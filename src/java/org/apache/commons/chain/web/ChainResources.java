@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainResources.java,v 1.3 2003/10/20 17:12:07 martinc Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/20 17:12:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainResources.java,v 1.4 2003/11/09 01:51:51 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/11/09 01:51:51 $
  *
  * ====================================================================
  *
@@ -105,6 +105,9 @@ final class ChainResources {
     static void parseClassResources(Catalog catalog, String resources,
                                     ConfigParser parser) {
 
+        if (resources == null) {
+            return;
+        }
         ClassLoader loader =
             Thread.currentThread().getContextClassLoader();
         if (loader == null) {
@@ -155,6 +158,9 @@ final class ChainResources {
                                   String resources,
                                   ConfigParser parser) {
 
+        if (resources == null) {
+            return;
+        }
         String path = null;
         try {
             while (true) {
