@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/Attic/ContextMap2.java,v 1.1 2003/09/27 03:57:28 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2003/09/27 03:57:28 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/Attic/ContextMap2.java,v 1.2 2003/09/27 18:15:12 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/09/27 18:15:12 $
  *
  * ====================================================================
  *
@@ -68,13 +68,13 @@ import java.util.Collection;
 
 
 /**
+ * <p>Simple extension of {@link ContextBase2} class to provide a Map interface to the attributes Map.</p>
+ *
  * <p><em>WARNING: This is an EXPERIMENTAL class and may be removed at
  * any time.</em></p>
  *
- * <p>Simple extension of {@link ContextBase2} class to provide a Map interface to the attributes Map.</p>
- *
  * @author Ted Husted
- * @version $Revision: 1.1 $ $Date: 2003/09/27 03:57:28 $
+ * @version $Revision: 1.2 $ $Date: 2003/09/27 18:15:12 $
  */
 
 public class ContextMap2 extends ContextBase2 implements Map {

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/Attic/ContextBase2.java,v 1.1 2003/09/17 15:17:58 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2003/09/17 15:17:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/Attic/ContextBase2.java,v 1.2 2003/09/27 18:15:12 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/09/27 18:15:12 $
  *
  * ====================================================================
  *
@@ -64,16 +64,16 @@ package org.apache.commons.chain.impl;
 
 
 /**
- * <p><em>WARNING: This is an EXPERIMENTAL class and may be removed at
- * any time.</em></p>
- *
  * <p>Convenience extension of {@link ContextBase} class.</p>
  *
  * <p>Provides support for using the internal map to store the  fields for any
  * JavaBean style properties defined by a sublcass</p>
  *
+ * <p><em>WARNING: This is an EXPERIMENTAL class and may be removed at
+ * any time.</em></p>
+ *
  * @author Ted Husted
- * @version $Revision: 1.1 $ $Date: 2003/09/17 15:17:58 $
+ * @version $Revision: 1.2 $ $Date: 2003/09/27 18:15:12 $
  */
 
 public class ContextBase2 extends ContextBase {

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/Attic/ContextBaseAttributes.java,v 1.2 2003/09/17 15:17:58 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/09/17 15:17:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/Attic/ContextBaseAttributes.java,v 1.3 2003/09/27 18:15:12 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/09/27 18:15:12 $
  *
  * ====================================================================
  *
@@ -81,7 +81,7 @@ import java.util.Set;
  * associated {@link ContextBase} when there is such a property.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2003/09/17 15:17:58 $
+ * @version $Revision: 1.3 $ $Date: 2003/09/27 18:15:12 $
  */
 
 class ContextBaseAttributes implements Map {
@@ -275,15 +275,15 @@ class ContextBaseAttributes implements Map {
 
 
     /**
-     * <p><em>WARNING: This is an EXPERIMENTAL feature and may be removed at
-     * any time.</em></p>
-     *
      * <p>Returns the value to which the internal map maps the specified key,
      * bypassing any JavaBean style getters. This method allows a
      * JavaBean getter to be defined for any additional processing but still
      * use the internal map for storage, if desired. Since this class is not
      * public, this method can only be accessed by another member of hte
      * <code>org.apache.commons.chain.impl</code> package.</p>
+     *
+     * <p><em>WARNING: This is an EXPERIMENTAL feature and may be removed at
+     * any time.</em></p>
      *
      * @param key key whose associated value is to be returned.
      * @return the value to which this map maps the specified key, or
@@ -303,15 +303,15 @@ class ContextBaseAttributes implements Map {
     }
 
     /**
-     * <p><em>WARNING: This is an EXPERIMENTAL feature and may be removed at
-     * any time.</em></p>
-     *
      * <p>Associates the key/value pair within the internal map,
      * bypassing any JavaBean style getters. This method allows a
      * JavaBean getter to be defined for any additional processing but still
      * use the internal map for storage, if desired. Since this class is not
      * public, this method can only be accessed by another member of hte
      * <code>org.apache.commons.chain.impl</code> package.</p>
+     *
+     * <p><em>WARNING: This is an EXPERIMENTAL feature and may be removed at
+     * any time.</em></p>
      *
      * @param key key with which the specified value is to be associated.
      * @param value value to be associated with the specified key.
