@@ -15,9 +15,7 @@
  */
 package org.apache.commons.chain;
 
-
 import java.util.Iterator;
-
 
 /**
  * <p>A {@link CatalogFactory} is a class used to store and retrieve
@@ -26,7 +24,7 @@ import java.util.Iterator;
  * Factory pattern (see GoF).</p>
  *
  * @author Sean Schofield 
- * @version $Revision: 1.2 $ $Date: 2004/10/17 01:23:01 $
+ * @version $Revision: 1.3 $ $Date: 2004/10/17 01:53:53 $
  */
 
 public interface CatalogFactory {
@@ -75,6 +73,11 @@ public interface CatalogFactory {
     public Iterator getNames();
 
 
+    /**
+     * <p>Release all {@link Catalog}s currently registered with
+     * this {@link CatalogFactory}.</p>
+     */
+    public void clear();
+
+
 }
-
-

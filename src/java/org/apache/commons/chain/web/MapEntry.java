@@ -23,7 +23,7 @@ import java.util.Map;
  * <p>Map.Entry implementation that can be constructed to either be read-only
  * or not.</p>
  *
- * @version $Revision: 1.1 $ $Date: 2004/09/10 22:43:20 $
+ * @version $Revision: 1.2 $ $Date: 2004/10/17 01:53:53 $
  */
 
 public class MapEntry implements Map.Entry {
@@ -84,7 +84,7 @@ public class MapEntry implements Map.Entry {
      * 
      * @param val The new value
      * @return The old entry value
-     * @throw UnsupportedOperationException If the entry cannot be modified
+     * @throws UnsupportedOperationException If the entry cannot be modified
      */
     public Object setValue(Object val) {
         if (modifiable) {
