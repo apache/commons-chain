@@ -27,7 +27,7 @@ import java.util.Iterator;
  * that can be selected and executed based on environmental conditions.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/02/25 00:01:07 $
+ * @version $Revision: 1.7 $ $Date: 2004/11/30 05:52:22 $
  */
 
 public interface Catalog {
@@ -37,7 +37,7 @@ public interface Catalog {
      * <p>A default context attribute for storing a default {@link Catalog},
      * provided as a convenience only.</p>
      */
-    public static final String CATALOG_KEY = "org.apache.commons.chain.CATALOG";
+    String CATALOG_KEY = "org.apache.commons.chain.CATALOG";
 
 
     /**

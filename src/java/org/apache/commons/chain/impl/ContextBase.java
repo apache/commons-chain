@@ -45,7 +45,7 @@ import org.apache.commons.chain.Context;
  * be utilized as an attribute key or property name.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision: 1.7 $ $Date: 2004/11/30 05:52:23 $
  */
 
 public class ContextBase extends HashMap implements Context {
@@ -102,7 +102,7 @@ public class ContextBase extends HashMap implements Context {
     /**
      * <p>The same <code>PropertyDescriptor</code>s as an array.</p>
      */
-    private PropertyDescriptor pd[] = null;
+    private PropertyDescriptor[] pd = null;
 
 
     /**
@@ -127,7 +127,7 @@ public class ContextBase extends HashMap implements Context {
      * <p>Zero-length array of parameter values for calling property getters.
      * </p>
      */
-    private static Object zeroParams[] = new Object[0];
+    private static Object[] zeroParams = new Object[0];
 
 
     // ------------------------------------------------------------- Map Methods
@@ -188,7 +188,7 @@ public class ContextBase extends HashMap implements Context {
             }
         }
         return (false);
-        
+
     }
 
 
@@ -415,10 +415,10 @@ public class ContextBase extends HashMap implements Context {
             }
         }
         if (j < 0) {
-            throw new IllegalArgumentException("Property '" + name +
-                                               "' is not present");
+            throw new IllegalArgumentException("Property '" + name
+                                               + "' is not present");
         }
-        PropertyDescriptor results[] = new PropertyDescriptor[pd.length - 1];
+        PropertyDescriptor[] results = new PropertyDescriptor[pd.length - 1];
         System.arraycopy(pd, 0, results, 0, j);
         System.arraycopy(pd, j + 1, results, j, pd.length - (j + 1));
         pd = results;
@@ -506,14 +506,14 @@ public class ContextBase extends HashMap implements Context {
             Method method = descriptor.getReadMethod();
             if (method == null) {
                 throw new UnsupportedOperationException
-                    ("Property '" + descriptor.getName() +
-                     "' is not readable");
+                    ("Property '" + descriptor.getName()
+                     + "' is not readable");
             }
             return (method.invoke(this, zeroParams));
         } catch (Exception e) {
             throw new UnsupportedOperationException
-                ("Exception reading property '" + descriptor.getName() +
-                 "': " + e.getMessage());
+                ("Exception reading property '" + descriptor.getName()
+                 + "': " + e.getMessage());
         }
 
     }
@@ -574,14 +574,14 @@ public class ContextBase extends HashMap implements Context {
             Method method = descriptor.getWriteMethod();
             if (method == null) {
                 throw new UnsupportedOperationException
-                    ("Property '" + descriptor.getName() +
-                     "' is not writeable");
+                    ("Property '" + descriptor.getName()
+                     + "' is not writeable");
             }
             method.invoke(this, new Object[] { value });
         } catch (Exception e) {
             throw new UnsupportedOperationException
-                ("Exception writing property '" + descriptor.getName() +
-                 "': " + e.getMessage());
+                ("Exception writing property '" + descriptor.getName()
+                 + "': " + e.getMessage());
         }
 
     }
@@ -705,8 +705,8 @@ public class ContextBase extends HashMap implements Context {
         }
 
         public int hashCode() {
-            return (((key == null) ? 0 : key.hashCode()) ^
-                    ((value == null) ? 0 : value.hashCode()));
+            return (((key == null) ? 0 : key.hashCode())
+                   ^ ((value == null) ? 0 : value.hashCode()));
         }
 
         public Object setValue(Object value) {

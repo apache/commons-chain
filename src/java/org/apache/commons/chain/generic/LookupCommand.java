@@ -18,7 +18,6 @@ package org.apache.commons.chain.generic;
 
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
-import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.Filter;
@@ -40,7 +39,7 @@ import org.apache.commons.chain.Filter;
  * <code>IllegalArgumentException</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.9 $ $Date: 2004/10/22 18:06:47 $
+ * @version $Revision: 1.10 $ $Date: 2004/11/30 05:52:23 $
  */
 
 public class LookupCommand implements Filter {
@@ -246,12 +245,12 @@ public class LookupCommand implements Filter {
             if ((command == null) && !isOptional()) {
                 if (catalogName == null) {
                     throw new IllegalArgumentException
-                        ("Cannot find command '" + name +
-                         "' in default catalog");
+                        ("Cannot find command '" + name
+                         + "' in default catalog");
                 } else {
                     throw new IllegalArgumentException
-                        ("Cannot find command '" + name +
-                         "' in catalog '" + catalogName + "'");
+                        ("Cannot find command '" + name
+                         + "' in catalog '" + catalogName + "'");
                 }
             }
             return (command);

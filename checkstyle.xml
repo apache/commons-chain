@@ -29,15 +29,15 @@
           <!-- Checks that are different from the sun coding conventions ones -->
           <!-- ************************************************************** -->
           <module name="Header">
-              <property name="headerFile" value="${basedir}/LICENSE.txt"/>
-              <property name="ignoreLines" value="1,2,3,4,5,6"/>
+              <property name="headerFile" value="${basedir}/license-header.txt"/>
+              <property name="ignoreLines" value="2"/>
           </module>
           <property name="tabWidth" value="4"/>
           <module name="LeftCurly">
             <property name="option" value="eol"/>
           </module>
           <module name="RightCurly">
-            <property name="option" value="alone"/>
+            <property name="option" value="same"/>
           </module>
           <module name="LineLength">
             <property name="max" value="132"/>
@@ -130,7 +130,7 @@
   
           <!-- Checks for class design                         -->
           <!-- See http://checkstyle.sf.net/config_design.html -->
-          <module name="DesignForExtension"/>
+          <!-- module name="DesignForExtension"/ -->
           <module name="FinalClass"/>
           <module name="HideUtilityClassConstructor"/>
           <module name="InterfaceIsType"/>
@@ -140,7 +140,7 @@
           <!-- Miscellaneous other checks.                   -->
           <!-- See http://checkstyle.sf.net/config_misc.html -->
           <module name="ArrayTypeStyle"/>
-          <module name="FinalParameters"/>
+          <!-- module name="FinalParameters"/ -->
           <module name="GenericIllegalRegexp">
               <property name="format" value="\s+$"/>
               <property name="message" value="Line has trailing spaces."/>

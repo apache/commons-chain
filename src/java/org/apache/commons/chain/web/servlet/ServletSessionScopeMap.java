@@ -33,7 +33,7 @@ import org.apache.commons.chain.web.MapEntry;
  * attributes.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2004/09/10 22:43:20 $
+ * @version $Revision: 1.5 $ $Date: 2004/11/30 05:52:23 $
  */
 
 final class ServletSessionScopeMap implements Map {
@@ -45,7 +45,7 @@ final class ServletSessionScopeMap implements Map {
 
 
     private HttpSession session = null;
- 
+
 
     public void clear() {
         Iterator keys = keySet().iterator();

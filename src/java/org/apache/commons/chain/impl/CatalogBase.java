@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import org.apache.commons.chain.Catalog;
-import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 
 
@@ -33,7 +32,7 @@ import org.apache.commons.chain.Command;
  *
  * @author Craig R. McClanahan
  * @author Matthew J. Sgarlata
- * @version $Revision: 1.11 $ $Date: 2004/11/17 07:59:18 $
+ * @version $Revision: 1.12 $ $Date: 2004/11/30 05:52:23 $
  */
 
 public class CatalogBase implements Catalog {

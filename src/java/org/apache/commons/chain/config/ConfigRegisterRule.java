@@ -32,7 +32,7 @@ import org.xml.sax.Attributes;
  * it should be registered.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision: 1.5 $ $Date: 2004/11/30 05:52:23 $
  */
 class ConfigRegisterRule extends Rule {
 
@@ -69,10 +69,10 @@ class ConfigRegisterRule extends Rule {
     /**
      * <p>Register the top {@link Command} if appropriate.</p>
      *
-     * @param namespace the namespace URI of the matching element, or an 
+     * @param namespace the namespace URI of the matching element, or an
      *   empty string if the parser is not namespace aware or the element has
      *   no namespace
-     * @param name the local name if the parser is namespace aware, or just 
+     * @param name the local name if the parser is namespace aware, or just
      *   the element name otherwise
      * @param attributes The attribute list of this element
      */
@@ -81,8 +81,8 @@ class ConfigRegisterRule extends Rule {
 
         // Is the top object a Command?
         Object top = digester.peek(0);
-        if ((top == null) ||
-            !(top instanceof Command)) {
+        if ((top == null)
+            || !(top instanceof Command)) {
             return;
         }
         Command command = (Command) top;

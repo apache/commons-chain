@@ -32,7 +32,7 @@ import javax.portlet.PortletRequest;
  * attributes.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision: 1.4 $ $Date: 2004/11/30 05:52:23 $
  */
 
 final class PortletRequestScopeMap implements Map {
@@ -44,7 +44,7 @@ final class PortletRequestScopeMap implements Map {
 
 
     private PortletRequest request = null;
- 
+
 
     public void clear() {
         Iterator keys = keySet().iterator();

@@ -33,7 +33,7 @@ import org.apache.commons.chain.web.MapEntry;
  * name-values[].</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2004/09/10 22:43:20 $
+ * @version $Revision: 1.5 $ $Date: 2004/11/30 05:52:23 $
  */
 
 final class ServletHeaderValuesMap implements Map {
@@ -61,10 +61,10 @@ final class ServletHeaderValuesMap implements Map {
         if (!(value instanceof String[])) {
             return (false);
         }
-        String test[] = (String[]) value;
+        String[] test = (String[]) value;
         Iterator values = values().iterator();
         while (values.hasNext()) {
-            String actual[] = (String[]) values.next();
+            String[] actual = (String[]) values.next();
             if (test.length == actual.length) {
                 boolean matched = true;
                 for (int i = 0; i < test.length; i++) {

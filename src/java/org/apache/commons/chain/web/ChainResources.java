@@ -91,8 +91,8 @@ final class ChainResources {
             }
         } catch (Exception e) {
             throw new RuntimeException
-                ("Exception parsing chain config resource '" + path + "': " +
-                 e.getMessage());
+                ("Exception parsing chain config resource '" + path + "': "
+                 + e.getMessage());
         }
 
     }
@@ -145,8 +145,8 @@ final class ChainResources {
             }
         } catch (Exception e) {
             throw new RuntimeException
-                ("Exception parsing chain config resource '" + path + "': " +
-                 e.getMessage());
+                ("Exception parsing chain config resource '" + path + "': "
+                 + e.getMessage());
         }
 
     }
@@ -192,8 +192,8 @@ final class ChainResources {
             }
         } catch (Exception e) {
             throw new RuntimeException
-                ("Exception parsing chain config resource '" + path + "': " +
-                 e.getMessage());
+                ("Exception parsing chain config resource '" + path + "': "
+                 + e.getMessage());
         }
 
     }
@@ -243,8 +243,8 @@ final class ChainResources {
             }
         } catch (Exception e) {
             throw new RuntimeException
-                ("Exception parsing chain config resource '" + path + "': " +
-                 e.getMessage());
+                ("Exception parsing chain config resource '" + path + "': "
+                 + e.getMessage());
         }
 
     }

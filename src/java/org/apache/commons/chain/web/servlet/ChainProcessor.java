@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
 import org.apache.commons.chain.web.ChainServlet;
 
 

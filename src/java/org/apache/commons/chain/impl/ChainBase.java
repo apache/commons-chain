@@ -28,7 +28,7 @@ import org.apache.commons.chain.Filter;
  * <p>Convenience base class for {@link Chain} implementations.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision: 1.6 $ $Date: 2004/11/30 05:52:23 $
  */
 
 public class ChainBase implements Chain {
@@ -71,7 +71,7 @@ public class ChainBase implements Chain {
      *  or one of the individual {@link Command} elements,
      *  is <code>null</code>
      */
-    public ChainBase(Command commands[]) {
+    public ChainBase(Command[] commands) {
 
         if (commands == null) {
             throw new IllegalArgumentException();
@@ -114,7 +114,7 @@ public class ChainBase implements Chain {
      * the order in which they may delegate processing to the remainder of
      * the {@link Chain}.</p>
      */
-    protected Command commands[] = new Command[0];
+    protected Command[] commands = new Command[0];
 
 
     /**
@@ -136,7 +136,7 @@ public class ChainBase implements Chain {
         if (frozen) {
             throw new IllegalStateException();
         }
-        Command results[] = new Command[commands.length + 1];
+        Command[] results = new Command[commands.length + 1];
         System.arraycopy(commands, 0, results, 0, commands.length);
         results[commands.length] = command;
         commands = results;
@@ -170,7 +170,7 @@ public class ChainBase implements Chain {
             } catch (Exception e) {
                 saveException = e;
                 break;
-            }   
+            }
         }
 
         // Call postprocess methods on Filters in reverse order

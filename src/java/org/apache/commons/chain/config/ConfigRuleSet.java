@@ -16,10 +16,6 @@
 package org.apache.commons.chain.config;
 
 
-import org.apache.commons.chain.Catalog;
-import org.apache.commons.chain.CatalogFactory;
-import org.apache.commons.chain.Chain;
-import org.apache.commons.chain.Command;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.RuleSetBase;
 
@@ -53,7 +49,7 @@ import org.apache.commons.digester.RuleSetBase;
  * <li><strong>classAttribute</strong> -- Attribute on a chain (optional) or
  *     command (required) element that specifies the fully qualified class
  *     name of the implementation class that should be instantiated.
- *     [className]</li> 
+ *     [className]</li>
  * <li><strong>commandElement</strong> -- Name of the XML element
  *     representing the addition of a {@link Command}.  An implementation
  *     class name must be provided on the attribute named by the
@@ -69,9 +65,9 @@ import org.apache.commons.digester.RuleSetBase;
  *     rules will be associated, or <code>null</code> for no namespace.
  *     [null]</li>
  * </ul>
- * 
+ *
  * @author Craig R. McClanahan
- * @version $Revision: 1.8 $ $Date: 2004/10/18 01:07:41 $
+ * @version $Revision: 1.9 $ $Date: 2004/11/30 05:52:23 $
  */
 
 public class ConfigRuleSet extends RuleSetBase {

@@ -32,7 +32,7 @@ import javax.portlet.PortletContext;
  * attributes.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision: 1.4 $ $Date: 2004/11/30 05:52:23 $
  */
 
 final class PortletApplicationScopeMap implements Map {
@@ -44,7 +44,7 @@ final class PortletApplicationScopeMap implements Map {
 
 
     private PortletContext context = null;
- 
+
 
     public void clear() {
         Iterator keys = keySet().iterator();

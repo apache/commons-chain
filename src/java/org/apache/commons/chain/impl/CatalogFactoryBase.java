@@ -16,7 +16,6 @@
 
 package org.apache.commons.chain.impl;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -26,26 +25,26 @@ import org.apache.commons.chain.CatalogFactory;
 /**
  * <p>A simple implementation of {@link CatalogFactory}.</p>
  *
- * @author Sean Schofield 
- * @version $Revision: 1.3 $ $Date: 2004/10/18 01:07:42 $
+ * @author Sean Schofield
+ * @version $Revision: 1.4 $ $Date: 2004/11/30 05:52:23 $
  */
 
 public class CatalogFactoryBase extends CatalogFactory {
-    
+
 
     // ----------------------------------------------------------- Constructors
-    
-    
+
+
     /**
      * <p>Construct an empty instance of {@link CatalogFactoryBase}.  This
      * constructor is intended solely for use by {@link CatalogFactory}.</p>
      */
-    public CatalogFactoryBase() {}
-    
-    
+    public CatalogFactoryBase() { }
+
+
     // ----------------------------------------------------- Instance Variables
-    
-    
+
+
     /**
      * <p>The default {@link Catalog} for this {@link CatalogFactory).</p>
      */
@@ -56,14 +55,14 @@ public class CatalogFactoryBase extends CatalogFactory {
      * <p>Map of named {@link Catalog}s, keyed by catalog name.</p>
      */
     private Map catalogs = new HashMap();
-    
-    
+
+
     // --------------------------------------------------------- Public Methods
-    
+
 
     // Documented in CatalogFactory interface
     public Catalog getCatalog() {
-        
+
         return catalog;
 
     }
@@ -71,15 +70,15 @@ public class CatalogFactoryBase extends CatalogFactory {
 
     // Documented in CatalogFactory interface
     public void setCatalog(Catalog catalog) {
-        
+
         this.catalog = catalog;
-        
+
     }
 
 
     // Documented in CatalogFactory interface
     public Catalog getCatalog(String name) {
-        
+
         synchronized (catalogs) {
             return (Catalog) catalogs.get(name);
         }
@@ -95,7 +94,7 @@ public class CatalogFactoryBase extends CatalogFactory {
         }
 
     }
-    
+
 
     // Documented in CatalogFactory interface
     public Iterator getNames() {

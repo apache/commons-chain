@@ -37,7 +37,7 @@ package org.apache.commons.chain;
  * method, which is guaranteed to be called by the owning {@link Chain}.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/25 00:01:07 $
+ * @version $Revision: 1.6 $ $Date: 2004/11/30 05:52:23 $
  */
 
 public interface Filter extends Command {
@@ -60,7 +60,7 @@ public interface Filter extends Command {
      * @return If a non-null <code>exception</code> was "handled" by this
      *  method (and therefore need not be rethrown), return <code>true</code>;
      *  otherwise return <code>false</code>
-     */ 
+     */
    boolean postprocess(Context context, Exception exception);
 
 

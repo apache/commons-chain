@@ -18,8 +18,6 @@ package org.apache.commons.chain.config;
 
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
-import org.apache.commons.chain.Chain;
-import org.apache.commons.chain.Command;
 import org.apache.commons.digester.Rule;
 import org.xml.sax.Attributes;
 
@@ -33,7 +31,7 @@ import org.xml.sax.Attributes;
  * become the default {@link Catalog} for this application.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2004/10/18 18:47:12 $
+ * @version $Revision: 1.2 $ $Date: 2004/11/30 05:52:23 $
  */
 class ConfigCatalogRule extends Rule {
 
@@ -83,10 +81,10 @@ class ConfigCatalogRule extends Rule {
      * if there is no such attribute defined.  Push it onto the top of the
      * stack.</p>
      *
-     * @param namespace the namespace URI of the matching element, or an 
+     * @param namespace the namespace URI of the matching element, or an
      *   empty string if the parser is not namespace aware or the element has
      *   no namespace
-     * @param name the local name if the parser is namespace aware, or just 
+     * @param name the local name if the parser is namespace aware, or just
      *   the element name otherwise
      * @param attributes The attribute list of this element
      */

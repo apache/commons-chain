@@ -16,9 +16,6 @@
 package org.apache.commons.chain.config;
 
 
-import org.apache.commons.chain.Catalog;
-import org.apache.commons.chain.Chain;
-import org.apache.commons.chain.Command;
 import org.apache.commons.digester.Rule;
 import org.xml.sax.Attributes;
 
@@ -31,7 +28,7 @@ import org.xml.sax.Attributes;
  * the class names to make changes easier, this also makes configuration
  * files <strong>much</strong> easier to read and write.</p>
  *
- * @version $Revision: 1.1 $ $Date: 2004/07/16 19:06:01 $
+ * @version $Revision: 1.2 $ $Date: 2004/11/30 05:52:23 $
  */
 
 class ConfigDefineRule extends Rule {
@@ -80,10 +77,10 @@ class ConfigDefineRule extends Rule {
     /**
      * <p>Register new rules for the specified name and class.</p>
      *
-     * @param namespace the namespace URI of the matching element, or an 
+     * @param namespace the namespace URI of the matching element, or an
      *   empty string if the parser is not namespace aware or the element has
      *   no namespace
-     * @param name the local name if the parser is namespace aware, or just 
+     * @param name the local name if the parser is namespace aware, or just
      *   the element name otherwise
      * @param attributes The attribute list of this element
      */

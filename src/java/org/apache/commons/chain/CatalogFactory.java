@@ -26,8 +26,8 @@ import org.apache.commons.chain.impl.CatalogFactoryBase;
  * as well as {@link Catalog}s stored with a name key.  Follows the
  * Factory pattern (see GoF).</p>
  *
- * @author Sean Schofield 
- * @version $Revision: 1.4 $ $Date: 2004/10/18 01:07:41 $
+ * @author Sean Schofield
+ * @version $Revision: 1.5 $ $Date: 2004/11/30 05:52:22 $
  */
 
 public abstract class CatalogFactory {
@@ -82,7 +82,7 @@ public abstract class CatalogFactory {
 
 
     // ------------------------------------------------------- Static Variables
-    
+
 
     /**
      * <p>The set of registered {@link CatalogFactory} instances,
@@ -101,7 +101,7 @@ public abstract class CatalogFactory {
      * running inside a servet container), this will return a separate
      * instance for each application, even if this class is loaded from
      * a shared parent class loader.</p>
-     * 
+     *
      * @return the per-application singleton instance of {@link CatalogFactory}
      */
     public static CatalogFactory getInstance() {
@@ -116,9 +116,9 @@ public abstract class CatalogFactory {
             }
         }
         return factory;
-        
+
     }
-    
+
 
     /**
      * <p>Clear all references to registered catalogs, as well as to the

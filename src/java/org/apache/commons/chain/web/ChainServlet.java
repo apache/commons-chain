@@ -93,7 +93,7 @@ import org.apache.commons.logging.LogFactory;
  */
 
 public class ChainServlet extends HttpServlet {
-    
+
 
     // ------------------------------------------------------ Manifest Constants
 
@@ -167,12 +167,12 @@ public class ChainServlet extends HttpServlet {
      * @throws ServletException if the servlet could not be initialized
      */
     public void init() throws ServletException {
-        
+
         ServletConfig config = getServletConfig();
         ServletContext context = getServletContext();
         if (log.isInfoEnabled()) {
-            log.info("Initializing chain servlet '" +
-                     config.getServletName() + "'");
+            log.info("Initializing chain servlet '"
+                     + config.getServletName() + "'");
         }
 
         // Retrieve servlet init parameters that we need
@@ -203,8 +203,8 @@ public class ChainServlet extends HttpServlet {
                 Class clazz = loader.loadClass(ruleSet);
                 parser.setRuleSet((RuleSet) clazz.newInstance());
             } catch (Exception e) {
-                throw new ServletException("Exception initalizing RuleSet '" +
-                                           ruleSet + "' instance", e);
+                throw new ServletException("Exception initalizing RuleSet '"
+                                           + ruleSet + "' instance", e);
             }
         }
 
@@ -225,7 +225,7 @@ public class ChainServlet extends HttpServlet {
         if (attr != null) {
             context.setAttribute(attr, catalog);
         }
-        
+
     }
 
 

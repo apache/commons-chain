@@ -92,7 +92,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Craig R. McClanahan
  * @author Ted Husted
- * @version $Revision: 1.6 $ $Date: 2004/10/18 01:48:51 $
+ * @version $Revision: 1.7 $ $Date: 2004/11/30 05:52:23 $
  */
 
 public class ChainListener implements ServletContextListener {
@@ -207,9 +207,9 @@ public class ChainListener implements ServletContextListener {
                 Class clazz = loader.loadClass(ruleSet);
                 parser.setRuleSet((RuleSet) clazz.newInstance());
             } catch (Exception e) {
-                throw new RuntimeException("Exception initalizing RuleSet '" +
-                                           ruleSet + "' instance: " +
-                                           e.getMessage());
+                throw new RuntimeException("Exception initalizing RuleSet '"
+                                           + ruleSet + "' instance: "
+                                           + e.getMessage());
             }
         }
 
@@ -264,9 +264,9 @@ public class ChainListener implements ServletContextListener {
             URL resourceURL = null;
             try {
                 URL jarURL = context.getResource(path);
-                resourceURL = new URL("jar:" +
-                                      translate(jarURL.toExternalForm()) +
-                                      "!/META-INF/chain-config.xml");
+                resourceURL = new URL("jar:"
+                                      + translate(jarURL.toExternalForm())
+                                      + "!/META-INF/chain-config.xml");
                 if (resourceURL == null) {
                     continue;
                 }
@@ -284,9 +284,9 @@ public class ChainListener implements ServletContextListener {
                 parser.parse(resourceURL);
             } catch (Exception e) {
                 throw new RuntimeException
-                    ("Exception parsing chain config resource '" +
-                     resourceURL.toExternalForm() + "': " +
-                     e.getMessage());
+                    ("Exception parsing chain config resource '"
+                     + resourceURL.toExternalForm() + "': "
+                     + e.getMessage());
             }
         }
 
@@ -322,9 +322,9 @@ public class ChainListener implements ServletContextListener {
             URL resourceURL = null;
             try {
                 URL jarURL = context.getResource(path);
-                resourceURL = new URL("jar:" +
-                                      translate(jarURL.toExternalForm()) +
-                                      "!/META-INF/chain-config.xml");
+                resourceURL = new URL("jar:"
+                                      + translate(jarURL.toExternalForm())
+                                      + "!/META-INF/chain-config.xml");
                 if (resourceURL == null) {
                     continue;
                 }
@@ -342,9 +342,9 @@ public class ChainListener implements ServletContextListener {
                 parser.parse(catalog, resourceURL);
             } catch (Exception e) {
                 throw new RuntimeException
-                    ("Exception parsing chain config resource '" +
-                     resourceURL.toExternalForm() + "': " +
-                     e.getMessage());
+                    ("Exception parsing chain config resource '"
+                     + resourceURL.toExternalForm() + "': "
+                     + e.getMessage());
             }
         }
 

@@ -17,7 +17,6 @@ package org.apache.commons.chain.web;
 
 
 import java.util.Map;
-import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ContextBase;
 
 
@@ -36,7 +35,7 @@ import org.apache.commons.chain.impl.ContextBase;
  * of the same name, as supported by {@link ContextBase}.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision: 1.6 $ $Date: 2004/11/30 05:52:23 $
  */
 
 public abstract class WebContext extends ContextBase {
