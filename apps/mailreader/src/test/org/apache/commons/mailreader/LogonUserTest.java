@@ -1,7 +1,8 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/test/org/apache/commons/mailreader/LogonUserTest.java,v 1.1 2004/03/29 01:37:39 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/29 01:37:39 $
+
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/test/org/apache/commons/mailreader/LogonUserTest.java,v 1.2 2004/03/29 02:34:20 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/03/29 02:34:20 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -20,12 +21,11 @@
 package org.apache.commons.mailreader;
 
 import junit.framework.TestCase;
-import junit.framework.Assert;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.mailreader.MailReader;
 import org.apache.commons.chain.mailreader.MailReaderBase;
-import org.apache.commons.chain.mailreader.commands.LocaleChange;
+import org.apache.commons.chain.mailreader.commands.LogonUser;
 import org.apache.commons.chain.impl.ContextBase;
 import org.apache.struts.webapp.example.User;
 import org.apache.struts.webapp.example.UserDatabase;
@@ -73,6 +73,46 @@ public class LogonUserTest extends TestCase {
         User user = context.getUser();
         assertNotNull("Where's waldo?",user);
         assertEquals("Who am I?","John Q. User",user.getFullName());
+
+    }
+
+    public void testInvalidPassword() {
+
+        Context input = new ContextBase();
+        input.put(MailReader.PN_USERNAME,USER);
+        input.put(MailReader.PN_PASSWORD,"SezMe");
+
+        MailReader context = new MailReaderBase(locale,input,database);
+
+        try {
+            command.execute(context);
+        }
+        catch(Exception e) {
+            fail(e.getMessage());
+        }
+
+        User user = context.getUser();
+        assertNull("Who's watching the store",user);
+
+    }
+
+    public void testInvalidUsername() {
+
+        Context input = new ContextBase();
+        input.put(MailReader.PN_USERNAME,"zaphod");
+        input.put(MailReader.PN_PASSWORD,PASS);
+
+        MailReader context = new MailReaderBase(locale,input,database);
+
+        try {
+            command.execute(context);
+        }
+        catch(Exception e) {
+            fail(e.getMessage());
+        }
+
+        User user = context.getUser();
+        assertNull("Who's watching the store",user);
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/test/org/apache/commons/mailreader/ChangeLocaleTest.java,v 1.1 2004/03/29 00:54:23 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/29 00:54:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/test/org/apache/commons/mailreader/ChangeLocaleTest.java,v 1.2 2004/03/29 02:34:19 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/03/29 02:34:19 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -50,7 +50,7 @@ public class ChangeLocaleTest extends TestCase {
         input.put(MailReader.PN_COUNTRY,"CA");
         input.put(MailReader.PN_LANGUAGE,"FR");
 
-        MailReader context = new MailReaderBase(original,input);
+        MailReader context = new MailReaderBase(original,input,null);
 
         try {
             command.execute(context);

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/MailReaderAction.java,v 1.1 2004/03/29 00:52:09 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/29 00:52:09 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/MailReaderAction.java,v 1.2 2004/03/29 02:34:19 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/03/29 02:34:19 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -22,6 +22,8 @@ package org.apache.commons.chain.mailreader.struts;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.mailreader.ClientContext;
 import org.apache.commons.chain.mailreader.MailReaderBase;
+import org.apache.struts.webapp.example.UserDatabase;
+import org.apache.struts.webapp.example.Constants;
 
 import java.util.Locale;
 
@@ -36,7 +38,9 @@ public class MailReaderAction extends CommandAction {
 
         Locale locale = helper.getLocale();
         Context input = getInput(helper.getActionForm());
-        return new MailReaderBase(locale, input);
+        UserDatabase database = (UserDatabase)
+                helper.getAttribute(Constants.DATABASE_KEY);
+        return new MailReaderBase(locale, input, database);
 
     }
 

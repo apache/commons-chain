@@ -23,8 +23,16 @@ public interface ClientContext extends Context {
      */
     public static String PN_LOCALE = "locale";
 
+    /**
+     * <p>Assign Locale property</p>
+     * @param locale New Locale
+     */
     public void setLocale(Locale locale);
 
+    /**
+     * <p>Return Locale property</p>
+     * @return This Locale property
+     */
     public Locale getLocale();
 
     /**
@@ -32,8 +40,16 @@ public interface ClientContext extends Context {
      */
     public static String PN_INPUT = "input";
 
+    /**
+     * <p>Assign Input property</p>
+     * @param context New Input context
+     */
     public void setInput(Context context);
 
+    /**
+     * <p>Return Input property.</p>
+     * @return This Input property
+     */
     public Context getInput();
 
 }

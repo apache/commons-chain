@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/Attic/ActionHelperBase.java,v 1.1 2004/03/29 00:52:09 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/29 00:52:09 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/Attic/ActionHelperBase.java,v 1.2 2004/03/29 02:34:19 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/03/29 02:34:19 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -404,6 +404,14 @@ public class ActionHelperBase implements ActionHelper {
                 return response.encodeURL(url);
         } else
             return (url);
+    }
+
+    // See ActionHelper interface for JavaDoc
+    public Object getAttribute(String key) {
+        Object o = request.getAttribute(key);
+        if (null==o) o = session.getAttribute(key);
+        if (null==o) o = application.getAttribute(key);
+        return o;
     }
 
     // ------------------------------------------------ Presentation API

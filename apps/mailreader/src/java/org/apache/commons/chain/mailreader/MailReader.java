@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/MailReader.java,v 1.1 2004/03/29 00:52:22 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/29 00:52:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/MailReader.java,v 1.2 2004/03/29 02:34:19 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/03/29 02:34:19 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -19,6 +19,9 @@
  */
 package org.apache.commons.chain.mailreader;
 
+import org.apache.struts.webapp.example.UserDatabase;
+import org.apache.struts.webapp.example.User;
+
 
 /**
  * Application interface for MailReader Commands.
@@ -35,8 +38,38 @@ public interface MailReader extends ClientContext {
      */
     static String PN_LANGUAGE = "language";
 
+    /**
+     * Property name for username.
+     */
+    static String PN_USERNAME = "username";
 
-    // Database
-    // User
+    /**
+     * Property name for password.
+     */
+    static String PN_PASSWORD = "password";
+
+    /**
+     * <p>Return user database or null.</p>
+     * @return user database or null.
+     */
+    public UserDatabase getDatabase();
+
+    /**
+     * <p>Assign user database.</p>
+     * @param database The new database instance
+     */
+    public void setDatabase(UserDatabase database);
+
+    /**
+     * <p>Return current user, if any</p>
+     * @return
+     */
+    public User getUser();
+
+    /**
+     * <p>Assign current user.</p>
+     * @param user The new user
+     */
+    public void setUser(User user);
 
 }
