@@ -31,7 +31,7 @@ from the environment in which they are run (such as a command that can be
 used in either a Servlet or Portlet, without being tied directly to the API
 contracts of either of these environments).  For commands that need to allocate
 resources prior to delegation, and then release them upon return (even if a
-delegated-to command throws an exception, the "filter" extension to "command"
+delegated-to command throws an exception), the "filter" extension to "command"
 provides a <code>postprocess()</code> method for this cleanup.  Finally,
 commands can be stored and looked up in a "catalog" to allow deferral of the
 decision on which command (or chain) is actually executed.</p>
