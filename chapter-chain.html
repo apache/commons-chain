@@ -1,0 +1,909 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Jakarta Commons Chain of Responsibility</title><meta content="DocBook XSL Stylesheets V1.61.3" name="generator"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="N10001"></a>Jakarta Commons Chain of Responsibility</h2></div></div><div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><a href="#N10008">Introduction</a></dt><dt><a href="#N10014">Separate "business" logic from "presentation" logic</a></dt><dt><a href="#N100E3">Test a Command</a></dt><dt><a href="#N1012B">Create a Command</a></dt><dt><a href="#N10199">Create a Context</a></dt><dt><a href="#N10233">Create a Catalog</a></dt><dt><a href="#N10285">Load a Catalog From a Web Application</a></dt><dt><a href="#N102CB">Call a Command From Struts</a></dt><dt><a href="#N1037A">Create a Controller</a></dt><dt><a href="#N10452">Call a Command From a Servlet</a></dt></dl></div><font color="red">&lt;authorblurb&gt;<p>The Commons Chain Cookbook is an extract from the Jakarta Cookbook
+    [ISBN: TBA] which has been graciously donated to the Apache Software
+    Foundation by O'Reilly &amp;&nbsp;Associates. The publication date for the
+    Jakarta Cookbook has not been set.</p>&lt;/authorblurb&gt;</font><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N10008"></a>Introduction</h2></div></div><div></div></div><p>The essence of computing might be that for any expected input (A),
+    we return the expected output (B). The challenge is getting from (A) to
+    (B). For a simple program, (A) to (B) might be a single transformation.
+    Say, shifting a character code 32 digits so that "a" becomes "A". In a
+    complex application, A to B can be a long and winding road.</p><p>We might need to confirm that the user is authorized to create (B)
+    from (A). We might need to find that (A) is valid input for (B). We might
+    need to convert (A) from another character set. We may need to insert a
+    preamble before writing (B). We may need to merge another resource with
+    (A) before creating (B). Meanwhile, iIf anything goes wrong during
+    processing, the error must be handled, and even logged. Some tasks might
+    be able to continue after a non-fatal error, or, if the error is fatal,
+    all process might need to halt.</p><p>There are many different ways programmers organize processing logic
+    within an application. Often, the difference between an elegant
+    architecture and a muddled ball-of mud is how control flows from one
+    process to another. To realize and retain elegeance, we must organize
+    complex, multi-step processes so that they are easy to discover and
+    change.</p><p><i><span class="remark">[TODO:]</span></i></p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N10014"></a>Separate "business" logic from "presentation" logic</h2></div></div><div></div></div><p><span class="emphasis"><em>Problem:</em></span> You want to cleanly separate the
+    execution and presentation layers without complicating the design of your
+    application.</p><p><i class="citetitle"><span class="emphasis"><em>Solution:</em></span></i> Use the
+    <i class="glossterm">Chain of Responsibility</i> and
+    <i class="glossterm">Command</i> patterns so that the presentation layer can
+    execute a command, or chain of commands, without needing to know how the
+    command is implemented.</p><p><span class="emphasis"><em>Discussion</em></span>: To be useful, most applications
+    need to run a process and then tell the client what happened. In practice,
+    we find mixing "running" and "telling" together creates code that can be
+    hard to test and maintain. If we can have one component run (or execute)
+    the process, and another component report (or present) the result, then we
+    can test, create, and maintain each component separately. But, how can we
+    cleanly separate the execution and presentation layers without
+    complicating the design of an application?</p><p>Most application frameworks, especially web application frameworks,
+    rely on the Command pattern. An incoming HTTP request is mapped to some
+    type of "command" object. The command object takes whatever action is
+    required, using information passed in the HTTP request.</p><p><i><span class="remark"><i><span class="remark">[Glossary: "Chain of Responsibility pattern",
+    "Command pattern" entry]</span></i></span></i></p><div class="figure"><a name="N10030"></a><p class="title"><b>Figure&nbsp;1.&nbsp;Using information passed in the request, the Command object takes
+      whatever action is required.</b></p><a href="/cgi-bin/olink?sysid="><i><span class="remark">[TODO: line art.]</span></i></a></div><p>In practice, there are usually commands within commands. A Command
+    object in a web application often looks like a sandwich. First, it does
+    some things for the benefit of the presentation layer, then it executes
+    the business logic, and then it does some more presentation layer things.
+    The problem many developers face is how to cleanly separate the
+    <i class="glossterm">business logic</i> in the middle of a web command from
+    other necessary tasks that are part of the <i class="glossterm">request/response
+    transaction</i>.</p><p><i><span class="remark"><i><span class="remark">[Glossary: "business logic" , "request/response
+    transaction" entry]</span></i></span></i></p><div class="figure"><a name="N10043"></a><p class="title"><b>Figure&nbsp;2.&nbsp;A Command object often looks like a business logic
+      sandwich.</b></p><a href="/cgi-bin/olink?sysid="><i><span class="remark">[TODO: line art.]</span></i></a></div><p>The <span class="productname">Chain of Responsibility</span>&trade; package in
+    the Jakarta Commons [<a href="#">http://jakarta.apache.org/commons/</a>] combines the
+    Command pattern with the classic <i class="glossterm">Chain of Responsibility
+    pattern</i> to make it easy to call a business command as part of
+    a larger application command. (For more about the patterns, see
+    <span class="productname">Design Patterns: Elements of Reusable Object Orientated
+    Software</span>&trade; [<span class="productnumber">ISBN
+    0-201-63361-2</span>]).</p><p><i><span class="remark"><i><span class="remark">[Glossary: "Chain of Responsibility pattern"
+    entry]</span></i></span></i></p><p><div class="figure"><a name="N10063"></a><p class="title"><b>Figure&nbsp;3.&nbsp;The Chain package makes it easy to call a business operation
+        from within a larger transaction.</b></p><a href="/cgi-bin/olink?sysid=">[TODO: line art]</a></div></p><p>To implement the patterns, the <tt class="classname">Chain</tt> package
+    defines five key interfaces:</p><table summary="Simple list" border="0" class="simplelist"><tr><td>Context</td></tr><tr><td>Command</td></tr><tr><td>Chain</td></tr><tr><td>Filter</td></tr><tr><td>Catalog</td></tr></table><p><span class="emphasis"><em>Context.</em></span> A <tt class="classname">Context</tt>
+    represents the state of an application. In the Chain package,
+    <tt class="classname">Context</tt> is a marker interface for a
+    <tt class="classname">java.util.Map</tt>. The Context is an envelope
+    containing the attributes needed to complete a transaction. In other
+    words, a Context is a stateful object with member values.</p><p><span class="emphasis"><em>Command.</em></span> A <tt class="classname">Command</tt>
+    represents a <i class="glossterm">unit of work</i>. A Command has a single
+    entry method: <tt class="methodname">public boolean execute(Context
+    context)</tt>. A Command acts upon the state passed to it through
+    a context object, but retains no state of its own. Commands may be
+    assembled into a Chain, so that a complex transaction can be created from
+    discrete units of work. If a Command returns <span class="symbol">true</span>, then
+    other Commands in a Chain should <span class="emphasis"><em>not</em></span> be executed. If
+    a Command returns <span class="symbol">false</span>, then other Commands in the Chain
+    (if any) may execute.</p><p><i><span class="remark"><i><span class="remark">[Glossary: "unit of work"
+    entry]</span></i></span></i></p><p><span class="emphasis"><em>Chain.</em></span> <tt class="classname">Chain</tt> implements
+    the <tt class="classname">Command</tt> interface, so a
+    <tt class="classname">Chain</tt> can be used interchangeably with a
+    <tt class="classname">Command</tt>. An application doesn't need to know if
+    it's calling a Chain or a Command, so you can refactor from one to the
+    other. A Chain can nest other Chains as desired. This property is known as
+    the <span class="emphasis"><em><i class="glossterm">Liskov substitution principle</i>.
+    </em></span></p><p><span class="emphasis"><em><i><span class="remark">[Glossary: "<i class="glossterm">Liskov substitution
+    principle</i>" entry]</span></i></em></span></p><p><span class="emphasis"><em>Filter.</em></span> Ideally, every command would be an
+    island. In real life, we sometimes need to allocate resources and be
+    assured the resources will be released no matter what happens. A
+    <tt class="classname">Filter</tt> is a specialized
+    <tt class="classname">Command</tt> that adds a
+    <tt class="methodname">postProcess</tt> method. A
+    <tt class="classname">Chain</tt> is expected to call the
+    <tt class="methodname">postProcess</tt> method of any filters in the chain
+    before returning. A Command that implements Filter can safely release any
+    resources it allocated through the <tt class="methodname">postProcess</tt>
+    method, even if those resources are shared with other Commands.</p><p><span class="emphasis"><em>Catalog.</em></span> Many applications use "facades" and
+    "factories" and other techniques to avoid binding layers too closely
+    together. Layers need to interact, but often we don't want them to
+    interact at the classname level. A <tt class="classname">Catalog</tt> is
+    collection of logically named Commands (or Chains) that a client can
+    execute, without knowing the Command's classname.</p><p><div class="figure"><a name="N100DA"></a><p class="title"><b>Figure&nbsp;4.&nbsp;The five core interfaces: Context, Command, Chain, Filter, and
+        Catalog.</b></p><a href="/cgi-bin/olink?sysid="><i><span class="remark">[TODO: UML for Context, Command, Chain, Filter, and
+        Catalog.]</span></i></a></div></p><p>The rest of the chapter features recipes that will help you put the
+    Chain of Responsibility package to work in your own applications.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N100E3"></a>Test a Command</h2></div></div><div></div></div><p><span class="emphasis"><em>Problem:</em></span> You want to start using
+    <tt class="classname">Command</tt> objects in your application.</p><p><span class="emphasis"><em>Solution:</em></span> Use <i class="glossterm">Test Driven
+    Development</i> to create a test for a Command, and let the test
+    tell you how to write the Command. When the test passes, you will have a
+    working Command to integrate into your application.</p><p><span class="emphasis"><em><i><span class="remark">[Glossary: "<i class="glossterm">Test Driven
+    Development</i>" entry]</span></i></em></span></p><p><span class="emphasis"><em>Discussion: </em></span>Let's say we're working on an
+    application that maintains a "<tt class="classname">Profile</tt>" object for
+    each client. We need to change the state of the Profile during the
+    client's "session" with the application, which may span several requests.
+    Different application environments may preserve a Profile in different
+    ways. A web application may store a Profile as an attribute of the
+    HttpSession or as a client-side "cookie". An EJB application may maintain
+    a Profile as an attribute of the client's environment. Regardless, you
+    would like a single Command that can check to see if a client has a
+    Profile object, and, if not, create one. The Command does not know how the
+    application stores a Profile, or even if it is stored.</p><p>One reason we use Commands is because they are easy to test. In this
+    recipe, let's write a test for our Command. In another recipe, we will
+    create the corresponding Command. This approach is known as Test Driven
+    Development.</p><p>To test our Command, we can simply</p><div class="orderedlist"><ol type="1"><li><p>Create a Context with a known state</p></li><li><p>Create a Command instance to test</p></li><li><p>Execute the Command, passing our Context</p></li><li><p>Confirm that our Context now contains the expected state</p></li></ol></div><p>For the <tt class="classname">Context</tt>, we can use the
+    <tt class="classname">ContextBase</tt> class provided as part of the Chain
+    package. The <tt class="classname">ProfileCheck</tt> Command and Profile
+    object are shown in the next recipe. The remaining code for our
+    <tt class="classname">TestProfileCheck</tt> TestCase is shown as Example
+    1.</p><div class="example"><a name="N10123"></a><p class="title"><b>Example&nbsp;1.&nbsp;Testing whether a Profile object is created</b></p><pre class="programlisting">package org.apache.commons.mailreader;
+
+import junit.framework.TestCase;
+import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
+import org.apache.commons.chain.mailreader.commands.ProfileCheck;
+import org.apache.commons.chain.mailreader.commands.Profile;
+import org.apache.commons.chain.impl.ContextBase;
+
+public class ProfileCheckTest extends TestCase {
+
+   public void testProfileCheckNeed() {[TODO:]
+
+        Context context = new ContextBase();
+        Command command = new ProfileCheck();
+        try {
+            command.execute(context);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+
+        Profile profile = (Profile) context.get(Profile.PROFILE_KEY);
+        assertNotNull("Missing Profile", profile);
+
+    }</pre></div><p>Since we're using a test-first approach, we can't run or even
+    compile this class (yet). But we can use the test class to tell us which
+    other classes we need to write. The next recipe shows how to create a
+    Command.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N1012B"></a>Create a Command</h2></div></div><div></div></div><p><span class="emphasis"><em>Problem:</em></span> You need to create a
+    <tt class="classname">Command</tt> for your application, so that a test of the
+    Command will succeed.</p><p><span class="emphasis"><em>Solution:</em></span> Use the test to tell you what code
+    will realize the Command's <i class="glossterm"><span class="emphasis"><em>API
+    contract</em></span></i>.</p><p><i><span class="remark">[Glossary: <span class="emphasis"><em>"API contract</em></span>"
+    entry.]</span></i></p><p><span class="emphasis"><em>Discussion:</em></span> A key reason for using Commands,
+    and chains of Commands, is testability. Since Commands are designed to act
+    on whatever <tt class="classname">Context</tt> they receive, we can create a
+    Context with a known state to test our Command. In the preceding recipe,
+    we created a test for a <tt class="classname">ProfileCheck</tt> command. Let's
+    implement that Command so that it passes our test.</p><p>To pass the ProfileCheck test, we need to</p><div class="orderedlist"><ol type="1"><li><p>Retrieve the Profile from the Context, using Profile.PROFILE_KEY
+        as the attribute name.</p></li><li><p>If Profile is NULL, create a Profile and store it in the
+        Context.</p></li><li><p>Return <span class="symbol">false</span> or <span class="symbol">true</span> to the
+        caller.</p></li></ol></div><p>Whether to return <span class="symbol">false</span> or <span class="symbol">true</span> at
+    step 3 is optional. You could choose to return <span class="symbol">true</span>,
+    since this Command did check the profile. Or, you could decide to return
+    <span class="symbol">false</span>, so that the Command can be used as part of a
+    Chain. The return value controls whether a chain terminates or continues.
+    True forces a chain to end. False allows a chain to continue. For now,
+    we'll just return <span class="symbol">false</span>, so that our Command could be
+    used as part of a larger chain of Commands.</p><p>The code implementing our ProfileCheck Command is shown as Example
+    2.</p><div class="example"><a name="N10174"></a><p class="title"><b>Example&nbsp;2.&nbsp;A Command to create a Profile, if one doesn't exist.</b></p><pre class="programlisting">package org.apache.commons.chain.mailreader.commands;
+
+import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
+
+public class ProfileCheck implements Command {
+
+    public boolean newProfile(Context context) { return new Profile(); }
+
+    public boolean execute(Context context) throws Exception {
+        Object profile = context.get(Profile.PROFILE_KEY);
+        if (null == profile) {
+            profile = newProfile(context);
+            context.put(Profile.PROFILE_KEY, profile);
+        }
+        return false;
+    }
+}</pre></div><p>To compile our Command and run our test, we also need a
+    <tt class="classname">Profile</tt> class. Example 3 shows the simplest
+    implementation of Profile that will pass our test.</p><div class="example"><a name="N1017F"></a><p class="title"><b>Example&nbsp;3.&nbsp;The simplest Profile class that can possibly work.</b></p><pre class="programlisting">package org.apache.commons.chain.mailreader.commands; 
+public class Profile { 
+    public static String PROFILE_KEY = "profile"; 
+}</pre></div><p>Note that we used a separate method to create the Profile object. If
+    we buried a call to "new Profile()" in the Execute method, we could not be
+    reuse our CheckProfile Command to create specialized Profiles. Using
+    helper methods to create objects is known as the
+    <i class="glossterm">Factory</i> pattern.</p><p><i><span class="remark"><i><span class="remark">[Glossary: "Factory pattern"
+    entry]</span></i></span></i></p><p>We should now be able to compile all three classes and run our
+    test.</p><p><div class="figure"><a name="N10191"></a><p class="title"><b>Figure&nbsp;5.&nbsp;Green bar for org.apache.commons.mailreader.ProfileCheckTest
+        [TODO: Screen capture]</b></p><div class="mediaobject"><img src="???" alt="Green bar for org.apache.commons.mailreader.ProfileCheckTest [TODO: Screen capture]"></div></div></p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N10199"></a>Create a Context</h2></div></div><div></div></div><p><span class="emphasis"><em>Problem:</em></span> You want a
+    <tt class="classname">Context</tt> that is
+    <i class="glossterm"><span class="emphasis"><em>type-safe</em></span></i>,
+    <i class="glossterm"><span class="emphasis"><em>encapsulated</em></span></i>, or interoperable
+    with components that expect <i class="glossterm">JavaBean</i>
+    properties.</p><p><i><span class="remark">[Glossary entry: <span class="emphasis"><em>type-safety</em></span>,
+    <span class="emphasis"><em>encapsulate, JavaBean]</em></span></span></i></p><p><span class="emphasis"><em>Solution:</em></span> Extend your Context class from
+    <tt class="classname">ContextBase</tt>, and add whatever JavaBean properties
+    you need.</p><p><span class="emphasis"><em>Discussion</em></span>: Many components already use a
+    "context". Each of the various Java Servlet "scopes" have a context
+    object. The <span class="productnumber">Apache Velocity</span> product relies
+    on a context object. Most operating systems have a list of simple
+    "environment" settings that is a "context". These examples all use a "map"
+    or "dictionary" style context. These contexts are a simple list of
+    entries, where each entry is a key and a value.</p><p>Other components also use what amounts to a context but predefine
+    the entries as object properties. The Apache Struts framework is one
+    example. Developers can define a JavaBean (or
+    "<tt class="classname">ActionForm</tt>") to act as the context for a request.
+    Some components mix both approaches. The Servlet request and session
+    objects expose a Map-style context along with several predefined
+    properties. Struts supports a variant of the ActionForm that utilizes a
+    Map.</p><p>Architects will often choose a Map-style context because they are
+    easy to implement and <span class="emphasis"><em>very</em></span> easy to extend. Usually,
+    developers can add their own entries to a Map-style context at will. Of
+    course, as illustrated by figure 6, every engineering decision is a
+    trade-off. Maps trade type-safety and encapsulation for flexibility and
+    extensibility. Other times, architects will decide to trade flexibility
+    for type-safety. Or, we may decide to trade extensibility for
+    encapsulation. Often, these decisions are driven by the need to
+    interoperate with other components that may expect either a Map or a
+    JavaBean.</p><div class="figure"><a name="N101CE"></a><p class="title"><b>Figure&nbsp;6.&nbsp;Every engineering decision is a trade-off.</b></p><a href="/cgi-bin/olink?sysid=">[:TODO: line art -- (Do it right; Do it soon; Do it cheap: Choose
+      any two.)]</a></div><p>The Jakarta Commons Chain of Command architects have chosen a
+    Map-style context as the default. The Chain Context is nothing but a
+    "marker interface" for the standard Java <tt class="classname">Map</tt>
+    interface.</p><p><div class="example"><a name="N101DA"></a><p class="title"><b>Example&nbsp;4.&nbsp;The Context interface is a "marker" interface extending
+        Map.</b></p><p><pre class="programlisting">public interface Context extends Map {
+}</pre></p></div>However, to provide developers with type-safety,
+    encapsulation, and interoperability, Chain provides a sophisticated
+    <tt class="classname">ContextBase</tt> class that also supports JavaBean
+    properties.</p><p>If a developer declares a JavaBean property on a subclass of
+    ContextBase, this property is automatically used by the Map methods. The
+    Map <tt class="methodname">get</tt> and <tt class="methodname">put</tt> methods
+    of ContextBase introspect the subclass. If they find a JavaBean property
+    named after the key argument, the getter or setter method is called
+    instead.</p><p>This bit of wizardry enforces type-safety for any declared
+    properties, but developers can still use the context as if it were an
+    ordinary Map. If all needed attributes are defined as properties, then a
+    ContextBase can interoperate with components that expect a Map and also
+    with components that expect a JavaBean -- all at the same time. Everything
+    is transparent, and there are no special requirements for the
+    caller.</p><p>Let's create a test for a ContextBase subclass to prove the JavaBean
+    properties and Map methods are interoperable and type-safe.</p><p>To test the context for interoperability, we'll need to do four
+    things:</p><div class="orderedlist"><ol type="1"><li><p>Assign a value to a typed property using a JavaBean
+        setter</p></li><li><p>Retrieve the same value using the Map get method</p></li><li><p>Assign another value using the Map set method</p></li><li><p>Retrieve the update value using a JavaBean setter</p></li></ol></div><p>To test the context for type-safety, we will also need to
+    <div class="orderedlist"><ol type="1"><li><p>Assign a <tt class="classname">String</tt> to a typed property
+          using the Map get method</p></li><li><p>Confirm that the assignation throws a "type mismatch"
+          exception</p></li></ol></div></p><p>To write these tests, let's create a context with a
+    <span class="emphasis"><em>Locale</em></span> property for an application named
+    "MailReader". The code for our <tt class="classname">LocaleValueTest</tt> is
+    shown in Example 5.<div class="example"><a name="N10218"></a><p class="title"><b>Example&nbsp;5.&nbsp;LocaleValueTest proves that our context is interoperable and
+        type-safe.</b></p><p><pre class="programlisting">package org.apache.commons.mailreader;
+import junit.framework.TestCase;
+import junit.framework.Assert;
+import org.apache.commons.chain.mailreader.MailReader;
+import java.util.Locale;
+
+public class LocaleValueTest extends TestCase {
+
+    MailReader context;
+
+    public void setUp() {
+        context = new MailReader();
+    }
+
+    public void testLocaleSetPropertyGetMap() {
+        Locale expected = Locale.CANADA_FRENCH;
+        context.setLocale(expected);
+        Locale locale = (Locale) context.get(MailReader.LOCALE_KEY);
+        Assert.assertNotNull(locale);
+        Assert.assertEquals(expected, locale);
+    }
+
+    public void testLocalePutMapGetProperty() {
+        Locale expected = Locale.ITALIAN;
+        context.put(MailReader.LOCALE_KEY, expected);
+        Locale locale = context.getLocale();
+        Assert.assertNotNull(locale);
+        Assert.assertEquals(expected, locale);
+    }
+
+    public void testLocaleSetTypedWithStringException() {
+        String localeString = Locale.US.toString();
+        try {
+            context.put(MailReader.LOCALE_KEY, localeString);
+            fail("Expected 'argument type mismatch' error");
+        } catch (UnsupportedOperationException expected) {
+            ;
+        }
+    }
+}</pre></p></div>A <tt class="classname">MailReader</tt> Context object that passes
+    the LocaleValueTest is shown as Example 6.<div class="example"><a name="N10223"></a><p class="title"><b>Example&nbsp;6.&nbsp;The simplest MailReader object that will pass
+        LocalValueTest.</b></p><p><pre class="programlisting">package org.apache.commons.chain.mailreader;
+import org.apache.commons.chain.impl.ContextBase;
+import java.util.Locale;
+
+public class MailReader extends ContextBase {Prop
+    public static String LOCALE_KEY = "locale";
+    private Locale locale;
+    public Locale getLocale() {
+        return locale;
+    }
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
+}</pre></p></div>The MailReader object in Example 6 shows how much utility is
+    built into ContextBase class. All we had to do was define the property.
+    The base class took care of the rest. Of course, there is no free lunch.
+    ContextBase has to go through the bother of introspection to tell if an
+    attribute has a property or not. The ContextBase code is written to be
+    efficient, but if your application can just use a Map-style context, you
+    could use the leaner version of a MailReader context shown in Example
+    7.<div class="example"><a name="N1022B"></a><p class="title"><b>Example&nbsp;7.&nbsp;An even simpler MailReader Context (but that would fail
+        LocalValueTest).</b></p><p><pre class="programlisting">package org.apache.commons.chain.mailreader;
+import org.apache.commons.chain.Context;
+import java.util.Hashmap;
+
+public class MailReader extends Hashmap implements Context {
+    public static String LOCALE_KEY = "locale";
+}</pre></p></div>By extending the stock ContextBase subclass, or rolling your
+    own class with a HashMap, you can use whatever type of context is best for
+    your own artichtecture.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N10233"></a>Create a Catalog</h2></div></div><div></div></div><p><span class="emphasis"><em>Problem:</em></span> You want to layer your application
+    without creating dependencies on <tt class="classname">Command</tt> objects
+    that exist in different layers.</p><p><span class="emphasis"><em>Solution:</em></span> Assign each command a logical name so
+    that it can be called from a "catalog". A catalog moves dependency on to
+    the logical name and away from the Java classname or classnames. The
+    caller has a dependency on the catalog but not on the actual Command
+    classes.</p><p><span class="emphasis"><em>Discussion:</em></span> Context and Command objects are
+    usually used to join layers of an application together. How can one layer
+    call Commands in another layer without creating new dependencies between
+    the two layers?</p><p>Interlayer dependencies are a common dilemma in enterprise
+    applications. We want to layer our application so that it becomes robust
+    and cohesive, but we also need a way for the different layers to interact
+    with each other. The Commons Chain package offers a
+    <tt class="classname">Catalog</tt> object to help solve problems with
+    dependencies between layers, as well as between components on the same
+    layer.</p><p>A Catalog can be configured through <i class="glossterm">metadata</i>
+    (an XML document) and instantiated at application startup. Clients can
+    retrieve whatever <tt class="classname">Commands</tt> they need from the
+    Catalog at runtime. If Commands need to be refactored, new classnames can
+    be referenced in the metadata, with zero-changes to the application
+    code.</p><p><i><span class="remark">[Glossary: Add "metadata"<span class="emphasis"><em>
+    entry.]</em></span></span></i></p><p>Let's take a look at some code that uses a Catalog. Example 8 shows
+    a method that executes a Command from a Catalog stored in a web
+    application's servlet context. <div class="example"><a name="N10259"></a><p class="title"><b>Example&nbsp;8.&nbsp;A Catalog stores Commands that an application can lookup and
+        execute.</b></p><p><pre class="programlisting">   boolean executeCatalogCommand(Context context, String name, HttpServletRequest request) 
+        throws Exception {
+    
+        ServletContext servletContext = request.getSession().getServletContext();  
+        Catalog catalog = (Catalog) servletContext.getAttribute("catalog");
+        Command command = catalog.getCommand(name);
+        boolean stop = command.execute(context);
+        return stop;
+        
+    } </pre></p></div></p><p><i><span class="remark">[Glossary: Add <span class="emphasis"><em>"type-safety"</em></span>,
+    "<span class="emphasis"><em>encapsulate", "JavaBean" entry.]</em></span></span></i></p><p>Notice that we only pass the name of a Command into the method. Also
+    note that we retrieve the Command and pass it the Context without knowing
+    the precise type of either object. All references are to the standard
+    interfaces.</p><p>Example 9 shows an XML document that can be used to create a
+    Catalog, like the one called in Example 8.<div class="example"><a name="N1026C"></a><p class="title"><b>Example&nbsp;9.&nbsp;A Catalog can be configured using metadata (an XML
+        document).</b></p><p><pre class="programlisting">&lt;?xml version="1.0" ?&gt;
+&lt;chains&gt;
+  &lt;command 
+    name="LocaleChange" 
+    className="org.apache.commons.chain.mailreader.commands.LocaleChange"/&gt;
+  &lt;command 
+    name="LogonUser" 
+    className="org.apache.commons.chain.mailreader.commands.LogonUser"/&gt;
+&lt;/chains&gt;</pre></p></div>The application needs to know the name given to a Command we
+    want to execute, but it does not need to know the classname of the
+    Command. The Command could also be a <tt class="classname">Chain</tt> of
+    Commands. We can refactor Commands within the Catalog and make
+    zero-changes to the application. For example, we might decide to check for
+    a user profile before changing a user's locale setting. If we wanted to
+    make running a <tt class="classname">CheckProfile</tt> Command part of
+    "LocaleChange", we could change the Catalog to make "LocaleChange" a
+    Chain. Example 10 shows Catalog metadata where "LocaleChange" is a Chain.
+    <div class="example"><a name="N1027A"></a><p class="title"><b>Example&nbsp;10.&nbsp;A Catalog can be refactored with zero-changes to the
+        application code.</b></p><p><pre class="programlisting">&lt;chains&gt;
+ &lt;chain name="LocaleChange"&gt; 
+    &lt;command 
+      className="org.apache.commons.chain.mailreader.commands.ProfileCheck"/&gt;
+    &lt;command 
+      className="org.apache.commons.chain.mailreader.commands.LocaleChange"/&gt;
+  &lt;/chain&gt;
+  &lt;command 
+    name="LogonUser" 
+    className="org.apache.commons.chain.mailreader.commands.LogonUser"/&gt;
+&lt;/chains&gt;</pre></p></div></p><p>In the "Create a Command" recipe, we use a factory method to create
+    a "Profile" object. If we subclass that Command to create a specialized
+    Profile, we can cite the new classname in the Catalog, with zero changes
+    to the rest of the application.</p><p>Being able to make quick and easy changes to an application can have
+    a big effect on the bottom line. The recurring, annual maintenance cost of
+    applications can range between 25% to 50% of the initial development cost
+    (Gartner Group, May 2002).</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N10285"></a>Load a Catalog From a Web Application</h2></div></div><div></div></div><p><span class="emphasis"><em>Problem:</em></span> You'd like to load a catalog
+    automatically when a web application starts.</p><p><span class="emphasis"><em>Solution:</em></span> Utilize the
+    <tt class="classname">ChainListener</tt> bundled with the Commons Chain of
+    Responsibility Package.</p><p><span class="emphasis"><em>Discussion:</em></span> A Catalog can be created
+    progmatically, using conventional Java statements, or by specifying the
+    catalog members as metadata (an XML document). For testing, it can be
+    easiest to create a catalog progmatically. For deployment, catalogs are
+    much easier to maintain as metadata. The downside of using metadata is
+    that it needs to be parsed so that the specified objects can be created.
+    Happily, the Common Chain of Responsibility package comes bundled with a
+    Listener that can read a Catalog metadata file and create the
+    corresponding object graph.</p><p>To use ChainListener in a web application, just add a reference to
+    your application's web.xml (yet another metadata document). One such
+    reference is shown as Example 11. <div class="example"><a name="N10299"></a><p class="title"><b>Example&nbsp;11.&nbsp;Loading a ChainListener via a web.xml</b></p><pre class="programlisting">    &lt;!-- Commons Chain listener to load catalogs  --&gt;
+    &lt;context-param&gt;
+        &lt;param-name&gt;org.apache.commons.chain.CONFIG_CLASS_RESOURCE&lt;/param-name&gt;
+        &lt;param-value&gt;resources/catalog.xml&lt;/param-value&gt;
+    &lt;/context-param&gt;
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.apache.commons.chain.web.ChainListener&lt;/listener-class&gt;
+    &lt;/listener&gt;</pre></div>The elements in Example 11 expect that there is a
+    "catalog.xml" file stored on the application's classpath under a directory
+    named "resources". Usually, this would mean that there is a "resources"
+    directory under "WEB-INF/classes". If you are using Maven to build your
+    application, Maven can copy metadata files from your source tree to the
+    web infrastructure tree automatically. Many teams do the same with custom
+    Ant build files. Example 12 shows a fragment of a Maven properties file
+    that copies <tt class="filename">catalog.xml</tt> from a directory under
+    "<tt class="filename">src/resources/chain</tt>" to
+    "<tt class="filename">/WEB-INF/classpath/resources</tt>" under the web
+    deployment directory. <div class="example"><a name="N102AC"></a><p class="title"><b>Example&nbsp;12.&nbsp;Managing resources in a Maven properties file</b></p><p><pre class="programlisting">&lt;!-- ... --&gt;
+
+    &lt;build&gt;
+       &lt;sourceDirectory&gt;src/java&lt;/sourceDirectory&gt;
+       &lt;resources&gt;
+           &lt;resource&gt;
+             &lt;directory&gt;${basedir}/src/resources/chain&lt;/directory&gt;
+             &lt;targetPath&gt;resources&lt;/targetPath&gt;
+             &lt;includes&gt;
+               &lt;include&gt;catalog.xml&lt;/include&gt;
+             &lt;/includes&gt;
+           &lt;/resource&gt;
+       &lt;/resources&gt;
+    &lt;/build&gt;
+
+&lt;!-- ... --&gt;</pre></p></div></p><p>By default, ChainListener will create an application-scope attribute
+    by the name of "catalog".</p><p>The default attribute name can be changed, if needed, You can also
+    configure ChainListener to read files from a system path or from a JAR.
+    See the JavaDoc for all the configuration details. There is also a
+    <tt class="classname">ChainServlet</tt> if you are using the Servlet 2.2
+    platform.</p><p>Using the default attribute, and given an
+    <tt class="classname">HttpServletRequest</tt> instance, you can access the
+    catalog by coding:</p><p><pre class="programlisting">        Catalog catalog = (Catalog) request.getSession().getServletContext().getAttribute("catalog");</pre></p><p>Given the catalog, you can execute a command and pass it a context,
+    like so:</p><p><pre class="programlisting">        Command command = catalog.getCommand(commandName);  
+        boolean stop = command.execute(context);</pre></p><p>Of course, the hard part is populating the context and determining
+    which command we need to run for a given request. That work is often left
+    to a Front Controller, like the one implemented by Apache Struts.
+    Accordingly, we include a "Call a Command from Struts" recipe In this
+    chapter. If you like Controllers, but don't like Struts, there are also
+    "Create a Controller" and "Call a Command from a Servlet" recipes.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N102CB"></a>Call a Command From Struts</h2></div></div><div></div></div><p><span class="emphasis"><em>Problem:</em></span> You'd like to call Commands from
+    within a Struts application.</p><p><span class="emphasis"><em>Solution:</em></span> Use a CommandAction to call a Command
+    named for your ActionForm.</p><p><span class="emphasis"><em>Discussion:</em></span> As a Front Controller, the Apache
+    Struts web application framework has three primary responsibilities.
+    <div class="orderedlist"><ol type="1"><li><p>Validate a user request</p></li><li><p>Process a user request</p></li><li><p>Create a response to the request</p></li></ol></div>The third item is usually delegated to a server page.
+    Struts provides framework-aware components, like JSP tag libraries, to
+    encourage developers to use another resource to create the response. In
+    this way, Struts needs only to select the resource. The actual response
+    creation is handled elsewhere.</p><p>Struts also bundles a component to help validate the user request.
+    The Struts Validator utilizes metadata to vet request values and create
+    user prompts should validation fail.</p><p>To discharge its responsibility to "Process a user request", Struts
+    provides an extension point called the "<tt class="classname">Action</tt>"
+    class. The Struts Action is a blank slate where developers can do whatever
+    is necessary to process the request. Some developers even make JDBC calls
+    from Actions, but such practices are discouraged. The Struts best practice
+    is for Actions to delegate business and system logic calls to another
+    component, such as a <i class="glossterm">business facade</i>. The Struts
+    Action passes appropriate values to one or methods on the facade. The
+    outcome is used to determine an appropriate response. Often, the outcome
+    of an Action is described as either "success " or "failure".</p><p><i><span class="remark">[Glossary: "Business facade" entry]</span></i></p><p>Aside from the blank Action, Struts distributes several "standard"
+    Actions, such as the <tt class="classname">DispatchAction</tt>. The standard
+    Actions are designed to be used several times in different ways within an
+    application. To allow reuse of Actions, Struts provides a
+    <i class="glossterm">Decorator</i> class called an
+    <tt class="classname">ActionMapping</tt>. Runtime details can be specified
+    through the <tt class="classname">ActionMappings</tt>, so that each usage of a
+    standard Action can be slightly different.</p><p>To solve the problem of calling a Command from Struts, we can use a
+    standard Action to retrieve the Catalog and call the Command. We can
+    specify runtime details in the ActionMapping. Our details include which
+    set of validations to pass and which CommanIn this chapter, d to
+    run.</p><p>In practice, the set of validations we need to pass and the command
+    we need to run are closely coupled. In fact, it can be a good practice to
+    create a distinct set of validations for each Command. If a Command
+    changes, then its validations can change with it, without affecting other
+    Commands.</p><p>In Struts, the set of validations is coupled to the ActionForm name.
+    The ActionForm name is a logical identifier, separate from the ActionForm
+    classname. When you use the Struts Validator, the "form" name for the
+    Validations is the same string as the ActionForm "name" specified by the
+    ActionMapping. A database guru would call this a 1:1 relation; the
+    Validator form name and the ActionForm name are shared keys. If we want
+    each Command to have its own set of validations, and it's own
+    ActionMapping, it follows that we should use the same "key" throughout.
+    The Command name can be the ActionForm name as well as the Validator form
+    name.</p><p>Example 13 shows how the names line up in the three metadata files,
+    the catalog.xml, the validation.xml, and the struts-config.xml. The token,
+    or "key", that links the three files together is "LocaleChange"<div class="example"><a name="N1030A"></a><p class="title"><b>Example&nbsp;13.&nbsp;A tale of three metadata files: catalog.xml, validation.xml,
+        and struts-config.xml</b></p><p><pre class="programlisting">&lt;!-- catalog.xml --&gt;
+&lt;?xml version="1.0" ?&gt;
+&lt;chains&gt;
+    &lt;command
+        name="<span class="emphasis"><em>LocaleChange</em></span>"
+        className="org.apache.commons.chain.mailreader.commands.LocaleChange" /&gt;
+&lt;/chains&gt;
+
+&lt;!-- validation.xml --&gt;
+&lt;?xml version="1.0" ?&gt;
+&lt;!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1//ENIn this chapter, "
+          "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd"&gt;
+&lt;form-validation&gt;
+    &lt;formset&gt;
+        &lt;form name="<span class="emphasis"><em>LocaleChange</em></span>"&gt;
+            &lt;field property="language" depends="required"&gt;
+                &lt;arg0 key="prompt.language"/&gt;
+            &lt;/field&gt;
+        &lt;/form&gt;
+    &lt;/formset&gt;
+&lt;/form-validation&gt;
+
+&lt;!-- struts-config.xml --&gt;
+&lt;?xml version="1.0" ?&gt;
+&lt;!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd"&gt;
+&lt;struts-config&gt;
+    &lt;form-beans&gt;
+        &lt;form-bean
+            name="<span class="emphasis"><em>LocaleChange</em></span>"
+            type="org.apache.struts.validator.DynaValidatorForm"&gt;
+           &lt;form-property name="language" type="java.lang.String"/&gt;
+           &lt;form-property name="country" type="java.lang.String"/&gt;
+         &lt;/form-bean&gt;
+     &lt;/form-beans&gt;
+    &lt;action-mappings&gt;
+        &lt;action path="/LocaleChange"
+            name="<span class="emphasis"><em>LocaleChange</em></span>"
+            type="org.apache.commons.chain.mailreader.struts.CommandAction"&gt;
+        &lt;forward name="success" path="/Welcome.do" /&gt;
+        &lt;/action&gt;
+    &lt;/action-mappings&gt;
+&lt;struts-config&gt;</pre></p></div>In Example 13, we used "LocaleChange" for the Command name,
+    the validation Form name, and the Action form-bean name. To trigger the
+    thread, all we need to do is define a generic Action that will use the
+    form-bean name as the Command name. Example 14 shows our
+    <tt class="classname">CommandAction</tt>. <div class="example"><a name="N10321"></a><p class="title"><b>Example&nbsp;14.&nbsp;The CommandAction links the form-bean name with the Command
+        name</b></p><p><pre class="programlisting">package org.apache.commons.chain.mailreader.struts;
+import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
+import org.apache.commons.chain.web.servlet.ServletWebContext;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;as the ActionForm name.
+import org.apache.struts.action.ActionMapping;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class CommandAction extends Action {
+
+    protected Command getCommand(ActionMapping mapping,
+                                 ActionForm form,
+                                 HttpServletRequest request,
+                                 HttpServletResponse response) throws Exception {
+        Catalog catalog = (Catalog) request.getSession().getServletContext().getAttribute("catalog");
+        String name = mapping.getName();
+        Command command = catalog.getCommand(name);
+        return command;
+    }
+
+    protected Context getContext(ActionMapping mapping,
+                                 ActionForm form,
+                                 HttpServletRequest request,
+                                 HttpServletResponse response) throws Exception {
+        ServletContext application = request.getSession().getServletContext();
+        Context context = new ServletWebContext(application, request, response);
+        return context;
+    }
+
+    protected static String SUCCESS = "success";
+
+    protected ActionForward findLocation(ActionMapping mapping, boolean stop) {
+        if (stop) return mapping.getInputForward(); // Something failed
+        return mapping.findForward(SUCCESS);
+    }
+
+    public ActionForward execute(
+            ActionMapping mapping,
+            ActionForm form,
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws Exception {
+        Command command = getCommand(mapping, form, request, response);
+        Context context = getContext(mapping, form, request, response);
+        boolean stop = command.execute(context);
+        ActionForward location = findLocation(mapping, stop);
+        return location;
+    }</pre></p></div>The entry point to an Action class is the
+    <tt class="methodname">execute</tt> method. Our execute method calls
+    <tt class="methodname">getCommand</tt> and
+    <tt class="methodname">getContext</tt> methods that we have defined to obtain
+    the Command from the catalog and to build a Context based on the web
+    request. Keeping life simple, we use the
+    <tt class="classname">ServletWebContext</tt> bundled with Commons Chain.
+    Depending on your needs, you might want to define your own specialized
+    Context.(See "Create a Context" Recipe.) Our execute method then calls the
+    command's <tt class="methodname">execute</tt> method. We pass the return
+    value of command.execute to our <tt class="methodname">findLocation</tt>
+    method, which determines "success" or "failure".</p><p>Another way to write CommandAction would be to use the ActionMapping
+    "<span class="property">parameter</span>" property to indicate the Command name .
+    To do that, we'd patch <tt class="methodname">getCommand</tt> to call
+    <tt class="methodname">mapping.getParameter()</tt> instead of
+    <tt class="methodname">getName()</tt>, like this:<pre class="programlisting">  -     String name = mapping.getName();
+  +     String name = mapping.getParameter();</pre></p><p>(The minus sign means remove, or subtract, the line. The plus sign
+    means insert, or add, the line. The Unix patch program follows this
+    format.)</p><p><i><span class="remark">[Glossary: "patch" entry]</span></i></p><p>The "parameter" approach in the preceding example lets us name the
+    form-beans independently of the Command name. But, a consequence is that
+    we have to specify the Command name for each ActionMapping.
+    (<span class="emphasis"><em>Bor-ring!</em></span>) You could also merge the two approaches
+    and return the parameter property only when it is used, like
+    this:<pre class="programlisting">        String name = mapping.getParameter();
+  +     if ((null==name) || (name=="")) name = mapping.getName();</pre></p><p>Or you could mix and match the two approches, using CommandAction
+    when the formbean name and the command name match, and a
+    CommandParamterAction, when they do not. Struts allows you to use as many
+    Actions, and standard Actions, as you like.</p><p>Note that our Command is expected to do the "custom" work usually
+    delegated to the Action. Consequently, we do not need to create an Action
+    subclass for each task. We can use one or two standard Actions and have
+    them call the appropriate Command class. A set of related tasks (or
+    "story") might share an ActionForm class and a Command class, but, most
+    often, the Actions can be standard, reusable Actions.</p><p>Something else to note about Example 14 is that we use the
+    "LocaleChange" token as the <span class="property">path</span> attribute. This
+    means that the story would be trigged by opening (for example) the
+    "<tt class="filename">/LocaleChange.do</tt>" page. Even so, the path is
+    <span class="emphasis"><em>not</em></span> part of our <i class="glossterm">semantic
+    chain</i>. The path is not a fully logical name that we control.
+    The path token is shared with the container, and the container may have
+    its own constraints on the path. (JAAS pattern matching, for example.) The
+    path can't be part of our chain of keys, since it is shared with the
+    container's "business logic".</p><p><i><span class="remark">[Glossary: <span class="emphasis"><em>Add "Semantic chain pattern"</em></span>
+    entry.]</span></i></p><p>Having used "LocaleChange" for everything else, using it for the
+    path token seems natural. Most of us would do the same. But, the path can
+    vary as needed, without upsetting the rest of the semantic chain. If the
+    "path" needs to change to suit a change in the JAAS configuration, nothing
+    else needs to change.</p><p>Of course, there would be several other ways to call a Command from
+    a Struts Action. Since the request is passed to the Action, it's easy to
+    obtain a Catalog stored in application scope. Once you have access to the
+    Catalog, the rest is easy.</p><p>Other frameworks, like WebWorks and Maverick, have components
+    similar to Struts Actions. Any of these components can be used to create a
+    Context, access the Catalog, and execute a Command.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N1037A"></a>Create a Controller</h2></div></div><div></div></div><p><span class="emphasis"><em>Problem:</em></span> You want to base your application's
+    <i class="glossterm">Controller</i> components on the Commons Chain of
+    Command package.</p><p><i><span class="remark">[Glossary: <span class="emphasis"><em>Add "Controller pattern"</em></span>
+    entry, along with Application Controller and Front
+    Controller.]</span></i></p><p><span class="emphasis"><em>Solution:</em></span> Create a set of interfaces for a
+    Controller package that can be implemented using base classes from the
+    Chain of Command package.</p><p><span class="emphasis"><em>Warning: Since we are creating a base package, this recipe
+    is longer than most. Each individual component is simple enough, but there
+    are several components to cover. Since the components are interrelated,
+    covering them separately would be confusing. So, sit back, loosen your
+    belt, and enjoy, while we whip up a "seven-course meal".</em></span></p><p><span class="emphasis"><em>Discussion:</em></span> Many applications use
+    implementations of the Controller pattern to field user requests.
+    <span class="productname">Core J2EE Patterns: Best Practices and Design
+    Strategies</span>&trade; <span class="productnumber">[ISBN:
+    0-13-142246-4]</span> describes a controller as a component that
+    "interacts with a client, controlling and managing the handling of each
+    request." There are several flavors of controllers, including Application
+    Controllers and Front Controllers. Many web application frameworks, like
+    Apache Struts, utilize a Front Controller.</p><p>Often, an implementation of the Controller pattern will in turn use
+    the Command pattern or Chain of Command pattern. How can we use the
+    Commons Chain of Command package to implement a Controller?</p><p>Following the general description from Core J2EE Patterns, let's
+    start by defining a test that passes a request to a controller and
+    confirms that an appropriate response is returned.</p><p>To write our test, we need to:<div class="orderedlist"><ol type="1"><li><p>Create a Controller.</p></li><li><p>Add a Handler for our Request to the Controller.</p></li><li><p>Create a Request and pass it to the Controller.</p></li><li><p>Confirm that the Request returns the expected Response.</p></li></ol></div></p><p>To simplify writing the test, lets make a few executive
+    decisions:</p><div class="orderedlist"><ol type="1"><li><p>The Request and Response object have "name" properties.</p></li><li><p>The name of a Response matches the name of its Request (a shared
+        key).</p></li><li><p>The test will be based on interfaces; implemented classes will
+        extend Common Chain members.</p></li><li><p>The Controller extends Catalog.</p></li><li><p>The Request and Response extend Context.</p></li><li><p>The Request Handler extends Command.</p></li><li><p>For no particular reason, we'll call our controller package
+        "Agility".</p></li></ol></div><p>Example 15 shows a <tt class="classname">ProcessingTest</tt> class with
+    our <tt class="methodname">testRequestResponseNames</tt> method.<div class="example"><a name="N103D3"></a><p class="title"><b>Example&nbsp;15.&nbsp;Test to assert that our Controller can process a Request and
+        return an appropriate Response</b></p><p><pre class="programlisting">package org.apache.commons.agility;
+
+import junit.framework.TestCase; 
+import org.apache.commons.agility.impl.ControllerCatalog;
+import org.apache.commons.agility.impl.HandlerCommand;
+import org.apache.commons.agility.impl.RequestContext;
+
+public class ProcessingTest extends TestCase {
+
+    public void testRequestResponseName() {
+        
+        String NAME = "TestProcessing"; 
+
+        Controller controller = new ControllerCatalog();
+
+        RequestHandler handler = new HandlerCommand(NAME);
+        controller.addHandler(handler);
+        Request request = new RequestContext(NAME);
+        controller.process(request);
+        Response response = request.getResponse();
+
+        assertNotNull(response);
+        assertEquals(NAME, response.getName());
+    }
+}</pre></p></div>To compile the ProcessingTest class, we will need interface
+    members for <tt class="classname">Controller</tt>,
+    <tt class="classname">RequestHandler</tt>, <tt class="classname">Request</tt>, and
+    <tt class="classname">Response</tt>, and class members for
+    <tt class="classname">ControllerCatalog</tt>,
+    <tt class="classname">HandlerCommand</tt>, and
+    <tt class="classname">RequestContext</tt>. Figure 7 shows the UML for the four
+    interfaces.<div class="figure"><a name="N103F0"></a><p class="title"><b>Figure&nbsp;7.&nbsp;The four interfaces needed to realize ProcessingTest</b></p><a href="/cgi-bin/olink?sysid="><i><span class="remark">[TODO: UML for Controller, RequestHandler, Request, and
+        Response ]</span></i></a></div></p><p>Referring to the UML in Figure 7, we can write the code for our
+    interface members, as shown in Example 16. <div class="example"><a name="N103F9"></a><p class="title"><b>Example&nbsp;16.&nbsp;To compile ProcessTest, we need to define four
+        interfaces.</b></p><p><pre class="programlisting">// Controller.java
+package org.apache.commons.agility;
+public interface Controller {
+    void addHandler(RequestHandler handler);
+    RequestHandler getHandler(String name) throws ProcessException;
+    void process(Request request) throws ProcessException;
+}
+
+// Request.java
+package org.apache.commons.agility;
+public interface Request {
+    String getName();
+    Response getResponse();
+    void setResponse(Response response);
+}
+
+// Response.java
+package org.apache.commons.agility;
+public interface Response {
+    String getName();
+}
+
+// RequestHandler.java
+package org.apache.commons.agility;
+public interface RequestHandler {
+    String getName();
+    void handle(Request request) throws ProcessException;
+}
+
+// ProcessException.java
+package org.apache.commons.agility;
+public class ProcessException extends Exception {
+    public ProcessException(Throwable cause) {
+        super(cause);
+    }
+}</pre></p></div></p><p>With the interfaces out of the way, we can turn to the classes we
+    need to implement. The UML for the class members we need is shown as
+    Figure 8. <div class="figure"><a name="N10402"></a><p class="title"><b>Figure&nbsp;8.&nbsp;The thee classes needed to realize ProcessingTest.</b></p><a href="/cgi-bin/olink?sysid="><i><span class="remark">[TODO: UML for ControllerCatalog, RequestContext, and
+        HandlerCommand.]</span></i></a></div></p><p>If we create the classes indicated by Figure 8, and stub-out the
+    methods, we can get the code to compile. The test will run, but skeleton
+    classes won't pass muster. Let's implement each class, starting with
+    HandlerCommand, which is shown as Example 17.</p><p><div class="example"><a name="N1040C"></a><p class="title"><b>Example&nbsp;17.&nbsp;HandlerCommand provides default behavior that subclasses can
+        override</b></p><p><pre class="programlisting">package org.apache.commons.agility.impl;
+
+import org.apache.commons.agility.ProcessException;
+import org.apache.commons.agility.Request;
+import org.apache.commons.agility.RequestHandler;
+import org.apache.commons.agility.Response;
+import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
+
+public class HandlerCommand implements Command, RequestHandler {
+    String name =  null;
+
+    public HandlerCommand(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean execute(Context context) throws Exception {
+        handle((Request) context);
+        return true;
+    }
+
+    public void handle(Request request) throws ProcessException {
+        try {
+            String name = request.getName();
+            Response response = new ResponseContext(name);
+            request.setResponse(response);
+        } catch (Exception e) {
+            throw new ProcessException(e);
+        }
+    }
+}</pre></p></div>The <tt class="methodname">handle(Request)</tt> method of
+    HandlerCommand realizes the prime responsibility for this class: create a
+    Response for the Request. The execute(Context) method is an
+    <i class="glossterm">adapter</i> that delegates to the handle method. Now we
+    can call execute or handle and achieve the same result. The constructor
+    assigns each instance of HandlerCommand a name so that it can be matched
+    with a Request.</p><p><i><span class="remark"><i><span class="remark">[Glossary: "apapter pattern"
+    entry]</span></i></span></i></p><p>The handle(Request) method shown here is not very useful. However,
+    it will pass our test and prove the infrastructure is working. Subclasses
+    can override handle(Request) to create the appropriate Response for a
+    given Request. Since HandlerCommands are still Commands, we can itemize
+    our HandlerCommand subclasses as metadata (an XML document). This will
+    make it easy to handle new Requests as our application grows.</p><p>The HandlerCommand class creates a ResponseContext instance and sets
+    it as the Response. The ResponseContext class is shown as Example
+    18.</p><p><div class="example"><a name="N10423"></a><p class="title"><b>Example&nbsp;18.&nbsp;Many other implementations of ResponseContext are possible.
+        They just need to implement Response and extend ContextBase.</b></p><p><pre class="programlisting">package org.apache.commons.agility.impl;
+
+import org.apache.commons.agility.Response;
+import org.apache.commons.chain.impl.ContextBase;
+
+public class ResponseContext extends ContextBase implements Response {
+
+    private String name;
+
+    public ResponseContext(String name) {
+        super();
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}</pre></p></div>Since we're just testing the infrastructure, our
+    ResponseContext is rudimentary. A Front Controller for a web application
+    framework might define several attributes for a Response, such as the
+    location of a server page. The RequestHandler can create any kind of
+    Response object that might be needed.</p><p>Whatever RequestHandlers we need are added to the Catalog, either as
+    metadata or programatically. Our tests add the handler programatically, so
+    we need to implement the AddHandler method. Example 19 shows our
+    implementation of CatalogController. <div class="example"><a name="N1042D"></a><p class="title"><b>Example&nbsp;19.&nbsp;RequestHandlers can be added to the CatalogController
+        programatically or through metadata</b></p><p><pre class="programlisting">package org.apache.commons.agility.impl;
+
+import org.apache.commons.agility.Controller;
+import org.apache.commons.agility.ProcessException;
+import org.apache.commons.agility.Request;
+import org.apache.commons.agility.RequestHandler;
+import org.apache.commons.chain.impl.CatalogBase;
+import org.apache.commons.chain.Command;
+
+public class ControllerCatalog extends CatalogBase implements Controller {
+    public RequestHandler getHandler(String name) {
+        return (RequestHandler) getCommand(request.getName());
+    }
+
+    public void addHandler(RequestHandler handler) {
+        this.addCommand(handler.getName(), (Command) handler);
+    }
+
+    public void process(Request request) throws ProcessException {
+        Handler handler = getHandler(request.getName());
+        if (handler != null) handler.handle(request);
+    }
+}</pre></p></div>The main entry point to our Controller is the
+    <tt class="methodname">process(Request)</tt> method. This method could host a
+    great deal of functionality. We could even implement the process method as
+    a series of Commands or Chains of Commands. An application could then
+    fine-tune the request processing by specifying different Commands in a
+    metadata catalog. The Struts web application framework uses this approach
+    for its request processor.</p><p>But for now, we just want to pass our test. All the process method
+    needs to do is find the RequestHandler and call its handle(Request)
+    method. We can do that just by looking up the name of the Request in our
+    catalog and retrieving the matching RequestHandler (or Command).</p><p>The <tt class="methodname">addHandler(RequestHandler)</tt> method is
+    another adapter that delegates to an inherited method. In this case,
+    addHandler calls <tt class="methodname">addCommand(String,Command)</tt>.
+    Since our RequestHandlers are Commands, they can be passed to the
+    superclass method. The <tt class="methodname">getHandler(String)</tt> method
+    is yet another adapter/delegate.</p><p>Last but not least is the RequestContext class, shown as Example
+    20.</p><p><div class="example"><a name="N10448"></a><p class="title"><b>Example&nbsp;20.&nbsp;RequestContext ties it all together</b></p><p><pre class="programlisting">package org.apache.commons.agility.impl;
+
+import org.apache.commons.agility.Request;
+import org.apache.commons.agility.Response;
+import org.apache.commons.chain.impl.ContextBase;
+
+public class RequestContext extends ContextBase implements Request {
+
+    private String name;
+    private Response response;
+
+    public RequestContext(String name) {
+        super();
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Response getResponse() {
+        return response;
+    }
+
+    public void setResponse(Response response) {
+        this.response = response;
+    }
+}</pre></p></div>Like the ResponseContext, an application could add several
+    properties to its Request class. A web application might wrap or transfer
+    attributes from the HttpServletRequest. But so long as the class
+    implements Request and Context, it will plug into our Controller
+    implementation.</p><p>Using the interfaces and base classes shown here, you can create
+    whatever Controllers you need.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N10452"></a>Call a Command From a Servlet</h2></div></div><div></div></div><p><span class="emphasis"><em>Problem:</em></span> You would like to call commands during
+    your application using a servlet.</p><p><span class="emphasis"><em>Solution:</em></span> Use the Listener from the "Load a
+    Catalog from a Web Application" recipe to setup a list of Commands, and
+    the Controller from the "Create a Controller" recipe to process the
+    request.</p><p><span class="emphasis"><em>Discussion: [<i><span class="remark">TODO:]</span></i></em></span></p><p>###</p></div></div></body></html>
