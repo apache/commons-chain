@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainResources.java,v 1.2 2003/10/12 09:10:40 rdonkin Exp $
- * $Revision: 1.2 $
- * $Date: 2003/10/12 09:10:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainResources.java,v 1.3 2003/10/20 17:12:07 martinc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/10/20 17:12:07 $
  *
  * ====================================================================
  *
@@ -89,7 +89,7 @@ final class ChainResources {
     /**
      * <p>The <code>Log</code> instance for this class.</p>
      */
-    private static final Log log = LogFactory.getLog(ChainListener.class);
+    private static final Log log = LogFactory.getLog(ChainResources.class);
 
 
     // ---------------------------------------------------------- Static Methods
