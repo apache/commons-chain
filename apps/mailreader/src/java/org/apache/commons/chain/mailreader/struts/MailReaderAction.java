@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/MailReaderAction.java,v 1.3 2004/04/01 03:37:20 husted Exp $
- * $Revision: 1.3 $
- * $Date: 2004/04/01 03:37:20 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/MailReaderAction.java,v 1.4 2004/04/08 23:21:22 husted Exp $
+ * $Revision: 1.4 $
+ * $Date: 2004/04/08 23:21:22 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -23,9 +23,7 @@ import org.apache.commons.chain.Context;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.impl.ContextBase;
-import org.apache.commons.chain.mailreader.ClientContext;
 import org.apache.commons.chain.mailreader.MailReader;
-import org.apache.commons.chain.mailreader.MailReaderBase;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.webapp.example.Constants;
 import org.apache.struts.webapp.example.User;
@@ -40,7 +38,7 @@ import java.util.HashMap;
 
 /**
  * <p>Process Commands using a {@link org.apache.commons.chain.mailreader.MailReader}
- * {@link ClientContext}.</p>
+ * {@link Context}.</p>
  */
 public class MailReaderAction extends Action {
 
@@ -76,7 +74,7 @@ public class MailReaderAction extends Action {
         Context input = getInput(form);
         UserDatabase database = (UserDatabase)
                 request.getSession().getServletContext().getAttribute(Constants.DATABASE_KEY);
-        return new MailReaderBase(locale, input, database);
+        return new MailReader(locale, input, database);
 
     }
 
@@ -141,6 +139,23 @@ public class MailReaderAction extends Action {
 
     }
 
+
+    /**
+     * <p>
+     * Validate state, setting messages and returning ActionForward
+     * if appropriate.
+     * </p>
+     */
+    protected ActionForward checkState(ActionMapping mapping,
+        ActionForm form,
+        HttpServletRequest request,
+        HttpServletResponse response) throws Exception {
+
+        // override to provide functionality
+        return null;
+
+    }
+
     /**
      * <p>
      * Operations to perform prior to executing business command.
@@ -157,11 +172,21 @@ public class MailReaderAction extends Action {
 
         // TODO: Expose any output
         // TODO: Expose any status messages,
-        // TODO: Expose any error messages and find input
+
+        ActionForward location = checkState(mapping,form,request,response);
+        if (null!=location) return location;
 
         return null;
 
     }
+
+    /**
+     * <p>
+     * Token representing a nominal outcome ["success"].
+     * </p>
+     */
+    protected static String SUCCESS = "success";
+
 
     /**
      * <p>Convenience method to return nominal location.</p>
@@ -169,7 +194,21 @@ public class MailReaderAction extends Action {
      * @return ActionForward named "success" or null
      */
     protected ActionForward findSuccess(ActionMapping mapping) {
-        return mapping.findForward("success");
+        return mapping.findForward(SUCCESS);
+    }
+
+
+    /**
+     * <p>
+     * Convenience method to return the Input forward.
+     * Assumes the InputForward option and input property is set.
+     * Otherwise, returns <code>null</code>.
+     * </p>
+     * @param mapping Our ActionMapping
+     * @return a forward named "success" or null.
+     */
+    protected ActionForward findInput(ActionMapping mapping) {
+        return mapping.getInputForward();
     }
 
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/MailReader.java,v 1.2 2004/03/29 02:34:19 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2004/03/29 02:34:19 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/MailReader.java,v 1.3 2004/04/08 23:23:47 husted Exp $
+ * $Revision: 1.3 $
+ * $Date: 2004/04/08 23:23:47 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -19,57 +19,117 @@
  */
 package org.apache.commons.chain.mailreader;
 
-import org.apache.struts.webapp.example.UserDatabase;
 import org.apache.struts.webapp.example.User;
+import org.apache.struts.webapp.example.UserDatabase;
+import org.apache.commons.chain.Context;
+import org.apache.commons.chain.impl.ContextBase;
+
+import java.util.Locale;
 
 
 /**
- * Application interface for MailReader Commands.
+ * Context for MailReader Commands.
  */
-public interface MailReader extends ClientContext {
+public class MailReader extends ContextBase {
 
     /**
      * Property name for the country field of a Locale.
      */
-    static String PN_COUNTRY = "country";
+    public static String PN_COUNTRY = "country";
 
     /**
      * Property name for the language field of a Locale.
      */
-    static String PN_LANGUAGE = "language";
+    public static String PN_LANGUAGE = "language";
 
     /**
      * Property name for username.
      */
-    static String PN_USERNAME = "username";
+    public static String PN_USERNAME = "username";
 
     /**
      * Property name for password.
      */
-    static String PN_PASSWORD = "password";
+    public static String PN_PASSWORD = "password";
 
     /**
-     * <p>Return user database or null.</p>
-     * @return user database or null.
+     * <p>Default constructor.</p>
      */
-    public UserDatabase getDatabase();
+    public MailReader() {
+        super();
+    }
 
     /**
-     * <p>Assign user database.</p>
-     * @param database The new database instance
+     * <p>Convenience constructor to create and populate instance.</p>
+     * @param locale
+     * @param input
      */
-    public void setDatabase(UserDatabase database);
+    public MailReader(Locale locale, Context input, UserDatabase database) {
+        super();
+        this.locale = locale;
+        this.input = input;
+        this.database = database;
+    }
 
     /**
-     * <p>Return current user, if any</p>
-     * @return
+     * <p>Field for Locale property.</p>
      */
-    public User getUser();
+    private Locale locale;
+
+    // See ContextContext interface for JavaDoc
+    public Locale getLocale() {
+        return locale;
+    }
+
+    // See ContextContext interface for JavaDoc
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
 
     /**
-     * <p>Assign current user.</p>
-     * @param user The new user
+     * <p>Field for Input property.</p>
      */
-    public void setUser(User user);
+    private Context input;
+
+    // See ContextContext interface for JavaDoc
+    public Context getInput() {
+        return input;
+    }
+
+    // See ContextContext interface for JavaDoc
+    public void setInput(Context input) {
+        this.input = input;
+    }
+
+    /**
+     * <p>Field for database property.</p>
+     */
+    private UserDatabase database;
+
+    // See MailReader interface for JavaDoc
+    public UserDatabase getDatabase() {
+        return database;
+    }
+
+    // See MailReader interface for JavaDoc
+    public void setDatabase(UserDatabase database) {
+        this.database = database;
+    }
+
+    /**
+     * <p>Field for user property.</p>
+     */
+    private User user;
+
+    // See MailReader interface for JavaDoc
+    public User getUser() {
+        return user;
+    }
+
+    // See MailReader interface for JavaDoc
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
 }
