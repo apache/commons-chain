@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/Attic/ContextBaseAttributes.java,v 1.1 2003/08/11 04:44:17 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/Attic/ContextBaseAttributes.java,v 1.2 2003/09/17 15:17:58 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/09/17 15:17:58 $
  *
  * ====================================================================
  *
@@ -81,7 +81,7 @@ import java.util.Set;
  * associated {@link ContextBase} when there is such a property.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:17 $
+ * @version $Revision: 1.2 $ $Date: 2003/09/17 15:17:58 $
  */
 
 class ContextBaseAttributes implements Map {
@@ -268,6 +268,75 @@ class ContextBaseAttributes implements Map {
 
     public Collection values() {
         return (attributes.values()); // FIXME - include properties?
+    }
+
+
+    // --------------------------------------------------------- Public Methods
+
+
+    /**
+     * <p><em>WARNING: This is an EXPERIMENTAL feature and may be removed at
+     * any time.</em></p>
+     *
+     * <p>Returns the value to which the internal map maps the specified key,
+     * bypassing any JavaBean style getters. This method allows a
+     * JavaBean getter to be defined for any additional processing but still
+     * use the internal map for storage, if desired. Since this class is not
+     * public, this method can only be accessed by another member of hte
+     * <code>org.apache.commons.chain.impl</code> package.</p>
+     *
+     * @param key key whose associated value is to be returned.
+     * @return the value to which this map maps the specified key, or
+     *	       <tt>null</tt> if the map contains no mapping for this key.
+     *
+     * @throws ClassCastException if the key is of an inappropriate type for
+     * 		  this map (optional).
+     * @throws NullPointerException key is <tt>null</tt> and this map does not
+     *		  not permit <tt>null</tt> keys (optional).
+     *
+     * @see #get(Object)
+     */
+    public Object getField(Object key) {
+
+        return attributes.get(key);
+
+    }
+
+    /**
+     * <p><em>WARNING: This is an EXPERIMENTAL feature and may be removed at
+     * any time.</em></p>
+     *
+     * <p>Associates the key/value pair within the internal map,
+     * bypassing any JavaBean style getters. This method allows a
+     * JavaBean getter to be defined for any additional processing but still
+     * use the internal map for storage, if desired. Since this class is not
+     * public, this method can only be accessed by another member of hte
+     * <code>org.apache.commons.chain.impl</code> package.</p>
+     *
+     * @param key key with which the specified value is to be associated.
+     * @param value value to be associated with the specified key.
+     * @return previous value associated with specified key, or <tt>null</tt>
+     *	       if there was no mapping for key.  A <tt>null</tt> return can
+     *	       also indicate that the map previously associated <tt>null</tt>
+     *	       with the specified key, if the implementation supports
+     *	       <tt>null</tt> values.
+     *
+     * @throws UnsupportedOperationException if the <tt>put</tt> operation is
+     *	          not supported by this map.
+     * @throws ClassCastException if the class of the specified key or value
+     * 	          prevents it from being stored in this map.
+     * @throws IllegalArgumentException if some aspect of this key or value
+     *	          prevents it from being stored in this map.
+     * @throws NullPointerException this map does not permit <tt>null</tt>
+     *            keys or values, and the specified key or value is
+     *            <tt>null</tt>.
+     *
+     * @see #put(Object, Object)
+     */
+    public Object putField(Object key, Object value) {
+
+        return attributes.put(key,value);
+
     }
 
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/ContextBase.java,v 1.2 2003/08/12 20:33:24 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/12 20:33:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/ContextBase.java,v 1.3 2003/09/17 15:17:58 husted Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/09/17 15:17:58 $
  *
  * ====================================================================
  *
@@ -79,10 +79,27 @@ import org.apache.commons.chain.Context;
  * of the corresponding name.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2003/08/12 20:33:24 $
+ * @version $Revision: 1.3 $ $Date: 2003/09/17 15:17:58 $
  */
 
 public class ContextBase implements Context {
+
+
+    /**
+     * Default, no argument constructor.
+     */
+    public ContextBase() {
+        ;
+    }
+
+    /**
+     * Convenience constructor to create context and then add attributes
+     * from a Map.
+     * @param attributes A Map of attributes to add
+     */
+    public ContextBase(Map attributes) {
+        getAttributes().putAll(attributes);
+    }
 
 
     // ----------------------------------------------------- Instance Variables
@@ -97,18 +114,11 @@ public class ContextBase implements Context {
     // -------------------------------------------------------- Context Methods
 
 
-    /**
-     * <p>Return an implementation of <code>java.util.Map</code> that
-     * applications can use to manipulate a general purpose collection
-     * of key-value pairs that maintain the state information associated
-     * with the processing of the transaction that is represented by
-     * this {@link Context} instance.</p>
-     */
+    // See interface for JavaDoc
     public Map getAttributes() {
 
         return (attributes);
 
     }
-
 
 }
