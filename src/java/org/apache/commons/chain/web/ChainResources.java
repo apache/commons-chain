@@ -17,6 +17,8 @@ package org.apache.commons.chain.web;
 
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletContext;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.config.ConfigParser;
@@ -65,20 +67,11 @@ final class ChainResources {
         if (loader == null) {
             loader = ChainResources.class.getClassLoader();
         }
+        String[] paths = getResourcePaths(resources);
         String path = null;
         try {
-            while (true) {
-                int comma = resources.indexOf(",");
-                if (comma < 0) {
-                    path = resources.trim();
-                    resources = "";
-                } else {
-                    path = resources.substring(0, comma);
-                    resources = resources.substring(comma + 1);
-                }
-                if (path.length() < 1) {
-                    break;
-                }
+            for (int i = 0; i < paths.length; i++) {
+                path = paths[i];
                 URL url = loader.getResource(path);
                 if (url == null) {
                     throw new IllegalStateException
@@ -119,20 +112,11 @@ final class ChainResources {
         if (loader == null) {
             loader = ChainResources.class.getClassLoader();
         }
+        String[] paths = getResourcePaths(resources);
         String path = null;
         try {
-            while (true) {
-                int comma = resources.indexOf(",");
-                if (comma < 0) {
-                    path = resources.trim();
-                    resources = "";
-                } else {
-                    path = resources.substring(0, comma);
-                    resources = resources.substring(comma + 1);
-                }
-                if (path.length() < 1) {
-                    break;
-                }
+            for (int i = 0; i < paths.length; i++) {
+                path = paths[i];
                 URL url = loader.getResource(path);
                 if (url == null) {
                     throw new IllegalStateException
@@ -166,20 +150,11 @@ final class ChainResources {
         if (resources == null) {
             return;
         }
+        String[] paths = getResourcePaths(resources);
         String path = null;
         try {
-            while (true) {
-                int comma = resources.indexOf(",");
-                if (comma < 0) {
-                    path = resources.trim();
-                    resources = "";
-                } else {
-                    path = resources.substring(0, comma);
-                    resources = resources.substring(comma + 1);
-                }
-                if (path.length() < 1) {
-                    break;
-                }
+            for (int i = 0; i < paths.length; i++) {
+                path = paths[i];
                 URL url = context.getResource(path);
                 if (url == null) {
                     throw new IllegalStateException
@@ -217,20 +192,11 @@ final class ChainResources {
         if (resources == null) {
             return;
         }
+        String[] paths = getResourcePaths(resources);
         String path = null;
         try {
-            while (true) {
-                int comma = resources.indexOf(",");
-                if (comma < 0) {
-                    path = resources.trim();
-                    resources = "";
-                } else {
-                    path = resources.substring(0, comma);
-                    resources = resources.substring(comma + 1);
-                }
-                if (path.length() < 1) {
-                    break;
-                }
+            for (int i = 0; i < paths.length; i++) {
+                path = paths[i];
                 URL url = context.getResource(path);
                 if (url == null) {
                     throw new IllegalStateException
@@ -248,6 +214,39 @@ final class ChainResources {
         }
 
     }
+
+
+    /**
+     * <p> Parse the resource string into an array of paths. Empty entries will
+     * be skipped. (That is, all entries in the array are non-empty paths.)</p>
+     *
+     * @param resources A comma-delimited list of resource paths (or
+     *                  <code>null</code>).
+     *
+     * @return An array of non-empty paths. The array itself may be empty.
+     */
+    static String[] getResourcePaths(String resources) {
+        List paths = new ArrayList();
+
+        if (resources != null) {
+            String path;
+            int comma;
+
+            while ((comma = resources.indexOf(',')) >= 0) {
+                path = resources.substring(0, comma).trim();
+                if (path.length() > 0) {
+                    paths.add(path);
+                }
+                resources = resources.substring(comma + 1);
+            }
+            resources = resources.trim();
+            if (resources.length() > 0) {
+                paths.add(resources);
+            }
+        }
+
+        return (String[]) paths.toArray(new String[0]);
+    }        
 
 
 }
