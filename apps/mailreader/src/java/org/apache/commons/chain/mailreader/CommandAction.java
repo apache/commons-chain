@@ -1,15 +1,17 @@
 package org.apache.commons.chain.mailreader;
 
-import org.apache.struts.action.*;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ContextBase;
-import org.apache.commons.chain.mailreader.commands.MailReader;
-import org.apache.commons.chain.mailreader.commands.MailReaderBase;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.DynaActionForm;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Locale;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -27,84 +29,137 @@ import java.util.Locale;
  * when support for Commons Chains is added.
  * </p>
  */
-public class CommandAction extends Action {
+public abstract class CommandAction extends ContextAction {
 
     /**
      * <p>
-     * Return the default {@link org.apache.commons.chain.Catalog}.
+     * Return the relevant command from the default
+     * {@link org.apache.commons.chain.Catalog}.
      * </p>
-     * @return Default Catalog
-     * @throws java.lang.UnsupportedOperationException if ControllerContext is
-     * null.
+     * @return Command for this helper
      */
-    public Catalog getCatalog(HttpServletRequest request){
+    protected Command getCatalogCommand(ActionHelper helper){
 
-        return (Catalog) request.getSession().getServletContext().getAttribute(Catalog.CATALOG_KEY);
-
-    }
-
-    public ViewContext getContext(ActionHelper helper, ActionForm form) {
-
-        Locale locale = helper.getLocale();
-        Context input = getInput(form);
-        return new MailReaderBase(locale,input);
+        Catalog catalog = helper.getCatalog();
+        String name = helper.getMapping().getName();
+        return catalog.getCommand(name);
 
     }
 
+    /**
+     * <p>
+     * Return the client context for this application.
+     * Must be implemented by a subclass.
+     * </p>
+     * @param helper
+     * @return
+     */
+    protected abstract ClientContext getContext(ActionHelper helper);
 
-    public Context getInput(ActionForm form) {
-        DynaActionForm dyna = (DynaActionForm) form;
-        return new ContextBase(dyna.getMap());
+    /**
+     * <p>
+     * Operations to perform prior to executing business command.
+     * </p>
+     * @param helper Our ActionHelper
+     * @param context Our ClientContext
+     * @return ActionForward to follow, or null
+     */
+    protected ActionForward preExecute(ActionHelper helper, ClientContext context) {
+        // override to provide functionality
+        return null;
     }
 
-    public void conformInput(ActionHelper helper, ViewContext context) {
+    /**
+     * <p>Convert ActionForm to Chain Context.</p>
+     * @param form
+     * @return
+     */
+    protected Context getInput(ActionForm form) {
+
+        Map input;
+        if (form instanceof DynaActionForm) {
+            DynaActionForm dyna = (DynaActionForm) form;
+            input = dyna.getMap();
+        }
+        else try {
+            input = BeanUtils.describe(form);
+        } catch (Throwable t) {
+            input = new HashMap();
+        }
+        return new ContextBase(input);
+
+    }
+
+    /**
+     * <p>Transfer input properties (back) to ActionForm.</p>
+     * @param helper Our ActionHelper
+     * @param context Our ClientContext
+     */
+    protected void conformInput(ActionHelper helper, ClientContext context) {
+
         Context input = context.getInput();
-        ActionMapping mapping = helper.getMapping();
-        HttpServletRequest request = helper.getRequest();
-        String formScope = mapping.getScope();
-        String name = mapping.getName();
-        if (helper.isRequestScope()) request.setAttribute(name,input);
-        else request.getSession().setAttribute(name,input);
+        helper.setInputToForm(input);
+
     }
 
-    public void conformState(ActionHelper helper, ViewContext context) {
+    /**
+     * <p>Transfer framework properties (back) to framework objects.</p>
+     * @param helper Our ActionHelper
+     * @param context Our ClientContext
+     */
+    protected void conformState(ActionHelper helper, ClientContext context) {
+
         helper.setLocale(context.getLocale());
+
     }
 
-    public ActionForward findSuccess(ActionMapping mapping) {
-        return mapping.findForward("success");
-    }
 
-    public ActionForward execute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) throws Exception {
+    /**
+     * <p>
+     * Operations to perform prior to executing business command.
+     * </p>
+     * @param helper Our ActionHelper
+     * @param context Our ClientContext
+     * @return ActionForward to follow, or null
+     */
+    protected ActionForward postExecute(ActionHelper helper, ClientContext context) {
 
-        // create ActionHelper
-        ActionHelper helper = new ActionHelperBase(request,response);
-        // return execute(helper); // ContextAction
-
-        // TODO: obtain database reference
-        // forward = preCommand(helper); if (forward!=null) return forward;
-
-        // create mailreader context, using ActionHelper methods
-        ViewContext context = getContext(helper,form);
-
-        // execute command
-        String name = mapping.getName();
-        boolean stop = getCatalog(request).getCommand(name).execute(context);
-
-        // update state from mailreader context
         conformInput(helper,context);
         conformState(helper,context);
 
         // TODO: Expose any output
         // TODO: Expose any status messages,
         // TODO: Expose any error messages and find input
-        // location = postCommand(helper,context);
 
-        // find success
-        return helper.findSuccess();
+        return null;
+
+    }
+
+    /**
+     * <p>Convenience method to return nominal location.</p>
+     * @param mapping Our ActionMapping
+     * @return ActionForward named "success" or null
+     */
+    protected ActionForward findSuccess(ActionMapping mapping) {
+        return mapping.findForward("success");
+    }
+
+    // See interface for JavaDoc
+    public ActionForward execute(ActionHelper helper) throws Exception {
+
+        ActionForward location;
+        ClientContext context = getContext(helper);
+
+        location = preExecute(helper,context);
+        if (location!=null) return location;
+
+        boolean stop = getCatalogCommand(helper).execute(context);
+
+        location = postExecute(helper,context);
+        if (location!=null) return location;
+
+        return findSuccess(helper);
+
     }
 
     // ModuleContext -> state for a module (mappings, messages) : ReadOnly
@@ -113,4 +168,5 @@ public class CommandAction extends Action {
 
     // StrutsContext -> state for entire Struts application : ReadWrite
     // StrutsContext.createActionContext(request);
+
 }

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelperBase.java,v 1.2 2004/03/27 18:21:30 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2004/03/27 18:21:30 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelperBase.java,v 1.3 2004/03/28 03:20:55 husted Exp $
+ * $Revision: 1.3 $
+ * $Date: 2004/03/28 03:20:55 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -19,6 +19,9 @@
  */
 package org.apache.commons.chain.mailreader;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.Context;
 import org.apache.struts.Globals;
 import org.apache.struts.action.*;
 import org.apache.struts.upload.MultipartRequestWrapper;
@@ -38,7 +41,7 @@ import java.util.Locale;
  * applications.
  * </p>
  * <p>
- * NOTE -- In the next version, a "ViewContext" interface
+ * NOTE -- In the next version, a "ClientContext" interface
  * and implementation will be added to this class to allow
  * access to operations business Commands might use without
  * exposing Http signatures or other implementation details.
@@ -221,6 +224,7 @@ public class ActionHelperBase implements ActionHelper {
 
     }
 
+    // See ActionHelper interface for JavaDoc
     public void setLocale(Locale locale) {
 
         session.setAttribute(Globals.LOCALE_KEY,locale);
@@ -484,8 +488,36 @@ public class ActionHelperBase implements ActionHelper {
         return getEncodeURL(getActionMappingURL(path));
     }
 
+    // ------------------------------------------------- Catalog / Context
+
+    // See ActionHelper interface for JavaDoc
+    public Catalog getCatalog() {
+
+        return (Catalog) application.getAttribute(Catalog.CATALOG_KEY);
+
+    }
+
+    // See ActionHelper interface for JavaDoc
+    public void setInputAsForm(Context input) {
+        ActionMapping mapping = getMapping();
+        String formScope = mapping.getScope();
+        String name = mapping.getName();
+        if ("request".equals(formScope)) request.setAttribute(name,input);
+        else request.getSession().setAttribute(name,input);
+    }
+
+    // See ActionHelper interface for JavaDoc
+    public void setInputToForm(Context input) {
+        ActionForm form = getActionForm();
+        try {
+            BeanUtils.copyProperties(form,input);
+        } catch (Throwable t) {
+            // FIXME: Now what? Log and Throw?
+        }
+    }
 
     // --------------------------------------------- Presentation Wrappers
+
 
     /**
      * <p>Wrapper for getLink(String)</p>

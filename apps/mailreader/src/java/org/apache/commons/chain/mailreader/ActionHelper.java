@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelper.java,v 1.2 2004/03/27 18:21:30 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2004/03/27 18:21:30 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelper.java,v 1.3 2004/03/28 03:20:55 husted Exp $
+ * $Revision: 1.3 $
+ * $Date: 2004/03/28 03:20:55 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -20,16 +20,13 @@
 package org.apache.commons.chain.mailreader;
 
 
-import javax.sql.DataSource;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionFormBean;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessages;
+import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.Context;
+import org.apache.struts.action.*;
 import org.apache.struts.upload.MultipartRequestWrapper;
 import org.apache.struts.util.MessageResources;
 
+import javax.sql.DataSource;
 import java.util.Locale;
 
 
@@ -52,7 +49,7 @@ import java.util.Locale;
  * application so they can easily access the various Struts
  * shared resources. These resources may be stored under
  * attributes in the application, session, or request contexts,
- * but users of this class do not need to know where.
+ * but users of this class do not need to know what goes where.
  * </p>
  * <p>
  * The ActionHelperBase methods simply return the resources
@@ -109,11 +106,16 @@ public interface ActionHelper {
 
     /**
      * <p>
-     * The Locale associated with this client, or null if none.
+     * Return the Locale associated with this client, or null if none.
      * </p>
      */
     public Locale getLocale();
 
+    /**
+     * <p>
+     * Assign the Locale to associate with this client.
+     * </p>
+     */
     public void setLocale(Locale locale);
 
     /**
@@ -165,7 +167,7 @@ public interface ActionHelper {
 
     /**
      * <p>
-     * Retrieve and return the <code>ActionForm</code> bean associated with
+     * Retrieve and return the <code>ActionForm</code> instance associated with
      * this mapping. If there is no ActionForm present, return <code>null</code>.
      * </p>
      */
@@ -238,6 +240,35 @@ public interface ActionHelper {
      */
     public String getEncodeURL(String url);
 
+
+// ----------------------------------------------- Catalog / Context
+
+    /**
+     * <p>Returns the default Command Catalog, if any.</p>
+     * @return the default Command Catalog.
+     */
+    public Catalog getCatalog();
+
+
+    /**
+     * <p>
+     * Replace the ActionForm instance with an Input context.
+     * Useful in JSTL or Velocity environments.
+     * </p>
+     * @param input Input Context
+     */
+    public void setInputAsForm(Context input);
+
+
+    /**
+     * <p>
+     * Copy input context attributes over matching ActionForm properties.
+     * </p>
+     * @param input Input Context
+     */
+    public void setInputToForm(Context input);
+
+
 // ------------------------------------------------ Presentation API
 
     /**
@@ -290,6 +321,5 @@ public interface ActionHelper {
      * @param path Name given to local or global forward.
      */
     public String getAction(String path);
-
 
 }

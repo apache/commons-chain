@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/Attic/MailReader.java,v 1.1 2004/03/27 03:58:02 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/27 03:58:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/Attic/MailReader.java,v 1.2 2004/03/28 03:20:56 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/03/28 03:20:56 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -19,17 +19,25 @@
  */
 package org.apache.commons.chain.mailreader.commands;
 
-import org.apache.commons.chain.Context;
-import org.apache.commons.chain.mailreader.ViewContext;
-
-import java.util.Locale;
+import org.apache.commons.chain.mailreader.ClientContext;
 
 /**
  * Application interface for MailReader Commands.
  */
-public interface MailReader extends ViewContext {
+public interface MailReader extends ClientContext {
 
+    /**
+     * Property name for the country field of a Locale.
+     */
     static String PN_COUNTRY = "country";
+
+    /**
+     * Property name for the language field of a Locale.
+     */
     static String PN_LANGUAGE = "language";
+
+
+    // Database
+    // User
 
 }

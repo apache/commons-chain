@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/Attic/MailReaderBase.java,v 1.1 2004/03/27 03:58:02 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/27 03:58:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/Attic/MailReaderBase.java,v 1.2 2004/03/28 03:20:56 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/03/28 03:20:56 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -19,8 +19,8 @@
  */
 package org.apache.commons.chain.mailreader.commands;
 
-import org.apache.commons.chain.impl.ContextBase;
 import org.apache.commons.chain.Context;
+import org.apache.commons.chain.impl.ContextBase;
 
 import java.util.Locale;
 
@@ -29,54 +29,63 @@ import java.util.Locale;
  */
 public class MailReaderBase extends ContextBase implements MailReader {
 
+    /**
+     * <p>Default constructor.</p>
+     */
     public MailReaderBase() {
         super();
     }
 
+    /**
+     * <p>Convenience constructor to create and populate instance.</p>
+     * @param locale
+     * @param input
+     */
     public MailReaderBase(Locale locale, Context input) {
         super();
         this.locale = locale;
         this.input = input;
     }
 
-    private boolean isLocale = false;
+    /**
+     * <p>Field for Locale property.</p>
+     */
     private Locale locale;
 
+    /**
+     * <p>Return Locale property</p>
+     * @return This Locale property
+     */
     public Locale getLocale() {
         return locale;
     }
 
+    /**
+     * <p>Assign Locale property</p>
+     * @param locale New Locale
+     */
     public void setLocale(Locale locale) {
         this.locale = locale;
-        setIsLocale(true);
     }
 
-    public boolean isLocale() {
-        return isLocale;
-    }
-
-    public void setIsLocale(boolean locale) {
-        isLocale = locale;
-    }
-
-    private boolean isInput = false;
+    /**
+     * <p>Field for Input property.</p>
+     */
     private Context input;
 
+    /**
+     * <p>Return Input property.</p>
+     * @return This Input property
+     */
     public Context getInput() {
         return input;
     }
 
+    /**
+     * <p>Assign Input property</p>
+     * @param input New Input context
+     */
     public void setInput(Context input) {
         this.input = input;
-        setIsInput(true);
     }
-
-    public boolean isInput() {
-        return isInput;
-    }
-
-    public void setIsInput(boolean input) {
-        isInput = input;
-    }
-
 }

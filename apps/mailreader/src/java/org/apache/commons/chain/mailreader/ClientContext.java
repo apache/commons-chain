@@ -5,9 +5,18 @@ import org.apache.commons.chain.Context;
 import java.util.Locale;
 
 /**
- * Application interface for the Struts framework.
+ * <p>
+ * A "disconnected" representation of the framework state for the client
+ * making a request. An instance of this interface may be passed to
+ * other components. An instance may also be used to update the "connected"
+ * representation.
+ * </p>
+ * <p>
+ * See {@link org.apache.commons.chain.mailreader.commands.MailReaderBase}
+ * for an implementation.
+ * </p>
  */
-public interface ViewContext extends Context {
+public interface ClientContext extends Context {
 
     public static String PN_LOCALE = "locale";
     public boolean isLocale();
