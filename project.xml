@@ -15,7 +15,7 @@
    limitations under the License.
 -->
 <project>
-  <extend>../sandbox-build/project.xml</extend>
+  <extend>../commons-build/project.xml</extend>
   <name>Commons Chain</name>
   <id>commons-chain</id>
   
@@ -45,6 +45,12 @@
       <email>martinc@apache.org</email>
       <organization>Informatica</organization>
     </developer>
+    <developer>
+      <name>Don Brown</name>
+      <id>mrdon</id>
+      <email>mrdon@apache.org</email>
+      <organization></organization>
+    </developer>
   </developers>
   
   <dependencies>
@@ -69,7 +75,7 @@
       <groupId>jsf</groupId>
       <artifactId>jsf-impl</artifactId>
       <version>1.0</version>
-      <url>http://java.sun.com/j2ee/javaserverfaces/download.html</url>
+      <url>http://java.sun.com/j2ee/javaserverfaces/download.html</url> 
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -99,6 +105,8 @@
   </dependencies>
   
   <build>
+    <sourceDirectory>src/java</sourceDirectory>
+    <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
     <unitTest>
       <includes>
         <include>**/*Test.java</include>

@@ -14,7 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<!DOCTYPE org.apache.commons.menus SYSTEM '../../../jakarta-commons/commons-build/menus/menus.dtd'>
+<!DOCTYPE org.apache.commons.menus SYSTEM '../../jakarta-commons/commons-build/menus/menus.dtd'>
 <project name="Commons&#xA0;Chain">
   <title>Commons&#xA0;Chain</title>
   <body>
@@ -23,7 +23,7 @@
       <item name="Javadoc"       href="/apidocs/index.html"/>
       <item name="Mailing lists" href="/mail-lists.html"/>
       <item name="Team"          href="/team-list.html"/>
-      <item name="CVS"           href="http://cvs.apache.org/viewcvs/jakarta-commons-sandbox/chain/"/>
+      <item name="CVS"           href="http://cvs.apache.org/viewcvs/jakarta-commons/chain/"/>
     </menu>
     &common-menus;
   </body>
