@@ -4,7 +4,7 @@
   <extend>../project.xml</extend>
   <name>Chain</name>
   <id>commons-chain</id>
-  <currentVersion>0.1-dev</currentVersion>
+  <currentVersion>0.2-dev</currentVersion>
   <inceptionYear>2003</inceptionYear>
   <shortDescription>Chain of Responsibility</shortDescription>
   <description>An implmentation of the GoF Chain of Responsibility pattern.</description>
@@ -32,32 +32,52 @@
   
   <dependencies>
     <dependency> 
-      <id>servletapi</id> 
-      <version>2.3</version> 
+      <groupId>servletapi</groupId>
+      <artifactId>servletapi</artifactId>
+      <version>2.3</version>
     </dependency>
     <dependency>
-      <id>portlet-api</id>
-      <version>0.1-dev-unreleased</version>
+      <groupId>portlet-api</groupId>
+      <artifactId>portlet-api</artifactId>
+      <version>1.0</version>
+      <url>http://jakarta.apache.org/pluto</url>
     </dependency>
     <dependency>
-      <id>junit</id>
+      <groupId>jsf</groupId>
+      <artifactId>jsf-api</artifactId>
+      <version>1.0-beta</version>
+      <url>http://java.sun.com/j2ee/javaserverfaces/download.html</url>
+    </dependency>
+    <dependency>
+      <groupId>jsf</groupId>
+      <artifactId>jsf-impl</artifactId>
+      <version>1.0-beta</version>
+      <url>http://java.sun.com/j2ee/javaserverfaces/download.html</url>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
       <version>3.8.1</version>
     </dependency>
-    <dependency> 
-      <id>commons-beanutils</id> 
-      <version>1.6</version> 
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.6</version>
     </dependency> 
-    <dependency> 
-      <id>commons-collections</id> 
-      <version>2.1</version> 
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>2.1</version>
     </dependency> 
-    <dependency> 
-      <id>commons-digester</id> 
-      <version>1.5</version> 
+    <dependency>
+      <groupId>commons-digester</groupId>
+      <artifactId>commons-digester</artifactId>
+      <version>1.5</version>
     </dependency> 
-    <dependency> 
-      <id>commons-logging</id> 
-      <version>1.0.3</version> 
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.0.3</version>
     </dependency> 
   </dependencies>
   
