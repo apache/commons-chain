@@ -6,4 +6,7 @@
     <command
         name="LocaleChange"
         className="org.apache.commons.chain.mailreader.commands.LocaleChange" />
+    <command
+        name="LogonUser"
+        className="org.apache.commons.chain.mailreader.commands.LogonUser" />
 </chains>
