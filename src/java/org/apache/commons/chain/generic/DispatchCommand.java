@@ -4,7 +4,6 @@ import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import java.lang.reflect.Method;
 import java.util.WeakHashMap;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * An abstract base command which uses introspection to look up a method to execute.  
