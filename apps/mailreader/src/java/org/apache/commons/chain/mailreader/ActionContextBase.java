@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionContextBase.java,v 1.1 2004/03/25 12:39:27 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/25 12:39:27 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionContextBase.java,v 1.2 2004/03/26 18:21:48 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/03/26 18:21:48 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -31,32 +31,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
+import java.util.Locale;
 /**
  * <p>
- * [This class is based on the experimental ConfigHelper class,
- * and is under active development.]
- * <p>
- * A Context exposing the Struts shared resources,
- * which are be stored in the application, session, or
- * request contexts, as appropriate.
- * </p>
- * <p>
- * An instance should be created for each request
- * processed. The  methods which return resources from
- * the request or session contexts are not thread-safe.
- * </p>
- * <p>
- * Provided for use by Commands and other components in the
- * application so they can easily access the various Struts
- * shared resources. These resources may be stored under
- * attributes in the application, session, or request contexts,
- * but users of this class do not need to know where.
- * </p>
- * <p>
- * The ActionContextBase methods simply return the resources
- * from under the context and key used by the Struts
- * ActionServlet when the resources are created.
+ * NOTE -- This implementation was designed to work with the
+ * default module only. Many methods won't work with modular
+ * applications.
  * </p>
  * <p>
  * NOTE -- In the next version, a "ViewContext" interface
@@ -65,7 +45,7 @@ import javax.sql.DataSource;
  * exposing Http signatures or other implementation details.
  * </p>
  * <p>
- * At some point, a "disconnected" implementation should be
+ * NOTE -- At some point, a "disconnected" implementation should be
  * available so that the Http resources do not have be cached
  * as class members.
  * </p>
@@ -74,7 +54,7 @@ import javax.sql.DataSource;
  * when support for Commons Chains is added.
  * </p>
  */
-public class ActionContextBase extends ContextBase {
+public class ActionContextBase extends ContextBase implements ActionContext {
 
 // --------------------------------------------------------  Properties
 
@@ -185,12 +165,7 @@ public class ActionContextBase extends ContextBase {
 
     // ------------------------------------------------ Application Context
 
-    /**
-     * The <strong>default</strong>
-     * configured data source (which must implement
-     * <code>javax.sql.DataSource</code>),
-     * if one is configured for this application.
-     */
+    // See ActionContext interface for JavaDoc
     public DataSource getDataSource() {
 
         if (this.application == null)
@@ -199,6 +174,16 @@ public class ActionContextBase extends ContextBase {
 
     }
 
+    // See ActionContext interface for JavaDoc
+    public ActionMessages getActionErrors() {
+
+        if (this.application == null)
+            return null;
+        return (ActionMessages) this.application.getAttribute(Globals.ERROR_KEY);
+
+    }
+
+    // See ActionContext interface for JavaDoc
     public ActionMessages getActionMessages() {
 
         if (this.application == null)
@@ -207,9 +192,7 @@ public class ActionContextBase extends ContextBase {
 
     }
 
-    /**
-     * The application resources for this application.
-     */
+    // See ActionContext interface for JavaDoc
     public MessageResources getMessageResources() {
 
         if (this.application == null) {
@@ -219,11 +202,7 @@ public class ActionContextBase extends ContextBase {
 
     }
 
-    /**
-     * The path-mapped pattern (<code>/action/*</code>) or
-     * extension mapped pattern ((<code>*.do</code>)
-     * used to determine our Action URIs in this application.
-     */
+    // See ActionContext interface for JavaDoc
     public String getServletMapping() {
 
         if (this.application == null) {
@@ -235,9 +214,17 @@ public class ActionContextBase extends ContextBase {
 
     // ---------------------------------------------------- Session Context
 
-    /**
-     * The transaction token stored in this session, if it is used.
-     */
+    // See ActionContext interface for JavaDoc
+    public Locale getLocale() {
+
+        if (this.session == null) {
+            return null;
+        }
+        return (Locale) session.getAttribute(Globals.LOCALE_KEY);
+
+    }
+
+    // See ActionContext interface for JavaDoc
     public String getToken() {
 
         if (this.session == null) {
@@ -249,11 +236,7 @@ public class ActionContextBase extends ContextBase {
 
     // ---------------------------------------------------- Request Context
 
-    /**
-     * The runtime JspException that may be been thrown by a Struts tag
-     * extension, or compatible presentation extension, and placed
-     * in the request.
-     */
+    // See ActionContext interface for JavaDoc
     public Throwable getException() {
 
         if (this.request == null) {
@@ -263,9 +246,7 @@ public class ActionContextBase extends ContextBase {
 
     }
 
-    /**
-     * The multipart object for this request.
-     */
+    // See ActionContext interface for JavaDoc
     public MultipartRequestWrapper getMultipartRequestWrapper() {
 
         if (this.request == null) {
@@ -274,10 +255,7 @@ public class ActionContextBase extends ContextBase {
         return (MultipartRequestWrapper) this.request.getAttribute(Globals.MULTIPART_KEY);
     }
 
-    /**
-     * The <code>org.apache.struts.ActionMapping</code>
-     * instance for this request.
-     */
+    // See ActionContext interface for JavaDoc
     public ActionMapping getMapping() {
 
         if (this.request == null) {
@@ -289,12 +267,7 @@ public class ActionContextBase extends ContextBase {
 
     // ---------------------------------------------------- Utility Methods
 
-    /**
-     * Return true if a message string for the specified message key
-     * is present for the user's Locale.
-     *
-     * @param key Message key
-     */
+    // See ActionContext interface for JavaDoc
     public boolean isMessage(String key) {
 
         // Look up the requested MessageResources
@@ -309,12 +282,7 @@ public class ActionContextBase extends ContextBase {
 
     }
 
-    /*
-     * Retrieve and return the <code>ActionForm</code> bean associated with
-     * this mapping, creating and stashing one if necessary.  If there is no
-     * form bean associated with this mapping, return <code>null</code>.
-     *
-     */
+    // See ActionContext interface for JavaDoc
     public ActionForm getActionForm() {
 
         // Is there a mapping associated with this request?
@@ -338,47 +306,26 @@ public class ActionContextBase extends ContextBase {
         return instance;
     }
 
-    /**
-     * Return the form bean definition associated with the specified
-     * logical name, if any; otherwise return <code>null</code>.
-     *
-     * @param name Logical name of the requested form bean definition
-     */
+    // See ActionContext interface for JavaDoc
+    // TODO:
     public ActionFormBean getFormBean(String name) {
         return null;
     }
 
-    /**
-     * Return the forwarding associated with the specified logical name,
-     * if any; otherwise return <code>null</code>.
-     *
-     * @param name Logical name of the requested forwarding
-     */
+
+    // See ActionContext interface for JavaDoc
+    // TODO:
     public ActionForward getActionForward(String name) {
         return null;
     }
 
-    /**
-     * Return the mapping associated with the specified request path, if any;
-     * otherwise return <code>null</code>.
-     *
-     * @param path Request path for which a mapping is requested
-     */
+    // See ActionContext interface for JavaDoc
+    // TODO:
     public ActionMapping getActionMapping(String path) {
         return null;
     }
 
-    /**
-     * Return the form action converted into an action mapping path.  The
-     * value of the <code>action</code> property is manipulated as follows in
-     * computing the name of the requested mapping:
-     * <ul>
-     * <li>Any filename extension is removed (on the theory that extension
-     *     mapping is being used to select the controller servlet).</li>
-     * <li>If the resulting value does not start with a slash, then a
-     *     slash is prepended.</li>
-     * </ul>
-     */
+    // See ActionContext interface for JavaDoc
     public String getActionMappingName(String action) {
 
         String value = action;
@@ -396,9 +343,7 @@ public class ActionContextBase extends ContextBase {
 
     }
 
-    /**
-     * Return the form action converted into a server-relative URL.
-     */
+    // See ActionContext interface for JavaDoc
     public String getActionMappingURL(String action) {
 
         StringBuffer value = new StringBuffer(this.request.getContextPath());
@@ -436,9 +381,7 @@ public class ActionContextBase extends ContextBase {
 
     }
 
-    /**
-     * Return the url encoded to maintain the user session, if any.
-     */
+    // See ActionContext interface for JavaDoc
     public String getEncodeURL(String url) {
 
         if ((session != null) && (response != null)) {
@@ -457,9 +400,7 @@ public class ActionContextBase extends ContextBase {
 
     // ------------------------------------------------ Presentation API
 
-    /**
-     * Renders the reference for a HTML <base> element
-     */
+    // See ActionContext interface for JavaDoc
     public String getOrigRef() {
 
         // HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
@@ -470,9 +411,7 @@ public class ActionContextBase extends ContextBase {
         return result.toString();
     }
 
-    /**
-     * Renders the reference for a HTML <base> element.
-     */
+    // See ActionContext interface for JavaDoc
     public String getBaseRef() {
 
         if (request == null)
@@ -489,12 +428,7 @@ public class ActionContextBase extends ContextBase {
         return result.toString();
     }
 
-    /**
-     * Return the path for the specified forward,
-     * otherwise return <code>null</code>.
-     *
-     * @param name Name given to local or global forward.
-     */
+    // See ActionContext interface for JavaDoc
     public String getLink(String name) {
 
         ActionForward forward = getActionForward(name);
@@ -510,12 +444,7 @@ public class ActionContextBase extends ContextBase {
 
     }
 
-    /**
-     * Return the localized message for the specified key,
-     * otherwise return <code>null</code>.
-     *
-     * @param key Message key
-     */
+    // See ActionContext interface for JavaDoc
     public String getMessage(String key) {
 
         MessageResources resources = getMessageResources();
@@ -526,12 +455,7 @@ public class ActionContextBase extends ContextBase {
 
     }
 
-    /**
-     * Look up and return a message string, based on the specified parameters.
-     *
-     * @param key Message key to be looked up and returned
-     * @param args Replacement parameters for this message
-     */
+    // See ActionContext interface for JavaDoc
     public String getMessage(String key, Object args[]) {
 
         MessageResources resources = getMessageResources();
@@ -552,12 +476,7 @@ public class ActionContextBase extends ContextBase {
 
     }
 
-    /**
-     * Return the URL for the specified ActionMapping,
-     * otherwise return <code>null</code>.
-     *
-     * @param path Name given to local or global forward.
-     */
+    // See ActionContext interface for JavaDoc
     public String getAction(String path) {
         return getEncodeURL(getActionMappingURL(path));
     }
@@ -566,8 +485,7 @@ public class ActionContextBase extends ContextBase {
     // --------------------------------------------- Presentation Wrappers
 
     /**
-     * Wrapper for getLink(String)
-     *
+     * <p>Wrapper for getLink(String)</p>
      * @param name Name given to local or global forward.
      */
     public String link(String name) {
@@ -575,8 +493,7 @@ public class ActionContextBase extends ContextBase {
     }
 
     /**
-     * Wrapper for getMessage(String)
-     *
+     * <p>Wrapper for getMessage(String)</p>
      * @param key Message key
      */
     public String message(String key) {
@@ -584,8 +501,7 @@ public class ActionContextBase extends ContextBase {
     }
 
     /**
-     * Wrapper for getMessage(String,Object[])
-     *
+     * <p>Wrapper for getMessage(String,Object[])</p>
      * @param key Message key to be looked up and returned
      * @param args Replacement parameters for this message
      */
@@ -594,11 +510,11 @@ public class ActionContextBase extends ContextBase {
     }
 
     /**
-     * Wrapper for getAction(String)
-     *
+     * <p>Wrapper for getAction(String)</p>
      * @param path Name given to local or global forward.
      */
     public String action(String path) {
         return getAction(path);
     }
+
 }
