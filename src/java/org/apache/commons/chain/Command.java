@@ -1,12 +1,12 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Command.java,v 1.2 2003/09/29 20:02:08 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/09/29 20:02:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Command.java,v 1.3 2003/10/01 12:31:50 husted Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/10/01 12:31:50 $
  *
 /* ====================================================================
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2000 The Apache Software Foundation.  All rights
+ * Copyright (c) 2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -119,7 +119,7 @@ package org.apache.commons.chain;
  * configure the internal operation of this {@link Command}.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2003/09/29 20:02:08 $
+ * @version $Revision: 1.3 $ $Date: 2003/10/01 12:31:50 $
  */
 
 public interface Command {
