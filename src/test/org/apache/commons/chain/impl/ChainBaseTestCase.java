@@ -28,7 +28,7 @@ import org.apache.commons.chain.Context;
  * <p>Test case for the <code>ChainBase</code> class.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/25 00:01:05 $
+ * @version $Revision: 1.6 $ $Date: 2005/01/08 04:15:23 $
  */
 
 public class ChainBaseTestCase extends TestCase {
@@ -353,7 +353,7 @@ public class ChainBaseTestCase extends TestCase {
     // Verify the contents of the execution log
     protected void checkExecuteLog(String expected) {
         StringBuffer log = (StringBuffer) context.get("log");
-        assertNotNull("Context returned log");
+        assertNotNull("Context failed to return log", log);
         assertEquals("Context returned correct log",
                      expected, log.toString());
     }
