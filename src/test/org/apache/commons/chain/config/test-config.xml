@@ -1,4 +1,4 @@
-<chains>
+<catalog>
 
   <!-- Single command "chains" from CatalogBaseTestCase -->
   <command   name="AddingCommand"
@@ -99,4 +99,4 @@
         className="org.apache.commons.chain.impl.NonDelegatingFilter"/>
   </chain>
 
-</chains>
+</catalog>

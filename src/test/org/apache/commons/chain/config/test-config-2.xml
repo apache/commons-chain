@@ -1,4 +1,4 @@
-<chains>
+<catalog name="foo">
 
   <!-- Define command and chain aliases -->
   <define    name="adding-command"
@@ -95,4 +95,4 @@
                                      id3="c"/>
   </test-chain>
 
-</chains>
+</catalog>

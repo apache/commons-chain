@@ -22,14 +22,13 @@ import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.impl.CatalogBase;
-import org.apache.commons.chain.impl.CatalogFactoryBase;
 import java.util.Iterator;
 
 /**
  * <p>Test case for the <code>CatalogFactoryBase</code> class.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2004/10/17 22:39:00 $
+ * @version $Revision: 1.2 $ $Date: 2004/10/18 01:09:06 $
  */
 
 public class CatalogFactoryBaseTestCase extends TestCase {
@@ -64,7 +63,7 @@ public class CatalogFactoryBaseTestCase extends TestCase {
      * <p>Set up instance variables required by this test case.</p>
      */
     public void setUp() {
-        factory = CatalogFactoryBase.getInstance();
+        factory = CatalogFactory.getInstance();
     }
 
 
@@ -93,11 +92,7 @@ public class CatalogFactoryBaseTestCase extends TestCase {
 
         Catalog catalog = new CatalogBase();
         factory.setCatalog(catalog);
-        assertEquals(catalog, factory.getCatalog());
-        assertEquals(catalog,
-               factory.getCatalog("org.apache.commons.chain.DEFAULT_CATALOG"));
-        assertEquals(1, getCatalogCount());
-        factory.clear();
+        assertTrue(catalog == factory.getCatalog());
         assertEquals(0, getCatalogCount());
 
     }
@@ -126,11 +121,12 @@ public class CatalogFactoryBaseTestCase extends TestCase {
         catalog = new CatalogBase();
         factory.addCatalog("foo", catalog);
         assertTrue(catalog == factory.getCatalog("foo"));
-        assertEquals(2, getCatalogCount());
+        assertEquals(1, getCatalogCount());
         factory.addCatalog("foo", new CatalogBase());
-        assertEquals(2, getCatalogCount());
+        assertEquals(1, getCatalogCount());
         assertTrue(!(catalog == factory.getCatalog("foo")));
-        factory.clear();
+        CatalogFactory.clear();
+        factory = CatalogFactory.getInstance();
         assertEquals(0, getCatalogCount());
 
     }
