@@ -795,13 +795,9 @@ public class MailReader extends Hashmap implements Context {
 <!-- ... -->]]></source></p>
       </example></p>
 
-    <p>By default, ChainListener will create an application-scope attribute
-    by the name of "catalog".</p>
-
-    <p>The default attribute name can be changed, if needed. You can also
-    configure ChainListener to read files from a system path or from a JAR.
-    See the JavaDoc for all the configuration details. There is also a
-    <code>ChainServlet</code> if you are using the Servlet 2.2
+    <p>You can also configure ChainListener to read files from a system path
+    or from a JAR. See the JavaDoc for all the configuration details. There
+    is also a <code>ChainServlet</code> if you are using the Servlet 2.2
     platform.</p>
 
     <p>Using the default attribute, and given an
