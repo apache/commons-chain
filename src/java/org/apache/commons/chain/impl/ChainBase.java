@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/ChainBase.java,v 1.2 2003/08/12 20:33:24 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/12 20:33:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/ChainBase.java,v 1.3 2003/08/31 21:50:53 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/08/31 21:50:53 $
  *
  * ====================================================================
  *
@@ -75,7 +75,7 @@ import org.apache.commons.chain.Filter;
  * <p>Convenience base class for {@link Chain} implementations.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2003/08/12 20:33:24 $
+ * @version $Revision: 1.3 $ $Date: 2003/08/31 21:50:53 $
  */
 
 public class ChainBase implements Chain {
@@ -224,10 +224,17 @@ public class ChainBase implements Chain {
         if (i >= n) { // Fell off the end of the chain
             i--;
         }
+        boolean handled = false;
+        boolean result = false;
         for (int j = i; j >= 0; j--) {
             if (commands[j] instanceof Filter) {
                 try {
-                    ((Filter) commands[j]).postprocess(context, saveException);
+                    result =
+                        ((Filter) commands[j]).postprocess(context,
+                                                           saveException);
+                    if (result) {
+                        handled = true;
+                    }
                 } catch (Exception e) {
                     ; // Silently ignore
                 }
@@ -235,7 +242,7 @@ public class ChainBase implements Chain {
         }
 
         // Return the exception or result state from the last execute()
-        if (saveException != null) {
+        if ((saveException != null) && !handled) {
             throw saveException;
         } else {
             return (saveResult);

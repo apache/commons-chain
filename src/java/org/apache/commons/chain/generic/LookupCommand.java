@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/LookupCommand.java,v 1.1 2003/08/11 04:44:18 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:18 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/LookupCommand.java,v 1.2 2003/08/31 21:50:53 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/31 21:50:53 $
  *
  * ====================================================================
  *
@@ -85,7 +85,7 @@ import org.apache.commons.chain.Filter;
  * <code>IllegalArgumentException</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:18 $
+ * @version $Revision: 1.2 $ $Date: 2003/08/31 21:50:53 $
  */
 
 public class LookupCommand implements Filter {
@@ -226,14 +226,15 @@ public class LookupCommand implements Filter {
     }
 
 
-    public void postprocess(Context context, Exception exception) {
+    public boolean postprocess(Context context, Exception exception) {
 
 	Command command = getCommand(context);
         if (command != null) {
             if (command instanceof Filter) {
-                ((Filter) command).postprocess(context, exception);
+                return (((Filter) command).postprocess(context, exception));
             }
         }
+        return (false);
 
     }
 

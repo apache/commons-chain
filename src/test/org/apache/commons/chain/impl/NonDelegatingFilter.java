@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/NonDelegatingFilter.java,v 1.2 2003/08/12 20:33:25 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/12 20:33:25 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/NonDelegatingFilter.java,v 1.3 2003/08/31 21:50:53 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/08/31 21:50:53 $
  *
  * ====================================================================
  *
@@ -71,7 +71,7 @@ import org.apache.commons.chain.Filter;
  * and returns <code>true</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2003/08/12 20:33:25 $
+ * @version $Revision: 1.3 $ $Date: 2003/08/31 21:50:53 $
  */
 
 public class NonDelegatingFilter extends NonDelegatingCommand
@@ -118,8 +118,9 @@ public class NonDelegatingFilter extends NonDelegatingCommand
 
 
     // Postprocess method for this Filter
-    public void postprocess(Context context, Exception exception) {
+    public boolean postprocess(Context context, Exception exception) {
         log(context, id2);
+        return (false);
     }
 
 

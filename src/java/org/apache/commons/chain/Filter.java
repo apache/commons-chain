@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Filter.java,v 1.1 2003/08/11 04:44:17 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Filter.java,v 1.2 2003/08/31 21:50:53 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/31 21:50:53 $
  *
  * ====================================================================
  *
@@ -84,7 +84,7 @@ package org.apache.commons.chain;
  * method, which is guaranteed to be called by the owning {@link Chain}.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:17 $
+ * @version $Revision: 1.2 $ $Date: 2003/08/31 21:50:53 $
  */
 
 public interface Filter extends Command {
@@ -103,8 +103,12 @@ public interface Filter extends Command {
      *
      * @exception IllegalArgumentException if <code>context</code>
      *  is <code>null</code>
+     *
+     * @return If a non-null <code>exception</code> was "handled" by this
+     *  method (and therefore need not be rethrown), return <code>true</code>;
+     *  otherwise return <code>false</code>
      */ 
-   public void postprocess(Context context, Exception exception);
+   public boolean postprocess(Context context, Exception exception);
 
 
 }

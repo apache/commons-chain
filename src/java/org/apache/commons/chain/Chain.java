@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Chain.java,v 1.1 2003/08/11 04:44:16 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:16 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Chain.java,v 1.2 2003/08/31 21:50:53 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/31 21:50:53 $
  *
  * ====================================================================
  *
@@ -94,7 +94,7 @@ package org.apache.commons.chain;
  * After that, the configuration of the {@link Chain} is frozen.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:16 $
+ * @version $Revision: 1.2 $ $Date: 2003/08/31 21:50:53 $
  */
 
 public interface Chain extends Command {
@@ -148,7 +148,8 @@ public interface Chain extends Command {
      *  {@link Chain}
      *
      * @exception Exception if thrown by one of the {@link Command}s
-     *  in this {@link Chain}
+     *  in this {@link Chain} but not handled by a <code>postprocess()</code>
+     *  method of a {@link Filter}
      * @exception IllegalArgumentException if <code>context</code>
      *  is <code>null</code>
      *
