@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.chain.web.MapEntry;
 
 
 /**
@@ -32,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
  * attributes.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2004/02/25 00:01:04 $
+ * @version $Revision: 1.4 $ $Date: 2004/09/10 22:43:20 $
  */
 
 final class ServletRequestScopeMap implements Map {
@@ -77,8 +78,10 @@ final class ServletRequestScopeMap implements Map {
     public Set entrySet() {
         Set set = new HashSet();
         Enumeration keys = request.getAttributeNames();
+        String key;
         while (keys.hasMoreElements()) {
-            set.add(request.getAttribute((String) keys.nextElement()));
+            key = (String) keys.nextElement();
+            set.add(new MapEntry(key, request.getAttribute(key), true));
         }
         return (set);
     }

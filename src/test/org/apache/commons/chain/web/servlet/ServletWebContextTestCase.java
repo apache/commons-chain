@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -132,6 +133,9 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertEquals("avalue3", (String) map.get("akey3"));
         assertEquals("avalue4", (String) map.get("akey4"));
 
+        // Transparency - entrySet()
+        checkEntrySet(map, true);
+ 
         // Transparency - removal via web object
         scontext.removeAttribute("akey1");
         checkMapSize(map, 3);
@@ -213,6 +217,9 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertTrue(map.containsValue("hvalue1"));
         assertTrue(map.containsValue("hvalue2a"));
 
+        // Transparency - entrySet()
+        checkEntrySet(map, false);
+ 
         // Unsupported operations on read-only map
         try {
             map.clear();
@@ -268,6 +275,9 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertTrue(map.containsValue(values1));
         assertTrue(map.containsValue(values2));
 
+        // Transparency - entrySet()
+        checkEntrySet(map, false);
+ 
         // Unsupported operations on read-only map
         try {
             map.clear();
@@ -315,6 +325,9 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertTrue(map.containsValue("ivalue2"));
         assertTrue(map.containsValue("ivalue3"));
 
+        // Transparency - entrySet()
+        checkEntrySet(map, false);
+ 
         // Unsupported operations on read-only map
         try {
             map.clear();
@@ -358,6 +371,8 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertTrue(map.containsKey("pkey2"));
         assertTrue(map.containsValue("pvalue1"));
         assertTrue(map.containsValue("pvalue2a"));
+
+        checkEntrySet(map, false);
 
         // Unsupported operations on read-only map
         try {
@@ -520,12 +535,15 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertEquals("rvalue1", (String) map.get("rkey1"));
         assertEquals("rvalue2", (String) map.get("rkey2"));
 
+        // Transparency - entrySet()
+        checkEntrySet(map, true);
+ 
         // Transparency - removal via web object
         request.removeAttribute("rkey1");
         checkMapSize(map, 1);
         assertNull(map.get("rkey1"));
 
-        // Transparency - removal via map
+       // Transparency - removal via map
         map.remove("rkey2");
         checkMapSize(map, 0);
         assertNull(request.getAttribute("rkey2"));
@@ -569,6 +587,9 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertEquals("svalue2", (String) map.get("skey2"));
         assertEquals("svalue3", (String) map.get("skey3"));
 
+        // Transparency - entrySet()
+        checkEntrySet(map, true);
+ 
         // Transparency - removal via web object
         session.removeAttribute("skey1");
         checkMapSize(map, 2);
@@ -632,6 +653,28 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertEquals(size, map.values().size());
     }
 
+    // Test to ensure proper entrySet() and are modifiable optionally
+    protected void checkEntrySet(Map map, boolean modifiable) {
+        assertTrue(map.size() > 1);
+        Set entries = map.entrySet();
+        assertTrue(map.size() == entries.size());
+        Object o = entries.iterator().next();
+
+        assertTrue(o instanceof Map.Entry);
+
+        if (!modifiable) {
+            try {
+                ((Map.Entry)o).setValue(new Object());
+                fail("Should have thrown UnsupportedOperationException");
+            } catch (UnsupportedOperationException e) {
+                ; // expected result
+            }
+        } else {
+            // Should pass and not throw UnsupportedOperationException
+            Map.Entry e = (Map.Entry)o;
+            e.setValue(e.setValue(new Object()));
+        }    
+    }    
 
     // Create a new instance of the appropriate Context type for this test case
     protected Context createContext() {
