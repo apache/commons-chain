@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/CopyCommand.java,v 1.4 2003/10/12 09:10:54 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/12 09:10:54 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/CopyCommand.java,v 1.5 2003/10/18 05:30:18 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/18 05:30:18 $
  *
  * ====================================================================
  *
@@ -72,7 +72,7 @@ import org.apache.commons.chain.Context;
  * the <code>fromKey</code> (if any), to the <code>toKey</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/10/12 09:10:54 $
+ * @version $Revision: 1.5 $ $Date: 2003/10/18 05:30:18 $
  */
 
 public class CopyCommand implements Command {
@@ -89,7 +89,7 @@ public class CopyCommand implements Command {
      */
     public String getFromKey() {
 
-	return (this.fromKey);
+    return (this.fromKey);
 
     }
 
@@ -101,7 +101,7 @@ public class CopyCommand implements Command {
      */
     public void setFromKey(String fromKey) {
 
-	this.fromKey = fromKey;
+    this.fromKey = fromKey;
 
     }
 
@@ -114,7 +114,7 @@ public class CopyCommand implements Command {
      */
     public String getToKey() {
 
-	return (this.toKey);
+    return (this.toKey);
 
     }
 
@@ -126,7 +126,7 @@ public class CopyCommand implements Command {
      */
     public void setToKey(String toKey) {
 
-	this.toKey = toKey;
+    this.toKey = toKey;
 
     }
 
@@ -169,16 +169,16 @@ public class CopyCommand implements Command {
      */
     public boolean execute(Context context) throws Exception {
 
-	Object value = this.value;
+    Object value = this.value;
         if (value == null) {
             context.get(getFromKey());
         }
-	if (value != null) {
-	    context.put(getToKey(), value);
-	} else {
-	    context.remove(getToKey());
-	}
-	return (false);
+    if (value != null) {
+        context.put(getToKey(), value);
+    } else {
+        context.remove(getToKey());
+    }
+    return (false);
 
     }
 

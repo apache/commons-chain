@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/LookupCommand.java,v 1.4 2003/10/12 09:10:54 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/12 09:10:54 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/LookupCommand.java,v 1.5 2003/10/18 05:30:18 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/18 05:30:18 $
  *
  * ====================================================================
  *
@@ -85,7 +85,7 @@ import org.apache.commons.chain.Filter;
  * <code>IllegalArgumentException</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/10/12 09:10:54 $
+ * @version $Revision: 1.5 $ $Date: 2003/10/18 05:30:18 $
  */
 
 public class LookupCommand implements Filter {
@@ -103,7 +103,7 @@ public class LookupCommand implements Filter {
      */
     public String getCatalogKey() {
 
-	return (this.catalogKey);
+    return (this.catalogKey);
 
     }
 
@@ -116,7 +116,7 @@ public class LookupCommand implements Filter {
      */
     public void setCatalogKey(String catalogKey) {
 
-	this.catalogKey = catalogKey;
+    this.catalogKey = catalogKey;
 
     }
 
@@ -130,7 +130,7 @@ public class LookupCommand implements Filter {
      */
     public String getName() {
 
-	return (this.name);
+    return (this.name);
 
     }
 
@@ -143,7 +143,7 @@ public class LookupCommand implements Filter {
      */
     public void setName(String name) {
 
-	this.name = name;
+    this.name = name;
 
     }
 
@@ -157,7 +157,7 @@ public class LookupCommand implements Filter {
      */
     public String getNameKey() {
 
-	return (this.nameKey);
+    return (this.nameKey);
 
     }
 
@@ -170,7 +170,7 @@ public class LookupCommand implements Filter {
      */
     public void setNameKey(String nameKey) {
 
-	this.nameKey = nameKey;
+    this.nameKey = nameKey;
 
     }
 
@@ -216,7 +216,7 @@ public class LookupCommand implements Filter {
      */
     public boolean execute(Context context) throws Exception {
 
-	Command command = getCommand(context);
+    Command command = getCommand(context);
         if (command != null) {
             return (command.execute(context));
         } else {
@@ -228,7 +228,7 @@ public class LookupCommand implements Filter {
 
     public boolean postprocess(Context context, Exception exception) {
 
-	Command command = getCommand(context);
+    Command command = getCommand(context);
         if (command != null) {
             if (command instanceof Filter) {
                 return (((Filter) command).postprocess(context, exception));
@@ -253,25 +253,25 @@ public class LookupCommand implements Filter {
      */
     private Command getCommand(Context context) {
 
-	Catalog catalog = (Catalog)
-	    context.get(getCatalogKey());
-	if (catalog == null) {
-	    throw new IllegalArgumentException(getCatalogKey());
-	}
-	Command command = null;
-	String name = getName();
-	if (name == null) {
-	    name = (String) context.get(getNameKey());
-	}
-	if (name != null) {
-	    command = catalog.getCommand(name);
-	    if ((command == null) && !isOptional()) {
-		throw new IllegalArgumentException(name);
-	    }
-	    return (command);
-	} else {
-	    throw new IllegalArgumentException("No command name");
-	}
+    Catalog catalog = (Catalog)
+        context.get(getCatalogKey());
+    if (catalog == null) {
+        throw new IllegalArgumentException(getCatalogKey());
+    }
+    Command command = null;
+    String name = getName();
+    if (name == null) {
+        name = (String) context.get(getNameKey());
+    }
+    if (name != null) {
+        command = catalog.getCommand(name);
+        if ((command == null) && !isOptional()) {
+        throw new IllegalArgumentException(name);
+        }
+        return (command);
+    } else {
+        throw new IllegalArgumentException("No command name");
+    }
 
     }
 

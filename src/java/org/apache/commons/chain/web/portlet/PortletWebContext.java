@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/portlet/PortletWebContext.java,v 1.3 2003/10/12 09:10:21 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/12 09:10:21 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/portlet/PortletWebContext.java,v 1.4 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -79,7 +79,7 @@ import org.apache.commons.chain.web.WebContext;
  * instances that are passed to the constructor (or the initialize method).</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2003/10/12 09:10:21 $
+ * @version $Revision: 1.4 $ $Date: 2003/10/18 05:30:19 $
  */
 
 public class PortletWebContext extends WebContext {
@@ -200,7 +200,7 @@ public class PortletWebContext extends WebContext {
      */
     public PortletContext getContext() {
 
-	return (this.context);
+    return (this.context);
 
     }
 
@@ -210,7 +210,7 @@ public class PortletWebContext extends WebContext {
      */
     public PortletRequest getRequest() {
 
-	return (this.request);
+    return (this.request);
 
     }
 
@@ -220,7 +220,7 @@ public class PortletWebContext extends WebContext {
      */
     public PortletResponse getResponse() {
 
-	return (this.response);
+    return (this.response);
 
     }
 
@@ -290,8 +290,8 @@ public class PortletWebContext extends WebContext {
     public Map getHeader() {
 
         if ((header == null) && (request != null)) {
-	    //            header = new PortletHeaderMap(request);
-	    header = Collections.EMPTY_MAP;
+        //            header = new PortletHeaderMap(request);
+        header = Collections.EMPTY_MAP;
         }
         return (header);
 
@@ -301,8 +301,8 @@ public class PortletWebContext extends WebContext {
     public Map getHeaderValues() {
 
         if ((headerValues == null) && (request != null)) {
-	    //            headerValues = new PortletHeaderValuesMap(request);
-	    headerValues = Collections.EMPTY_MAP;
+        //            headerValues = new PortletHeaderValuesMap(request);
+        headerValues = Collections.EMPTY_MAP;
         }
         return (headerValues);
 
@@ -353,7 +353,7 @@ public class PortletWebContext extends WebContext {
 
         if ((sessionScope == null) && (request != null)) {
             sessionScope =
-		new PortletSessionScopeMap(request.getPortletSession());
+        new PortletSessionScopeMap(request.getPortletSession());
         }
         return (sessionScope);
 

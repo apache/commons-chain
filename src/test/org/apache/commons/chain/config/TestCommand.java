@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/config/TestCommand.java,v 1.2 2003/10/12 09:11:52 rdonkin Exp $
- * $Revision: 1.2 $
- * $Date: 2003/10/12 09:11:52 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/config/TestCommand.java,v 1.3 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -76,24 +76,24 @@ public class TestCommand implements Command {
 
     private String bar = null;
     public String getBar() {
-	return (this.bar);
+    return (this.bar);
     }
     public void setBar(String bar) {
-	this.bar = bar;
+    this.bar = bar;
     }
 
 
     private String foo = null;
     public String getFoo() {
-	return (this.foo);
+    return (this.foo);
     }
     public void setFoo(String foo) {
-	this.foo = foo;
+    this.foo = foo;
     }
 
 
     public boolean execute(Context context) throws Exception {
-	return (false);
+    return (false);
     }
 
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/NonDelegatingFilter.java,v 1.4 2003/10/12 09:11:53 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/12 09:11:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/NonDelegatingFilter.java,v 1.5 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -71,7 +71,7 @@ import org.apache.commons.chain.Filter;
  * and returns <code>true</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/10/12 09:11:53 $
+ * @version $Revision: 1.5 $ $Date: 2003/10/18 05:30:19 $
  */
 
 public class NonDelegatingFilter extends NonDelegatingCommand
@@ -82,7 +82,7 @@ public class NonDelegatingFilter extends NonDelegatingCommand
 
 
     public NonDelegatingFilter() {
-	this("", "");
+    this("", "");
     }
 
 
@@ -98,10 +98,10 @@ public class NonDelegatingFilter extends NonDelegatingCommand
 
     protected String id2 = null;
     public String getId2() {
-	return (this.id2);
+    return (this.id2);
     }
     public void setId2(String id2) {
-	this.id2 = id2;
+    this.id2 = id2;
     }
 
 

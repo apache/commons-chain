@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/faces/FacesWebContext.java,v 1.3 2003/10/12 09:10:40 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/12 09:10:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/faces/FacesWebContext.java,v 1.4 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -75,7 +75,7 @@ import org.apache.commons.chain.web.WebContext;
  * that is passed to the constructor (or the initialize method).</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2003/10/12 09:10:40 $
+ * @version $Revision: 1.4 $ $Date: 2003/10/18 05:30:19 $
  */
 
 public class FacesWebContext extends WebContext {
@@ -126,7 +126,7 @@ public class FacesWebContext extends WebContext {
      */
     public FacesContext getContext() {
 
-	return (this.context);
+    return (this.context);
 
     }
 
@@ -163,56 +163,56 @@ public class FacesWebContext extends WebContext {
 
     public Map getApplicationScope() {
 
-	return (context.getExternalContext().getApplicationMap());
+    return (context.getExternalContext().getApplicationMap());
 
     }
 
 
     public Map getHeader() {
 
-	return (context.getExternalContext().getRequestHeaderMap());
+    return (context.getExternalContext().getRequestHeaderMap());
 
     }
 
 
     public Map getHeaderValues() {
 
-	return (context.getExternalContext().getRequestHeaderValuesMap());
+    return (context.getExternalContext().getRequestHeaderValuesMap());
 
     }
 
 
     public Map getInitParam() {
 
-	return (context.getExternalContext().getInitParameterMap());
+    return (context.getExternalContext().getInitParameterMap());
 
     }
 
 
     public Map getParam() {
 
-	return (context.getExternalContext().getRequestParameterMap());
+    return (context.getExternalContext().getRequestParameterMap());
 
     }
 
 
     public Map getParamValues() {
 
-	return (context.getExternalContext().getRequestParameterValuesMap());
+    return (context.getExternalContext().getRequestParameterValuesMap());
 
     }
 
 
     public Map getRequestScope() {
 
-	return (context.getExternalContext().getRequestMap());
+    return (context.getExternalContext().getRequestMap());
 
     }
 
 
     public Map getSessionScope() {
 
-	return (context.getExternalContext().getSessionMap());
+    return (context.getExternalContext().getSessionMap());
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ServletWebContext.java,v 1.3 2003/10/12 09:10:41 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/12 09:10:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ServletWebContext.java,v 1.4 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import org.apache.commons.chain.web.WebContext;
  * instances that are passed to the constructor (or the initialize method).</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2003/10/12 09:10:41 $
+ * @version $Revision: 1.4 $ $Date: 2003/10/18 05:30:19 $
  */
 
 public class ServletWebContext extends WebContext {
@@ -198,7 +198,7 @@ public class ServletWebContext extends WebContext {
      */
     public ServletContext getContext() {
 
-	return (this.context);
+    return (this.context);
 
     }
 
@@ -208,7 +208,7 @@ public class ServletWebContext extends WebContext {
      */
     public HttpServletRequest getRequest() {
 
-	return (this.request);
+    return (this.request);
 
     }
 
@@ -218,7 +218,7 @@ public class ServletWebContext extends WebContext {
      */
     public HttpServletResponse getResponse() {
 
-	return (this.response);
+    return (this.response);
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/ExceptionCommand.java,v 1.2 2003/10/12 09:11:53 rdonkin Exp $
- * $Revision: 1.2 $
- * $Date: 2003/10/12 09:11:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/ExceptionCommand.java,v 1.3 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -72,7 +72,7 @@ import org.apache.commons.chain.Context;
  * and throws an Exception.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2003/10/12 09:11:53 $
+ * @version $Revision: 1.3 $ $Date: 2003/10/18 05:30:19 $
  */
 public class ExceptionCommand extends NonDelegatingCommand {
 
@@ -81,7 +81,7 @@ public class ExceptionCommand extends NonDelegatingCommand {
 
 
     public ExceptionCommand() {
-	this("");
+    this("");
     }
 
 

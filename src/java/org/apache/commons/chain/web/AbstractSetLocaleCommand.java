@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/AbstractSetLocaleCommand.java,v 1.3 2003/10/12 09:10:40 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/12 09:10:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/AbstractSetLocaleCommand.java,v 1.4 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -75,7 +75,7 @@ import org.apache.commons.chain.Context;
  * property.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2003/10/12 09:10:40 $
+ * @version $Revision: 1.4 $ $Date: 2003/10/18 05:30:19 $
  */
 
 public abstract class AbstractSetLocaleCommand implements Command {
@@ -96,7 +96,7 @@ public abstract class AbstractSetLocaleCommand implements Command {
      */
     public String getLocaleKey() {
 
-	return (this.localeKey);
+    return (this.localeKey);
 
     }
 
@@ -109,7 +109,7 @@ public abstract class AbstractSetLocaleCommand implements Command {
      */
     public void setLocaleKey(String localeKey) {
 
-	this.localeKey = localeKey;
+    this.localeKey = localeKey;
 
     }
 
@@ -127,9 +127,9 @@ public abstract class AbstractSetLocaleCommand implements Command {
      */
     public boolean execute(Context context) throws Exception {
 
-	setLocale(context,
-		  (Locale) context.get(getLocaleKey()));
-	return (false);
+    setLocale(context,
+          (Locale) context.get(getLocaleKey()));
+    return (false);
 
     }
 

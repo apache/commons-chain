@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/DelegatingCommand.java,v 1.3 2003/10/12 09:11:53 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/12 09:11:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/DelegatingCommand.java,v 1.4 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -71,7 +71,7 @@ import org.apache.commons.chain.Context;
  * and delegates to the rest of the chain.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2003/10/12 09:11:53 $
+ * @version $Revision: 1.4 $ $Date: 2003/10/18 05:30:19 $
  */
 
 public class DelegatingCommand extends NonDelegatingCommand {
@@ -81,7 +81,7 @@ public class DelegatingCommand extends NonDelegatingCommand {
 
 
     public DelegatingCommand() {
-	this("");
+    this("");
     }
 
 

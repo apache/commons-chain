@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/CatalogBase.java,v 1.6 2003/10/12 09:10:55 rdonkin Exp $
- * $Revision: 1.6 $
- * $Date: 2003/10/12 09:10:55 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/CatalogBase.java,v 1.7 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -76,7 +76,7 @@ import org.apache.commons.chain.Command;
  *
  * @author Craig R. McClanahan
  * @author Matthew J. Sgarlata
- * @version $Revision: 1.6 $ $Date: 2003/10/12 09:10:55 $
+ * @version $Revision: 1.7 $ $Date: 2003/10/18 05:30:19 $
  */
 
 public class CatalogBase implements Catalog {
@@ -116,25 +116,25 @@ public class CatalogBase implements Catalog {
 
     }
 
- 	/**
- 	 * Converts this Catalog to a String.  Useful for debugging purposes.
- 	 * @return a representation of this catalog as a String
- 	 */
- 	public String toString() {
+    /**
+     * Converts this Catalog to a String.  Useful for debugging purposes.
+     * @return a representation of this catalog as a String
+     */
+    public String toString() {
 
- 		Iterator names = getNames();
- 		StringBuffer str =
- 			new StringBuffer("[" + this.getClass().getName() + ": ");
+        Iterator names = getNames();
+        StringBuffer str =
+            new StringBuffer("[" + this.getClass().getName() + ": ");
 
- 		while (names.hasNext()) {
- 			str.append(names.next());
- 			if (names.hasNext()) {
-  			str.append(", ");
- 			}
- 		}
- 		str.append("]");
+        while (names.hasNext()) {
+            str.append(names.next());
+            if (names.hasNext()) {
+            str.append(", ");
+            }
+        }
+        str.append("]");
 
- 		return str.toString();
+        return str.toString();
 
- 	}
+    }
 }

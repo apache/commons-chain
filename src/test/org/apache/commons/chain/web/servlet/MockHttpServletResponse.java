@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/MockHttpServletResponse.java,v 1.3 2003/10/12 09:11:16 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/12 09:11:16 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/MockHttpServletResponse.java,v 1.4 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -192,7 +192,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
 
 
     public String getContentType() {
-	throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException();
     }
 
 
@@ -232,7 +232,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
 
 
     public void setCharacterEncoding(String encoding) {
-	throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException();
     }
 
 
@@ -247,7 +247,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
 
 
     public void setLocale(Locale locale) {
-	this.locale = locale;
+    this.locale = locale;
     }
 
 

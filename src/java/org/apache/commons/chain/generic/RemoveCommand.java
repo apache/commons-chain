@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/RemoveCommand.java,v 1.4 2003/10/12 09:10:54 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/12 09:10:54 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/RemoveCommand.java,v 1.5 2003/10/18 05:30:18 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/18 05:30:18 $
  *
  * ====================================================================
  *
@@ -70,7 +70,7 @@ import org.apache.commons.chain.Context;
  * <p>Remove any context attribute stored under the <code>fromKey</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/10/12 09:10:54 $
+ * @version $Revision: 1.5 $ $Date: 2003/10/18 05:30:18 $
  */
 
 public class RemoveCommand implements Command {
@@ -87,7 +87,7 @@ public class RemoveCommand implements Command {
      */
     public String getFromKey() {
 
-	return (this.fromKey);
+    return (this.fromKey);
 
     }
 
@@ -99,7 +99,7 @@ public class RemoveCommand implements Command {
      */
     public void setFromKey(String fromKey) {
 
-	this.fromKey = fromKey;
+    this.fromKey = fromKey;
 
     }
 
@@ -117,8 +117,8 @@ public class RemoveCommand implements Command {
      */
     public boolean execute(Context context) throws Exception {
 
-	context.remove(getFromKey());
-	return (false);
+    context.remove(getFromKey());
+    return (false);
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/ServletSetLocaleCommandTestCase.java,v 1.4 2003/10/12 09:11:16 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/12 09:11:16 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/ServletSetLocaleCommandTestCase.java,v 1.5 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -115,9 +115,9 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
      */
     public void setUp() {
 
-	locale = new Locale("en", "US");
+    locale = new Locale("en", "US");
 
-	// Set up Servlet API Objects
+    // Set up Servlet API Objects
         scontext = new MockServletContext();
         session = new MockHttpSession(scontext);
         request = new MockHttpServletRequest("/context", "/servlet",
@@ -125,9 +125,9 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
                                              session);
         response = new MockHttpServletResponse();
 
-	// Set up Chain API Objects
+    // Set up Chain API Objects
         context = new ServletWebContext(scontext, request, response);
-	command = new ServletGetLocaleCommand();
+    command = new ServletGetLocaleCommand();
 
     }
 
@@ -153,7 +153,7 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
         response = null;
 
         context = null;
-	command = null;
+    command = null;
 
     }
 
@@ -164,9 +164,9 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
     // Test configured behavior
     public void testConfigured() throws Exception {
 
-	command.setLocaleKey("special");
-	assertEquals("special", command.getLocaleKey());
-	check(context, command);
+    command.setLocaleKey("special");
+    assertEquals("special", command.getLocaleKey());
+    check(context, command);
 
     }
 
@@ -174,8 +174,8 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
     // Test default behavior
     public void testDefaut() throws Exception {
 
-	assertEquals("locale", command.getLocaleKey());
-	check(context, command);
+    assertEquals("locale", command.getLocaleKey());
+    check(context, command);
 
     }
 
@@ -184,19 +184,19 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
 
 
     protected void check(Context context, ServletGetLocaleCommand command)
-	throws Exception {
+    throws Exception {
 
-	String localeKey = command.getLocaleKey();
-	assertNotNull(localeKey);
-	Object value = context.get(localeKey);
-	assertNull(value);
-	context.put(localeKey, locale);
-	assertNotNull(context.get(localeKey));
-	assertNull(response.getLocale());
-	boolean result = command.execute(context);
-	assertFalse(result);
-	assertNotNull(response.getLocale());
-	assertEquals(locale, response.getLocale());
+    String localeKey = command.getLocaleKey();
+    assertNotNull(localeKey);
+    Object value = context.get(localeKey);
+    assertNull(value);
+    context.put(localeKey, locale);
+    assertNotNull(context.get(localeKey));
+    assertNull(response.getLocale());
+    boolean result = command.execute(context);
+    assertFalse(result);
+    assertNotNull(response.getLocale());
+    assertEquals(locale, response.getLocale());
 
     }
 

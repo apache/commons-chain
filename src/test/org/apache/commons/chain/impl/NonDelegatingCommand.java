@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/NonDelegatingCommand.java,v 1.4 2003/10/12 09:11:53 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/12 09:11:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/NonDelegatingCommand.java,v 1.5 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -71,7 +71,7 @@ import org.apache.commons.chain.Context;
  * and returns.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/10/12 09:11:53 $
+ * @version $Revision: 1.5 $ $Date: 2003/10/18 05:30:19 $
  */
 
 public class NonDelegatingCommand implements Command {
@@ -81,7 +81,7 @@ public class NonDelegatingCommand implements Command {
 
 
     public NonDelegatingCommand() {
-	this("");
+    this("");
     }
 
 
@@ -102,7 +102,7 @@ public class NonDelegatingCommand implements Command {
     }
 
     public void setId(String id) {
-	this.id = id;
+    this.id = id;
     }
 
 

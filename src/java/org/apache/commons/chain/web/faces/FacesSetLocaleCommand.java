@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/faces/FacesSetLocaleCommand.java,v 1.4 2003/10/12 09:10:40 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/12 09:10:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/faces/FacesSetLocaleCommand.java,v 1.5 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -82,9 +82,9 @@ public class FacesSetLocaleCommand extends AbstractSetLocaleCommand {
 
     protected void setLocale(Context context, Locale locale) {
 
-	FacesContext fcontext = (FacesContext)
-	    context.get("context");
-	fcontext.setLocale(locale);
+    FacesContext fcontext = (FacesContext)
+        context.get("context");
+    fcontext.setLocale(locale);
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/config/TestChain.java,v 1.2 2003/10/12 09:11:52 rdonkin Exp $
- * $Revision: 1.2 $
- * $Date: 2003/10/12 09:11:52 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/config/TestChain.java,v 1.3 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -76,7 +76,7 @@ public class TestChain extends ChainBase {
 
     public Command[] getCommands() {
 
-	return (commands);
+    return (commands);
 
     }
 

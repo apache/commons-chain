@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/AddingCommand.java,v 1.2 2003/10/12 09:11:53 rdonkin Exp $
- * $Revision: 1.2 $
- * $Date: 2003/10/12 09:11:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/AddingCommand.java,v 1.3 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -74,7 +74,7 @@ import org.apache.commons.chain.Context;
  * subclasses <code>ChainBase</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2003/10/12 09:11:53 $
+ * @version $Revision: 1.3 $ $Date: 2003/10/18 05:30:19 $
  */
 
 public class AddingCommand extends NonDelegatingCommand {
@@ -84,7 +84,7 @@ public class AddingCommand extends NonDelegatingCommand {
 
 
     public AddingCommand() {
-	this("", null);
+    this("", null);
     }
 
     // Construct an instance that will log the specified identifier

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/portlet/PortletSessionScopeMap.java,v 1.2 2003/10/12 09:10:21 rdonkin Exp $
- * $Revision: 1.2 $
- * $Date: 2003/10/12 09:10:21 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/portlet/PortletSessionScopeMap.java,v 1.3 2003/10/18 05:30:19 martinc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/10/18 05:30:19 $
  *
  * ====================================================================
  *
@@ -79,7 +79,7 @@ import javax.portlet.PortletSession;
  * attributes.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2003/10/12 09:10:21 $
+ * @version $Revision: 1.3 $ $Date: 2003/10/18 05:30:19 $
  */
 
 final class PortletSessionScopeMap implements Map {
@@ -111,7 +111,7 @@ final class PortletSessionScopeMap implements Map {
             return (false);
         }
         Enumeration keys =
-	    session.getAttributeNames(PortletSession.PORTLET_SCOPE);
+        session.getAttributeNames(PortletSession.PORTLET_SCOPE);
         while (keys.hasMoreElements()) {
             Object next = session.getAttribute((String) keys.nextElement());
             if (next == value) {
@@ -125,7 +125,7 @@ final class PortletSessionScopeMap implements Map {
     public Set entrySet() {
         Set set = new HashSet();
         Enumeration keys =
-	    session.getAttributeNames(PortletSession.PORTLET_SCOPE);
+        session.getAttributeNames(PortletSession.PORTLET_SCOPE);
         while (keys.hasMoreElements()) {
             set.add(session.getAttribute((String) keys.nextElement()));
         }
@@ -156,7 +156,7 @@ final class PortletSessionScopeMap implements Map {
     public Set keySet() {
         Set set = new HashSet();
         Enumeration keys =
-	    session.getAttributeNames(PortletSession.PORTLET_SCOPE);
+        session.getAttributeNames(PortletSession.PORTLET_SCOPE);
         while (keys.hasMoreElements()) {
             set.add(keys.nextElement());
         }
@@ -195,7 +195,7 @@ final class PortletSessionScopeMap implements Map {
     public int size() {
         int n = 0;
         Enumeration keys =
-	    session.getAttributeNames(PortletSession.PORTLET_SCOPE);
+        session.getAttributeNames(PortletSession.PORTLET_SCOPE);
         while (keys.hasMoreElements()) {
             keys.nextElement();
             n++;
@@ -207,7 +207,7 @@ final class PortletSessionScopeMap implements Map {
     public Collection values() {
         List list = new ArrayList();
         Enumeration keys =
-	    session.getAttributeNames(PortletSession.PORTLET_SCOPE);
+        session.getAttributeNames(PortletSession.PORTLET_SCOPE);
         while (keys.hasMoreElements()) {
             list.add(session.getAttribute((String) keys.nextElement()));
         }
