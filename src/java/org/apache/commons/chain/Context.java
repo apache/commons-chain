@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Context.java,v 1.1 2003/08/11 04:44:16 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:16 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Context.java,v 1.2 2003/09/17 15:16:08 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/09/17 15:16:08 $
  *
  * ====================================================================
  *
@@ -126,7 +126,7 @@ import java.util.Map;
  * implementation.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:16 $
+ * @version $Revision: 1.2 $ $Date: 2003/09/17 15:16:08 $
  */
 
 public interface Context {
@@ -138,6 +138,8 @@ public interface Context {
      * of key-value pairs that maintain the state information associated
      * with the processing of the transaction that is represented by
      * this {@link Context} instance.</p>
+     *
+     * @return The state information for this context as a Map
      */
     public Map getAttributes();
 
