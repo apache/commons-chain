@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/portlet/PortletWebContext.java,v 1.4 2003/10/18 05:30:19 martinc Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/18 05:30:19 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/portlet/PortletWebContext.java,v 1.5 2003/10/20 05:25:41 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/20 05:25:41 $
  *
  * ====================================================================
  *
@@ -68,7 +68,6 @@ import java.util.Map;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.PortletSession;
 import org.apache.commons.chain.web.WebContext;
 
 
@@ -79,7 +78,7 @@ import org.apache.commons.chain.web.WebContext;
  * instances that are passed to the constructor (or the initialize method).</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/10/18 05:30:19 $
+ * @version $Revision: 1.5 $ $Date: 2003/10/20 05:25:41 $
  */
 
 public class PortletWebContext extends WebContext {

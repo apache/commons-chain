@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainServlet.java,v 1.4 2003/10/05 03:02:34 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/05 03:02:34 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainServlet.java,v 1.5 2003/10/20 05:25:41 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/20 05:25:41 $
  *
 /* ====================================================================
  * The Apache Software License, Version 1.1
@@ -62,9 +62,7 @@
 package org.apache.commons.chain.web;
 
 
-import java.io.InputStream;
 import java.io.IOException;
-import java.net.URL;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -74,7 +72,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.config.ConfigParser;
 import org.apache.commons.chain.impl.CatalogBase;
-import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

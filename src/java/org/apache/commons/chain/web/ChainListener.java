@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainListener.java,v 1.3 2003/10/12 09:10:40 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/12 09:10:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainListener.java,v 1.4 2003/10/20 05:25:41 martinc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/10/20 05:25:41 $
  *
  * ====================================================================
  *
@@ -64,8 +64,6 @@ package org.apache.commons.chain.web;
 
 
 import java.io.InputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -130,7 +128,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Craig R. McClanahan
  * @author Ted Husted
- * @version $Revision: 1.3 $ $Date: 2003/10/12 09:10:40 $
+ * @version $Revision: 1.4 $ $Date: 2003/10/20 05:25:41 $
  */
 
 public class ChainListener implements ServletContextListener {
