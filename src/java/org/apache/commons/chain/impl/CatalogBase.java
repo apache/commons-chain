@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/CatalogBase.java,v 1.4 2003/09/29 15:44:40 husted Exp $
- * $Revision: 1.4 $
- * $Date: 2003/09/29 15:44:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/CatalogBase.java,v 1.5 2003/09/29 17:45:29 husted Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/09/29 17:45:29 $
  *
  * ====================================================================
  *
@@ -76,7 +76,7 @@ import org.apache.commons.chain.Command;
  *
  * @author Craig R. McClanahan
  * @author Matthew J. Sgarlata
- * @version $Revision: 1.4 $ $Date: 2003/09/29 15:44:40 $
+ * @version $Revision: 1.5 $ $Date: 2003/09/29 17:45:29 $
  */
 
 public class CatalogBase implements Catalog {
@@ -94,21 +94,14 @@ public class CatalogBase implements Catalog {
     // --------------------------------------------------------- Public Methods
 
 
-    /**
-     * Adds a Command to this Catalog.
-     * @param name the name by which the Command can be identified
-     * @param command the Command to add to this Catalog
-     */
+    // Documented in Catalog interface
     public void addCommand(String name, Command command) {
 
         commands.put(name, command);
 
     }
 
- 	/**
-     * Retrieves the Command identified by the given name from this Catalog.
- 	 * @return the Command identified by the given name from this Catalog
- 	 */
+    // Documented in Catalog interface
     public Command getCommand(String name) {
 
         return ((Command) commands.get(name));
@@ -116,12 +109,7 @@ public class CatalogBase implements Catalog {
     }
 
 
- 	/**
- 	 * Returns an Iterator which can be used to iterate through all the Commands
- 	 * in the Catalog.
- 	 * @return an Iterator which can be used to iterate through all the Commands
- 	 * in the Catalog
- 	 */
+    // Documented in Catalog interface
     public Iterator getNames() {
 
         return (commands.keySet().iterator());
