@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/CheckLogonTag.java,v 1.1 2004/03/25 12:39:27 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/25 12:39:27 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/CheckLogonTag.java,v 1.2 2004/04/01 03:39:16 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/04/01 03:39:16 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -31,7 +31,7 @@ import java.io.IOException;
  * Check for a valid User logged on in the current session.  If there is no
  * such user, forward control to the logon page.
  *
- * @version $Revision: 1.1 $ $Date: 2004/03/25 12:39:27 $
+ * @version $Revision: 1.2 $ $Date: 2004/04/01 03:39:16 $
  */
 public final class CheckLogonTag extends TagSupport {
 
@@ -42,7 +42,7 @@ public final class CheckLogonTag extends TagSupport {
     /**
      * Path to use if a login is needed.
      */
-    private static String LOGIN_PATH = "/Logon.do";
+    private static String LOGIN_PATH = "/LogonForm.do";
 
 
     // ------------------------------------------------------- Public Methods
@@ -70,7 +70,7 @@ public final class CheckLogonTag extends TagSupport {
     public int doEndTag() throws JspException {
 
         // Is there a valid user logged on?
-        boolean valid = (null != pageContext.getServletContext().getAttribute(Constants.USER_KEY));
+        boolean valid = (null != pageContext.getSession().getAttribute(Constants.USER_KEY));
 
         // Forward control based on the results
         if (valid) {
