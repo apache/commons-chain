@@ -1,13 +1,12 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Command.java,v 1.1 2003/08/11 04:44:16 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:16 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Command.java,v 1.2 2003/09/29 20:02:08 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/09/29 20:02:08 $
  *
- * ====================================================================
- *
+/* ====================================================================
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2000 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,21 +21,21 @@
  *    the documentation and/or other materials provided with the
  *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if
- *    any, must include the following acknowlegement:
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
  *        Apache Software Foundation (http://www.apache.org/)."
- *    Alternately, this acknowlegement may appear in the software itself,
- *    if and wherever such third-party acknowlegements normally appear.
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "The Jakarta Project", "Commons", and "Apache Software
  *    Foundation" must not be used to endorse or promote products derived
  *    from this software without prior written permission. For written
  *    permission, please contact apache@apache.org.
  *
- * 5. Products derived from this software may not be called "Apache"
- *    nor may "Apache" appear in their names without prior written
- *    permission of the Apache Group.
+ * 5. Products derived from this software may not be called "Apache",
+ *    nor may "Apache" appear in their name, without prior written
+ *    permission of the Apache Software Foundation.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -111,7 +110,7 @@ package org.apache.commons.chain;
  * would be executed by calling:</p>
  *
  * <pre>
- *   String input = (String) context.getAttributes().get(getInputKey());
+ *   String input = (String) context.get(getInputKey());
  * </pre>
  *
  * <p>instead of hard coding the attribute name.  The use of the "Key"
@@ -120,7 +119,7 @@ package org.apache.commons.chain;
  * configure the internal operation of this {@link Command}.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:16 $
+ * @version $Revision: 1.2 $ $Date: 2003/09/29 20:02:08 $
  */
 
 public interface Command {

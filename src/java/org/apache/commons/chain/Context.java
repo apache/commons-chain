@@ -1,13 +1,7 @@
-/*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Context.java,v 1.3 2003/09/29 06:02:13 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2003/09/29 06:02:13 $
- *
- * ====================================================================
- *
+/* ====================================================================
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2000 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,21 +16,21 @@
  *    the documentation and/or other materials provided with the
  *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if
- *    any, must include the following acknowlegement:
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
  *        Apache Software Foundation (http://www.apache.org/)."
- *    Alternately, this acknowlegement may appear in the software itself,
- *    if and wherever such third-party acknowlegements normally appear.
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "The Jakarta Project", "Commons", and "Apache Software
  *    Foundation" must not be used to endorse or promote products derived
  *    from this software without prior written permission. For written
  *    permission, please contact apache@apache.org.
  *
- * 5. Products derived from this software may not be called "Apache"
- *    nor may "Apache" appear in their names without prior written
- *    permission of the Apache Group.
+ * 5. Products derived from this software may not be called "Apache",
+ *    nor may "Apache" appear in their name, without prior written
+ *    permission of the Apache Software Foundation.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -68,7 +62,7 @@ import java.util.Map;
 
 /**
  * <p>A {@link Context} represents the state information that is
- * accessed an  manipulated by the execution of a {@link Command} or a
+ * accessed and manipulated by the execution of a {@link Command} or a
  * {@link Chain}.  Specialized implementations of {@link Context} will
  * typically add JavaBeans properties that contain typesafe accessors
  * to information that is relevant to a particular use case for this
@@ -83,8 +77,8 @@ import java.util.Map;
  * properties added to a particular {@link Context} implementation exhibit
  * <em>Attribute-Property Transparency</em>.  In other words,
  * a value stored via a call to <code>setFoo(value)</code> should be visible
- * by calling <code>getAttributes().get("foo")</code>, and a value stored
- * via a call to <code>getAttributes().put("foo", value)</code> should be
+ * by calling <code>get("foo")</code>, and a value stored
+ * via a call to <code>put("foo", value)</code> should be
  * visible by calling <code>getFoo()</code>.  If your {@link Context}
  * implementation class exhibits this featue, it becomes easier to reuse the
  * implementation in multiple environments, without the need to cast to a
@@ -103,7 +97,7 @@ import java.util.Map;
  * implementation.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2003/09/29 06:02:13 $
+ * @version $Revision: 1.4 $ $Date: 2003/09/29 20:02:08 $
  */
 
 public interface Context extends Map {
