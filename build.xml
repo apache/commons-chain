@@ -1,0 +1,331 @@
+<project name="Chain Of Responsibility Pattern" default="compile" basedir=".">
+
+
+<!--
+        "Chain of Responsibility" component of the Jakarta Commons Subproject
+        $Id: build.xml,v 1.1 2003/08/11 04:44:16 craigmcc Exp $
+-->
+
+
+<!-- ========== Initialize Properties ===================================== -->
+
+
+  <property file="build.properties"/>                <!-- Component local   -->
+  <property file="../build.properties"/>             <!-- Commons local     -->
+  <property file="${user.home}/build.properties"/>   <!-- User local        -->
+
+
+<!-- ========== External Dependencies ===================================== -->
+
+
+  <!-- The directory containing your binary distribution of JUnit,
+       version 3.8.1 or later -->
+  <property name="junit.home"              value="/usr/local/junit3.8.1"/>
+
+  <!-- (OPTIONAL) The directory containing your JavaServer Faces API JAR file -->
+  <property name="jsf-api.home"            value="${user.home}/jwsdp-1.2/jsf/lib"/>
+
+  <!-- (OPTIONAL) The directory containing your Portlet API JAR file -->
+  <property name="portlet-api.home"        value="../../jakarta-jetspeed-2/portlet-api"/>
+
+  <!-- (OPTIONAL) The directory containing your Servlet API JAR file -->
+  <property name="servlet-api.home"        value="lib"/>
+
+
+<!-- ========== Derived Values ============================================ -->
+
+
+  <!-- The pathname of the "junit.jar" JAR file -->
+  <property name="junit.jar"               value="${junit.home}/junit.jar"/>
+
+  <!-- (OPTIONAL) The pathname of the JavaServer Faces API JAR file -->
+  <property name="jsf-api.jar"             value="${jsf-api.home}/jsf-api.jar"/>
+
+  <!-- (OPTIONAL) The pathname of the Portlet API JAR file -->
+  <property name="portlet-api.jar"         value="${portlet-api.home}/target/portlet-api-0.6.6.jar"/>
+
+  <!-- (OPTIONAL) The pathname of the Servlet API JAR file -->
+  <property name="servlet-api.jar"         value="${servlet-api.home}/servlet.jar"/>
+
+
+<!-- ========== Component Declarations ==================================== -->
+
+
+  <!-- The name of this component -->
+  <property name="component.name"          value="chain"/>
+
+  <!-- The primary package name of this component -->
+  <property name="component.package"       value="org.apache.commons.chain"/>
+
+  <!-- The title of this component -->
+  <property name="component.title"         value="Chain Of Responsibility Pattern"/>
+
+  <!-- The current version number of this component -->
+  <property name="component.version"       value="0.1-dev"/>
+
+  <!-- The base directory for compilation targets -->
+  <property name="build.home"              value="target"/>
+
+  <!-- The base directory for component configuration files -->
+  <property name="conf.home"               value="src/conf"/>
+
+  <!-- The base directory for distribution targets -->
+  <property name="dist.home"               value="dist"/>
+
+  <!-- The base directory for component sources -->
+  <property name="source.home"             value="src/java"/>
+
+  <!-- The base directory for unit test sources -->
+  <property name="test.home"               value="src/test"/>
+
+
+<!-- ========== Compiler Defaults ========================================= -->
+
+
+  <!-- Should Java compilations set the 'debug' compiler option? -->
+  <property name="compile.debug"           value="true"/>
+
+  <!-- Should Java compilations set the 'deprecation' compiler option? -->
+  <property name="compile.deprecation"     value="false"/>
+
+  <!-- Should Java compilations set the 'optimize' compiler option? -->
+  <property name="compile.optimize"        value="true"/>
+
+  <!-- Construct compile classpath -->
+  <path id="compile.classpath">
+    <pathelement location="${build.home}/classes"/>
+    <pathelement location="${commons-beanutils.jar}"/>
+    <pathelement location="${commons-collections.jar}"/>
+    <pathelement location="${commons-digester.jar}"/>
+    <pathelement location="${commons-logging.jar}"/>
+    <pathelement location="${jsf-api.jar}"/>
+    <pathelement location="${portlet-api.jar}"/>
+    <pathelement location="${servlet-api.jar}"/>
+  </path>
+
+
+<!-- ========== Test Execution Defaults =================================== -->
+
+
+  <!-- Construct unit test classpath -->
+  <path id="test.classpath">
+    <pathelement location="${build.home}/classes"/>
+    <pathelement location="${build.home}/tests"/>
+    <pathelement location="${commons-beanutils.jar}"/>
+    <pathelement location="${commons-collections.jar}"/>
+    <pathelement location="${commons-digester.jar}"/>
+    <pathelement location="${commons-logging.jar}"/>
+    <pathelement location="${junit.jar}"/>
+    <pathelement location="${jsf-api.jar}"/>
+    <pathelement location="${portlet-api.jar}"/>
+    <pathelement location="${servlet-api.jar}"/>
+  </path>
+
+  <!-- Should all tests fail if one does? -->
+  <property name="test.failonerror"        value="true"/>
+
+  <!-- The test runner to execute -->
+  <property name="test.runner"             value="junit.textui.TestRunner"/>
+
+
+<!-- ========== Executable Targets ======================================== -->
+
+
+  <target name="flags">
+    <available property="digester.present" file="${commons-digester.jar}"/>
+    <available property="faces.present"    file="${jsf-api.jar}"/>
+    <available property="portlet.present"  file="${portlet-api.jar}"/>
+    <available property="servlet.present"  file="${servlet-api.jar}"/>
+  </target>
+
+
+  <target name="init" depends="flags"
+   description="Initialize and evaluate conditionals">
+    <echo message="-------- ${component.name} ${component.version} --------"/>
+    <echo message="digester.present =      ${digester.present}"/>
+    <echo message="faces.present =         ${faces.present}"/>
+    <echo message="portlet.present =       ${portlet.present}"/>
+    <echo message="servlet.present =       ${servlet.present}"/>
+    <filter  token="name"                  value="${component.name}"/>
+    <filter  token="package"               value="${component.package}"/>
+    <filter  token="version"               value="${component.version}"/>
+  </target>
+
+
+  <target name="prepare" depends="init"
+   description="Prepare build directory">
+    <mkdir dir="${build.home}"/>
+    <mkdir dir="${build.home}/classes"/>
+    <mkdir dir="${build.home}/conf"/>
+    <mkdir dir="${build.home}/tests"/>
+  </target>
+
+
+  <target name="static" depends="prepare"
+   description="Copy static files to build directory">
+    <tstamp/>
+    <copy  todir="${build.home}/conf" filtering="on">
+      <fileset dir="${conf.home}" includes="*.MF"/>
+    </copy>
+  </target>
+
+
+  <target name="compile" depends="static"
+   description="Compile shareable components">
+    <javac      srcdir="${source.home}"
+               destdir="${build.home}/classes"
+                 debug="${compile.debug}"
+           deprecation="${compile.deprecation}"
+              optimize="${compile.optimize}">
+      <classpath refid="compile.classpath"/>
+      <exclude    name="org/apache/commons/chain/web/faces/*.java"
+                unless="faces.present"/>
+      <exclude    name="org/apache/commons/chain/web/portet/*.java"
+                unless="portlet.present"/>
+      <exclude    name="org/apache/commons/chain/web/Servlet*.java"
+                unless="servlet.present"/>
+      <exclude    name="org/apache.commons/chain/config/*.java"
+                unless="digester.present"/>
+    </javac>
+    <copy    todir="${build.home}/classes" filtering="on">
+      <fileset dir="${source.home}" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+
+  <target name="compile.tests" depends="compile"
+   description="Compile unit test cases">
+    <javac      srcdir="${test.home}"
+               destdir="${build.home}/tests"
+                 debug="${compile.debug}"
+           deprecation="${compile.deprecation}"
+              optimize="${compile.optimize}">
+      <classpath refid="test.classpath"/>
+      <exclude    name="org/apache/commons/chain/web/*Faces*.java"
+                unless="faces.present"/>
+      <exclude    name="org/apache/commons/chain/web/*Portlet*.java"
+                unless="portlet.present"/>
+      <exclude    name="org/apache/commons/chain/web/*Http*.java"
+                unless="servlet.present"/>
+      <exclude    name="org/apache/commons/chain/web/*Servlet*.java"
+                unless="servlet.present"/>
+      <exclude    name="org/apache.commons/chain/config/*.java"
+                unless="digester.present"/>
+    </javac>
+    <copy    todir="${build.home}/tests" filtering="on">
+      <fileset dir="${test.home}" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+
+  <target name="clean"
+   description="Clean build and distribution directories">
+    <delete    dir="${build.home}"/>
+    <delete    dir="${dist.home}"/>
+  </target>
+
+
+  <target name="all" depends="clean,compile"
+   description="Clean and compile all components"/>
+
+
+  <target name="javadoc" depends="compile"
+   description="Create component Javadoc documentation">
+    <mkdir      dir="${dist.home}"/>
+    <mkdir      dir="${dist.home}/docs"/>
+    <mkdir      dir="${dist.home}/docs/api"/>
+    <javadoc sourcepath="${source.home}"
+                destdir="${dist.home}/docs/api"
+           packagenames="org.apache.commons.*"
+                 author="true"
+                package="true"
+                version="true"
+               overview="src/java/overview.html"
+               doctitle="&lt;h1&gt;${component.title} (Version ${component.version})&lt;/h1&gt;"
+            windowtitle="${component.title} (Version ${component.version})"
+                 bottom="Copyright (c) 2001-2003 - Apache Software Foundation">
+      <classpath refid="compile.classpath"/>
+    </javadoc>
+  </target>
+
+
+  <target name="dist" depends="javadoc"
+   description="Create binary distribution">
+    <mkdir      dir="${dist.home}"/>
+    <copy      file="build.properties.sample"
+              todir="${dist.home}"/>
+    <copy      file="build.xml"
+              todir="${dist.home}"/>
+    <copy      file="LICENSE.txt"
+              todir="${dist.home}"/>
+    <copy      file="RELEASE-NOTES.txt"
+              todir="${dist.home}"/>
+    <mkdir      dir="${build.home}/classes/META-INF"/>
+    <copy      file="LICENSE.txt"
+             tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
+    <jar    jarfile="${dist.home}/commons-${component.name}.jar"
+            basedir="${build.home}/classes"
+           manifest="${build.home}/conf/MANIFEST.MF"/>
+    <mkdir      dir="${dist.home}/src"/>
+    <copy     todir="${dist.home}/src">
+      <fileset  dir="src" excludes="**CVS**"/>
+    </copy>
+  </target>
+
+
+  <target name="install-jar" depends="dist"
+   description="--> Installs jar file in ${lib.repo}">
+    <copy todir="${lib.repo}" filtering="no">
+      <fileset dir="${dist.home}">
+        <include name="commons-${component.name}.jar"/>
+      </fileset>
+    </copy>
+  </target>
+
+
+<!-- ========== Unit Test Targets ========================================= -->
+
+
+  <target name="test"  depends="compile.tests"
+   description="Run all unit test cases">
+
+    <junit printsummary="yes" fork="yes"
+          haltonfailure="yes" haltonerror="yes">
+
+      <classpath refid="test.classpath"/>
+      <formatter type="plain" usefile="false"/>
+
+      <!-- org.apache.commons.chain.config tests -->
+      <batchtest>
+        <fileset    dir="${build.home}/tests"
+               includes="org/apache/commons/chain/config/*TestCase.class">
+          <exclude name="org/apache/commons/chain/config/*.class"
+                 unless="digester.present"/>
+        </fileset>
+      </batchtest>
+
+      <!-- org.apache.commons.chain.impl tests -->
+      <batchtest>
+        <fileset    dir="${build.home}/tests"
+               includes="org/apache/commons/chain/impl/*TestCase.class"/>
+      </batchtest>
+
+      <!-- org.apache.commons.chain.web tests -->
+      <batchtest>
+        <fileset    dir="${build.home}/tests"
+               includes="org/apache/commons/chain/web/**/*TestCase.class">
+          <exclude name="org/apache/commons/chain/web/faces/*.class"
+                 unless="faces.present"/>
+          <exclude name="org/apache/commons/chain/web/portlet/*.class"
+                 unless="portlet.present"/>
+          <exclude name="org/apache/commons/chain/web/servlet/*.class"
+                 unless="servlet.present"/>
+        </fileset>
+      </batchtest>
+
+    </junit>
+
+  </target>
+
+
+</project>

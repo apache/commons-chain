@@ -1,0 +1,22 @@
+# The directory containing your binary distribution of JUnit, 
+# version 3.8.1 or later
+junit.home = /usr/local/junit3.8.1
+
+# The pathname of the "junit.jar" JAR file
+junit.jar = ${junit.home}/junit.jar
+
+# (OPTIONAL) The pathname of the "faces-api.jar" file
+jsf-api.jar=${user.home}/jwsdp-1.2/jsf/lib/jsf-api.jar
+
+# (OPTIONAL) The pathname of the "portlet-api.jar" file
+portlet-api.jar=../../jakarta-jetspeed-2/portlet-api/target/portlet-api-0.6.6.jar
+
+# (OPTIONAL) The pathname of the "servlet-api.jar" file
+# Version 2.2 or later required, version 2.4 is supported
+servlet-api.jar = /usr/local/jwsdp-1.2/common/lib/servlet-api.jar
+
+# (OPTIONAL) The pathname of the "commons-digester.jar" file
+# required only if you are using the org.apache.commons.chain.config package
+commons-digester.jar = ../../jakarta-commons/digester/dist/commons-digester.jar
+
+
