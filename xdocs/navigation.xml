@@ -20,6 +20,7 @@
   <body>
     <menu name="Commons&#xA0;Chain">
       <item name="Overview"      href="/index.html"/>
+      <item name="Cookbook"      href="/cookbook.html"/>
       <item name="Javadoc"       href="/apidocs/index.html"/>
       <item name="Mailing lists" href="/mail-lists.html"/>
       <item name="Team"          href="/team-list.html"/>
