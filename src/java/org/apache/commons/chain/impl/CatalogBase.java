@@ -17,6 +17,7 @@ package org.apache.commons.chain.impl;
 
 
 import java.util.HashMap;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import org.apache.commons.chain.Catalog;
@@ -28,9 +29,11 @@ import org.apache.commons.chain.Command;
  * <p>Simple in-memory implementation of {@link Catalog}.  This class can
  * also be used as the basis for more advanced implementations.</p>
  *
+ * <p>This implementation is thread-safe.</p>
+ *
  * @author Craig R. McClanahan
  * @author Matthew J. Sgarlata
- * @version $Revision: 1.10 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision: 1.11 $ $Date: 2004/11/17 07:59:18 $
  */
 
 public class CatalogBase implements Catalog {
@@ -42,7 +45,7 @@ public class CatalogBase implements Catalog {
     /**
      * <p>The map of named {@link Command}s, keyed by name.
      */
-    protected Map commands = new HashMap();
+    protected Map commands = Collections.synchronizedMap(new HashMap());
 
 
     // --------------------------------------------------------- Public Methods
