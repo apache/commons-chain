@@ -47,6 +47,10 @@ import org.apache.commons.digester.RuleSetBase;
  *     representing the addition of a {@link Command}.  An implementation
  *     class name must be provided on the attribute named by the
  *     <code>classAttribute</code> property.  [command]</li>
+ * <li><strong>defineElement</strong> -- Name of the XML element
+ *     that associates the element specified by the <code>nameAttribute</code>
+ *     attributes with a {@link Command} or {@link Chain} implementation class
+ *     named by the <code>classAttribute</code> attribute.  [define]</li>
  * <li><strong>nameAttribute</strong> -- Attribute on an outermost chain or
  *     command element that will be used to register this command with the
  *     associated {@link Catalog} instance on the stack.  [name]</li>
@@ -56,7 +60,7 @@ import org.apache.commons.digester.RuleSetBase;
  * </ul>
  * 
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/07/09 00:03:25 $
+ * @version $Revision: 1.7 $ $Date: 2004/07/16 19:06:01 $
  */
 
 public class ConfigRuleSet extends RuleSetBase {
@@ -69,6 +73,7 @@ public class ConfigRuleSet extends RuleSetBase {
     private String chainElement = "chain";
     private String classAttribute = "className";
     private String commandElement = "command";
+    private String defineElement = "define";
     private String nameAttribute = "name";
 
 
@@ -148,6 +153,24 @@ public class ConfigRuleSet extends RuleSetBase {
 
 
     /**
+     * <p>Return the element name of a define element.</p>
+     */
+    public String getDefineElement() {
+        return (this.defineElement);
+    }
+
+
+    /**
+     * <p>Set the element name of a define element.</p>
+     *
+     * @param defineElement The new element name
+     */
+    public void setDefineElement(String defineElement) {
+        this.defineElement = defineElement;
+    }
+
+
+    /**
      * <p>Return the attribute name of a name attribute.</p>
      */
     public String getNameAttribute() {
@@ -194,6 +217,11 @@ public class ConfigRuleSet extends RuleSetBase {
         digester.addSetProperties("*/" + getCommandElement());
         digester.addRule("*/" + getCommandElement(),
                          new ConfigRegisterRule(nameAttribute));
+
+        // Add rules for a define element
+        digester.addRule("*/" + getDefineElement(),
+                         new ConfigDefineRule(getNameAttribute(),
+                                              getClassAttribute()));
 
     }
 
