@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Catalog.java,v 1.4 2003/10/01 12:31:50 husted Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/01 12:31:50 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Catalog.java,v 1.5 2003/10/22 06:21:24 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/22 06:21:24 $
  *
 /* ====================================================================
  * The Apache Software License, Version 1.1
@@ -73,7 +73,7 @@ import java.util.Iterator;
  * that can be selected and executed based on environmental conditions.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/10/01 12:31:50 $
+ * @version $Revision: 1.5 $ $Date: 2003/10/22 06:21:24 $
  */
 
 public interface Catalog {
@@ -83,7 +83,7 @@ public interface Catalog {
      * <p>A default context attribute for storing a default {@link Catalog},
      * provided as a convenience only.</p>
      */
-    public final static String CATALOG_KEY = "org.apache.commons.chain.CATALOG";
+    public static final String CATALOG_KEY = "org.apache.commons.chain.CATALOG";
 
 
     /**
@@ -95,7 +95,7 @@ public interface Catalog {
      * @param command {@link Command} or {@link Chain} to be returned
      *  for later lookups on this name
      */
-    public void addCommand(String name, Command command);
+    void addCommand(String name, Command command);
 
 
     /**
@@ -105,7 +105,7 @@ public interface Catalog {
      * @param name Name for which a {@link Command} or {@link Chain}
      *  should be retrieved
      */
-    public Command getCommand(String name);
+    Command getCommand(String name);
 
 
 
@@ -114,7 +114,7 @@ public interface Catalog {
      * known to this {@link Catalog}.  If there are no known commands,
      * an empty Iterator is returned.</p>
      */
-    public Iterator getNames();
+    Iterator getNames();
 
 
 }

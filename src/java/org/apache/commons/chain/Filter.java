@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Filter.java,v 1.3 2003/10/01 12:32:03 husted Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/01 12:32:03 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Filter.java,v 1.4 2003/10/22 06:21:24 martinc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/10/22 06:21:24 $
  *
 /* ====================================================================
  * The Apache Software License, Version 1.1
@@ -82,7 +82,7 @@ package org.apache.commons.chain;
  * method, which is guaranteed to be called by the owning {@link Chain}.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2003/10/01 12:32:03 $
+ * @version $Revision: 1.4 $ $Date: 2003/10/22 06:21:24 $
  */
 
 public interface Filter extends Command {
@@ -106,7 +106,7 @@ public interface Filter extends Command {
      *  method (and therefore need not be rethrown), return <code>true</code>;
      *  otherwise return <code>false</code>
      */ 
-   public boolean postprocess(Context context, Exception exception);
+   boolean postprocess(Context context, Exception exception);
 
 
 }

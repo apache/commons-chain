@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Chain.java,v 1.4 2003/10/01 12:31:50 husted Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/01 12:31:50 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Chain.java,v 1.5 2003/10/22 06:21:24 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/22 06:21:24 $
  *
 /* ====================================================================
  * The Apache Software License, Version 1.1
@@ -93,7 +93,7 @@ package org.apache.commons.chain;
  * After that, the configuration of the {@link Chain} is frozen.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/10/01 12:31:50 $
+ * @version $Revision: 1.5 $ $Date: 2003/10/22 06:21:24 $
  */
 
 public interface Chain extends Command {
@@ -113,7 +113,7 @@ public interface Chain extends Command {
      * @exception IllegalStateException if this {@link Chain} has already
      *  been executed at least once, so no further configuration is allowed
      */
-    public void addCommand(Command command);
+    void addCommand(Command command);
 
 
     /**
@@ -157,7 +157,7 @@ public interface Chain extends Command {
      *  of this {@link Context} should be delegated to a subsequent
      *  {@link Command} in an enclosing {@link Chain}
      */
-    public boolean execute(Context context) throws Exception;
+    boolean execute(Context context) throws Exception;
 
 
 }
