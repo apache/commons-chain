@@ -78,7 +78,7 @@
       <groupId>portlet-api</groupId>
       <artifactId>portlet-api</artifactId>
       <version>1.0</version>
-      <url>http://jakarta.apache.org/pluto</url>
+      <url>http://portals.apache.org/pluto</url>
     </dependency>
     <dependency>
       <groupId>jsf</groupId>
