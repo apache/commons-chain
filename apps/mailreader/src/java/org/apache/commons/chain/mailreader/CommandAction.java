@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * <p>
- * Create ActionContextBase pass to Command corresponding to the ActionForm name.
+ * Create ActionHelperBase pass to Command corresponding to the ActionForm name.
  * On return, analyze Context, returning values in servlet contexts as
- * appropriate. The ActionContextBase is also exposed in the request under
+ * appropriate. The ActionHelperBase is also exposed in the request under
  * the key "context".
  * </p>
  * <p>
