@@ -3,7 +3,7 @@
 
 <!--
         "Chain of Responsibility" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.4 2003/09/30 01:44:44 husted Exp $
+        $Id: build.xml,v 1.5 2003/10/01 04:23:00 craigmcc Exp $
 -->
 
 
@@ -94,6 +94,8 @@
   <!-- Construct compile classpath -->
   <path id="compile.classpath">
     <pathelement location="${build.home}/classes"/>
+    <pathelement location="${commons-beanutils.jar}"/>
+    <pathelement location="${commons-collections.jar}"/>
     <pathelement location="${commons-digester.jar}"/>
     <pathelement location="${commons-logging.jar}"/>
     <pathelement location="${jsf-api.jar}"/>
@@ -109,9 +111,12 @@
   <path id="test.classpath">
     <pathelement location="${build.home}/classes"/>
     <pathelement location="${build.home}/tests"/>
+    <pathelement location="${commons-beanutils.jar}"/>
+    <pathelement location="${commons-collections.jar}"/>
     <pathelement location="${commons-digester.jar}"/>
-    <pathelement location="${junit.jar}"/>
+    <pathelement location="${commons-logging.jar}"/>
     <pathelement location="${jsf-api.jar}"/>
+    <pathelement location="${junit.jar}"/>
     <pathelement location="${portlet-api.jar}"/>
     <pathelement location="${servlet-api.jar}"/>
   </path>
@@ -127,6 +132,10 @@
 
 
   <target name="flags">
+    <available property="beanutils.present"
+                                           file="${commons-beanutils.jar}"/>
+    <available property="collections.present"
+                                           file="${commons-collections.jar}"/>
     <available property="digester.present" file="${commons-digester.jar}"/>
     <available property="faces.present"    file="${jsf-api.jar}"/>
     <available property="logging.present"  file="${commons-logging.jar}"/>
@@ -140,6 +149,8 @@
   <target name="init" depends="flags"
    description="Initialize and evaluate conditionals">
     <echo message="-------- ${component.name} ${component.version} --------"/>
+    <echo message="beanutils.present =     ${beanutils.present}"/>
+    <echo message="collections.present =   ${collections.present}"/>
     <echo message="digester.present =      ${digester.present}"/>
     <echo message="faces.present =         ${faces.present}"/>
     <echo message="logging.present =       ${logging.present}"/>
@@ -178,20 +189,38 @@
            deprecation="${compile.deprecation}"
               optimize="${compile.optimize}">
       <classpath refid="compile.classpath"/>
+      <exclude    name="org/apache/commons/chain/config/*.java"
+                unless="beanutils.present"/>
+      <exclude    name="org/apache/commons/chain/config/*.java"
+                unless="collections.present"/>
+      <exclude    name="org/apache/commons/chain/config/*.java"
+                unless="digester.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainListener.java"
+                unless="beanutils.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainListener.java"
+                unless="collections.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainListener.java"
+                unless="digester.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainListener.java"
+                unless="logging.present"/>
       <exclude    name="org/apache/commons/chain/web/ChainListener.java"
                 unless="servlet23.present"/>
       <exclude    name="org/apache/commons/chain/web/ChainServlet.java"
+                unless="beanutils.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainServlet.java"
+                unless="collections.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainServlet.java"
+                unless="digester.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainServlet.java"
                 unless="servlet.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainServlet.java"
+                unless="logging.present"/>
       <exclude    name="org/apache/commons/chain/web/faces/*.java"
                 unless="faces.present"/>
       <exclude    name="org/apache/commons/chain/web/portlet/*.java"
                 unless="portlet.present"/>
       <exclude    name="org/apache/commons/chain/web/servlet/*.java"
                 unless="servlet.present"/>
-     <exclude    name="org/apache/commons/chain/web/servlet/config/*.java"
-                unless="logging.present"/>
-      <exclude    name="org/apache/commons/chain/config/*.java"
-                unless="digester.present"/>
     </javac>
     <copy    todir="${build.home}/classes" filtering="on">
       <fileset dir="${source.home}" excludes="**/*.java"/>

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/config/Attic/ChainServlet.java,v 1.1 2003/09/29 15:34:45 husted Exp $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainServlet.java,v 1.1 2003/10/01 04:23:00 craigmcc Exp $
  * $Revision: 1.1 $
- * $Date: 2003/09/29 15:34:45 $
+ * $Date: 2003/10/01 04:23:00 $
  *
  * ====================================================================
  *
@@ -58,7 +58,7 @@
  * <http://www.apache.org/>.
  *
  */
-package org.apache.commons.chain.web.servlet.config;
+package org.apache.commons.chain.web;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -102,6 +102,10 @@ import org.xml.sax.InputSource;
  * context attribute to which the Catalog should be saved, the two catalogs will
  * be <em>merged</em> as described here. (TODO create this documentation and
  * link it here)</p>
+ *
+ * <p>This class runs on Servlet 2.2 or later.  If you are running on a
+ * Servlet 2.3 or later system, you should also consider using
+ * {@link ChainListener} to initialize your {@link Catalog}.</p>
  *
  * @author Matthew J. Sgarlata
  * @author Craig R. McClanahan
