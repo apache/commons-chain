@@ -357,7 +357,7 @@ import org.apache.commons.chain.Context;
 
 public class ProfileCheck implements Command {
 
-    public boolean newProfile(Context context) { return new Profile(); }
+    public Profile newProfile(Context context) { return new Profile(); }
 
     public boolean execute(Context context) throws Exception {
         Object profile = context.get(Profile.PROFILE_KEY);
