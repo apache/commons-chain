@@ -39,7 +39,7 @@ import org.apache.commons.chain.Filter;
  * <code>IllegalArgumentException</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.11 $ $Date: 2005/01/08 18:02:28 $
+ * @version $Revision: 1.11 $ $Date$
  */
 
 public class LookupCommand implements Filter {
@@ -154,25 +154,71 @@ public class LookupCommand implements Filter {
 
     }
 
+    private boolean ignoreExecuteResult = false;
 
+    /**
+     * <p>Return <code>true</code> if this command should ignore
+     * the return value from executing the looked-up command.  
+     * Defaults to <code>false</code>, which means that the return result 
+     * of executing this lookup will be whatever is returned from that
+     * command.</p>
+     */
+    public boolean isIgnoreExecuteResult() {
+        return ignoreExecuteResult;
+    }
 
+    /**
+     * <p>Set the rules for whether or not this class will ignore or
+     * pass through the value returned from executing the looked up 
+     * command.</p>
+     * <p>If you are looking up a chain which may be "aborted" and
+     * you do not want this class to stop chain processing, then this 
+     * value should be set to <code>true</code></p>
+     * @param ignoreExecuteResult
+     */
+    public void setIgnoreExecuteResult(boolean ignoreReturn) {
+        this.ignoreExecuteResult = ignoreReturn;
+    }
+
+    private boolean ignorePostprocessResult = false;
+    
+    public boolean isIgnorePostprocessResult() {
+        return ignorePostprocessResult;
+    }
+    public void setIgnorePostprocessResult(boolean ignorePostprocessResult) {
+        this.ignorePostprocessResult = ignorePostprocessResult;
+    }
     // ---------------------------------------------------------- Filter Methods
 
 
     /**
-     * <p>Look up the specified command, and (if found) execute it.</p>
+     * <p>Look up the specified command, and (if found) execute it.
+     * Unless <code>ignoreExecuteResult</code> is set to <code>true</code>, 
+     * return the result of executing the found command.  If no command
+     * is found, return <code>false</code>, unless the <code>optional</code>
+     * property is <code>false</code>, in which case an <code>IllegalArgumentException</code>
+     * will be thrown.  
+     * </p>
      *
      * @param context The context for this request
      *
      * @exception IllegalArgumentException if no such {@link Command}
      *  can be found and the <code>optional</code> property is set
      *  to <code>false</code>
+     * @return the result of executing the looked-up command, or 
+     * <code>false</code> if no command is found or if the command
+     * is found but the <code>ignoreExecuteResult</code> property of this
+     * instance is <code>true</code>
      */
     public boolean execute(Context context) throws Exception {
 
         Command command = getCommand(context);
         if (command != null) {
-            return (command.execute(context));
+            boolean result = (command.execute(context));
+            if (isIgnoreExecuteResult()) {
+                return false;
+            }
+            return result;
         } else {
             return (false);
         }
@@ -188,13 +234,20 @@ public class LookupCommand implements Filter {
      * @param exception Any <code>Exception</code> thrown by command execution
      *
      * @exception Exception if thrown by the <code>postprocess()</code> method
+     * @return the result of executing the <code>postprocess</code> method
+     * of the looked-up command, unless <code>ignorePostprocessResult</code> is 
+     * <code>true</code>.  If no command is found, return <code>false</code>,
+     * unless the <code>optional</code> property is <code>false</code>, in which 
+     * case <code>IllegalArgumentException</code> will be thrown.
      */
     public boolean postprocess(Context context, Exception exception) {
 
         Command command = getCommand(context);
         if (command != null) {
             if (command instanceof Filter) {
-                return (((Filter) command).postprocess(context, exception));
+                boolean result = (((Filter) command).postprocess(context, exception));
+                if (isIgnorePostprocessResult())  return false;
+                return result;
             }
         }
         return (false);

@@ -180,6 +180,23 @@ public class LookupCommandTestCase extends TestCase {
         checkExecuteLog("2b1/2b2/2b3");
     }
 
+    // Test ability to lookup and execute single non-delegating command, ignoring its result
+    public void testExecuteMethodLookup_3a() {
+
+        // use default catalog
+        catalog.addCommand("foo", new NonDelegatingCommand("3a"));
+        command.setIgnoreExecuteResult(true);
+        command.setName("foo");
+
+        try {
+            assertFalse("Command should return false",
+                       command.execute(context));
+        } catch (Exception e) {
+            fail("Threw exception: " + e);
+        }
+        checkExecuteLog("3a");
+    }
+
 
     // -------------------------------------------------------- Support Methods
 
