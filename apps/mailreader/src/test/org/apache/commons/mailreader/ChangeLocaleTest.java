@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/test/org/apache/commons/mailreader/ChangeLocaleTest.java,v 1.2 2004/03/29 02:34:19 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2004/03/29 02:34:19 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/test/org/apache/commons/mailreader/ChangeLocaleTest.java,v 1.3 2004/04/08 23:26:07 husted Exp $
+ * $Revision: 1.3 $
+ * $Date: 2004/04/08 23:26:07 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.mailreader.MailReader;
-import org.apache.commons.chain.mailreader.MailReaderBase;
 import org.apache.commons.chain.mailreader.commands.LocaleChange;
 import org.apache.commons.chain.impl.ContextBase;
 
@@ -47,19 +46,18 @@ public class ChangeLocaleTest extends TestCase {
         Locale expected = Locale.CANADA_FRENCH;
 
         Context input = new ContextBase();
-        input.put(MailReader.PN_COUNTRY,"CA");
-        input.put(MailReader.PN_LANGUAGE,"FR");
+        input.put(MailReader.PN_COUNTRY, "CA");
+        input.put(MailReader.PN_LANGUAGE, "FR");
 
-        MailReader context = new MailReaderBase(original,input,null);
+        MailReader context = new MailReader(original, input, null);
 
         try {
             command.execute(context);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             fail(e.getMessage());
         }
 
-        assertEquals("Unexpected Locale",expected,context.getLocale());
+        assertEquals("Unexpected Locale", expected, context.getLocale());
 
     }
 
