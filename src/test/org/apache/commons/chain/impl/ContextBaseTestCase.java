@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/ContextBaseTestCase.java,v 1.4 2003/10/12 09:11:53 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/12 09:11:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/ContextBaseTestCase.java,v 1.5 2003/10/21 15:55:10 martinc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/21 15:55:10 $
  *
  * ====================================================================
  *
@@ -62,13 +62,13 @@
 package org.apache.commons.chain.impl;
 
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -80,7 +80,7 @@ import org.apache.commons.chain.Context;
  * <p>Test case for the <code>ContextBase</code> class.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/10/12 09:11:53 $
+ * @version $Revision: 1.5 $ $Date: 2003/10/21 15:55:10 $
  */
 
 public class ContextBaseTestCase extends TestCase {
@@ -150,7 +150,7 @@ public class ContextBaseTestCase extends TestCase {
         assertTrue("Returned foo type", value instanceof String);
         assertEquals("Returned foo value", "This is foo",
                      (String) value);
-        
+
         context.put("bar", "This is bar");
         checkAttributeCount(2);
         value = context.get("bar");
@@ -158,7 +158,7 @@ public class ContextBaseTestCase extends TestCase {
         assertTrue("Returned bar type", value instanceof String);
         assertEquals("Returned bar value", "This is bar",
                      (String) value);
-        
+
         context.put("baz", "This is baz");
         checkAttributeCount(3);
         value = context.get("baz");
@@ -166,7 +166,7 @@ public class ContextBaseTestCase extends TestCase {
         assertTrue("Returned baz type", value instanceof String);
         assertEquals("Returned baz value", "This is baz",
                      (String) value);
-        
+
         context.put("baz", "This is new baz");
         checkAttributeCount(3); // Replaced, not added
         value = context.get("baz");
@@ -174,7 +174,7 @@ public class ContextBaseTestCase extends TestCase {
         assertTrue("Returned baz type", value instanceof String);
         assertEquals("Returned baz value", "This is new baz",
                      (String) value);
-        
+
         context.remove("bar");
         checkAttributeCount(2);
         assertNull("Did not return bar",
@@ -234,7 +234,7 @@ public class ContextBaseTestCase extends TestCase {
         assertTrue(!context.equals(other));
         assertTrue(context.hashCode() != other.hashCode());
 
-    }        
+    }
 
 
     // Test keySet()
