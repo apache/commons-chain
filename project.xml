@@ -109,8 +109,17 @@
     <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
     <unitTest>
       <includes>
-        <include>**/*Test.java</include>
+        <include>**/*TestCase.java</include>
       </includes>
     </unitTest>
+    <resources>
+      <resource>
+        <directory>${pom.build.unitTestSourceDirectory}</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+    </resources>
+ 
   </build>
 </project>
