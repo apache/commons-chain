@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/CatalogBase.java,v 1.3 2003/08/31 21:50:53 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2003/08/31 21:50:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/CatalogBase.java,v 1.4 2003/09/29 15:44:40 husted Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/09/29 15:44:40 $
  *
  * ====================================================================
  *
@@ -75,7 +75,8 @@ import org.apache.commons.chain.Command;
  * also be used as the basis for more advanced implementations.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2003/08/31 21:50:53 $
+ * @author Matthew J. Sgarlata
+ * @version $Revision: 1.4 $ $Date: 2003/09/29 15:44:40 $
  */
 
 public class CatalogBase implements Catalog {
@@ -93,13 +94,21 @@ public class CatalogBase implements Catalog {
     // --------------------------------------------------------- Public Methods
 
 
+    /**
+     * Adds a Command to this Catalog.
+     * @param name the name by which the Command can be identified
+     * @param command the Command to add to this Catalog
+     */
     public void addCommand(String name, Command command) {
 
         commands.put(name, command);
 
     }
 
-
+ 	/**
+     * Retrieves the Command identified by the given name from this Catalog.
+ 	 * @return the Command identified by the given name from this Catalog
+ 	 */
     public Command getCommand(String name) {
 
         return ((Command) commands.get(name));
@@ -107,12 +116,37 @@ public class CatalogBase implements Catalog {
     }
 
 
-
+ 	/**
+ 	 * Returns an Iterator which can be used to iterate through all the Commands
+ 	 * in the Catalog.
+ 	 * @return an Iterator which can be used to iterate through all the Commands
+ 	 * in the Catalog
+ 	 */
     public Iterator getNames() {
 
         return (commands.keySet().iterator());
 
     }
 
+ 	/**
+ 	 * Converts this Catalog to a String.  Useful for debugging purposes.
+ 	 * @return a representation of this catalog as a String
+ 	 */
+ 	public String toString() {
 
+ 		Iterator names = getNames();
+ 		StringBuffer str =
+ 			new StringBuffer("[" + this.getClass().getName() + ": ");
+
+ 		while (names.hasNext()) {
+ 			str.append(names.next());
+ 			if (names.hasNext()) {
+  			str.append(", ");
+ 			}
+ 		}
+ 		str.append("]");
+
+ 		return str.toString();
+
+ 	}
 }
