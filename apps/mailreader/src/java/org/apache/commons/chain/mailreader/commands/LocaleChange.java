@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/LocaleChange.java,v 1.2 2004/03/29 02:34:19 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2004/03/29 02:34:19 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/LocaleChange.java,v 1.3 2004/06/01 00:48:41 husted Exp $
+ * $Revision: 1.3 $
+ * $Date: 2004/06/01 00:48:41 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -30,10 +30,16 @@ import java.util.Locale;
  */
 public class LocaleChange implements Command {
 
+    /**
+     * Return true if null or empty.
+     * @param string
+     * @return true if null or empty
+     */
     static boolean isBlank(String string) {
         return ((string == null) || (string.trim().length() == 0));
     }
 
+    // See interface for Javadoc
     public boolean execute(Context context) throws Exception {
 
         MailReader app = (MailReader) context;

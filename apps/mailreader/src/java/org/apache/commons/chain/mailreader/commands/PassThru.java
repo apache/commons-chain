@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/PassThru.java,v 1.1 2004/03/25 12:39:49 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/25 12:39:49 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/PassThru.java,v 1.2 2004/06/01 00:48:41 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/06/01 00:48:41 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -24,10 +24,11 @@ import org.apache.commons.chain.Context;
 
 /**
  * Dummy command that just returns false.
- * @version $Revision: 1.1 $ $Date: 2004/03/25 12:39:49 $
+ * @version $Revision: 1.2 $ $Date: 2004/06/01 00:48:41 $
  */
 public class PassThru implements Command {
 
+    // See interface for Javadoc
     public boolean execute(Context context) throws Exception {
 
         return false;
