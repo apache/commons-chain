@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelperBase.java,v 1.3 2004/03/28 03:20:55 husted Exp $
- * $Revision: 1.3 $
- * $Date: 2004/03/28 03:20:55 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/Attic/ActionHelperBase.java,v 1.1 2004/03/29 00:52:09 husted Exp $
+ * $Revision: 1.1 $
+ * $Date: 2004/03/29 00:52:09 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain.mailreader;
+package org.apache.commons.chain.mailreader.struts;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.chain.Catalog;
@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.util.Locale;
+
 /**
  * <p>
  * NOTE -- This implementation was designed to work with the
@@ -227,7 +228,7 @@ public class ActionHelperBase implements ActionHelper {
     // See ActionHelper interface for JavaDoc
     public void setLocale(Locale locale) {
 
-        session.setAttribute(Globals.LOCALE_KEY,locale);
+        session.setAttribute(Globals.LOCALE_KEY, locale);
 
     }
 
@@ -493,7 +494,7 @@ public class ActionHelperBase implements ActionHelper {
     // See ActionHelper interface for JavaDoc
     public Catalog getCatalog() {
 
-        return (Catalog) application.getAttribute(Catalog.CATALOG_KEY);
+        return (Catalog) application.getAttribute("catalog");
 
     }
 
@@ -502,15 +503,17 @@ public class ActionHelperBase implements ActionHelper {
         ActionMapping mapping = getMapping();
         String formScope = mapping.getScope();
         String name = mapping.getName();
-        if ("request".equals(formScope)) request.setAttribute(name,input);
-        else request.getSession().setAttribute(name,input);
+        if ("request".equals(formScope))
+            request.setAttribute(name, input);
+        else
+            request.getSession().setAttribute(name, input);
     }
 
     // See ActionHelper interface for JavaDoc
     public void setInputToForm(Context input) {
         ActionForm form = getActionForm();
         try {
-            BeanUtils.copyProperties(form,input);
+            BeanUtils.copyProperties(form, input);
         } catch (Throwable t) {
             // FIXME: Now what? Log and Throw?
         }

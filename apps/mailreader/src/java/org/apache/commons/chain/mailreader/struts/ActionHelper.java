@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelper.java,v 1.3 2004/03/28 03:20:55 husted Exp $
- * $Revision: 1.3 $
- * $Date: 2004/03/28 03:20:55 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/Attic/ActionHelper.java,v 1.1 2004/03/29 00:52:09 husted Exp $
+ * $Revision: 1.1 $
+ * $Date: 2004/03/29 00:52:09 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain.mailreader;
+package org.apache.commons.chain.mailreader.struts;
 
 
 import org.apache.commons.chain.Catalog;
@@ -171,7 +171,7 @@ public interface ActionHelper {
      * this mapping. If there is no ActionForm present, return <code>null</code>.
      * </p>
      */
-     public ActionForm getActionForm();
+    public ActionForm getActionForm();
 
 
     /**
@@ -290,7 +290,7 @@ public interface ActionHelper {
      * </p>
      * @param name Name given to local or global forward.
      */
-     public String getLink(String name);
+    public String getLink(String name);
 
 
     /**

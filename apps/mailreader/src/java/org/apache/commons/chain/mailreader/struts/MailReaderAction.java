@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/MailReaderAction.java,v 1.1 2004/03/28 03:20:55 husted Exp $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/MailReaderAction.java,v 1.1 2004/03/29 00:52:09 husted Exp $
  * $Revision: 1.1 $
- * $Date: 2004/03/28 03:20:55 $
+ * $Date: 2004/03/29 00:52:09 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -17,15 +17,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain.mailreader;
+package org.apache.commons.chain.mailreader.struts;
 
 import org.apache.commons.chain.Context;
-import org.apache.commons.chain.mailreader.commands.MailReaderBase;
+import org.apache.commons.chain.mailreader.ClientContext;
+import org.apache.commons.chain.mailreader.MailReaderBase;
 
 import java.util.Locale;
 
 /**
- * <p>Process Commands using a MailReader ClientContext.</p>
+ * <p>Process Commands using a {@link org.apache.commons.chain.mailreader.MailReader}
+ * {@link ClientContext}.</p>
  */
 public class MailReaderAction extends CommandAction {
 
@@ -34,7 +36,7 @@ public class MailReaderAction extends CommandAction {
 
         Locale locale = helper.getLocale();
         Context input = getInput(helper.getActionForm());
-        return new MailReaderBase(locale,input);
+        return new MailReaderBase(locale, input);
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ContextAction.java,v 1.1 2004/03/28 03:20:55 husted Exp $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/Attic/ContextAction.java,v 1.1 2004/03/29 00:52:09 husted Exp $
  * $Revision: 1.1 $
- * $Date: 2004/03/28 03:20:55 $
+ * $Date: 2004/03/29 00:52:09 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain.mailreader;
+package org.apache.commons.chain.mailreader.struts;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -29,8 +29,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * <p>
- * Create ActionContext from standard execute call and pass to a context
- * form of execute, to be extended by a subclass.
+ * Create ActionHelper from standard <code>execute</code> call
+ * and pass to a helper form of <code>execute</code>,
+ * to be extended by a subclass.
  * </p>
  */
 public abstract class ContextAction extends Action {
@@ -57,13 +58,28 @@ public abstract class ContextAction extends Action {
 
     /**
      * <p>
-     * Process the request represented by the ActionHelper, and return an
-     * ActionForward representing the resource that will create the corresonding
-     * response (or create the response directly and reutrn null), with provision
-     * for handling exceptions thrown by the business logic.
+     * Convenience method to return the Input forward.
+     * Assumes the InputForward option and input property is set.
+     * Otherwise, returns <code>null</code>.
+     * </p>
+     * @param helper Our ActionHelper
+     * @return a forward named "success" or null.
+     */
+    protected ActionForward findInput(ActionHelper helper) {
+        return helper.getMapping().getInputForward();
+    }
+
+
+    /**
+     * <p>
+     * Process the request represented by the {@link ActionHelper}, and return an
+     * {@link ActionForward} representing the resource that will create the
+     * corresonding response (or create the response directly and return null).
+     * Exception-handling can be managed here or through the Struts configuration,
+     * the Struts configuration being preferred.
      * </p>
      * @param helper The ActionHelper we are processing
-     * @exception Exception if the application business logic throws
+     * @exception java.lang.Exception if the application business logic throws
      *  an exception
      */
     public abstract ActionForward execute(ActionHelper helper) throws Exception;
@@ -71,15 +87,15 @@ public abstract class ContextAction extends Action {
 
     /**
      * <p>
-     * Create ActionHelper and return result of execute(ActionHelper).
-     * Subclasses are expected to implement the execute(ActionHelper)
-     * and provide the needed functionality there.
+     * Create {@link ActionHelper} and return result of <code>execute(ActionHelper)</code>.
+     * Concrete subclasses must implement <code>execute(ActionHelper)</code>.
+     * See {@link CommandAction} for an example.
      * </p>
      * @param mapping The ActionMapping used to select this instance
      * @param form The optional ActionForm bean for this request (if any)
      * @param request The HTTP request we are processing
      * @param response The HTTP response we are creating
-     * @exception Exception if the application business logic throws
+     * @exception java.lang.Exception if the application business logic throws
      *  an exception
      */
     public ActionForward execute(ActionMapping mapping,
@@ -87,7 +103,7 @@ public abstract class ContextAction extends Action {
                                  HttpServletRequest request,
                                  HttpServletResponse response) throws Exception {
 
-        ActionHelper helper = new ActionHelperBase(request,response);
+        ActionHelper helper = new ActionHelperBase(request, response);
         return execute(helper);
 
     }

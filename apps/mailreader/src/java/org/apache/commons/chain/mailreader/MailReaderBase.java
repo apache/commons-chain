@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/Attic/MailReaderBase.java,v 1.2 2004/03/28 03:20:56 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2004/03/28 03:20:56 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/MailReaderBase.java,v 1.1 2004/03/29 00:52:22 husted Exp $
+ * $Revision: 1.1 $
+ * $Date: 2004/03/29 00:52:22 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain.mailreader.commands;
+package org.apache.commons.chain.mailreader;
 
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ContextBase;

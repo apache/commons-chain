@@ -1,10 +1,11 @@
-package org.apache.commons.chain.mailreader;
+package org.apache.commons.chain.mailreader.struts;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ContextBase;
+import org.apache.commons.chain.mailreader.ClientContext;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -15,30 +16,21 @@ import java.util.Map;
 
 /**
  * <p>
- * Create ActionHelperBase pass to Command corresponding to the ActionForm name.
- * On return, analyze Context, returning values in servlet contexts as
- * appropriate. The ActionHelperBase is also exposed in the request under
- * the key "context".
- * </p>
- * <p>
- * The Struts ActionMapping should define exception handlers for any documented
- * exceptions thrown by a given Command object.
- * </p>
- * <p>
- * NOTE -- This class may be migrated to a later release of Struts
- * when support for Commons Chains is added.
+ * Create {@link ActionHelperBase} pass to{@link Command} corresponding to the
+ * ActionForm name. On return, analyze business {@link Context}, returning values
+ * in servlet contexts as appropriate.
  * </p>
  */
 public abstract class CommandAction extends ContextAction {
 
     /**
      * <p>
-     * Return the relevant command from the default
-     * {@link org.apache.commons.chain.Catalog}.
+     * Return the relevant {@link Command} from the default
+     * {@link Catalog}.
      * </p>
      * @return Command for this helper
      */
-    protected Command getCatalogCommand(ActionHelper helper){
+    protected Command getCatalogCommand(ActionHelper helper) {
 
         Catalog catalog = helper.getCatalog();
         String name = helper.getMapping().getName();
@@ -48,8 +40,8 @@ public abstract class CommandAction extends ContextAction {
 
     /**
      * <p>
-     * Return the client context for this application.
-     * Must be implemented by a subclass.
+     * Return the {@link ClientContext} for this request.
+     * Must be implemented by a concrete subclass.
      * </p>
      * @param helper
      * @return
@@ -59,6 +51,8 @@ public abstract class CommandAction extends ContextAction {
     /**
      * <p>
      * Operations to perform prior to executing business command.
+     * If operations fail, return an appropriate {@link ActionForward}.
+     * If operations succeed, return <code>null</code>.
      * </p>
      * @param helper Our ActionHelper
      * @param context Our ClientContext
@@ -70,9 +64,9 @@ public abstract class CommandAction extends ContextAction {
     }
 
     /**
-     * <p>Convert ActionForm to Chain Context.</p>
-     * @param form
-     * @return
+     * <p>Convert {@link ActionForm} to {@link Context}.</p>
+     * @param form Our ActionForm (conventonal or dynamic)
+     * @return Context based on ActionForm values
      */
     protected Context getInput(ActionForm form) {
 
@@ -80,12 +74,12 @@ public abstract class CommandAction extends ContextAction {
         if (form instanceof DynaActionForm) {
             DynaActionForm dyna = (DynaActionForm) form;
             input = dyna.getMap();
-        }
-        else try {
-            input = BeanUtils.describe(form);
-        } catch (Throwable t) {
-            input = new HashMap();
-        }
+        } else
+            try {
+                input = BeanUtils.describe(form);
+            } catch (Throwable t) {
+                input = new HashMap(); // FIXME: Lame resolution
+            }
         return new ContextBase(input);
 
     }
@@ -124,8 +118,8 @@ public abstract class CommandAction extends ContextAction {
      */
     protected ActionForward postExecute(ActionHelper helper, ClientContext context) {
 
-        conformInput(helper,context);
-        conformState(helper,context);
+        conformInput(helper, context);
+        conformState(helper, context);
 
         // TODO: Expose any output
         // TODO: Expose any status messages,
@@ -150,13 +144,13 @@ public abstract class CommandAction extends ContextAction {
         ActionForward location;
         ClientContext context = getContext(helper);
 
-        location = preExecute(helper,context);
-        if (location!=null) return location;
+        location = preExecute(helper, context);
+        if (location != null) return location;
 
         boolean stop = getCatalogCommand(helper).execute(context);
 
-        location = postExecute(helper,context);
-        if (location!=null) return location;
+        location = postExecute(helper, context);
+        if (location != null) return location;
 
         return findSuccess(helper);
 

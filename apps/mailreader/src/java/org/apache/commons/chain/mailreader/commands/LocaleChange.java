@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/Attic/LocaleCommand.java,v 1.1 2004/03/27 03:58:02 husted Exp $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/LocaleChange.java,v 1.1 2004/03/29 00:52:22 husted Exp $
  * $Revision: 1.1 $
- * $Date: 2004/03/27 03:58:02 $
+ * $Date: 2004/03/29 00:52:22 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -21,16 +21,17 @@ package org.apache.commons.chain.mailreader.commands;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
+import org.apache.commons.chain.mailreader.MailReader;
 
 import java.util.Locale;
 
 /**
  * Change Locale according to input values, country and language.
  */
-public class LocaleCommand implements Command {
+public class LocaleChange implements Command {
 
     static boolean isBlank(String string) {
-        return ((string==null) || (string.trim().length()==0));
+        return ((string == null) || (string.trim().length() == 0));
     }
 
     public boolean execute(Context context) {
@@ -43,8 +44,7 @@ public class LocaleCommand implements Command {
         Locale locale = Locale.getDefault();
         if ((!isBlank(language)) && (!isBlank(country))) {
             locale = new Locale(language, country);
-        }
-        else if (!isBlank(language)) {
+        } else if (!isBlank(language)) {
             locale = new Locale(language, "");
         }
         app.setLocale(locale);

@@ -12,20 +12,28 @@ import java.util.Locale;
  * representation.
  * </p>
  * <p>
- * See {@link org.apache.commons.chain.mailreader.commands.MailReaderBase}
+ * See {@link org.apache.commons.chain.mailreader.MailReaderBase}
  * for an implementation.
  * </p>
  */
 public interface ClientContext extends Context {
 
+    /**
+     * Client {@link Locale} property.
+     */
     public static String PN_LOCALE = "locale";
-    public boolean isLocale();
+
     public void setLocale(Locale locale);
+
     public Locale getLocale();
 
+    /**
+     * Input {@link Context} property.
+     */
     public static String PN_INPUT = "input";
-    public boolean isInput();
+
     public void setInput(Context context);
+
     public Context getInput();
 
 }
