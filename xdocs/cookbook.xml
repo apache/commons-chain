@@ -686,14 +686,14 @@ public class MailReader extends Hashmap implements Context {
         document).</title>
 
         <p><source><![CDATA[<?xml version="1.0" ?>
-<chains>
+<catalog>
   <command 
     name="LocaleChange" 
     className="org.apache.commons.chain.mailreader.commands.LocaleChange"/>
   <command 
     name="LogonUser" 
     className="org.apache.commons.chain.mailreader.commands.LogonUser"/>
-</chains>]]></source></p>
+</catalog>]]></source></p>
       </example>The application needs to know the name given to a Command we
     want to execute, but it does not need to know the classname of the
     Command. The Command could also be a <code>Chain</code> of
@@ -707,7 +707,7 @@ public class MailReader extends Hashmap implements Context {
         <title>A Catalog can be refactored with zero-changes to the
         application code.</title>
 
-        <p><source><![CDATA[<chains>
+        <p><source><![CDATA[<catalog>
   <chain name="LocaleChange">
     <command 
       className="org.apache.commons.chain.mailreader.commands.ProfileCheck"/>
@@ -717,7 +717,7 @@ public class MailReader extends Hashmap implements Context {
   <command 
     name="LogonUser" 
     className="org.apache.commons.chain.mailreader.commands.LogonUser"/>
-</chains>]]></source></p>
+</catalog>]]></source></p>
       </example></p>
 
     <p>In the "Create a Command" recipe, we use a factory method to create
@@ -910,11 +910,11 @@ public class MailReader extends Hashmap implements Context {
 
         <p><source><![CDATA[<!-- catalog.xml -->
 <?xml version="1.0" ?>
-<chains>
+<catalog>
     <command
         name="<em>LocaleChange</em>"
         className="org.apache.commons.chain.mailreader.commands.LocaleChange" />
-</chains>
+</catalog>
 
 <!-- validation.xml -->
 <?xml version="1.0" ?>
