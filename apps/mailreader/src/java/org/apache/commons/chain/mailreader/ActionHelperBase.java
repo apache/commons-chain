@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelperBase.java,v 1.1 2004/03/27 03:56:20 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/27 03:56:20 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelperBase.java,v 1.2 2004/03/27 18:21:30 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/03/27 18:21:30 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -19,7 +19,6 @@
  */
 package org.apache.commons.chain.mailreader;
 
-import org.apache.commons.chain.impl.ContextBase;
 import org.apache.struts.Globals;
 import org.apache.struts.action.*;
 import org.apache.struts.upload.MultipartRequestWrapper;
@@ -135,15 +134,14 @@ public class ActionHelperBase implements ActionHelper {
      * Do not call other methods without setting these first!
      * This is also called by the convenience constructor.
      *
-     * @param application - The associated ServletContext.
      * @param request - The associated HTTP request.
      * @param response - The associated HTTP response.
      */
     public void setResources(
-            ServletContext application,
             HttpServletRequest request,
             HttpServletResponse response) {
 
+        ServletContext application = request.getSession().getServletContext();
         setApplication(application);
         setRequest(request);
         setResponse(response);
@@ -154,12 +152,11 @@ public class ActionHelperBase implements ActionHelper {
     }
 
     public ActionHelperBase(
-            ServletContext application,
             HttpServletRequest request,
             HttpServletResponse response) {
 
         super();
-        this.setResources(application, request, response);
+        this.setResources(request, response);
     }
 
 

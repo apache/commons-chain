@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelper.java,v 1.1 2004/03/27 03:56:20 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/27 03:56:20 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelper.java,v 1.2 2004/03/27 18:21:30 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/03/27 18:21:30 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -113,6 +113,8 @@ public interface ActionHelper {
      * </p>
      */
     public Locale getLocale();
+
+    public void setLocale(Locale locale);
 
     /**
      * <p>
