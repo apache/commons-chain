@@ -17,6 +17,7 @@ package org.apache.commons.chain.generic;
 
 
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
@@ -39,7 +40,7 @@ import org.apache.commons.chain.Filter;
  * <code>IllegalArgumentException</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.8 $ $Date: 2004/02/25 00:01:07 $
+ * @version $Revision: 1.9 $ $Date: 2004/10/22 18:06:47 $
  */
 
 public class LookupCommand implements Filter {
@@ -48,29 +49,29 @@ public class LookupCommand implements Filter {
     // -------------------------------------------------------------- Properties
 
 
-    private String catalogKey = "catalog";
+    private String catalogName = null;
 
 
     /**
-     * <p>Return the context attribute key under which the {@link Catalog}
-     * instance to be searched is stored.</p>
+     * <p>Return the name of the {@link Catalog} to be searched, or
+     * <code>null</code> to search the default {@link Catalog}.</p>
      */
-    public String getCatalogKey() {
+    public String getCatalogName() {
 
-    return (this.catalogKey);
+        return (this.catalogName);
 
     }
 
 
     /**
-     * <p>Set the context attribute key under which the {@link Catalog}
-     * instance to be searched is stored.</p>
+     * <p>Set the name of the {@link Catalog} to be searched, or
+     * <code>null</code> to search the default {@link Catalog}.</p>
      *
-     * @param catalogKey The new context attribute key
+     * @param catalogName The new {@link Catalog} name or <code>null</code>
      */
-    public void setCatalogKey(String catalogKey) {
+    public void setCatalogName(String catalogName) {
 
-    this.catalogKey = catalogKey;
+        this.catalogName = catalogName;
 
     }
 
@@ -84,7 +85,7 @@ public class LookupCommand implements Filter {
      */
     public String getName() {
 
-    return (this.name);
+        return (this.name);
 
     }
 
@@ -97,7 +98,7 @@ public class LookupCommand implements Filter {
      */
     public void setName(String name) {
 
-    this.name = name;
+        this.name = name;
 
     }
 
@@ -111,7 +112,7 @@ public class LookupCommand implements Filter {
      */
     public String getNameKey() {
 
-    return (this.nameKey);
+        return (this.nameKey);
 
     }
 
@@ -124,7 +125,7 @@ public class LookupCommand implements Filter {
      */
     public void setNameKey(String nameKey) {
 
-    this.nameKey = nameKey;
+        this.nameKey = nameKey;
 
     }
 
@@ -170,7 +171,7 @@ public class LookupCommand implements Filter {
      */
     public boolean execute(Context context) throws Exception {
 
-    Command command = getCommand(context);
+        Command command = getCommand(context);
         if (command != null) {
             return (command.execute(context));
         } else {
@@ -180,9 +181,18 @@ public class LookupCommand implements Filter {
     }
 
 
+    /**
+     * <p>If the executed command was itself a {@link Filter}, call the
+     * <code>postprocess()</code> method of that {@link Filter} as well.</p>
+     *
+     * @param context The context for this request
+     * @param exception Any <code>Exception</code> thrown by command execution
+     *
+     * @exception Exception if thrown by the <code>postprocess()</code> method
+     */
     public boolean postprocess(Context context, Exception exception) {
 
-    Command command = getCommand(context);
+        Command command = getCommand(context);
         if (command != null) {
             if (command instanceof Filter) {
                 return (((Filter) command).postprocess(context, exception));
@@ -207,25 +217,47 @@ public class LookupCommand implements Filter {
      */
     private Command getCommand(Context context) {
 
-    Catalog catalog = (Catalog)
-        context.get(getCatalogKey());
-    if (catalog == null) {
-        throw new IllegalArgumentException(getCatalogKey());
-    }
-    Command command = null;
-    String name = getName();
-    if (name == null) {
-        name = (String) context.get(getNameKey());
-    }
-    if (name != null) {
-        command = catalog.getCommand(name);
-        if ((command == null) && !isOptional()) {
-        throw new IllegalArgumentException(name);
+        CatalogFactory catalogFactory = CatalogFactory.getInstance();
+        String catalogName = getCatalogName();
+        Catalog catalog = null;
+        if (catalogName == null) {
+            // use default catalog
+            catalog = catalogFactory.getCatalog();
+        } else {
+            catalog = catalogFactory.getCatalog(catalogName);
         }
-        return (command);
-    } else {
-        throw new IllegalArgumentException("No command name");
-    }
+        if (catalog == null) {
+            if (catalogName == null) {
+                throw new IllegalArgumentException
+                    ("Cannot find default catalog");
+            } else {
+                throw new IllegalArgumentException
+                    ("Cannot find catalog '" + catalogName + "'");
+            }
+        }
+
+        Command command = null;
+        String name = getName();
+        if (name == null) {
+            name = (String) context.get(getNameKey());
+        }
+        if (name != null) {
+            command = catalog.getCommand(name);
+            if ((command == null) && !isOptional()) {
+                if (catalogName == null) {
+                    throw new IllegalArgumentException
+                        ("Cannot find command '" + name +
+                         "' in default catalog");
+                } else {
+                    throw new IllegalArgumentException
+                        ("Cannot find command '" + name +
+                         "' in catalog '" + catalogName + "'");
+                }
+            }
+            return (command);
+        } else {
+            throw new IllegalArgumentException("No command name");
+        }
 
     }
 
