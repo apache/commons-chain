@@ -30,6 +30,10 @@ import org.apache.commons.digester.RuleSetBase;
  * executing the <code>addRuleInstance()</code> method in order to influence
  * the rules that get added, with default values in square brackets:</p>
  * <ul>
+ * <li><strong>chainClass</strong> -- Fully qualified name of the implementation
+ *     class used to create new {@link Chain} instances.  If not specified, the
+ *     default value is <code>org.apache.commons.chain.impl.ChainBase</code>.
+ *     </li>
  * <li><strong>chainElement</strong> -- Name of the XML element representing
  *     the addition of a {@link Chain}.  A chain element has the same
  *     functionality as a command element, except that it defaults the
@@ -52,7 +56,7 @@ import org.apache.commons.digester.RuleSetBase;
  * </ul>
  * 
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision: 1.6 $ $Date: 2004/07/09 00:03:25 $
  */
 
 public class ConfigRuleSet extends RuleSetBase {
@@ -61,6 +65,7 @@ public class ConfigRuleSet extends RuleSetBase {
     // ----------------------------------------------------- Instance Variables
 
 
+    private String chainClass = "org.apache.commons.chain.impl.ChainBase";
     private String chainElement = "chain";
     private String classAttribute = "className";
     private String commandElement = "command";
@@ -68,6 +73,24 @@ public class ConfigRuleSet extends RuleSetBase {
 
 
     // ------------------------------------------------------------- Properties
+
+
+    /**
+     * <p>Return the fully qualified {@link Chain} implementation class.</p>
+     */
+    public String getChainClass() {
+        return (this.chainClass);
+    }
+
+
+    /**
+     * <p>Set the fully qualified {@link Chain} implementation class.</p>
+     *
+     * @param chainClass The new {@link Chain} implementation class
+     */
+    public void setChainClass(String chainClass) {
+        this.chainClass = chainClass;
+    }
 
 
     /**
@@ -158,7 +181,7 @@ public class ConfigRuleSet extends RuleSetBase {
 
         // Add rules for a chain element
         digester.addObjectCreate("*/" + getChainElement(),
-                                 "org.apache.commons.chain.impl.ChainBase",
+                                 getChainClass(),
                                  getClassAttribute());
         digester.addSetProperties("*/" + getChainElement());
         digester.addRule("*/" + getChainElement(),
