@@ -187,7 +187,7 @@
     <p><em>Catalog.</em> Many applications use "facades" and
     "factories" and other techniques to avoid binding layers too closely
     together. Layers need to interact, but often we don't want them to
-    interact at the classname level. A <code>Catalog</code> is
+    interact at the classname level. A <code>Catalog</code> is a
     collection of logically named Commands (or Chains) that a client can
     execute, without knowing the Command's classname.</p>
 

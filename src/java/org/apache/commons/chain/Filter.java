@@ -31,13 +31,13 @@ package org.apache.commons.chain;
  * <p>The most common use case for a {@link Filter}, as opposed to a
  * {@link Command}, is where potentially expensive resources must be acquired
  * and held until the processing of a particular request has been completed,
- * even it execution is delegated to a subsequent {@link Command} via the
+ * even if execution is delegated to a subsequent {@link Command} via the
  * <code>execute()</code> returning <code>false</code>.  A {@link Filter}
  * can reliably release such resources in the <code>postprocess()</code>
  * method, which is guaranteed to be called by the owning {@link Chain}.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision: 1.7 $ $Date: 2005/01/08 19:53:02 $
  */
 
 public interface Filter extends Command {
