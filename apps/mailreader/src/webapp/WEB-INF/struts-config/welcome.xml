@@ -21,6 +21,7 @@
 
     <action-mappings>
         <action path="/Welcome" forward="/welcome.jsp" />
+        <action path="/Menu" forward="/menu.jsp" />
     </action-mappings>
 
 </struts-config>
