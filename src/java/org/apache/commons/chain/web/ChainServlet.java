@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainServlet.java,v 1.3 2003/10/04 22:54:10 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/04 22:54:10 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainServlet.java,v 1.4 2003/10/05 03:02:34 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/10/05 03:02:34 $
  *
 /* ====================================================================
  * The Apache Software License, Version 1.1
@@ -65,12 +65,12 @@ package org.apache.commons.chain.web;
 import java.io.InputStream;
 import java.io.IOException;
 import java.net.URL;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.config.ConfigParser;
 import org.apache.commons.chain.impl.CatalogBase;
@@ -130,7 +130,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Ted Husted
  */
 
-public class ChainServlet extends GenericServlet {
+public class ChainServlet extends HttpServlet {
     
 
     // ------------------------------------------------------ Manifest Constants
@@ -148,7 +148,7 @@ public class ChainServlet extends GenericServlet {
     /**
      * <p>The default servlet context attribute key.</p>
      */
-    private static final String CONFIG_ATTR_DEFAULT = "catalog";
+    public static final String CONFIG_ATTR_DEFAULT = "catalog";
 
 
     /**
@@ -253,14 +253,13 @@ public class ChainServlet extends GenericServlet {
      * and store it in the servlet context.</p>
      *
      * @param request the request issued by the client
-     *
      * @param response the response to be returned to the cliengt
      *
      * @throws javax.servlet.ServletException (this exception is never thrown)
-     *
      * @throws java.io.IOException (this exception is never thrown)
      */
-    public void service(ServletRequest request, ServletResponse response)
+    public void service(HttpServletRequest request,
+                        HttpServletResponse response)
         throws ServletException, IOException {
 
         ; // do nothing
