@@ -3,7 +3,7 @@
 
 <!--
         "Chain of Responsibility" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.5 2003/10/01 04:23:00 craigmcc Exp $
+        $Id: build.xml,v 1.6 2003/10/01 12:28:01 husted Exp $
 -->
 
 
@@ -244,6 +244,10 @@
                 unless="servlet.present"/>
       <exclude    name="org/apache/commons/chain/web/*Servlet*.java"
                 unless="servlet.present"/>
+      <exclude    name="org/apache/commons/chain/config/*.java"
+                unless="beanutils.present"/>
+      <exclude    name="org/apache/commons/chain/config/*.java"
+                unless="collections.present"/>
       <exclude    name="org/apache/commons/chain/config/*.java"
                 unless="digester.present"/>
     </javac>
