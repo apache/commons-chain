@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/MockServletContext.java,v 1.1 2003/08/11 04:44:18 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:18 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/MockServletContext.java,v 1.2 2003/08/12 20:33:25 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/12 20:33:25 $
  *
  * ====================================================================
  *
@@ -62,17 +62,16 @@
 package org.apache.commons.chain.web.servlet;
 
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import java.io.InputStream;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Set;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 
 // Mock Object for ServletContext (Version 2.3)

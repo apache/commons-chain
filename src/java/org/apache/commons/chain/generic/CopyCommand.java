@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/CopyCommand.java,v 1.1 2003/08/11 04:44:18 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:18 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/CopyCommand.java,v 1.2 2003/08/12 20:33:24 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/12 20:33:24 $
  *
  * ====================================================================
  *
@@ -63,11 +63,8 @@ package org.apache.commons.chain.generic;
 
 
 import java.util.Map;
-import org.apache.commons.chain.Catalog;
-import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
-import org.apache.commons.chain.Filter;
 
 
 /**
@@ -75,7 +72,7 @@ import org.apache.commons.chain.Filter;
  * the <code>fromKey</code> (if any), to the <code>toKey</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:18 $
+ * @version $Revision: 1.2 $ $Date: 2003/08/12 20:33:24 $
  */
 
 public class CopyCommand implements Command {

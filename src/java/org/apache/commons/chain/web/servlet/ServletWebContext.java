@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ServletWebContext.java,v 1.1 2003/08/11 04:44:17 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ServletWebContext.java,v 1.2 2003/08/12 20:33:25 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/12 20:33:25 $
  *
  * ====================================================================
  *
@@ -63,20 +63,10 @@
 package org.apache.commons.chain.web.servlet;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.apache.commons.chain.Chain;
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
 import org.apache.commons.chain.web.WebContext;
 
 
@@ -87,7 +77,7 @@ import org.apache.commons.chain.web.WebContext;
  * instances that are passed to the constructor (or the initialize method).</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:17 $
+ * @version $Revision: 1.2 $ $Date: 2003/08/12 20:33:25 $
  */
 
 public class ServletWebContext extends WebContext {

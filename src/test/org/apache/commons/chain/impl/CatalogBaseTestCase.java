@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/CatalogBaseTestCase.java,v 1.1 2003/08/11 04:44:18 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:18 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/CatalogBaseTestCase.java,v 1.2 2003/08/12 20:33:25 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/12 20:33:25 $
  *
  * ====================================================================
  *
@@ -62,21 +62,20 @@
 package org.apache.commons.chain.impl;
 
 
-import java.util.Iterator;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
+
+import java.util.Iterator;
 
 
 /**
  * <p>Test case for the <code>CatalogBase</code> class.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:18 $
+ * @version $Revision: 1.2 $ $Date: 2003/08/12 20:33:25 $
  */
 
 public class CatalogBaseTestCase extends TestCase {

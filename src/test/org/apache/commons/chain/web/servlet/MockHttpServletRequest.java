@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/MockHttpServletRequest.java,v 1.1 2003/08/11 04:44:18 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:18 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/MockHttpServletRequest.java,v 1.2 2003/08/12 20:33:25 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/12 20:33:25 $
  *
  * ====================================================================
  *
@@ -62,21 +62,17 @@
 package org.apache.commons.chain.web.servlet;
 
 
-import java.io.BufferedReader;
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import org.apache.commons.chain.web.MockEnumeration;
+import org.apache.commons.chain.web.MockPrincipal;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.chain.web.MockEnumeration;
-import org.apache.commons.chain.web.MockPrincipal;
+import java.io.BufferedReader;
+import java.security.Principal;
+import java.util.*;
 
 
 // Mock Object for HttpServletRequest (Version 2.3)

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/MockHttpSession.java,v 1.1 2003/08/11 04:44:18 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:18 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/MockHttpSession.java,v 1.2 2003/08/12 20:33:25 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/12 20:33:25 $
  *
  * ====================================================================
  *
@@ -62,12 +62,13 @@
 package org.apache.commons.chain.web.servlet;
 
 
-import java.util.Enumeration;
-import java.util.HashMap;
+import org.apache.commons.chain.web.MockEnumeration;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
-import org.apache.commons.chain.web.MockEnumeration;
+import java.util.Enumeration;
+import java.util.HashMap;
 
 
 

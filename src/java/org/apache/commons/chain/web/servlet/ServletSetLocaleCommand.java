@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ServletSetLocaleCommand.java,v 1.1 2003/08/11 04:44:17 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ServletSetLocaleCommand.java,v 1.2 2003/08/12 20:33:25 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/12 20:33:25 $
  *
  * ====================================================================
  *
@@ -65,7 +65,6 @@ package org.apache.commons.chain.web.servlet;
 
 import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.web.AbstractSetLocaleCommand;
 

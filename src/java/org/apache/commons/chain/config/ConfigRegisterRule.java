@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/config/ConfigRegisterRule.java,v 1.1 2003/08/11 04:44:17 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/config/ConfigRegisterRule.java,v 1.2 2003/08/12 20:33:24 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/08/12 20:33:24 $
  *
  * ====================================================================
  *
@@ -65,7 +65,6 @@ package org.apache.commons.chain.config;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
-import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.Rule;
 import org.xml.sax.Attributes;
 
@@ -79,7 +78,7 @@ import org.xml.sax.Attributes;
  * it should be registered.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:17 $
+ * @version $Revision: 1.2 $ $Date: 2003/08/12 20:33:24 $
  */
 class ConfigRegisterRule extends Rule {
 
