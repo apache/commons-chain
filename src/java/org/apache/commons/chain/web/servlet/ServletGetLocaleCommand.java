@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ServletGetLocaleCommand.java,v 1.2 2003/08/12 20:33:25 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/12 20:33:25 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ServletGetLocaleCommand.java,v 1.3 2003/09/29 06:02:13 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/09/29 06:02:13 $
  *
  * ====================================================================
  *
@@ -86,7 +86,7 @@ public class ServletGetLocaleCommand extends AbstractGetLocaleCommand {
     protected Locale getLocale(Context context) {
 
 	HttpServletRequest request = (HttpServletRequest)
-	    context.getAttributes().get("request");
+	    context.get("request");
 	return (request.getLocale());
 
     }

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/portlet/PortletGetLocaleCommand.java,v 1.2 2003/08/12 20:33:24 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/12 20:33:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/portlet/PortletGetLocaleCommand.java,v 1.3 2003/09/29 06:02:13 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/09/29 06:02:13 $
  *
  * ====================================================================
  *
@@ -86,7 +86,7 @@ public class PortletGetLocaleCommand extends AbstractGetLocaleCommand {
     protected Locale getLocale(Context context) {
 
 	PortletRequest request = (PortletRequest)
-	    context.getAttributes().get("request");
+	    context.get("request");
 	return (request.getLocale());
 
     }

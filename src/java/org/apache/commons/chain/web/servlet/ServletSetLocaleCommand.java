@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ServletSetLocaleCommand.java,v 1.2 2003/08/12 20:33:25 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/12 20:33:25 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ServletSetLocaleCommand.java,v 1.3 2003/09/29 06:02:13 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/09/29 06:02:13 $
  *
  * ====================================================================
  *
@@ -83,7 +83,7 @@ public class ServletSetLocaleCommand extends AbstractSetLocaleCommand {
     protected void setLocale(Context context, Locale locale) {
 
 	HttpServletResponse response = (HttpServletResponse)
-	    context.getAttributes().get("response");
+	    context.get("response");
 	response.setLocale(locale);
 
     }

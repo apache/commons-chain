@@ -3,7 +3,7 @@
 
 <!--
         "Chain of Responsibility" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.2 2003/08/12 19:33:56 husted Exp $
+        $Id: build.xml,v 1.3 2003/09/29 06:02:13 craigmcc Exp $
 -->
 
 
@@ -136,6 +136,8 @@
     <available property="faces.present"    file="${jsf-api.jar}"/>
     <available property="portlet.present"  file="${portlet-api.jar}"/>
     <available property="servlet.present"  file="${servlet-api.jar}"/>
+    <available property="servlet23.present" classpathref="compile.classpath"
+              classname="javax.servlet.ServletContextListener"/>
   </target>
 
 
@@ -146,6 +148,7 @@
     <echo message="faces.present =         ${faces.present}"/>
     <echo message="portlet.present =       ${portlet.present}"/>
     <echo message="servlet.present =       ${servlet.present}"/>
+    <echo message="servlet23.present =     ${servlet23.present}"/>
     <filter  token="name"                  value="${component.name}"/>
     <filter  token="package"               value="${component.package}"/>
     <filter  token="version"               value="${component.version}"/>
@@ -178,6 +181,10 @@
            deprecation="${compile.deprecation}"
               optimize="${compile.optimize}">
       <classpath refid="compile.classpath"/>
+      <exclude    name="org/apache/commons/chain/web/ChainListener.java"
+                unless="servlet23.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainServlet.java"
+                unless="servlet.present"/>
       <exclude    name="org/apache/commons/chain/web/faces/*.java"
                 unless="faces.present"/>
       <exclude    name="org/apache/commons/chain/web/portlet/*.java"

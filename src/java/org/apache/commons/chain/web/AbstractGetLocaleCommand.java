@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/AbstractGetLocaleCommand.java,v 1.1 2003/08/11 04:44:17 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/AbstractGetLocaleCommand.java,v 1.2 2003/09/29 06:02:13 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/09/29 06:02:13 $
  *
  * ====================================================================
  *
@@ -74,7 +74,7 @@ import org.apache.commons.chain.Context;
  * context attribute key returned by the <code>localeKey</code> property.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:17 $
+ * @version $Revision: 1.2 $ $Date: 2003/09/29 06:02:13 $
  */
 
 public abstract class AbstractGetLocaleCommand implements Command {
@@ -126,7 +126,7 @@ public abstract class AbstractGetLocaleCommand implements Command {
      */
     public boolean execute(Context context) throws Exception {
 
-	context.getAttributes().put(getLocaleKey(), getLocale(context));
+	context.put(getLocaleKey(), getLocale(context));
 	return (false);
 
     }

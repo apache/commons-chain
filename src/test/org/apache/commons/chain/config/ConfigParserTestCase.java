@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/config/ConfigParserTestCase.java,v 1.2 2003/08/12 20:33:25 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/12 20:33:25 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/config/ConfigParserTestCase.java,v 1.3 2003/09/29 06:02:13 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/09/29 06:02:13 $
  *
  * ====================================================================
  *
@@ -364,7 +364,7 @@ public class ConfigParserTestCase extends TestCase {
 
     // Verify the contents of the execution log
     protected void checkExecuteLog(String expected) {
-        StringBuffer log = (StringBuffer) context.getAttributes().get("log");
+        StringBuffer log = (StringBuffer) context.get("log");
         assertNotNull("Context returned log");
         assertEquals("Context returned correct log",
                      expected, log.toString());

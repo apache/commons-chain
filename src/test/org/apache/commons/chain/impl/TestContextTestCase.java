@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/TestContextTestCase.java,v 1.2 2003/08/12 20:33:25 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/12 20:33:25 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/TestContextTestCase.java,v 1.3 2003/09/29 06:02:14 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/09/29 06:02:14 $
  *
  * ====================================================================
  *
@@ -64,6 +64,7 @@ package org.apache.commons.chain.impl;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import org.apache.commons.chain.Context;
 
 
 /**
@@ -74,7 +75,7 @@ import junit.framework.TestSuite;
 public class TestContextTestCase extends ContextBaseTestCase {
 
 
-    // ---------------------------------------------------------- Constructors
+    // ------------------------------------------------------------ Constructors
 
     /**
      * Construct a new instance of this test case.
@@ -86,14 +87,14 @@ public class TestContextTestCase extends ContextBaseTestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
+    // ---------------------------------------------------- Overall Test Methods
 
 
     /**
      * Set up instance variables required by this test case.
      */
     public void setUp() {
-        context = new TestContext();
+        context = createContext();
     }
 
 
@@ -105,26 +106,37 @@ public class TestContextTestCase extends ContextBaseTestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
+    // ------------------------------------------------- Individual Test Methods
+
+
+    // Test state of newly created instance
+    public void testPristine() {
+
+        super.testPristine();
+        assertEquals("readOnly", (String) context.get("readOnly"));
+        assertEquals("readWrite", (String) context.get("readWrite"));
+        assertEquals("writeOnly", ((TestContext) context).returnWriteOnly());
+
+    }
 
 
     // Test a read only property on the Context implementation class
     public void testReadOnly() {
 
-        Object readOnly = context.getAttributes().get("readOnly");
+        Object readOnly = context.get("readOnly");
         assertNotNull("readOnly found", readOnly);
         assertTrue("readOnly String",
                    readOnly instanceof String);
         assertEquals("readOnly value", "readOnly", readOnly);
 
         try {
-            context.getAttributes().put("readOnly", "new readOnly");
+            context.put("readOnly", "new readOnly");
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
             ; // Expected result
         }
         assertEquals("readOnly unchanged", "readOnly",
-                     (String) context.getAttributes().get("readOnly"));
+                     (String) context.get("readOnly"));
 
     }
 
@@ -132,14 +144,14 @@ public class TestContextTestCase extends ContextBaseTestCase {
     // Test a read write property on the Context implementation class
     public void testReadWrite() {
 
-        Object readWrite = context.getAttributes().get("readWrite");
+        Object readWrite = context.get("readWrite");
         assertNotNull("readWrite found", readWrite);
         assertTrue("readWrite String",
                    readWrite instanceof String);
         assertEquals("readWrite value", "readWrite", readWrite);
 
-        context.getAttributes().put("readWrite", "new readWrite");
-        readWrite = context.getAttributes().get("readWrite");
+        context.put("readWrite", "new readWrite");
+        readWrite = context.get("readWrite");
         assertNotNull("readWrite found", readWrite);
         assertTrue("readWrite String",
                    readWrite instanceof String);
@@ -157,13 +169,22 @@ public class TestContextTestCase extends ContextBaseTestCase {
                    writeOnly instanceof String);
         assertEquals("writeOnly value", "writeOnly", writeOnly);
 
-        context.getAttributes().put("writeOnly", "new writeOnly");
+        context.put("writeOnly", "new writeOnly");
         writeOnly = ((TestContext) context).returnWriteOnly();
         assertNotNull("writeOnly found", writeOnly);
         assertTrue("writeOnly String",
                    writeOnly instanceof String);
         assertEquals("writeOnly value", "new writeOnly", writeOnly);
 
+    }
+
+
+    // ------------------------------------------------------- Protected Methods
+
+
+    // Create a new instance of the appropriate Context type for this test case
+    protected Context createContext() {
+        return (new TestContext());
     }
 
 

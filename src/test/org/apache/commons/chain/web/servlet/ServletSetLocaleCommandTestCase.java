@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/ServletSetLocaleCommandTestCase.java,v 1.2 2003/08/12 20:33:25 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/12 20:33:25 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/web/servlet/ServletSetLocaleCommandTestCase.java,v 1.3 2003/09/29 06:02:14 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/09/29 06:02:14 $
  *
  * ====================================================================
  *
@@ -188,10 +188,10 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
 
 	String localeKey = command.getLocaleKey();
 	assertNotNull(localeKey);
-	Object value = context.getAttributes().get(localeKey);
+	Object value = context.get(localeKey);
 	assertNull(value);
-	context.getAttributes().put(localeKey, locale);
-	assertNotNull(context.getAttributes().get(localeKey));
+	context.put(localeKey, locale);
+	assertNotNull(context.get(localeKey));
 	assertNull(response.getLocale());
 	boolean result = command.execute(context);
 	assertFalse(result);

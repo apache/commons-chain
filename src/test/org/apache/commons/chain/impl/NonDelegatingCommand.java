@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/NonDelegatingCommand.java,v 1.2 2003/08/12 20:33:25 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/12 20:33:25 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/test/org/apache/commons/chain/impl/NonDelegatingCommand.java,v 1.3 2003/09/29 06:02:14 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/09/29 06:02:14 $
  *
  * ====================================================================
  *
@@ -71,7 +71,7 @@ import org.apache.commons.chain.Context;
  * and returns.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2003/08/12 20:33:25 $
+ * @version $Revision: 1.3 $ $Date: 2003/09/29 06:02:14 $
  */
 
 public class NonDelegatingCommand implements Command {
@@ -134,10 +134,10 @@ public class NonDelegatingCommand implements Command {
      * @param id The identifier to be logged
      */
     protected void log(Context context, String id) {
-        StringBuffer sb = (StringBuffer) context.getAttributes().get("log");
+        StringBuffer sb = (StringBuffer) context.get("log");
         if (sb == null) {
             sb = new StringBuffer();
-            context.getAttributes().put("log", sb);
+            context.put("log", sb);
         }
         if (sb.length() > 0) {
             sb.append('/');

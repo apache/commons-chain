@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/LookupCommand.java,v 1.2 2003/08/31 21:50:53 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2003/08/31 21:50:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/LookupCommand.java,v 1.3 2003/09/29 06:02:13 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/09/29 06:02:13 $
  *
  * ====================================================================
  *
@@ -85,7 +85,7 @@ import org.apache.commons.chain.Filter;
  * <code>IllegalArgumentException</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2003/08/31 21:50:53 $
+ * @version $Revision: 1.3 $ $Date: 2003/09/29 06:02:13 $
  */
 
 public class LookupCommand implements Filter {
@@ -254,14 +254,14 @@ public class LookupCommand implements Filter {
     private Command getCommand(Context context) {
 
 	Catalog catalog = (Catalog)
-	    context.getAttributes().get(getCatalogKey());
+	    context.get(getCatalogKey());
 	if (catalog == null) {
 	    throw new IllegalArgumentException(getCatalogKey());
 	}
 	Command command = null;
 	String name = getName();
 	if (name == null) {
-	    name = (String) context.getAttributes().get(getNameKey());
+	    name = (String) context.get(getNameKey());
 	}
 	if (name != null) {
 	    command = catalog.getCommand(name);
