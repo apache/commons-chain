@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ChainProcessor.java,v 1.3 2003/10/20 05:25:41 martinc Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/20 05:25:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/servlet/ChainProcessor.java,v 1.4 2003/11/09 01:57:21 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/11/09 01:57:21 $
  *
  * ====================================================================
  *
@@ -69,6 +69,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
 import org.apache.commons.chain.web.ChainServlet;
 
 

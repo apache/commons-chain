@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/CatalogBase.java,v 1.8 2003/10/20 05:25:41 martinc Exp $
- * $Revision: 1.8 $
- * $Date: 2003/10/20 05:25:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/impl/CatalogBase.java,v 1.9 2003/11/09 01:57:21 craigmcc Exp $
+ * $Revision: 1.9 $
+ * $Date: 2003/11/09 01:57:21 $
  *
  * ====================================================================
  *
@@ -66,6 +66,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 
 
@@ -75,7 +76,7 @@ import org.apache.commons.chain.Command;
  *
  * @author Craig R. McClanahan
  * @author Matthew J. Sgarlata
- * @version $Revision: 1.8 $ $Date: 2003/10/20 05:25:41 $
+ * @version $Revision: 1.9 $ $Date: 2003/11/09 01:57:21 $
  */
 
 public class CatalogBase implements Catalog {

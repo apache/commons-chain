@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/LookupCommand.java,v 1.6 2003/10/20 05:25:41 martinc Exp $
- * $Revision: 1.6 $
- * $Date: 2003/10/20 05:25:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/generic/LookupCommand.java,v 1.7 2003/11/09 01:57:21 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2003/11/09 01:57:21 $
  *
  * ====================================================================
  *
@@ -63,6 +63,7 @@ package org.apache.commons.chain.generic;
 
 
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.Filter;
@@ -84,7 +85,7 @@ import org.apache.commons.chain.Filter;
  * <code>IllegalArgumentException</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2003/10/20 05:25:41 $
+ * @version $Revision: 1.7 $ $Date: 2003/11/09 01:57:21 $
  */
 
 public class LookupCommand implements Filter {

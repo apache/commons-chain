@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/config/ConfigRuleSet.java,v 1.3 2003/10/20 05:25:41 martinc Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/20 05:25:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/config/ConfigRuleSet.java,v 1.4 2003/11/09 01:57:21 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/11/09 01:57:21 $
  *
  * ====================================================================
  *
@@ -62,6 +62,9 @@
 package org.apache.commons.chain.config;
 
 
+import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.Chain;
+import org.apache.commons.chain.Command;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.RuleSetBase;
 
@@ -95,7 +98,7 @@ import org.apache.commons.digester.RuleSetBase;
  * </ul>
  * 
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2003/10/20 05:25:41 $
+ * @version $Revision: 1.4 $ $Date: 2003/11/09 01:57:21 $
  */
 
 public class ConfigRuleSet extends RuleSetBase {
