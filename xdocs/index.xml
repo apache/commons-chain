@@ -81,6 +81,7 @@
       can be directly measured by observing the corresponding state
       changes in the context that is supplied.</p>
 
+<subsection name="Status">
 <p>
  <ul>
   <li>This code is in the commons <i>sandbox</i></li>
@@ -89,6 +90,7 @@
   <li>If you like the code and want to push it towards a release, join the mailing list!</li>
  </ul>
 </p>
+</subsection>
 
 </section>
 
