@@ -1,13 +1,12 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainServlet.java,v 1.1 2003/10/01 04:23:00 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/10/01 04:23:00 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainServlet.java,v 1.2 2003/10/01 12:41:07 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/10/01 12:41:07 $
  *
- * ====================================================================
- *
+/* ====================================================================
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,21 +21,21 @@
  *    the documentation and/or other materials provided with the
  *    distribution.
  *
- * 3. The end-user documentation included with the redistribution, if
- *    any, must include the following acknowlegement:
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
  *        Apache Software Foundation (http://www.apache.org/)."
- *    Alternately, this acknowlegement may appear in the software itself,
- *    if and wherever such third-party acknowlegements normally appear.
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "The Jakarta Project", "Commons", and "Apache Software
  *    Foundation" must not be used to endorse or promote products derived
  *    from this software without prior written permission. For written
  *    permission, please contact apache@apache.org.
  *
- * 5. Products derived from this software may not be called "Apache"
- *    nor may "Apache" appear in their names without prior written
- *    permission of the Apache Group.
+ * 5. Products derived from this software may not be called "Apache",
+ *    nor may "Apache" appear in their name, without prior written
+ *    permission of the Apache Software Foundation.
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -58,7 +57,10 @@
  * <http://www.apache.org/>.
  *
  */
+
+
 package org.apache.commons.chain.web;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,6 +76,7 @@ import org.apache.commons.digester.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.InputSource;
+
 
 /**
  * <p>Servlet that configures a Catalog based on an XML configuration file.  The
@@ -112,40 +115,50 @@ import org.xml.sax.InputSource;
  */
 public class ChainServlet extends GenericServlet {
     
-    protected static final Log log = LogFactory.getLog(ChainServlet.class);
-    
+
     /**
-     * The servlet initialization parameter which specifies the location of the
-     * XML file that describes the servlet chain we wish to load.
+     * <p>The <code>Log</code> instance to use with this class.</p>
+     */
+    protected static final Log log = LogFactory.getLog(ChainServlet.class);
+
+
+    /**
+     * <p>The servlet initialization parameter which specifies the location of the
+     * XML file that describes the servlet chain we wish to load.</p>
      */
     public static final String INIT_PARAM_CONFIG = "config";
-    
+
+
     /**
-     * The optional servlet initialization parameter that specifies the fully
+     * <p>The optional servlet initialization parameter that specifies the fully
      * qualified class name of the rule set that will be used to configure the
-     * Digester.
+     * Digester.</p>
      */
     public static final String INIT_PARAM_RULE_SET = "ruleset";
-    
+
+
     /**
-     * The optional servlet initialization parameter that specifies the
+     * <p>The optional servlet initialization parameter that specifies the
      * servlet context attribute in which the catalog will be stored.  If this
      * parameter is not specified, the catalog will be stored under the
-     * attribute "org.apache.commons.chain.CATALOG".
+     * attribute <code>org.apache.commons.chain.CATALOG</code>.</p>
      */
     public static final String INIT_PARAM_ATTRIBUTE = "attribute";
-    
+
+
     /**
-     * The servlet context attribute in which the catalog will be stored.
+     * <p>The servlet context attribute in which the catalog will be stored. </p>
      */
     protected String catalogAttr = Catalog.CATALOG_KEY; ;
+
 
     /**
      * <p>The <code>RuleSet</code> to be used for configuring our Digester
      * parsing rules.</p>
      */
     protected RuleSet ruleSet = new ConfigRuleSet();
-    
+
+
     /**
      * <p>The <code>Digester</code> to be used for parsing.</p>
      */
@@ -168,12 +181,15 @@ public class ChainServlet extends GenericServlet {
 
     }
 
+
     /**
-     * Use the Digester to create a {@link org.apache.commons.chain.Catalog}
+     * <p>Use the Digester to create a {@link org.apache.commons.chain.Catalog}
      * based on the information in an XML file and store the catalog in the
-     * servlet context.
+     * servlet context. </p>
+     *
      * @param servletConfig the configuration information supplied with this
      * servlet
+     *
      * @throws javax.servlet.ServletException if the servlet could not be initialized
      */
     public void init(ServletConfig servletConfig) throws ServletException {
@@ -245,12 +261,17 @@ public class ChainServlet extends GenericServlet {
         
     }
 
+
     /**
-     * Does nothing; this servlet's only purpose is to initialize a Chain
-     * and store it in the servlet context.
+     * <p>Does nothing; this servlet's only purpose is to initialize a Chain
+     * and store it in the servlet context.</p>
+     *
      * @param request the request issued by the client
+     *
      * @param response the response to be returned to the cliengt
+     *
      * @throws javax.servlet.ServletException (this exception is never thrown)
+     *
      * @throws java.io.IOException (this exception is never thrown)
      */
     public void service(ServletRequest request, ServletResponse response)
