@@ -81,16 +81,10 @@
       <url>http://portals.apache.org/pluto</url>
     </dependency>
     <dependency>
-      <groupId>jsf</groupId>
-      <artifactId>jsf-api</artifactId>
-      <version>1.0</version>
-      <url>http://java.sun.com/j2ee/javaserverfaces/download.html</url>
-    </dependency>
-    <dependency>
-      <groupId>jsf</groupId>
-      <artifactId>jsf-impl</artifactId>
-      <version>1.0</version>
-      <url>http://java.sun.com/j2ee/javaserverfaces/download.html</url> 
+      <groupId>myfaces</groupId>
+      <artifactId>myfaces-jsf-api</artifactId>
+      <version>1.0.8-beta</version>
+      <url>http://incubator.apache.org/myfaces</url>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
