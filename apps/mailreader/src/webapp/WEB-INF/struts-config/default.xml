@@ -42,8 +42,9 @@
 
   <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
     <set-property property="pathnames"
-                     value="/WEB-INF/validator-rules.xml,
-                            /WEB-INF/validation.xml"/>
+                     value="/WEB-INF/struts-config/validator-rules.xml,
+                            /WEB-INF/struts-config/default-validation.xml,
+                            /WEB-INF/struts-config/logon-validation.xml"/>
   </plug-in>
 
   <plug-in className="org.apache.struts.plugins.DigestingPlugIn">

@@ -4,19 +4,9 @@
           "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1//EN"
           "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
 
-<!--
-    Validation Rules for the Struts Example Web Application
-
-    $Id: validation.xml,v 1.1 2004/03/25 12:36:50 husted Exp $
--->
-
 <form-validation>
-
-
-    <!-- ========== Default Language Form Definitions ===================== -->
     <formset>
-
-        <form name="LogonForm">
+        <form name="LogonUser">
 
             <field property="username"
                     depends="required">
@@ -41,34 +31,5 @@
             </field>
 
         </form>
-
-
-        <form name="RegistrationForm">
-
-            <field property="fromAddress"
-                    depends="required,email">
-                <arg0   key="prompt.fromAddress"/>
-            </field>
-
-            <field property="fullName"
-                    depends="required">
-              <arg0     key="prompt.fullName"/>
-            </field>
-
-            <field property="replyToAddress"
-                    depends="email">
-                <arg0   key="prompt.replyToAddress"/>
-            </field>
-
-            <field property="username"
-                    depends="required">
-              <arg0     key="prompt.username"/>
-            </field>
-
-        </form>
-
-
     </formset>
-
-
 </form-validation>
