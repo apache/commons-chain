@@ -25,7 +25,7 @@ import org.apache.commons.chain.Context;
  * the <code>fromKey</code> (if any), to the <code>toKey</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2004/02/25 00:01:07 $
+ * @version $Revision: 1.8 $ $Date: 2005/01/07 19:18:03 $
  */
 
 public class CopyCommand implements Command {
@@ -122,16 +122,19 @@ public class CopyCommand implements Command {
      */
     public boolean execute(Context context) throws Exception {
 
-    Object value = this.value;
+        Object value = this.value;
+        
         if (value == null) {
-            context.get(getFromKey());
+            value = context.get(getFromKey());
         }
-    if (value != null) {
-        context.put(getToKey(), value);
-    } else {
-        context.remove(getToKey());
-    }
-    return (false);
+        
+        if (value != null) {
+            context.put(getToKey(), value);
+        } else {
+            context.remove(getToKey());
+        }
+        
+        return (false);
 
     }
 
