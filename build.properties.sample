@@ -6,21 +6,30 @@ junit.home = /usr/local/junit3.8.1
 junit.jar = ${junit.home}/junit.jar
 
 # (OPTIONAL) The pathname of the "faces-api.jar" file
-# To disable, set to a non-existant path
+# To disable, set to a non-existant path (e.g. /absent.jar)
 jsf-api.jar=${user.home}/jwsdp-1.2/jsf/lib/jsf-api.jar
 
 # (OPTIONAL) The pathname of the "portlet-api.jar" file
-# To disable, set to a non-existant path
+# To disable, set to a non-existant path (e.g. /absent.jar)
 portlet-api.jar=../../jakarta-jetspeed-2/portlet-api/target/portlet-api-0.6.6.jar
 
 # (OPTIONAL) The pathname of the "servlet-api.jar" file
 # Version 2.2 or later required, version 2.4 is supported
-# To disable, set to a non-existant path
+# To disable, set to a non-existant path (e.g. /absent.jar)
 servlet-api.jar = /usr/local/jwsdp-1.2/common/lib/servlet-api.jar
+
+# (OPTIONAL) The pathname of the "commons-logging.jar" file
+# required only if you are using or compiling the org.apache.commons.web.servlet package
+# To disable, set to a non-existant path (e.g. /absent.jar)
+commons-logging.jar = ../../jakarta-commons/logging/dist/commons-logging.jar
 
 # (OPTIONAL) The pathname of the "commons-digester.jar" file
 # required only if you are using the org.apache.commons.chain.config package
-# To disable, set to a non-existant path
+# To disable, set to a non-existant path (e.g. /absent.jar)
 commons-digester.jar = ../../jakarta-commons/digester/dist/commons-digester.jar
 
+# (OPTIONAL) The pathname of the shared JAR repository
+# required only if you are using the install-jar target
+# To disable, set to a non-existant path (e.g. /absent.jar)
+lib.repo = /usr/local/common/lib
 
