@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Catalog.java,v 1.1 2003/08/11 04:44:16 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/08/11 04:44:16 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/Catalog.java,v 1.2 2003/09/29 15:35:47 husted Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/09/29 15:35:47 $
  *
  * ====================================================================
  *
@@ -73,10 +73,17 @@ import java.util.Iterator;
  * that can be selected and executed based on environmental conditions.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/08/11 04:44:16 $
+ * @version $Revision: 1.2 $ $Date: 2003/09/29 15:35:47 $
  */
 
 public interface Catalog {
+
+
+    /**
+     * <p>A default context attribute for storing a default catalog,
+     * provided as a convenience only.</p>
+     */
+    public final static String CATALOG_KEY = "org.apache.commons.chain.CATALOG";
 
 
     /**
