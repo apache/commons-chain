@@ -31,7 +31,7 @@ import org.xml.sax.Attributes;
  * become the default {@link Catalog} for this application.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 class ConfigCatalogRule extends Rule {
 

@@ -30,7 +30,7 @@ import org.apache.commons.chain.web.WebContext;
  * instances that are passed to the constructor (or the initialize method).</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/25 00:01:04 $
+ * @version $Revision$ $Date$
  */
 
 public class ServletWebContext extends WebContext {

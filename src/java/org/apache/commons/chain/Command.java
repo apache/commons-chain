@@ -73,7 +73,7 @@ package org.apache.commons.chain;
  * configure the internal operation of this {@link Command}.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/25 00:01:07 $
+ * @version $Revision$ $Date$
  */
 
 public interface Command {

@@ -17,7 +17,7 @@
      Use the standard Struts "build.webapps" target to create the example application. Start your web container. 
      Then use Ant to run the webtest.xml.
      
-     @version $Revision: 1.1 $ $Date: 2004/03/25 12:36:49 $
+     @version $Revision$ $Date$
      */
     -->
     

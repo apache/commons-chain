@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/struts/webapp/example/memory/MemoryDatabasePlugIn.java,v 1.1 2004/03/25 12:41:51 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/25 12:41:51 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -44,7 +44,7 @@ import java.io.*;
  * <strong>NOT</strong> assume that files written here will survive a restart
  * of your servlet container.</p>
  *
- * @version $Revision: 1.1 $ $Date: 2004/03/25 12:41:51 $
+ * @version $Revision$ $Date$
  */
 
 public final class MemoryDatabasePlugIn implements PlugIn {

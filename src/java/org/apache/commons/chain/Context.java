@@ -56,7 +56,7 @@ import java.util.Map;
  * implementation.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/02/25 00:01:07 $
+ * @version $Revision$ $Date$
  */
 
 public interface Context extends Map {

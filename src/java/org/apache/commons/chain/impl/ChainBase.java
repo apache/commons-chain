@@ -28,7 +28,7 @@ import org.apache.commons.chain.Filter;
  * <p>Convenience base class for {@link Chain} implementations.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 
 public class ChainBase implements Chain {

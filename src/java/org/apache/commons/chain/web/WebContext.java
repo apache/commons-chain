@@ -35,7 +35,7 @@ import org.apache.commons.chain.impl.ContextBase;
  * of the same name, as supported by {@link ContextBase}.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 
 public abstract class WebContext extends ContextBase {

@@ -67,7 +67,7 @@ import org.apache.commons.digester.RuleSetBase;
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.9 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 
 public class ConfigRuleSet extends RuleSetBase {

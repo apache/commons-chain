@@ -6,8 +6,8 @@ By using a redirect, the user-agent will change address to match the path of our
 
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/webapp/index.jsp,v 1.1 2004/03/25 12:36:11 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/25 12:36:11 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 2000-2004 Apache Software Foundation
  *

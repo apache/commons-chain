@@ -92,7 +92,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Craig R. McClanahan
  * @author Ted Husted
- * @version $Revision: 1.7 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 
 public class ChainListener implements ServletContextListener {

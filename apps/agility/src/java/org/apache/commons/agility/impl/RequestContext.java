@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/agility/src/java/org/apache/commons/agility/impl/RequestContext.java,v 1.1 2004/06/01 00:55:50 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/06/01 00:55:50 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *

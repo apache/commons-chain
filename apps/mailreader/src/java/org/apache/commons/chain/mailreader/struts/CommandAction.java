@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/CommandAction.java,v 1.3 2004/06/01 00:49:17 husted Exp $
- * $Revision: 1.3 $
- * $Date: 2004/06/01 00:49:17 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *

@@ -28,7 +28,7 @@ import org.apache.commons.chain.Context;
  * <p>Test case for the <code>ChainBase</code> class.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2005/01/08 04:15:23 $
+ * @version $Revision$ $Date$
  */
 
 public class ChainBaseTestCase extends TestCase {

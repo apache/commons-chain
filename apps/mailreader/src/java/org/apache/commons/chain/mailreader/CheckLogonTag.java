@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/CheckLogonTag.java,v 1.2 2004/04/01 03:39:16 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2004/04/01 03:39:16 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -31,7 +31,7 @@ import java.io.IOException;
  * Check for a valid User logged on in the current session.  If there is no
  * such user, forward control to the logon page.
  *
- * @version $Revision: 1.2 $ $Date: 2004/04/01 03:39:16 $
+ * @version $Revision$ $Date$
  */
 public final class CheckLogonTag extends TagSupport {
 

@@ -45,7 +45,7 @@ import org.apache.commons.chain.Context;
  * be utilized as an attribute key or property name.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 
 public class ContextBase extends HashMap implements Context {

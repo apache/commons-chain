@@ -28,7 +28,7 @@ import org.xml.sax.Attributes;
  * the class names to make changes easier, this also makes configuration
  * files <strong>much</strong> easier to read and write.</p>
  *
- * @version $Revision: 1.2 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 
 class ConfigDefineRule extends Rule {

@@ -23,7 +23,7 @@ import java.util.Map;
  * <p>Map.Entry implementation that can be constructed to either be read-only
  * or not.</p>
  *
- * @version $Revision: 1.3 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 
 public class MapEntry implements Map.Entry {

@@ -1,8 +1,8 @@
 /*
 
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/test/org/apache/commons/mailreader/LogonUserTest.java,v 1.3 2004/04/08 23:26:07 husted Exp $
- * $Revision: 1.3 $
- * $Date: 2004/04/08 23:26:07 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 2000-2004 Apache Software Foundation
  *

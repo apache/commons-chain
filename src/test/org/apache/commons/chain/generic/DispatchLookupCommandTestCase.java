@@ -30,7 +30,7 @@ import org.apache.commons.chain.impl.NonDelegatingCommand;
  * <p>Test case for the <code>DispatchLookupCommand</code> class.</p>
  *
  * @author Sean Schofield
- * @version $Revision: 1.1 $
+ * @version $Revision$
  */
 
 public class DispatchLookupCommandTestCase extends TestCase {

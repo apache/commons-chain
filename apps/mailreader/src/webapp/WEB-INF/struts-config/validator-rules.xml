@@ -3,8 +3,8 @@
           "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
 <!--
   $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/webapp/WEB-INF/struts-config/validator-rules.xml,v 1.1 2004/04/08 23:32:34 husted Exp $
-  $Revision: 1.1 $
-  $Date: 2004/04/08 23:32:34 $
+  $Revision$
+  $Date$
 
    This file contains the default Struts Validator pluggable validator
    definitions.  It should be placed somewhere under /WEB-INF and

@@ -34,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
  * String which encodes both the catalog and command names.</p>
  *
  * @author Sean Schofield
- * @version $Revision: 1.6 $ $Date: 2004/12/31 02:28:07 $
+ * @version $Revision$ $Date$
  */
 
 public abstract class CatalogFactory {

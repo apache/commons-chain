@@ -25,7 +25,7 @@ import org.apache.commons.chain.Context;
  * and delegates to the rest of the chain.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/25 00:01:05 $
+ * @version $Revision$ $Date$
  */
 
 public class DelegatingCommand extends NonDelegatingCommand {

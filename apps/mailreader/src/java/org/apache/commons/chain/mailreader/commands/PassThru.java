@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/commands/PassThru.java,v 1.2 2004/06/01 00:48:41 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2004/06/01 00:48:41 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -24,7 +24,7 @@ import org.apache.commons.chain.Context;
 
 /**
  * Dummy command that just returns false.
- * @version $Revision: 1.2 $ $Date: 2004/06/01 00:48:41 $
+ * @version $Revision$ $Date$
  */
 public class PassThru implements Command {
 

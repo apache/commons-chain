@@ -28,7 +28,7 @@ import java.util.Iterator;
  * <p>Test case for the <code>CatalogFactoryBase</code> class.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2004/12/31 02:28:07 $
+ * @version $Revision$ $Date$
  */
 
 public class CatalogFactoryBaseTestCase extends TestCase {

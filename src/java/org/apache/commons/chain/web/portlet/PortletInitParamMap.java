@@ -32,7 +32,7 @@ import javax.portlet.PortletContext;
  * init parameters.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision$ $Date$
  */
 
 final class PortletInitParamMap implements Map {

@@ -32,7 +32,7 @@ import org.apache.commons.chain.Command;
  *
  * @author Craig R. McClanahan
  * @author Matthew J. Sgarlata
- * @version $Revision: 1.12 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 
 public class CatalogBase implements Catalog {

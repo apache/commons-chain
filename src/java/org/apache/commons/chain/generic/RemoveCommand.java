@@ -24,7 +24,7 @@ import org.apache.commons.chain.Context;
  * <p>Remove any context attribute stored under the <code>fromKey</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/02/25 00:01:07 $
+ * @version $Revision$ $Date$
  */
 
 public class RemoveCommand implements Command {

@@ -27,7 +27,7 @@ import org.apache.commons.chain.Context;
  * context attribute key returned by the <code>localeKey</code> property.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision$ $Date$
  */
 
 public abstract class AbstractGetLocaleCommand implements Command {

@@ -1,8 +1,8 @@
 /*
 
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/test/org/apache/commons/mailreader/ProfileCheckTest.java,v 1.1 2004/06/01 00:52:47 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/06/01 00:52:47 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 2000-2004 Apache Software Foundation
  *

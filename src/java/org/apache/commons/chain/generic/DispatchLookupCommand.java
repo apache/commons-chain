@@ -45,7 +45,7 @@ import java.util.WeakHashMap;
  * <code>IllegalArgumentException</code>.</p>
  *
  * @author Sean Schofield
- * @version $Revision: 1.1 $
+ * @version $Revision$
  */
 
 public class DispatchLookupCommand extends LookupCommand implements Filter {

@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/MailReader.java,v 1.4 2004/06/01 00:51:18 husted Exp $
- * $Revision: 1.4 $
- * $Date: 2004/06/01 00:51:18 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 2000-2004 Apache Software Foundation
  *

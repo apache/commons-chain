@@ -39,7 +39,7 @@ import org.apache.commons.chain.Filter;
  * <code>IllegalArgumentException</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.11 $ $Date$
+ * @version $Revision$ $Date$
  */
 
 public class LookupCommand implements Filter {

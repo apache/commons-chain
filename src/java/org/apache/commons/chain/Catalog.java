@@ -27,7 +27,7 @@ import java.util.Iterator;
  * that can be selected and executed based on environmental conditions.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2004/11/30 05:52:22 $
+ * @version $Revision$ $Date$
  */
 
 public interface Catalog {

@@ -33,7 +33,7 @@ import org.xml.sax.InputSource;
  * to parse more than one configuration document.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2004/10/18 01:07:41 $
+ * @version $Revision$ $Date$
  */
 public class ConfigParser {
 

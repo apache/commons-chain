@@ -33,7 +33,7 @@ import org.apache.commons.chain.web.MapEntry;
  * name-value.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2004/09/10 22:43:20 $
+ * @version $Revision$ $Date$
  */
 
 final class ServletParamMap implements Map {

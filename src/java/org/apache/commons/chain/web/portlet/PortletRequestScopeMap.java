@@ -32,7 +32,7 @@ import javax.portlet.PortletRequest;
  * attributes.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 
 final class PortletRequestScopeMap implements Map {

@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/agility/src/test/org/apache/commons/agility/ProcessingTest.java,v 1.1 2004/06/01 00:56:48 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/06/01 00:56:48 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *

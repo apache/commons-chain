@@ -25,7 +25,7 @@ import org.apache.commons.chain.Context;
  * and returns.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/02/25 00:01:05 $
+ * @version $Revision$ $Date$
  */
 
 public class NonDelegatingCommand implements Command {

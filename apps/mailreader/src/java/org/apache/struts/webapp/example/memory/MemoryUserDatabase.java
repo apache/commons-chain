@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/struts/webapp/example/memory/MemoryUserDatabase.java,v 1.1 2004/03/25 12:41:51 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/25 12:41:51 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -38,7 +38,7 @@ import java.util.HashMap;
  * <p>Concrete implementation of {@link UserDatabase} for an in-memory
  * database backed by an XML data file.</p>
  *
- * @version $Revision: 1.1 $ $Date: 2004/03/25 12:41:51 $
+ * @version $Revision$ $Date$
  * @since Struts 1.1
  */
 

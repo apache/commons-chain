@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/struts/webapp/example/Subscription.java,v 1.1 2004/03/25 12:42:04 husted Exp $
- * $Revision: 1.1 $
- * $Date: 2004/03/25 12:42:04 $
+ * $Revision$
+ * $Date$
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -26,7 +26,7 @@ package org.apache.struts.webapp.example;
  * <p>A <strong>Subscription</strong> which is stored, along with the
  * associated {@link User}, in a {@link UserDatabase}.</p>
  *
- * @version $Revision: 1.1 $ $Date: 2004/03/25 12:42:04 $
+ * @version $Revision$ $Date$
  */
 
 public interface Subscription {

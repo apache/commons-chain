@@ -32,7 +32,7 @@ import org.xml.sax.Attributes;
  * it should be registered.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 class ConfigRegisterRule extends Rule {
 

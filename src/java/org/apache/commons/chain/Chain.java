@@ -47,7 +47,7 @@ package org.apache.commons.chain;
  * After that, the configuration of the {@link Chain} is frozen.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/02/25 00:01:07 $
+ * @version $Revision$ $Date$
  */
 
 public interface Chain extends Command {

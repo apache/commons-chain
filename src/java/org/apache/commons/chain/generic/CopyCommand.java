@@ -25,7 +25,7 @@ import org.apache.commons.chain.Context;
  * the <code>fromKey</code> (if any), to the <code>toKey</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.8 $ $Date: 2005/01/07 19:18:03 $
+ * @version $Revision$ $Date$
  */
 
 public class CopyCommand implements Command {

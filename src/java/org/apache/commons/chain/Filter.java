@@ -37,7 +37,7 @@ package org.apache.commons.chain;
  * method, which is guaranteed to be called by the owning {@link Chain}.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2005/01/08 19:53:02 $
+ * @version $Revision$ $Date$
  */
 
 public interface Filter extends Command {

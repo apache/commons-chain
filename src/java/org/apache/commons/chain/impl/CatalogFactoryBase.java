@@ -26,7 +26,7 @@ import org.apache.commons.chain.CatalogFactory;
  * <p>A simple implementation of {@link CatalogFactory}.</p>
  *
  * @author Sean Schofield
- * @version $Revision: 1.4 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision$ $Date$
  */
 
 public class CatalogFactoryBase extends CatalogFactory {
