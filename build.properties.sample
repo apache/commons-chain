@@ -18,15 +18,25 @@ portlet-api.jar=../../jakarta-jetspeed-2/portlet-api/target/portlet-api-0.6.6.ja
 # To disable, set to a non-existant path (e.g. /absent.jar)
 servlet-api.jar = /usr/local/jwsdp-1.2/common/lib/servlet-api.jar
 
-# (OPTIONAL) The pathname of the "commons-logging.jar" file
-# required only if you are using or compiling the org.apache.commons.web.servlet package
+# (OPTIONAL) The pathname of the "commons-beanutils.jar" file
+# required only if you are using the org.apache.commons.chain.config package
 # To disable, set to a non-existant path (e.g. /absent.jar)
-commons-logging.jar = ../../jakarta-commons/logging/dist/commons-logging.jar
+commons-beanutils.jar = ../../jakarta-commons/beanutils/dist/commons-beanutils.jar
+
+# (OPTIONAL) The pathname of the "commons-collections.jar" file
+# required only if you are using the org.apache.commons.chain.config package
+# To disable, set to a non-existant path (e.g. /absent.jar)
+commons-collections.jar = ../../jakarta-commons/collections/dist/commons-collections.jar
 
 # (OPTIONAL) The pathname of the "commons-digester.jar" file
 # required only if you are using the org.apache.commons.chain.config package
 # To disable, set to a non-existant path (e.g. /absent.jar)
 commons-digester.jar = ../../jakarta-commons/digester/dist/commons-digester.jar
+
+# (OPTIONAL) The pathname of the "commons-logging.jar" file
+# required only if you are using or compiling the org.apache.commons.config package
+# To disable, set to a non-existant path (e.g. /absent.jar)
+commons-logging.jar = ../../jakarta-commons/logging/dist/commons-logging.jar
 
 # (OPTIONAL) The pathname of the shared JAR repository
 # required only if you are using the install-jar target
