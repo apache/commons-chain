@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<chains>
+<catalog>
     <command
         name="PassThru"
         className="org.apache.commons.chain.mailreader.commands.PassThru" />
@@ -9,4 +9,4 @@
     <command
         name="LogonUser"
         className="org.apache.commons.chain.mailreader.commands.LogonUser" />
-</chains>
+</catalog>
