@@ -28,7 +28,7 @@ import java.util.Iterator;
  * <p>Test case for the <code>CatalogFactoryBase</code> class.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2004/10/18 01:09:06 $
+ * @version $Revision: 1.3 $ $Date: 2004/12/09 05:23:14 $
  */
 
 public class CatalogFactoryBaseTestCase extends TestCase {
@@ -86,19 +86,6 @@ public class CatalogFactoryBaseTestCase extends TestCase {
 
 
     /**
-     * <p>Test the default {@link Catalog} instance.</p>
-     */
-    public void testDefaultCatalog() {
-
-        Catalog catalog = new CatalogBase();
-        factory.setCatalog(catalog);
-        assertTrue(catalog == factory.getCatalog());
-        assertEquals(0, getCatalogCount());
-
-    }
-
-
-    /**
      * <p>Test a pristine instance of {@link CatalogFactory}.</p>
      */
     public void testPristine() {
@@ -106,6 +93,19 @@ public class CatalogFactoryBaseTestCase extends TestCase {
         assertNotNull(factory);
         assertNull(factory.getCatalog());
         assertNull(factory.getCatalog("foo"));
+        assertEquals(0, getCatalogCount());
+
+    }
+
+
+    /**
+     * <p>Test the default {@link Catalog} instance.</p>
+     */
+    public void testDefaultCatalog() {
+
+        Catalog catalog = new CatalogBase();
+        factory.setCatalog(catalog);
+        assertTrue(catalog == factory.getCatalog());
         assertEquals(0, getCatalogCount());
 
     }
