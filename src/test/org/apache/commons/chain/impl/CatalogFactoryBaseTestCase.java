@@ -28,7 +28,7 @@ import java.util.Iterator;
  * <p>Test case for the <code>CatalogFactoryBase</code> class.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2004/12/09 05:23:14 $
+ * @version $Revision: 1.4 $ $Date: 2004/12/31 02:28:07 $
  */
 
 public class CatalogFactoryBaseTestCase extends TestCase {
@@ -128,6 +128,53 @@ public class CatalogFactoryBaseTestCase extends TestCase {
         CatalogFactory.clear();
         factory = CatalogFactory.getInstance();
         assertEquals(0, getCatalogCount());
+
+    }
+
+
+    /**
+     * <p>Test <code>getCatalog()</code> method.</p>
+     */
+    public void testCatalogIdentifier() {
+
+        Catalog defaultCatalog = new CatalogBase();
+        Command defaultFoo = new NonDelegatingCommand();
+        defaultCatalog.addCommand("foo", defaultFoo);
+        Command fallback = new NonDelegatingCommand();
+        defaultCatalog.addCommand("noSuchCatalog:fallback", fallback);
+
+        factory.setCatalog(defaultCatalog);
+
+        Catalog specificCatalog = new CatalogBase();
+        Command specificFoo = new NonDelegatingCommand();
+        specificCatalog.addCommand("foo", specificFoo);
+        factory.addCatalog("specific", specificCatalog);
+
+        Command command = factory.getCommand("foo");
+        assertSame(defaultFoo, command);
+
+        command = factory.getCommand("specific:foo");
+        assertSame(specificFoo, command);
+
+        command = factory.getCommand("void");
+        assertNull(command);
+
+        command = factory.getCommand("foo:void");
+        assertNull(command);
+
+        command = factory.getCommand("specific:void");
+        assertNull(command);
+
+        command = factory.getCommand("noSuchCatalog:fallback");
+        assertNull(command);
+
+        try {
+            command = factory.getCommand("multiple:delimiters:reserved");
+            fail("A command ID with more than one delimiter should throw an IllegalArgumentException");
+        }
+        catch (IllegalArgumentException ex) {
+            // expected behavior
+        }
 
     }
 

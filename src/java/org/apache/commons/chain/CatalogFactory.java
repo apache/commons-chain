@@ -20,17 +20,38 @@ import java.util.Iterator;
 import java.util.Map;
 import org.apache.commons.chain.impl.CatalogFactoryBase;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <p>A {@link CatalogFactory} is a class used to store and retrieve
  * {@link Catalog}s.  The factory allows for a default {@link Catalog}
  * as well as {@link Catalog}s stored with a name key.  Follows the
  * Factory pattern (see GoF).</p>
  *
+ * <p>The base <code>CatalogFactory</code> implementation also implements
+ * a resolution mechanism which allows lookup of a command based on a single
+ * String which encodes both the catalog and command names.</p>
+ *
  * @author Sean Schofield
- * @version $Revision: 1.5 $ $Date: 2004/11/30 05:52:22 $
+ * @version $Revision: 1.6 $ $Date: 2004/12/31 02:28:07 $
  */
 
 public abstract class CatalogFactory {
+
+
+    /**
+     * <p>The <code>Log</code> instance for this class.</p>
+     */
+    private static final Log log = LogFactory.getLog(CatalogFactory.class);
+
+
+    /**
+     * <p>Values passed to the <code>getCommand(String)</code> method should
+     * use this as the delimiter between the "catalog" name and the "command"
+     * name.</p>
+     */
+    public static final String DELIMITER = ":";
 
 
     // --------------------------------------------------------- Public Methods
@@ -79,6 +100,66 @@ public abstract class CatalogFactory {
      * If there are no known catalogs, an empty Iterator is returned.</p>
      */
     public abstract Iterator getNames();
+
+
+    /**
+     * <p>Return a <code>Command</code> based on the given commandID.</p>
+     *
+     * <p>At this time, the structure of commandID is relatively simple:  if the
+     * commandID contains a DELIMITER, treat the segment of the commandID
+     * up to (but not including) the DELIMITER as the name of a catalog, and the
+     * segment following the DELIMITER as a command name within that catalog.
+     * If the commandID contains no DELIMITER, treat the commandID as the name
+     * of a command in the default catalog.</p>
+     *
+     * <p>To preserve the possibility of future extensions to this lookup
+     * mechanism, the DELIMITER string should be considered reserved, and
+     * should not be used in command names.  commandID values which contain
+     * more than one DELIMITER will cause an
+     * <code>IllegalArgumentException</code> to be thrown.</p>
+     *
+     * @param commandID the identifier of the command to return
+     * @return the command located with commandID, or <code>null</code>
+     *  if either the command name or the catalog name cannot be resolved
+     * @throws IllegalArgumentException if the commandID contains more than
+     *  one DELIMITER
+     */
+    public Command getCommand(String commandID) throws IllegalArgumentException {
+
+        String commandName = commandID;
+        String catalogName = null;
+        Catalog catalog = null;
+
+        if (commandID != null) {
+            int splitPos = commandID.indexOf(DELIMITER);
+            if (splitPos != -1) {
+                catalogName = commandID.substring(0, splitPos);
+                commandName = commandID.substring(splitPos + DELIMITER.length());
+                if (commandName.indexOf(DELIMITER) != -1) {
+                    throw new IllegalArgumentException("commandID [" +
+                                                       commandID +
+                                                       "] has too many delimiters (reserved for future use)");
+                }
+            }
+        }
+
+        if (catalogName != null) {
+            catalog = this.getCatalog(catalogName);
+            if (catalog == null) {
+                log.warn("No catalog found for name: " + catalogName + ".");
+                return null;
+            }
+        } else {
+            catalog = this.getCatalog();
+            if (catalog == null) {
+                log.warn("No default catalog found.");
+                return null;
+            }
+        }
+
+        return catalog.getCommand(commandName);                    
+
+    }
 
 
     // ------------------------------------------------------- Static Variables
