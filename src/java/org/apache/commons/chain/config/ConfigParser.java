@@ -33,7 +33,7 @@ import org.xml.sax.InputSource;
  * to parse more than one configuration document.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision: 1.4 $ $Date: 2004/10/18 01:07:41 $
  */
 public class ConfigParser {
 
@@ -140,13 +140,18 @@ public class ConfigParser {
     /**
      * <p>Parse the XML document at the specified URL, using the configured
      * <code>RuleSet</code>, registering top level commands into the specified
-     * {@link Catalog}.</p>
+     * {@link Catalog}.  Use this method <strong>only</strong> if you have
+     * <strong>NOT</strong> included any <code>factory</code> element in your
+     * configuration resource, and wish to supply the catalog explictly.</p>
      *
      * @param catalog {@link Catalog} into which configured chains are
      *  to be registered
      * @param url <code>URL</code> of the XML document to be parsed
      *
      * @exception Exception if a parsing error occurs
+     *
+     * @deprecated Use parse(URL) on a configuration resource with "factory"
+     *  element(s) embedded
      */
     public void parse(Catalog catalog, URL url) throws Exception {
 
@@ -154,6 +159,33 @@ public class ConfigParser {
         Digester digester = getDigester();
         digester.clear();
         digester.push(catalog);
+
+        // Prepare our InputSource
+        InputSource source = new InputSource(url.toExternalForm());
+        source.setByteStream(url.openStream());
+
+        // Parse the configuration document
+        digester.parse(source);
+
+    }
+
+
+    /**
+     * <p>Parse the XML document at the specified URL using the configured
+     * <code>RuleSet</code>, registering catalogs with nested chains and
+     * commands as they are encountered.  Use this method <strong>only</strong>
+     * if you have included one or more <code>factory</code> elements in your
+     * configuration resource.</p>
+     *
+     * @param url <code>URL</code> of the XML document to be parsed
+     *
+     * @exception Exception if a parsing error occurs
+     */
+    public void parse(URL url) throws Exception {
+
+        // Prepare our Digester instance
+        Digester digester = getDigester();
+        digester.clear();
 
         // Prepare our InputSource
         InputSource source = new InputSource(url.toExternalForm());

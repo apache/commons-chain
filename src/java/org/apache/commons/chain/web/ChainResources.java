@@ -51,9 +51,62 @@ final class ChainResources {
     /**
      * <p>Parse the specified class loader resources.</p>
      *
+     * @param resources Comma-delimited list of resources (or <code>null</code>)
+     * @param parser {@link ConfigParser} to use for parsing
+     */
+    static void parseClassResources(String resources,
+                                    ConfigParser parser) {
+
+        if (resources == null) {
+            return;
+        }
+        ClassLoader loader =
+            Thread.currentThread().getContextClassLoader();
+        if (loader == null) {
+            loader = ChainResources.class.getClassLoader();
+        }
+        String path = null;
+        try {
+            while (true) {
+                int comma = resources.indexOf(",");
+                if (comma < 0) {
+                    path = resources.trim();
+                    resources = "";
+                } else {
+                    path = resources.substring(0, comma);
+                    resources = resources.substring(comma + 1);
+                }
+                if (path.length() < 1) {
+                    break;
+                }
+                URL url = loader.getResource(path);
+                if (url == null) {
+                    throw new IllegalStateException
+                        ("Missing chain config resource '" + path + "'");
+                }
+                if (log.isDebugEnabled()) {
+                    log.debug("Loading chain config resource '" + path + "'");
+                }
+                parser.parse(url);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException
+                ("Exception parsing chain config resource '" + path + "': " +
+                 e.getMessage());
+        }
+
+    }
+
+
+    /**
+     * <p>Parse the specified class loader resources.</p>
+     *
      * @param catalog {@link Catalog} we are populating
      * @param resources Comma-delimited list of resources (or <code>null</code>)
      * @param parser {@link ConfigParser} to use for parsing
+     *
+     * @deprecated Use the variant that does not take a catalog, on a
+     *  configuration resource containing "catalog" element(s)
      */
     static void parseClassResources(Catalog catalog, String resources,
                                     ConfigParser parser) {
@@ -102,10 +155,60 @@ final class ChainResources {
     /**
      * <p>Parse the specified web application resources.</p>
      *
+     * @param context <code>ServletContext</code> for this web application
+     * @param resources Comma-delimited list of resources (or <code>null</code>)
+     * @param parser {@link ConfigParser} to use for parsing
+     */
+    static void parseWebResources(ServletContext context,
+                                  String resources,
+                                  ConfigParser parser) {
+
+        if (resources == null) {
+            return;
+        }
+        String path = null;
+        try {
+            while (true) {
+                int comma = resources.indexOf(",");
+                if (comma < 0) {
+                    path = resources.trim();
+                    resources = "";
+                } else {
+                    path = resources.substring(0, comma);
+                    resources = resources.substring(comma + 1);
+                }
+                if (path.length() < 1) {
+                    break;
+                }
+                URL url = context.getResource(path);
+                if (url == null) {
+                    throw new IllegalStateException
+                        ("Missing chain config resource '" + path + "'");
+                }
+                if (log.isDebugEnabled()) {
+                    log.debug("Loading chain config resource '" + path + "'");
+                }
+                parser.parse(url);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException
+                ("Exception parsing chain config resource '" + path + "': " +
+                 e.getMessage());
+        }
+
+    }
+
+
+    /**
+     * <p>Parse the specified web application resources.</p>
+     *
      * @param catalog {@link Catalog} we are populating
      * @param context <code>ServletContext</code> for this web application
      * @param resources Comma-delimited list of resources (or <code>null</code>)
      * @param parser {@link ConfigParser} to use for parsing
+     *
+     * @deprecated Use the variant that does not take a catalog, on a
+     *  configuration resource containing "catalog" element(s)
      */
     static void parseWebResources(Catalog catalog, ServletContext context,
                                   String resources,

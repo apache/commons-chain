@@ -17,6 +17,7 @@ package org.apache.commons.chain.config;
 
 
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.digester.Digester;
@@ -30,6 +31,16 @@ import org.apache.commons.digester.RuleSetBase;
  * executing the <code>addRuleInstance()</code> method in order to influence
  * the rules that get added, with default values in square brackets:</p>
  * <ul>
+ * <li><strong>catalogClass</strong> -- Fully qualified name of the
+ *     implementation class used to create new {@link Catalog} instances.
+ *     If not specified, the default value is
+ *     <code>org.apache.commons.chain.impl.CatalogBsae</code>.</li>
+ * <li><strong>catalogElement</strong> -- Name of the XML element representing
+ *     the addition of a {@link Catalog}.  Any such catalog that is created
+ *     will be registered with the {@link CatalogFactory} instance for our
+ *     application, under the name specified by the <code>nameAttribute</code>
+ *     attribute (if present), or as the default {@link Catalog}.  If not
+ *     specified, the default value is <code>catalog</code>.</li>
  * <li><strong>chainClass</strong> -- Fully qualified name of the implementation
  *     class used to create new {@link Chain} instances.  If not specified, the
  *     default value is <code>org.apache.commons.chain.impl.ChainBase</code>.
@@ -60,7 +71,7 @@ import org.apache.commons.digester.RuleSetBase;
  * </ul>
  * 
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2004/07/16 19:06:01 $
+ * @version $Revision: 1.8 $ $Date: 2004/10/18 01:07:41 $
  */
 
 public class ConfigRuleSet extends RuleSetBase {
@@ -69,6 +80,8 @@ public class ConfigRuleSet extends RuleSetBase {
     // ----------------------------------------------------- Instance Variables
 
 
+    private String catalogClass = "org.apache.commons.chain.impl.CatalogBase";
+    private String catalogElement = "catalog";
     private String chainClass = "org.apache.commons.chain.impl.ChainBase";
     private String chainElement = "chain";
     private String classAttribute = "className";
@@ -78,6 +91,42 @@ public class ConfigRuleSet extends RuleSetBase {
 
 
     // ------------------------------------------------------------- Properties
+
+
+    /**
+     * <p>Return the fully qualified {@link Catalog} implementation class.</p>
+     */
+    public String getCatalogClass() {
+        return (this.catalogClass);
+    }
+
+
+    /**
+     * <p>Set the fully qualified {@link Catalog} implementation class.</p>
+     *
+     * @param catalogClass The new {@link Catalog} implementation class
+     */
+    public void setCatalogClass(String catalogClass) {
+        this.catalogClass = catalogClass;
+    }
+
+
+    /**
+     * <p>Return the element name of a catalog element.</p>
+     */
+    public String getCatalogElement() {
+        return (this.catalogElement);
+    }
+
+
+    /**
+     * <p>Set the element name of a catalog element.</p>
+     *
+     * @param catalogElement The new element name
+     */
+    public void setCatalogElement(String catalogElement) {
+        this.catalogElement = catalogElement;
+    }
 
 
     /**
@@ -201,6 +250,11 @@ public class ConfigRuleSet extends RuleSetBase {
      *  should be added.
      */
     public void addRuleInstances(Digester digester) {
+
+        // Add rules for a catalog element
+        digester.addRule("*/" + getCatalogElement(),
+                         new ConfigCatalogRule(nameAttribute, catalogClass));
+        digester.addSetProperties("*/" + getCatalogElement());
 
         // Add rules for a chain element
         digester.addObjectCreate("*/" + getChainElement(),
