@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/MailReader.java,v 1.3 2004/04/08 23:23:47 husted Exp $
- * $Revision: 1.3 $
- * $Date: 2004/04/08 23:23:47 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/MailReader.java,v 1.4 2004/06/01 00:51:18 husted Exp $
+ * $Revision: 1.4 $
+ * $Date: 2004/06/01 00:51:18 $
  *
  * Copyright 2000-2004 Apache Software Foundation
  *
@@ -31,6 +31,11 @@ import java.util.Locale;
  * Context for MailReader Commands.
  */
 public class MailReader extends ContextBase {
+
+    /**
+     * Property key for Locale.
+     */
+    public static String LOCALE_KEY = "locale";
 
     /**
      * Property name for the country field of a Locale.

@@ -12,24 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 public class LogonAction extends MailReaderAction {
 
     protected ActionForward checkState(ActionMapping mapping,
-        ActionForm form,
-        HttpServletRequest request,
-        HttpServletResponse response) throws Exception {
+                                       ActionForm form,
+                                       HttpServletRequest request,
+                                       HttpServletResponse response) throws Exception {
 
         Object user = request.getSession().getAttribute(Constants.USER_KEY);
-        if (user==null) {
+        if (user == null) {
             ActionMessages errors = new ActionMessages();
             errors.add(
-               ActionMessages.GLOBAL_MESSAGE,
-               new ActionMessage("error.password.mismatch"));
-            saveErrors(request,errors);
+                    ActionMessages.GLOBAL_MESSAGE,
+                    new ActionMessage("error.password.mismatch"));
+            saveErrors(request, errors);
             return findInput(mapping);
         }
 
         return null;
 
     }
-
 
 
 }

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/MailReaderAction.java,v 1.4 2004/04/08 23:21:22 husted Exp $
- * $Revision: 1.4 $
- * $Date: 2004/04/08 23:21:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/struts/MailReaderAction.java,v 1.5 2004/06/01 00:50:36 husted Exp $
+ * $Revision: 1.5 $
+ * $Date: 2004/06/01 00:50:36 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -65,10 +65,10 @@ public class MailReaderAction extends Action {
 
     // See interface for JavaDoc
     public MailReader getContext(
-        ActionMapping mapping,
-        ActionForm form,
-        HttpServletRequest request)
-        throws Exception {
+            ActionMapping mapping,
+            ActionForm form,
+            HttpServletRequest request)
+            throws Exception {
 
         Locale locale = getLocale(request);
         Context input = getInput(form);
@@ -87,9 +87,9 @@ public class MailReaderAction extends Action {
      * @return ActionForward to follow, or null
      */
     protected ActionForward preExecute(ActionMapping mapping,
-        ActionForm form,
-        HttpServletRequest request,
-        HttpServletResponse response) throws Exception {
+                                       ActionForm form,
+                                       HttpServletRequest request,
+                                       HttpServletResponse response) throws Exception {
 
         // override to provide functionality
         return null;
@@ -104,8 +104,8 @@ public class MailReaderAction extends Action {
      * @return Command for this helper
      */
     protected Command getCatalogCommand(ActionMapping mapping,
-        ActionForm form,
-        HttpServletRequest request) throws Exception {
+                                        ActionForm form,
+                                        HttpServletRequest request) throws Exception {
 
         Catalog catalog = (Catalog) request.getSession().getServletContext().getAttribute("catalog");
         String name = mapping.getName();
@@ -117,11 +117,11 @@ public class MailReaderAction extends Action {
      * <p>Transfer input properties (back) to ActionForm.</p>
      */
     protected void conformInput(ActionMapping mapping,
-        ActionForm form,
-        HttpServletRequest request,
-        MailReader mailReader) throws Exception {
+                                ActionForm form,
+                                HttpServletRequest request,
+                                MailReader mailReader) throws Exception {
 
-        BeanUtils.copyProperties(form,mailReader.getInput());
+        BeanUtils.copyProperties(form, mailReader.getInput());
 
     }
 
@@ -129,11 +129,11 @@ public class MailReaderAction extends Action {
      * <p>Transfer framework properties (back) to framework objects.</p>
      */
     protected void conformState(ActionMapping mapping,
-        ActionForm form,
-        HttpServletRequest request,
-        MailReader mailReader) throws Exception {
+                                ActionForm form,
+                                HttpServletRequest request,
+                                MailReader mailReader) throws Exception {
 
-        setLocale(request,mailReader.getLocale());
+        setLocale(request, mailReader.getLocale());
         User user = mailReader.getUser();
         request.getSession().setAttribute(Constants.USER_KEY, user);
 
@@ -147,9 +147,9 @@ public class MailReaderAction extends Action {
      * </p>
      */
     protected ActionForward checkState(ActionMapping mapping,
-        ActionForm form,
-        HttpServletRequest request,
-        HttpServletResponse response) throws Exception {
+                                       ActionForm form,
+                                       HttpServletRequest request,
+                                       HttpServletResponse response) throws Exception {
 
         // override to provide functionality
         return null;
@@ -162,19 +162,19 @@ public class MailReaderAction extends Action {
      * </p>
      */
     protected ActionForward postExecute(ActionMapping mapping,
-        ActionForm form,
-        HttpServletRequest request,
-        HttpServletResponse response,
-        MailReader mailReader) throws Exception {
+                                        ActionForm form,
+                                        HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        MailReader mailReader) throws Exception {
 
-        conformInput(mapping,form,request,mailReader);
-        conformState(mapping,form,request,mailReader);
+        conformInput(mapping, form, request, mailReader);
+        conformState(mapping, form, request, mailReader);
 
         // TODO: Expose any output
         // TODO: Expose any status messages,
 
-        ActionForward location = checkState(mapping,form,request,response);
-        if (null!=location) return location;
+        ActionForward location = checkState(mapping, form, request, response);
+        if (null != location) return location;
 
         return null;
 
@@ -212,23 +212,24 @@ public class MailReaderAction extends Action {
     }
 
 
-      // See super class for JavaDoc
+    // See super class for JavaDoc
     public ActionForward execute(
-        ActionMapping mapping,
-        ActionForm form,
-        HttpServletRequest request,
-        HttpServletResponse response)
-        throws Exception {
+            ActionMapping mapping,
+            ActionForm form,
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws Exception {
 
         ActionForward location;
-        MailReader mailReader = getContext(mapping,form,request);
+        MailReader mailReader = getContext(mapping, form, request);
 
-        location = preExecute(mapping,form,request,response);
+        location = preExecute(mapping, form, request, response);
         if (location != null) return location;
 
-        boolean stop = getCatalogCommand(mapping,form,request).execute(mailReader);
+        Command command = getCatalogCommand(mapping, form, request);
+        boolean stop = command.execute(mailReader);
 
-        location = postExecute(mapping,form,request,response,mailReader);
+        location = postExecute(mapping, form, request, response, mailReader);
         if (location != null) return location;
 
         return findSuccess(mapping);
