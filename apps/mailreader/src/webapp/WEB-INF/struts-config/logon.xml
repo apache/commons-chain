@@ -15,7 +15,7 @@
     <form-beans>
 
         <form-bean
-            name="Logon"
+            name="LogonUser"
             type="org.apache.struts.validator.DynaValidatorForm">
            <form-property name="username" type="java.lang.String"/>
            <form-property name="password" type="java.lang.String"/>
@@ -28,8 +28,25 @@
     <global-forwards/>
 
     <action-mappings>
-        <action path="/LogonForm" forward="/missing.jsp" />
-    </action-mappings>
 
+        <action path="/LogonForm"
+            name="LogonUser"
+            validate="false"
+            scope="request"
+            forward="/logon.jsp" />
+
+        <action path="/LogonUser"
+            name="LogonUser"
+            validate="true"
+            scope="request"
+            input="input"
+            type="org.apache.commons.chain.mailreader.struts.LogonAction">
+            <forward name="input" path="/LogonForm.do" />
+            <forward name="success" path="/Menu.do" />
+        </action>
+
+        <action path="/Logoff" forward="/missing.jsp" />
+
+    </action-mappings>
 
 </struts-config>
