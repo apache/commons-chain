@@ -16,10 +16,10 @@
 -->
 <project>
   <extend>../sandbox-build/project.xml</extend>
-  <name>Chain</name>
+  <name>Commons Chain</name>
   <id>commons-chain</id>
   
-  <logo><!--/images/logo.png--></logo>
+  <logo>/images/chain-logo-white.png</logo>
   
   <currentVersion>0.2-dev</currentVersion>
   <inceptionYear>2003</inceptionYear>
@@ -62,13 +62,13 @@
     <dependency>
       <groupId>jsf</groupId>
       <artifactId>jsf-api</artifactId>
-      <version>1.0-beta</version>
+      <version>1.0</version>
       <url>http://java.sun.com/j2ee/javaserverfaces/download.html</url>
     </dependency>
     <dependency>
       <groupId>jsf</groupId>
       <artifactId>jsf-impl</artifactId>
-      <version>1.0-beta</version>
+      <version>1.0</version>
       <url>http://java.sun.com/j2ee/javaserverfaces/download.html</url>
     </dependency>
     <dependency>
