@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<chains>
+    <command
+        name="passThru"
+        className="org.apache.commons.chain.mailreader.commands.PassThru" />
+</chains>
