@@ -39,7 +39,7 @@ import org.apache.commons.chain.Filter;
  * <code>IllegalArgumentException</code>.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.10 $ $Date: 2004/11/30 05:52:23 $
+ * @version $Revision: 1.11 $ $Date: 2005/01/08 18:02:28 $
  */
 
 public class LookupCommand implements Filter {
@@ -214,7 +214,7 @@ public class LookupCommand implements Filter {
      *  can be found and the <code>optional</code> property is set
      *  to <code>false</code>
      */
-    private Command getCommand(Context context) {
+    protected Command getCommand(Context context) {
 
         CatalogFactory catalogFactory = CatalogFactory.getInstance();
         String catalogName = getCatalogName();
