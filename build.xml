@@ -3,7 +3,7 @@
 
 <!--
         "Chain of Responsibility" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.1 2003/08/11 04:44:16 craigmcc Exp $
+        $Id: build.xml,v 1.2 2003/08/12 19:33:56 husted Exp $
 -->
 
 
@@ -180,9 +180,9 @@
       <classpath refid="compile.classpath"/>
       <exclude    name="org/apache/commons/chain/web/faces/*.java"
                 unless="faces.present"/>
-      <exclude    name="org/apache/commons/chain/web/portet/*.java"
+      <exclude    name="org/apache/commons/chain/web/portlet/*.java"
                 unless="portlet.present"/>
-      <exclude    name="org/apache/commons/chain/web/Servlet*.java"
+      <exclude    name="org/apache/commons/chain/web/servlet/*.java"
                 unless="servlet.present"/>
       <exclude    name="org/apache.commons/chain/config/*.java"
                 unless="digester.present"/>
@@ -289,7 +289,7 @@
   <target name="test"  depends="compile.tests"
    description="Run all unit test cases">
 
-    <junit printsummary="yes" fork="yes"
+    <junit printsummary="yes" fork="no"
           haltonfailure="yes" haltonerror="yes">
 
       <classpath refid="test.classpath"/>

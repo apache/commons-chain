@@ -72,7 +72,7 @@ encapsulated in the following interfaces in package
 <li><strong>Filter</strong> - A specialized <code>Command</code> that requires
     any <code>Chain</code> that executes it to promise a later call to the
     <code>postprocess()</code> method if its <code>execute()</code> method
-    was ever called, even in the face of exceptions being thrown by subseuqently
+    was ever called, even in the face of exceptions being thrown by subsequently
     called commands.</li>
 <li><strong>Context</strong> - A container for attributes and properties that
     represent the dynamic state of the computation being performed by a
@@ -101,7 +101,7 @@ the corresponding APIs at compile time):</p>
     Optional, compiled only if commons-digester.jar is available.</li>
 <li><strong>org.apache.commons.web</strong> - Abstract implementation
     of <code>Context</code> that represents the fundamental characteristics
-    of request, session, and application scope objects in a web appication
+    of request, session, and application scope objects in a web application
     environment, without being tied specificaly to the Servlet or Portlet
     APIs.  These characteristics are exposed under property names that are
     identical to the "implicit variables" of the expression language that is
