@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="Chain">
+
+  <title>Chain</title>
+  <organizationLogo href="/images/jakarta-logo-blue.gif">Jakarta</organizationLogo>
+
+  <body>
+    <menu name="Chain">
+      <item name="Home"                href="/index.html"/>
+      <item name="Download"            href="/download.html"/>
+    </menu>
+
+    <links>
+      <item name="Jakarta" href="http://jakarta.apache.org"/>
+      <item name="Commons" href="http://jakarta.apache.org/commons"/>
+      <item name="Chain" href="/index.html"/>
+    </links>
+  </body>
+</project>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <extend>../project.xml</extend>
+  <name>Chain</name>
+  <id>commons-chain</id>
+  <currentVersion>0.1-dev</currentVersion>
+  <inceptionYear>2003</inceptionYear>
+  <shortDescription>Chain of Responsibility</shortDescription>
+  <description>An implmentation of the GoF Chain of Responsibility pattern.</description>
+
+  <developers>
+    <developer>
+      <name>Craig McClanahan</name>
+      <id>craigmcc</id>
+      <email>craigmcc@apache.org</email>
+      <organization></organization>
+    </developer>
+    <developer>
+      <name>Ted Husted</name>
+      <id>husted</id>
+      <email>husted@apache.org</email>
+      <organization></organization>
+    </developer>
+    <developer>
+      <name>Martin Cooper</name>
+      <id>martinc</id>
+      <email>martinc@apache.org</email>
+      <organization>Informatica</organization>
+    </developer>
+  </developers>
+  
+  <dependencies>
+    <dependency> 
+      <id>servletapi</id> 
+      <version>2.3</version> 
+    </dependency>
+    <dependency>
+      <id>portlet-api</id>
+      <version>0.1-dev-unreleased</version>
+    </dependency>
+    <dependency>
+      <id>junit</id>
+      <version>3.8.1</version>
+    </dependency>
+    <dependency> 
+      <id>commons-beanutils</id> 
+      <version>1.6</version> 
+    </dependency> 
+    <dependency> 
+      <id>commons-collections</id> 
+      <version>2.1</version> 
+    </dependency> 
+    <dependency> 
+      <id>commons-digester</id> 
+      <version>1.5</version> 
+    </dependency> 
+    <dependency> 
+      <id>commons-logging</id> 
+      <version>1.0.3</version> 
+    </dependency> 
+  </dependencies>
+  
+  <build>
+    <unitTest>
+      <includes>
+        <include>**/*Test.java</include>
+      </includes>
+    </unitTest>
+  </build>
+</project>

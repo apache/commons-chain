@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Home</title>
+    <author email="martinc@apache.org">Martin Cooper</author>
+    <author email="craigmcc@apache.org">Craig McClanahan</author>
+  </properties>
+
+  <body>
+
+    <section name="Introduction">
+      <p>A popular technique for organizing the execution of complex
+      processing flows is the "Chain of Responsibility" pattern, as
+      described (among many other places) in the classic "Gang of Four"
+      design patterns book. Although the fundamental API contracts
+      required to implement this design patten are extremely simple, it
+      is useful to have a base API that facilitates using the pattern,
+      and (more importantly) encouraging composition of command
+      implementations from multiple diverse sources.</p>
+
+      <p>Towards that end, the Chain API models a computation as a
+      series of "commands" that can be combined into a "chain". The API
+      for a command consists of a single method
+      (<code>execute()</code>), which is passed a "context" parameter
+      containing the dynamic state of the computation, and whose return
+      value is a boolean that determines whether or not processing for
+      the current chain has been completed (true), or whether
+      processing should be delegated to the next command in the chain
+      (false).</p>
+
+      <p>The "context" abstraction is designed to isolate command
+      implementations from the environment in which they are run (such
+      as a command that can be used in either a Servlet or Portlet,
+      without being tied directly to the API contracts of either of
+      these environments). For commands that need to allocate resources
+      prior to delegation, and then release them upon return (even if a
+      delegated-to command throws an exception), the "filter" extension
+      to "command" provides a <code>postprocess()</code> method for
+      this cleanup. Finally, commands can be stored and looked up in a
+      "catalog" to allow deferral of the decision on which command (or
+      chain) is actually executed.</p>
+
+      <p>To maximize the usefulness of the Chain of Responsibility
+      pattern APIs, the fundamental interface contracts are defined in
+      a manner with zero dependencies other than an appropriate JDK.
+      Convenience base class implementations of these APIs are
+      provided, as well as more specialized (but optional)
+      implementations for the web environment (i.e. servlets and
+      portlets). However, conditional compilation in the build script
+      allows graceful creation of the underlying API JAR file even in
+      the absence of the optional dependencies.</p>
+
+      <p>Given that command implementations are designed to conform
+      with these recommendations, it should be feasible to utilize the
+      Chain of Responsibility APIs in the "front controller" of a web
+      application framework (such as Struts), but also be able to use
+      it in the business logic and persistence tiers to model complex
+      computational requirements via composition. In addition,
+      separation of a computation into discrete commands that operate
+      on a general purpose context allows easier creation of commands
+      that are unit testable, because the impact of executing a command
+      can be directly measured by observing the corresponding state
+      changes in the context that is supplied.</p>
+    </section>
+
+  </body>
+
+</document>
