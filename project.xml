@@ -21,7 +21,7 @@
   
   <logo>/images/chain-logo-white.png</logo>
   
-  <currentVersion>0.2-dev</currentVersion>
+  <currentVersion>1.0-dev</currentVersion>
   <inceptionYear>2003</inceptionYear>
   <shortDescription>Commons Chain</shortDescription>
   <description>An implmentation of the GoF Chain of Responsibility pattern</description>
@@ -100,17 +100,12 @@
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
-      <version>1.6</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId>
-      <version>2.1</version>
+      <version>1.7.0</version>
     </dependency>
     <dependency>
       <groupId>commons-digester</groupId>
       <artifactId>commons-digester</artifactId>
-      <version>1.5</version>
+      <version>1.6</version>
     </dependency>
     <dependency>
       <groupId>commons-logging</groupId>
