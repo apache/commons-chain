@@ -32,7 +32,7 @@ import org.apache.commons.chain.impl.NonDelegatingCommand;
  * <p>Test case for the <code>LookupCommand</code> class.</p>
  *
  * @author Sean Schofield
- * @version 
+ * @version $Revision: 1.2 $
  */
 
 public class LookupCommandTestCase extends TestCase {
