@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionContext.java,v 1.1 2004/03/26 18:21:48 husted Exp $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelper.java,v 1.1 2004/03/27 03:56:20 husted Exp $
  * $Revision: 1.1 $
- * $Date: 2004/03/26 18:21:48 $
+ * $Date: 2004/03/27 03:56:20 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -55,12 +55,12 @@ import java.util.Locale;
  * but users of this class do not need to know where.
  * </p>
  * <p>
- * The ActionContextBase methods simply return the resources
+ * The ActionHelperBase methods simply return the resources
  * from under the context and key used by the Struts
  * ActionServlet when the resources are created.
  * </p>
  */
-public interface ActionContext {
+public interface ActionHelper {
 
 
 // ------------------------------------------------ Application Context

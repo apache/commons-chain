@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionContextBase.java,v 1.2 2004/03/26 18:21:48 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2004/03/26 18:21:48 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/apps/mailreader/src/java/org/apache/commons/chain/mailreader/Attic/ActionHelperBase.java,v 1.1 2004/03/27 03:56:20 husted Exp $
+ * $Revision: 1.1 $
+ * $Date: 2004/03/27 03:56:20 $
  *
  * Copyright 1999-2004 The Apache Software Foundation.
  *
@@ -54,7 +54,7 @@ import java.util.Locale;
  * when support for Commons Chains is added.
  * </p>
  */
-public class ActionContextBase extends ContextBase implements ActionContext {
+public class ActionHelperBase implements ActionHelper {
 
 // --------------------------------------------------------  Properties
 
@@ -149,11 +149,11 @@ public class ActionContextBase extends ContextBase implements ActionContext {
         setResponse(response);
     }
 
-    public ActionContextBase() {
+    public ActionHelperBase() {
         super();
     }
 
-    public ActionContextBase(
+    public ActionHelperBase(
             ServletContext application,
             HttpServletRequest request,
             HttpServletResponse response) {
@@ -165,7 +165,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     // ------------------------------------------------ Application Context
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public DataSource getDataSource() {
 
         if (this.application == null)
@@ -174,7 +174,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public ActionMessages getActionErrors() {
 
         if (this.application == null)
@@ -183,7 +183,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public ActionMessages getActionMessages() {
 
         if (this.application == null)
@@ -192,7 +192,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public MessageResources getMessageResources() {
 
         if (this.application == null) {
@@ -202,7 +202,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public String getServletMapping() {
 
         if (this.application == null) {
@@ -214,7 +214,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     // ---------------------------------------------------- Session Context
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public Locale getLocale() {
 
         if (this.session == null) {
@@ -224,7 +224,13 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    public void setLocale(Locale locale) {
+
+        session.setAttribute(Globals.LOCALE_KEY,locale);
+
+    }
+
+    // See ActionHelper interface for JavaDoc
     public String getToken() {
 
         if (this.session == null) {
@@ -236,7 +242,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     // ---------------------------------------------------- Request Context
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public Throwable getException() {
 
         if (this.request == null) {
@@ -246,7 +252,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public MultipartRequestWrapper getMultipartRequestWrapper() {
 
         if (this.request == null) {
@@ -255,7 +261,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
         return (MultipartRequestWrapper) this.request.getAttribute(Globals.MULTIPART_KEY);
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public ActionMapping getMapping() {
 
         if (this.request == null) {
@@ -267,7 +273,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     // ---------------------------------------------------- Utility Methods
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public boolean isMessage(String key) {
 
         // Look up the requested MessageResources
@@ -282,7 +288,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public ActionForm getActionForm() {
 
         // Is there a mapping associated with this request?
@@ -306,26 +312,26 @@ public class ActionContextBase extends ContextBase implements ActionContext {
         return instance;
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     // TODO:
     public ActionFormBean getFormBean(String name) {
         return null;
     }
 
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     // TODO:
     public ActionForward getActionForward(String name) {
         return null;
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     // TODO:
     public ActionMapping getActionMapping(String path) {
         return null;
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public String getActionMappingName(String action) {
 
         String value = action;
@@ -343,7 +349,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public String getActionMappingURL(String action) {
 
         StringBuffer value = new StringBuffer(this.request.getContextPath());
@@ -381,7 +387,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public String getEncodeURL(String url) {
 
         if ((session != null) && (response != null)) {
@@ -400,7 +406,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     // ------------------------------------------------ Presentation API
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public String getOrigRef() {
 
         // HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
@@ -411,7 +417,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
         return result.toString();
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public String getBaseRef() {
 
         if (request == null)
@@ -428,7 +434,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
         return result.toString();
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public String getLink(String name) {
 
         ActionForward forward = getActionForward(name);
@@ -444,7 +450,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public String getMessage(String key) {
 
         MessageResources resources = getMessageResources();
@@ -455,7 +461,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public String getMessage(String key, Object args[]) {
 
         MessageResources resources = getMessageResources();
@@ -476,7 +482,7 @@ public class ActionContextBase extends ContextBase implements ActionContext {
 
     }
 
-    // See ActionContext interface for JavaDoc
+    // See ActionHelper interface for JavaDoc
     public String getAction(String path) {
         return getEncodeURL(getActionMappingURL(path));
     }
