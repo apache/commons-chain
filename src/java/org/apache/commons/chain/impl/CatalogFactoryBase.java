@@ -20,14 +20,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.CatalogFactory;
 
 /**
  * <p>A simple implementation of {@link CatalogFactory}.</p>
  *
  * @author Sean Schofield 
- * @version $Revision: 1.1 $ $Date: 2004/10/17 01:53:53 $
+ * @version $Revision: 1.2 $ $Date: 2004/10/17 22:39:00 $
  */
 
 public class CatalogFactoryBase implements CatalogFactory {
@@ -79,7 +79,7 @@ public class CatalogFactoryBase implements CatalogFactory {
      * 
      * @return the singleton instance of CatalogFactoryBase.
      */
-    public CatalogFactory getInstance() {
+    public static CatalogFactory getInstance() {
         
         return instance;    
         
