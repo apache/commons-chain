@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainListener.java,v 1.1 2003/10/01 04:23:00 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/10/01 04:23:00 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainListener.java,v 1.2 2003/10/04 22:54:09 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/10/04 22:54:09 $
  *
  * ====================================================================
  *
@@ -76,45 +76,61 @@ import javax.servlet.ServletContextListener;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.config.ConfigParser;
 import org.apache.commons.chain.impl.CatalogBase;
+import org.apache.commons.digester.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
 /**
- * <p>Optional <code>ServletContextListener</code> that automatically
+ * <p><code>ServletContextListener</code> that automatically
  * scans chain configuration files in the current web application at
  * startup time, and exposes the result in a {@link Catalog} under a
- * specified servlet context attribute.  The following context init
+ * specified servlet context attribute.  The following <em>context</em> init
  * parameters are utilized:</p>
  * <ul>
- * <li><strong>org.apache.commons.chain.CONFIG_RESOURCE</strong> -
- *     comma-deimited list of chain configuration webapp resources
- *     to be loaded.  If not specified, defaults to
- *     <code>/WEB-INF/chain-config.xml</code>.</li>
- * <li><strong>org.apache.commons.chain.CONFIG_CATALOG</strong> -
+ * <li><strong>org.apache.commons.chain.CONFIG_CLASS_RESOURCE</strong> -
+ *     comma-delimited list of chain configuration resources to be loaded
+ *     via <code>ClassLoader.getResource()</code> calls.  If not specified,
+ *     no class loader resources will be loaded.</li>
+ * <li><strong>org.apache.commons.chain.CONFIG_WEB_RESOURCE</strong> -
+ *     comma-delimited list of chain configuration webapp resources
+ *     to be loaded.  If not specified, no web application resources
+ *     will be loaded.</li>
+ * <li><strong>org.apache.commons.chain.CONFIG_ATTR</strong> -
  *     Name of the servlet context attribute under which the
- *     resulting {@link Catalog} will be exposed.  If not specified,
+ *     resulting {@link Catalog} will be created or updated.  If not specified,
  *     defaults to <code>catalog</code>.</li>
+ * <li><strong>org.apache.commons.chain.RULE_SET</strong> -
+ *     Fully qualified class name of a Digester <code>RuleSet</code>
+ *     implementation to use for parsing configuration resources (this
+ *     class must have a public zero-args constructor).  If not defined,
+ *     the standard <code>RuleSet</code> implementation will be used.</li>
  * </ul>
  *
  * <p>When a web application that has configured this listener is
- * started, it will create a new {@link Catalog} (if needed) and populate it by
- * scanning configuration resources from the init parameter described
- * above.  If a {@link Catalog} instance already exists at the specified
- * attribute, any new parsed definitions will be merged into the existing
- * catalog (the last definition for a particular name wins).  In addition,
- * it will scan all of the JAR files in the <code>/WEB-INF/lib</code>
- * directory, and automatically scan any <code>META-INF/chain-config.xml</code>
- * files embedded in those JAR files.  In this way, it is easy to provide a
- * library JAR that includes command chain definitions, and have it
- * automatically get configured simply by dropping the JAR file into a
- * web application.</p>
+ * started, it will acquire the {@link Catalog} under the specified servlet
+ * context attribute key, creating a new one if there is none already there.
+ * This {@link Catalog} will then be populated by scanning configuration
+ * resources from the following sources (loaded in this order):</p>
+ * <ul>
+ * <li>Resources loaded from any <code>META-INF/chain-config.xml</code>
+ *     resource found in a JAR file in <code>/WEB-INF/lib</code>.</li>
+ * <li>Resources loaded from specified resource paths from the
+ *     webapp's class loader (via <code>ClassLoader.getResource()</code>).</li>
+ * <li>Resources loaded from specified resource paths in the web application
+ *     archive (via <code>ServetContext.getResource()</code>).</li>
+ * </ul>
  *
  * <p>This class requires Servlet 2.3 or later.  If you are running on
- * a Servlet 2.2 system, consider using {@link ChainServlet} instead.</p>
+ * Servlet 2.2 system, consider using {@link ChainServlet} instead.
+ * Note that {@link ChainServlet} uses parameters of the
+ * same names, but they are <em>servlet</em> init parameters instead
+ * of <em>context</em> init parameters.  Because of this, you can use
+ * both facilities in the same application, if desired.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/10/01 04:23:00 $
+ * @author Ted Husted
+ * @version $Revision: 1.2 $ $Date: 2003/10/04 22:54:09 $
  */
 
 public class ChainListener implements ServletContextListener {
@@ -133,24 +149,34 @@ public class ChainListener implements ServletContextListener {
 
 
     /**
-     * <p>The name of the context init parameter containing a comma-delimited
-     * list of web applicaton resources to be scanned.</p>
-     */
-    public static final String CONFIG_RESOURCE =
-        "org.apache.commons.chain.CONFIG_RESOURCE";
-
-
-    /**
      * <p>The default servlet context attribute key.</p>
      */
     private static final String CONFIG_ATTR_DEFAULT = "catalog";
 
 
     /**
-     * <p>The default resource list.</p>
+     * <p>The name of the context init parameter containing a comma-delimited
+     * list of class loader resources to be scanned.</p>
      */
-    private static final String CONFIG_RESOURCE_DEFAULT =
-        "/WEB-INF/chain-config.xml";
+    public static final String CONFIG_CLASS_RESOURCE =
+        "org.apache.commons.chain.CONFIG_CLASS_RESOURCE";
+
+
+    /**
+     * <p>The name of the context init parameter containing a comma-delimited
+     * list of web applicaton resources to be scanned.</p>
+     */
+    public static final String CONFIG_WEB_RESOURCE =
+        "org.apache.commons.chain.CONFIG_WEB_RESOURCE";
+
+
+    /**
+     * <p>The name of the context init parameter containing the fully
+     * qualified class name of the <code>RuleSet</code> implementation
+     * for configuring our {@link ConfigParser}.</p>
+     */
+    public static final String RULE_SET =
+        "org.apache.commons.chain.RULE_SET";
 
 
     // -------------------------------------------------------- Static Variables
@@ -192,17 +218,20 @@ public class ChainListener implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent event) {
 
+        if (log.isInfoEnabled()) {
+            log.info("Initializing chain listener");
+        }
         ServletContext context = event.getServletContext();
+
+        // Retrieve context init parameters that we need
         String attr = context.getInitParameter(CONFIG_ATTR);
         if (attr == null) {
             attr = CONFIG_ATTR_DEFAULT;
         }
-        boolean defaulting = false;
-        String resource = context.getInitParameter(CONFIG_RESOURCE);
-        if (resource == null) {
-            resource = CONFIG_RESOURCE_DEFAULT;
-            defaulting = true;
-        }
+        String classResources =
+            context.getInitParameter(CONFIG_CLASS_RESOURCE);
+        String ruleSet = context.getInitParameter(RULE_SET);
+        String webResources = context.getInitParameter(CONFIG_WEB_RESOURCE);
 
         // Retrieve or create the Catalog instance we will be updating
         Catalog catalog = (Catalog) context.getAttribute(attr);
@@ -211,51 +240,58 @@ public class ChainListener implements ServletContextListener {
         }
 
         // Construct the configuration resource parser we will use
-        // FIXME - Do we need to make this more configurable?
         ConfigParser parser = new ConfigParser();
-
-        // Parse the resources specified in our init parameter (if any)
-        String path = null;
-        try {
-            while (true) {
-                int comma = resource.indexOf(",");
-                if (comma < 0) {
-                    path = resource.trim();
-                    resource = "";
-                } else {
-                    path = resource.substring(0, comma);
-                    resource = resource.substring(comma + 1);
+        if (ruleSet != null) {
+            try {
+                ClassLoader loader =
+                    Thread.currentThread().getContextClassLoader();
+                if (loader == null) {
+                    loader = this.getClass().getClassLoader();
                 }
-                if (path.length() < 1) {
-                    break;
-                }
-                URL url = context.getResource(path);
-                if (url == null) {
-                    if (defaulting) {
-                        continue; // It is OK not to have a default config file
-                    } else {
-                        throw new IllegalStateException
-                            ("Missing chain config resource '" + path + "'");
-                    }
-                }
-                if (log.isDebugEnabled()) {
-                    log.debug("Loading chain config resource '" + path + "'");
-                }
-                parser.parse(catalog, url);
+                Class clazz = loader.loadClass(ruleSet);
+                parser.setRuleSet((RuleSet) clazz.newInstance());
+            } catch (Exception e) {
+                throw new RuntimeException("Exception initalizing RuleSet '" +
+                                           ruleSet + "' instance: " +
+                                           e.getMessage());
             }
-        } catch (Exception e) {
-            throw new RuntimeException
-                ("Exception parsing chain config resource '" + path + "': " +
-                 e.getMessage());
         }
 
-        // Parse the resources in any embedded JAR files
+        // Parse the resources specified in our init parameters (if any)
+        parseJarResources(catalog, context, parser);
+        ChainResources.parseClassResources
+            (catalog, classResources, parser);
+        ChainResources.parseWebResources
+            (catalog, context, webResources, parser);
+
+        // Expose the completed catalog
+        context.setAttribute(attr, catalog);
+
+    }
+
+
+    // --------------------------------------------------------- Private Methods
+
+
+    /**
+     * <p>Parse resources found in JAR files in the <code>/WEB-INF/lib</code>
+     * subdirectory (if any).</p>
+     *
+     * @param catalog {@link Catalog} we are populating
+     * @param context <code>ServletContext</code> for this web application
+     * @param parser {@link ConfigParser} to use for parsing
+     */
+    private void parseJarResources(Catalog catalog, ServletContext context,
+                                   ConfigParser parser) {
+
         Set jars = context.getResourcePaths("/WEB-INF/lib");
         if (jars == null) {
             jars = new HashSet();
         }
+        String path = null;
         Iterator paths = jars.iterator();
         while (paths.hasNext()) {
+
             path = (String) paths.next();
             if (!path.endsWith(".jar")) {
                 continue;
@@ -266,6 +302,20 @@ public class ChainListener implements ServletContextListener {
                 resourceURL = new URL("jar:" +
                                       translate(jarURL.toExternalForm()) +
                                       "!/META-INF/chain-config.xml");
+                if (resourceURL == null) {
+                    continue;
+                }
+                InputStream is = null;
+                try {
+                    is = resourceURL.openStream();
+                } catch (Exception e) {
+                    ; // means there is no such resource
+                }
+                if (is == null) {
+                    continue;
+                } else {
+                    is.close();
+                }
                 parser.parse(catalog, resourceURL);
             } catch (Exception e) {
                 throw new RuntimeException
@@ -275,13 +325,7 @@ public class ChainListener implements ServletContextListener {
             }
         }
 
-        // Expose the completed catalog
-        context.setAttribute(attr, catalog);
-
     }
-
-
-    // --------------------------------------------------------- Private Methods
 
 
     /**

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainServlet.java,v 1.2 2003/10/01 12:41:07 husted Exp $
- * $Revision: 1.2 $
- * $Date: 2003/10/01 12:41:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//chain/src/java/org/apache/commons/chain/web/ChainServlet.java,v 1.3 2003/10/04 22:54:10 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/10/04 22:54:10 $
  *
 /* ====================================================================
  * The Apache Software License, Version 1.1
@@ -62,59 +62,122 @@
 package org.apache.commons.chain.web;
 
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.io.IOException;
 import java.net.URL;
-
-import javax.servlet.*;
-
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import org.apache.commons.chain.Catalog;
-import org.apache.commons.chain.config.ConfigRuleSet;
+import org.apache.commons.chain.config.ConfigParser;
 import org.apache.commons.chain.impl.CatalogBase;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xml.sax.InputSource;
 
 
 /**
- * <p>Servlet that configures a Catalog based on an XML configuration file.  The
- * catalog is stored in a servlet context attribute so that it is accessible to
- * other servlets.</p>
- * 
- * <p>The servlet has three different initialization parameters, as described
- * below:</p>
+ * <p><code>Servlet</code> that automatically scans chain configuration files
+ * in the current web application at startup time, and exposes the result in a
+ * {@link Catalog} under a specified servlet context attribute.  The following
+ * <em>servlet</em> init parameters are utilized:</p>
  * <ul>
- *     <li><code>config</code> specifies the location of the XML file used by
- *     the Digester to create the Catalog.  The locations of files are relative
- *     to the webapp's root context directory, so a
- *     <code>/WEB-INF/chain-config.xml</code> is an example location for the
- *     XML file.</li>
- *     <li><code>ruleset</code> (optional) specifies the fully qualified class
- *     name of the rule set the Digester should use to create the Catalog.  If
- *     this value is not specified the {@link
- *     org.apache.commons.chain.config.ConfigRuleSet} will be used.</li>
- *     <li><code>attribute</code> (optional) specifies the servlet context
- *     attribute in which the Catalog should be stored.  If this value is not
- *     specified the attribute used will be
- *     <code>Catalog.CATALOG_KEY</code>.</li>
+ * <li><strong>org.apache.commons.chain.CONFIG_CLASS_RESOURCE</strong> -
+ *     comma-delimited list of chain configuration resources to be loaded
+ *     via <code>ClassLoader.getResource()</code> calls.  If not specified,
+ *     no class loader resources will be loaded.</li>
+ * <li><strong>org.apache.commons.chain.CONFIG_WEB_RESOURCE</strong> -
+ *     comma-delimited list of chain configuration webapp resources
+ *     to be loaded.  If not specified, no web application resources
+ *     will be loaded.</li>
+ * <li><strong>org.apache.commons.chain.CONFIG_ATTR</strong> -
+ *     Name of the servlet context attribute under which the
+ *     resulting {@link Catalog} will be created or updated.  If not specified,
+ *     defaults to <code>catalog</code>.</li>
+ * <li><strong>org.apache.commons.chain.RULE_SET</strong> -
+ *     Fully qualified class name of a Digester <code>RuleSet</code>
+ *     implementation to use for parsing configuration resources (this
+ *     class must have a public zero-args constructor).  If not defined,
+ *     the standard <code>RuleSet</code> implementation will be used.</li>
  * </ul>
- * 
- * <p>One final note is that if a Catalog is found to already exist in the
- * context attribute to which the Catalog should be saved, the two catalogs will
- * be <em>merged</em> as described here. (TODO create this documentation and
- * link it here)</p>
+ *
+ * <p>When a web application that has configured this servlet is
+ * started, it will acquire the {@link Catalog} under the specified servlet
+ * context attribute key, creating a new one if there is none already there.
+ * This {@link Catalog} will then be populated by scanning configuration
+ * resources from the following sources (loaded in this order):</p>
+ * <ul>
+ * <li>Resources loaded from specified resource paths from the
+ *     webapp's class loader (via <code>ClassLoader.getResource()</code>).</li>
+ * <li>Resources loaded from specified resource paths in the web application
+ *     archive (via <code>ServetContext.getResource()</code>).</li>
+ * </ul>
  *
  * <p>This class runs on Servlet 2.2 or later.  If you are running on a
  * Servlet 2.3 or later system, you should also consider using
- * {@link ChainListener} to initialize your {@link Catalog}.</p>
+ * {@link ChainListener} to initialize your {@link Catalog}.  Note that
+ * {@link ChainListener} uses parameters of the same names, but they are
+ * <em>context</em> init parameters instead of <em>servlet</em> init
+ * parameters. Because of this, you can use both facilities in the
+ * same application, if desired.</p>
  *
  * @author Matthew J. Sgarlata
  * @author Craig R. McClanahan
+ * @author Ted Husted
  */
+
 public class ChainServlet extends GenericServlet {
     
+
+    // ------------------------------------------------------ Manifest Constants
+
+
+    /**
+     * <p>The name of the context init parameter containing the name of the
+     * servlet context attribute under which our resulting {@link Catalog}
+     * will be stored.</p>
+     */
+    public static final String CONFIG_ATTR =
+        "org.apache.commons.chain.CONFIG_ATTR";
+
+
+    /**
+     * <p>The default servlet context attribute key.</p>
+     */
+    private static final String CONFIG_ATTR_DEFAULT = "catalog";
+
+
+    /**
+     * <p>The name of the context init parameter containing a comma-delimited
+     * list of class loader resources to be scanned.</p>
+     */
+    public static final String CONFIG_CLASS_RESOURCE =
+        "org.apache.commons.chain.CONFIG_CLASS_RESOURCE";
+
+
+    /**
+     * <p>The name of the context init parameter containing a comma-delimited
+     * list of web applicaton resources to be scanned.</p>
+     */
+    public static final String CONFIG_WEB_RESOURCE =
+        "org.apache.commons.chain.CONFIG_WEB_RESOURCE";
+
+
+    /**
+     * <p>The name of the context init parameter containing the fully
+     * qualified class name of the <code>RuleSet</code> implementation
+     * for configuring our {@link ConfigParser}.</p>
+     */
+    public static final String RULE_SET =
+        "org.apache.commons.chain.RULE_SET";
+
+
+    // -------------------------------------------------------- Static Variables
+
 
     /**
      * <p>The <code>Log</code> instance to use with this class.</p>
@@ -122,142 +185,65 @@ public class ChainServlet extends GenericServlet {
     protected static final Log log = LogFactory.getLog(ChainServlet.class);
 
 
-    /**
-     * <p>The servlet initialization parameter which specifies the location of the
-     * XML file that describes the servlet chain we wish to load.</p>
-     */
-    public static final String INIT_PARAM_CONFIG = "config";
+    // --------------------------------------------------------- Servlet Methods
 
 
     /**
-     * <p>The optional servlet initialization parameter that specifies the fully
-     * qualified class name of the rule set that will be used to configure the
-     * Digester.</p>
-     */
-    public static final String INIT_PARAM_RULE_SET = "ruleset";
-
-
-    /**
-     * <p>The optional servlet initialization parameter that specifies the
-     * servlet context attribute in which the catalog will be stored.  If this
-     * parameter is not specified, the catalog will be stored under the
-     * attribute <code>org.apache.commons.chain.CATALOG</code>.</p>
-     */
-    public static final String INIT_PARAM_ATTRIBUTE = "attribute";
-
-
-    /**
-     * <p>The servlet context attribute in which the catalog will be stored. </p>
-     */
-    protected String catalogAttr = Catalog.CATALOG_KEY; ;
-
-
-    /**
-     * <p>The <code>RuleSet</code> to be used for configuring our Digester
-     * parsing rules.</p>
-     */
-    protected RuleSet ruleSet = new ConfigRuleSet();
-
-
-    /**
-     * <p>The <code>Digester</code> to be used for parsing.</p>
-     */
-    protected Digester digester = null;
-
-
-    /**
-     * <p>Return the <code>Digester</code> instance to be used for
-     * parsing, creating one if necessary.</p>
-     */
-    public Digester getDigester() {
-
-        if (digester == null) {
-            digester = new Digester();
-            digester.setNamespaceAware(ruleSet.getNamespaceURI() != null);
-            digester.setValidating(false);
-            digester.addRuleSet(ruleSet);
-        }
-        return (digester);
-
-    }
-
-
-    /**
-     * <p>Use the Digester to create a {@link org.apache.commons.chain.Catalog}
-     * based on the information in an XML file and store the catalog in the
-     * servlet context. </p>
+     * <p>Create (if necessary) and configure a {@link Catalog} from the
+     * servlet init parameters that have been specified.</p>
      *
-     * @param servletConfig the configuration information supplied with this
-     * servlet
-     *
-     * @throws javax.servlet.ServletException if the servlet could not be initialized
+     * @throws ServletException if the servlet could not be initialized
      */
-    public void init(ServletConfig servletConfig) throws ServletException {
+    public void init() throws ServletException {
         
-        String configParam;
-        String rulesetParam;
-        String attributeParam;
-        
-        super.init(servletConfig);
+        ServletConfig config = getServletConfig();
+        ServletContext context = getServletContext();
         if (log.isInfoEnabled()) {
             log.info("Initializing chain servlet '" +
-                servletConfig.getServletName() + "'");
+                     config.getServletName() + "'");
         }
-        
-        configParam = servletConfig.getInitParameter(INIT_PARAM_CONFIG); 
-        if (configParam == null) {
-            log.error("The " + INIT_PARAM_CONFIG +
-                " init-param must be specified");
-            throw new ServletException("The " + INIT_PARAM_CONFIG +
-                " init-param must be specified");
+
+        // Retrieve servlet init parameters that we need
+        String attr = config.getInitParameter(CONFIG_ATTR);
+        if (attr == null) {
+            attr = CONFIG_ATTR_DEFAULT;
         }
-        
-        rulesetParam = servletConfig.getInitParameter(INIT_PARAM_RULE_SET);
-        if (rulesetParam != null) {
+        String classResources =
+            context.getInitParameter(CONFIG_CLASS_RESOURCE);
+        String ruleSet = context.getInitParameter(RULE_SET);
+        String webResources = context.getInitParameter(CONFIG_WEB_RESOURCE);
+
+        // Retrieve or create the Catalog instance we will be updating
+        Catalog catalog = (Catalog) context.getAttribute(attr);
+        if (catalog == null) {
+            catalog = new CatalogBase();
+        }
+
+        // Construct the configuration resource parser we will use
+        ConfigParser parser = new ConfigParser();
+        if (ruleSet != null) {
             try {
-                ruleSet = (RuleSet) Class.forName(rulesetParam).newInstance();
-            }
-            catch (Exception e) {
-                log.error("Error creating RuleSet", e);
-                throw new ServletException("Error creating RuleSet", e);
-            }
-        }
-        
-        attributeParam = servletConfig.getInitParameter(INIT_PARAM_ATTRIBUTE);
-        if (attributeParam != null) {
-            catalogAttr = attributeParam;
-        }
-        
-        try {
-            Catalog catalog;
-            if (getServletContext().getAttribute(catalogAttr) != null) {
-                catalog =
-                    (Catalog) getServletContext().getAttribute(catalogAttr);
-                if (log.isInfoEnabled()) {
-                    log.info("Merging catalog with existing catalog " + catalog);
+                ClassLoader loader =
+                    Thread.currentThread().getContextClassLoader();
+                if (loader == null) {
+                    loader = this.getClass().getClassLoader();
                 }
+                Class clazz = loader.loadClass(ruleSet);
+                parser.setRuleSet((RuleSet) clazz.newInstance());
+            } catch (Exception e) {
+                throw new ServletException("Exception initalizing RuleSet '" +
+                                           ruleSet + "' instance", e);
             }
-            else {
-                catalog = new CatalogBase();
-                if (log.isInfoEnabled()) {
-                    log.info("Creating new catalog");
-                }
-            }
-            Digester digester = getDigester();
-            InputStream input = null;
-            URL url = getServletContext().getResource(configParam);
-            InputSource is = new InputSource(url.toExternalForm());
-            input = getServletContext().getResourceAsStream(configParam);
-            is.setByteStream(input);
-            digester.push(catalog);
-            digester.parse(is);
-            getServletContext().setAttribute(catalogAttr, catalog);
         }
-        catch (Exception e) {
-            log.error("Error initializing the ChainServlet", e);
-            throw new ServletException("Error initializing the ChainServlet",
-                e);
-        }
+
+        // Parse the resources specified in our init parameters (if any)
+        ChainResources.parseClassResources
+            (catalog, classResources, parser);
+        ChainResources.parseWebResources
+            (catalog, context, webResources, parser);
+
+        // Expose the completed catalog
+        context.setAttribute(attr, catalog);
         
     }
 
@@ -278,5 +264,8 @@ public class ChainServlet extends GenericServlet {
         throws ServletException, IOException {
 
         ; // do nothing
+
     }
+
+
 }

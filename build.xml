@@ -3,7 +3,7 @@
 
 <!--
         "Chain of Responsibility" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.6 2003/10/01 12:28:01 husted Exp $
+        $Id: build.xml,v 1.7 2003/10/04 22:54:09 craigmcc Exp $
 -->
 
 
@@ -204,6 +204,16 @@
       <exclude    name="org/apache/commons/chain/web/ChainListener.java"
                 unless="logging.present"/>
       <exclude    name="org/apache/commons/chain/web/ChainListener.java"
+                unless="servlet23.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainResources.java"
+                unless="beanutils.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainResources.java"
+                unless="collections.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainResources.java"
+                unless="digester.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainResources.java"
+                unless="logging.present"/>
+      <exclude    name="org/apache/commons/chain/web/ChainResources.java"
                 unless="servlet23.present"/>
       <exclude    name="org/apache/commons/chain/web/ChainServlet.java"
                 unless="beanutils.present"/>
