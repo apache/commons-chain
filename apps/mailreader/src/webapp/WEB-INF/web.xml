@@ -9,7 +9,7 @@
 
     <!-- Commons Chain listener to load catalogs  -->
     <context-param>
-        <param-name>org.apache.commons.chain.CONFIG_RESOURCE</param-name>
+        <param-name>org.apache.commons.chain.CONFIG_CLASS_RESOURCE</param-name>
         <param-value>resources/catalog.xml</param-value>
     </context-param>
 

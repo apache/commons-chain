@@ -15,7 +15,7 @@
     <form-beans>
 
         <form-bean
-            name="Locale"
+            name="LocaleChange"
             type="org.apache.struts.validator.DynaValidatorForm">
            <form-property name="language" type="java.lang.String"/>
            <form-property name="country" type="java.lang.String"/>
@@ -28,9 +28,11 @@
     <global-forwards/>
 
     <action-mappings>
-        <action path="/Locale"
-            name="Locale"
-            forward="/missing.jsp" />
+        <action path="/LocaleChange"
+            name="LocaleChange"
+            type="org.apache.commons.chain.mailreader.struts.MailReaderAction">
+        <forward name="success" path="/Welcome.do" />
+        </action>
     </action-mappings>
 
 </struts-config>

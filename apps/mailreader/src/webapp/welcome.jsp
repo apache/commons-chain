@@ -16,9 +16,9 @@
 
 <h3>Language Options</h3>
 <ul>
-<li><html:link action="/Locale?language=en">English</html:link></li>
-<li><html:link action="/Locale?language=ja" useLocalEncoding="true">Japanese</html:link></li>
-<li><html:link action="/Locale?language=ru" useLocalEncoding="true">Russian</html:link></li>
+<li><html:link action="/LocaleChange?language=en">English</html:link></li>
+<li><html:link action="/LocaleChange?language=ja" useLocalEncoding="true">Japanese</html:link></li>
+<li><html:link action="/LocaleChange?language=ru" useLocalEncoding="true">Russian</html:link></li>
 </ul>
 
 <hr />
