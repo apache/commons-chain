@@ -1,6 +1,9 @@
 <?xml version="1.0" ?>
 <chains>
     <command
-        name="passThru"
+        name="PassThru"
         className="org.apache.commons.chain.mailreader.commands.PassThru" />
+    <command
+        name="LocaleChange"
+        className="org.apache.commons.chain.mailreader.commands.LocaleChange" />
 </chains>
