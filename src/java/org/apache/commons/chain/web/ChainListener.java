@@ -25,6 +25,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.config.ConfigParser;
 import org.apache.commons.chain.impl.CatalogBase;
 import org.apache.commons.digester.RuleSet;
@@ -49,8 +50,13 @@ import org.apache.commons.logging.LogFactory;
  *     will be loaded.</li>
  * <li><strong>org.apache.commons.chain.CONFIG_ATTR</strong> -
  *     Name of the servlet context attribute under which the
- *     resulting {@link Catalog} will be created or updated.  If not specified,
- *     defaults to <code>catalog</code>.</li>
+ *     resulting {@link Catalog} will be created or updated.
+ *     If not specified, it is expected that parsed resources will
+ *     contain <code>&lt;catalog&gt;</code> elements (which will
+ *     cause registration of the created {@link Catalog}s into
+ *     the {@link CatalogFactory} for this application, and no
+ *     servet context attribute will be created.
+ *     <strong>NOTE</strong> - This parameter is deprecated.</p>
  * <li><strong>org.apache.commons.chain.RULE_SET</strong> -
  *     Fully qualified class name of a Digester <code>RuleSet</code>
  *     implementation to use for parsing configuration resources (this
@@ -72,6 +78,11 @@ import org.apache.commons.logging.LogFactory;
  *     archive (via <code>ServetContext.getResource()</code>).</li>
  * </ul>
  *
+ * <p>If no attribute key is specified, on the other hand, parsed configuration
+ * resources are expected to contain <code>&lt;catalog&gt;</code> elements,
+ * and the catalogs will be registered with the {@link CatalogFactory}
+ * for this web application.</p>
+ *
  * <p>This class requires Servlet 2.3 or later.  If you are running on
  * Servlet 2.2 system, consider using {@link ChainServlet} instead.
  * Note that {@link ChainServlet} uses parameters of the
@@ -81,7 +92,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Craig R. McClanahan
  * @author Ted Husted
- * @version $Revision: 1.5 $ $Date: 2004/02/25 00:01:06 $
+ * @version $Revision: 1.6 $ $Date: 2004/10/18 01:48:51 $
  */
 
 public class ChainListener implements ServletContextListener {
@@ -97,12 +108,6 @@ public class ChainListener implements ServletContextListener {
      */
     public static final String CONFIG_ATTR =
         "org.apache.commons.chain.CONFIG_ATTR";
-
-
-    /**
-     * <p>The default servlet context attribute key.</p>
-     */
-    private static final String CONFIG_ATTR_DEFAULT = "catalog";
 
 
     /**
@@ -152,10 +157,10 @@ public class ChainListener implements ServletContextListener {
 
         ServletContext context = event.getServletContext();
         String attr = context.getInitParameter(CONFIG_ATTR);
-        if (attr == null) {
-            attr = CONFIG_ATTR_DEFAULT;
+        if (attr != null) {
+            context.removeAttribute(attr);
         }
-        context.removeAttribute(attr);
+        CatalogFactory.clear();
 
     }
 
@@ -176,18 +181,18 @@ public class ChainListener implements ServletContextListener {
 
         // Retrieve context init parameters that we need
         String attr = context.getInitParameter(CONFIG_ATTR);
-        if (attr == null) {
-            attr = CONFIG_ATTR_DEFAULT;
-        }
         String classResources =
             context.getInitParameter(CONFIG_CLASS_RESOURCE);
         String ruleSet = context.getInitParameter(RULE_SET);
         String webResources = context.getInitParameter(CONFIG_WEB_RESOURCE);
 
-        // Retrieve or create the Catalog instance we will be updating
-        Catalog catalog = (Catalog) context.getAttribute(attr);
-        if (catalog == null) {
-            catalog = new CatalogBase();
+        // Retrieve or create the Catalog instance we may be updating
+        Catalog catalog = null;
+        if (attr != null) {
+            catalog = (Catalog) context.getAttribute(attr);
+            if (catalog == null) {
+                catalog = new CatalogBase();
+            }
         }
 
         // Construct the configuration resource parser we will use
@@ -209,14 +214,24 @@ public class ChainListener implements ServletContextListener {
         }
 
         // Parse the resources specified in our init parameters (if any)
-        parseJarResources(catalog, context, parser);
-        ChainResources.parseClassResources
-            (catalog, classResources, parser);
-        ChainResources.parseWebResources
-            (catalog, context, webResources, parser);
+        if (attr == null) {
+            parseJarResources(context, parser);
+            ChainResources.parseClassResources
+                (classResources, parser);
+            ChainResources.parseWebResources
+                (context, webResources, parser);
+        } else {
+            parseJarResources(catalog, context, parser);
+            ChainResources.parseClassResources
+                (catalog, classResources, parser);
+            ChainResources.parseWebResources
+                (catalog, context, webResources, parser);
+        }
 
-        // Expose the completed catalog
-        context.setAttribute(attr, catalog);
+        // Expose the completed catalog (if requested)
+        if (attr != null) {
+            context.setAttribute(attr, catalog);
+        }
 
     }
 
@@ -228,9 +243,66 @@ public class ChainListener implements ServletContextListener {
      * <p>Parse resources found in JAR files in the <code>/WEB-INF/lib</code>
      * subdirectory (if any).</p>
      *
+     * @param context <code>ServletContext</code> for this web application
+     * @param parser {@link ConfigParser} to use for parsing
+     */
+    private void parseJarResources(ServletContext context,
+                                   ConfigParser parser) {
+
+        Set jars = context.getResourcePaths("/WEB-INF/lib");
+        if (jars == null) {
+            jars = new HashSet();
+        }
+        String path = null;
+        Iterator paths = jars.iterator();
+        while (paths.hasNext()) {
+
+            path = (String) paths.next();
+            if (!path.endsWith(".jar")) {
+                continue;
+            }
+            URL resourceURL = null;
+            try {
+                URL jarURL = context.getResource(path);
+                resourceURL = new URL("jar:" +
+                                      translate(jarURL.toExternalForm()) +
+                                      "!/META-INF/chain-config.xml");
+                if (resourceURL == null) {
+                    continue;
+                }
+                InputStream is = null;
+                try {
+                    is = resourceURL.openStream();
+                } catch (Exception e) {
+                    ; // means there is no such resource
+                }
+                if (is == null) {
+                    continue;
+                } else {
+                    is.close();
+                }
+                parser.parse(resourceURL);
+            } catch (Exception e) {
+                throw new RuntimeException
+                    ("Exception parsing chain config resource '" +
+                     resourceURL.toExternalForm() + "': " +
+                     e.getMessage());
+            }
+        }
+
+    }
+
+
+    /**
+     * <p>Parse resources found in JAR files in the <code>/WEB-INF/lib</code>
+     * subdirectory (if any).</p>
+     *
      * @param catalog {@link Catalog} we are populating
      * @param context <code>ServletContext</code> for this web application
      * @param parser {@link ConfigParser} to use for parsing
+     *
+     * @deprecated Use the variant that does not take a catalog, on a
+     *  configuration resource containing "catalog" element(s)
      */
     private void parseJarResources(Catalog catalog, ServletContext context,
                                    ConfigParser parser) {

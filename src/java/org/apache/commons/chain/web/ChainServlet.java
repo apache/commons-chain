@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.config.ConfigParser;
 import org.apache.commons.chain.impl.CatalogBase;
 import org.apache.commons.digester.RuleSet;
@@ -47,8 +48,13 @@ import org.apache.commons.logging.LogFactory;
  *     will be loaded.</li>
  * <li><strong>org.apache.commons.chain.CONFIG_ATTR</strong> -
  *     Name of the servlet context attribute under which the
- *     resulting {@link Catalog} will be created or updated.  If not specified,
- *     defaults to <code>catalog</code>.</li>
+ *     resulting {@link Catalog} will be created or updated.
+ *     If not specified, it is expected that parsed resources will
+ *     contain <code>&lt;catalog&gt;</code> elements (which will
+ *     cause registration of the created {@link Catalog}s into
+ *     the {@link CatalogFactory} for this application, and no
+ *     servet context attribute will be created.
+ *     <strong>NOTE</strong> - This parameter is deprecated.</p>
  * <li><strong>org.apache.commons.chain.RULE_SET</strong> -
  *     Fully qualified class name of a Digester <code>RuleSet</code>
  *     implementation to use for parsing configuration resources (this
@@ -67,6 +73,11 @@ import org.apache.commons.logging.LogFactory;
  * <li>Resources loaded from specified resource paths in the web application
  *     archive (via <code>ServetContext.getResource()</code>).</li>
  * </ul>
+ *
+ * <p>If no attribute key is specified, on the other hand, parsed configuration
+ * resources are expected to contain <code>&lt;catalog&gt;</code> elements,
+ * and the catalogs will be registered with the {@link CatalogFactory}
+ * for this web application.</p>
  *
  * <p>This class runs on Servlet 2.2 or later.  If you are running on a
  * Servlet 2.3 or later system, you should also consider using
@@ -94,12 +105,6 @@ public class ChainServlet extends HttpServlet {
      */
     public static final String CONFIG_ATTR =
         "org.apache.commons.chain.CONFIG_ATTR";
-
-
-    /**
-     * <p>The default servlet context attribute key.</p>
-     */
-    public static final String CONFIG_ATTR_DEFAULT = "catalog";
 
 
     /**
@@ -140,6 +145,22 @@ public class ChainServlet extends HttpServlet {
 
 
     /**
+     * <p>Clean up after ourselves as this application shuts down.</p>
+     */
+    public void destroy() {
+
+        ServletConfig config = getServletConfig();
+        ServletContext context = getServletContext();
+        String attr = config.getInitParameter(CONFIG_ATTR);
+        if (attr != null) {
+            context.removeAttribute(attr);
+        }
+        CatalogFactory.clear();
+
+    }
+
+
+    /**
      * <p>Create (if necessary) and configure a {@link Catalog} from the
      * servlet init parameters that have been specified.</p>
      *
@@ -156,18 +177,18 @@ public class ChainServlet extends HttpServlet {
 
         // Retrieve servlet init parameters that we need
         String attr = config.getInitParameter(CONFIG_ATTR);
-        if (attr == null) {
-            attr = CONFIG_ATTR_DEFAULT;
-        }
         String classResources =
             context.getInitParameter(CONFIG_CLASS_RESOURCE);
         String ruleSet = context.getInitParameter(RULE_SET);
         String webResources = context.getInitParameter(CONFIG_WEB_RESOURCE);
 
-        // Retrieve or create the Catalog instance we will be updating
-        Catalog catalog = (Catalog) context.getAttribute(attr);
-        if (catalog == null) {
-            catalog = new CatalogBase();
+        // Retrieve or create the Catalog instance we may be updating
+        Catalog catalog = null;
+        if (attr != null) {
+            catalog = (Catalog) context.getAttribute(attr);
+            if (catalog == null) {
+                catalog = new CatalogBase();
+            }
         }
 
         // Construct the configuration resource parser we will use
@@ -188,13 +209,22 @@ public class ChainServlet extends HttpServlet {
         }
 
         // Parse the resources specified in our init parameters (if any)
-        ChainResources.parseClassResources
-            (catalog, classResources, parser);
-        ChainResources.parseWebResources
-            (catalog, context, webResources, parser);
+        if (attr == null) {
+            ChainResources.parseClassResources
+                (classResources, parser);
+            ChainResources.parseWebResources
+                (context, webResources, parser);
+        } else {
+            ChainResources.parseClassResources
+                (catalog, classResources, parser);
+            ChainResources.parseWebResources
+                (catalog, context, webResources, parser);
+        }
 
-        // Expose the completed catalog
-        context.setAttribute(attr, catalog);
+        // Expose the completed catalog (if requested)
+        if (attr != null) {
+            context.setAttribute(attr, catalog);
+        }
         
     }
 

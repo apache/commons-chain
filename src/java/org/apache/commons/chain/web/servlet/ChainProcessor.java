@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.web.ChainServlet;
@@ -28,13 +29,16 @@ import org.apache.commons.chain.web.ChainServlet;
 
 /**
  * <p>Custom subclass of {@link ChainServlet} that also dispatches incoming
- * requests to a configurable {@link Command} loaded from the configured
+ * requests to a configurable {@link Command} loaded from the specified
  * {@link Catalog}.</p>
  *
  * <p>In addition to the <em>servlet</em> init parameters supported by
  * {@link ChainServlet}, this class supports the following additional
  * parameters:</p>
  * <ul>
+ * <li><strong>org.apache.commons.chain.CATALOG</strong> - Name of the
+ *     catalog from which to acquire commands to be executed.  If not
+ *     specified, the default catalog for this application will be used.</li>
  * <li><strong>org.apache.commons.chain.COMMAND</strong> - Name of the
  *     {@link Command} (looked up in our configured {@link Catalog} used
  *     to process all incoming servlet requests.  If not specified,
@@ -53,6 +57,22 @@ public class ChainProcessor extends ChainServlet {
 
 
     // ------------------------------------------------------ Manifest Constants
+
+
+    /**
+     * <p>The name of the servlet init parameter containing the name of the
+     * {@link Catalog} to use for processing incoming requests.</p>
+     */
+    public static final String CATALOG =
+        "org.apache.commons.chain.CATALOG";
+
+
+    /**
+     * <p>The default request attribute under which we expose the
+     * {@link Catalog} being used to subordinate {@link Command}s.</p>
+     */
+    public static final String CATALOG_DEFAULT =
+        "org.apache.commons.chain.CATALOG";
 
 
     /**
@@ -76,9 +96,19 @@ public class ChainProcessor extends ChainServlet {
     /**
      * <p>The name of the context attribute under which our {@link Catalog}
      * is stored.  This value is also used as the name of the
-     * context attribute under which the catalog is exposed to commands.</p>
+     * context attribute under which the catalog is exposed to commands.
+     * If not specified, we will look up commands in the appropriate
+     * {@link Catalog} retrieved from our {@link CatalogFactory}.</p>
      */
     private String attribute = null;
+
+
+    /**
+     * <p>The name of the {@link Catalog} to retrieve from the
+     * {@link CatalogFactory} for this application, or <code>null</code>
+     * to select the default {@link Catalog}.</p>
+     */
+    private String catalog = null;
 
 
     /**
@@ -88,7 +118,27 @@ public class ChainProcessor extends ChainServlet {
     private String command = null;
 
 
+    /**
+     * <p>The {@link CatalogFactory} for this application.</p>
+     */
+    private CatalogFactory factory = null;
+
+
     // --------------------------------------------------------- Servlet Methods
+
+
+    /**
+     * <p>Clean up as this application is shut down.</p>
+     */
+    public void destroy() {
+
+        super.destroy();
+        attribute = null;
+        catalog = null;
+        command = null;
+        factory = null;
+
+    }
 
 
     /**
@@ -100,13 +150,12 @@ public class ChainProcessor extends ChainServlet {
 
         super.init();
         attribute = getServletConfig().getInitParameter(CONFIG_ATTR);
-        if (attribute == null) {
-            attribute = CONFIG_ATTR_DEFAULT;
-        }
+        catalog = getServletConfig().getInitParameter(CATALOG);
         command = getServletConfig().getInitParameter(COMMAND);
         if (command == null) {
             command = COMMAND_DEFAULT;
         }
+        factory = CatalogFactory.getInstance();
 
     }
 
@@ -128,10 +177,19 @@ public class ChainProcessor extends ChainServlet {
 
         ServletWebContext context =
             new ServletWebContext(getServletContext(), request, response);
-        Catalog catalog =
-            (Catalog) getServletContext().getAttribute(this.attribute);
-        context.put(this.attribute, catalog);
-        Command command = catalog.getCommand(this.command);
+        Catalog theCatalog = null;
+        if (attribute != null) {
+            theCatalog = (Catalog) getServletContext().getAttribute
+                (this.attribute);
+        } else if (catalog != null) {
+            theCatalog = factory.getCatalog(catalog);
+        } else {
+            theCatalog = factory.getCatalog();
+        }
+        if (attribute == null) {
+            request.setAttribute(CATALOG_DEFAULT, theCatalog);
+        }
+        Command command = theCatalog.getCommand(this.command);
         try {
             command.execute(context);
         } catch (Exception e) {
