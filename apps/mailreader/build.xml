@@ -6,7 +6,7 @@
         <delete    dir="target"/>
   </target>
   <target description="Call Maven goal under subdirectory" name="maven">
-    <exec executable="maven.bat" dir="${exec.dir}">
+    <exec executable="${maven.exec}" dir="${exec.dir}">
       <arg line="${maven.goal}" />
     </exec>
   </target>
