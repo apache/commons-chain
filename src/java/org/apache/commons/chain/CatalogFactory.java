@@ -15,6 +15,10 @@
  */
 package org.apache.commons.chain;
 
+
+import java.util.Iterator;
+
+
 /**
  * <p>A {@link CatalogFactory} is a class used to store and retrieve
  * {@link Catalog}s.  The factory allows for a default {@link Catalog}
@@ -22,18 +26,10 @@ package org.apache.commons.chain;
  * Factory pattern (see GoF).</p>
  *
  * @author Sean Schofield 
- * @version $Revision: 1.1 $ $Date: 2004/10/02 19:20:55 $
+ * @version $Revision: 1.2 $ $Date: 2004/10/17 01:23:01 $
  */
 
 public interface CatalogFactory {
-
-
-    /**
-     * <p>Returns a instance of CatalogFactory.</p>
-     *
-     * @return an instance of CatalogFactory
-     */
-    public CatalogFactory getInstance();
 
 
     /**
@@ -69,6 +65,14 @@ public interface CatalogFactory {
      * @param catalog the Catalog to add
      */
     public void addCatalog(String name, Catalog catalog);
+
+
+    /**
+     * <p>Return an <code>Iterator</code> over the set of named
+     * {@link Catalog}s known to this {@link CatalogFactory}.
+     * If there are no known catalogs, an empty Iterator is returned.</p>
+     */
+    public Iterator getNames();
 
 
 }
