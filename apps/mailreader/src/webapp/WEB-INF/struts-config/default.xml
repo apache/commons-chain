@@ -21,6 +21,7 @@
 
     <action-mappings>
         <action path="/RegisterForm" forward="/missing.jsp" />
+        <action path="/RegisterAdd" forward="/missing.jsp" />
         <action path="/Tour" forward="/missing.jsp" />
     </action-mappings>
 
