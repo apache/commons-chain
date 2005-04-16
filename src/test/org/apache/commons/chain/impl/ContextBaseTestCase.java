@@ -16,6 +16,10 @@
 package org.apache.commons.chain.impl;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,6 +31,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.apache.commons.chain.Context;
+import org.apache.commons.chain.web.WebContext;
 
 
 
@@ -336,6 +341,47 @@ public class ContextBaseTestCase extends TestCase {
         assertTrue(context.containsValue("baz value"));
 
     }
+
+
+    // Test serialization
+    public void testSeriaization() throws Exception {
+
+        // ContextBase is implicitly declared Serializable because it
+        // extends HashMap.  However, it is not possible to make
+        // the concrete subclasses of WebContext Serializable, because
+        // the underlying container objects that they wrap will not be.
+        // Therefore, skip testing serializability of these implementations
+        if (context instanceof WebContext) {
+            return;
+        }
+
+        // Set up the context with some parameters
+        context.put("foo", "foo value");
+        context.put("bar", "bar value");
+        context.put("baz", "baz value");
+        checkAttributeCount(3);
+
+        // Serialize to a byte array
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(context);
+        oos.close();
+
+        // Deserialize back to a new object
+        ByteArrayInputStream bais =
+          new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        context = (Context) ois.readObject();
+        ois.close();
+
+        // Do some rudimentary checks to make sure we have the same contents
+        assertTrue(context.containsKey("foo"));
+        assertTrue(context.containsKey("bar"));
+        assertTrue(context.containsKey("baz"));
+        checkAttributeCount(3);
+
+    }
+
 
 
     // -------------------------------------------------------- Support Methods

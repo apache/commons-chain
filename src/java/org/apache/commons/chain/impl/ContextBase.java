@@ -90,19 +90,25 @@ public class ContextBase extends HashMap implements Context {
     // ------------------------------------------------------ Instance Variables
 
 
+    // NOTE - PropertyDescriptor instances are not Serializable, so the
+    // following variables must be declared as transient.  When a ContextBase
+    // instance is deserialized, the no-arguments constructor is called,
+    // and the initialize() method called there will repoopulate them.
+    // Therefore, no special restoration activity is required.
+
     /**
      * <p>The <code>PropertyDescriptor</code>s for all JavaBeans properties
      * of this {@link Context} implementation class, keyed by property name.
      * This collection is allocated only if there are any JavaBeans
      * properties.</p>
      */
-    private Map descriptors = null;
+    private transient Map descriptors = null;
 
 
     /**
      * <p>The same <code>PropertyDescriptor</code>s as an array.</p>
      */
-    private PropertyDescriptor[] pd = null;
+    private transient PropertyDescriptor[] pd = null;
 
 
     /**
