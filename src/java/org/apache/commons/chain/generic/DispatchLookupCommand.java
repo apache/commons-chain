@@ -16,6 +16,7 @@
 package org.apache.commons.chain.generic;
 
 
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.Filter;
@@ -50,6 +51,24 @@ import java.util.WeakHashMap;
 
 public class DispatchLookupCommand extends LookupCommand implements Filter {
 
+    // -------------------------------------------------------------- Constructors
+
+    /**
+     * Create an instance with an unspecified <code>catalogFactory</code> property.  
+     * This property can be set later using <code>setProperty</code>, or if it is not set,
+     * the static singleton instance from <code>CatalogFactory.getInstance()</code> will be used. 
+     * 
+     */
+    public DispatchLookupCommand() {  super();  };
+    
+    /**
+     * Create an instance and initialize the <code>catalogFactory</code> property
+     * to given <code>factory</code>/
+     */
+    public DispatchLookupCommand(CatalogFactory factory) {
+        super(factory);
+    }
+    
     // ------------------------------------------------------- Static Variables
     
     /**

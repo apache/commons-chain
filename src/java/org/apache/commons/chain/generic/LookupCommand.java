@@ -45,11 +45,40 @@ import org.apache.commons.chain.Filter;
 public class LookupCommand implements Filter {
 
 
+    // -------------------------------------------------------------- Constructors
+
+    /**
+     * Create an instance with an unspecified <code>catalogFactory</code> property.  
+     * This property can be set later using <code>setProperty</code>, or if it is not set,
+     * the static singleton instance from <code>CatalogFactory.getInstance()</code> will be used. 
+     * 
+     */
+    public LookupCommand() {    }
+    
+    /**
+     * Create an instance and initialize the <code>catalogFactory</code> property
+     * to given <code>factory</code>/
+     */
+    public LookupCommand(CatalogFactory factory) {
+        this.catalogFactory = factory;
+    }
+    
+
     // -------------------------------------------------------------- Properties
 
 
-    private String catalogName = null;
 
+    private CatalogFactory catalogFactory = null;
+
+    /**
+     * <p>Set the {@link CatalogFactory} from which lookups will be
+     * performed.</p>
+     */
+    public void setCatalogFactory(CatalogFactory catalogFactory) {
+        this.catalogFactory = catalogFactory;
+    }
+    
+    private String catalogName = null;
 
     /**
      * <p>Return the name of the {@link Catalog} to be searched, or
@@ -268,15 +297,16 @@ public class LookupCommand implements Filter {
      *  to <code>false</code>
      */
     protected Command getCommand(Context context) {
+        CatalogFactory lookupFactory = this.catalogFactory;
+        if (lookupFactory == null) lookupFactory = CatalogFactory.getInstance();
 
-        CatalogFactory catalogFactory = CatalogFactory.getInstance();
         String catalogName = getCatalogName();
         Catalog catalog = null;
         if (catalogName == null) {
             // use default catalog
-            catalog = catalogFactory.getCatalog();
+            catalog = lookupFactory.getCatalog();
         } else {
-            catalog = catalogFactory.getCatalog(catalogName);
+            catalog = lookupFactory.getCatalog(catalogName);
         }
         if (catalog == null) {
             if (catalogName == null) {
