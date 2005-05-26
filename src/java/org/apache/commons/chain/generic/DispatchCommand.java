@@ -2,6 +2,8 @@ package org.apache.commons.chain.generic;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
+
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.WeakHashMap;
 
@@ -30,7 +32,11 @@ public abstract class DispatchCommand implements Command {
      * returning a boolean value as interpreted by <code>evaluateResult</code>.
      * @param context
      * @return
-     * @throws Exception
+     * @throws IllegalStateException if neither 'method' nor 'methodKey' properties are defined
+     * @throws Exception if any is thrown by the invocation.  Note that if invoking the method
+     * results in an InvocationTargetException, the cause of that exception is thrown instead of
+     * the exception itself, unless the cause is an <code>Error</code> or other <code>Throwable</code>
+     * which is not an <code>Exception</code>. 
      */
     public boolean execute(Context context) throws Exception {
 
@@ -40,7 +46,12 @@ public abstract class DispatchCommand implements Command {
 
         Method methodObject = extractMethod(context);
 
-        return evaluateResult(methodObject.invoke(this, getArguments(context)));
+        try {
+            return evaluateResult(methodObject.invoke(this, getArguments(context)));
+        } catch (InvocationTargetException e) {
+            if (e instanceof Exception) throw (Exception) e.getCause();
+            throw e;
+        }
     }
 
     /**
