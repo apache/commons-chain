@@ -48,12 +48,13 @@ public class LookupCommand implements Filter {
     // -------------------------------------------------------------- Constructors
 
     /**
-     * Create an instance with an unspecified <code>catalogFactory</code> property.  
-     * This property can be set later using <code>setProperty</code>, or if it is not set,
-     * the static singleton instance from <code>CatalogFactory.getInstance()</code> will be used. 
+     * Create an instance, setting its <code>catalogFactory</code> property to the
+     * value of <code>CatalogFactory.getInstance()</code>. 
      * 
      */
-    public LookupCommand() {    }
+    public LookupCommand() {    
+        this(CatalogFactory.getInstance());
+    }
     
     /**
      * Create an instance and initialize the <code>catalogFactory</code> property
@@ -66,9 +67,7 @@ public class LookupCommand implements Filter {
 
     // -------------------------------------------------------------- Properties
 
-
-
-    private CatalogFactory catalogFactory = null;
+    protected CatalogFactory catalogFactory = null;
 
     /**
      * <p>Set the {@link CatalogFactory} from which lookups will be
@@ -77,6 +76,16 @@ public class LookupCommand implements Filter {
     public void setCatalogFactory(CatalogFactory catalogFactory) {
         this.catalogFactory = catalogFactory;
     }
+    
+    /**
+     * Return the {@link CatalogFactory} from which lookups will be performed. 
+     * @return
+     */
+    public CatalogFactory getCatalogFactory() {
+
+        return this.catalogFactory;
+    }
+
     
     private String catalogName = null;
 
