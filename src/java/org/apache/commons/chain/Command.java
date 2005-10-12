@@ -78,7 +78,19 @@ package org.apache.commons.chain;
 
 public interface Command {
 
+    /**
+     * <p>Commands should return <code>CONTINUE_PROCESSING</code> if the processing
+     *  of the given {@link Context} should be delegated to a subsequent
+     *  {@link Command} in an enclosing {@link Chain}</p>
+     */
+    public static final boolean CONTINUE_PROCESSING = false;
 
+    /**
+     * <p>Commands should return <code>PROCESSING_COMPLETE</code>
+     * if the processing of the given {@link Context}
+     *  has been completed.</p>
+     */
+    public static final boolean PROCESSING_COMPLETE = true;
     /**
      * <p>Execute a unit of processing work to be performed.  This
      * {@link Command} may either complete the required processing
