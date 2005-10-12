@@ -47,6 +47,20 @@ public class CatalogBase implements Catalog {
     protected Map commands = Collections.synchronizedMap(new HashMap());
 
 
+    // --------------------------------------------------------- Constructors
+
+    public CatalogBase() { }
+
+    /**
+     * <p>Create a catalog whose commands are those specified in the given <code>Map</code>.
+     * All Map keys should be <code>String</code> and all values should be <code>Command</code>.</p>
+     *  
+     * @param commands
+     */
+    public CatalogBase( Map commands ) {
+        this.commands = Collections.synchronizedMap(commands);
+    }
+    
     // --------------------------------------------------------- Public Methods
 
 
