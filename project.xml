@@ -70,21 +70,21 @@
   
   <dependencies>
     <dependency>
-      <groupId>servletapi</groupId>
-      <artifactId>servletapi</artifactId>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
       <version>2.3</version>
     </dependency>
     <dependency>
-      <groupId>portlet-api</groupId>
+      <groupId>javax.portlet</groupId>
       <artifactId>portlet-api</artifactId>
       <version>1.0</version>
       <url>http://portals.apache.org/pluto</url>
     </dependency>
     <dependency>
       <groupId>myfaces</groupId>
-      <artifactId>myfaces-jsf-api</artifactId>
-      <version>1.0.8-beta</version>
-      <url>http://incubator.apache.org/myfaces</url>
+      <artifactId>myfaces-api</artifactId>
+      <version>1.1.0</version>
+      <url>http://myfaces.apache.org</url>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
