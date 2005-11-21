@@ -17,7 +17,8 @@
 <project>
   <extend>../commons-build/project.xml</extend>
   <name>Commons Chain</name>
-  <id>commons-chain</id>
+  <groupId>commons-chain</groupId>
+  <artifactId>commons-chain</artifactId>
   
   <logo>/images/chain-logo-white.png</logo>
   

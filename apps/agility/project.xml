@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <project>
-  <id>agility</id>
+  <groupId>commons-chain</groupId>
+  <artifactId>agility</artifactId>
   <name>Agility Controller for Commons Chain</name>
   <package>org.apache.*</package>
   <description>An implementation of the classic Controller pattern implemented with Commons Chain.</description>
   <shortDescription>Agility Controller for Commons Chain</shortDescription>
-  <version>1.0.0</version>
+  <currentVersion>1.0.1-SNAPSHOT</currentVersion>
   <inceptionYear>2004</inceptionYear>
 
   <developers>
@@ -30,7 +31,7 @@
     <dependency>
       <groupId>commons-chain</groupId>
       <artifactId>commons-chain</artifactId>
-      <version>0.2-dev</version>
+      <version>0.2-SNAPSHOT</version>
       <properties>
         <war.bundle>true</war.bundle>
       </properties>
@@ -40,20 +41,17 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>3.8.1</version>
+        <properties>
+          <scope>test</scope>
+        </properties>
       </dependency>
    </dependencies>
-
-    <resources>
-        <resource directory="resources/chain" targetPath="resources" />
-    </resources>
 
     <build>
 
        <sourceDirectory>src/java</sourceDirectory>
 
        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
-
-       <aspectSourceDirectory/>
 
        <unitTest>
          <includes>
