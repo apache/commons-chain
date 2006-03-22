@@ -95,7 +95,6 @@ class ConfigRegisterRule extends Rule {
 
         // Register the top element appropriately
         if (next instanceof Catalog) {
-            Catalog catalog = (Catalog) next;
             String nameValue = attributes.getValue(nameAttribute);
             if (nameValue != null) {
                 ((Catalog) next).addCommand(nameValue, command);
