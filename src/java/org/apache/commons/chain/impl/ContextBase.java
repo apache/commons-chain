@@ -722,7 +722,9 @@ public class ContextBase extends HashMap implements Context {
             return (previous);
         }
 
-
+        public String toString() {
+            return getKey() + "=" + getValue();
+        }
     }
 
 
