@@ -14,9 +14,72 @@
    limitations under the License.
 -->
 <project default="java:jar"
+  xmlns:ant="jelly:ant"
   xmlns:j="jelly:core">
 
-  <postGoal name="xdoc:copy-resources">  
+  <!-- ================================================================== -->
+  <!-- Copy into the binary distribution                                  -->
+  <!-- ================================================================== -->
+  <postGoal name="dist:prepare-bin-filesystem">
+
+    <copy todir="${maven.dist.bin.assembly.dir}">
+      <fileset file='${basedir}/NOTICE.txt'/>
+      <fileset file="${basedir}/RELEASE-NOTES.txt"/>
+    </copy>
+
   </postGoal>
+
+  <!-- ================================================================== -->
+  <!-- Copy into the source distribution                                  -->
+  <!-- ================================================================== -->
+  <postGoal name="dist:prepare-src-filesystem">
+
+    <!-- Copy the NOTICE -->
+    <copy todir="${maven.dist.src.assembly.dir}">
+      <fileset file='${basedir}/NOTICE.txt'/>
+      <fileset file="${basedir}/RELEASE-NOTES.txt"/>
+      <fileset file="${basedir}/build.properties.sample"/>
+      <fileset file="${basedir}/checkstyle.xml"/>
+      <fileset file="${basedir}/license-header.txt"/>
+    </copy>
+
+    <!-- Copy xdoc files -->
+    <copy todir="${maven.dist.src.assembly.dir}/xdocs">
+      <fileset dir="./xdocs"/>
+    </copy>
+
+  </postGoal>
+
+    <!-- ================================================================== -->
+    <!-- Create MD5 Check Sums                                              -->
+    <!-- ================================================================== -->
+    <postGoal name="dist">
+
+         <!-- create checksum for jar -->
+         <ant:checksum file="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}.jar" property="jar.md5"/>
+         <ant:echo message="${jar.md5} *${pom.artifactId}-${pom.currentVersion}.jar" 
+                   file="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}.jar.md5" />
+
+         <!-- create checksum for binary zip -->
+         <ant:checksum file="${maven.dist.dir}/${pom.artifactId}-${pom.currentVersion}.zip" property="zip.md5"/>
+         <ant:echo message="${zip.md5} *${pom.artifactId}-${pom.currentVersion}.zip" 
+                   file="${maven.dist.dir}/${pom.artifactId}-${pom.currentVersion}.zip.md5" />
+
+         <!-- create checksum for binary tar.gz -->
+         <ant:checksum file="${maven.dist.dir}/${pom.artifactId}-${pom.currentVersion}.tar.gz" property="tar.gz.md5"/>
+         <ant:echo message="${tar.gz.md5} *${pom.artifactId}-${pom.currentVersion}.tar.gz" 
+                   file="${maven.dist.dir}/${pom.artifactId}-${pom.currentVersion}.tar.gz.md5" />
+
+         <!-- create checksum for source zip -->
+         <ant:checksum file="${maven.dist.dir}/${pom.artifactId}-${pom.currentVersion}-src.zip" property="src.zip.md5"/>
+         <ant:echo message="${src.zip.md5} *${pom.artifactId}-${pom.currentVersion}-src.zip" 
+                   file="${maven.dist.dir}/${pom.artifactId}-${pom.currentVersion}-src.zip.md5" />
+
+         <!-- create checksum for source tar.gz -->
+         <ant:checksum file="${maven.dist.dir}/${pom.artifactId}-${pom.currentVersion}-src.tar.gz" property="src.tar.gz.md5"/>
+         <ant:echo message="${src.tar.gz.md5} *${pom.artifactId}-${pom.currentVersion}-src.tar.gz" 
+                   file="${maven.dist.dir}/${pom.artifactId}-${pom.currentVersion}-src.tar.gz.md5" />
+
+    </postGoal>
   
 </project>
