@@ -67,6 +67,11 @@
       <email>mrdon@apache.org</email>
       <organization></organization>
     </developer>
+    <developer>
+      <name>Niall Pemberton</name>
+      <id>niallp</id>
+      <email>niallp at apache.org</email>
+    </developer>
   </developers>
   
   <dependencies>
