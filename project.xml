@@ -15,7 +15,7 @@
    limitations under the License.
 -->
 <project>
-  <extend>../commons-build/project.xml</extend>
+  <pomVersion>3</pomVersion>
   <name>Commons Chain</name>
   <groupId>commons-chain</groupId>
   <artifactId>commons-chain</artifactId>
@@ -30,6 +30,19 @@
   <url>http://jakarta.apache.org/commons/${pom.artifactId.substring(8)}/</url>
   <package>org.apache.commons.${pom.artifactId.substring(8)}</package>
 
+  <organization>
+    <name>The Apache Software Foundation</name>
+    <url>http://jakarta.apache.org</url>
+    <logo>http://jakarta.apache.org/images/original-jakarta-logo.gif</logo>
+  </organization>
+
+  <licenses>
+	<license>
+    	<name>The Apache Software License, Version 2.0</name>
+    	<url>/LICENSE.txt</url>
+    	<distribution>repo</distribution>
+	</license>
+  </licenses>
 
   <gumpRepositoryId>jakarta</gumpRepositoryId>
   <issueTrackingUrl>http://issues.apache.org/jira/</issueTrackingUrl>
@@ -39,21 +52,34 @@
   
   <repository>
     <connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/commons/proper/${pom.artifactId.substring(8)}/trunk</connection>
-    <url>http://svn.apache.org/repos/asf/jakarta/commons/proper/${pom.artifactId.substring(8)}/trunk</url>
+    <url>http://svn.apache.org/viewcvs.cgi</url>
   </repository>
+
+  <mailingLists>
+    <mailingList>
+      <name>Commons Dev List</name>
+      <subscribe>commons-dev-subscribe@jakarta.apache.org</subscribe>
+      <unsubscribe>commons-dev-unsubscribe@jakarta.apache.org</unsubscribe>
+      <archive>http://mail-archives.apache.org/eyebrowse/SummarizeList?listName=commons-dev@jakarta.apache.org</archive>
+    </mailingList>
+    <mailingList>
+      <name>Commons User List</name>
+      <subscribe>commons-user-subscribe@jakarta.apache.org</subscribe>
+      <unsubscribe>commons-user-unsubscribe@jakarta.apache.org</unsubscribe>
+      <archive>http://mail-archives.apache.org/eyebrowse/SummarizeList?listName=commons-user@jakarta.apache.org</archive>
+    </mailingList>
+  </mailingLists>
  
   <developers>
     <developer>
       <name>Craig McClanahan</name>
       <id>craigmcc</id>
       <email>craigmcc@apache.org</email>
-      <organization></organization>
     </developer>
     <developer>
       <name>Ted Husted</name>
       <id>husted</id>
       <email>husted@apache.org</email>
-      <organization></organization>
     </developer>
     <developer>
       <name>Martin Cooper</name>
@@ -65,7 +91,16 @@
       <name>Don Brown</name>
       <id>mrdon</id>
       <email>mrdon@apache.org</email>
-      <organization></organization>
+    </developer>
+    <developer>
+      <name>James Mitchell</name>
+      <id>jmitchell</id>
+      <email>jmitchell at apache.org</email>
+    </developer>
+    <developer>
+      <name>Joe Germuska</name>
+      <id>germuska</id>
+      <email>germuska at apache.org</email>
     </developer>
     <developer>
       <name>Niall Pemberton</name>
@@ -121,10 +156,39 @@
       <properties>
           <comment>
               &lt;strong&gt;Site Only&lt;/strong&gt; - v1.9.2 (minimum)
-              required for building the BeanUtils Site documentation.
+              required for building the Chain Site documentation.
           </comment>
       </properties>
     </dependency>
+
+    <dependency>
+      <groupId>maven</groupId>
+      <artifactId>maven-changelog-plugin</artifactId>
+      <version>1.8.2</version>
+      <url>http://maven.apache.org/reference/plugins/changelog/</url>
+      <type>plugin</type>
+      <properties>
+          <comment>
+              &lt;strong&gt;Site Only&lt;/strong&gt; - v1.8.2 (minimum)
+              required for building the Chain Site documentation.
+          </comment>
+      </properties>
+    </dependency>
+
+    <dependency>
+      <groupId>maven</groupId>
+      <artifactId>maven-changes-plugin</artifactId>
+      <version>1.6</version>
+      <url>http://maven.apache.org/reference/plugins/changes/</url>
+      <type>plugin</type>
+      <properties>
+          <comment>
+              &lt;strong&gt;Site Only&lt;/strong&gt; - v1.6 (minimum)
+              required for building the Chain Site documentation.
+          </comment>
+      </properties>
+    </dependency>
+
   </dependencies>
   
   <build>
@@ -145,4 +209,15 @@
     </resources>
  
   </build>
+
+  <reports>
+    <report>maven-checkstyle-plugin</report>
+    <report>maven-changes-plugin</report>
+    <report>maven-changelog-plugin</report>
+    <report>maven-javadoc-plugin</report>
+    <report>maven-junit-report-plugin</report>
+    <report>maven-jxr-plugin</report>
+    <report>maven-license-plugin</report>
+  </reports>
+
 </project>

@@ -86,37 +86,31 @@
   <section name="Documentation">
     <p>
       <ul>
-        <li>The <a href="apidocs/index.html">Javadoc</a> of the latest CVS.</li>
+        <li>The <a href="apidocs/index.html">Javadoc</a> of the latest SVN.</li>
         <li>The <a href="cookbook.html">Cookbook</a> containing "recipes" for using the chain.</li>
-        <li>The <a href="http://cvs.apache.org/viewcvs/jakarta-commons/chain/">CVS repository</a> can be browsed.</li>
+        <li>The <a href="cvs-usage.html">SVN repository</a> can be browsed.</li>
       </ul>
     </p>
   </section>
 
   <section name="Downloading Chain">
-    <subsection name='Releases'>
-      <p>
-        <strong>Chain 1.0</strong> - 9 Dec 2004
-        <ul>
-          <li>Download the binary distribution from a mirror site
-            <a href='http://jakarta.apache.org/site/binindex.cgi'>here</a>
-          </li>
-          <li>Download the source distribution from a mirror site
-            <a href='http://jakarta.apache.org/site/sourceindex.cgi'>here</a>
-          </li>
-        </ul>
-      </p>
-    </subsection>
-    <subsection name='Nightly Builds'>	
-      <p>
-        Nightly builds are built every day from the current CVS HEAD. This is 
-        the latest code and so should be treated with caution!
-      </p>
-      <p>
-        Download nightly builds from 
-        <a href='http://cvs.apache.org/builds/jakarta-commons/nightly/commons-chain/'>here</a>.
-      </p>
-    </subsection>
+    <p>See the <a href="downloads.html">Downloads</a> page for current/previous 
+       releases.
+    </p>
+  </section>
+
+  <section name="Support">
+    <p>
+      The <a href="mail-lists.html">commons mailing lists</a> act as the main support forum.
+      The user list is suitable for most library usage queries.
+      The dev list is intended for the development discussion.
+      Please remember that the lists are shared between all commons components,
+      so prefix your email by [chain].
+    </p>
+
+    <p>
+      Issues may be reported via <a href="issue-tracking.html">ASF Jira</a>.
+    </p>
   </section>
 
 </body>

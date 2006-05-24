@@ -14,18 +14,37 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<!DOCTYPE org.apache.commons.menus SYSTEM '../../commons-build/menus/menus.dtd'>
+<!DOCTYPE org.apache.commons.menus SYSTEM 'http://jakarta.apache.org/commons/build/maven-build.dtd'>
 <project name="Commons&#xA0;Chain">
   <title>Commons&#xA0;Chain</title>
   <body>
+    <links>
+      <item name="Apache"                   
+            href="http://www.apache.org"/>
+      <item name="Jakarta"                   
+            href="http://jakarta.apache.org"/>
+      <item name="Commons"                   
+            href="http://jakarta.apache.org/commons/"/>
+    </links>
+
     <menu name="Commons&#xA0;Chain">
       <item name="Overview"      href="/index.html"/>
       <item name="Cookbook"      href="/cookbook.html"/>
+      <item name="Release Notes" href="/changes-report.html"/>
       <item name="Javadoc"       href="/apidocs/index.html"/>
-      <item name="Mailing lists" href="/mail-lists.html"/>
-      <item name="Team"          href="/team-list.html"/>
-      <item name="CVS"           href="http://cvs.apache.org/viewcvs/jakarta-commons/chain/"/>
+      <item name="Download"      href="/downloads.html"/>
+      <item name="Issue Tracking" href="/issue-tracking.html"/>
     </menu>
-    &common-menus;
+    
+    <menu name="Development">
+      <item name="Building"                href="/building.html"/>
+      <item name="Mailing Lists"           href="/mail-lists.html"/>
+      <item name="Team"                    href="/team-list.html"/>
+      <item name="Javadoc (latest)"        href="http://jakarta.apache.org/commons/chain/apidocs/"/>
+      <item name="SVN Repository"          href="/cvs-usage.html"/>
+    </menu>
+    
+    &commons;
+
   </body>
 </project>
