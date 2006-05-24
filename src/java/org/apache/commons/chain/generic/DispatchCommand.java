@@ -49,7 +49,10 @@ public abstract class DispatchCommand implements Command {
         try {
             return evaluateResult(methodObject.invoke(this, getArguments(context)));
         } catch (InvocationTargetException e) {
-            if (e.getCause() instanceof Exception) throw (Exception) e.getCause();
+            Throwable cause = e.getTargetException();
+            if (cause instanceof Exception) {
+                throw (Exception)cause;
+            } 
             throw e;
         }
     }
