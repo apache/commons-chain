@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <project>
-  <groupId>commons-chain</groupId>
-  <artifactId>mailreader</artifactId>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-chain-mailreader</artifactId>
   <name>Struts MailReader for Commons Chain</name>
   <package>org.apache.*</package>
   <description>A new implementation of the classic Struts MailReader example using Commons Chain as a business facade.</description>
@@ -59,7 +59,7 @@
     <dependency>
       <groupId>struts</groupId>
       <artifactId>struts</artifactId>
-      <version>1.2.0</version>
+      <version>1.2.2</version>
       <properties>
         <war.bundle>true</war.bundle>
       </properties>
@@ -68,7 +68,7 @@
     <dependency>
       <groupId>commons-chain</groupId>
       <artifactId>commons-chain</artifactId>
-      <version>0.2-SNAPSHOT</version>
+      <version>1.0</version>
       <properties>
         <war.bundle>true</war.bundle>
       </properties>
