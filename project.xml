@@ -17,7 +17,7 @@
 <project>
   <pomVersion>3</pomVersion>
   <name>Commons Chain</name>
-  <groupId>commons-chain</groupId>
+  <groupId>org.apache.commons</groupId>
   <artifactId>commons-chain</artifactId>
   
   <logo>/images/chain-logo-white.png</logo>
