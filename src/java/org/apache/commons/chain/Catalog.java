@@ -58,6 +58,7 @@ public interface Catalog {
      *
      * @param name Name for which a {@link Command} or {@link Chain}
      *  should be retrieved
+     * @return The Command associated with the specified name.
      */
     Command getCommand(String name);
 
@@ -67,6 +68,7 @@ public interface Catalog {
      * <p>Return an <code>Iterator</code> over the set of named commands
      * known to this {@link Catalog}.  If there are no known commands,
      * an empty Iterator is returned.</p>
+     * @return An iterator of the names in this Catalog.
      */
     Iterator getNames();
 

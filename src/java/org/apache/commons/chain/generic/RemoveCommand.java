@@ -38,6 +38,7 @@ public class RemoveCommand implements Command {
 
     /**
      * <p>Return the context attribute key for the attribute.</p>
+     * @return The context attribute key.
      */
     public String getFromKey() {
 
@@ -68,6 +69,7 @@ public class RemoveCommand implements Command {
      * @param context {@link Context} in which we are operating
      *
      * @return <code>false</code> so that processing will continue
+     * @throws Exception if and error occurs.
      */
     public boolean execute(Context context) throws Exception {
 

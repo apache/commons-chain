@@ -66,6 +66,7 @@ public class ConfigParser {
     /**
      * <p>Return the <code>Digester</code> instance to be used for
      * parsing, creating one if necessary.</p>
+     * @return A Digester instance.
      */
     public Digester getDigester() {
 
@@ -85,6 +86,7 @@ public class ConfigParser {
     /**
      * <p>Return the <code>RuleSet</code> to be used for configuring
      * our <code>Digester</code> parsing rules, creating one if necessary.</p>
+     * @return The RuleSet for configuring a Digester instance.
      */
     public RuleSet getRuleSet() {
 
@@ -114,6 +116,7 @@ public class ConfigParser {
      * <p>Return the "use context class loader" flag.  If set to
      * <code>true</code>, Digester will attempt to instantiate new
      * command and chain instances from the context class loader.</p>
+     * @return <code>true</code> if Digester should use the context class loader.
      */
     public boolean getUseContextClassLoader() {
 

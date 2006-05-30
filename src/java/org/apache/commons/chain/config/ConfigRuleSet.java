@@ -91,6 +91,7 @@ public class ConfigRuleSet extends RuleSetBase {
 
     /**
      * <p>Return the fully qualified {@link Catalog} implementation class.</p>
+     * @return The Catalog's class name.
      */
     public String getCatalogClass() {
         return (this.catalogClass);
@@ -109,6 +110,7 @@ public class ConfigRuleSet extends RuleSetBase {
 
     /**
      * <p>Return the element name of a catalog element.</p>
+     * @return The element name of a catalog element.
      */
     public String getCatalogElement() {
         return (this.catalogElement);
@@ -127,6 +129,7 @@ public class ConfigRuleSet extends RuleSetBase {
 
     /**
      * <p>Return the fully qualified {@link Chain} implementation class.</p>
+     * @return The Chain's class name.
      */
     public String getChainClass() {
         return (this.chainClass);
@@ -145,6 +148,7 @@ public class ConfigRuleSet extends RuleSetBase {
 
     /**
      * <p>Return the element name of a chain element.</p>
+     * @return The element name of a catalog element.
      */
     public String getChainElement() {
         return (this.chainElement);
@@ -163,6 +167,7 @@ public class ConfigRuleSet extends RuleSetBase {
 
     /**
      * <p>Return the attribute name of a class attribute.</p>
+     * @return The attribute name of a class attribute.
      */
     public String getClassAttribute() {
         return (this.classAttribute);
@@ -181,6 +186,7 @@ public class ConfigRuleSet extends RuleSetBase {
 
     /**
      * <p>Return the element name of a command element.</p>
+     * @return The element name of a command element.
      */
     public String getCommandElement() {
         return (this.commandElement);
@@ -199,6 +205,7 @@ public class ConfigRuleSet extends RuleSetBase {
 
     /**
      * <p>Return the element name of a define element.</p>
+     * @return The element name of a define element.
      */
     public String getDefineElement() {
         return (this.defineElement);
@@ -217,6 +224,7 @@ public class ConfigRuleSet extends RuleSetBase {
 
     /**
      * <p>Return the attribute name of a name attribute.</p>
+     * @return The attribute name of an attribute element.
      */
     public String getNameAttribute() {
         return (this.nameAttribute);

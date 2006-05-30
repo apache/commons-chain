@@ -49,21 +49,22 @@ public class LookupCommand implements Filter {
 
     /**
      * Create an instance, setting its <code>catalogFactory</code> property to the
-     * value of <code>CatalogFactory.getInstance()</code>. 
-     * 
+     * value of <code>CatalogFactory.getInstance()</code>.
      */
-    public LookupCommand() {    
+    public LookupCommand() {
         this(CatalogFactory.getInstance());
     }
-    
+
     /**
      * Create an instance and initialize the <code>catalogFactory</code> property
      * to given <code>factory</code>/
+     *
+     * @param factory The Catalog Factory.
      */
     public LookupCommand(CatalogFactory factory) {
         this.catalogFactory = factory;
     }
-    
+
 
     // -------------------------------------------------------------- Properties
 
@@ -72,26 +73,29 @@ public class LookupCommand implements Filter {
     /**
      * <p>Set the {@link CatalogFactory} from which lookups will be
      * performed.</p>
+     *
+     * @param catalogFactory The Catalog Factory.
      */
     public void setCatalogFactory(CatalogFactory catalogFactory) {
         this.catalogFactory = catalogFactory;
     }
-    
+
     /**
-     * Return the {@link CatalogFactory} from which lookups will be performed. 
-     * @return
+     * Return the {@link CatalogFactory} from which lookups will be performed.
+     * @return The Catalog factory.
      */
     public CatalogFactory getCatalogFactory() {
 
         return this.catalogFactory;
     }
 
-    
+
     private String catalogName = null;
 
     /**
      * <p>Return the name of the {@link Catalog} to be searched, or
      * <code>null</code> to search the default {@link Catalog}.</p>
+     * @return The Catalog name.
      */
     public String getCatalogName() {
 
@@ -119,6 +123,7 @@ public class LookupCommand implements Filter {
     /**
      * <p>Return the name of the {@link Command} that we will look up and
      * delegate execution to.</p>
+     * @return The name of the Command.
      */
     public String getName() {
 
@@ -146,6 +151,7 @@ public class LookupCommand implements Filter {
     /**
      * <p>Return the context attribute key under which the {@link Command}
      * name is stored.</p>
+     * @return The context key of the Command.
      */
     public String getNameKey() {
 
@@ -173,6 +179,7 @@ public class LookupCommand implements Filter {
     /**
      * <p>Return <code>true</code> if locating the specified command
      * is optional.</p>
+     * @return <code>true</code> if the Command is optional.
      */
     public boolean isOptional() {
 
@@ -196,10 +203,12 @@ public class LookupCommand implements Filter {
 
     /**
      * <p>Return <code>true</code> if this command should ignore
-     * the return value from executing the looked-up command.  
-     * Defaults to <code>false</code>, which means that the return result 
+     * the return value from executing the looked-up command.
+     * Defaults to <code>false</code>, which means that the return result
      * of executing this lookup will be whatever is returned from that
      * command.</p>
+     * @return <code>true</code> if result of the looked up Command
+     * should be ignored.
      */
     public boolean isIgnoreExecuteResult() {
         return ignoreExecuteResult;
@@ -207,22 +216,44 @@ public class LookupCommand implements Filter {
 
     /**
      * <p>Set the rules for whether or not this class will ignore or
-     * pass through the value returned from executing the looked up 
+     * pass through the value returned from executing the looked up
      * command.</p>
      * <p>If you are looking up a chain which may be "aborted" and
-     * you do not want this class to stop chain processing, then this 
+     * you do not want this class to stop chain processing, then this
      * value should be set to <code>true</code></p>
-     * @param ignoreExecuteResult
+     * @param ignoreReturn <code>true</code> if result of the
+     * looked up Command should be ignored.
      */
     public void setIgnoreExecuteResult(boolean ignoreReturn) {
         this.ignoreExecuteResult = ignoreReturn;
     }
 
     private boolean ignorePostprocessResult = false;
-    
+
+    /**
+     * <p>Return <code>true</code> if this command is a Filter and
+     * should ignore the return value from executing the looked-up Filter's
+     * <code>postprocess()</code> method.
+     * Defaults to <code>false</code>, which means that the return result
+     * of executing this lookup will be whatever is returned from that
+     * Filter.</p>
+     * @return <code>true</code> if result of the looked up Filter's
+     * <code>postprocess()</code> method should be ignored.
+     */
     public boolean isIgnorePostprocessResult() {
         return ignorePostprocessResult;
     }
+
+    /**
+     * <p>Set the rules for whether or not this class will ignore or
+     * pass through the value returned from executing the looked up
+     * Filter's <code>postprocess()</code> method.</p>
+     * <p>If you are looking up a Filter which may be "aborted" and
+     * you do not want this class to stop chain processing, then this
+     * value should be set to <code>true</code></p>
+     * @param ignorePostprocessResult <code>true</code> if result of the
+     * looked up Filter's <code>postprocess()</code> method should be ignored.
+     */
     public void setIgnorePostprocessResult(boolean ignorePostprocessResult) {
         this.ignorePostprocessResult = ignorePostprocessResult;
     }
@@ -231,11 +262,11 @@ public class LookupCommand implements Filter {
 
     /**
      * <p>Look up the specified command, and (if found) execute it.
-     * Unless <code>ignoreExecuteResult</code> is set to <code>true</code>, 
+     * Unless <code>ignoreExecuteResult</code> is set to <code>true</code>,
      * return the result of executing the found command.  If no command
      * is found, return <code>false</code>, unless the <code>optional</code>
      * property is <code>false</code>, in which case an <code>IllegalArgumentException</code>
-     * will be thrown.  
+     * will be thrown.
      * </p>
      *
      * @param context The context for this request
@@ -243,10 +274,11 @@ public class LookupCommand implements Filter {
      * @exception IllegalArgumentException if no such {@link Command}
      *  can be found and the <code>optional</code> property is set
      *  to <code>false</code>
-     * @return the result of executing the looked-up command, or 
+     * @return the result of executing the looked-up command, or
      * <code>false</code> if no command is found or if the command
      * is found but the <code>ignoreExecuteResult</code> property of this
      * instance is <code>true</code>
+     * @throws Exception if and error occurs in the looked-up Command.
      */
     public boolean execute(Context context) throws Exception {
 
@@ -271,11 +303,10 @@ public class LookupCommand implements Filter {
      * @param context The context for this request
      * @param exception Any <code>Exception</code> thrown by command execution
      *
-     * @exception Exception if thrown by the <code>postprocess()</code> method
      * @return the result of executing the <code>postprocess</code> method
-     * of the looked-up command, unless <code>ignorePostprocessResult</code> is 
+     * of the looked-up command, unless <code>ignorePostprocessResult</code> is
      * <code>true</code>.  If no command is found, return <code>false</code>,
-     * unless the <code>optional</code> property is <code>false</code>, in which 
+     * unless the <code>optional</code> property is <code>false</code>, in which
      * case <code>IllegalArgumentException</code> will be thrown.
      */
     public boolean postprocess(Context context, Exception exception) {
@@ -284,7 +315,9 @@ public class LookupCommand implements Filter {
         if (command != null) {
             if (command instanceof Filter) {
                 boolean result = (((Filter) command).postprocess(context, exception));
-                if (isIgnorePostprocessResult())  return false;
+                if (isIgnorePostprocessResult()) {
+                    return false;
+                }
                 return result;
             }
         }
@@ -300,14 +333,16 @@ public class LookupCommand implements Filter {
      * <p>Return the {@link Command} instance to be delegated to.</p>
      *
      * @param context {@link Context} for this request
-     *
+     * @return The looked-up Command.
      * @exception IllegalArgumentException if no such {@link Command}
      *  can be found and the <code>optional</code> property is set
      *  to <code>false</code>
      */
     protected Command getCommand(Context context) {
         CatalogFactory lookupFactory = this.catalogFactory;
-        if (lookupFactory == null) lookupFactory = CatalogFactory.getInstance();
+        if (lookupFactory == null) {
+            lookupFactory = CatalogFactory.getInstance();
+        }
 
         String catalogName = getCatalogName();
         Catalog catalog = null;

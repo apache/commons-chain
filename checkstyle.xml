@@ -58,9 +58,16 @@
   
           <!-- Checks for Javadoc comments.                     -->
           <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-          <module name="JavadocMethod"/>
-          <module name="JavadocType"/>
-          <module name="JavadocVariable"/>
+          <module name="JavadocMethod">
+              <property name="scope" value="protected"/>
+              <property name="allowUndeclaredRTE" value="true"/>
+          </module>
+          <module name="JavadocType">
+              <property name="scope" value="protected"/>
+          </module>
+          <module name="JavadocVariable">
+              <property name="scope" value="protected"/>
+          </module>
   
   
           <!-- Checks for Naming Conventions.                  -->
@@ -93,16 +100,18 @@
           <module name="EmptyForIteratorPad"/>
           <module name="NoWhitespaceAfter"/>
           <module name="NoWhitespaceBefore"/>
-          <module name="OperatorWrap"/>
+          <!-- module name="OperatorWrap"/ -->
           <module name="TabCharacter"/>
-          <module name="WhitespaceAfter"/>
+          <module name="WhitespaceAfter">
+             <property name="tokens" value="COMMA, SEMI"/>
+          </module>
           <module name="WhitespaceAround"/>
   
   
           <!-- Modifier Checks                                    -->
           <!-- See http://checkstyle.sf.net/config_modifiers.html -->
           <module name="ModifierOrder"/>
-          <module name="RedundantModifier"/>
+          <!-- module name="RedundantModifier"/ -->
   
   
           <!-- Checks for blocks. You know, those {}'s         -->
@@ -119,7 +128,7 @@
           <module name="DoubleCheckedLocking"/>    <!-- MY FAVOURITE -->
           <module name="EmptyStatement"/>
           <module name="EqualsHashCode"/>
-          <module name="HiddenField"/>
+          <!-- module name="HiddenField"/ -->
           <module name="IllegalInstantiation"/>
           <module name="InnerAssignment"/>
           <module name="MagicNumber"/>

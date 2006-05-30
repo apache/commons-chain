@@ -98,6 +98,7 @@ public abstract class CatalogFactory {
      * <p>Return an <code>Iterator</code> over the set of named
      * {@link Catalog}s known to this {@link CatalogFactory}.
      * If there are no known catalogs, an empty Iterator is returned.</p>
+     * @return An Iterator of the names of the Catalogs known by this factory.
      */
     public abstract Iterator getNames();
 
@@ -124,7 +125,7 @@ public abstract class CatalogFactory {
      * @throws IllegalArgumentException if the commandID contains more than
      *  one DELIMITER
      */
-    public Command getCommand(String commandID) throws IllegalArgumentException {
+    public Command getCommand(String commandID) {
 
         String commandName = commandID;
         String catalogName = null;
@@ -157,7 +158,7 @@ public abstract class CatalogFactory {
             }
         }
 
-        return catalog.getCommand(commandName);                    
+        return catalog.getCommand(commandName);
 
     }
 

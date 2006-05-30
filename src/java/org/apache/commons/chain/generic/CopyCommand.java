@@ -39,6 +39,7 @@ public class CopyCommand implements Command {
 
     /**
      * <p>Return the context attribute key for the source attribute.</p>
+     * @return The source attribute key.
      */
     public String getFromKey() {
 
@@ -64,6 +65,7 @@ public class CopyCommand implements Command {
 
     /**
      * <p>Return the context attribute key for the destination attribute.</p>
+     * @return The destination attribute key.
      */
     public String getToKey() {
 
@@ -89,6 +91,7 @@ public class CopyCommand implements Command {
 
     /**
      * <p>Return the literal value to be copied.</p>
+     * @return The literal value.
      */
     public String getValue() {
 
@@ -119,21 +122,22 @@ public class CopyCommand implements Command {
      * @param context {@link Context} in which we are operating
      *
      * @return <code>false</code> so that processing will continue
+     * @throws Exception in the if an error occurs during execution.
      */
     public boolean execute(Context context) throws Exception {
 
         Object value = this.value;
-        
+
         if (value == null) {
             value = context.get(getFromKey());
         }
-        
+
         if (value != null) {
             context.put(getToKey(), value);
         } else {
             context.remove(getToKey());
         }
-        
+
         return (false);
 
     }
