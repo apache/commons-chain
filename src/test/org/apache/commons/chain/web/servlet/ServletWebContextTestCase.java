@@ -26,6 +26,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -92,6 +93,8 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         ((MockHttpServletRequest) request).addParameter("pkey1", "pvalue1");
         ((MockHttpServletRequest) request).addParameter("pkey2", "pvalue2a");
         ((MockHttpServletRequest) request).addParameter("pkey2", "pvalue2b");
+        ((MockHttpServletRequest) request).addCookie("ckey1", "cvalue1");
+        ((MockHttpServletRequest) request).addCookie("ckey2", "cvalue2");
         response = new MockHttpServletResponse();
         context = createContext();
     }
@@ -458,6 +461,53 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     }
 
 
+    // Test getCookies()
+    public void testCookies() {
+
+        Map map = ((WebContext) context).getCookies();
+        assertNotNull(map);
+
+        // Initial contents
+        checkMapSize(map, 2);
+        Cookie cookie1 = (Cookie)map.get("ckey1");
+        assertNotNull(cookie1);
+        assertEquals("cvalue1", cookie1.getValue());
+        Cookie cookie2 = (Cookie)map.get("ckey2");
+        assertNotNull(cookie2);
+        assertEquals("cvalue2", cookie2.getValue());
+        assertTrue(map.containsKey("ckey1"));
+        assertTrue(map.containsKey("ckey2"));
+        assertTrue(map.containsValue(cookie1));
+        assertTrue(map.containsValue(cookie2));
+
+        // Unsupported operations on read-only map
+        try {
+            map.clear();
+            fail("Should have thrown UnsupportedOperationException");
+        } catch (UnsupportedOperationException e) {
+            ; // expected result
+        }
+        try {
+            map.put("ckey3", "XXX");
+            fail("Should have thrown UnsupportedOperationException");
+        } catch (UnsupportedOperationException e) {
+            ; // expected result
+        }
+        try {
+            map.putAll(new HashMap());
+            fail("Should have thrown UnsupportedOperationException");
+        } catch (UnsupportedOperationException e) {
+            ; // expected result
+        }
+        try {
+            map.remove("ckey1");
+            fail("Should have thrown UnsupportedOperationException");
+        } catch (UnsupportedOperationException e) {
+            ; // expected result
+        }
+
+    }
+
     // Test state of newly created instance
     public void testPristine() {
 
@@ -471,6 +521,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertNotNull(swcontext.getInitParam());
         assertNotNull(swcontext.getParam());
         assertNotNull(swcontext.getParamValues());
+        assertNotNull(swcontext.getCookies());
         assertNotNull(swcontext.getRequestScope());
         assertNotNull(swcontext.getSessionScope());
 
@@ -487,6 +538,8 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
                      swcontext.get("param"));
         assertTrue(swcontext.getParamValues() ==
                      swcontext.get("paramValues"));
+        assertTrue(swcontext.getCookies() ==
+                     swcontext.get("cookies"));
         assertTrue(swcontext.getRequestScope() ==
                      swcontext.get("requestScope"));
         assertTrue(swcontext.getSessionScope() ==
@@ -508,6 +561,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertNull(swcontext.getInitParam());
         assertNull(swcontext.getParam());
         assertNull(swcontext.getParamValues());
+        assertNull(swcontext.getCookies());
         assertNull(swcontext.getRequestScope());
         assertNull(swcontext.getSessionScope());
 
@@ -518,6 +572,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertNull(swcontext.get("initParam"));
         assertNull(swcontext.get("param"));
         assertNull(swcontext.get("paramValues"));
+        assertNull(swcontext.get("cookies"));
         assertNull(swcontext.get("requestScope"));
         assertNull(swcontext.get("sessionScope"));
 

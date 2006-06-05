@@ -188,6 +188,19 @@ public class FacesWebContext extends WebContext {
     /**
      * See the {@link WebContext}'s Javadoc.
      *
+     * @return Map of Cookies.
+     * @since Chain 1.1
+     */
+    public Map getCookies() {
+
+        return (context.getExternalContext().getRequestCookieMap());
+
+    }
+
+
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
      * @return Request scope Map.
      */
     public Map getRequestScope() {

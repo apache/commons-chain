@@ -65,6 +65,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
     protected HashMap attributes = new HashMap();
     protected String contextPath = null;
     protected HashMap headers = new HashMap();
+    protected Cookie[] cookies = new Cookie[0];
     protected Locale locale = null;
     protected HashMap parameters = new HashMap();
     protected String pathInfo = null;
@@ -102,6 +103,17 @@ public class MockHttpServletRequest implements HttpServletRequest {
         System.arraycopy(values, 0, results, 0, values.length);
         results[values.length] = value;
         parameters.put(name, results);
+    }
+
+    public void addCookie(String name, String value) {
+        addCookie(new Cookie(name, value));
+    }
+
+    public void addCookie(Cookie cookie) {
+        Cookie[] newValues = new Cookie[cookies.length + 1];
+        System.arraycopy(cookies, 0, newValues, 0, cookies.length);
+        cookies = newValues;
+        cookies[cookies.length - 1] = cookie;
     }
 
 
@@ -146,7 +158,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 
 
     public Cookie[] getCookies() {
-        throw new UnsupportedOperationException();
+        return cookies;
     }
 
 

@@ -101,6 +101,16 @@ public abstract class WebContext extends ContextBase {
 
 
     /**
+     * <p>Return an immutable <code>Map</code> that maps cookie names to
+     * the set of cookies specified in the request.
+     *
+     * @return Map of Cookies.
+     * @since Chain 1.1
+     */
+    public abstract Map getCookies();
+
+
+    /**
      * <p>Return a mutable <code>Map</code> that maps request scope
      * attribute names to their values.</p>
      *

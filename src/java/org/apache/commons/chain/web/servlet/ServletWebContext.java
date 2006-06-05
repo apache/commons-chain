@@ -101,6 +101,12 @@ public class ServletWebContext extends WebContext {
 
 
     /**
+     * <p>The lazily instantiated <code>Map</code> of cookies.</p>
+     */
+    private Map cookieValues = null;
+
+
+    /**
      * <p>The lazily instantiated <code>Map</code> of request
      * parameter name-value.</p>
      */
@@ -216,6 +222,7 @@ public class ServletWebContext extends WebContext {
         initParam = null;
         param = null;
         paramValues = null;
+        cookieValues = null;
         requestScope = null;
         sessionScope = null;
 
@@ -317,6 +324,22 @@ public class ServletWebContext extends WebContext {
             paramValues = new ServletParamValuesMap(request);
         }
         return (paramValues);
+
+    }
+
+
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Map of Cookies.
+     * @since Chain 1.1
+     */
+    public Map getCookies() {
+
+        if ((cookieValues == null) && (request != null)) {
+            cookieValues = new ServletCookieMap(request);
+        }
+        return (cookieValues);
 
     }
 

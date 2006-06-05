@@ -325,6 +325,19 @@ public class PortletWebContext extends WebContext {
 
 
     /**
+     * Returns an empty Map - portlets don't support Cookies.
+     *
+     * @return An empty Map.
+     * @since Chain 1.1
+     */
+    public Map getCookies() {
+
+        return Collections.EMPTY_MAP;
+
+    }
+
+
+    /**
      * See the {@link WebContext}'s Javadoc.
      *
      * @return Request scope Map.
