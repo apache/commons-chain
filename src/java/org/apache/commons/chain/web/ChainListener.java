@@ -135,15 +135,6 @@ public class ChainListener implements ServletContextListener {
         "org.apache.commons.chain.RULE_SET";
 
 
-    // -------------------------------------------------------- Static Variables
-
-
-    /**
-     * <p>The <code>Log</code> instance for this class.</p>
-     */
-    private static final Log log = LogFactory.getLog(ChainListener.class);
-
-
     // ------------------------------------------ ServletContextListener Methods
 
 
@@ -174,6 +165,7 @@ public class ChainListener implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent event) {
 
+        Log log = LogFactory.getLog(ChainListener.class);
         if (log.isInfoEnabled()) {
             log.info("Initializing chain listener");
         }

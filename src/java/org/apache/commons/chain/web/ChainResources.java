@@ -38,15 +38,6 @@ import org.apache.commons.logging.LogFactory;
 final class ChainResources {
 
 
-    // -------------------------------------------------------- Static Variables
-
-
-    /**
-     * <p>The <code>Log</code> instance for this class.</p>
-     */
-    private static final Log log = LogFactory.getLog(ChainResources.class);
-
-
     // ---------------------------------------------------------- Static Methods
 
 
@@ -62,6 +53,7 @@ final class ChainResources {
         if (resources == null) {
             return;
         }
+        Log log = LogFactory.getLog(ChainResources.class);
         ClassLoader loader =
             Thread.currentThread().getContextClassLoader();
         if (loader == null) {
@@ -107,6 +99,7 @@ final class ChainResources {
         if (resources == null) {
             return;
         }
+        Log log = LogFactory.getLog(ChainResources.class);
         ClassLoader loader =
             Thread.currentThread().getContextClassLoader();
         if (loader == null) {
@@ -150,6 +143,7 @@ final class ChainResources {
         if (resources == null) {
             return;
         }
+        Log log = LogFactory.getLog(ChainResources.class);
         String[] paths = getResourcePaths(resources);
         String path = null;
         try {
@@ -192,6 +186,7 @@ final class ChainResources {
         if (resources == null) {
             return;
         }
+        Log log = LogFactory.getLog(ChainResources.class);
         String[] paths = getResourcePaths(resources);
         String path = null;
         try {

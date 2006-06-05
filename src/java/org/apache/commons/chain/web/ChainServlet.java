@@ -132,15 +132,6 @@ public class ChainServlet extends HttpServlet {
         "org.apache.commons.chain.RULE_SET";
 
 
-    // -------------------------------------------------------- Static Variables
-
-
-    /**
-     * <p>The <code>Log</code> instance to use with this class.</p>
-     */
-    protected static final Log log = LogFactory.getLog(ChainServlet.class);
-
-
     // --------------------------------------------------------- Servlet Methods
 
 
@@ -168,6 +159,7 @@ public class ChainServlet extends HttpServlet {
      */
     public void init() throws ServletException {
 
+        Log log = LogFactory.getLog(ChainServlet.class);
         ServletConfig config = getServletConfig();
         ServletContext context = getServletContext();
         if (log.isInfoEnabled()) {

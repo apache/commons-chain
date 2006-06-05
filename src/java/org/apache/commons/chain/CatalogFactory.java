@@ -41,12 +41,6 @@ public abstract class CatalogFactory {
 
 
     /**
-     * <p>The <code>Log</code> instance for this class.</p>
-     */
-    private static final Log log = LogFactory.getLog(CatalogFactory.class);
-
-
-    /**
      * <p>Values passed to the <code>getCommand(String)</code> method should
      * use this as the delimiter between the "catalog" name and the "command"
      * name.</p>
@@ -149,12 +143,14 @@ public abstract class CatalogFactory {
         if (catalogName != null) {
             catalog = this.getCatalog(catalogName);
             if (catalog == null) {
+                Log log = LogFactory.getLog(CatalogFactory.class);
                 log.warn("No catalog found for name: " + catalogName + ".");
                 return null;
             }
         } else {
             catalog = this.getCatalog();
             if (catalog == null) {
+                Log log = LogFactory.getLog(CatalogFactory.class);
                 log.warn("No default catalog found.");
                 return null;
             }
@@ -236,6 +232,5 @@ public abstract class CatalogFactory {
         return cl;
 
     }
-
 
 }
