@@ -45,7 +45,8 @@ import org.apache.commons.chain.web.ChainServlet;
  * </ul>
  *
  * <p>Also, the <code>org.apache.commons.chain.CONFIG_ATTR</code>
- * init parameter is also used to identify the {@link Context} attribute under
+ * init parameter is also used to identify the
+ * {@link org.apache.commons.chain.Context} attribute under
  * which our configured {@link Catalog} will be made available to
  * {@link Command}s processing our requests, in addition to its definition
  * of the <code>ServletContext</code> attribute key under which the

@@ -60,7 +60,12 @@ public class CatalogFactoryBase extends CatalogFactory {
     // --------------------------------------------------------- Public Methods
 
 
-    // Documented in CatalogFactory interface
+    /**
+     * <p>Gets the default instance of Catalog associated with the factory
+     * (if any); otherwise, return <code>null</code>.</p>
+     *
+     * @return the default Catalog instance
+     */
     public Catalog getCatalog() {
 
         return catalog;
@@ -68,7 +73,11 @@ public class CatalogFactoryBase extends CatalogFactory {
     }
 
 
-    // Documented in CatalogFactory interface
+    /**
+     * <p>Sets the default instance of Catalog associated with the factory.</p>
+     *
+     * @param catalog the default Catalog instance
+     */
     public void setCatalog(Catalog catalog) {
 
         this.catalog = catalog;
@@ -76,7 +85,13 @@ public class CatalogFactoryBase extends CatalogFactory {
     }
 
 
-    // Documented in CatalogFactory interface
+    /**
+     * <p>Retrieves a Catalog instance by name (if any); otherwise
+     * return <code>null</code>.</p>
+     *
+     * @param name the name of the Catalog to retrieve
+     * @return the specified Catalog
+     */
     public Catalog getCatalog(String name) {
 
         synchronized (catalogs) {
@@ -86,7 +101,13 @@ public class CatalogFactoryBase extends CatalogFactory {
     }
 
 
-    // Documented in CatalogFactory interface
+    /**
+     * <p>Adds a named instance of Catalog to the factory (for subsequent
+     * retrieval later).</p>
+     *
+     * @param name the name of the Catalog to add
+     * @param catalog the Catalog to add
+     */
     public void addCatalog(String name, Catalog catalog) {
 
         synchronized (catalogs) {
@@ -96,7 +117,12 @@ public class CatalogFactoryBase extends CatalogFactory {
     }
 
 
-    // Documented in CatalogFactory interface
+    /**
+     * <p>Return an <code>Iterator</code> over the set of named
+     * {@link Catalog}s known to this {@link CatalogFactory}.
+     * If there are no known catalogs, an empty Iterator is returned.</p>
+     * @return An Iterator of the names of the Catalogs known by this factory.
+     */
     public Iterator getNames() {
 
         synchronized (catalogs) {

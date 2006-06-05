@@ -26,7 +26,8 @@ import java.util.WeakHashMap;
 /**
  * <p>This command combines elements of the {@link LookupCommand} with the
  * {@link DispatchCommand}.  Look up a specified {@link Command} (which could
- * also be a {@link Chain}) in a {@link Catalog}, and delegate execution to
+ * also be a {@link org.apache.commons.chain.Chain}) in a
+ * {@link org.apache.commons.chain.Catalog}, and delegate execution to
  * it.  Introspection is used to lookup the appropriate method to delegate
  * execution to.  If the delegated-to {@link Command} is also a
  * {@link Filter}, its <code>postprocess()</code> method will also be invoked
@@ -47,6 +48,7 @@ import java.util.WeakHashMap;
  *
  * @author Sean Schofield
  * @version $Revision$
+ * @since Chain 1.1
  */
 
 public class DispatchLookupCommand extends LookupCommand implements Filter {

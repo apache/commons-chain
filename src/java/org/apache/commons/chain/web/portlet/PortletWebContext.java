@@ -44,9 +44,6 @@ public class PortletWebContext extends WebContext {
      * <p>Construct an uninitialized {@link PortletWebContext} instance.</p>
      */
     public PortletWebContext() {
-
-        ;
-
     }
 
 
@@ -149,6 +146,8 @@ public class PortletWebContext extends WebContext {
 
     /**
      * <p>Return the {@link PortletContext} for this context.</p>
+     *
+     * @return The <code>PortletContext</code> for this request
      */
     public PortletContext getContext() {
 
@@ -159,6 +158,8 @@ public class PortletWebContext extends WebContext {
 
     /**
      * <p>Return the {@link PortletRequest} for this context.</p>
+     *
+     * @return The <code>PortletRequest</code> for this context.
      */
     public PortletRequest getRequest() {
 
@@ -169,6 +170,8 @@ public class PortletWebContext extends WebContext {
 
     /**
      * <p>Return the {@link PortletResponse} for this context.</p>
+     *
+     * @return The <code>PortletResponse</code> for this context.
      */
     public PortletResponse getResponse() {
 
@@ -229,6 +232,11 @@ public class PortletWebContext extends WebContext {
     // ------------------------------------------------------ WebContext Methods
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Application scope Map.
+     */
     public Map getApplicationScope() {
 
         if ((applicationScope == null) && (context != null)) {
@@ -239,6 +247,11 @@ public class PortletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Header values Map.
+     */
     public Map getHeader() {
 
         if ((header == null) && (request != null)) {
@@ -250,6 +263,11 @@ public class PortletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Header values Map.
+     */
     public Map getHeaderValues() {
 
         if ((headerValues == null) && (request != null)) {
@@ -261,6 +279,11 @@ public class PortletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Initialization parameter Map.
+     */
     public Map getInitParam() {
 
         if ((initParam == null) && (context != null)) {
@@ -271,6 +294,11 @@ public class PortletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Request parameter Map.
+     */
     public Map getParam() {
 
         if ((param == null) && (request != null)) {
@@ -281,6 +309,11 @@ public class PortletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Request parameter Map.
+     */
     public Map getParamValues() {
 
         if ((paramValues == null) && (request != null)) {
@@ -291,6 +324,11 @@ public class PortletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Request scope Map.
+     */
     public Map getRequestScope() {
 
         if ((requestScope == null) && (request != null)) {
@@ -301,6 +339,11 @@ public class PortletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Session scope Map.
+     */
     public Map getSessionScope() {
 
         if ((sessionScope == null) && (request != null)) {

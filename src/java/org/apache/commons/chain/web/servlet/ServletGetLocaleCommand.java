@@ -35,6 +35,9 @@ public class ServletGetLocaleCommand extends AbstractGetLocaleCommand {
 
     /**
      * <p>Retrieve and return the <code>Locale</code> for this request.</p>
+     *
+     * @param context The {@link Context} we are operating on.
+     * @return The Locale for the request.
      */
     protected Locale getLocale(Context context) {
 

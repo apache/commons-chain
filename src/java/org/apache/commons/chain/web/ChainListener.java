@@ -274,7 +274,7 @@ public class ChainListener implements ServletContextListener {
                 try {
                     is = resourceURL.openStream();
                 } catch (Exception e) {
-                    ; // means there is no such resource
+                      // means there is no such resource
                 }
                 if (is == null) {
                     continue;
@@ -332,7 +332,7 @@ public class ChainListener implements ServletContextListener {
                 try {
                     is = resourceURL.openStream();
                 } catch (Exception e) {
-                    ; // means there is no such resource
+                      // means there is no such resource
                 }
                 if (is == null) {
                     continue;

@@ -49,6 +49,8 @@ public class PathInfoMapper implements Command {
     /**
      * <p>Return the context key under which our {@link Catalog} has been
      * stored.</p>
+     *
+     * @return The context key for the Catalog.
      */
     public String getCatalogKey() {
 
@@ -78,6 +80,9 @@ public class PathInfoMapper implements Command {
      * select an appropriate {@link Command} to be executed.
      *
      * @param context Context for the current request
+     * @return The result of executing the Command for the request URI.
+     * @throws Exception if there is a problem executing the Command for
+     *  the request URI.
      */
     public boolean execute(Context context) throws Exception {
 

@@ -21,9 +21,9 @@ import org.apache.commons.chain.impl.ContextBase;
 
 
 /**
- * <p>Abstract base implementation of {@link Context} that provides web
- * based applications that use it a "generic" view of HTTP related requests
- * and responses, without tying the application to a particular underlying
+ * <p>Abstract base implementation of {@link org.apache.commons.chain.Context} that
+ * provides web based applications that use it a "generic" view of HTTP related
+ * requests and responses, without tying the application to a particular underlying
  * Java API (such as servlets).  It is expected that a concrete subclass
  * of {@link WebContext} for each API (such as
  * {@link org.apache.commons.chain.web.servlet.ServletWebContext})
@@ -47,6 +47,8 @@ public abstract class WebContext extends ContextBase {
     /**
      * <p>Return a mutable <code>Map</code> that maps application scope
      * attribute names to their values.</p>
+     *
+     * @return Application scope Map.
      */
     public abstract Map getApplicationScope();
 
@@ -55,6 +57,8 @@ public abstract class WebContext extends ContextBase {
      * <p>Return an immutable <code>Map</code> that maps header names to
      * the first (or only) header value (as a String).  Header names must
      * be matched in a case-insensitive manner.</p>
+     *
+     * @return Header values Map.
      */
     public abstract Map getHeader();
 
@@ -63,6 +67,8 @@ public abstract class WebContext extends ContextBase {
      * <p>Return an immutable <code>Map</code> that maps header names to
      * the set of all values specified in the request (as a String array).
      * Header names must be matched in a case-insensitive manner.</p>
+     *
+     * @return Header values Map.
      */
     public abstract Map getHeaderValues();
 
@@ -70,6 +76,8 @@ public abstract class WebContext extends ContextBase {
     /**
      * <p>Return an immutable <code>Map</code> that maps context application
      * initialization parameters to their values.</p>
+     *
+     * @return Initialization parameter Map.
      */
     public abstract Map getInitParam();
 
@@ -77,6 +85,8 @@ public abstract class WebContext extends ContextBase {
     /**
      * <p>Return an immutable <code>Map</code> that maps request parameter
      * names to the first (or only) value (as a String).</p>
+     *
+     * @return Request parameter Map.
      */
     public abstract Map getParam();
 
@@ -84,6 +94,8 @@ public abstract class WebContext extends ContextBase {
     /**
      * <p>Return an immutable <code>Map</code> that maps request parameter
      * names to the set of all values (as a String array).</p>
+     *
+     * @return Request parameter Map.
      */
     public abstract Map getParamValues();
 
@@ -91,6 +103,8 @@ public abstract class WebContext extends ContextBase {
     /**
      * <p>Return a mutable <code>Map</code> that maps request scope
      * attribute names to their values.</p>
+     *
+     * @return Request scope Map.
      */
     public abstract Map getRequestScope();
 
@@ -98,6 +112,8 @@ public abstract class WebContext extends ContextBase {
     /**
      * <p>Return a mutable <code>Map</code> that maps session scope
      * attribute names to their values.</p>
+     *
+     * @return Session scope Map.
      */
     public abstract Map getSessionScope();
 

@@ -46,6 +46,8 @@ public abstract class AbstractSetLocaleCommand implements Command {
     /**
      * <p>Return the context attribute key under which we will retrieve
      * the response <code>Locale</code>.</p>
+     *
+     * @return The context attribute key of the request <code>Locale</code>.
      */
     public String getLocaleKey() {
 
@@ -77,6 +79,7 @@ public abstract class AbstractSetLocaleCommand implements Command {
      * @param context The {@link Context} we are operating on
      *
      * @return <code>false</code> so that processng will continue
+     * @throws Exception If an error occurs during execution.
      */
     public boolean execute(Context context) throws Exception {
 
@@ -92,6 +95,9 @@ public abstract class AbstractSetLocaleCommand implements Command {
 
     /**
      * <p>Establish the specified <code>Locale</code> for this response.</p>
+     *
+     * @param context The {@link Context} we are operating on.
+     * @param locale The Locale for the request.
      */
     protected abstract void setLocale(Context context, Locale locale);
 

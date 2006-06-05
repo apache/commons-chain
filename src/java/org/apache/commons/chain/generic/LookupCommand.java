@@ -24,7 +24,8 @@ import org.apache.commons.chain.Filter;
 
 
 /**
- * <p>Look up a specified {@link Command} (which could also be a {@link Chain})
+ * <p>Look up a specified {@link Command} (which could also be a
+ * {@link org.apache.commons.chain.Chain})
  * in a {@link Catalog}, and delegate execution to it.  If the delegated-to
  * {@link Command} is also a {@link Filter}, its <code>postprocess()</code>
  * method will also be invoked at the appropriate time.</p>
@@ -50,6 +51,8 @@ public class LookupCommand implements Filter {
     /**
      * Create an instance, setting its <code>catalogFactory</code> property to the
      * value of <code>CatalogFactory.getInstance()</code>.
+     *
+     * @since Chain 1.1
      */
     public LookupCommand() {
         this(CatalogFactory.getInstance());
@@ -60,6 +63,8 @@ public class LookupCommand implements Filter {
      * to given <code>factory</code>/
      *
      * @param factory The Catalog Factory.
+     *
+     * @since Chain 1.1
      */
     public LookupCommand(CatalogFactory factory) {
         this.catalogFactory = factory;
@@ -68,13 +73,15 @@ public class LookupCommand implements Filter {
 
     // -------------------------------------------------------------- Properties
 
-    protected CatalogFactory catalogFactory = null;
+    private CatalogFactory catalogFactory = null;
 
     /**
      * <p>Set the {@link CatalogFactory} from which lookups will be
      * performed.</p>
      *
      * @param catalogFactory The Catalog Factory.
+     *
+     * @since Chain 1.1
      */
     public void setCatalogFactory(CatalogFactory catalogFactory) {
         this.catalogFactory = catalogFactory;
@@ -83,6 +90,8 @@ public class LookupCommand implements Filter {
     /**
      * Return the {@link CatalogFactory} from which lookups will be performed.
      * @return The Catalog factory.
+     *
+     * @since Chain 1.1
      */
     public CatalogFactory getCatalogFactory() {
 
@@ -209,6 +218,8 @@ public class LookupCommand implements Filter {
      * command.</p>
      * @return <code>true</code> if result of the looked up Command
      * should be ignored.
+     *
+     * @since Chain 1.1
      */
     public boolean isIgnoreExecuteResult() {
         return ignoreExecuteResult;
@@ -223,6 +234,8 @@ public class LookupCommand implements Filter {
      * value should be set to <code>true</code></p>
      * @param ignoreReturn <code>true</code> if result of the
      * looked up Command should be ignored.
+     *
+     * @since Chain 1.1
      */
     public void setIgnoreExecuteResult(boolean ignoreReturn) {
         this.ignoreExecuteResult = ignoreReturn;
@@ -239,6 +252,8 @@ public class LookupCommand implements Filter {
      * Filter.</p>
      * @return <code>true</code> if result of the looked up Filter's
      * <code>postprocess()</code> method should be ignored.
+     *
+     * @since Chain 1.1
      */
     public boolean isIgnorePostprocessResult() {
         return ignorePostprocessResult;
@@ -253,6 +268,8 @@ public class LookupCommand implements Filter {
      * value should be set to <code>true</code></p>
      * @param ignorePostprocessResult <code>true</code> if result of the
      * looked up Filter's <code>postprocess()</code> method should be ignored.
+     *
+     * @since Chain 1.1
      */
     public void setIgnorePostprocessResult(boolean ignorePostprocessResult) {
         this.ignorePostprocessResult = ignorePostprocessResult;

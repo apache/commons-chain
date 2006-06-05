@@ -49,29 +49,49 @@ public class CatalogBase implements Catalog {
 
     // --------------------------------------------------------- Constructors
 
+    /**
+     * Create an empty catalog.
+     */
     public CatalogBase() { }
 
     /**
      * <p>Create a catalog whose commands are those specified in the given <code>Map</code>.
      * All Map keys should be <code>String</code> and all values should be <code>Command</code>.</p>
-     *  
-     * @param commands
+     *
+     * @param commands Map of Commands.
+     *
+     * @since Chain 1.1
      */
     public CatalogBase( Map commands ) {
         this.commands = Collections.synchronizedMap(commands);
     }
-    
+
     // --------------------------------------------------------- Public Methods
 
 
-    // Documented in Catalog interface
+    /**
+     * <p>Add a new name and associated {@link Command}
+     * to the set of named commands known to this {@link Catalog},
+     * replacing any previous command for that name.
+     *
+     * @param name Name of the new command
+     * @param command {@link Command} to be returned
+     *  for later lookups on this name
+     */
     public void addCommand(String name, Command command) {
 
         commands.put(name, command);
 
     }
 
-    // Documented in Catalog interface
+    /**
+     * <p>Return the {@link Command} associated with the
+     * specified name, if any; otherwise, return <code>null</code>.</p>
+     *
+     * @param name Name for which a {@link Command}
+     *  should be retrieved
+     * @return The Command associated with the specified name.
+     */
     public Command getCommand(String name) {
 
         return ((Command) commands.get(name));
@@ -79,7 +99,12 @@ public class CatalogBase implements Catalog {
     }
 
 
-    // Documented in Catalog interface
+    /**
+     * <p>Return an <code>Iterator</code> over the set of named commands
+     * known to this {@link Catalog}.  If there are no known commands,
+     * an empty Iterator is returned.</p>
+     * @return An iterator of the names in this Catalog.
+     */
     public Iterator getNames() {
 
         return (commands.keySet().iterator());

@@ -127,7 +127,15 @@ public class ChainBase implements Chain {
     // ---------------------------------------------------------- Chain Methods
 
 
-    // Documented in Chain interface
+    /**
+     * See the {@link Chain} JavaDoc.
+     *
+     * @param command The {@link Command} to be added
+     *
+     * @exception IllegalArgumentException if <code>command</code>
+     *  is <code>null</code>
+     * @exception IllegalStateException if no further configuration is allowed
+     */
     public void addCommand(Command command) {
 
         if (command == null) {
@@ -144,7 +152,23 @@ public class ChainBase implements Chain {
     }
 
 
-    // Documented in Chain interface
+    /**
+     * See the {@link Chain} JavaDoc.
+     *
+     * @param context The {@link Context} to be processed by this
+     *  {@link Chain}
+     *
+     * @throws Exception if thrown by one of the {@link Command}s
+     *  in this {@link Chain} but not handled by a <code>postprocess()</code>
+     *  method of a {@link Filter}
+     * @throws IllegalArgumentException if <code>context</code>
+     *  is <code>null</code>
+     *
+     * @return <code>true</code> if the processing of this {@link Context}
+     *  has been completed, or <code>false</code> if the processing
+     *  of this {@link Context} should be delegated to a subsequent
+     *  {@link Command} in an enclosing {@link Chain}
+     */
     public boolean execute(Context context) throws Exception {
 
         // Verify our parameters
@@ -160,7 +184,7 @@ public class ChainBase implements Chain {
         boolean saveResult = false;
         Exception saveException = null;
         int i = 0;
-        int n = commands.length;;
+        int n = commands.length;
         for (i = 0; i < n; i++) {
             try {
                 saveResult = commands[i].execute(context);
@@ -189,7 +213,7 @@ public class ChainBase implements Chain {
                         handled = true;
                     }
                 } catch (Exception e) {
-                    ; // Silently ignore
+                      // Silently ignore
                 }
             }
         }

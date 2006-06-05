@@ -43,9 +43,6 @@ public class ServletWebContext extends WebContext {
      * <p>Construct an uninitialized {@link ServletWebContext} instance.</p>
      */
     public ServletWebContext() {
-
-        ;
-
     }
 
 
@@ -148,6 +145,8 @@ public class ServletWebContext extends WebContext {
 
     /**
      * <p>Return the {@link ServletContext} for this context.</p>
+     *
+     * @return The <code>ServletContext</code> for this context.
      */
     public ServletContext getContext() {
 
@@ -158,6 +157,8 @@ public class ServletWebContext extends WebContext {
 
     /**
      * <p>Return the {@link HttpServletRequest} for this context.</p>
+     *
+     * @return The <code>HttpServletRequest</code> for this context.
      */
     public HttpServletRequest getRequest() {
 
@@ -168,6 +169,8 @@ public class ServletWebContext extends WebContext {
 
     /**
      * <p>Return the {@link HttpServletResponse} for this context.</p>
+     *
+     * @return The <code>HttpServletResponse</code> for this context.
      */
     public HttpServletResponse getResponse() {
 
@@ -228,6 +231,11 @@ public class ServletWebContext extends WebContext {
     // ------------------------------------------------------ WebContext Methods
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Application scope Map.
+     */
     public Map getApplicationScope() {
 
         if ((applicationScope == null) && (context != null)) {
@@ -238,6 +246,11 @@ public class ServletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Header values Map.
+     */
     public Map getHeader() {
 
         if ((header == null) && (request != null)) {
@@ -248,6 +261,11 @@ public class ServletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Header values Map.
+     */
     public Map getHeaderValues() {
 
         if ((headerValues == null) && (request != null)) {
@@ -258,6 +276,11 @@ public class ServletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Initialization parameter Map.
+     */
     public Map getInitParam() {
 
         if ((initParam == null) && (context != null)) {
@@ -268,6 +291,11 @@ public class ServletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Request parameter Map.
+     */
     public Map getParam() {
 
         if ((param == null) && (request != null)) {
@@ -278,6 +306,11 @@ public class ServletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Request parameter Map.
+     */
     public Map getParamValues() {
 
         if ((paramValues == null) && (request != null)) {
@@ -288,6 +321,11 @@ public class ServletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Request scope Map.
+     */
     public Map getRequestScope() {
 
         if ((requestScope == null) && (request != null)) {
@@ -298,6 +336,11 @@ public class ServletWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Session scope Map.
+     */
     public Map getSessionScope() {
 
         if ((sessionScope == null) && (request != null)) {

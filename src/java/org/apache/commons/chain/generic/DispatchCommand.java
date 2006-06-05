@@ -20,23 +20,26 @@ import org.apache.commons.chain.Context;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
  * An abstract base command which uses introspection to look up a method to execute.
  * For use by developers who prefer to group related functionality into a single class
  * rather than an inheritance family.
+ *
+ * @since Chain 1.1
  */
 public abstract class DispatchCommand implements Command {
 
     /** Cache of methods */
-    protected WeakHashMap methods = new WeakHashMap();
+    private Map methods = new WeakHashMap();
 
     /** Method name */
-    protected String method = null;
+    private String method = null;
 
     /** Method key */
-    protected String methodKey = null;
+    private String methodKey = null;
 
     /**
      * The base implementation expects dispatch methods to take a <code>Context</code>
@@ -48,17 +51,13 @@ public abstract class DispatchCommand implements Command {
     /**
      * Look up the method specified by either "method" or "methodKey" and invoke it,
      * returning a boolean value as interpreted by <code>evaluateResult</code>.
-     * @param context
-     * @return
+     * @param context The Context to be processed by this Command.
+     * @return the result of method being dispatched to.
      * @throws IllegalStateException if neither 'method' nor 'methodKey' properties are defined
      * @throws Exception if any is thrown by the invocation.  Note that if invoking the method
      * results in an InvocationTargetException, the cause of that exception is thrown instead of
      * the exception itself, unless the cause is an <code>Error</code> or other <code>Throwable</code>
      * which is not an <code>Exception</code>.
-     *
-     * @param context The Context to be processed by this Command.
-     *
-     * @return the result of method being dispatched to.
      */
     public boolean execute(Context context) throws Exception {
 

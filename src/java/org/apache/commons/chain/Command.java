@@ -81,7 +81,9 @@ public interface Command {
     /**
      * <p>Commands should return <code>CONTINUE_PROCESSING</code> if the processing
      *  of the given {@link Context} should be delegated to a subsequent
-     *  {@link Command} in an enclosing {@link Chain}</p>
+     *  {@link Command} in an enclosing {@link Chain}.</p>
+     *
+     * @since Chain 1.1
      */
     public static final boolean CONTINUE_PROCESSING = false;
 
@@ -89,6 +91,8 @@ public interface Command {
      * <p>Commands should return <code>PROCESSING_COMPLETE</code>
      * if the processing of the given {@link Context}
      *  has been completed.</p>
+     *
+     * @since Chain 1.1
      */
     public static final boolean PROCESSING_COMPLETE = true;
     /**

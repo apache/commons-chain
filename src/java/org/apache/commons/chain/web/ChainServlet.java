@@ -243,7 +243,7 @@ public class ChainServlet extends HttpServlet {
                         HttpServletResponse response)
         throws ServletException, IOException {
 
-        ; // do nothing
+          // do nothing
 
     }
 

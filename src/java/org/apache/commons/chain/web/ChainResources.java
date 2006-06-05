@@ -224,6 +224,8 @@ final class ChainResources {
      *                  <code>null</code>).
      *
      * @return An array of non-empty paths. The array itself may be empty.
+     *
+     * @since Chain 1.1
      */
     static String[] getResourcePaths(String resources) {
         List paths = new ArrayList();
@@ -246,7 +248,7 @@ final class ChainResources {
         }
 
         return (String[]) paths.toArray(new String[0]);
-    }        
+    }
 
 
 }

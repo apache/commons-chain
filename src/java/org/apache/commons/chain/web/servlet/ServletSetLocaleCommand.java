@@ -33,6 +33,12 @@ public class ServletSetLocaleCommand extends AbstractSetLocaleCommand {
     // ------------------------------------------------------- Protected Methods
 
 
+    /**
+     * <p>Establish the specified <code>Locale</code> for this response.</p>
+     *
+     * @param context The {@link Context} we are operating on.
+     * @param locale The Locale for the request.
+     */
     protected void setLocale(Context context, Locale locale) {
 
     HttpServletResponse response = (HttpServletResponse)

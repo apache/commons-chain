@@ -51,6 +51,8 @@ public class RequestParameterMapper implements Command {
     /**
      * <p>Return the context key under which our {@link Catalog} has been
      * stored.</p>
+     *
+     * @return The context key for the Catalog.
      */
     public String getCatalogKey() {
 
@@ -75,6 +77,8 @@ public class RequestParameterMapper implements Command {
     /**
      * <p>Return the name of the request parameter to use for
      * selecting the {@link Command} to be executed.</p>
+     *
+     * @return The name of the request parameter.
      */
     public String getParameter() {
 
@@ -104,6 +108,9 @@ public class RequestParameterMapper implements Command {
      * to select an appropriate {@link Command} to be executed.
      *
      * @param context Context for the current request
+     * @return The result of executing the Command for the request parameter.
+     * @throws Exception if there is a problem executing the Command for
+     *  the request parameter.
      */
     public boolean execute(Context context) throws Exception {
 

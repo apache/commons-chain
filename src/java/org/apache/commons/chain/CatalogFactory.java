@@ -124,6 +124,8 @@ public abstract class CatalogFactory {
      *  if either the command name or the catalog name cannot be resolved
      * @throws IllegalArgumentException if the commandID contains more than
      *  one DELIMITER
+     *
+     * @since Chain 1.1
      */
     public Command getCommand(String commandID) {
 

@@ -41,9 +41,6 @@ public class FacesWebContext extends WebContext {
      * <p>Construct an uninitialized {@link FacesWebContext} instance.</p>
      */
     public FacesWebContext() {
-
-        ;
-
     }
 
 
@@ -76,6 +73,8 @@ public class FacesWebContext extends WebContext {
     /**
      * <p>Return the <code>FacesContext</code> instance for the request
      * associated with this {@link FacesWebContext}.</p>
+     *
+     * @return The <code>FacesContext</code> for this request
      */
     public FacesContext getContext() {
 
@@ -114,6 +113,11 @@ public class FacesWebContext extends WebContext {
     // ------------------------------------------------------ WebContext Methods
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Application scope Map.
+     */
     public Map getApplicationScope() {
 
     return (context.getExternalContext().getApplicationMap());
@@ -121,6 +125,11 @@ public class FacesWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Header values Map.
+     */
     public Map getHeader() {
 
     return (context.getExternalContext().getRequestHeaderMap());
@@ -128,6 +137,11 @@ public class FacesWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Header values Map.
+     */
     public Map getHeaderValues() {
 
     return (context.getExternalContext().getRequestHeaderValuesMap());
@@ -135,6 +149,11 @@ public class FacesWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Initialization parameter Map.
+     */
     public Map getInitParam() {
 
     return (context.getExternalContext().getInitParameterMap());
@@ -142,6 +161,11 @@ public class FacesWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Request parameter Map.
+     */
     public Map getParam() {
 
     return (context.getExternalContext().getRequestParameterMap());
@@ -149,6 +173,11 @@ public class FacesWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Request parameter Map.
+     */
     public Map getParamValues() {
 
     return (context.getExternalContext().getRequestParameterValuesMap());
@@ -156,6 +185,11 @@ public class FacesWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Request scope Map.
+     */
     public Map getRequestScope() {
 
     return (context.getExternalContext().getRequestMap());
@@ -163,6 +197,11 @@ public class FacesWebContext extends WebContext {
     }
 
 
+    /**
+     * See the {@link WebContext}'s Javadoc.
+     *
+     * @return Session scope Map.
+     */
     public Map getSessionScope() {
 
     return (context.getExternalContext().getSessionMap());

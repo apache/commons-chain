@@ -23,44 +23,50 @@ import org.apache.commons.digester.RuleSetBase;
 /**
  * <p>Digester <code>RuleSet</code> for configuring <em>Chain of
  * Responsibility</em> command chains, and adding them to an appropriate
- * {@link Catalog}.  The following properties may be configured prior to
- * executing the <code>addRuleInstance()</code> method in order to influence
- * the rules that get added, with default values in square brackets:</p>
+ * {@link org.apache.commons.chain.Catalog}.  The following properties
+ * may be configured prior to executing the <code>addRuleInstance()</code>
+ * method in order to influence the rules that get added, with default
+ * values in square brackets:</p>
  * <ul>
  * <li><strong>catalogClass</strong> -- Fully qualified name of the
- *     implementation class used to create new {@link Catalog} instances.
+ *     implementation class used to create new
+ *     {@link org.apache.commons.chain.Catalog} instances.
  *     If not specified, the default value is
  *     <code>org.apache.commons.chain.impl.CatalogBsae</code>.</li>
  * <li><strong>catalogElement</strong> -- Name of the XML element representing
- *     the addition of a {@link Catalog}.  Any such catalog that is created
- *     will be registered with the {@link CatalogFactory} instance for our
+ *     the addition of a {@link org.apache.commons.chain.Catalog}.
+ *     Any such catalog that is created will be registered with the
+ *     {@link org.apache.commons.chain.CatalogFactory} instance for our
  *     application, under the name specified by the <code>nameAttribute</code>
- *     attribute (if present), or as the default {@link Catalog}.  If not
- *     specified, the default value is <code>catalog</code>.</li>
+ *     attribute (if present), or as the default {@link org.apache.commons.chain.Catalog}.
+ *     If not specified, the default value is <code>catalog</code>.</li>
  * <li><strong>chainClass</strong> -- Fully qualified name of the implementation
- *     class used to create new {@link Chain} instances.  If not specified, the
- *     default value is <code>org.apache.commons.chain.impl.ChainBase</code>.
+ *     class used to create new {@link org.apache.commons.chain.Chain} instances.
+ *     If not specified, the default value is
+ *     <code>org.apache.commons.chain.impl.ChainBase</code>.
  *     </li>
  * <li><strong>chainElement</strong> -- Name of the XML element representing
- *     the addition of a {@link Chain}.  A chain element has the same
- *     functionality as a command element, except that it defaults the
- *     implementation class to
+ *     the addition of a {@link org.apache.commons.chain.Chain}.  A chain
+ *     element has the same functionality as a command element, except that
+ *     it defaults the implementation class to
  *     <code>org.apache.commons.chain.impl.ChainBase</code>.  [chain]</li>
  * <li><strong>classAttribute</strong> -- Attribute on a chain (optional) or
  *     command (required) element that specifies the fully qualified class
  *     name of the implementation class that should be instantiated.
  *     [className]</li>
  * <li><strong>commandElement</strong> -- Name of the XML element
- *     representing the addition of a {@link Command}.  An implementation
- *     class name must be provided on the attribute named by the
+ *     representing the addition of a {@link org.apache.commons.chain.Command}.
+ *     An implementation class name must be provided on the attribute named by the
  *     <code>classAttribute</code> property.  [command]</li>
  * <li><strong>defineElement</strong> -- Name of the XML element
  *     that associates the element specified by the <code>nameAttribute</code>
- *     attributes with a {@link Command} or {@link Chain} implementation class
+ *     attributes with a {@link org.apache.commons.chain.Command} or
+ *     {@link org.apache.commons.chain.Chain} implementation class
  *     named by the <code>classAttribute</code> attribute.  [define]</li>
  * <li><strong>nameAttribute</strong> -- Attribute on an outermost chain or
  *     command element that will be used to register this command with the
- *     associated {@link Catalog} instance on the stack.  [name]</li>
+ *     associated {@link org.apache.commons.chain.Catalog} instance on the stack.
+ *     [name]</li>
  * <li><strong>namespaceURI</strong> -- The XML namespace URI with which these
  *     rules will be associated, or <code>null</code> for no namespace.
  *     [null]</li>
@@ -90,7 +96,8 @@ public class ConfigRuleSet extends RuleSetBase {
 
 
     /**
-     * <p>Return the fully qualified {@link Catalog} implementation class.</p>
+     * <p>Return the fully qualified {@link org.apache.commons.chain.Catalog}
+     *  implementation class.</p>
      * @return The Catalog's class name.
      */
     public String getCatalogClass() {
@@ -99,9 +106,11 @@ public class ConfigRuleSet extends RuleSetBase {
 
 
     /**
-     * <p>Set the fully qualified {@link Catalog} implementation class.</p>
+     * <p>Set the fully qualified {@link org.apache.commons.chain.Catalog}
+     * implementation class.</p>
      *
-     * @param catalogClass The new {@link Catalog} implementation class
+     * @param catalogClass The new {@link org.apache.commons.chain.Catalog}
+     *  implementation class
      */
     public void setCatalogClass(String catalogClass) {
         this.catalogClass = catalogClass;
@@ -128,7 +137,8 @@ public class ConfigRuleSet extends RuleSetBase {
 
 
     /**
-     * <p>Return the fully qualified {@link Chain} implementation class.</p>
+     * <p>Return the fully qualified {@link org.apache.commons.chain.Chain}
+     * implementation class.</p>
      * @return The Chain's class name.
      */
     public String getChainClass() {
@@ -137,9 +147,11 @@ public class ConfigRuleSet extends RuleSetBase {
 
 
     /**
-     * <p>Set the fully qualified {@link Chain} implementation class.</p>
+     * <p>Set the fully qualified {@link org.apache.commons.chain.Chain}
+     * implementation class.</p>
      *
-     * @param chainClass The new {@link Chain} implementation class
+     * @param chainClass The new {@link org.apache.commons.chain.Chain}
+     * implementation class
      */
     public void setChainClass(String chainClass) {
         this.chainClass = chainClass;

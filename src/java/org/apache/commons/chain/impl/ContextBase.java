@@ -165,6 +165,9 @@ public class ContextBase extends HashMap implements Context {
      * <code>true</code> if the specified value is present in either the
      * underlying <code>Map</code> or one of the local property values.</p>
      *
+     * @param value the value look for in the context.
+     * @return <code>true</code> if found in this context otherwise
+     *  <code>false</code>.
      * @exception IllegalArgumentException if a property getter
      *  throws an exception
      */
@@ -204,6 +207,8 @@ public class ContextBase extends HashMap implements Context {
      * for attempts to remove the key for a property of the {@link Context}
      * implementation class, which will throw
      * <code>UnsupportedOperationException</code>.</p>
+     *
+     * @return Set of entries in the Context.
      */
     public Set entrySet() {
 
@@ -223,6 +228,7 @@ public class ContextBase extends HashMap implements Context {
      * the contracts of the <code>Map</code> interface.</p>
      *
      * @param key Key of the value to be returned
+     * @return The value for the specified key.
      *
      * @exception IllegalArgumentException if an exception is thrown
      *  reading this local property value
@@ -259,6 +265,9 @@ public class ContextBase extends HashMap implements Context {
      * <p>Override the default <code>Map</code> behavior to return
      * <code>true</code> if the underlying <code>Map</code> only contains
      * key-value pairs for local properties (if any).</p>
+     *
+     * @return <code>true</code> if this Context is empty, otherwise
+     *  <code>false</code>.
      */
     public boolean isEmpty() {
 
@@ -279,6 +288,8 @@ public class ContextBase extends HashMap implements Context {
      * for attempts to remove the key for a property of the {@link Context}
      * implementation class, which will throw
      * <code>UnsupportedOperationException</code>.</p>
+     *
+     * @return The set of keys for objects in this Context.
      */
     public Set keySet() {
 
@@ -295,6 +306,7 @@ public class ContextBase extends HashMap implements Context {
      *
      * @param key Key of the value to be stored or replaced
      * @param value New value to be stored
+     * @return The value added to the Context.
      *
      * @exception IllegalArgumentException if an exception is thrown
      *  reading or wrting this local property value
@@ -358,6 +370,7 @@ public class ContextBase extends HashMap implements Context {
      * remove a key that is the name of a local property.</p>
      *
      * @param key Key to be removed
+     * @return The value removed from the Context.
      *
      * @exception UnsupportedOperationException if the specified
      *  <code>key</code> matches the name of a local property
@@ -391,6 +404,8 @@ public class ContextBase extends HashMap implements Context {
      * for attempts to remove the key for a property of the {@link Context}
      * implementation class, which will throw
      * <code>UnsupportedOperationException</code>.</p>
+     *
+     * @return The collection of values in this Context.
      */
     public Collection values() {
 
@@ -583,7 +598,7 @@ public class ContextBase extends HashMap implements Context {
                     ("Property '" + descriptor.getName()
                      + "' is not writeable");
             }
-            method.invoke(this, new Object[] { value });
+            method.invoke(this, new Object[] {value});
         } catch (Exception e) {
             throw new UnsupportedOperationException
                 ("Exception writing property '" + descriptor.getName()
@@ -648,7 +663,7 @@ public class ContextBase extends HashMap implements Context {
      */
     private class EntrySetIterator implements Iterator {
 
-        Map.Entry entry = null;
+        private Map.Entry entry = null;
         private Iterator keys = ContextBase.this.keySet().iterator();
 
         public boolean hasNext() {
@@ -775,7 +790,7 @@ public class ContextBase extends HashMap implements Context {
      */
     private class ValuesIterator implements Iterator {
 
-        Map.Entry entry = null;
+        private Map.Entry entry = null;
         private Iterator keys = ContextBase.this.keySet().iterator();
 
         public boolean hasNext() {
