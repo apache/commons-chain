@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.io.Serializable;
 import org.apache.commons.chain.Context;
 
 
@@ -120,7 +121,7 @@ public class ContextBase extends HashMap implements Context {
 
     static {
 
-        singleton = new Object() {
+        singleton = new Serializable() {
                 public boolean equals(Object object) {
                     return (false);
                 }

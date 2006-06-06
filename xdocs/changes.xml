@@ -75,7 +75,9 @@ The <action> type attribute can be add,update,fix,remove.
          <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=178563">r 178563</a>
          Decouple CatalogFactory lookup from LookupAction.
       </action>
-      <action dev="craigmcc" type="fix" issue="CHAIN-12" due-to="Jeff Ramsdale">
+      <action dev="craigmcc" type="fix" issue="CHAIN-12">
+        <dueto name="Jeff Ramsdale"/>
+        <dueto name="Dennis Lundberg"/>
          <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=161600">r 161600</a>
          Make ContextBase live up to the Serializable contract that it inherits by virtue of extending HashMap.
       </action>
