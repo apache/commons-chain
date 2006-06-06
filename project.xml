@@ -22,7 +22,7 @@
   
   <logo>/images/chain-logo-white.png</logo>
   
-  <currentVersion>1.1-SNAPSHOT</currentVersion>
+  <currentVersion>1.1-RC1</currentVersion>
   <inceptionYear>2003</inceptionYear>
   <shortDescription>Commons Chain</shortDescription>
   <description>An implmentation of the GoF Chain of Responsibility pattern</description>
