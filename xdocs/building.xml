@@ -46,6 +46,40 @@ limitations under the License.
 	Further details can be found in the
 	<a href="http://jakarta.apache.org/commons/building.html">commons build instructions</a>.
   </p>
+  <subsection name="Changelog Report">
+    <p>
+      The default configuration for the 
+      <a href="http://maven.apache.org/maven-1.x/plugins/changelog/">Changelog Report</a>
+      is to show changes within the last year. If however you wish to see changes since a
+      specified date you can override the configuration by adding a <b>build.properties</b>
+      file to the Commons Chain directory. For example to show all the changes since the
+      Chain 1.0 release, you would have the following in the <b>build.properties</b>:
+    </p>
+    <p><source><![CDATA[
+maven.changelog.type=date
+maven.changelog.date=2004-12-09
+]]></source></p>
+    <p>
+      Unfortunately, an issue with Subversion imports means that this report will only pick
+      up changes since the last import - which in the case of the ASF repository was December 2005.
+      If you require the changelog report to show changes prior to December 2005 for Commons Chain
+      then you can use the workaround described
+      <a href="http://www.niallp.pwp.blueyonder.co.uk/ChangelogSubversionIssue.html">here</a>.
+    </p>
+  </subsection>
+  <subsection name="Building With JDK 1.3">
+    <p>
+      Commons Chain can be built using <b>JDK 1.3</b> - however you will need to modify the
+      <b>project.xml</b> to add an additional dependency for <b>xml apis</b>:
+    </p>
+    <p><source><![CDATA[
+<dependency>
+    <groupId>xml-apis</groupId>
+    <artifactId>xml-apis</artifactId>
+    <version>2.0.2</version>
+    <url>http://xml.apache.org/commons/</url>
+</dependency>]]></source></p>
+  </subsection>
 </section>
 <!-- ================================================== -->
 <section name="Ant Goals">
