@@ -573,6 +573,89 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
     }
 
 
+    // Test getSessionScope() without Session
+    public void testSessionScopeWithoutSession() {
+
+        // Create a Context without a session
+        PortletWebContext ctx = new PortletWebContext(pcontext, 
+           new MockPortletRequest(), response);
+        assertNull("Session(A)", ctx.getRequest().getPortletSession(false));
+
+        // Get the session Map & check session doesn't exist
+        Map sessionMap = ctx.getSessionScope();
+        assertNull("Session(B)", ctx.getRequest().getPortletSession(false));
+        assertNotNull("Session Map(A)", sessionMap);
+
+        // test clear()
+        sessionMap.clear();
+        assertNull("Session(C)", ctx.getRequest().getPortletSession(false));
+
+        // test containsKey()
+        assertFalse("containsKey()", sessionMap.containsKey("ABC"));
+        assertNull("Session(D)", ctx.getRequest().getPortletSession(false));
+
+        // test containsValue()
+        assertFalse("containsValue()", sessionMap.containsValue("ABC"));
+        assertNull("Session(E)", ctx.getRequest().getPortletSession(false));
+
+        // test entrySet()
+        Set entrySet = sessionMap.entrySet();
+        assertNotNull("entrySet", entrySet);
+        assertEquals("entrySet Size", 0, entrySet.size());
+        assertNull("Session(F)", ctx.getRequest().getPortletSession(false));
+
+        // test equals()
+        assertFalse("equals()", sessionMap.equals("ABC"));
+        assertNull("Session(G)", ctx.getRequest().getPortletSession(false));
+
+        // test get()
+        assertNull("get()", sessionMap.get("ABC"));
+        assertNull("Session(H)", ctx.getRequest().getPortletSession(false));
+
+        // test hashCode()
+        sessionMap.hashCode();
+        assertNull("Session(I)", ctx.getRequest().getPortletSession(false));
+
+        // test isEmpty()
+        assertTrue("isEmpty()", sessionMap.isEmpty());
+        assertNull("Session(J)", ctx.getRequest().getPortletSession(false));
+
+        // test keySet()
+        Set keySet = sessionMap.keySet();
+        assertNotNull("keySet", keySet);
+        assertEquals("keySet Size", 0, keySet.size());
+        assertNull("Session(K)", ctx.getRequest().getPortletSession(false));
+
+        // test putAll() with an empty Map
+        sessionMap.putAll(new HashMap());
+        assertNull("Session(L)", ctx.getRequest().getPortletSession(false));
+
+        // test remove()
+        assertNull("remove()", sessionMap.remove("ABC"));
+        assertNull("Session(M)", ctx.getRequest().getPortletSession(false));
+
+        // test size()
+        assertEquals("size() Size", 0, sessionMap.size());
+        assertNull("Session(N)", ctx.getRequest().getPortletSession(false));
+
+        // test values()
+        Collection values = sessionMap.values();
+        assertNotNull("values", values);
+        assertEquals("values Size", 0, values.size());
+        assertNull("Session(O)", ctx.getRequest().getPortletSession(false));
+
+        // test put()
+        try {
+            assertNull("put()", sessionMap.put("ABC", "XYZ"));
+            assertNotNull("Session(P)", ctx.getRequest().getPortletSession(false));
+        } catch(UnsupportedOperationException ex) {
+            // expected: currently MockPortletRequest throws this
+            //           when trying to create a PortletSession
+        }
+
+    }
+
+
     // ------------------------------------------------------- Protected Methods
 
 

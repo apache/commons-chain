@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.Collection;
 
 
 /**
@@ -678,6 +679,89 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         // Clearing the map
         map.clear();
         checkMapSize(map, 0);
+
+    }
+
+
+    // Test getSessionScope() without Session
+    public void testSessionScopeWithoutSession() {
+
+        // Create a Context without a session
+        ServletWebContext ctx = new ServletWebContext(scontext, 
+           new MockHttpServletRequest(), response);
+        assertNull("Session(A)", ctx.getRequest().getSession(false));
+
+        // Get the session Map & check session doesn't exist
+        Map sessionMap = ctx.getSessionScope();
+        assertNull("Session(B)", ctx.getRequest().getSession(false));
+        assertNotNull("Session Map(A)", sessionMap);
+
+        // test clear()
+        sessionMap.clear();
+        assertNull("Session(C)", ctx.getRequest().getSession(false));
+
+        // test containsKey()
+        assertFalse("containsKey()", sessionMap.containsKey("ABC"));
+        assertNull("Session(D)", ctx.getRequest().getSession(false));
+
+        // test containsValue()
+        assertFalse("containsValue()", sessionMap.containsValue("ABC"));
+        assertNull("Session(E)", ctx.getRequest().getSession(false));
+
+        // test entrySet()
+        Set entrySet = sessionMap.entrySet();
+        assertNotNull("entrySet", entrySet);
+        assertEquals("entrySet Size", 0, entrySet.size());
+        assertNull("Session(F)", ctx.getRequest().getSession(false));
+
+        // test equals()
+        assertFalse("equals()", sessionMap.equals("ABC"));
+        assertNull("Session(G)", ctx.getRequest().getSession(false));
+
+        // test get()
+        assertNull("get()", sessionMap.get("ABC"));
+        assertNull("Session(H)", ctx.getRequest().getSession(false));
+
+        // test hashCode()
+        sessionMap.hashCode();
+        assertNull("Session(I)", ctx.getRequest().getSession(false));
+
+        // test isEmpty()
+        assertTrue("isEmpty()", sessionMap.isEmpty());
+        assertNull("Session(J)", ctx.getRequest().getSession(false));
+
+        // test keySet()
+        Set keySet = sessionMap.keySet();
+        assertNotNull("keySet", keySet);
+        assertEquals("keySet Size", 0, keySet.size());
+        assertNull("Session(K)", ctx.getRequest().getSession(false));
+
+        // test putAll() with an empty Map
+        sessionMap.putAll(new HashMap());
+        assertNull("Session(L)", ctx.getRequest().getSession(false));
+
+        // test remove()
+        assertNull("remove()", sessionMap.remove("ABC"));
+        assertNull("Session(M)", ctx.getRequest().getSession(false));
+
+        // test size()
+        assertEquals("size() Size", 0, sessionMap.size());
+        assertNull("Session(N)", ctx.getRequest().getSession(false));
+
+        // test values()
+        Collection values = sessionMap.values();
+        assertNotNull("values", values);
+        assertEquals("values Size", 0, values.size());
+        assertNull("Session(O)", ctx.getRequest().getSession(false));
+
+        // test put()
+        try {
+            assertNull("put()", sessionMap.put("ABC", "XYZ"));
+            assertNotNull("Session(P)", ctx.getRequest().getSession(false));
+        } catch(UnsupportedOperationException ex) {
+            // expected: currently MockHttpServletRequest throws this
+            //           when trying to create a HttpSession
+        }
 
     }
 

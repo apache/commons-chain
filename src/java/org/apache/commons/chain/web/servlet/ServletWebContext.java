@@ -367,7 +367,7 @@ public class ServletWebContext extends WebContext {
     public Map getSessionScope() {
 
         if ((sessionScope == null) && (request != null)) {
-            sessionScope = new ServletSessionScopeMap(request.getSession());
+            sessionScope = new ServletSessionScopeMap(request);
         }
         return (sessionScope);
 

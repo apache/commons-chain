@@ -361,7 +361,7 @@ public class PortletWebContext extends WebContext {
 
         if ((sessionScope == null) && (request != null)) {
             sessionScope =
-        new PortletSessionScopeMap(request.getPortletSession());
+            new PortletSessionScopeMap(request);
         }
         return (sessionScope);
 
