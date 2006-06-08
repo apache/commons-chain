@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.portlet.PortletSession;
+import org.apache.commons.chain.web.MapEntry;
 
 
 /**
@@ -79,8 +80,10 @@ final class PortletSessionScopeMap implements Map {
         Set set = new HashSet();
         Enumeration keys =
         session.getAttributeNames(PortletSession.PORTLET_SCOPE);
+        String key;
         while (keys.hasMoreElements()) {
-            set.add(session.getAttribute((String) keys.nextElement()));
+            key = (String) keys.nextElement();
+            set.add(new MapEntry(key, session.getAttribute(key), true));
         }
         return (set);
     }

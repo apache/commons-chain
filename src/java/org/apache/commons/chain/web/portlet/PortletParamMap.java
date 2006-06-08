@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.portlet.PortletRequest;
+import org.apache.commons.chain.web.MapEntry;
 
 
 /**
@@ -70,8 +71,10 @@ final class PortletParamMap implements Map {
     public Set entrySet() {
         Set set = new HashSet();
         Enumeration keys = request.getParameterNames();
+        String key;
         while (keys.hasMoreElements()) {
-            set.add(request.getParameter((String) keys.nextElement()));
+            key = (String) keys.nextElement();
+            set.add(new MapEntry(key, request.getParameter(key), false));
         }
         return (set);
     }

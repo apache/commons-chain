@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.portlet.PortletContext;
+import org.apache.commons.chain.web.MapEntry;
 
 
 /**
@@ -77,8 +78,10 @@ final class PortletApplicationScopeMap implements Map {
     public Set entrySet() {
         Set set = new HashSet();
         Enumeration keys = context.getAttributeNames();
+        String key;
         while (keys.hasMoreElements()) {
-            set.add(context.getAttribute((String) keys.nextElement()));
+            key = (String)keys.nextElement();
+            set.add(new MapEntry(key, context.getAttribute(key), true));
         }
         return (set);
     }
