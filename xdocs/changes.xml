@@ -39,6 +39,14 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.1-SNAPSHOT" date="in SVN">
+      <action dev="niallp" type="fix" issue="CHAIN-30">
+         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=412789">r 412789</a>
+         ServletSessionScopeMap always forces a Session to be Created.
+      </action>
+      <action dev="niallp" type="fix" issue="CHAIN-31">
+         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=412719">r 412719</a>
+         Portlet Map implementations' entry Set should contain Map.Entry elements.
+      </action>
       <action dev="niallp" type="add" issue="CHAIN-28">
          <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=411948">r 411948</a>
         Provide a Map of Cookies in the WebContext.
