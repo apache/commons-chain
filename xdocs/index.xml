@@ -65,9 +65,7 @@
       Convenience base class implementations of these APIs are
       provided, as well as more specialized (but optional)
       implementations for the web environment (i.e. servlets and
-      portlets). However, conditional compilation in the build script
-      allows graceful creation of the underlying API JAR file even in
-      the absence of the optional dependencies.</p>
+      portlets).</p>
 
       <p>Given that command implementations are designed to conform
       with these recommendations, it should be feasible to utilize the
