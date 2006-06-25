@@ -46,7 +46,7 @@ public class CatalogFactoryBase extends CatalogFactory {
 
 
     /**
-     * <p>The default {@link Catalog} for this {@link CatalogFactory).</p>
+     * <p>The default {@link Catalog} for this {@link CatalogFactory}.</p>
      */
     private Catalog catalog = null;
 

@@ -23,7 +23,8 @@ import org.xml.sax.Attributes;
 /**
  * <p>Digester rule that will dynamically register a new set of rules
  * for a specified element name and default implementation class.  This
- * allows "alias" elements to be created for {@link Chain} and {@link Command}
+ * allows "alias" elements to be created for {@link org.apache.commons.chain.Chain}
+ * and {@link org.apache.commons.chain.Command}
  * implementation classes that are commonly used.  Besides factoring out
  * the class names to make changes easier, this also makes configuration
  * files <strong>much</strong> easier to read and write.</p>
