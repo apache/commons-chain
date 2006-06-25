@@ -419,36 +419,6 @@ public class ContextBase extends HashMap implements Context {
 
 
     /**
-     * <p>Eliminate the specified property descriptor from the list of
-     * property descriptors in <code>pd</code>.</p>
-     *
-     * @param name Name of the property to eliminate
-     *
-     * @exception IllegalArgumentException if the specified property name
-     *  is not present
-     */
-    private void eliminate(String name) {
-
-        int j = -1;
-        for (int i = 0; i < pd.length; i++) {
-            if (name.equals(pd[i].getName())) {
-                j = i;
-                break;
-            }
-        }
-        if (j < 0) {
-            throw new IllegalArgumentException("Property '" + name
-                                               + "' is not present");
-        }
-        PropertyDescriptor[] results = new PropertyDescriptor[pd.length - 1];
-        System.arraycopy(pd, 0, results, 0, j);
-        System.arraycopy(pd, j + 1, results, j, pd.length - (j + 1));
-        pd = results;
-
-    }
-
-
-    /**
      * <p>Return an <code>Iterator</code> over the set of <code>Map.Entry</code>
      * objects representing our key-value pairs.</p>
      */
@@ -496,15 +466,18 @@ public class ContextBase extends HashMap implements Context {
         } catch (IntrospectionException e) {
             pd = new PropertyDescriptor[0]; // Should never happen
         }
-        eliminate("class"); // Because of "getClass()"
-        eliminate("empty"); // Because of "isEmpty()"
 
         // Initialize the underlying Map contents
-        if (pd.length > 0) {
-            descriptors = new HashMap();
-            for (int i = 0; i < pd.length; i++) {
-                descriptors.put(pd[i].getName(), pd[i]);
-                super.put(pd[i].getName(), singleton);
+        for (int i = 0; i < pd.length; i++) {
+            String name = pd[i].getName();
+
+            // Add descriptor (ignoring getClass() and isEmpty())
+            if (!("class".equals(name) || "empty".equals(name))) {
+                if (descriptors == null) {
+                    descriptors = new HashMap((pd.length - 2));
+                }
+                descriptors.put(name, pd[i]);
+                super.put(name, singleton);
             }
         }
 
