@@ -19,29 +19,27 @@
   <title>Commons&#xA0;Chain</title>
   <body>
     <links>
-      <item name="Apache"                   
-            href="http://www.apache.org"/>
-      <item name="Jakarta"                   
-            href="http://jakarta.apache.org"/>
-      <item name="Commons"                   
-            href="http://jakarta.apache.org/commons/"/>
+      <item name="Apache"  href="http://www.apache.org"/>
+      <item name="Jakarta" href="http://jakarta.apache.org"/>
+      <item name="Commons" href="http://jakarta.apache.org/commons/"/>
     </links>
 
     <menu name="Commons&#xA0;Chain">
       <item name="Overview"      href="/index.html"/>
       <item name="Cookbook"      href="/cookbook.html"/>
-      <item name="Release Notes" href="/changes-report.html"/>
       <item name="Javadoc"       href="/apidocs/index.html"/>
       <item name="Download"      href="/downloads.html"/>
-      <item name="Issue Tracking" href="/issue-tracking.html"/>
+      <item name="Wiki"          href="http://wiki.apache.org/jakarta-commons/Chain"/>
     </menu>
     
     <menu name="Development">
+      <item name="History"                 href="/changes-report.html"/>
       <item name="Building"                href="/building.html"/>
       <item name="Mailing Lists"           href="/mail-lists.html"/>
+      <item name="Issue Tracking"          href="/issue-tracking.html"/>
       <item name="Team"                    href="/team-list.html"/>
+      <item name="Source Repository"       href="/cvs-usage.html"/>
       <item name="Javadoc (latest)"        href="http://jakarta.apache.org/commons/chain/apidocs/"/>
-      <item name="SVN Repository"          href="/cvs-usage.html"/>
     </menu>
     
     &commons;
