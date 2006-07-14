@@ -115,7 +115,7 @@
       <artifactId>servlet-api</artifactId>
       <version>2.3</version>
       <properties>
-        <scope>provided</scope>
+        <optional>true</optional>
       </properties>
     </dependency>
     <dependency>
@@ -123,12 +123,18 @@
       <artifactId>portlet-api</artifactId>
       <version>1.0</version>
       <url>http://portals.apache.org/pluto</url>
+      <properties>
+        <optional>true</optional>
+      </properties>
     </dependency>
     <dependency>
       <groupId>myfaces</groupId>
       <artifactId>myfaces-api</artifactId>
       <version>1.1.0</version>
       <url>http://myfaces.apache.org</url>
+      <properties>
+        <optional>true</optional>
+      </properties>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
