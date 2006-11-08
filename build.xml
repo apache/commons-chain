@@ -164,7 +164,7 @@
     </get>
     <get dest="${libdir}/commons-digester-1.6.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-digester/jars/commons-digester-1.6.jar">
     </get>
-    <get dest="${libdir}/commons-logging-1.0.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-logging/jars/commons-logging-1.0.3.jar">
+    <get dest="${libdir}/commons-logging-1.0.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-logging/jars/commons-logging-1.0.4.jar">
     </get>
   </target>
   <target name="install-maven">
