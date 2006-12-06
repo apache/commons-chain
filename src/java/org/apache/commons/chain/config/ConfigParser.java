@@ -21,7 +21,6 @@ import java.net.URL;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.RuleSet;
-import org.xml.sax.InputSource;
 
 
 /**
@@ -164,12 +163,8 @@ public class ConfigParser {
         digester.clear();
         digester.push(catalog);
 
-        // Prepare our InputSource
-        InputSource source = new InputSource(url.toExternalForm());
-        source.setByteStream(url.openStream());
-
         // Parse the configuration document
-        digester.parse(source);
+        digester.parse(url);
 
     }
 
@@ -191,12 +186,8 @@ public class ConfigParser {
         Digester digester = getDigester();
         digester.clear();
 
-        // Prepare our InputSource
-        InputSource source = new InputSource(url.toExternalForm());
-        source.setByteStream(url.openStream());
-
         // Parse the configuration document
-        digester.parse(source);
+        digester.parse(url);
 
     }
 
