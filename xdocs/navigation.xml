@@ -42,6 +42,7 @@
       <item name="Source Repository"       href="/cvs-usage.html"/>
       <item name="Javadoc (latest)"        href="http://jakarta.apache.org/commons/chain/apidocs/"/>
       <item name="Building"                href="/building.html"/>
+      <item name="Maven Reports"           href="/maven-reports.html"/>
     </menu>
     
     &commons;
