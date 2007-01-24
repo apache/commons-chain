@@ -37,7 +37,7 @@ import org.apache.commons.chain.Context;
  *
  * <p>In addition to the minimal functionality required by the {@link Context}
  * interface, this class implements the recommended support for
- * <em>Attribute-Property Transparency</p>.  This is implemented by
+ * <em>Attribute-Property Transparency</em>. This is implemented by
  * analyzing the available JavaBeans properties of this class (or its
  * subclass), exposes them as key-value pairs in the <code>Map</code>,
  * with the key being the name of the property itself.</p>
