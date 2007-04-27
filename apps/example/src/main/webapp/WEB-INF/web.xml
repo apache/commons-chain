@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to you under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+-->
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <display-name>Chain Example</display-name>
+
+    <context-param>
+        <param-name>org.apache.commons.chain.CONFIG_WEB_RESOURCE</param-name>
+        <param-value>/WEB-INF/chain-config.xml</param-value>
+    </context-param>
+
+    <!-- Configuration Listener -->
+    <listener>
+        <listener-class>
+            org.apache.commons.chain.web.ChainListener
+        </listener-class>
+    </listener>
+
+    <!-- "Path Info" Servlet Configuration -->
+    <servlet>
+        <servlet-name>pathinfo</servlet-name>
+        <servlet-class>org.apache.commons.chain.apps.example.ExampleServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- "Request Parameter" Servlet Configuration -->
+    <servlet>
+        <servlet-name>reqparam</servlet-name>
+        <servlet-class>org.apache.commons.chain.apps.example.ExampleServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <!-- "Servlet Path" Servlet Configuration -->
+    <servlet>
+        <servlet-name>servletpath</servlet-name>
+        <servlet-class>org.apache.commons.chain.apps.example.ExampleServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
+    <!-- "Path Info" Servlet Mappings -->
+    <servlet-mapping>
+        <servlet-name>pathinfo</servlet-name>
+        <url-pattern>/exec/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- "Request Parameter" Servlet Mappings -->
+    <servlet-mapping>
+        <servlet-name>reqparam</servlet-name>
+        <url-pattern>/execute</url-pattern>
+    </servlet-mapping>
+
+    <!-- "Servlet Path" Servlet Mappings -->
+    <servlet-mapping>
+        <servlet-name>servletpath</servlet-name>
+        <url-pattern>*.execute</url-pattern>
+    </servlet-mapping>
+
+    <!-- Welcome File List -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>
