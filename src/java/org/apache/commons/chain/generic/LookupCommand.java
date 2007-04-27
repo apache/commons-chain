@@ -348,15 +348,16 @@ public class LookupCommand implements Filter {
 
 
     /**
-     * <p>Return the {@link Command} instance to be delegated to.</p>
+     * <p>Return the {@link Catalog} to look up the {@link Command} in.</p>
      *
      * @param context {@link Context} for this request
-     * @return The looked-up Command.
-     * @exception IllegalArgumentException if no such {@link Command}
-     *  can be found and the <code>optional</code> property is set
-     *  to <code>false</code>
+     * @return The catalog.
+     * @exception IllegalArgumentException if no {@link Catalog}
+     *  can be found
+     *
+     * @since Chain 1.2
      */
-    protected Command getCommand(Context context) {
+    protected Catalog getCatalog(Context context) {
         CatalogFactory lookupFactory = this.catalogFactory;
         if (lookupFactory == null) {
             lookupFactory = CatalogFactory.getInstance();
@@ -380,11 +381,24 @@ public class LookupCommand implements Filter {
             }
         }
 
+        return catalog;
+    }
+
+    /**
+     * <p>Return the {@link Command} instance to be delegated to.</p>
+     *
+     * @param context {@link Context} for this request
+     * @return The looked-up Command.
+     * @exception IllegalArgumentException if no such {@link Command}
+     *  can be found and the <code>optional</code> property is set
+     *  to <code>false</code>
+     */
+    protected Command getCommand(Context context) {
+
+        Catalog catalog = getCatalog(context);
+
         Command command = null;
-        String name = getName();
-        if (name == null) {
-            name = (String) context.get(getNameKey());
-        }
+        String name = getCommandName(context);
         if (name != null) {
             command = catalog.getCommand(name);
             if ((command == null) && !isOptional()) {
@@ -405,5 +419,22 @@ public class LookupCommand implements Filter {
 
     }
 
+    /**
+     * <p>Return the name of the {@link Command} instance to be delegated to.</p>
+     *
+     * @param context {@link Context} for this request
+     * @return The name of the {@link Command} instance
+     *
+     * @since Chain 1.2
+     */
+    protected String getCommandName(Context context) {
+
+        String name = getName();
+        if (name == null) {
+            name = (String) context.get(getNameKey());
+        }
+        return name;
+
+    }
 
 }

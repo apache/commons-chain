@@ -19,8 +19,8 @@ package org.apache.commons.chain.web.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.chain.Catalog;
-import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
+import org.apache.commons.chain.generic.LookupCommand;
 
 
 /**
@@ -36,7 +36,7 @@ import org.apache.commons.chain.Context;
  * @author Craig R. McClanahan
  */
 
-public class RequestParameterMapper implements Command {
+public class RequestParameterMapper extends LookupCommand {
 
 
     // ------------------------------------------------------ Instance Variables
@@ -67,6 +67,9 @@ public class RequestParameterMapper implements Command {
      * stored.</p>
      *
      * @param catalogKey The new catalog key
+     *
+     * @deprecated Use catalogName to specify the name of the catalog in the
+     *  catalog factory
      */
     public void setCatalogKey(String catalogKey) {
 
@@ -80,6 +83,9 @@ public class RequestParameterMapper implements Command {
      * selecting the {@link Command} to be executed.</p>
      *
      * @return The name of the request parameter.
+     *
+     * @deprecated Use catalogName to specify the name of the catalog in the
+     *  catalog factory
      */
     public String getParameter() {
 
@@ -109,22 +115,37 @@ public class RequestParameterMapper implements Command {
      * to select an appropriate {@link Command} to be executed.
      *
      * @param context Context for the current request
-     * @return The result of executing the Command for the request parameter.
-     * @throws Exception if there is a problem executing the Command for
-     *  the request parameter.
+     * @return The name of the {@link Command} instance
+     *
+     * @since Chain 1.2
      */
-    public boolean execute(Context context) throws Exception {
+    protected String getCommandName(Context context) {
 
         // Look up the specified request parameter for this request
         ServletWebContext swcontext = (ServletWebContext) context;
         HttpServletRequest request = swcontext.getRequest();
         String value = request.getParameter(getParameter());
+        return value;
 
-        // Map to the Command specified by the extra path info
+    }
+
+
+    /**
+     * <p>Return the {@link Catalog} to look up the {@link Command} in.</p>
+     *
+     * @param context {@link Context} for this request
+     * @return The catalog.
+     * @exception IllegalArgumentException if no {@link Catalog}
+     *  can be found
+     *
+     * @since Chain 1.2
+     */
+    protected Catalog getCatalog(Context context) {
         Catalog catalog = (Catalog) context.get(getCatalogKey());
-        Command command = catalog.getCommand(value);
-        return (command.execute(context));
-
+        if (catalog == null) {
+            catalog = super.getCatalog(context);
+        }
+        return catalog;
     }
 
 
