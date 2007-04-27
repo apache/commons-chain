@@ -31,18 +31,18 @@
 
     <ul>
       <li><a href="index.jsp">Index Page</a></li>
-      <li><a href="foo.execute">Foo Page</a></li>
-      <li><a href="bar.execute">Bar Page</a></li>
+      <li><a href="foo.execute">foo.execute</a></li>
+      <li><a href="bar.execute">bar.execute</a></li>
     </ul>
 
   <table border="1">
      <tr><th>Example</th><th>Command</th><th>Count</th></tr>
-     <tr><td rowspan="2" valign="top">Path Info</td><td>Foo</td><td><c:out value="${pathinfoFooCount}" default="0"/></td></tr>
-     <tr><td>Bar</td><td><c:out value="${pathinfoBarCount}" default="0"/></td></tr>
-     <tr><td rowspan="2" valign="top">Request Parameter</td><td>Foo</td><td><c:out value="${reqparamFooCount}" default="0"/></td></tr>
-     <tr><td>Bar</td><td><c:out value="${reqparamBarCount}" default="0"/></td></tr>
-     <tr><td rowspan="2" valign="top">Servlet path</td><td>Foo</td><td><c:out value="${servletpathFooCount}" default="0"/></td></tr>
-     <tr><td>Bar</td><td><c:out value="${servletpathBarCount}" default="0"/></td></tr>
+     <tr><td rowspan="2" valign="top">Path Info</td><td>/foo</td><td><c:out value="${pathinfoFooCount}" default="0"/></td></tr>
+     <tr><td>/bar</td><td><c:out value="${pathinfoBarCount}" default="0"/></td></tr>
+     <tr><td rowspan="2" valign="top">Request Parameter</td><td>foo</td><td><c:out value="${reqparamFooCount}" default="0"/></td></tr>
+     <tr><td>bar</td><td><c:out value="${reqparamBarCount}" default="0"/></td></tr>
+     <tr><td rowspan="2" valign="top">Servlet path</td><td>/foo.execute</td><td><c:out value="${servletpathFooCount}" default="0"/></td></tr>
+     <tr><td>/bar.execute</td><td><c:out value="${servletpathBarCount}" default="0"/></td></tr>
   </table>
 
   </body>
