@@ -64,6 +64,7 @@ public class CatalogFactoryBaseTestCase extends TestCase {
      * <p>Set up instance variables required by this test case.</p>
      */
     public void setUp() {
+        CatalogFactory.clear();
         factory = CatalogFactory.getInstance();
     }
 

@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+  
+        http://www.apache.org/licenses/LICENSE-2.0
+  
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-parent</artifactId>
+        <version>2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>commons-chain</groupId>
+    <artifactId>commons-chain</artifactId>
+    <version>1.2-SNAPSHOT</version>
+    <name>Commons Chain</name>
+    <description>
+        An implmentation of the GoF Chain of Responsibility pattern
+    </description>
+    <url>http://jakarta.apache.org/commons/chain/</url>
+    <issueManagement>
+        <system>jira</system>
+        <url>http://issues.apache.org/jira/browse/CHAIN</url>
+    </issueManagement>
+    <inceptionYear>2003</inceptionYear>
+
+    <developers>
+        <developer>
+            <name>Craig McClanahan</name>
+            <id>craigmcc</id>
+            <email>craigmcc at apache.org</email>
+        </developer>
+        <developer>
+            <name>Ted Husted</name>
+            <id>husted</id>
+            <email>husted at apache.org</email>
+        </developer>
+        <developer>
+            <name>Martin Cooper</name>
+            <id>martinc</id>
+            <email>martinc at apache.org</email>
+        </developer>
+        <developer>
+            <name>Don Brown</name>
+            <id>mrdon</id>
+            <email>mrdon at apache.org</email>
+        </developer>
+        <developer>
+            <name>James Mitchell</name>
+            <id>jmitchell</id>
+            <email>jmitchell at apache.org</email>
+        </developer>
+        <developer>
+            <name>Joe Germuska</name>
+            <id>germuska</id>
+            <email>germuska at apache.org</email>
+        </developer>
+        <developer>
+            <name>Niall Pemberton</name>
+            <id>niallp</id>
+            <email>niallp at apache.org</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/commons/proper/chain/trunk/</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/chain/trunk/</developerConnection>
+        <url>http://svn.apache.org/viewvc/jakarta/commons/proper/chain/trunk/</url>
+    </scm>
+
+    <properties>
+        <maven.compile.source>1.4</maven.compile.source>
+        <maven.compile.target>1.4</maven.compile.target>
+    </properties> 
+  
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+        <testSourceDirectory>src/test</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>NOTICE.txt</include>
+                    <include>LICENSE.txt</include>
+                </includes>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </testResource>
+        </testResources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/bin.xml</descriptor>
+                        <descriptor>src/main/assembly/src.xml</descriptor>
+                    </descriptors>
+                    <tarLongFileMode>gnu</tarLongFileMode>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-digester</groupId>
+            <artifactId>commons-digester</artifactId>
+            <version>1.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.3</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.portlet</groupId>
+            <artifactId>portlet-api</artifactId>
+            <version>1.0</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>myfaces</groupId>
+            <artifactId>myfaces-api</artifactId>
+            <version>1.1.0</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <reporting>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changes-plugin</artifactId>
+                <configuration>
+                    <xmlPath>${basedir}/xdocs/changes.xml</xmlPath>
+                    <issueLinkTemplate>%URL%/%ISSUE%</issueLinkTemplate>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>changes-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <enableRulesSummary>false</enableRulesSummary>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <rulesets>
+                        <ruleset>checkstyle.xml</ruleset>
+                    </rulesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>
