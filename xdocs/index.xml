@@ -20,7 +20,7 @@
 
   <properties>
     <title>Overview</title>
-    <author email="commons-dev@jakarta.apache.org">Commons Documentation Team</author>
+    <author email="dev@commons.apache.org">Commons Documentation Team</author>
     <author email="martinc@apache.org">Martin Cooper</author>
     <author email="craigmcc@apache.org">Craig McClanahan</author>
   </properties>
