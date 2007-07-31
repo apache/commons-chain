@@ -13,8 +13,8 @@
     <description xml:lang="en">An implmentation of the GoF Chain of Responsibility pattern</description>
     <repository>
       <SVNRepository>
-        <browse rdf:resource="http://svn.apache.org/repos/asf/jakarta/commons/proper/chain/trunk"/>
-        <location rdf:resource="http://svn.apache.org/repos/asf/jakarta/commons/proper/chain"/>
+        <browse rdf:resource="http://svn.apache.org/repos/asf/commons/proper/chain/trunk"/>
+        <location rdf:resource="http://svn.apache.org/repos/asf/commons/proper/chain"/>
       </SVNRepository>
     </repository>
     <release>
