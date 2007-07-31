@@ -21,13 +21,12 @@
   <body>
     <links>
       <item name="Apache"  href="http://www.apache.org"/>
-      <item name="Jakarta" href="http://jakarta.apache.org"/>
       <item name="Commons" href="http://commons.apache.org/"/>
     </links>
 
     <menu name="Chain">
       <item name="Overview"      href="/index.html"/>
-      <item name="Download"      href="http://jakarta.apache.org/site/downloads/downloads_commons-chain.cgi"/>
+      <item name="Download"      href="http://commons.apache.org/downloads/download_chain.cgi"/>
       <item name="Release Notes" href="/changes-report.html"/>
       <item name="Cookbook"      href="/cookbook.html"/>
       <item name="Javadoc"       href="/apidocs/index.html"/>
