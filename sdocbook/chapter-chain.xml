@@ -2,7 +2,7 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
 "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
 <article>
-  <title>Jakarta Commons Chain of Responsibility</title>
+  <title>Apache Commons Chain of Responsibility</title>
 
   <authorblurb>
     <para>The Commons Chain Cookbook is an extract from the Jakarta Cookbook
@@ -96,8 +96,8 @@
     </figure>
 
     <para>The <productname>Chain of Responsibility</productname> package in
-    the Jakarta Commons [<link
-    linkend="???">http://jakarta.apache.org/commons/</link>] combines the
+    the Apache Commons [<link
+    linkend="???">http://commons.apache.org/</link>] combines the
     Command pattern with the classic <glossterm>Chain of Responsibility
     pattern</glossterm> to make it easy to call a business command as part of
     a larger application command. (For more about the patterns, see
@@ -452,7 +452,7 @@ public class Profile {
       any two.)]</olink>
     </figure>
 
-    <para>The Jakarta Commons Chain of Command architects have chosen a
+    <para>The Apache Commons Chain of Command architects have chosen a
     Map-style context as the default. The Chain Context is nothing but a
     "marker interface" for the standard Java <classname>Map</classname>
     interface.</para>

@@ -7,10 +7,10 @@ $Id$
 INTRODUCTION:
 ============
 The changes-report.html provides details of changes in each release:
-o http://jakarta.apache.org/commons/chain/changes-report.html
+o http://commons.apache.org/chain/changes-report.html
 
-For more information on Jakarta Commons Chain, see
-o http://jakarta.apache.org/commons/chain/
+For more information on Apache Commons Chain, see
+o http://commons.apache.org/chain/
 
 NEW FEATURES:
 ============

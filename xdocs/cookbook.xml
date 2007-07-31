@@ -459,7 +459,7 @@ public class Profile {
       any two.)]</olink>
     </figure -->
 
-    <p>The Jakarta Commons Chain of Command architects have chosen a
+    <p>The Apache Commons Chain of Command architects have chosen a
     Map-style context as the default. The Chain Context is nothing but a
     "marker interface" for the standard Java <code>Map</code>
     interface.</p>
