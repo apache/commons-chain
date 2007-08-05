@@ -71,7 +71,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="niallp" type="fix" issue="CHAIN-29">
          <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=411893">r 411893</a>
          Remove Static <code>Log</code> instances - see
-         <a href="http://wiki.apache.org/jakarta-commons/Logging/StaticLog">here</a>.
+         <a href="http://wiki.apache.org/commons/Logging/StaticLog">here</a>.
       </action>
       <action dev="niallp" type="fix" issue="CHAIN-11">
          <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=409125">r 409125</a>

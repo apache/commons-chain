@@ -32,7 +32,7 @@
       <item name="Javadoc"       href="/apidocs/index.html"/>
       <item name="Dependencies"  href="/dependencies.html"/>
       <item name="License"       href="/license.html"/>
-      <item name="Wiki"          href="http://wiki.apache.org/jakarta-commons/Chain"/>
+      <item name="Wiki"          href="http://wiki.apache.org/commons/Chain"/>
     </menu>
     
     <menu name="Development">
