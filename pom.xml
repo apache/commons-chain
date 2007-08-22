@@ -27,7 +27,7 @@
     <groupId>commons-chain</groupId>
     <artifactId>commons-chain</artifactId>
     <version>1.2-SNAPSHOT</version>
-    <name>Commons Chain</name>
+    <name>Chain</name>
     <description>
         An implmentation of the GoF Chain of Responsibility pattern
     </description>
