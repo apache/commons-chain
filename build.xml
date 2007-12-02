@@ -156,13 +156,13 @@
     </get>
     <get dest="${libdir}/portlet-api-1.0.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/portlet-api/jars/portlet-api-1.0.jar">
     </get>
-    <get dest="${libdir}/myfaces-jsf-api-1.0.8-beta.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/myfaces/jars/myfaces-jsf-api-1.0.8-beta.jar">
+    <get dest="${libdir}/myfaces-api-1.1.0.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/myfaces/jars/myfaces-api-1.1.0.jar">
     </get>
     <get dest="${libdir}/junit-3.8.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/junit/jars/junit-3.8.1.jar">
     </get>
     <get dest="${libdir}/commons-beanutils-1.7.0.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-beanutils/jars/commons-beanutils-1.7.0.jar">
     </get>
-    <get dest="${libdir}/commons-digester-1.6.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-digester/jars/commons-digester-1.6.jar">
+    <get dest="${libdir}/commons-digester-1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-digester/jars/commons-digester-1.8.jar">
     </get>
     <get dest="${libdir}/commons-logging-1.0.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-logging/jars/commons-logging-1.0.4.jar">
     </get>
