@@ -42,6 +42,12 @@
       <fileset file="${basedir}/build.properties.sample"/>
       <fileset file="${basedir}/checkstyle.xml"/>
       <fileset file="${basedir}/license-header.txt"/>
+      <fileset file="${basedir}/pom.xml"/>
+    </copy>
+
+    <!-- Copy apps files -->
+    <copy todir="${maven.dist.src.assembly.dir}/apps">
+      <fileset dir="./apps"/>
     </copy>
 
     <!-- Copy xdoc files -->
