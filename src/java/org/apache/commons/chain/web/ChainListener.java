@@ -208,13 +208,13 @@ public class ChainListener implements ServletContextListener {
 
         // Parse the resources specified in our init parameters (if any)
         if (attr == null) {
-            parseJarResources(context, parser);
+            parseJarResources(context, parser, log);
             ChainResources.parseClassResources
                 (classResources, parser);
             ChainResources.parseWebResources
                 (context, webResources, parser);
         } else {
-            parseJarResources(catalog, context, parser);
+            parseJarResources(catalog, context, parser, log);
             ChainResources.parseClassResources
                 (catalog, classResources, parser);
             ChainResources.parseWebResources
@@ -240,7 +240,7 @@ public class ChainListener implements ServletContextListener {
      * @param parser {@link ConfigParser} to use for parsing
      */
     private void parseJarResources(ServletContext context,
-                                   ConfigParser parser) {
+                                   ConfigParser parser, Log log) {
 
         Set jars = context.getResourcePaths("/WEB-INF/lib");
         if (jars == null) {
@@ -270,9 +270,15 @@ public class ChainListener implements ServletContextListener {
                       // means there is no such resource
                 }
                 if (is == null) {
+                    if (log.isDebugEnabled()) {
+                        log.debug("Not Found: " + resourceURL);
+                    }
                     continue;
                 } else {
                     is.close();
+                }
+                if (log.isDebugEnabled()) {
+                    log.debug("Parsing: " + resourceURL);
                 }
                 parser.parse(resourceURL);
             } catch (Exception e) {
@@ -298,7 +304,7 @@ public class ChainListener implements ServletContextListener {
      *  configuration resource containing "catalog" element(s)
      */
     private void parseJarResources(Catalog catalog, ServletContext context,
-                                   ConfigParser parser) {
+                                   ConfigParser parser, Log log) {
 
         Set jars = context.getResourcePaths("/WEB-INF/lib");
         if (jars == null) {
@@ -328,9 +334,15 @@ public class ChainListener implements ServletContextListener {
                       // means there is no such resource
                 }
                 if (is == null) {
+                    if (log.isDebugEnabled()) {
+                        log.debug("Not Found: " + resourceURL);
+                    }
                     continue;
                 } else {
                     is.close();
+                }
+                if (log.isDebugEnabled()) {
+                    log.debug("Parsing: " + resourceURL);
                 }
                 parser.parse(catalog, resourceURL);
             } catch (Exception e) {
