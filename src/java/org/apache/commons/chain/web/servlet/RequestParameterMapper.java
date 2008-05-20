@@ -20,6 +20,7 @@ package org.apache.commons.chain.web.servlet;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Context;
+import org.apache.commons.chain.Command;
 import org.apache.commons.chain.generic.LookupCommand;
 
 
@@ -36,7 +37,7 @@ import org.apache.commons.chain.generic.LookupCommand;
  * @author Craig R. McClanahan
  */
 
-public class RequestParameterMapper extends LookupCommand {
+public class RequestParameterMapper extends LookupCommand implements Command {
 
 
     // ------------------------------------------------------ Instance Variables
