@@ -38,6 +38,9 @@
             </includes>
         </fileSet>
         <fileSet>
+            <directory>apps</directory>
+        </fileSet>
+        <fileSet>
             <directory>src</directory>
         </fileSet>
         <fileSet>
