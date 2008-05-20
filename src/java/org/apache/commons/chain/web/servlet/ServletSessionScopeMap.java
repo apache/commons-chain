@@ -77,7 +77,7 @@ final class ServletSessionScopeMap implements Map {
         Enumeration keys = session.getAttributeNames();
         while (keys.hasMoreElements()) {
             Object next = session.getAttribute((String) keys.nextElement());
-            if (next == value) {
+            if (value.equals(next)) {
                 return (true);
             }
         }

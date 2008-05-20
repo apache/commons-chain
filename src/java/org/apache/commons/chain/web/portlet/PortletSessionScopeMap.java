@@ -78,7 +78,7 @@ final class PortletSessionScopeMap implements Map {
         session.getAttributeNames(PortletSession.PORTLET_SCOPE);
         while (keys.hasMoreElements()) {
             Object next = session.getAttribute((String) keys.nextElement());
-            if (next == value) {
+            if (value.equals(next)) {
                 return (true);
             }
         }

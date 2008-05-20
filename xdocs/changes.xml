@@ -40,6 +40,9 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.2" date="in SVN">
+      <action dev="niallp" type="fix" issue="CHAIN-42" due-to="Isaac Shabtay">
+         Various scope mappers use incorrect equalization.
+      </action>
       <action dev="niallp" type="fix" issue="CHAIN-33">
          Upgrade to Commons Digester 1.8 to fix bug loading webapp resources.
       </action>

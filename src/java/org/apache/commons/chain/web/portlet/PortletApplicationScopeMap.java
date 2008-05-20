@@ -68,7 +68,7 @@ final class PortletApplicationScopeMap implements Map {
         Enumeration keys = context.getAttributeNames();
         while (keys.hasMoreElements()) {
             Object next = context.getAttribute((String) keys.nextElement());
-            if (next == value) {
+            if (value.equals(next)) {
                 return (true);
             }
         }

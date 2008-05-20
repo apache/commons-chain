@@ -68,7 +68,7 @@ final class ServletRequestScopeMap implements Map {
         Enumeration keys = request.getAttributeNames();
         while (keys.hasMoreElements()) {
             Object next = request.getAttribute((String) keys.nextElement());
-            if (next == value) {
+            if (value.equals(next)) {
                 return (true);
             }
         }
