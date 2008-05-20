@@ -23,11 +23,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-    <title>Path Info Example: Bar</title>
+    <title>Path Info Example</title>
   </head>
   <body>
 
-    <h1>Path Info Example: Bar</h1>
+    <h1>Path Info Example</h1>
 
     <ul>
       <li><a href="../index.jsp">Index Page</a></li>
