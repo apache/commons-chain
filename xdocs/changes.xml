@@ -48,7 +48,7 @@ The <action> type attribute can be add,update,fix,remove.
       </action>
       <action dev="niallp" type="fix">
          Corrections to the project.xml - mark servlet, portlet and myfaces dependencies
-         as <i>optional</i> to prevent dependency problems for maven2 users.
+         as "optional" to prevent dependency problems for maven2 users.
       </action>
       <action dev="niallp" type="update" issue="CHAIN-32" due-to="Joshua Graham">
          Improve instantiation performance of ContextBase subclasses.
@@ -57,130 +57,98 @@ The <action> type attribute can be add,update,fix,remove.
 
     <release version="1.1" date="2006-06-14">
       <action dev="niallp" type="fix" issue="CHAIN-30">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=412789">r 412789</a>
          ServletSessionScopeMap always forces a Session to be Created.
       </action>
       <action dev="niallp" type="fix" issue="CHAIN-31">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=412719">r 412719</a>
          Portlet Map implementations' entry Set should contain Map.Entry elements.
       </action>
       <action dev="niallp" type="add" issue="CHAIN-28">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=411948">r 411948</a>
         Provide a Map of Cookies in the WebContext.
       </action>
       <action dev="niallp" type="fix" issue="CHAIN-29">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=411893">r 411893</a>
-         Remove Static <code>Log</code> instances - see
-         <a href="http://wiki.apache.org/commons/Logging/StaticLog">here</a>.
+         Remove Static Log instances - see
+         http://wiki.apache.org/commons/Logging/StaticLog
       </action>
       <action dev="niallp" type="fix" issue="CHAIN-11">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=409125">r 409125</a>
          Modify DispatchCommand so that it will compile using JDK 1.3 (remove JDK 1.4 method).
       </action>
       <action dev="germuska" type="fix">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=356422">r 356422</a>
          DispatchCommand - fix bug in handling InvocationTargetException.
       </action>
       <action dev="germuska" type="fix" issue="CHAIN-9" due-to="Wendy Smoak">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=322530">r 322530</a>
          Maven build updates.
       </action>
       <action dev="germuska" type="update">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=315059">r 315059</a>
          CatalogBase - add constructor which takes an already built map of commands, for easier use in dependency-injection environments.
       </action>
       <action dev="germuska" type="fix" issue="CHAIN-25">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=178565">r 178565</a>
          DispatchCommand should unwrap InvocationTargetException.
       </action>
       <action dev="germuska" type="update">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=178563">r 178563</a>
          Expose catalogFactory so that subclasses can get at it.
       </action>
       <action dev="germuska" type="update" issue="CHAIN-3">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=165087">r 165087</a> and
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=178563">r 178563</a>
          Decouple CatalogFactory lookup from LookupAction.
       </action>
       <action dev="craigmcc" type="fix" issue="CHAIN-12">
         <dueto name="Jeff Ramsdale"/>
         <dueto name="Dennis Lundberg"/>
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=161600">r 161600</a> and
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=412150">r 412150</a>
          Make ContextBase live up to the Serializable contract that it inherits by virtue of extending HashMap.
       </action>
       <action dev="martinc" type="update">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=156615">r 156615</a>
          ChainResources - factor out the comma-delimited parsing into a separate method, fix the whitespace-skipping bugs in it.
       </action>
       <action dev="germuska" type="update">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=154949">r 154949</a>
          Add support for using LookupCommand in a way which does not pass through the result from the looked up command.
       </action>
       <action dev="jmitchell" type="add" issue="CHAIN-14" due-to="Sean Schofield">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142926">r 142926</a>
          Add new DispatchLookupCommand.
       </action>
       <action dev="jmitchell" type="add" issue="CHAIN-26" due-to="Sean Schofield">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142924">r 142924</a>
          Add new test for LookupCommand.
       </action>
       <action dev="germuska" type="add" issue="CHAIN-20">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142922">r 142922</a>
          Add new  DispatchCommand.
       </action>
       <action dev="jmitchell" type="fix" issue="CHAIN-6">
         <dueto name="William Slough"/>
         <dueto name="Sean Schofield"/>
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142919">r 142919</a>
          CopyCommand does not work unless setValue is called.
       </action>
       <action dev="craigmcc" type="add" issue="CHAIN-19" due-to="Joe Germuska">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142918">r 142918</a>
          Provide a  mechanism for encoding catalog and command in a single string
       </action>
       <action dev="martinc" type="fix" issue="CHAIN-1" due-to="Sergio Moretto">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142917">r 142917</a>
          Code fragment from 'cookbook' is incorrect.
       </action>
     </release>
 
     <release version="1.0" date="2004-12-09" description="Initial Release">
       <action dev="mardon" type="fix" issue="CHAIN-5" due-to="Manfred Wolff">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142907">r 142907</a>
          Make CatalogBase.getCommand() thread safe.
       </action>
       <action dev="craigmcc" type="update" issue="CHAIN-2" due-to="Sean Schofield">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142905">r 142905</a>
          LookupCommand should use new CatalogFactory.
       </action>
       <action dev="craigmcc" type="fix" issue="CHAIN-10" due-to="Sean Schofield">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142904">r 142904</a>
          Sample catalog.xml missing &lt;catalog&gt; tag.
       </action>
       <action dev="craigmcc" type="add" issue="CHAIN-7" due-to="Sean Schofield">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142903">r 142903</a>
          Add missing new class ConfigCatalogRule.
       </action>
       <action dev="craigmcc" type="update" issue="CHAIN-21">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142900">r 142900</a>
          Make the impl. class of chainbase configurable.
       </action>
       <action dev="craigmcc" type="fix" issue="CHAIN-23" due-to="Sean Schofield">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142898">r 142898</a>
          Support for new CatalogFactory.
       </action>
       <action dev="martinc" type="fix" issue="CHAIN-8" due-to="Otis Gospodnetic">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142831">r 142831</a> and
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142833">r 142833</a>
          tabs to spaces, Log name fix.
       </action>
       <action dev="husted" type="fix" issue="CHAIN-15" due-to="Joe Germuska">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142817">r 142817</a>
          build.properties.sample should add commons-logging.
       </action>
       <action dev="husted" type="update" issue="CHAIN-22" due-to="Matthew Sgarlata">
-         <a href="http://svn.apache.org/viewvc?view=rev&amp;revision=142814">r 142814</a>
          Added JavaDoc and a toString() method to CatalogBase.
       </action>
     </release>
