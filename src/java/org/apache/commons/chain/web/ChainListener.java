@@ -369,7 +369,7 @@ public class ChainListener implements ServletContextListener {
             if (index < 0) {
                 break;
             }
-            value = value.substring(0, index) + value.substring(index + 1);
+            value = value.substring(0, index) + "%20" + value.substring(index + 1);
         }
         return (value);
 
