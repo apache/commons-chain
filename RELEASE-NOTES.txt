@@ -1,7 +1,7 @@
 $Id$
 
                            Commons Chain Package
-                                Version 1.1
+                                Version 1.2
                                Release Notes
 
 INTRODUCTION:
@@ -12,41 +12,31 @@ o http://commons.apache.org/chain/changes-report.html
 For more information on Apache Commons Chain, see
 o http://commons.apache.org/chain/
 
+COMPATIBILITY
+=============
+Chain 1.2 is binary and source compatible with version 1.1.
+
+The minimum JDK version required is 1.3
+
+
 NEW FEATURES:
 ============
-o CHAIN-28: Provide a Map of Cookies in the WebContext.
-o CHAIN-14: Add new DispatchLookupCommand.
-o CHAIN-26: Add new test for LookupCommand.
-o CHAIN-20: Add new DispatchCommand.
-o CHAIN-19: Provide a mechanism for encoding catalog and command in a single 
-  string. 
+o First OSGi-enabled release of Commons Chain
+o CHAIN-36: Add Example webapp for Servlet Mapper Commands. 
 
 
 CHANGES:
 ========
-o CatalogBase - add constructor which takes an already built map of 
-  commands, for easier use in dependency-injection environments. 
-o Expose catalogFactory so that subclasses can get at it. 
-o CHAIN-3: Decouple CatalogFactory lookup from LookupAction.
-o ChainResources - factor out the comma-delimited parsing into a 
-  separate method, fix the whitespace-skipping bugs in it. 
-o Add support for using LookupCommand in a way which does not pass 
-  through the result from the looked up command.  
+o CHAIN-32: Improve instantiation performance of ContextBase subclasses. 
+o CHAIN-4: Update servlet implementation classes to be aware of CatalogFactory. 
 
       
 BUG REPORTS ADDRESSED:
 =====================
-o CHAIN-30: ServletSessionScopeMap always forces a Session to be Created. 
-o CHAIN-31: Portlet Map implementations' entry Set should contain Map.Entry 
-  elements.
-o CHAIN-29: Remove Static Log instances - see here. Issue: . 
-o CHAIN-11: Modify DispatchCommand so that it will compile using JDK 1.3 
-  (remove JDK 1.4 method). 
-o DispatchCommand - fix bug in handling InvocationTargetException. 
-o CHAIN-9: Maven build updates. 
-o CHAIN-25: DispatchCommand should unwrap InvocationTargetException.
-o CHAIN-12: Make ContextBase live up to the Serializable contract 
-  that it inherits by virtue of extending HashMap.
-o CHAIN-6: CopyCommand does not work unless setValue is called.
-o CHAIN-1: Code fragment from 'cookbook' is incorrect.
+o CHAIN-43: ChainListener URL translation does not work as expected. 
+o CHAIN-42: Various scope mappers use incorrect equalization.
+o CHAIN-41: Ant build fails due to usage of old Digester.
+o CHAIN-35: PathInfoMapper command can not obtain the current catalog instance.
+o CHAIN-34: Unbalanced tags in JavaDoc for ContextBase class.
+o CHAIN-33: Upgrade to Digester 1.8 to fix bug loading webapp resources.
 

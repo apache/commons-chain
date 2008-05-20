@@ -39,22 +39,43 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.2" date="in SVN">
-      <action dev="niallp" type="fix" issue="CHAIN-42" due-to="Isaac Shabtay">
-         Various scope mappers use incorrect equalization.
+    <release version="1.2" date="in SVN" description="OSGi enabled / minor bug fixes">
+      <action dev="niallp" type="add">
+         Chain 1.2 is the first OSGi-enabled release.
       </action>
-      <action dev="niallp" type="fix" issue="CHAIN-33">
-         Upgrade to Commons Digester 1.8 to fix bug loading webapp resources.
+      <action dev="niallp" type="add" issue="CHAIN-36">
+         Add Example webapp for Servlet Mapper Commands
       </action>
       <action dev="rahul" type="update">
          Upgrade Commons Logging dependency to 1.0.4
       </action>
+      <action dev="niallp" type="update" issue="CHAIN-32" due-to="Joshua Graham">
+         Improve instantiation performance of ContextBase subclasses.
+      </action>
+      <action dev="niallp" type="update" issue="CHAIN-4" due-to="Joe Germuska">
+         Update servlet implementation classes to be aware of CatalogFactory
+      </action>
+      <action dev="niallp" type="fix" issue="CHAIN-43" due-to="Ales Dolecek">
+         ChainListener URL translation does not work as expected.
+      </action>
+      <action dev="niallp" type="fix" issue="CHAIN-42" due-to="Isaac Shabtay">
+         Various scope mappers use incorrect equalization.
+      </action>
+      <action dev="skitching" type="fix" issue="CHAIN-41" due-to="Isaac Shabtay">
+         Ant build fails due to usage of old Digester.
+      </action>
+      <action dev="niallp" type="fix" issue="CHAIN-35">
+         PathInfoMapper command can not obtain the current catalog instance.
+      </action>
+      <action dev="niallp" type="fix" issue="CHAIN-34" due-to="Mark Vedder">
+         Unbalanced tags in JavaDoc for ContextBase class.
+      </action>
+      <action dev="niallp" type="fix" issue="CHAIN-33">
+         Upgrade to Commons Digester 1.8 to fix bug loading webapp resources.
+      </action>
       <action dev="niallp" type="fix">
          Corrections to the project.xml - mark servlet, portlet and myfaces dependencies
          as "optional" to prevent dependency problems for maven2 users.
-      </action>
-      <action dev="niallp" type="update" issue="CHAIN-32" due-to="Joshua Graham">
-         Improve instantiation performance of ContextBase subclasses.
       </action>
     </release>
 
