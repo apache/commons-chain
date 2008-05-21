@@ -87,7 +87,7 @@
       <ul>
         <li>The <a href="api-release/index.html">Javadoc</a> of the latest Release.</li>
         <li>The <a href="cookbook.html">Cookbook</a> containing "recipes" for using the chain.</li>
-        <li>The <a href="cvs-usage.html">SVN repository</a> can be browsed.</li>
+        <li>The <a href="source-repository">SVN repository</a> can be browsed.</li>
       </ul>
     </p>
   </section>
