@@ -174,7 +174,7 @@
     </get>
     <get dest="${libdir}/commons-digester-1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://repo1.maven.org/maven/commons-digester/jars/commons-digester-1.8.jar">
     </get>
-    <get dest="${libdir}/commons-logging-1.0.4.jar" usetimestamp="true" ignoreerrors="true" src="http://repo1.maven.org/maven/commons-logging/jars/commons-logging-1.0.4.jar">
+    <get dest="${libdir}/commons-logging-1.1.1.jar" usetimestamp="true" ignoreerrors="true" src="http://repo1.maven.org/maven/commons-logging/jars/commons-logging-1.1.1.jar">
     </get>
     <get dest="${libdir}/maven-xdoc-plugin-1.9.2.jar" usetimestamp="true" ignoreerrors="true" src="http://repo1.maven.org/maven/maven/plugins/maven-xdoc-plugin-1.9.2.jar">
     </get>

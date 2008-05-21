@@ -185,7 +185,7 @@
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
-      <version>1.0.4</version>
+      <version>1.1.1</version>
       <url>http://commons.apache.org/logging/</url>
     </dependency>
     <dependency>
