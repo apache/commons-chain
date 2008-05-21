@@ -39,7 +39,7 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.2" date="in SVN" description="OSGi enabled / minor bug fixes">
+    <release version="1.2" date="2008-05-24" description="OSGi enabled / minor bug fixes">
       <action dev="niallp" type="add">
          Chain 1.2 is the first OSGi-enabled release.
       </action>
