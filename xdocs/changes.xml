@@ -39,7 +39,7 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.2" date="2008-05-24" description="OSGi enabled / minor bug fixes">
+    <release version="1.2" date="2008-05-25" description="OSGi enabled / minor bug fixes">
       <action dev="niallp" type="add">
          Chain 1.2 is the first OSGi-enabled release.
       </action>
@@ -47,7 +47,7 @@ The <action> type attribute can be add,update,fix,remove.
          Add Example webapp for Servlet Mapper Commands
       </action>
       <action dev="rahul" type="update">
-         Upgrade Commons Logging dependency to 1.0.4
+         Upgrade Commons Logging dependency to 1.1.1
       </action>
       <action dev="niallp" type="update" issue="CHAIN-32" due-to="Joshua Graham">
          Improve instantiation performance of ContextBase subclasses.
