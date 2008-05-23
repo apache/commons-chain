@@ -29,7 +29,7 @@
     <version>1.2-SNAPSHOT</version>
     <name>Commons Chain</name>
     <description>
-        An implmentation of the GoF Chain of Responsibility pattern
+        An implementation of the GoF Chain of Responsibility pattern
     </description>
     <url>http://commons.apache.org/chain/</url>
     <issueManagement>
@@ -224,8 +224,9 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>2.1</version>
                 <configuration>
-                    <configLocation>checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/checkstyle.xml</configLocation>
                     <enableRulesSummary>false</enableRulesSummary>
+                    <headerFile>${basedir}/license-header.txt</headerFile>
                 </configuration>
             </plugin>
 
