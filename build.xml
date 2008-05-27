@@ -20,7 +20,7 @@
   </property>
   <property name="javadocdir" value="dist/docs/api">
   </property>
-  <property name="final.name" value="commons-chain-1.2-SNAPSHOT">
+  <property name="final.name" value="commons-chain-1.2">
   </property>
   <path id="build.classpath">
     <fileset dir="${libdir}">
@@ -146,7 +146,7 @@
     </tstamp>
     <property name="copyright" value="Copyright &amp;copy;  The Apache Software Foundation. All Rights Reserved.">
     </property>
-    <property name="title" value="Commons Chain 1.2-SNAPSHOT API">
+    <property name="title" value="Commons Chain 1.2 API">
     </property>
     <javadoc use="true" private="true" destdir="${javadocdir}" author="true" version="true" sourcepath="src/java" packagenames="org.apache.commons.chain.*">
       <classpath>
