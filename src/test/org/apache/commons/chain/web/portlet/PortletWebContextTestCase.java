@@ -166,6 +166,15 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
         map.clear();
         checkMapSize(map, 0);
 
+        // Test putAll()
+        Map values = new HashMap();
+        values.put(new Integer(1), "One");
+        values.put("2", "Two");
+        map.putAll(values);
+        assertEquals("putAll(1)", "One", map.get("1"));
+        assertEquals("putAll(2)", "Two", map.get("2"));
+        checkMapSize(map, 2);
+
     }
 
 
@@ -519,6 +528,15 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
         map.clear();
         checkMapSize(map, 0);
 
+        // Test putAll()
+        Map values = new HashMap();
+        values.put(new Integer(1), "One");
+        values.put("2", "Two");
+        map.putAll(values);
+        assertEquals("putAll(1)", "One", map.get("1"));
+        assertEquals("putAll(2)", "Two", map.get("2"));
+        checkMapSize(map, 2);
+
     }
 
 
@@ -570,6 +588,15 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
         // Clearing the map
         map.clear();
         checkMapSize(map, 0);
+
+        // Test putAll()
+        Map values = new HashMap();
+        values.put(new Integer(1), "One");
+        values.put("2", "Two");
+        map.putAll(values);
+        assertEquals("putAll(1)", "One", map.get("1"));
+        assertEquals("putAll(2)", "Two", map.get("2"));
+        checkMapSize(map, 2);
 
     }
 
