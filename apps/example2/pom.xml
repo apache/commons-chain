@@ -28,10 +28,10 @@
         <version>10</version>
     </parent>
 
-    <artifactId>chain-example</artifactId>
+    <artifactId>chain-example2</artifactId>
     <packaging>war</packaging>
     <version>1.2-SNAPSHOT</version>
-    <name>Chan Example App</name>
+    <name>Chan Example 2 App</name>
 
     <dependencies>
 
