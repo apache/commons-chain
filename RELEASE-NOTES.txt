@@ -33,6 +33,7 @@ o CHAIN-4: Update servlet implementation classes to be aware of CatalogFactory.
       
 BUG REPORTS ADDRESSED:
 =====================
+o CHAIN-44: CatalogFactory instance variable prevents ChainProcessor from being serializable.
 o CHAIN-43: ChainListener URL translation does not work as expected. 
 o CHAIN-42: Various scope mappers use incorrect equalization.
 o CHAIN-41: Ant build fails due to usage of old Digester.

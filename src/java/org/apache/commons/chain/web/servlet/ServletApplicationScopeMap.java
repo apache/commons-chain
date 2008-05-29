@@ -130,10 +130,10 @@ final class ServletApplicationScopeMap implements Map {
 
 
     public void putAll(Map map) {
-        Iterator keys = map.keySet().iterator();
-        while (keys.hasNext()) {
-            String key = (String) keys.next();
-            context.setAttribute(key, map.get(key));
+        Iterator entries = map.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry entry = (Map.Entry)entries.next();
+            put(entry.getKey(), entry.getValue());
         }
     }
 

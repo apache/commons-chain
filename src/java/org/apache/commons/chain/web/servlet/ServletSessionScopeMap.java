@@ -168,10 +168,10 @@ final class ServletSessionScopeMap implements Map {
 
 
     public void putAll(Map map) {
-        Iterator keys = map.keySet().iterator();
-        while (keys.hasNext()) {
-            Object key = keys.next();
-            put(key, map.get(key));
+        Iterator entries = map.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry entry = (Map.Entry)entries.next();
+            put(entry.getKey(), entry.getValue());
         }
     }
 

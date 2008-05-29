@@ -119,12 +119,6 @@ public class ChainProcessor extends ChainServlet {
     private String command = null;
 
 
-    /**
-     * <p>The {@link CatalogFactory} for this application.</p>
-     */
-    private CatalogFactory factory = null;
-
-
     // --------------------------------------------------------- Servlet Methods
 
 
@@ -137,7 +131,6 @@ public class ChainProcessor extends ChainServlet {
         attribute = null;
         catalog = null;
         command = null;
-        factory = null;
 
     }
 
@@ -156,7 +149,6 @@ public class ChainProcessor extends ChainServlet {
         if (command == null) {
             command = COMMAND_DEFAULT;
         }
-        factory = CatalogFactory.getInstance();
 
     }
 
@@ -183,9 +175,9 @@ public class ChainProcessor extends ChainServlet {
             theCatalog = (Catalog) getServletContext().getAttribute
                 (this.attribute);
         } else if (catalog != null) {
-            theCatalog = factory.getCatalog(catalog);
+            theCatalog = CatalogFactory.getInstance().getCatalog(catalog);
         } else {
-            theCatalog = factory.getCatalog();
+            theCatalog = CatalogFactory.getInstance().getCatalog();
         }
         if (attribute == null) {
             request.setAttribute(CATALOG_DEFAULT, theCatalog);

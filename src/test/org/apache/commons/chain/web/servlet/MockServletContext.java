@@ -21,6 +21,10 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,6 +37,7 @@ import java.util.Set;
 public class MockServletContext implements ServletContext {
 
 
+    private Log log = LogFactory.getLog(MockServletContext.class);
     private Hashtable attributes = new Hashtable();
     private Hashtable parameters = new Hashtable();
 
@@ -125,15 +130,15 @@ public class MockServletContext implements ServletContext {
     }
 
     public void log(String message) {
-        throw new UnsupportedOperationException();
+        log.info(message);
     }
 
     public void log(Exception exception, String message) {
-        throw new UnsupportedOperationException();
+        log.error(message, exception);
     }
 
     public void log(String message, Throwable exception) {
-        throw new UnsupportedOperationException();
+        log.error(message, exception);
     }
 
     public void removeAttribute(String name) {
