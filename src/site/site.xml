@@ -25,7 +25,7 @@
   <body>
     <menu name="Chain">
       <item name="Overview"      href="/index.html"/>
-      <item name="Download"      href="http://commons.apache.org/downloads/download_chain.cgi"/>
+      <item name="Download"      href="http://commons.apache.org/chain/download_chain.cgi"/>
       <item name="Release Notes" href="/changes-report.html"/>
       <item name="Cookbook"      href="/cookbook.html"/>
       <item name="Javadoc (latest release)" href="api-release/index.html"/>
