@@ -101,7 +101,7 @@ limitations under the License.
           </td>
           <td><a href="mailto:user-subscribe@commons.apache.org">Subscribe</a></td>
           <td><a href="mailto:user-unsubscribe@commons.apache.org">Unsubscribe</a></td>
-          <td><a href="mailto:user@commons.apache.org">Post</a></td>
+          <td><a href="mailto:user@commons.apache.org?subject=[chain]">Post</a></td>
           <td><a href="http://mail-archives.apache.org/mod_mbox/commons-user/">mail-archives.apache.org</a></td>
           <td><a href="http://markmail.org/list/org.apache.commons.users/">markmail.org</a><br />
               <a href="http://www.mail-archive.com/user@commons.apache.org/">www.mail-archive.com</a><br />
@@ -119,7 +119,7 @@ limitations under the License.
           </td>
           <td><a href="mailto:dev-subscribe@commons.apache.org">Subscribe</a></td>
           <td><a href="mailto:dev-unsubscribe@commons.apache.org">Unsubscribe</a></td>
-          <td><a href="mailto:dev@commons.apache.org">Post</a></td>
+          <td><a href="mailto:dev@commons.apache.org?subject=[chain]">Post</a></td>
           <td><a href="http://mail-archives.apache.org/mod_mbox/commons-dev/">mail-archives.apache.org</a></td>
           <td><a href="http://markmail.org/list/org.apache.commons.dev/">markmail.org</a><br />
               <a href="http://www.mail-archive.com/dev@commons.apache.org/">www.mail-archive.com</a><br />
