@@ -312,6 +312,7 @@ public class ConfigParserTestCase extends TestCase {
             String name = (String) names.next();
             n++;
             assertNotNull(name + " exists", catalog.getCommand(name));
+            System.out.println("NIALL: " + name);
         }
         assertEquals("Correct command count", expected, n);
     }
