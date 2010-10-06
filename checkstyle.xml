@@ -27,7 +27,10 @@
   
       <!-- Checks that a package.html file exists for each package.     -->
       <!-- See http://checkstyle.sf.net/config_javadoc.html#PackageHtml -->
-      <module name="PackageHtml"/>
+      <module name="JavadocPackage">
+          <!-- setting allowLegacy means it will check for package.html instead of just package-info.java -->
+          <property name="allowLegacy" value="true"/>
+      </module>
   
       <!-- Checks whether files end with a new line.                        -->
       <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
@@ -37,6 +40,21 @@
       <!-- See http://checkstyle.sf.net/config_misc.html#Translation -->
       <module name="Translation"/>
   
+      <module name="Header">
+          <property name="headerFile" value="${checkstyle.header.file}"/>
+      </module>
+
+      <module name="FileLength"/>
+
+      <module name="FileTabCharacter">
+          <property name="fileExtensions" value="java,xml"/>
+      </module>
+
+      <module name="RegexpSingleline">
+          <property name="format" value="\s+$"/>
+          <property name="message" value="Line has trailing spaces."/>
+      </module>
+
       <module name="TreeWalker">
   
           <!--property name="cacheFile" value="${checkstyle.cache.file}"/-->
@@ -44,9 +62,6 @@
           <!-- ************************************************************** -->
           <!-- Checks that are different from the sun coding conventions ones -->
           <!-- ************************************************************** -->
-          <module name="Header">
-              <property name="headerFile" value="${checkstyle.header.file}"/>
-          </module>
           <property name="tabWidth" value="4"/>
           <module name="LeftCurly">
             <property name="option" value="eol"/>
@@ -106,7 +121,6 @@
   
           <!-- Checks for Size Violations.                    -->
           <!-- See http://checkstyle.sf.net/config_sizes.html -->
-          <module name="FileLength"/>
           <module name="ParameterNumber"/>
   
   
@@ -116,7 +130,6 @@
           <module name="NoWhitespaceAfter"/>
           <module name="NoWhitespaceBefore"/>
           <!-- module name="OperatorWrap"/ -->
-          <module name="TabCharacter"/>
           <module name="WhitespaceAfter">
              <property name="tokens" value="COMMA, SEMI"/>
           </module>
@@ -167,10 +180,6 @@
           <!-- See http://checkstyle.sf.net/config_misc.html -->
           <module name="ArrayTypeStyle"/>
           <!-- module name="FinalParameters"/ -->
-          <module name="GenericIllegalRegexp">
-              <property name="format" value="\s+$"/>
-              <property name="message" value="Line has trailing spaces."/>
-          </module>
           <module name="TodoComment"/>
           <module name="UpperEll"/>
   
