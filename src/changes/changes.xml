@@ -117,9 +117,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="germuska" type="update" issue="CHAIN-3">
          Decouple CatalogFactory lookup from LookupAction.
       </action>
-      <action dev="craigmcc" type="fix" issue="CHAIN-12">
-        <dueto name="Jeff Ramsdale"/>
-        <dueto name="Dennis Lundberg"/>
+      <action dev="craigmcc" type="fix" issue="CHAIN-12" due-to="Jeff Ramsdale and Dennis Lundberg">
          Make ContextBase live up to the Serializable contract that it inherits by virtue of extending HashMap.
       </action>
       <action dev="martinc" type="update">
@@ -137,9 +135,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="germuska" type="add" issue="CHAIN-20">
          Add new  DispatchCommand.
       </action>
-      <action dev="jmitchell" type="fix" issue="CHAIN-6">
-        <dueto name="William Slough"/>
-        <dueto name="Sean Schofield"/>
+      <action dev="jmitchell" type="fix" issue="CHAIN-6" due-to="William Slough and Sean Schofield">
          CopyCommand does not work unless setValue is called.
       </action>
       <action dev="craigmcc" type="add" issue="CHAIN-19" due-to="Joe Germuska">
