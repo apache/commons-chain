@@ -31,7 +31,6 @@ import org.apache.commons.chain.web.MapEntry;
 /**
  * <p>Private implementation of <code>Map</code> for servlet cookies</p>
  *
- * @author Niall Pemberton
  * @version $Revision$ $Date$
  * @since Chain 1.1
  */
