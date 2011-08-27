@@ -95,7 +95,7 @@ public abstract class CatalogFactory {
      * If there are no known catalogs, an empty Iterator is returned.</p>
      * @return An Iterator of the names of the Catalogs known by this factory.
      */
-    public abstract Iterator getNames();
+    public abstract Iterator<String> getNames();
 
 
     /**
@@ -169,7 +169,8 @@ public abstract class CatalogFactory {
      * <p>The set of registered {@link CatalogFactory} instances,
      * keyed by the relevant class loader.</p>
      */
-    private static Map factories = new HashMap();
+    private static final Map<ClassLoader, CatalogFactory> factories =
+            new HashMap<ClassLoader, CatalogFactory>();
 
 
     // -------------------------------------------------------- Static Methods
@@ -190,7 +191,7 @@ public abstract class CatalogFactory {
         CatalogFactory factory = null;
         ClassLoader cl = getClassLoader();
         synchronized (factories) {
-            factory = (CatalogFactory) factories.get(cl);
+            factory = factories.get(cl);
             if (factory == null) {
                 factory = new CatalogFactoryBase();
                 factories.put(cl, factory);

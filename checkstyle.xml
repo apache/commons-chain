@@ -57,7 +57,7 @@
 
       <module name="TreeWalker">
   
-          <!--property name="cacheFile" value="${checkstyle.cache.file}"/-->
+          <property name="cacheFile" value="${checkstyle.cache.file}"/>
   
           <!-- ************************************************************** -->
           <!-- Checks that are different from the sun coding conventions ones -->

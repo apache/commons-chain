@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +36,7 @@ import org.apache.commons.chain.web.MapEntry;
  * @version $Revision$ $Date$
  */
 
-final class ServletHeaderMap implements Map {
+final class ServletHeaderMap implements Map<String, String> {
 
 
     public ServletHeaderMap(HttpServletRequest request) {
@@ -48,62 +47,65 @@ final class ServletHeaderMap implements Map {
     private HttpServletRequest request = null;
 
 
+    @Override
     public void clear() {
         throw new UnsupportedOperationException();
     }
 
 
+    @Override
     public boolean containsKey(Object key) {
         return (request.getHeader(key(key)) != null);
     }
 
 
+    @Override
     public boolean containsValue(Object value) {
-        Iterator values = values().iterator();
-        while (values.hasNext()) {
-            if (value.equals(values.next())) {
-                return (true);
-            }
-        }
-        return (false);
+        return values().contains(value);
     }
 
 
-    public Set entrySet() {
-        Set set = new HashSet();
-        Enumeration keys = request.getHeaderNames();
+    @Override
+    public Set<Entry<String, String>> entrySet() {
+        Set<Entry<String, String>> set = new HashSet<Entry<String, String>>();
+        Enumeration<String> keys = request.getHeaderNames();
         String key;
         while (keys.hasMoreElements()) {
-            key = (String) keys.nextElement();
-            set.add(new MapEntry(key, request.getHeader(key), false));
+            key = keys.nextElement();
+            set.add(new MapEntry<String, String>(key, request.getHeader(key), false));
         }
         return (set);
     }
 
 
+    @Override
     public boolean equals(Object o) {
         return (request.equals(o));
     }
 
 
-    public Object get(Object key) {
+    @Override
+    public String get(Object key) {
         return (request.getHeader(key(key)));
     }
 
 
+    @Override
     public int hashCode() {
         return (request.hashCode());
     }
 
 
+    @Override
     public boolean isEmpty() {
         return (size() < 1);
     }
 
 
-    public Set keySet() {
-        Set set = new HashSet();
-        Enumeration keys = request.getHeaderNames();
+    @Override
+    public Set<String> keySet() {
+        Set<String> set = new HashSet<String>();
+        Enumeration<String> keys = request.getHeaderNames();
         while (keys.hasMoreElements()) {
             set.add(keys.nextElement());
         }
@@ -111,21 +113,25 @@ final class ServletHeaderMap implements Map {
     }
 
 
-    public Object put(Object key, Object value) {
+    @Override
+    public String put(String key, String value) {
         throw new UnsupportedOperationException();
     }
 
 
-    public void putAll(Map map) {
+    @Override
+    public void putAll(Map<? extends String, ? extends String> map) {
         throw new UnsupportedOperationException();
     }
 
 
-    public Object remove(Object key) {
+    @Override
+    public String remove(Object key) {
         throw new UnsupportedOperationException();
     }
 
 
+    @Override
     public int size() {
         int n = 0;
         Enumeration keys = request.getHeaderNames();
@@ -137,11 +143,12 @@ final class ServletHeaderMap implements Map {
     }
 
 
-    public Collection values() {
-        List list = new ArrayList();
-        Enumeration keys = request.getHeaderNames();
+    @Override
+    public Collection<String> values() {
+        List<String> list = new ArrayList<String>();
+        Enumeration<String> keys = request.getHeaderNames();
         while (keys.hasMoreElements()) {
-            list.add(request.getHeader((String) keys.nextElement()));
+            list.add(request.getHeader(keys.nextElement()));
         }
         return (list);
     }

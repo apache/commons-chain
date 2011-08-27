@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +36,7 @@ import org.apache.commons.chain.web.MapEntry;
  * @version $Revision$ $Date$
  */
 
-final class ServletApplicationScopeMap implements Map {
+final class ServletApplicationScopeMap implements Map<String, Object> {
 
 
     public ServletApplicationScopeMap(ServletContext context) {
@@ -48,26 +47,28 @@ final class ServletApplicationScopeMap implements Map {
     private ServletContext context = null;
 
 
+    @Override
     public void clear() {
-        Iterator keys = keySet().iterator();
-        while (keys.hasNext()) {
-            context.removeAttribute((String) keys.next());
+        for (String key : keySet()) {
+            context.removeAttribute(key);
         }
     }
 
 
+    @Override
     public boolean containsKey(Object key) {
         return (context.getAttribute(key(key)) != null);
     }
 
 
+    @Override
     public boolean containsValue(Object value) {
         if (value == null) {
             return (false);
         }
-        Enumeration keys = context.getAttributeNames();
+        Enumeration<String> keys = context.getAttributeNames();
         while (keys.hasMoreElements()) {
-            Object next = context.getAttribute((String) keys.nextElement());
+            Object next = context.getAttribute(keys.nextElement());
             if (value.equals(next)) {
                 return (true);
             }
@@ -76,41 +77,47 @@ final class ServletApplicationScopeMap implements Map {
     }
 
 
-    public Set entrySet() {
-        Set set = new HashSet();
-        Enumeration keys = context.getAttributeNames();
+    @Override
+    public Set<Entry<String, Object>> entrySet() {
+        Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
+        Enumeration<String> keys = context.getAttributeNames();
         String key;
         while (keys.hasMoreElements()) {
-            key = (String)keys.nextElement();
-            set.add(new MapEntry(key, context.getAttribute(key), true));
+            key = keys.nextElement();
+            set.add(new MapEntry<String, Object>(key, context.getAttribute(key), true));
         }
         return (set);
     }
 
 
+    @Override
     public boolean equals(Object o) {
         return (context.equals(o));
     }
 
 
+    @Override
     public Object get(Object key) {
         return (context.getAttribute(key(key)));
     }
 
 
+    @Override
     public int hashCode() {
         return (context.hashCode());
     }
 
 
+    @Override
     public boolean isEmpty() {
         return (size() < 1);
     }
 
 
-    public Set keySet() {
-        Set set = new HashSet();
-        Enumeration keys = context.getAttributeNames();
+    @Override
+    public Set<String> keySet() {
+        Set<String> set = new HashSet<String>();
+        Enumeration<String> keys = context.getAttributeNames();
         while (keys.hasMoreElements()) {
             set.add(keys.nextElement());
         }
@@ -118,26 +125,27 @@ final class ServletApplicationScopeMap implements Map {
     }
 
 
-    public Object put(Object key, Object value) {
+    @Override
+    public Object put(String key, Object value) {
         if (value == null) {
             return (remove(key));
         }
-        String skey = key(key);
-        Object previous = context.getAttribute(skey);
-        context.setAttribute(skey, value);
+        Object previous = context.getAttribute(key);
+        context.setAttribute(key, value);
         return (previous);
     }
 
 
-    public void putAll(Map map) {
-        Iterator entries = map.entrySet().iterator();
-        while (entries.hasNext()) {
-            Map.Entry entry = (Map.Entry)entries.next();
-            put(entry.getKey(), entry.getValue());
+    @Override
+    public void putAll(Map<? extends String, ? extends Object> map) {
+
+        for (Entry<? extends String, ? extends Object> entry : map.entrySet()) {
+            put(key(entry.getKey()), entry.getValue());
         }
     }
 
 
+    @Override
     public Object remove(Object key) {
         String skey = key(key);
         Object previous = context.getAttribute(skey);
@@ -146,9 +154,10 @@ final class ServletApplicationScopeMap implements Map {
     }
 
 
+    @Override
     public int size() {
         int n = 0;
-        Enumeration keys = context.getAttributeNames();
+        Enumeration<String> keys = context.getAttributeNames();
         while (keys.hasMoreElements()) {
             keys.nextElement();
             n++;
@@ -157,11 +166,14 @@ final class ServletApplicationScopeMap implements Map {
     }
 
 
-    public Collection values() {
-        List list = new ArrayList();
-        Enumeration keys = context.getAttributeNames();
+    @Override
+    public Collection<Object> values() {
+        List<Object> list = new ArrayList<Object>();
+
+        Enumeration<String> keys = context.getAttributeNames();
+
         while (keys.hasMoreElements()) {
-            list.add(context.getAttribute((String) keys.nextElement()));
+            list.add(context.getAttribute(keys.nextElement()));
         }
         return (list);
     }

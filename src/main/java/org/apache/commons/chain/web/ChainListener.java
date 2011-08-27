@@ -164,6 +164,7 @@ public class ChainListener implements ServletContextListener {
      *
      * @param event <code>ServletContextEvent</code> to be processed
      */
+    @Override
     public void contextInitialized(ServletContextEvent event) {
 
         Log log = LogFactory.getLog(ChainListener.class);

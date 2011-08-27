@@ -20,6 +20,7 @@ package org.apache.commons.chain.generic;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.impl.CatalogBase;
@@ -49,7 +50,7 @@ public class LookupCommandTestCase extends TestCase {
     /**
      * The {@link LookupCommand} instance under test.
      */
-    protected LookupCommand command;
+    protected LookupCommand<Context> command;
 
     /**
      * The {@link Context} instance on which to execute the chain.
@@ -78,7 +79,7 @@ public class LookupCommandTestCase extends TestCase {
     public void setUp() {
         catalog = new CatalogBase();
         CatalogFactoryBase.getInstance().setCatalog(catalog);
-        command = new LookupCommand();        
+        command = new LookupCommand<Context>();
         context = new ContextBase();
     }
 
@@ -95,7 +96,7 @@ public class LookupCommandTestCase extends TestCase {
      */
     public void tearDown() {
         catalog = null;
-        CatalogFactoryBase.getInstance().clear();
+        CatalogFactoryBase.clear();
         command = null;
         context = null;
     }
@@ -123,7 +124,7 @@ public class LookupCommandTestCase extends TestCase {
     // Test ability to lookup and execute a chain
     public void testExecuteMethodLookup_1b() {
 
-        ChainBase chain = new ChainBase();
+        ChainBase<Context> chain = new ChainBase<Context>();
         chain.addCommand(new DelegatingCommand("1b1"));
         chain.addCommand(new DelegatingCommand("1b2"));
         chain.addCommand(new NonDelegatingCommand("1b3"));
@@ -162,7 +163,7 @@ public class LookupCommandTestCase extends TestCase {
     // Test ability to lookup and execute a chain using the context 
     public void testExecuteMethodLookup_2b() {
 
-        ChainBase chain = new ChainBase();
+        Chain<Context> chain = new ChainBase<Context>();
         chain.addCommand(new DelegatingCommand("2b1"));
         chain.addCommand(new DelegatingCommand("2b2"));
         chain.addCommand(new NonDelegatingCommand("2b3"));
@@ -185,7 +186,7 @@ public class LookupCommandTestCase extends TestCase {
     public void testExecuteMethodLookup_3a() {
 
         // use default catalog
-        catalog.addCommand("foo", new NonDelegatingCommand("3a"));
+        catalog.addCommand("foo", new NonDelegatingCommand<Context>("3a"));
         command.setIgnoreExecuteResult(true);
         command.setName("foo");
 

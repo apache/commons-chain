@@ -24,21 +24,24 @@ import java.util.Map;
  * <p>Map.Entry implementation that can be constructed to either be read-only
  * or not.</p>
  *
+ * @param <K> the type of keys maintained by this map
+ * @param <V> the type of mapped values
+ *
  * @version $Revision$ $Date$
  */
 
-public class MapEntry implements Map.Entry {
+public class MapEntry<K, V> implements Map.Entry<K, V> {
 
 
     /**
      * <p>The entry key.</p>
      */
-    private Object key;
+    private K key;
 
     /**
      * <p>The entry value.</p>
      */
-    private Object value;
+    private V value;
 
     /**
      * <p>Whether the entry can be modified.</p>
@@ -53,7 +56,7 @@ public class MapEntry implements Map.Entry {
      * @param value The entry value
      * @param modifiable Whether the entry should allow modification or not
      */
-    public MapEntry(Object key, Object value, boolean modifiable) {
+    public MapEntry(K key, V value, boolean modifiable) {
         this.key = key;
         this.value = value;
         this.modifiable = modifiable;
@@ -65,7 +68,8 @@ public class MapEntry implements Map.Entry {
      *
      * @return The entry key
      */
-    public Object getKey() {
+    @Override
+    public K getKey() {
         return key;
     }
 
@@ -75,7 +79,8 @@ public class MapEntry implements Map.Entry {
      *
      * @return The entry key
      */
-    public Object getValue() {
+    @Override
+    public V getValue() {
         return value;
     }
 
@@ -87,9 +92,10 @@ public class MapEntry implements Map.Entry {
      * @return The old entry value
      * @throws UnsupportedOperationException If the entry cannot be modified
      */
-    public Object setValue(Object val) {
+    @Override
+    public V setValue(V val) {
         if (modifiable) {
-            Object oldVal = this.value;
+            V oldVal = this.value;
             this.value = val;
             return oldVal;
         } else {
@@ -104,6 +110,7 @@ public class MapEntry implements Map.Entry {
      * @param o The object to test
      * @return True if equal, else false
      */
+    @Override
     public boolean equals(Object o) {
         if (o != null && o instanceof Map.Entry) {
             Map.Entry entry = (Map.Entry)o;
@@ -121,6 +128,7 @@ public class MapEntry implements Map.Entry {
      *
      * @return The and'ed hashcode of the key and value
      */
+    @Override
     public int hashCode() {
         return (this.getKey() == null   ? 0 : this.getKey().hashCode()) ^
                (this.getValue() == null ? 0 : this.getValue().hashCode());

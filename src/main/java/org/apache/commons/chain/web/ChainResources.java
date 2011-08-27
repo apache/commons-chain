@@ -38,6 +38,12 @@ import org.apache.commons.logging.LogFactory;
 
 final class ChainResources {
 
+    /**
+     * This class uses a private constructor because it is a utility class.
+     */
+    private ChainResources() {
+    }
+
 
     // ---------------------------------------------------------- Static Methods
 

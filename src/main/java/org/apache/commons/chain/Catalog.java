@@ -50,7 +50,7 @@ public interface Catalog {
      * @param command {@link Command} or {@link Chain} to be returned
      *  for later lookups on this name
      */
-    void addCommand(String name, Command command);
+    void addCommand(String name, Command<? extends Context> command);
 
 
     /**
@@ -71,7 +71,7 @@ public interface Catalog {
      * an empty Iterator is returned.</p>
      * @return An iterator of the names in this Catalog.
      */
-    Iterator getNames();
+    Iterator<String> getNames();
 
 
 }

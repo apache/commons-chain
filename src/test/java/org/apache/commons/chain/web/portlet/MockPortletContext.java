@@ -135,4 +135,8 @@ public class MockPortletContext implements PortletContext {
         attributes.put(name, value);
     }
 
+    public Enumeration<String> getContainerRuntimeOptions() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

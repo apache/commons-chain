@@ -47,7 +47,7 @@ public class DispatchLookupCommandTestCase extends TestCase {
     /**
      * The {@link DispatchLookupCommand} instance under test.
      */
-    protected DispatchLookupCommand command;
+    protected DispatchLookupCommand<Context> command;
 
     /**
      * The {@link Context} instance on which to execute the chain.
@@ -76,7 +76,7 @@ public class DispatchLookupCommandTestCase extends TestCase {
     public void setUp() {
         catalog = new CatalogBase();
         CatalogFactoryBase.getInstance().setCatalog(catalog);
-        command = new DispatchLookupCommand();        
+        command = new DispatchLookupCommand<Context>();
         context = new ContextBase();
     }
 
@@ -95,7 +95,7 @@ public class DispatchLookupCommandTestCase extends TestCase {
      */
     public void tearDown() {
         catalog = null;
-        CatalogFactoryBase.getInstance().clear();
+        CatalogFactoryBase.clear();
         command = null;
         context = null;
     }
@@ -109,7 +109,7 @@ public class DispatchLookupCommandTestCase extends TestCase {
     public void testExecuteDispatchLookup_1a() {
 
         // use default catalog
-        catalog.addCommand("fooCommand", new TestCommand("1"));
+        catalog.addCommand("fooCommand", new TestCommand<Context>("1"));
         
         // command should lookup the fooCommand and execute the fooMethod
         command.setName("fooCommand");
@@ -209,19 +209,19 @@ public class DispatchLookupCommandTestCase extends TestCase {
     // ---------------------------------------------------------- Inner Classes
 
 
-    class TestCommand extends NonDelegatingCommand {
+    class TestCommand<T extends Context> extends NonDelegatingCommand<T> {
 
         public TestCommand(String id)
         {
             super(id);
         }
     
-        public boolean fooMethod(Context context) {
+        public boolean fooMethod(T context) {
             log(context, id);            
             return true;
         }
         
-        public boolean barMethod(Context context) {
+        public boolean barMethod(T context) {
             log(context, id);
             return true;
         }

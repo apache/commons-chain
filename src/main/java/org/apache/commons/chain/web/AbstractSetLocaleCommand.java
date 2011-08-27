@@ -28,11 +28,13 @@ import org.apache.commons.chain.Context;
  * under the context attribute key returned by the <code>localeKey</code>
  * property.</p>
  *
+ * @param <T> Type of the context associated with this command
+ *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public abstract class AbstractSetLocaleCommand implements Command {
+public abstract class AbstractSetLocaleCommand<T extends Context> implements Command<T> {
 
 
     // -------------------------------------------------------------- Properties
@@ -82,7 +84,7 @@ public abstract class AbstractSetLocaleCommand implements Command {
      * @return <code>false</code> so that processng will continue
      * @throws Exception If an error occurs during execution.
      */
-    public boolean execute(Context context) throws Exception {
+    public boolean execute(T context) throws Exception {
 
     setLocale(context,
           (Locale) context.get(getLocaleKey()));
@@ -100,7 +102,7 @@ public abstract class AbstractSetLocaleCommand implements Command {
      * @param context The {@link Context} we are operating on.
      * @param locale The Locale for the request.
      */
-    protected abstract void setLocale(Context context, Locale locale);
+    protected abstract void setLocale(T context, Locale locale);
 
 
 }

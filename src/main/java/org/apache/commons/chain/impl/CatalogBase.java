@@ -17,10 +17,9 @@
 package org.apache.commons.chain.impl;
 
 
-import java.util.HashMap;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
 
@@ -45,7 +44,7 @@ public class CatalogBase implements Catalog {
     /**
      * <p>The map of named {@link Command}s, keyed by name.
      */
-    protected Map commands = Collections.synchronizedMap(new HashMap());
+    protected Map<String, Command> commands = new ConcurrentHashMap<String, Command>();
 
 
     // --------------------------------------------------------- Constructors
@@ -63,8 +62,8 @@ public class CatalogBase implements Catalog {
      *
      * @since Chain 1.1
      */
-    public CatalogBase( Map commands ) {
-        this.commands = Collections.synchronizedMap(commands);
+    public CatalogBase( Map<String, Command> commands ) {
+        this.commands =  new ConcurrentHashMap<String, Command>(commands);
     }
 
     // --------------------------------------------------------- Public Methods
@@ -79,6 +78,7 @@ public class CatalogBase implements Catalog {
      * @param command {@link Command} to be returned
      *  for later lookups on this name
      */
+    @Override
     public void addCommand(String name, Command command) {
 
         commands.put(name, command);
@@ -93,9 +93,10 @@ public class CatalogBase implements Catalog {
      *  should be retrieved
      * @return The Command associated with the specified name.
      */
+    @Override
     public Command getCommand(String name) {
 
-        return ((Command) commands.get(name));
+        return commands.get(name);
 
     }
 
@@ -106,9 +107,10 @@ public class CatalogBase implements Catalog {
      * an empty Iterator is returned.</p>
      * @return An iterator of the names in this Catalog.
      */
-    public Iterator getNames() {
+    @Override
+    public Iterator<String> getNames() {
 
-        return (commands.keySet().iterator());
+        return commands.keySet().iterator();
 
     }
 
@@ -116,6 +118,7 @@ public class CatalogBase implements Catalog {
      * Converts this Catalog to a String.  Useful for debugging purposes.
      * @return a representation of this catalog as a String
      */
+    @Override
     public String toString() {
 
         Iterator names = getNames();

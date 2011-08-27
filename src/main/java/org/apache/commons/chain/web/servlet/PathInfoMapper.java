@@ -92,6 +92,7 @@ public class PathInfoMapper extends LookupCommand implements Command {
      *
      * @since Chain 1.2
      */
+    @Override
     protected String getCommandName(Context context) {
 
         // Look up the extra path information for this request
@@ -117,6 +118,7 @@ public class PathInfoMapper extends LookupCommand implements Command {
      *
      * @since Chain 1.2
      */
+    @Override
     protected Catalog getCatalog(Context context) {
         Catalog catalog = (Catalog) context.get(getCatalogKey());
         if (catalog == null) {

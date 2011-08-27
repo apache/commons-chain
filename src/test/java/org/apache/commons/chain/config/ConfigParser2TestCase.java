@@ -111,7 +111,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Load the default test-config.xml file and examine the results
-    public void testDefaut() throws Exception {
+    public void testDefault() throws Exception {
 
         // Check overall command count
         load(DEFAULT_XML);

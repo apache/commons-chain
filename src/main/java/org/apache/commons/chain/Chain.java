@@ -47,11 +47,13 @@ package org.apache.commons.chain;
  * the <code>execute()</code> method of the {@link Chain} is first called.
  * After that, the configuration of the {@link Chain} is frozen.</p>
  *
+ * @param <T> Type of the context associated with this command
+ *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public interface Chain extends Command {
+public interface Chain<T extends Context> extends Command<T> {
 
 
     /**
@@ -68,7 +70,7 @@ public interface Chain extends Command {
      * @exception IllegalStateException if this {@link Chain} has already
      *  been executed at least once, so no further configuration is allowed
      */
-    void addCommand(Command command);
+    void addCommand(Command<T> command);
 
 
     /**
@@ -112,7 +114,8 @@ public interface Chain extends Command {
      *  of this {@link Context} should be delegated to a subsequent
      *  {@link Command} in an enclosing {@link Chain}
      */
-    boolean execute(Context context) throws Exception;
+    @Override
+    boolean execute(T context) throws Exception;
 
 
 }

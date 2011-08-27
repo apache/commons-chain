@@ -118,7 +118,7 @@ public class ChainServlet extends HttpServlet {
 
     /**
      * <p>The name of the context init parameter containing a comma-delimited
-     * list of web applicaton resources to be scanned.</p>
+     * list of web application resources to be scanned.</p>
      */
     public static final String CONFIG_WEB_RESOURCE =
         "org.apache.commons.chain.CONFIG_WEB_RESOURCE";
@@ -139,6 +139,7 @@ public class ChainServlet extends HttpServlet {
     /**
      * <p>Clean up after ourselves as this application shuts down.</p>
      */
+    @Override
     public void destroy() {
 
         ServletConfig config = getServletConfig();
@@ -158,6 +159,7 @@ public class ChainServlet extends HttpServlet {
      *
      * @throws ServletException if the servlet could not be initialized
      */
+    @Override
     public void init() throws ServletException {
 
         Log log = LogFactory.getLog(ChainServlet.class);
@@ -232,6 +234,7 @@ public class ChainServlet extends HttpServlet {
      * @throws javax.servlet.ServletException (this exception is never thrown)
      * @throws java.io.IOException (this exception is never thrown)
      */
+    @Override
     public void service(HttpServletRequest request,
                         HttpServletResponse response)
         throws ServletException, IOException {

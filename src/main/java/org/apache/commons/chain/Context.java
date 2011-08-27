@@ -60,7 +60,7 @@ import java.util.Map;
  * @version $Revision$ $Date$
  */
 
-public interface Context extends Map {
+public interface Context extends Map<String, Object> {
 
 
 }

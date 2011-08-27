@@ -17,9 +17,9 @@
 
 package org.apache.commons.chain.impl;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 
@@ -55,7 +55,8 @@ public class CatalogFactoryBase extends CatalogFactory {
     /**
      * <p>Map of named {@link Catalog}s, keyed by catalog name.</p>
      */
-    private Map catalogs = new HashMap();
+    private final Map<String, Catalog> catalogs =
+            new ConcurrentHashMap<String, Catalog>();
 
 
     // --------------------------------------------------------- Public Methods
@@ -67,6 +68,7 @@ public class CatalogFactoryBase extends CatalogFactory {
      *
      * @return the default Catalog instance
      */
+    @Override
     public Catalog getCatalog() {
 
         return catalog;
@@ -79,6 +81,7 @@ public class CatalogFactoryBase extends CatalogFactory {
      *
      * @param catalog the default Catalog instance
      */
+    @Override
     public void setCatalog(Catalog catalog) {
 
         this.catalog = catalog;
@@ -93,11 +96,10 @@ public class CatalogFactoryBase extends CatalogFactory {
      * @param name the name of the Catalog to retrieve
      * @return the specified Catalog
      */
+    @Override
     public Catalog getCatalog(String name) {
 
-        synchronized (catalogs) {
-            return (Catalog) catalogs.get(name);
-        }
+        return catalogs.get(name);
 
     }
 
@@ -109,11 +111,10 @@ public class CatalogFactoryBase extends CatalogFactory {
      * @param name the name of the Catalog to add
      * @param catalog the Catalog to add
      */
+    @Override
     public void addCatalog(String name, Catalog catalog) {
 
-        synchronized (catalogs) {
             catalogs.put(name, catalog);
-        }
 
     }
 
@@ -124,11 +125,10 @@ public class CatalogFactoryBase extends CatalogFactory {
      * If there are no known catalogs, an empty Iterator is returned.</p>
      * @return An Iterator of the names of the Catalogs known by this factory.
      */
-    public Iterator getNames() {
+    @Override
+    public Iterator<String> getNames() {
 
-        synchronized (catalogs) {
             return catalogs.keySet().iterator();
-        }
 
     }
 

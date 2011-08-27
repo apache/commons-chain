@@ -117,6 +117,7 @@ public class ServletPathMapper extends LookupCommand implements Command {
      *
      * @since Chain 1.2
      */
+    @Override
     protected Catalog getCatalog(Context context) {
         Catalog catalog = (Catalog) context.get(getCatalogKey());
         if (catalog == null) {

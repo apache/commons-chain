@@ -172,4 +172,13 @@ public class MockPortletSession implements PortletSession {
         }
     }
 
+    public Map<String, Object> getAttributeMap() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Map<String, Object> getAttributeMap(int scope) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    
 }

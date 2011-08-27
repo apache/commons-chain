@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,7 +37,7 @@ import org.apache.commons.chain.web.MapEntry;
  * @version $Revision$ $Date$
  */
 
-final class ServletSessionScopeMap implements Map {
+final class ServletSessionScopeMap implements Map<String, Object> {
 
 
     public ServletSessionScopeMap(HttpServletRequest request) {
@@ -51,16 +50,17 @@ final class ServletSessionScopeMap implements Map {
     private HttpServletRequest request = null;
 
 
+    @Override
     public void clear() {
         if (sessionExists()) {
-            Iterator keys = keySet().iterator();
-            while (keys.hasNext()) {
-                session.removeAttribute((String) keys.next());
+            for (String key : keySet()) {
+                session.removeAttribute(key);
             }
         }
     }
 
 
+    @Override
     public boolean containsKey(Object key) {
         if (sessionExists()) {
             return (session.getAttribute(key(key)) != null);
@@ -70,13 +70,14 @@ final class ServletSessionScopeMap implements Map {
     }
 
 
+    @Override
     public boolean containsValue(Object value) {
         if (value == null || !sessionExists()) {
             return (false);
         }
-        Enumeration keys = session.getAttributeNames();
+        Enumeration<String> keys = session.getAttributeNames();
         while (keys.hasMoreElements()) {
-            Object next = session.getAttribute((String) keys.nextElement());
+            Object next = session.getAttribute(keys.nextElement());
             if (value.equals(next)) {
                 return (true);
             }
@@ -85,13 +86,14 @@ final class ServletSessionScopeMap implements Map {
     }
 
 
-    public Set entrySet() {
-        Set set = new HashSet();
+    @Override
+    public Set<Entry<String, Object>> entrySet() {
+        Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
         if (sessionExists()) {
-            Enumeration keys = session.getAttributeNames();
+            Enumeration<String> keys = session.getAttributeNames();
             String key;
             while (keys.hasMoreElements()) {
-                key = (String) keys.nextElement();
+                key = keys.nextElement();
                 set.add(new MapEntry(key, session.getAttribute(key), true));
             }
         }
@@ -99,6 +101,7 @@ final class ServletSessionScopeMap implements Map {
     }
 
 
+    @Override
     public boolean equals(Object o) {
         if (sessionExists()) {
             return (session.equals(o));
@@ -108,6 +111,7 @@ final class ServletSessionScopeMap implements Map {
     }
 
 
+    @Override
     public Object get(Object key) {
         if (sessionExists()) {
             return (session.getAttribute(key(key)));
@@ -117,6 +121,7 @@ final class ServletSessionScopeMap implements Map {
     }
 
 
+    @Override
     public int hashCode() {
         if (sessionExists()) {
             return (session.hashCode());
@@ -126,6 +131,7 @@ final class ServletSessionScopeMap implements Map {
     }
 
 
+    @Override
     public boolean isEmpty() {
         if (sessionExists() &&
             session.getAttributeNames().hasMoreElements()) {
@@ -136,10 +142,11 @@ final class ServletSessionScopeMap implements Map {
     }
 
 
-    public Set keySet() {
-        Set set = new HashSet();
+    @Override
+    public Set<String> keySet() {
+        Set<String> set = new HashSet<String>();
         if (sessionExists()) {
-            Enumeration keys = session.getAttributeNames();
+            Enumeration<String> keys = session.getAttributeNames();
             while (keys.hasMoreElements()) {
                 set.add(keys.nextElement());
             }
@@ -148,7 +155,8 @@ final class ServletSessionScopeMap implements Map {
     }
 
 
-    public Object put(Object key, Object value) {
+    @Override
+    public Object put(String key, Object value) {
         if (value == null) {
             return (remove(key));
         }
@@ -160,22 +168,21 @@ final class ServletSessionScopeMap implements Map {
             request = null;
         }
 
-        String skey = key(key);
-        Object previous = session.getAttribute(skey);
-        session.setAttribute(skey, value);
+        Object previous = session.getAttribute(key);
+        session.setAttribute(key, value);
         return (previous);
     }
 
 
-    public void putAll(Map map) {
-        Iterator entries = map.entrySet().iterator();
-        while (entries.hasNext()) {
-            Map.Entry entry = (Map.Entry)entries.next();
-            put(entry.getKey(), entry.getValue());
+    @Override
+    public void putAll(Map<? extends String, ? extends Object> map) {
+        for (Entry<? extends String, ? extends Object> entry : map.entrySet()) {
+            put(key(entry.getKey()), entry.getValue());
         }
     }
 
 
+    @Override
     public Object remove(Object key) {
         if (sessionExists()) {
             String skey = key(key);
@@ -188,10 +195,11 @@ final class ServletSessionScopeMap implements Map {
     }
 
 
+    @Override
     public int size() {
         int n = 0;
         if (sessionExists()) {
-            Enumeration keys = session.getAttributeNames();
+            Enumeration<String> keys = session.getAttributeNames();
             while (keys.hasMoreElements()) {
                 keys.nextElement();
                 n++;
@@ -201,12 +209,13 @@ final class ServletSessionScopeMap implements Map {
     }
 
 
-    public Collection values() {
-        List list = new ArrayList();
+    @Override
+    public Collection<Object> values() {
+        List<Object> list = new ArrayList<Object>();
         if (sessionExists()) {
-            Enumeration keys = session.getAttributeNames();
+            Enumeration<String> keys = session.getAttributeNames();
             while (keys.hasMoreElements()) {
-                list.add(session.getAttribute((String) keys.nextElement()));
+                list.add(session.getAttribute(keys.nextElement()));
             }
         }
         return (list);

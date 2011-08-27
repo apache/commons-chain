@@ -86,6 +86,7 @@ class ConfigDefineRule extends Rule {
      *   the element name otherwise
      * @param attributes The attribute list of this element
      */
+    @Override
     public void begin(String namespace, String name, Attributes attributes)
         throws Exception {
 

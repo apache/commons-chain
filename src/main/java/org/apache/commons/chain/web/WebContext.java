@@ -18,6 +18,7 @@ package org.apache.commons.chain.web;
 
 
 import java.util.Map;
+import javax.servlet.http.Cookie;
 import org.apache.commons.chain.impl.ContextBase;
 
 
@@ -51,7 +52,7 @@ public abstract class WebContext extends ContextBase {
      *
      * @return Application scope Map.
      */
-    public abstract Map getApplicationScope();
+    public abstract Map<String, Object> getApplicationScope();
 
 
     /**
@@ -61,7 +62,7 @@ public abstract class WebContext extends ContextBase {
      *
      * @return Header values Map.
      */
-    public abstract Map getHeader();
+    public abstract Map<String, String> getHeader();
 
 
     /**
@@ -71,7 +72,7 @@ public abstract class WebContext extends ContextBase {
      *
      * @return Header values Map.
      */
-    public abstract Map getHeaderValues();
+    public abstract Map<String, String[]> getHeaderValues();
 
 
     /**
@@ -80,7 +81,7 @@ public abstract class WebContext extends ContextBase {
      *
      * @return Initialization parameter Map.
      */
-    public abstract Map getInitParam();
+    public abstract Map<String, String> getInitParam();
 
 
     /**
@@ -89,7 +90,7 @@ public abstract class WebContext extends ContextBase {
      *
      * @return Request parameter Map.
      */
-    public abstract Map getParam();
+    public abstract Map<String, String> getParam();
 
 
     /**
@@ -98,7 +99,7 @@ public abstract class WebContext extends ContextBase {
      *
      * @return Request parameter Map.
      */
-    public abstract Map getParamValues();
+    public abstract Map<String, String[]> getParamValues();
 
 
     /**
@@ -108,7 +109,7 @@ public abstract class WebContext extends ContextBase {
      * @return Map of Cookies.
      * @since Chain 1.1
      */
-    public abstract Map getCookies();
+    public abstract Map<String, Cookie> getCookies();
 
 
     /**
@@ -117,7 +118,7 @@ public abstract class WebContext extends ContextBase {
      *
      * @return Request scope Map.
      */
-    public abstract Map getRequestScope();
+    public abstract Map<String, Object> getRequestScope();
 
 
     /**
@@ -126,7 +127,7 @@ public abstract class WebContext extends ContextBase {
      *
      * @return Session scope Map.
      */
-    public abstract Map getSessionScope();
+    public abstract Map<String, Object> getSessionScope();
 
 
 }

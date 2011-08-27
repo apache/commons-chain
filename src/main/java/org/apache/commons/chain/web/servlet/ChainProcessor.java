@@ -125,6 +125,7 @@ public class ChainProcessor extends ChainServlet {
     /**
      * <p>Clean up as this application is shut down.</p>
      */
+    @Override
     public void destroy() {
 
         super.destroy();
@@ -140,6 +141,7 @@ public class ChainProcessor extends ChainServlet {
      *
      * @exception ServletException if an initialization error occurs
      */
+    @Override
     public void init() throws ServletException {
 
         super.init();
@@ -164,6 +166,7 @@ public class ChainProcessor extends ChainServlet {
      * @exception IOException if an input/output error occurs
      * @exception ServletException if a servlet exception occurs
      */
+    @Override
     public void service(HttpServletRequest request,
                         HttpServletResponse response)
         throws IOException, ServletException {

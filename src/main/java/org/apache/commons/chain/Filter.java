@@ -37,11 +37,13 @@ package org.apache.commons.chain;
  * can reliably release such resources in the <code>postprocess()</code>
  * method, which is guaranteed to be called by the owning {@link Chain}.</p>
  *
+ * @param <T> Type of the context associated with this command
+ *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public interface Filter extends Command {
+public interface Filter<T extends Context> extends Command<T> {
 
 
     /**
@@ -62,7 +64,7 @@ public interface Filter extends Command {
      *  method (and therefore need not be rethrown), return <code>true</code>;
      *  otherwise return <code>false</code>
      */
-   boolean postprocess(Context context, Exception exception);
+   boolean postprocess(T context, Exception exception);
 
 
 }

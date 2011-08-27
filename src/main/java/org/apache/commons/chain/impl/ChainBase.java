@@ -28,11 +28,13 @@ import org.apache.commons.chain.Filter;
 /**
  * <p>Convenience base class for {@link Chain} implementations.</p>
  *
+ * @param <T> Type of the context associated with this command
+ *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public class ChainBase implements Chain {
+public class ChainBase<T extends Context> implements Chain<T> {
 
 
     // ----------------------------------------------------------- Constructors
@@ -55,7 +57,7 @@ public class ChainBase implements Chain {
      * @exception IllegalArgumentException if <code>command</code>
      *  is <code>null</code>
      */
-    public ChainBase(Command command) {
+    public ChainBase(Command<T> command) {
 
         addCommand(command);
 
@@ -72,7 +74,7 @@ public class ChainBase implements Chain {
      *  or one of the individual {@link Command} elements,
      *  is <code>null</code>
      */
-    public ChainBase(Command[] commands) {
+    public ChainBase(Command<T>[] commands) {
 
         if (commands == null) {
             throw new IllegalArgumentException();
@@ -94,14 +96,14 @@ public class ChainBase implements Chain {
      *  or one of the individual {@link Command} elements,
      *  is <code>null</code>
      */
-    public ChainBase(Collection commands) {
+    public ChainBase(Collection<Command<T>> commands) {
 
         if (commands == null) {
             throw new IllegalArgumentException();
         }
-        Iterator elements = commands.iterator();
+        Iterator<Command<T>> elements = commands.iterator();
         while (elements.hasNext()) {
-            addCommand((Command) elements.next());
+            addCommand(elements.next());
         }
 
     }
@@ -115,7 +117,7 @@ public class ChainBase implements Chain {
      * the order in which they may delegate processing to the remainder of
      * the {@link Chain}.</p>
      */
-    protected Command[] commands = new Command[0];
+    protected Command<T>[] commands = new Command[0];
 
 
     /**
@@ -137,7 +139,8 @@ public class ChainBase implements Chain {
      *  is <code>null</code>
      * @exception IllegalStateException if no further configuration is allowed
      */
-    public void addCommand(Command command) {
+    @Override
+    public void addCommand(Command<T> command) {
 
         if (command == null) {
             throw new IllegalArgumentException();
@@ -170,7 +173,8 @@ public class ChainBase implements Chain {
      *  of this {@link Context} should be delegated to a subsequent
      *  {@link Command} in an enclosing {@link Chain}
      */
-    public boolean execute(Context context) throws Exception {
+    @Override
+    public boolean execute(T context) throws Exception {
 
         // Verify our parameters
         if (context == null) {
@@ -237,7 +241,7 @@ public class ChainBase implements Chain {
      * {@link Chain}.  This method is package private, and is used only
      * for the unit tests.</p>
      */
-    Command[] getCommands() {
+    Command<T>[] getCommands() {
 
         return (commands);
 

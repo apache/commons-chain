@@ -29,12 +29,14 @@ import java.util.WeakHashMap;
  * For use by developers who prefer to group related functionality into a single class
  * rather than an inheritance family.
  *
+ * @param <T> Type of the context associated with this command
+ *
  * @since Chain 1.1
  */
-public abstract class DispatchCommand implements Command {
+public abstract class DispatchCommand<T extends Context> implements Command<T> {
 
     /** Cache of methods */
-    private Map methods = new WeakHashMap();
+    private final Map<String, Method> methods = new WeakHashMap<String, Method>();
 
     /** Method name */
     private String method = null;
@@ -60,7 +62,7 @@ public abstract class DispatchCommand implements Command {
      * the exception itself, unless the cause is an <code>Error</code> or other <code>Throwable</code>
      * which is not an <code>Exception</code>.
      */
-    public boolean execute(Context context) throws Exception {
+    public boolean execute(T context) throws Exception {
 
         if (this.getMethod() == null && this.getMethodKey() == null) {
             throw new IllegalStateException("Neither 'method' nor 'methodKey' properties are defined ");
@@ -89,7 +91,7 @@ public abstract class DispatchCommand implements Command {
      * @throws NoSuchMethodException if no method can be found under the specified name.
      * @throws NullPointerException if no methodName cannot be determined
      */
-    protected Method extractMethod(Context context) throws NoSuchMethodException {
+    protected Method extractMethod(T context) throws NoSuchMethodException {
 
         String methodName = this.getMethod();
 
@@ -105,7 +107,7 @@ public abstract class DispatchCommand implements Command {
         Method theMethod = null;
 
         synchronized (methods) {
-            theMethod = (Method) methods.get(methodName);
+            theMethod = methods.get(methodName);
 
             if (theMethod == null) {
                 theMethod = getClass().getMethod(methodName, getSignature());
@@ -147,7 +149,7 @@ public abstract class DispatchCommand implements Command {
      * @param context The Context being processed by this Command.
      * @return The method arguments.
      */
-    protected Object[] getArguments(Context context) {
+    protected Object[] getArguments(T context) {
         return new Object[] {context};
     }
 
