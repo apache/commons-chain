@@ -76,6 +76,13 @@
         </developer>
     </developers>
 
+    <contributors>
+        <contributor>
+            <name>Elijah Zupancic</name>
+            <email>elijah at zupancic dot name</email>
+        </contributor>
+    </contributors>
+
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/chain/trunk/</connection>
         <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/chain/trunk/</developerConnection>
