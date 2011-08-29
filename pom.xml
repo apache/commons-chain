@@ -36,6 +36,14 @@
         <system>jira</system>
         <url>http://issues.apache.org/jira/browse/CHAIN</url>
     </issueManagement>
+    <distributionManagement>
+        <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
+        <site>
+            <id>people.apache.org</id>
+            <name>Apache Commons Site</name>
+            <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/chain</url>
+        </site>
+    </distributionManagement>
     <inceptionYear>2003</inceptionYear>
 
     <developers>
