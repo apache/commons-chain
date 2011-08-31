@@ -209,19 +209,19 @@ public class DispatchLookupCommandTestCase extends TestCase {
     // ---------------------------------------------------------- Inner Classes
 
 
-    class TestCommand<T extends Context> extends NonDelegatingCommand<T> {
+    class TestCommand<C extends Context> extends NonDelegatingCommand<C> {
 
         public TestCommand(String id)
         {
             super(id);
         }
     
-        public boolean fooMethod(T context) {
+        public boolean fooMethod(C context) {
             log(context, id);            
             return true;
         }
         
-        public boolean barMethod(T context) {
+        public boolean barMethod(C context) {
             log(context, id);
             return true;
         }

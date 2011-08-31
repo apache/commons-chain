@@ -27,13 +27,13 @@ import org.apache.commons.chain.Context;
  * requested Locale from our {@link Context}, and storing it under the
  * context attribute key returned by the <code>localeKey</code> property.</p>
  *
- * @param <T> Type of the context associated with this command
+ * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public abstract class AbstractGetLocaleCommand<T extends Context> implements Command<T> {
+public abstract class AbstractGetLocaleCommand<C extends Context> implements Command<C> {
 
 
     // -------------------------------------------------------------- Properties
@@ -84,7 +84,7 @@ public abstract class AbstractGetLocaleCommand<T extends Context> implements Com
      * @throws Exception If an error occurs during execution.
      */
     @Override
-    public boolean execute(T context) throws Exception {
+    public boolean execute(C context) throws Exception {
 
     context.put(getLocaleKey(), getLocale(context));
     return (false);
@@ -100,7 +100,7 @@ public abstract class AbstractGetLocaleCommand<T extends Context> implements Com
      * @param context The {@link Context} we are operating on.
      * @return The Locale for the request.
      */
-    protected abstract Locale getLocale(T context);
+    protected abstract Locale getLocale(C context);
 
 
 }

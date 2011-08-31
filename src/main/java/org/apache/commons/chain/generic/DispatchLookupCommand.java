@@ -47,14 +47,14 @@ import java.util.WeakHashMap;
  * silently ignored.  Otherwise, a lookup failure will trigger an
  * <code>IllegalArgumentException</code>.</p>
  *
- * @param <T> Type of the context associated with this command
+ * @param <C> Type of the context associated with this command
  *
  * @author Sean Schofield
  * @version $Revision$
  * @since Chain 1.1
  */
 
-public class DispatchLookupCommand<T extends Context> extends LookupCommand<T> implements Filter<T> {
+public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> implements Filter<C> {
 
     // -------------------------------------------------------------- Constructors
 
@@ -140,7 +140,7 @@ public class DispatchLookupCommand<T extends Context> extends LookupCommand<T> i
      *  <code>optional</code> property is set to <code>false</code>
      */
     @Override
-    public boolean execute(T context) throws Exception {
+    public boolean execute(C context) throws Exception {
 
         if (this.getMethod() == null && this.getMethodKey() == null) {
             throw new IllegalStateException(
@@ -148,7 +148,7 @@ public class DispatchLookupCommand<T extends Context> extends LookupCommand<T> i
             );
         }
 
-        Command<T> command = getCommand(context);
+        Command<C> command = getCommand(context);
 
         if (command != null) {
             Method methodObject = extractMethod(command, context);
@@ -188,7 +188,7 @@ public class DispatchLookupCommand<T extends Context> extends LookupCommand<T> i
      * @param context The context associated with the request
      * @return the method arguments to be used
      */
-    protected Object[] getArguments(T context) {
+    protected Object[] getArguments(C context) {
         return (Object[])new Object[] {context};
     }
 
@@ -211,7 +211,7 @@ public class DispatchLookupCommand<T extends Context> extends LookupCommand<T> i
      *    specified name.
      * @throws NullPointerException if no methodName can be determined
      */
-    private Method extractMethod(Command command, T context)
+    private Method extractMethod(Command command, C context)
         throws NoSuchMethodException {
 
         String methodName = this.getMethod();

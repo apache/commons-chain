@@ -40,13 +40,13 @@ import org.apache.commons.chain.Filter;
  * silently ignored.  Otherwise, a lookup failure will trigger an
  * <code>IllegalArgumentException</code>.</p>
  *
- * @param <T> Type of the context associated with this command
+ * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public class LookupCommand<T extends Context> implements Filter<T> {
+public class LookupCommand<C extends Context> implements Filter<C> {
 
 
     // -------------------------------------------------------------- Constructors
@@ -301,7 +301,7 @@ public class LookupCommand<T extends Context> implements Filter<T> {
      * @throws Exception if and error occurs in the looked-up Command.
      */
     @Override
-    public boolean execute(T context) throws Exception {
+    public boolean execute(C context) throws Exception {
 
         Command command = getCommand(context);
         if (command != null) {
@@ -331,7 +331,7 @@ public class LookupCommand<T extends Context> implements Filter<T> {
      * case <code>IllegalArgumentException</code> will be thrown.
      */
     @Override
-    public boolean postprocess(T context, Exception exception) {
+    public boolean postprocess(C context, Exception exception) {
 
         Command command = getCommand(context);
         if (command != null) {
@@ -361,7 +361,7 @@ public class LookupCommand<T extends Context> implements Filter<T> {
      *
      * @since Chain 1.2
      */
-    protected Catalog getCatalog(T context) {
+    protected Catalog getCatalog(C context) {
         CatalogFactory lookupFactory = this.catalogFactory;
         if (lookupFactory == null) {
             lookupFactory = CatalogFactory.getInstance();
@@ -397,7 +397,7 @@ public class LookupCommand<T extends Context> implements Filter<T> {
      *  can be found and the <code>optional</code> property is set
      *  to <code>false</code>
      */
-    protected Command getCommand(T context) {
+    protected Command getCommand(C context) {
 
         Catalog catalog = getCatalog(context);
 
@@ -431,7 +431,7 @@ public class LookupCommand<T extends Context> implements Filter<T> {
      *
      * @since Chain 1.2
      */
-    protected String getCommandName(T context) {
+    protected String getCommandName(C context) {
 
         String name = getName();
         if (name == null) {

@@ -29,7 +29,7 @@ import org.apache.commons.chain.Context;
  * @version $Revision$ $Date$
  */
 
-public class NonDelegatingCommand<T extends Context> implements Command<T> {
+public class NonDelegatingCommand<C extends Context> implements Command<C> {
 
 
     // ------------------------------------------------------------ Constructor
@@ -65,7 +65,7 @@ public class NonDelegatingCommand<T extends Context> implements Command<T> {
 
 
     // Execution method for this Command
-    public boolean execute(T context) throws Exception {
+    public boolean execute(C context) throws Exception {
 
         if (context == null) {
             throw new IllegalArgumentException();

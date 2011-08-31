@@ -27,11 +27,11 @@ import org.apache.commons.chain.web.AbstractSetLocaleCommand;
  * <p>Concrete implementation of {@link AbstractSetLocaleCommand} for
  * the Portlet API.</p>
  *
- * @param <T> Type of the context associated with this command
+ * @param <C> Type of the context associated with this command
  *
  */
 
-public class PortletSetLocaleCommand<T extends Context> extends AbstractSetLocaleCommand<T> {
+public class PortletSetLocaleCommand<C extends Context> extends AbstractSetLocaleCommand<C> {
 
 
     // ------------------------------------------------------- Protected Methods

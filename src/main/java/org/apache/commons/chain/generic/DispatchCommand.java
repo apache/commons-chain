@@ -29,11 +29,11 @@ import java.util.WeakHashMap;
  * For use by developers who prefer to group related functionality into a single class
  * rather than an inheritance family.
  *
- * @param <T> Type of the context associated with this command
+ * @param <C> Type of the context associated with this command
  *
  * @since Chain 1.1
  */
-public abstract class DispatchCommand<T extends Context> implements Command<T> {
+public abstract class DispatchCommand<C extends Context> implements Command<C> {
 
     /** Cache of methods */
     private final Map<String, Method> methods = new WeakHashMap<String, Method>();
@@ -62,7 +62,7 @@ public abstract class DispatchCommand<T extends Context> implements Command<T> {
      * the exception itself, unless the cause is an <code>Error</code> or other <code>Throwable</code>
      * which is not an <code>Exception</code>.
      */
-    public boolean execute(T context) throws Exception {
+    public boolean execute(C context) throws Exception {
 
         if (this.getMethod() == null && this.getMethodKey() == null) {
             throw new IllegalStateException("Neither 'method' nor 'methodKey' properties are defined ");
@@ -91,7 +91,7 @@ public abstract class DispatchCommand<T extends Context> implements Command<T> {
      * @throws NoSuchMethodException if no method can be found under the specified name.
      * @throws NullPointerException if no methodName cannot be determined
      */
-    protected Method extractMethod(T context) throws NoSuchMethodException {
+    protected Method extractMethod(C context) throws NoSuchMethodException {
 
         String methodName = this.getMethod();
 
@@ -149,7 +149,7 @@ public abstract class DispatchCommand<T extends Context> implements Command<T> {
      * @param context The Context being processed by this Command.
      * @return The method arguments.
      */
-    protected Object[] getArguments(T context) {
+    protected Object[] getArguments(C context) {
         return new Object[] {context};
     }
 
