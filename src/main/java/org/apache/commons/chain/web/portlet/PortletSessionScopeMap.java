@@ -60,27 +60,23 @@ final class PortletSessionScopeMap implements Map<String, Object> {
 
 
     public boolean containsKey(Object key) {
-        if (sessionExists()) {
-            return (session.getAttribute(key(key)) != null);
-        } else {
-            return false;
-        }
+        return sessionExists() && session.getAttribute(key(key)) != null;
     }
 
 
     public boolean containsValue(Object value) {
         if (value == null || !sessionExists()) {
-            return (false);
+            return false;
         }
         Enumeration<String> keys =
         session.getAttributeNames(PortletSession.PORTLET_SCOPE);
         while (keys.hasMoreElements()) {
             Object next = session.getAttribute(keys.nextElement());
             if (value.equals(next)) {
-                return (true);
+                return true;
             }
         }
-        return (false);
+        return false;
     }
 
 
@@ -95,43 +91,33 @@ final class PortletSessionScopeMap implements Map<String, Object> {
                 set.add(new MapEntry<String, Object>(key, session.getAttribute(key), true));
             }
         }
-        return (set);
+        return set;
     }
 
 
     public boolean equals(Object o) {
-        if (sessionExists()) {
-            return (session.equals(o));
-        } else {
-            return false;
-        }
+        return sessionExists() && session.equals(o);
     }
 
 
     public Object get(Object key) {
         if (sessionExists()) {
-            return (session.getAttribute(key(key)));
-        } else {
-            return null;
+            return session.getAttribute(key(key));
         }
+        return null;
     }
 
 
     public int hashCode() {
         if (sessionExists()) {
-            return (session.hashCode());
-        } else {
-            return 0;
+            return session.hashCode();
         }
+        return 0;
     }
 
 
     public boolean isEmpty() {
-        if (sessionExists() &&
-            session.getAttributeNames().hasMoreElements()) {
-            return false;
-        }
-        return true;
+        return !sessionExists() || !session.getAttributeNames().hasMoreElements();
     }
 
 
@@ -144,13 +130,13 @@ final class PortletSessionScopeMap implements Map<String, Object> {
                 set.add(keys.nextElement());
             }
         }
-        return (set);
+        return set;
     }
 
 
     public Object put(String key, Object value) {
         if (value == null) {
-            return (remove(key));
+            return remove(key);
         }
 
         // Ensure the Session is created, if it
@@ -163,7 +149,7 @@ final class PortletSessionScopeMap implements Map<String, Object> {
         String skey = key(key);
         Object previous = session.getAttribute(skey);
         session.setAttribute(skey, value);
-        return (previous);
+        return previous;
     }
 
 
@@ -179,10 +165,9 @@ final class PortletSessionScopeMap implements Map<String, Object> {
             String skey = key(key);
             Object previous = session.getAttribute(skey);
             session.removeAttribute(skey);
-            return (previous);
-        } else {
-            return (null);
+            return previous;
         }
+        return null;
     }
 
 
@@ -196,7 +181,7 @@ final class PortletSessionScopeMap implements Map<String, Object> {
                 n++;
             }
         }
-        return (n);
+        return n;
     }
 
 
@@ -209,18 +194,18 @@ final class PortletSessionScopeMap implements Map<String, Object> {
                 list.add(session.getAttribute(keys.nextElement()));
             }
         }
-        return (list);
+        return list;
     }
 
 
     private String key(Object key) {
         if (key == null) {
             throw new IllegalArgumentException();
-        } else if (key instanceof String) {
-            return ((String) key);
-        } else {
-            return (key.toString());
         }
+        if (key instanceof String) {
+            return (String) key;
+        }
+        return key.toString();
     }
 
     private boolean sessionExists() {
@@ -230,10 +215,7 @@ final class PortletSessionScopeMap implements Map<String, Object> {
                 request = null;
             }
         }
-        if (session != null) {
-            return true;
-        }
-        return false;
+        return session != null;
     }
 
 }
