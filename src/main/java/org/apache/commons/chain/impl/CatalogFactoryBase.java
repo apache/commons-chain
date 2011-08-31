@@ -68,7 +68,6 @@ public class CatalogFactoryBase extends CatalogFactory {
      *
      * @return the default Catalog instance
      */
-    @Override
     public Catalog getCatalog() {
 
         return catalog;
@@ -81,7 +80,6 @@ public class CatalogFactoryBase extends CatalogFactory {
      *
      * @param catalog the default Catalog instance
      */
-    @Override
     public void setCatalog(Catalog catalog) {
 
         this.catalog = catalog;
@@ -96,7 +94,6 @@ public class CatalogFactoryBase extends CatalogFactory {
      * @param name the name of the Catalog to retrieve
      * @return the specified Catalog
      */
-    @Override
     public Catalog getCatalog(String name) {
 
         return catalogs.get(name);
@@ -111,7 +108,6 @@ public class CatalogFactoryBase extends CatalogFactory {
      * @param name the name of the Catalog to add
      * @param catalog the Catalog to add
      */
-    @Override
     public void addCatalog(String name, Catalog catalog) {
 
             catalogs.put(name, catalog);
@@ -125,7 +121,6 @@ public class CatalogFactoryBase extends CatalogFactory {
      * If there are no known catalogs, an empty Iterator is returned.</p>
      * @return An Iterator of the names of the Catalogs known by this factory.
      */
-    @Override
     public Iterator<String> getNames() {
 
             return catalogs.keySet().iterator();

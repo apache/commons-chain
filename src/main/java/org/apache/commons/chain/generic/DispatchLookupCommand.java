@@ -139,7 +139,6 @@ public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> i
      * @throws Exception if no such {@link Command} can be found and the
      *  <code>optional</code> property is set to <code>false</code>
      */
-    @Override
     public boolean execute(C context) throws Exception {
 
         if (this.getMethod() == null && this.getMethodKey() == null) {

@@ -139,7 +139,6 @@ public class ChainBase<C extends Context> implements Chain<C> {
      *  is <code>null</code>
      * @exception IllegalStateException if no further configuration is allowed
      */
-    @Override
     public void addCommand(Command<C> command) {
 
         if (command == null) {
@@ -173,7 +172,6 @@ public class ChainBase<C extends Context> implements Chain<C> {
      *  of this {@link Context} should be delegated to a subsequent
      *  {@link Command} in an enclosing {@link Chain}
      */
-    @Override
     public boolean execute(C context) throws Exception {
 
         // Verify our parameters

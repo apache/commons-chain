@@ -50,7 +50,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     private PortletRequest request = null;
 
 
-    @Override
     public void clear() {
         if (sessionExists()) {
             for (String key : keySet()) {
@@ -60,7 +59,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public boolean containsKey(Object key) {
         if (sessionExists()) {
             return (session.getAttribute(key(key)) != null);
@@ -70,7 +68,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public boolean containsValue(Object value) {
         if (value == null || !sessionExists()) {
             return (false);
@@ -87,7 +84,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public Set<Entry<String, Object>> entrySet() {
         Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
         if (sessionExists()) {
@@ -103,7 +99,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public boolean equals(Object o) {
         if (sessionExists()) {
             return (session.equals(o));
@@ -113,7 +108,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public Object get(Object key) {
         if (sessionExists()) {
             return (session.getAttribute(key(key)));
@@ -123,7 +117,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public int hashCode() {
         if (sessionExists()) {
             return (session.hashCode());
@@ -133,7 +126,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public boolean isEmpty() {
         if (sessionExists() &&
             session.getAttributeNames().hasMoreElements()) {
@@ -144,7 +136,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
         if (sessionExists()) {
@@ -158,7 +149,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public Object put(String key, Object value) {
         if (value == null) {
             return (remove(key));
@@ -178,7 +168,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public void putAll(Map<? extends String, ? extends Object> map) {
         for (Entry<? extends String, ? extends Object> entry : map.entrySet()) {
             put(key(entry.getKey()), entry.getValue());
@@ -186,7 +175,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public Object remove(Object key) {
         if (sessionExists()) {
             String skey = key(key);
@@ -199,7 +187,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public int size() {
         int n = 0;
         if (sessionExists()) {
@@ -214,7 +201,6 @@ final class PortletSessionScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public Collection<Object> values() {
         List<Object> list = new ArrayList<Object>();
         if (sessionExists()) {

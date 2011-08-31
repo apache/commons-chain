@@ -83,7 +83,6 @@ public abstract class AbstractGetLocaleCommand<C extends Context> implements Com
      * @return <code>false</code> so that processng will continue
      * @throws Exception If an error occurs during execution.
      */
-    @Override
     public boolean execute(C context) throws Exception {
 
     context.put(getLocaleKey(), getLocale(context));

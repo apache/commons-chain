@@ -239,7 +239,6 @@ public class PortletWebContext extends WebContext {
      *
      * @return Application scope Map.
      */
-    @Override
     public Map<String, Object> getApplicationScope() {
 
         if ((applicationScope == null) && (context != null)) {
@@ -255,7 +254,6 @@ public class PortletWebContext extends WebContext {
      *
      * @return Header values Map.
      */
-    @Override
     public Map<String, String> getHeader() {
 
         if ((header == null) && (request != null)) {
@@ -272,7 +270,6 @@ public class PortletWebContext extends WebContext {
      *
      * @return Header values Map.
      */
-    @Override
     public Map<String, String[]> getHeaderValues() {
 
         if ((headerValues == null) && (request != null)) {
@@ -289,7 +286,6 @@ public class PortletWebContext extends WebContext {
      *
      * @return Initialization parameter Map.
      */
-    @Override
     public Map<String, String> getInitParam() {
 
         if ((initParam == null) && (context != null)) {
@@ -305,7 +301,6 @@ public class PortletWebContext extends WebContext {
      *
      * @return Request parameter Map.
      */
-    @Override
     public Map<String, String> getParam() {
 
         if ((param == null) && (request != null)) {
@@ -321,7 +316,6 @@ public class PortletWebContext extends WebContext {
      *
      * @return Request parameter Map.
      */
-    @Override
     public Map<String, String[]> getParamValues() {
 
         if ((paramValues == null) && (request != null)) {
@@ -338,7 +332,6 @@ public class PortletWebContext extends WebContext {
      * @return An empty Map.
      * @since Chain 1.1
      */
-    @Override
     public Map<String, Cookie> getCookies() {
 
         return Collections.EMPTY_MAP;
@@ -351,7 +344,6 @@ public class PortletWebContext extends WebContext {
      *
      * @return Request scope Map.
      */
-    @Override
     public Map<String, Object> getRequestScope() {
 
         if ((requestScope == null) && (request != null)) {
@@ -367,7 +359,6 @@ public class PortletWebContext extends WebContext {
      *
      * @return Session scope Map.
      */
-    @Override
     public Map<String, Object> getSessionScope() {
 
         if ((sessionScope == null) && (request != null)) {

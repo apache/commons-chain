@@ -42,7 +42,6 @@ public class FacesGetLocaleCommand<C extends Context> extends AbstractGetLocaleC
      * @param context The {@link Context} we are operating on.
      * @return The Locale for the request.
      */
-    @Override
     protected Locale getLocale(C context) {
 
     FacesContext fcontext = (FacesContext)

@@ -127,7 +127,6 @@ public class CopyCommand<C extends Context> implements Command<C> {
      * @return <code>false</code> so that processing will continue
      * @throws Exception in the if an error occurs during execution.
      */
-    @Override
     public boolean execute(C context) throws Exception {
 
         Object value = this.value;

@@ -147,7 +147,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      * <p>Override the default <code>Map</code> behavior to clear all keys and
      * values except those corresponding to JavaBeans properties.</p>
      */
-    @Override
     public void clear() {
 
         if (descriptors == null) {
@@ -176,7 +175,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      * @exception IllegalArgumentException if a property getter
      *  throws an exception
      */
-    @Override
     public boolean containsValue(Object value) {
 
         // Case 1 -- no local properties
@@ -216,7 +214,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      *
      * @return Set of entries in the Context.
      */
-    @Override
     public Set<Entry<String, Object>> entrySet() {
 
         return (new EntrySetImpl());
@@ -242,7 +239,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      * @exception UnsupportedOperationException if this local property does not
      *  have a read method.
      */
-    @Override
     public Object get(Object key) {
 
         // Case 1 -- no local properties
@@ -277,7 +273,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      * @return <code>true</code> if this Context is empty, otherwise
      *  <code>false</code>.
      */
-    @Override
     public boolean isEmpty() {
 
         // Case 1 -- no local properties
@@ -300,7 +295,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      *
      * @return The set of keys for objects in this Context.
      */
-    @Override
     public Set<String> keySet() {
 
 
@@ -323,7 +317,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      * @exception UnsupportedOperationException if this local property does not
      *  have both a read method and a write method
      */
-    @Override
     public Object put(String key, Object value) {
 
         // Case 1 -- no local properties
@@ -364,7 +357,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      * @exception UnsupportedOperationException if a local property does not
      *  have both a read method and a write method
      */
-    @Override
     public void putAll(Map<? extends String, ? extends Object> map) {
 
         for (Entry<? extends String, ? extends Object> pair : map.entrySet()) {
@@ -385,7 +377,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      * @exception UnsupportedOperationException if the specified
      *  <code>key</code> matches the name of a local property
      */
-    @Override
     public Object remove(Object key) {
 
         // Case 1 -- no local properties
@@ -418,7 +409,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      *
      * @return The collection of values in this Context.
      */
-    @Override
     public Collection<Object> values() {
 
         return (new ValuesImpl());
@@ -602,13 +592,11 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      */
     private class EntrySetImpl extends AbstractSet<Entry<String, Object>> {
 
-        @Override
-        public void clear() {
+            public void clear() {
             ContextBase.this.clear();
         }
 
-        @Override
-        public boolean contains(Object obj) {
+            public boolean contains(Object obj) {
             if (!(obj instanceof Map.Entry)) {
                 return (false);
             }
@@ -621,18 +609,15 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             }
         }
 
-        @Override
-        public boolean isEmpty() {
+            public boolean isEmpty() {
             return (ContextBase.this.isEmpty());
         }
 
-        @Override
-        public Iterator<Entry<String, Object>> iterator() {
+            public Iterator<Entry<String, Object>> iterator() {
             return (ContextBase.this.entriesIterator());
         }
 
-        @Override
-        public boolean remove(Object obj) {
+            public boolean remove(Object obj) {
             if (obj instanceof Map.Entry) {
                 return (ContextBase.this.remove((Map.Entry<String, Object>) obj));
             } else {
@@ -640,8 +625,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             }
         }
 
-        @Override
-        public int size() {
+            public int size() {
             return (ContextBase.this.size());
         }
 
@@ -657,18 +641,15 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
         private Map.Entry<String, Object> entry = null;
         private Iterator<String> keys = ContextBase.this.keySet().iterator();
 
-        @Override
         public boolean hasNext() {
             return (keys.hasNext());
         }
 
-        @Override
         public Entry<String, Object> next() {
             entry = ContextBase.this.entry(keys.next());
             return (entry);
         }
 
-        @Override
         public void remove() {
             ContextBase.this.remove(entry);
         }
@@ -690,8 +671,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
         private String key;
         private Object value;
 
-        @Override
-        public boolean equals(Object obj) {
+            public boolean equals(Object obj) {
             if (obj == null) {
                 return (false);
             } else if (!(obj instanceof Map.Entry)) {
@@ -712,23 +692,19 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             }
         }
 
-        @Override
         public String getKey() {
             return (this.key);
         }
 
-        @Override
         public Object getValue() {
             return (this.value);
         }
 
-        @Override
         public int hashCode() {
             return (((key == null) ? 0 : key.hashCode())
                    ^ ((value == null) ? 0 : value.hashCode()));
         }
 
-        @Override
         public Object setValue(Object value) {
             Object previous = this.value;
             ContextBase.this.put(this.key, value);
@@ -736,8 +712,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             return (previous);
         }
 
-        @Override
-        public String toString() {
+            public String toString() {
             return getKey() + "=" + getValue();
         }
     }
@@ -749,13 +724,11 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      */
     private class ValuesImpl extends AbstractCollection<Object> {
 
-        @Override
-        public void clear() {
+            public void clear() {
             ContextBase.this.clear();
         }
 
-        @Override
-        public boolean contains(Object obj) {
+            public boolean contains(Object obj) {
             if (!(obj instanceof Map.Entry)) {
                 return (false);
             }
@@ -763,18 +736,15 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             return (ContextBase.this.containsValue(entry.getValue()));
         }
 
-        @Override
-        public boolean isEmpty() {
+            public boolean isEmpty() {
             return (ContextBase.this.isEmpty());
         }
 
-        @Override
-        public Iterator<Object> iterator() {
+            public Iterator<Object> iterator() {
             return (ContextBase.this.valuesIterator());
         }
 
-        @Override
-        public boolean remove(Object obj) {
+            public boolean remove(Object obj) {
             if (obj instanceof Map.Entry) {
                 return (ContextBase.this.remove((Map.Entry) obj));
             } else {
@@ -782,8 +752,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             }
         }
 
-        @Override
-        public int size() {
+            public int size() {
             return (ContextBase.this.size());
         }
 
@@ -799,18 +768,15 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
         private Map.Entry<String, Object> entry = null;
         private Iterator<String> keys = ContextBase.this.keySet().iterator();
 
-        @Override
         public boolean hasNext() {
             return (keys.hasNext());
         }
 
-        @Override
         public Object next() {
             entry = ContextBase.this.entry(keys.next());
             return (entry.getValue());
         }
 
-        @Override
         public void remove() {
             ContextBase.this.remove(entry);
         }

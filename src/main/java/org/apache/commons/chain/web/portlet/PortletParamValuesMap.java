@@ -47,25 +47,21 @@ final class PortletParamValuesMap implements Map<String, String[]> {
     private PortletRequest request = null;
 
 
-    @Override
     public void clear() {
         throw new UnsupportedOperationException();
     }
 
 
-    @Override
     public boolean containsKey(Object key) {
         return (request.getParameter(key(key)) != null);
     }
 
 
-    @Override
     public boolean containsValue(Object value) {
         return values().contains(value);
     }
 
 
-    @Override
     public Set<Entry<String, String[]>> entrySet() {
         Set<Entry<String, String[]>> set = new HashSet<Entry<String, String[]>>();
         Enumeration<String> keys = request.getParameterNames();
@@ -78,31 +74,26 @@ final class PortletParamValuesMap implements Map<String, String[]> {
     }
 
 
-    @Override
     public boolean equals(Object o) {
         return (request.equals(o));
     }
 
 
-    @Override
     public String[] get(Object key) {
         return (request.getParameterValues(key(key)));
     }
 
 
-    @Override
     public int hashCode() {
         return (request.hashCode());
     }
 
 
-    @Override
     public boolean isEmpty() {
         return (size() < 1);
     }
 
 
-    @Override
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
         Enumeration<String> keys = request.getParameterNames();
@@ -113,25 +104,21 @@ final class PortletParamValuesMap implements Map<String, String[]> {
     }
 
 
-    @Override
     public String[] put(String key, String[] value) {
         throw new UnsupportedOperationException();
     }
 
 
-    @Override
     public void putAll(Map<? extends String, ? extends String[]> map) {
         throw new UnsupportedOperationException();
     }
 
 
-    @Override
     public String[] remove(Object key) {
         throw new UnsupportedOperationException();
     }
 
 
-    @Override
     public int size() {
         int n = 0;
         Enumeration<String> keys = request.getParameterNames();
@@ -143,7 +130,6 @@ final class PortletParamValuesMap implements Map<String, String[]> {
     }
 
 
-    @Override
     public Collection<String[]> values() {
         List<String[]> list = new ArrayList<String[]>();
         Enumeration<String> keys = request.getParameterNames();

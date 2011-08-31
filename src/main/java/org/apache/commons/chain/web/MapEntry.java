@@ -68,7 +68,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
      *
      * @return The entry key
      */
-    @Override
     public K getKey() {
         return key;
     }
@@ -79,7 +78,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
      *
      * @return The entry key
      */
-    @Override
     public V getValue() {
         return value;
     }
@@ -92,7 +90,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
      * @return The old entry value
      * @throws UnsupportedOperationException If the entry cannot be modified
      */
-    @Override
     public V setValue(V val) {
         if (modifiable) {
             V oldVal = this.value;
@@ -110,7 +107,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
      * @param o The object to test
      * @return True if equal, else false
      */
-    @Override
     public boolean equals(Object o) {
         if (o != null && o instanceof Map.Entry) {
             Map.Entry entry = (Map.Entry)o;
@@ -128,7 +124,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
      *
      * @return The and'ed hashcode of the key and value
      */
-    @Override
     public int hashCode() {
         return (this.getKey() == null   ? 0 : this.getKey().hashCode()) ^
                (this.getValue() == null ? 0 : this.getValue().hashCode());

@@ -47,7 +47,6 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
     private ServletContext context = null;
 
 
-    @Override
     public void clear() {
         for (String key : keySet()) {
             context.removeAttribute(key);
@@ -55,13 +54,11 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public boolean containsKey(Object key) {
         return (context.getAttribute(key(key)) != null);
     }
 
 
-    @Override
     public boolean containsValue(Object value) {
         if (value == null) {
             return (false);
@@ -77,7 +74,6 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public Set<Entry<String, Object>> entrySet() {
         Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
         Enumeration<String> keys = context.getAttributeNames();
@@ -90,31 +86,26 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public boolean equals(Object o) {
         return (context.equals(o));
     }
 
 
-    @Override
     public Object get(Object key) {
         return (context.getAttribute(key(key)));
     }
 
 
-    @Override
     public int hashCode() {
         return (context.hashCode());
     }
 
 
-    @Override
     public boolean isEmpty() {
         return (size() < 1);
     }
 
 
-    @Override
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
         Enumeration<String> keys = context.getAttributeNames();
@@ -125,7 +116,6 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public Object put(String key, Object value) {
         if (value == null) {
             return (remove(key));
@@ -136,7 +126,6 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public void putAll(Map<? extends String, ? extends Object> map) {
 
         for (Entry<? extends String, ? extends Object> entry : map.entrySet()) {
@@ -145,7 +134,6 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public Object remove(Object key) {
         String skey = key(key);
         Object previous = context.getAttribute(skey);
@@ -154,7 +142,6 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public int size() {
         int n = 0;
         Enumeration<String> keys = context.getAttributeNames();
@@ -166,7 +153,6 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
     }
 
 
-    @Override
     public Collection<Object> values() {
         List<Object> list = new ArrayList<Object>();
 

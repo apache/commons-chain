@@ -122,7 +122,6 @@ public class FacesWebContext extends WebContext {
      *
      * @return Application scope Map.
      */
-    @Override
     public Map<String, Object> getApplicationScope() {
 
     return (context.getExternalContext().getApplicationMap());
@@ -135,7 +134,6 @@ public class FacesWebContext extends WebContext {
      *
      * @return Header values Map.
      */
-    @Override
     public Map<String, String> getHeader() {
 
     return (context.getExternalContext().getRequestHeaderMap());
@@ -148,7 +146,6 @@ public class FacesWebContext extends WebContext {
      *
      * @return Header values Map.
      */
-    @Override
     public Map<String, String[]> getHeaderValues() {
 
     return (context.getExternalContext().getRequestHeaderValuesMap());
@@ -161,7 +158,6 @@ public class FacesWebContext extends WebContext {
      *
      * @return Initialization parameter Map.
      */
-    @Override
     public Map<String, String> getInitParam() {
 
     return (context.getExternalContext().getInitParameterMap());
@@ -186,7 +182,6 @@ public class FacesWebContext extends WebContext {
      *
      * @return Request parameter Map.
      */
-    @Override
     public Map<String, String[]> getParamValues() {
 
     return (context.getExternalContext().getRequestParameterValuesMap());
@@ -200,7 +195,6 @@ public class FacesWebContext extends WebContext {
      * @return Map of Cookies.
      * @since Chain 1.1
      */
-    @Override
     public Map<String, Cookie> getCookies() {
 
         Map<String, Object> facesCookieMap =
@@ -236,7 +230,6 @@ public class FacesWebContext extends WebContext {
      *
      * @return Request scope Map.
      */
-    @Override
     public Map<String, Object> getRequestScope() {
 
     return (context.getExternalContext().getRequestMap());
@@ -249,7 +242,6 @@ public class FacesWebContext extends WebContext {
      *
      * @return Session scope Map.
      */
-    @Override
     public Map<String, Object> getSessionScope() {
 
     return (context.getExternalContext().getSessionMap());

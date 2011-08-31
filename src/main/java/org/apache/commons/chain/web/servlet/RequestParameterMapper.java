@@ -120,7 +120,6 @@ public class RequestParameterMapper extends LookupCommand implements Command {
      *
      * @since Chain 1.2
      */
-    @Override
     protected String getCommandName(Context context) {
 
         // Look up the specified request parameter for this request
@@ -142,7 +141,6 @@ public class RequestParameterMapper extends LookupCommand implements Command {
      *
      * @since Chain 1.2
      */
-    @Override
     protected Catalog getCatalog(Context context) {
         Catalog catalog = (Catalog) context.get(getCatalogKey());
         if (catalog == null) {

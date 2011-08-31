@@ -78,7 +78,6 @@ public class CatalogBase implements Catalog {
      * @param command {@link Command} to be returned
      *  for later lookups on this name
      */
-    @Override
     public void addCommand(String name, Command command) {
 
         commands.put(name, command);
@@ -93,7 +92,6 @@ public class CatalogBase implements Catalog {
      *  should be retrieved
      * @return The Command associated with the specified name.
      */
-    @Override
     public Command getCommand(String name) {
 
         return commands.get(name);
@@ -107,7 +105,6 @@ public class CatalogBase implements Catalog {
      * an empty Iterator is returned.</p>
      * @return An iterator of the names in this Catalog.
      */
-    @Override
     public Iterator<String> getNames() {
 
         return commands.keySet().iterator();
@@ -118,7 +115,6 @@ public class CatalogBase implements Catalog {
      * Converts this Catalog to a String.  Useful for debugging purposes.
      * @return a representation of this catalog as a String
      */
-    @Override
     public String toString() {
 
         Iterator names = getNames();

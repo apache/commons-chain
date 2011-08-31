@@ -46,19 +46,16 @@ final class ServletCookieMap implements Map<String, Cookie> {
     private HttpServletRequest request = null;
 
 
-    @Override
     public void clear() {
         throw new UnsupportedOperationException();
     }
 
 
-    @Override
     public boolean containsKey(Object key) {
         return (get(key) != null);
     }
 
 
-    @Override
     public boolean containsValue(Object value) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -72,7 +69,6 @@ final class ServletCookieMap implements Map<String, Cookie> {
     }
 
 
-    @Override
     public Set<Entry<String, Cookie>> entrySet() {
         Set<Entry<String, Cookie>> set = new HashSet<Entry<String, Cookie>>();
         Cookie[] cookies = request.getCookies();
@@ -85,13 +81,11 @@ final class ServletCookieMap implements Map<String, Cookie> {
     }
 
 
-    @Override
     public boolean equals(Object o) {
         return (request.equals(o));
     }
 
 
-    @Override
     public Cookie get(Object key) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -105,19 +99,16 @@ final class ServletCookieMap implements Map<String, Cookie> {
     }
 
 
-    @Override
     public int hashCode() {
         return (request.hashCode());
     }
 
 
-    @Override
     public boolean isEmpty() {
         return (size() < 1);
     }
 
 
-    @Override
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
         Cookie[] cookies = request.getCookies();
@@ -130,31 +121,26 @@ final class ServletCookieMap implements Map<String, Cookie> {
     }
 
 
-    @Override
     public Cookie put(String key, Cookie value) {
         throw new UnsupportedOperationException();
     }
 
-    @Override
     public void putAll(Map<? extends String, ? extends Cookie> map) {
         throw new UnsupportedOperationException();
     }
 
 
-    @Override
     public Cookie remove(Object key) {
         throw new UnsupportedOperationException();
     }
 
 
-    @Override
     public int size() {
         Cookie[] cookies = request.getCookies();
         return (cookies == null ?  0 : cookies.length);
     }
 
 
-    @Override
     public Collection<Cookie> values() {
         List<Cookie> list = new ArrayList<Cookie>(size());
         Cookie[] cookies = request.getCookies();
