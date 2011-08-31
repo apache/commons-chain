@@ -104,10 +104,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
         if (commands == null) {
             throw new IllegalArgumentException();
         }
-        Iterator<Command<C>> elements = commands.iterator();
-        while (elements.hasNext()) {
-            addCommand(elements.next());
-        }
+        this.commands.addAll( commands );
 
     }
 
