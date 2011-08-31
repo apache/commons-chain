@@ -130,9 +130,8 @@ final class PortletSessionScopeMap implements Map<String, Object> {
         if (sessionExists() &&
             session.getAttributeNames().hasMoreElements()) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
 
@@ -233,9 +232,8 @@ final class PortletSessionScopeMap implements Map<String, Object> {
         }
         if (session != null) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
 }
