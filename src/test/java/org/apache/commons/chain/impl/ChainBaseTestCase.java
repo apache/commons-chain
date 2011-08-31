@@ -17,9 +17,12 @@
 package org.apache.commons.chain.impl;
 
 
+import java.util.List;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
@@ -343,10 +346,10 @@ public class ChainBaseTestCase extends TestCase {
     // Verify the number of configured commands
     protected void checkCommandCount(int expected) {
         if (chain instanceof ChainBase) {
-            Command commands[] = ((ChainBase) chain).getCommands();
+            List<Command> commands = ((ChainBase) chain).getCommands();
             assertNotNull("getCommands() returned a non-null array",
                           commands);
-            assertEquals("Correct command count", expected, commands.length);
+            assertEquals("Correct command count", expected, commands.size());
         }
     }
 

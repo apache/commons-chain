@@ -17,7 +17,6 @@
 package org.apache.commons.chain.config;
 
 
-import org.apache.commons.chain.Command;
 import org.apache.commons.chain.impl.ChainBase;
 
 
@@ -29,11 +28,11 @@ import org.apache.commons.chain.impl.ChainBase;
 public class TestChain extends ChainBase {
 
 
-    public Command[] getCommands() {
+    /*public Command[] getCommands() {
 
     return (commands);
 
-    }
+    }*/
 
 
 }

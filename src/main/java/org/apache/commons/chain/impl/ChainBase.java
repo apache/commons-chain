@@ -17,8 +17,11 @@
 package org.apache.commons.chain.impl;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
@@ -117,7 +120,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      * the order in which they may delegate processing to the remainder of
      * the {@link Chain}.</p>
      */
-    protected Command<C>[] commands = new Command[0];
+    private List<Command<C>> commands = new ArrayList<Command<C>>();
 
 
     /**
@@ -147,10 +150,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
         if (frozen) {
             throw new IllegalStateException();
         }
-        Command[] results = new Command[commands.length + 1];
-        System.arraycopy(commands, 0, results, 0, commands.length);
-        results[commands.length] = command;
-        commands = results;
+        commands.add( command );
 
     }
 
@@ -187,10 +187,10 @@ public class ChainBase<C extends Context> implements Chain<C> {
         boolean saveResult = false;
         Exception saveException = null;
         int i = 0;
-        int n = commands.length;
+        int n = commands.size();
         for (i = 0; i < n; i++) {
             try {
-                saveResult = commands[i].execute(context);
+                saveResult = commands.get(i).execute(context);
                 if (saveResult) {
                     break;
                 }
@@ -207,10 +207,10 @@ public class ChainBase<C extends Context> implements Chain<C> {
         boolean handled = false;
         boolean result = false;
         for (int j = i; j >= 0; j--) {
-            if (commands[j] instanceof Filter) {
+            if (commands.get(j) instanceof Filter) {
                 try {
                     result =
-                        ((Filter) commands[j]).postprocess(context,
+                        ((Filter) commands.get(j)).postprocess(context,
                                                            saveException);
                     if (result) {
                         handled = true;
@@ -239,7 +239,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      * {@link Chain}.  This method is package private, and is used only
      * for the unit tests.</p>
      */
-    Command<C>[] getCommands() {
+    List<Command<C>> getCommands() {
 
         return (commands);
 
