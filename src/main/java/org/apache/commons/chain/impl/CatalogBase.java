@@ -16,6 +16,7 @@
  */
 package org.apache.commons.chain.impl;
 
+import static java.util.Collections.unmodifiableMap;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -45,7 +46,7 @@ public class CatalogBase implements Catalog {
     /**
      * <p>The map of named {@link Command}s, keyed by name.
      */
-    protected Map<String, Command<? extends Context>> commands = new ConcurrentHashMap<String, Command<? extends Context>>();
+    private final Map<String, Command<? extends Context>> commands = new ConcurrentHashMap<String, Command<? extends Context>>();
 
 
     // --------------------------------------------------------- Constructors
@@ -102,6 +103,15 @@ public class CatalogBase implements Catalog {
 
     }
 
+    /**
+     * Returns the map of named {@link Command}s, keyed by name.
+     *
+     * @return The map of named {@link Command}s, keyed by name.
+     */
+    public Map<String, Command<? extends Context>> getCommands()
+    {
+        return unmodifiableMap(commands);
+    }
 
     /**
      * <p>Return an <code>Iterator</code> over the set of named commands
