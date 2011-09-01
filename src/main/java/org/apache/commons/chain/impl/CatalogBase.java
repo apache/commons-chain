@@ -89,6 +89,7 @@ public class CatalogBase implements Catalog {
      * <p>Return the {@link Command} associated with the
      * specified name, if any; otherwise, return <code>null</code>.</p>
      *
+     * @param <C> Type of the context associated with this command
      * @param name Name for which a {@link Command}
      *  should be retrieved
      * @return The Command associated with the specified name.
