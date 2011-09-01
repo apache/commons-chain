@@ -114,6 +114,7 @@ public abstract class CatalogFactory {
      * more than one DELIMITER will cause an
      * <code>IllegalArgumentException</code> to be thrown.</p>
      *
+     * @param <C> Type of the context associated with this command
      * @param commandID the identifier of the command to return
      * @return the command located with commandID, or <code>null</code>
      *  if either the command name or the catalog name cannot be resolved
