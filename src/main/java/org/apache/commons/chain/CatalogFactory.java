@@ -122,7 +122,7 @@ public abstract class CatalogFactory {
      *
      * @since Chain 1.1
      */
-    public Command getCommand(String commandID) {
+    public <C extends Context> Command<C> getCommand(String commandID) {
 
         String commandName = commandID;
         String catalogName = null;

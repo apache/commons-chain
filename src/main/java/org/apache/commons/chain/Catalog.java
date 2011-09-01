@@ -50,7 +50,7 @@ public interface Catalog {
      * @param command {@link Command} or {@link Chain} to be returned
      *  for later lookups on this name
      */
-    void addCommand(String name, Command<? extends Context> command);
+    <C extends Context> void addCommand(String name, Command<C> command);
 
 
     /**
@@ -61,7 +61,7 @@ public interface Catalog {
      *  should be retrieved
      * @return The Command associated with the specified name.
      */
-    Command getCommand(String name);
+    <C extends Context> Command<C> getCommand(String name);
 
 
 

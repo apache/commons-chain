@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
 
 
 /**
@@ -44,7 +45,7 @@ public class CatalogBase implements Catalog {
     /**
      * <p>The map of named {@link Command}s, keyed by name.
      */
-    protected Map<String, Command> commands = new ConcurrentHashMap<String, Command>();
+    protected Map<String, Command<? extends Context>> commands = new ConcurrentHashMap<String, Command<? extends Context>>();
 
 
     // --------------------------------------------------------- Constructors
@@ -62,8 +63,8 @@ public class CatalogBase implements Catalog {
      *
      * @since Chain 1.1
      */
-    public CatalogBase( Map<String, Command> commands ) {
-        this.commands =  new ConcurrentHashMap<String, Command>(commands);
+    public CatalogBase( Map<String, Command<? extends Context>> commands ) {
+        this.commands.putAll( commands );
     }
 
     // --------------------------------------------------------- Public Methods
@@ -78,7 +79,7 @@ public class CatalogBase implements Catalog {
      * @param command {@link Command} to be returned
      *  for later lookups on this name
      */
-    public void addCommand(String name, Command command) {
+    public <C extends Context> void addCommand(String name, Command<C> command) {
 
         commands.put(name, command);
 
@@ -92,9 +93,11 @@ public class CatalogBase implements Catalog {
      *  should be retrieved
      * @return The Command associated with the specified name.
      */
-    public Command getCommand(String name) {
+    public <C extends Context> Command<C> getCommand(String name) {
 
-        return commands.get(name);
+        @SuppressWarnings( "unchecked" ) // will throw a cast exception at runtime!
+        Command<C> command = (Command<C>) commands.get(name);
+        return command;
 
     }
 
@@ -117,7 +120,7 @@ public class CatalogBase implements Catalog {
      */
     public String toString() {
 
-        Iterator names = getNames();
+        Iterator<String> names = getNames();
         StringBuffer str =
             new StringBuffer("[" + this.getClass().getName() + ": ");
 
