@@ -123,7 +123,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      * <p>Flag indicating whether the configuration of our commands list
      * has been frozen by a call to the <code>execute()</code> method.</p>
      */
-    protected boolean frozen = false;
+    private boolean frozen = false;
 
 
     // ---------------------------------------------------------- Chain Methods
@@ -226,6 +226,18 @@ public class ChainBase<C extends Context> implements Chain<C> {
 
     }
 
+    /**
+     * Returns true, if the configuration of our commands list
+     * has been frozen by a call to the <code>execute()</code> method,
+     * false otherwise.
+     *
+     * @return true, if the configuration of our commands list
+     * has been frozen by a call to the <code>execute()</code> method,
+     * false otherwise.
+     */
+    public boolean isFrozen() {
+        return frozen;
+    }
 
     // -------------------------------------------------------- Package Methods
 
