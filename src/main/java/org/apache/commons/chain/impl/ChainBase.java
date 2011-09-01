@@ -116,7 +116,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      * the order in which they may delegate processing to the remainder of
      * the {@link Chain}.</p>
      */
-    private List<Command<C>> commands = new ArrayList<Command<C>>();
+    private final List<Command<C>> commands = new ArrayList<Command<C>>();
 
 
     /**
