@@ -120,7 +120,7 @@ public class PortletWebContext extends WebContext {
     /**
      * <p>The <code>PortletRequest</code> for this request.</p>
      */
-    protected PortletRequest request = null;
+    private PortletRequest request = null;
 
 
     /**
