@@ -106,8 +106,8 @@
         <commons.jira.pid>12310462</commons.jira.pid>
         <commons.osgi.import>!javax.portlet,*</commons.osgi.import>
         <commons.osgi.dynamicImport>javax.portlet</commons.osgi.dynamicImport>
-    </properties> 
-  
+    </properties>
+
     <build>
         <testResources>
             <testResource>
