@@ -302,7 +302,7 @@ public class LookupCommand<C extends Context> implements Filter<C> {
      */
     public boolean execute(C context) throws Exception {
 
-        Command command = getCommand(context);
+        Command<C> command = getCommand(context);
         if (command != null) {
             boolean result = (command.execute(context));
             if (isIgnoreExecuteResult()) {
@@ -331,10 +331,10 @@ public class LookupCommand<C extends Context> implements Filter<C> {
      */
     public boolean postprocess(C context, Exception exception) {
 
-        Command command = getCommand(context);
+        Command<C> command = getCommand(context);
         if (command != null) {
             if (command instanceof Filter) {
-                boolean result = (((Filter) command).postprocess(context, exception));
+                boolean result = (((Filter<C>) command).postprocess(context, exception));
                 if (isIgnorePostprocessResult()) {
                     return false;
                 }
@@ -389,17 +389,18 @@ public class LookupCommand<C extends Context> implements Filter<C> {
     /**
      * <p>Return the {@link Command} instance to be delegated to.</p>
      *
+     * @param <C> Type of the context associated with this command
      * @param context {@link Context} for this request
      * @return The looked-up Command.
      * @exception IllegalArgumentException if no such {@link Command}
      *  can be found and the <code>optional</code> property is set
      *  to <code>false</code>
      */
-    protected Command getCommand(C context) {
+    protected Command<C> getCommand(C context) {
 
         Catalog catalog = getCatalog(context);
 
-        Command command = null;
+        Command<C> command = null;
         String name = getCommandName(context);
         if (name != null) {
             command = catalog.getCommand(name);
