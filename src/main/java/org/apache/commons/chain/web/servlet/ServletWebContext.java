@@ -125,7 +125,7 @@ public class ServletWebContext extends WebContext {
     /**
      * <p>The <code>HttpServletRequest</code> for this request.</p>
      */
-    protected HttpServletRequest request = null;
+    private HttpServletRequest request = null;
 
 
     /**
