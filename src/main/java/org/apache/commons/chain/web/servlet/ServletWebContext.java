@@ -78,7 +78,7 @@ public class ServletWebContext extends WebContext {
     /**
      * <p>The <code>ServletContext</code> for this web application.</p>
      */
-    protected ServletContext context = null;
+    private ServletContext context = null;
 
 
     /**
