@@ -172,7 +172,7 @@ public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> i
      *
      * @return the expected method signature
      */
-    protected Class[] getSignature() {
+    protected Class<?>[] getSignature() {
         return DEFAULT_SIGNATURE;
     }
 
