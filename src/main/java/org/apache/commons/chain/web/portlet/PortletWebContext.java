@@ -133,7 +133,7 @@ public class PortletWebContext extends WebContext {
     /**
      * <p>The <code>PortletResponse</code> for this request.</p>
      */
-    protected PortletResponse response = null;
+    private PortletResponse response = null;
 
 
     /**
