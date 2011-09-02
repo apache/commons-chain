@@ -112,7 +112,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      * This collection is allocated only if there are any JavaBeans
      * properties.</p>
      */
-    private transient Map descriptors = null;
+    private transient Map<String, PropertyDescriptor> descriptors = null;
 
 
     /**
@@ -162,7 +162,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
         } else {
             Iterator<String> keys = keySet().iterator();
             while (keys.hasNext()) {
-                Object key = keys.next();
+                String key = keys.next();
                 if (!descriptors.containsKey(key)) {
                     keys.remove();
                 }
@@ -256,8 +256,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
 
         // Case 2 -- this is a local property
         if (key != null) {
-            PropertyDescriptor descriptor =
-                (PropertyDescriptor) descriptors.get(key);
+            PropertyDescriptor descriptor = descriptors.get(key);
             if (descriptor != null) {
                 if (descriptor.getReadMethod() != null) {
                     return (readProperty(descriptor));
@@ -334,8 +333,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
 
         // Case 2 -- this is a local property
         if (key != null) {
-            PropertyDescriptor descriptor =
-                (PropertyDescriptor) descriptors.get(key);
+            PropertyDescriptor descriptor = descriptors.get(key);
             if (descriptor != null) {
                 Object previous = null;
                 if (descriptor.getReadMethod() != null) {
@@ -394,8 +392,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
 
         // Case 2 -- this is a local property
         if (key != null) {
-            PropertyDescriptor descriptor =
-                (PropertyDescriptor) descriptors.get(key);
+            PropertyDescriptor descriptor = descriptors.get(key);
             if (descriptor != null) {
                 throw new UnsupportedOperationException
                     ("Local property '" + key + "' cannot be removed");
@@ -483,7 +480,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             // Add descriptor (ignoring getClass() and isEmpty())
             if (!("class".equals(name) || "empty".equals(name))) {
                 if (descriptors == null) {
-                    descriptors = new HashMap((pd.length - 2));
+                    descriptors = new HashMap<String, PropertyDescriptor>((pd.length - 2));
                 }
                 descriptors.put(name, pd[i]);
                 super.put(name, singleton);
