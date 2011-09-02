@@ -131,6 +131,8 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
     static {
 
         singleton = new Serializable() {
+                private static final long serialVersionUID = -6023767081282668587L;
+
                 public boolean equals(Object object) {
                     return (false);
                 }
