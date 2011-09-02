@@ -206,7 +206,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
             if (commands.get(j) instanceof Filter) {
                 try {
                     result =
-                        ((Filter) commands.get(j)).postprocess(context,
+                        ((Filter<C>) commands.get(j)).postprocess(context,
                                                            saveException);
                     if (result) {
                         handled = true;
