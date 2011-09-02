@@ -115,7 +115,7 @@ final class ServletSessionScopeMap implements Map<String, Object> {
 
 
     public boolean isEmpty() {
-        return !sessionExists() || !session.getAttributeNames().hasMoreElements() ;
+        return !sessionExists() || !session.getAttributeNames().hasMoreElements();
     }
 
 
