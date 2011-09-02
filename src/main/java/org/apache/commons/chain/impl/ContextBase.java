@@ -737,7 +737,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             if (!(obj instanceof Map.Entry)) {
                 return (false);
             }
-            Map.Entry entry = (Map.Entry) obj;
+            Map.Entry<?, ?> entry = (Map.Entry<?, ?>) obj;
             return (ContextBase.this.containsValue(entry.getValue()));
         }
 
