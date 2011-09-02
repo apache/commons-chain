@@ -197,7 +197,7 @@ public class ChainListener implements ServletContextListener {
                 if (loader == null) {
                     loader = this.getClass().getClassLoader();
                 }
-                Class clazz = loader.loadClass(ruleSet);
+                Class<?> clazz = loader.loadClass(ruleSet);
                 parser.setRuleSet((RuleSet) clazz.newInstance());
             } catch (Exception e) {
                 throw new RuntimeException("Exception initalizing RuleSet '"
