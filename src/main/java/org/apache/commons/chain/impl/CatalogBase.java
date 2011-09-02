@@ -76,6 +76,7 @@ public class CatalogBase implements Catalog {
      * to the set of named commands known to this {@link Catalog},
      * replacing any previous command for that name.
      *
+     * @param <C> Type of the context associated with this command
      * @param name Name of the new command
      * @param command {@link Command} to be returned
      *  for later lookups on this name
