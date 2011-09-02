@@ -42,9 +42,12 @@ import org.apache.commons.chain.impl.ContextBase;
 
 public abstract class WebContext extends ContextBase {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6804961872140299027L;
 
     // ---------------------------------------------------------- Public Methods
-
 
     /**
      * <p>Return a mutable <code>Map</code> that maps application scope
