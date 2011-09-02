@@ -109,7 +109,7 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
      */
     public boolean equals(Object o) {
         if (o != null && o instanceof Map.Entry) {
-            Map.Entry entry = (Map.Entry)o;
+            Map.Entry<?, ?> entry = (Map.Entry<?, ?>) o;
             return (this.getKey() == null ?
                     entry.getKey() == null : this.getKey().equals(entry.getKey()))  &&
                    (this.getValue() == null ?
