@@ -59,6 +59,12 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
 
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = -3137668177106072122L;
+
+
+    /**
      * Default, no argument constructor.
      */
     public ContextBase() {
