@@ -79,7 +79,7 @@ public class PortletWebContext extends WebContext {
     /**
      * <p>The <code>PortletContext</code> for this web application.</p>
      */
-    protected PortletContext context = null;
+    private PortletContext context = null;
 
 
     /**
@@ -263,7 +263,6 @@ public class PortletWebContext extends WebContext {
         return (header);
 
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
