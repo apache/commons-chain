@@ -188,7 +188,7 @@ public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> i
      * @return the method arguments to be used
      */
     protected Object[] getArguments(C context) {
-        return (Object[])new Object[] {context};
+        return new Object[] {context};
     }
 
 
