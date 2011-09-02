@@ -210,7 +210,7 @@ public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> i
      *    specified name.
      * @throws NullPointerException if no methodName can be determined
      */
-    private Method extractMethod(Command command, C context)
+    private Method extractMethod(Command<C> command, C context)
         throws NoSuchMethodException {
 
         String methodName = this.getMethod();
