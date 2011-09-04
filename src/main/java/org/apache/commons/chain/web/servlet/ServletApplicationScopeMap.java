@@ -63,6 +63,7 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
         if (value == null) {
             return (false);
         }
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
         Enumeration<String> keys = context.getAttributeNames();
         while (keys.hasMoreElements()) {
             Object next = context.getAttribute(keys.nextElement());
@@ -76,6 +77,7 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
 
     public Set<Entry<String, Object>> entrySet() {
         Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
         Enumeration<String> keys = context.getAttributeNames();
         String key;
         while (keys.hasMoreElements()) {
@@ -108,6 +110,7 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
 
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
         Enumeration<String> keys = context.getAttributeNames();
         while (keys.hasMoreElements()) {
             set.add(keys.nextElement());
@@ -144,6 +147,7 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
 
     public int size() {
         int n = 0;
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
         Enumeration<String> keys = context.getAttributeNames();
         while (keys.hasMoreElements()) {
             keys.nextElement();
@@ -156,6 +160,7 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
     public Collection<Object> values() {
         List<Object> list = new ArrayList<Object>();
 
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
         Enumeration<String> keys = context.getAttributeNames();
 
         while (keys.hasMoreElements()) {
