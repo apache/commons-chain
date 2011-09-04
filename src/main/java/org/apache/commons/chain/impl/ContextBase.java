@@ -351,6 +351,20 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
 
 
     /**
+     * {@inheritDoc}
+     */
+    public <T> T retrieve(String key) {
+        Object valueObject = get(key);
+        if (valueObject == null) {
+            return null;
+        }
+        @SuppressWarnings("unchecked") // will throw ClassCastException if type are not assignable
+        T value = (T) valueObject;
+        return value;
+    }
+
+
+    /**
      * <p>Override the default <code>Map</code> behavior to call the
      * <code>put()</code> method individually for each key-value pair
      * in the specified <code>Map</code>.</p>

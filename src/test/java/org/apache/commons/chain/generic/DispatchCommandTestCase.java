@@ -137,6 +137,10 @@ public class DispatchCommandTestCase extends TestCase {
             return this.wrappedContext.get(o);
         }
 
+        public <T> T retrieve(String key) {
+            return wrappedContext.retrieve(key);
+        }
+
         @Override
         public Object put(String key, Object value) {
             return this.wrappedContext.put(key, value);

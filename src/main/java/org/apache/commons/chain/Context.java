@@ -62,5 +62,19 @@ import java.util.Map;
 
 public interface Context extends Map<String, Object> {
 
+    /**
+     * That method enhances the {@link #get(Object)} method that helps users
+     * avoid the redundant code of type cast/checking when assignments are already known.
+     *
+     * It throws {@code ClassCastException} if types are not assignable.
+     *
+     * @param <T> the target assignment type
+     * @param key the key whose associated value is to be returned
+     * @return the value to which the specified key is mapped,
+     *         or {@code null} if this map contains no mapping for the key
+     * @see #get(Object)
+     * @since 2.0
+     */
+    <T> T retrieve(String key);
 
 }
