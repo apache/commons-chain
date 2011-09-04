@@ -218,7 +218,7 @@ public class ChainListener implements ServletContextListener {
             ChainResources.parseClassResources
                 (catalog, classResources, parser);
             ChainResources.parseWebResources
-                (catalog, context, webResources, parser);
+                (context, webResources, parser);
         }
 
         // Expose the completed catalog (if requested)
