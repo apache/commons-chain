@@ -242,15 +242,16 @@ public class ChainListener implements ServletContextListener {
     private void parseJarResources(ServletContext context,
                                    ConfigParser parser, Log log) {
 
-        Set jars = context.getResourcePaths("/WEB-INF/lib");
+        @SuppressWarnings( "unchecked" ) // it is known that always returns String inside
+        Set<String> jars = context.getResourcePaths("/WEB-INF/lib");
         if (jars == null) {
-            jars = new HashSet();
+            jars = new HashSet<String>();
         }
         String path = null;
-        Iterator paths = jars.iterator();
+        Iterator<String> paths = jars.iterator();
         while (paths.hasNext()) {
 
-            path = (String) paths.next();
+            path = paths.next();
             if (!path.endsWith(".jar")) {
                 continue;
             }
@@ -306,12 +307,13 @@ public class ChainListener implements ServletContextListener {
     private void parseJarResources(Catalog catalog, ServletContext context,
                                    ConfigParser parser, Log log) {
 
-        Set jars = context.getResourcePaths("/WEB-INF/lib");
+        @SuppressWarnings( "unchecked" ) // it is known that always returns String inside
+        Set<String> jars = context.getResourcePaths("/WEB-INF/lib");
         if (jars == null) {
-            jars = new HashSet();
+            jars = new HashSet<String>();
         }
         String path = null;
-        Iterator paths = jars.iterator();
+        Iterator<String> paths = jars.iterator();
         while (paths.hasNext()) {
 
             path = (String) paths.next();
