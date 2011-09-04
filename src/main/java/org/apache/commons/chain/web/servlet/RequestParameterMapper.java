@@ -38,7 +38,7 @@ import org.apache.commons.chain.generic.LookupCommand;
  * @author Craig R. McClanahan
  */
 
-public class RequestParameterMapper<C extends Context> extends LookupCommand<C> implements Command<C> {
+public class RequestParameterMapper<C extends Context> extends LookupCommand<C> {
 
 
     // ------------------------------------------------------ Instance Variables
