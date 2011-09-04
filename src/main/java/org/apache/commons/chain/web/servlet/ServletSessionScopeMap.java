@@ -68,6 +68,7 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         if (value == null || !sessionExists()) {
             return false;
         }
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
         Enumeration<String> keys = session.getAttributeNames();
         while (keys.hasMoreElements()) {
             Object next = session.getAttribute(keys.nextElement());
@@ -82,6 +83,7 @@ final class ServletSessionScopeMap implements Map<String, Object> {
     public Set<Entry<String, Object>> entrySet() {
         Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
         if (sessionExists()) {
+            @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
             Enumeration<String> keys = session.getAttributeNames();
             String key;
             while (keys.hasMoreElements()) {
@@ -122,6 +124,7 @@ final class ServletSessionScopeMap implements Map<String, Object> {
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
         if (sessionExists()) {
+            @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
             Enumeration<String> keys = session.getAttributeNames();
             while (keys.hasMoreElements()) {
                 set.add(keys.nextElement());
@@ -170,6 +173,7 @@ final class ServletSessionScopeMap implements Map<String, Object> {
     public int size() {
         int n = 0;
         if (sessionExists()) {
+            @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
             Enumeration<String> keys = session.getAttributeNames();
             while (keys.hasMoreElements()) {
                 keys.nextElement();
@@ -183,6 +187,7 @@ final class ServletSessionScopeMap implements Map<String, Object> {
     public Collection<Object> values() {
         List<Object> list = new ArrayList<Object>();
         if (sessionExists()) {
+            @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
             Enumeration<String> keys = session.getAttributeNames();
             while (keys.hasMoreElements()) {
                 list.add(session.getAttribute(keys.nextElement()));
