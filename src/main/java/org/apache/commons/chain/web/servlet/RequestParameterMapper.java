@@ -34,10 +34,11 @@ import org.apache.commons.chain.generic.LookupCommand;
  * "/foo.execute?command=bar" would cause the "/bar" command to be loaded
  * and executed.</p>
  *
+ * @param <C> Type of the context associated with this command
  * @author Craig R. McClanahan
  */
 
-public class RequestParameterMapper extends LookupCommand implements Command {
+public class RequestParameterMapper<C extends Context> extends LookupCommand<C> implements Command<C> {
 
 
     // ------------------------------------------------------ Instance Variables
@@ -120,7 +121,7 @@ public class RequestParameterMapper extends LookupCommand implements Command {
      *
      * @since Chain 1.2
      */
-    protected String getCommandName(Context context) {
+    protected String getCommandName(C context) {
 
         // Look up the specified request parameter for this request
         ServletWebContext swcontext = (ServletWebContext) context;
@@ -141,7 +142,7 @@ public class RequestParameterMapper extends LookupCommand implements Command {
      *
      * @since Chain 1.2
      */
-    protected Catalog getCatalog(Context context) {
+    protected Catalog getCatalog(C context) {
         Catalog catalog = (Catalog) context.get(getCatalogKey());
         if (catalog == null) {
             catalog = super.getCatalog(context);
