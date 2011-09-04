@@ -37,7 +37,7 @@ import org.apache.commons.chain.generic.LookupCommand;
  * @author Craig R. McClanahan
  */
 
-public class PathInfoMapper<C extends Context> extends LookupCommand<C> implements Command<C> {
+public class PathInfoMapper<C extends Context> extends LookupCommand<C> {
 
 
     // ------------------------------------------------------ Instance Variables
