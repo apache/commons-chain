@@ -38,6 +38,12 @@ import org.apache.commons.chain.web.WebContext;
 public class ServletWebContext extends WebContext {
 
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5852676730841544890L;
+
+
     // ------------------------------------------------------------ Constructors
 
 
