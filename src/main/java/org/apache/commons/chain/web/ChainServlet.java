@@ -215,7 +215,7 @@ public class ChainServlet extends HttpServlet {
                 (context, webResources, parser);
         } else {
             ChainResources.parseClassResources
-                (catalog, classResources, parser);
+                (classResources, parser);
             ChainResources.parseWebResources
                 (context, webResources, parser);
         }
