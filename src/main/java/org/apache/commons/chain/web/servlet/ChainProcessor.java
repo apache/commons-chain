@@ -188,7 +188,7 @@ public class ChainProcessor extends ChainServlet {
         if (attribute == null) {
             request.setAttribute(CATALOG_DEFAULT, theCatalog);
         }
-        Command command = theCatalog.getCommand(this.command);
+        Command<ServletWebContext> command = theCatalog.getCommand(this.command);
         try {
             command.execute(context);
         } catch (Exception e) {
