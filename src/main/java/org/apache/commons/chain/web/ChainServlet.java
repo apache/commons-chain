@@ -100,6 +100,12 @@ public class ChainServlet extends HttpServlet {
 
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = -6545081938506661333L;
+
+
+    /**
      * <p>The name of the context init parameter containing the name of the
      * servlet context attribute under which our resulting {@link Catalog}
      * will be stored.</p>
