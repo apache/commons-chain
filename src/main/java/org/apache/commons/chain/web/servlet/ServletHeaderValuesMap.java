@@ -84,10 +84,12 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
 
     public Set<Entry<String, String[]>> entrySet() {
         Set<Entry<String, String[]>> set = new HashSet<Entry<String, String[]>>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
         Enumeration<String> keys = request.getHeaderNames();
         String key;
         while (keys.hasMoreElements()) {
             key = keys.nextElement();
+            @SuppressWarnings( "unchecked" ) // it is known that header values are String
             Enumeration<String> values = request.getHeaders(key);
             String[] valuesArray = enumerationToArray(values);
             /* Previously the API was returning an Set<Entry<String, Enumeration<String>>
@@ -106,6 +108,7 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
 
 
     public String[] get(Object key) {
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
         Enumeration<String> values = request.getHeaders(key(key));
         String[] valuesArray = enumerationToArray(values);
 
@@ -125,6 +128,7 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
 
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
         Enumeration<String> keys = request.getHeaderNames();
         while (keys.hasMoreElements()) {
             set.add(keys.nextElement());
@@ -150,7 +154,8 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
 
     public int size() {
         int n = 0;
-        Enumeration keys = request.getHeaderNames();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
+        Enumeration<String> keys = request.getHeaderNames();
         while (keys.hasMoreElements()) {
             keys.nextElement();
             n++;
@@ -161,9 +166,11 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
 
     public Collection<String[]> values() {
         List<String[]> list = new ArrayList<String[]>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
         Enumeration<String> keys = request.getHeaderNames();
         while (keys.hasMoreElements()) {
             String key = keys.nextElement();
+            @SuppressWarnings( "unchecked" ) // it is known that header values are String
             Enumeration<String> values = request.getHeaders(key);
             String[] valuesArray = enumerationToArray(values);
             list.add(valuesArray);
