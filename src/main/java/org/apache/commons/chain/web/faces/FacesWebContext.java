@@ -42,6 +42,12 @@ public class FacesWebContext extends WebContext {
 
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = -1429681424077509130L;
+
+
+    /**
      * <p>Construct an uninitialized {@link FacesWebContext} instance.</p>
      */
     public FacesWebContext() {
