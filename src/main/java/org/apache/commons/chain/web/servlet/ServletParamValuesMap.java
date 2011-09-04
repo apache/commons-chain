@@ -64,6 +64,7 @@ final class ServletParamValuesMap implements Map<String, String[]> {
 
     public Set<Entry<String, String[]>> entrySet() {
         Set<Entry<String, String[]>> set = new HashSet<Entry<String, String[]>>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
         Enumeration<String> keys = request.getParameterNames();
         String key;
         while (keys.hasMoreElements()) {
@@ -96,6 +97,7 @@ final class ServletParamValuesMap implements Map<String, String[]> {
 
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
         Enumeration<String> keys = request.getParameterNames();
         while (keys.hasMoreElements()) {
             set.add(keys.nextElement());
@@ -121,6 +123,7 @@ final class ServletParamValuesMap implements Map<String, String[]> {
 
     public int size() {
         int n = 0;
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
         Enumeration<String> keys = request.getParameterNames();
         while (keys.hasMoreElements()) {
             keys.nextElement();
@@ -131,7 +134,8 @@ final class ServletParamValuesMap implements Map<String, String[]> {
 
 
     public Collection<String[]> values() {
-        List<String[]> list = new ArrayList();
+        List<String[]> list = new ArrayList<String[]>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
         Enumeration<String> keys = request.getParameterNames();
         while (keys.hasMoreElements()) {
             list.add(request.getParameterValues((String) keys.nextElement()));
