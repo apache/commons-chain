@@ -119,7 +119,7 @@ public class PathInfoMapper<C extends Context> extends LookupCommand<C> {
      * @since Chain 1.2
      */
     protected Catalog getCatalog(C context) {
-        Catalog catalog = (Catalog) context.get(getCatalogKey());
+        Catalog catalog = (Catalog) context.get(getCatalogName());
         if (catalog == null) {
             catalog = super.getCatalog(context);
         }
