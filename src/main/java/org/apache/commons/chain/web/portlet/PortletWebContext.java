@@ -39,6 +39,12 @@ import org.apache.commons.chain.web.WebContext;
 public class PortletWebContext extends WebContext {
 
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6928446126906631819L;
+
+
     // ------------------------------------------------------------ Constructors
 
 
