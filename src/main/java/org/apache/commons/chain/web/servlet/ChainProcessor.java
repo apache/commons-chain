@@ -61,6 +61,12 @@ public class ChainProcessor extends ChainServlet {
 
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = -6817532768031279260L;
+
+
+    /**
      * <p>The name of the servlet init parameter containing the name of the
      * {@link Catalog} to use for processing incoming requests.</p>
      */
