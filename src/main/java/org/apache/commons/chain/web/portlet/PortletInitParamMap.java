@@ -68,7 +68,7 @@ final class PortletInitParamMap implements Map<String, String> {
         String key;
         while (keys.hasMoreElements()) {
             key = keys.nextElement();
-            set.add(new MapEntry(key, context.getInitParameter(key), false));
+            set.add(new MapEntry<String, String>(key, context.getInitParameter(key), false));
         }
         return (set);
     }
