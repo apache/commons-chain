@@ -126,7 +126,7 @@ public class RequestParameterMapper<C extends Context> extends LookupCommand<C> 
         // Look up the specified request parameter for this request
         ServletWebContext swcontext = (ServletWebContext) context;
         HttpServletRequest request = swcontext.getRequest();
-        String value = request.getParameter(getParameter());
+        String value = request.getParameter(getCatalogName());
         return value;
 
     }
