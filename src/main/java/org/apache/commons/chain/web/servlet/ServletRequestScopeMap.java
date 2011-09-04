@@ -63,6 +63,7 @@ final class ServletRequestScopeMap implements Map<String, Object> {
         if (value == null) {
             return (false);
         }
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
         Enumeration<String> keys = request.getAttributeNames();
         while (keys.hasMoreElements()) {
             Object next = request.getAttribute(keys.nextElement());
@@ -76,6 +77,7 @@ final class ServletRequestScopeMap implements Map<String, Object> {
 
     public Set<Entry<String, Object>> entrySet() {
         Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
         Enumeration<String> keys = request.getAttributeNames();
         String key;
         while (keys.hasMoreElements()) {
@@ -108,6 +110,7 @@ final class ServletRequestScopeMap implements Map<String, Object> {
 
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
         Enumeration<String> keys = request.getAttributeNames();
         while (keys.hasMoreElements()) {
             set.add(keys.nextElement());
@@ -144,7 +147,8 @@ final class ServletRequestScopeMap implements Map<String, Object> {
 
     public int size() {
         int n = 0;
-        Enumeration keys = request.getAttributeNames();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+        Enumeration<String> keys = request.getAttributeNames();
         while (keys.hasMoreElements()) {
             keys.nextElement();
             n++;
@@ -155,6 +159,7 @@ final class ServletRequestScopeMap implements Map<String, Object> {
 
     public Collection<Object> values() {
         List<Object> list = new ArrayList<Object>();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
         Enumeration<String> keys = request.getAttributeNames();
         while (keys.hasMoreElements()) {
             list.add(request.getAttribute(keys.nextElement()));
