@@ -264,7 +264,7 @@ public class PortletWebContext extends WebContext {
 
         if ((header == null) && (request != null)) {
         //            header = new PortletHeaderMap(request);
-        header = Collections.EMPTY_MAP;
+        header = Collections.emptyMap();
         }
         return (header);
 
@@ -279,7 +279,7 @@ public class PortletWebContext extends WebContext {
 
         if ((headerValues == null) && (request != null)) {
         //            headerValues = new PortletHeaderValuesMap(request);
-        headerValues = Collections.EMPTY_MAP;
+        headerValues = Collections.emptyMap();
         }
         return (headerValues);
 
@@ -339,7 +339,7 @@ public class PortletWebContext extends WebContext {
      */
     public Map<String, Cookie> getCookies() {
 
-        return Collections.EMPTY_MAP;
+        return Collections.emptyMap();
 
     }
 
