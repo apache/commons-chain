@@ -108,7 +108,7 @@ public class CatalogBase implements Catalog {
      * Returns the map of named {@link Command}s, keyed by name.
      *
      * @return The map of named {@link Command}s, keyed by name.
-     * @since 3.0
+     * @since 2.0
      */
     public Map<String, Command<? extends Context>> getCommands() {
         return unmodifiableMap(commands);

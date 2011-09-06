@@ -234,7 +234,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      * @return true, if the configuration of our commands list
      * has been frozen by a call to the <code>execute()</code> method,
      * false otherwise.
-     * @since 3.0
+     * @since 2.0
      */
     public boolean isFrozen() {
         return frozen;
