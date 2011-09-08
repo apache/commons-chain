@@ -24,11 +24,13 @@ import org.apache.commons.chain.Context;
 /**
  * <p>Remove any context attribute stored under the <code>fromKey</code>.</p>
  *
+ * @param <C> Type of the context associated with this command
+ *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public class RemoveCommand implements Command {
+public class RemoveCommand<C extends Context> implements Command<C> {
 
 
     // -------------------------------------------------------------- Properties
@@ -72,7 +74,7 @@ public class RemoveCommand implements Command {
      * @return <code>false</code> so that processing will continue
      * @throws Exception if and error occurs.
      */
-    public boolean execute(Context context) throws Exception {
+    public boolean execute(C context) throws Exception {
 
     context.remove(getFromKey());
     return (false);

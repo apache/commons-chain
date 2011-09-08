@@ -14,25 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain.config;
-
-
-import org.apache.commons.chain.impl.ChainBase;
-
 
 /**
- * <p>Test implementation of <code>Chain</code> that exposes the
- * <code>getCommands()</code> method publicy.</p>
+ * Convenient base implementations of Chain of Responsibility Pattern
+ * contracts from <code>org.apache.commons.chain</code>.
  */
-
-public class TestChain extends ChainBase {
-
-
-    /*public Command[] getCommands() {
-
-    return (commands);
-
-    }*/
-
-
-}
+package org.apache.commons.chain.impl;

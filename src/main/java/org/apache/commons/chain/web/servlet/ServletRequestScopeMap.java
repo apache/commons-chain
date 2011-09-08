@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +36,7 @@ import org.apache.commons.chain.web.MapEntry;
  * @version $Revision$ $Date$
  */
 
-final class ServletRequestScopeMap implements Map {
+final class ServletRequestScopeMap implements Map<String, Object> {
 
 
     public ServletRequestScopeMap(HttpServletRequest request) {
@@ -49,9 +48,8 @@ final class ServletRequestScopeMap implements Map {
 
 
     public void clear() {
-        Iterator keys = keySet().iterator();
-        while (keys.hasNext()) {
-            request.removeAttribute((String) keys.next());
+        for (String key : keySet()) {
+            request.removeAttribute(key);
         }
     }
 
@@ -65,9 +63,10 @@ final class ServletRequestScopeMap implements Map {
         if (value == null) {
             return (false);
         }
-        Enumeration keys = request.getAttributeNames();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+        Enumeration<String> keys = request.getAttributeNames();
         while (keys.hasMoreElements()) {
-            Object next = request.getAttribute((String) keys.nextElement());
+            Object next = request.getAttribute(keys.nextElement());
             if (value.equals(next)) {
                 return (true);
             }
@@ -76,13 +75,14 @@ final class ServletRequestScopeMap implements Map {
     }
 
 
-    public Set entrySet() {
-        Set set = new HashSet();
-        Enumeration keys = request.getAttributeNames();
+    public Set<Entry<String, Object>> entrySet() {
+        Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+        Enumeration<String> keys = request.getAttributeNames();
         String key;
         while (keys.hasMoreElements()) {
-            key = (String) keys.nextElement();
-            set.add(new MapEntry(key, request.getAttribute(key), true));
+            key = keys.nextElement();
+            set.add(new MapEntry<String, Object>(key, request.getAttribute(key), true));
         }
         return (set);
     }
@@ -108,9 +108,10 @@ final class ServletRequestScopeMap implements Map {
     }
 
 
-    public Set keySet() {
-        Set set = new HashSet();
-        Enumeration keys = request.getAttributeNames();
+    public Set<String> keySet() {
+        Set<String> set = new HashSet<String>();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+        Enumeration<String> keys = request.getAttributeNames();
         while (keys.hasMoreElements()) {
             set.add(keys.nextElement());
         }
@@ -118,23 +119,21 @@ final class ServletRequestScopeMap implements Map {
     }
 
 
-    public Object put(Object key, Object value) {
+    public Object put(String key, Object value) {
         if (value == null) {
             return (remove(key));
         }
-        String skey = key(key);
-        Object previous = request.getAttribute(skey);
-        request.setAttribute(skey, value);
+        Object previous = request.getAttribute(key);
+        request.setAttribute(key, value);
         return (previous);
     }
 
 
-    public void putAll(Map map) {
-        Iterator entries = map.entrySet().iterator();
-        while (entries.hasNext()) {
-            Map.Entry entry = (Map.Entry)entries.next();
-            put(entry.getKey(), entry.getValue());
+    public void putAll(Map<? extends String, ? extends Object> map) {
+        for (Entry<? extends String, ? extends Object> entry : map.entrySet()) {
+            put(key(entry.getKey()), entry.getValue());
         }
+
     }
 
 
@@ -148,7 +147,8 @@ final class ServletRequestScopeMap implements Map {
 
     public int size() {
         int n = 0;
-        Enumeration keys = request.getAttributeNames();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+        Enumeration<String> keys = request.getAttributeNames();
         while (keys.hasMoreElements()) {
             keys.nextElement();
             n++;
@@ -157,11 +157,12 @@ final class ServletRequestScopeMap implements Map {
     }
 
 
-    public Collection values() {
-        List list = new ArrayList();
-        Enumeration keys = request.getAttributeNames();
+    public Collection<Object> values() {
+        List<Object> list = new ArrayList<Object>();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+        Enumeration<String> keys = request.getAttributeNames();
         while (keys.hasMoreElements()) {
-            list.add(request.getAttribute((String) keys.nextElement()));
+            list.add(request.getAttribute(keys.nextElement()));
         }
         return (list);
     }

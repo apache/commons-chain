@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,7 +37,7 @@ import org.apache.commons.chain.web.MapEntry;
  * @version $Revision$ $Date$
  */
 
-final class ServletSessionScopeMap implements Map {
+final class ServletSessionScopeMap implements Map<String, Object> {
 
 
     public ServletSessionScopeMap(HttpServletRequest request) {
@@ -53,104 +52,91 @@ final class ServletSessionScopeMap implements Map {
 
     public void clear() {
         if (sessionExists()) {
-            Iterator keys = keySet().iterator();
-            while (keys.hasNext()) {
-                session.removeAttribute((String) keys.next());
+            for (String key : keySet()) {
+                session.removeAttribute(key);
             }
         }
     }
 
 
     public boolean containsKey(Object key) {
-        if (sessionExists()) {
-            return (session.getAttribute(key(key)) != null);
-        } else {
-            return false;
-        }
+        return sessionExists() && session.getAttribute(key(key)) != null;
     }
 
 
     public boolean containsValue(Object value) {
         if (value == null || !sessionExists()) {
-            return (false);
+            return false;
         }
-        Enumeration keys = session.getAttributeNames();
+        @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+        Enumeration<String> keys = session.getAttributeNames();
         while (keys.hasMoreElements()) {
-            Object next = session.getAttribute((String) keys.nextElement());
+            Object next = session.getAttribute(keys.nextElement());
             if (value.equals(next)) {
-                return (true);
+                return true;
             }
         }
-        return (false);
+        return false;
     }
 
 
-    public Set entrySet() {
-        Set set = new HashSet();
+    public Set<Entry<String, Object>> entrySet() {
+        Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
         if (sessionExists()) {
-            Enumeration keys = session.getAttributeNames();
+            @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+            Enumeration<String> keys = session.getAttributeNames();
             String key;
             while (keys.hasMoreElements()) {
-                key = (String) keys.nextElement();
-                set.add(new MapEntry(key, session.getAttribute(key), true));
+                key = keys.nextElement();
+                set.add(new MapEntry<String, Object>(key, session.getAttribute(key), true));
             }
         }
-        return (set);
+        return set;
     }
 
 
     public boolean equals(Object o) {
-        if (sessionExists()) {
-            return (session.equals(o));
-        } else {
-            return false;
-        }
+        return sessionExists() && session.equals(o);
     }
 
 
     public Object get(Object key) {
         if (sessionExists()) {
-            return (session.getAttribute(key(key)));
-        } else {
-            return null;
+            return session.getAttribute(key(key));
         }
+        return null;
     }
 
 
     public int hashCode() {
         if (sessionExists()) {
-            return (session.hashCode());
-        } else {
-            return 0;
+            return session.hashCode();
         }
+        return 0;
     }
 
 
     public boolean isEmpty() {
-        if (sessionExists() &&
-            session.getAttributeNames().hasMoreElements()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !sessionExists() || !session.getAttributeNames().hasMoreElements();
     }
 
 
-    public Set keySet() {
-        Set set = new HashSet();
+    public Set<String> keySet() {
+        Set<String> set = new HashSet<String>();
         if (sessionExists()) {
-            Enumeration keys = session.getAttributeNames();
+            @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+            Enumeration<String> keys = session.getAttributeNames();
             while (keys.hasMoreElements()) {
                 set.add(keys.nextElement());
             }
         }
-        return (set);
+        return set;
     }
 
 
-    public Object put(Object key, Object value) {
+    public Object put(String key, Object value) {
         if (value == null) {
-            return (remove(key));
+            return remove(key);
         }
 
         // Ensure the Session is created, if it
@@ -160,18 +146,15 @@ final class ServletSessionScopeMap implements Map {
             request = null;
         }
 
-        String skey = key(key);
-        Object previous = session.getAttribute(skey);
-        session.setAttribute(skey, value);
-        return (previous);
+        Object previous = session.getAttribute(key);
+        session.setAttribute(key, value);
+        return previous;
     }
 
 
-    public void putAll(Map map) {
-        Iterator entries = map.entrySet().iterator();
-        while (entries.hasNext()) {
-            Map.Entry entry = (Map.Entry)entries.next();
-            put(entry.getKey(), entry.getValue());
+    public void putAll(Map<? extends String, ? extends Object> map) {
+        for (Entry<? extends String, ? extends Object> entry : map.entrySet()) {
+            put(key(entry.getKey()), entry.getValue());
         }
     }
 
@@ -181,46 +164,47 @@ final class ServletSessionScopeMap implements Map {
             String skey = key(key);
             Object previous = session.getAttribute(skey);
             session.removeAttribute(skey);
-            return (previous);
-        } else {
-            return (null);
+            return previous;
         }
+        return null;
     }
 
 
     public int size() {
         int n = 0;
         if (sessionExists()) {
-            Enumeration keys = session.getAttributeNames();
+            @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+            Enumeration<String> keys = session.getAttributeNames();
             while (keys.hasMoreElements()) {
                 keys.nextElement();
                 n++;
             }
         }
-        return (n);
+        return n;
     }
 
 
-    public Collection values() {
-        List list = new ArrayList();
+    public Collection<Object> values() {
+        List<Object> list = new ArrayList<Object>();
         if (sessionExists()) {
-            Enumeration keys = session.getAttributeNames();
+            @SuppressWarnings( "unchecked" ) // it is known that attribute names are String
+            Enumeration<String> keys = session.getAttributeNames();
             while (keys.hasMoreElements()) {
-                list.add(session.getAttribute((String) keys.nextElement()));
+                list.add(session.getAttribute(keys.nextElement()));
             }
         }
-        return (list);
+        return list;
     }
 
 
     private String key(Object key) {
         if (key == null) {
             throw new IllegalArgumentException();
-        } else if (key instanceof String) {
-            return ((String) key);
-        } else {
-            return (key.toString());
         }
+        if (key instanceof String) {
+            return (String) key;
+        }
+        return key.toString();
     }
 
     private boolean sessionExists() {
@@ -230,11 +214,7 @@ final class ServletSessionScopeMap implements Map {
                 request = null;
             }
         }
-        if (session != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return session != null;
     }
 
 }

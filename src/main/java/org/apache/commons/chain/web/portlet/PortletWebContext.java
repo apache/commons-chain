@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+import javax.servlet.http.Cookie;
 import org.apache.commons.chain.web.WebContext;
 
 
@@ -36,6 +37,12 @@ import org.apache.commons.chain.web.WebContext;
  */
 
 public class PortletWebContext extends WebContext {
+
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6928446126906631819L;
 
 
     // ------------------------------------------------------------ Constructors
@@ -72,74 +79,74 @@ public class PortletWebContext extends WebContext {
      * <p>The lazily instantiated <code>Map</code> of application scope
      * attributes.</p>
      */
-    private Map applicationScope = null;
+    private Map<String, Object> applicationScope = null;
 
 
     /**
      * <p>The <code>PortletContext</code> for this web application.</p>
      */
-    protected PortletContext context = null;
+    private PortletContext context = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of header name-value
      * combinations (immutable).</p>
      */
-    private Map header = null;
+    private Map<String, String> header = null;
 
 
     /**
      * <p>The lazily instantitated <code>Map</code> of header name-values
      * combinations (immutable).</p>
      */
-    private Map headerValues = null;
+    private Map<String, String[]> headerValues = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of context initialization
      * parameters.</p>
      */
-    private Map initParam = null;
+    private Map<String, String> initParam = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request
      * parameter name-value.</p>
      */
-    private Map param = null;
+    private Map<String, String> param = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request
      * parameter name-values.</p>
      */
-    private Map paramValues = null;
+    private Map<String, String[]> paramValues = null;
 
 
     /**
      * <p>The <code>PortletRequest</code> for this request.</p>
      */
-    protected PortletRequest request = null;
+    private PortletRequest request = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request scope
      * attributes.</p>
      */
-    private Map requestScope = null;
+    private Map<String, Object> requestScope = null;
 
 
     /**
      * <p>The <code>PortletResponse</code> for this request.</p>
      */
-    protected PortletResponse response = null;
+    private PortletResponse response = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of session scope
      * attributes.</p>
      */
-    private Map sessionScope = null;
+    private Map<String, Object> sessionScope = null;
 
 
     // ---------------------------------------------------------- Public Methods
@@ -238,7 +245,7 @@ public class PortletWebContext extends WebContext {
      *
      * @return Application scope Map.
      */
-    public Map getApplicationScope() {
+    public Map<String, Object> getApplicationScope() {
 
         if ((applicationScope == null) && (context != null)) {
             applicationScope = new PortletApplicationScopeMap(context);
@@ -253,27 +260,26 @@ public class PortletWebContext extends WebContext {
      *
      * @return Header values Map.
      */
-    public Map getHeader() {
+    public Map<String, String> getHeader() {
 
         if ((header == null) && (request != null)) {
         //            header = new PortletHeaderMap(request);
-        header = Collections.EMPTY_MAP;
+        header = Collections.emptyMap();
         }
         return (header);
 
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
      *
      * @return Header values Map.
      */
-    public Map getHeaderValues() {
+    public Map<String, String[]> getHeaderValues() {
 
         if ((headerValues == null) && (request != null)) {
         //            headerValues = new PortletHeaderValuesMap(request);
-        headerValues = Collections.EMPTY_MAP;
+        headerValues = Collections.emptyMap();
         }
         return (headerValues);
 
@@ -285,7 +291,7 @@ public class PortletWebContext extends WebContext {
      *
      * @return Initialization parameter Map.
      */
-    public Map getInitParam() {
+    public Map<String, String> getInitParam() {
 
         if ((initParam == null) && (context != null)) {
             initParam = new PortletInitParamMap(context);
@@ -300,7 +306,7 @@ public class PortletWebContext extends WebContext {
      *
      * @return Request parameter Map.
      */
-    public Map getParam() {
+    public Map<String, String> getParam() {
 
         if ((param == null) && (request != null)) {
             param = new PortletParamMap(request);
@@ -315,7 +321,7 @@ public class PortletWebContext extends WebContext {
      *
      * @return Request parameter Map.
      */
-    public Map getParamValues() {
+    public Map<String, String[]> getParamValues() {
 
         if ((paramValues == null) && (request != null)) {
             paramValues = new PortletParamValuesMap(request);
@@ -331,9 +337,9 @@ public class PortletWebContext extends WebContext {
      * @return An empty Map.
      * @since Chain 1.1
      */
-    public Map getCookies() {
+    public Map<String, Cookie> getCookies() {
 
-        return Collections.EMPTY_MAP;
+        return Collections.emptyMap();
 
     }
 
@@ -343,7 +349,7 @@ public class PortletWebContext extends WebContext {
      *
      * @return Request scope Map.
      */
-    public Map getRequestScope() {
+    public Map<String, Object> getRequestScope() {
 
         if ((requestScope == null) && (request != null)) {
             requestScope = new PortletRequestScopeMap(request);
@@ -358,7 +364,7 @@ public class PortletWebContext extends WebContext {
      *
      * @return Session scope Map.
      */
-    public Map getSessionScope() {
+    public Map<String, Object> getSessionScope() {
 
         if ((sessionScope == null) && (request != null)) {
             sessionScope =

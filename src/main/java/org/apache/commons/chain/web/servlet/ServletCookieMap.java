@@ -35,7 +35,7 @@ import org.apache.commons.chain.web.MapEntry;
  * @since Chain 1.1
  */
 
-final class ServletCookieMap implements Map {
+final class ServletCookieMap implements Map<String, Cookie> {
 
 
     public ServletCookieMap(HttpServletRequest request) {
@@ -69,12 +69,12 @@ final class ServletCookieMap implements Map {
     }
 
 
-    public Set entrySet() {
-        Set set = new HashSet();
+    public Set<Entry<String, Cookie>> entrySet() {
+        Set<Entry<String, Cookie>> set = new HashSet<Entry<String, Cookie>>();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
-                set.add(new MapEntry(cookies[i].getName(), cookies[i], false));
+                set.add(new MapEntry<String, Cookie>(cookies[i].getName(), cookies[i], false));
             }
         }
         return (set);
@@ -86,7 +86,7 @@ final class ServletCookieMap implements Map {
     }
 
 
-    public Object get(Object key) {
+    public Cookie get(Object key) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
@@ -109,8 +109,8 @@ final class ServletCookieMap implements Map {
     }
 
 
-    public Set keySet() {
-        Set set = new HashSet();
+    public Set<String> keySet() {
+        Set<String> set = new HashSet<String>();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
@@ -121,17 +121,16 @@ final class ServletCookieMap implements Map {
     }
 
 
-    public Object put(Object key, Object value) {
+    public Cookie put(String key, Cookie value) {
+        throw new UnsupportedOperationException();
+    }
+
+    public void putAll(Map<? extends String, ? extends Cookie> map) {
         throw new UnsupportedOperationException();
     }
 
 
-    public void putAll(Map map) {
-        throw new UnsupportedOperationException();
-    }
-
-
-    public Object remove(Object key) {
+    public Cookie remove(Object key) {
         throw new UnsupportedOperationException();
     }
 
@@ -142,8 +141,8 @@ final class ServletCookieMap implements Map {
     }
 
 
-    public Collection values() {
-        List list = new ArrayList(size());
+    public Collection<Cookie> values() {
+        List<Cookie> list = new ArrayList<Cookie>(size());
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {

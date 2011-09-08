@@ -14,25 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain.config;
-
-
-import org.apache.commons.chain.impl.ChainBase;
-
 
 /**
- * <p>Test implementation of <code>Chain</code> that exposes the
- * <code>getCommands()</code> method publicy.</p>
+ * Basis for specialized <code>Context</code> implementations suitable for use
+ * in web applications, and generic <code>Command</code> implementations useful
+ * across web application environments.
  */
-
-public class TestChain extends ChainBase {
-
-
-    /*public Command[] getCommands() {
-
-    return (commands);
-
-    }*/
-
-
-}
+package org.apache.commons.chain.web;

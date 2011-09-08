@@ -25,11 +25,13 @@ import org.apache.commons.chain.Context;
  * <p>Copy a specified literal value, or a context attribute stored under
  * the <code>fromKey</code> (if any), to the <code>toKey</code>.</p>
  *
+ * @param <C> Type of the context associated with this command
+ *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public class CopyCommand implements Command {
+public class CopyCommand<C extends Context> implements Command<C> {
 
 
     // -------------------------------------------------------------- Properties
@@ -125,7 +127,7 @@ public class CopyCommand implements Command {
      * @return <code>false</code> so that processing will continue
      * @throws Exception in the if an error occurs during execution.
      */
-    public boolean execute(Context context) throws Exception {
+    public boolean execute(C context) throws Exception {
 
         Object value = this.value;
 

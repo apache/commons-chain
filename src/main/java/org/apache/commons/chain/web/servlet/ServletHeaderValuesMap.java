@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +36,7 @@ import org.apache.commons.chain.web.MapEntry;
  * @version $Revision$ $Date$
  */
 
-final class ServletHeaderValuesMap implements Map {
+final class ServletHeaderValuesMap implements Map<String, String[]> {
 
 
     public ServletHeaderValuesMap(HttpServletRequest request) {
@@ -63,9 +62,8 @@ final class ServletHeaderValuesMap implements Map {
             return (false);
         }
         String[] test = (String[]) value;
-        Iterator values = values().iterator();
-        while (values.hasNext()) {
-            String[] actual = (String[]) values.next();
+
+        for (String[] actual : values()) {
             if (test.length == actual.length) {
                 boolean matched = true;
                 for (int i = 0; i < test.length; i++) {
@@ -79,17 +77,26 @@ final class ServletHeaderValuesMap implements Map {
                 }
             }
         }
+
         return (false);
     }
 
 
-    public Set entrySet() {
-        Set set = new HashSet();
-        Enumeration keys = request.getHeaderNames();
+    public Set<Entry<String, String[]>> entrySet() {
+        Set<Entry<String, String[]>> set = new HashSet<Entry<String, String[]>>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
+        Enumeration<String> keys = request.getHeaderNames();
         String key;
         while (keys.hasMoreElements()) {
-            key = (String) keys.nextElement();
-            set.add(new MapEntry(key, request.getHeaders(key), false));
+            key = keys.nextElement();
+            @SuppressWarnings( "unchecked" ) // it is known that header values are String
+            Enumeration<String> values = request.getHeaders(key);
+            String[] valuesArray = enumerationToArray(values);
+            /* Previously the API was returning an Set<Entry<String, Enumeration<String>>
+             * I'm assuming that this was a bug because it violates the contract of how the
+             * mapping class behaves. So, I fixed it right here.
+             */
+            set.add(new MapEntry<String, String[]>(key, valuesArray, false));
         }
         return (set);
     }
@@ -100,13 +107,12 @@ final class ServletHeaderValuesMap implements Map {
     }
 
 
-    public Object get(Object key) {
-        List list = new ArrayList();
-        Enumeration values = request.getHeaders(key(key));
-        while (values.hasMoreElements()) {
-            list.add((String) values.nextElement());
-        }
-        return (((String[]) list.toArray(new String[list.size()])));
+    public String[] get(Object key) {
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
+        Enumeration<String> values = request.getHeaders(key(key));
+        String[] valuesArray = enumerationToArray(values);
+
+        return valuesArray;
     }
 
 
@@ -120,9 +126,10 @@ final class ServletHeaderValuesMap implements Map {
     }
 
 
-    public Set keySet() {
-        Set set = new HashSet();
-        Enumeration keys = request.getHeaderNames();
+    public Set<String> keySet() {
+        Set<String> set = new HashSet<String>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
+        Enumeration<String> keys = request.getHeaderNames();
         while (keys.hasMoreElements()) {
             set.add(keys.nextElement());
         }
@@ -130,24 +137,25 @@ final class ServletHeaderValuesMap implements Map {
     }
 
 
-    public Object put(Object key, Object value) {
+    public String[] put(String key, String[] value) {
         throw new UnsupportedOperationException();
     }
 
 
-    public void putAll(Map map) {
+    public void putAll(Map<? extends String, ? extends String[]> map) {
         throw new UnsupportedOperationException();
     }
 
 
-    public Object remove(Object key) {
+    public String[] remove(Object key) {
         throw new UnsupportedOperationException();
     }
 
 
     public int size() {
         int n = 0;
-        Enumeration keys = request.getHeaderNames();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
+        Enumeration<String> keys = request.getHeaderNames();
         while (keys.hasMoreElements()) {
             keys.nextElement();
             n++;
@@ -156,21 +164,34 @@ final class ServletHeaderValuesMap implements Map {
     }
 
 
-    public Collection values() {
-        List list = new ArrayList();
-        Enumeration keys = request.getHeaderNames();
+    public Collection<String[]> values() {
+        List<String[]> list = new ArrayList<String[]>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
+        Enumeration<String> keys = request.getHeaderNames();
         while (keys.hasMoreElements()) {
-            String key = (String) keys.nextElement();
-            List list1 = new ArrayList();
-            Enumeration values = request.getHeaders(key);
-            while (values.hasMoreElements()) {
-                list1.add((String) values.nextElement());
-            }
-            list.add(((String[]) list1.toArray(new String[list1.size()])));
+            String key = keys.nextElement();
+            @SuppressWarnings( "unchecked" ) // it is known that header values are String
+            Enumeration<String> values = request.getHeaders(key);
+            String[] valuesArray = enumerationToArray(values);
+            list.add(valuesArray);
         }
         return (list);
     }
 
+    /**
+     * Simple utility method that converts a string enumeration into a string array.
+     * @param values enumeration of strings
+     * @return enumeration represented as a string array
+     */
+    private static String[] enumerationToArray(Enumeration<String> values) {
+        ArrayList<String> list = new ArrayList<String>();
+
+        while (values.hasMoreElements()) {
+            list.add(values.nextElement());
+        }
+
+        return list.toArray(new String[list.size()]);
+    }
 
     private String key(Object key) {
         if (key == null) {

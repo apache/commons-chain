@@ -20,6 +20,7 @@ package org.apache.commons.chain.impl;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
@@ -28,7 +29,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.io.Serializable;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.apache.commons.chain.Context;
 
 
@@ -50,10 +52,16 @@ import org.apache.commons.chain.Context;
  * @version $Revision$ $Date$
  */
 
-public class ContextBase extends HashMap implements Context {
+public class ContextBase extends ConcurrentHashMap<String, Object> implements Context {
 
 
     // ------------------------------------------------------------ Constructors
+
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -3137668177106072122L;
 
 
     /**
@@ -80,7 +88,7 @@ public class ContextBase extends HashMap implements Context {
      * @exception UnsupportedOperationException if a local property does not
      *  have a write method.
      */
-    public ContextBase(Map map) {
+    public ContextBase(Map<? extends String, ? extends Object> map) {
 
         super(map);
         initialize();
@@ -104,7 +112,7 @@ public class ContextBase extends HashMap implements Context {
      * This collection is allocated only if there are any JavaBeans
      * properties.</p>
      */
-    private transient Map descriptors = null;
+    private transient Map<String, PropertyDescriptor> descriptors = null;
 
 
     /**
@@ -123,6 +131,8 @@ public class ContextBase extends HashMap implements Context {
     static {
 
         singleton = new Serializable() {
+                private static final long serialVersionUID = -6023767081282668587L;
+
                 public boolean equals(Object object) {
                     return (false);
                 }
@@ -150,9 +160,9 @@ public class ContextBase extends HashMap implements Context {
         if (descriptors == null) {
             super.clear();
         } else {
-            Iterator keys = keySet().iterator();
+            Iterator<String> keys = keySet().iterator();
             while (keys.hasNext()) {
-                Object key = keys.next();
+                String key = keys.next();
                 if (!descriptors.containsKey(key)) {
                     keys.remove();
                 }
@@ -212,7 +222,7 @@ public class ContextBase extends HashMap implements Context {
      *
      * @return Set of entries in the Context.
      */
-    public Set entrySet() {
+    public Set<Entry<String, Object>> entrySet() {
 
         return (new EntrySetImpl());
 
@@ -246,8 +256,7 @@ public class ContextBase extends HashMap implements Context {
 
         // Case 2 -- this is a local property
         if (key != null) {
-            PropertyDescriptor descriptor =
-                (PropertyDescriptor) descriptors.get(key);
+            PropertyDescriptor descriptor = descriptors.get(key);
             if (descriptor != null) {
                 if (descriptor.getReadMethod() != null) {
                     return (readProperty(descriptor));
@@ -293,7 +302,7 @@ public class ContextBase extends HashMap implements Context {
      *
      * @return The set of keys for objects in this Context.
      */
-    public Set keySet() {
+    public Set<String> keySet() {
 
 
         return (super.keySet());
@@ -311,11 +320,11 @@ public class ContextBase extends HashMap implements Context {
      * @return The value added to the Context.
      *
      * @exception IllegalArgumentException if an exception is thrown
-     *  reading or wrting this local property value
+     *  reading or writing this local property value
      * @exception UnsupportedOperationException if this local property does not
      *  have both a read method and a write method
      */
-    public Object put(Object key, Object value) {
+    public Object put(String key, Object value) {
 
         // Case 1 -- no local properties
         if (descriptors == null) {
@@ -324,8 +333,7 @@ public class ContextBase extends HashMap implements Context {
 
         // Case 2 -- this is a local property
         if (key != null) {
-            PropertyDescriptor descriptor =
-                (PropertyDescriptor) descriptors.get(key);
+            PropertyDescriptor descriptor = descriptors.get(key);
             if (descriptor != null) {
                 Object previous = null;
                 if (descriptor.getReadMethod() != null) {
@@ -343,6 +351,20 @@ public class ContextBase extends HashMap implements Context {
 
 
     /**
+     * {@inheritDoc}
+     */
+    public <T> T retrieve(String key) {
+        Object valueObject = get(key);
+        if (valueObject == null) {
+            return null;
+        }
+        @SuppressWarnings("unchecked") // will throw ClassCastException if type are not assignable
+        T value = (T) valueObject;
+        return value;
+    }
+
+
+    /**
      * <p>Override the default <code>Map</code> behavior to call the
      * <code>put()</code> method individually for each key-value pair
      * in the specified <code>Map</code>.</p>
@@ -351,15 +373,13 @@ public class ContextBase extends HashMap implements Context {
      *  (or replace)
      *
      * @exception IllegalArgumentException if an exception is thrown
-     *  reading or wrting a local property value
+     *  reading or writing a local property value
      * @exception UnsupportedOperationException if a local property does not
      *  have both a read method and a write method
      */
-    public void putAll(Map map) {
+    public void putAll(Map<? extends String, ? extends Object> map) {
 
-        Iterator pairs = map.entrySet().iterator();
-        while (pairs.hasNext()) {
-            Map.Entry pair = (Map.Entry) pairs.next();
+        for (Entry<? extends String, ? extends Object> pair : map.entrySet()) {
             put(pair.getKey(), pair.getValue());
         }
 
@@ -386,8 +406,7 @@ public class ContextBase extends HashMap implements Context {
 
         // Case 2 -- this is a local property
         if (key != null) {
-            PropertyDescriptor descriptor =
-                (PropertyDescriptor) descriptors.get(key);
+            PropertyDescriptor descriptor = descriptors.get(key);
             if (descriptor != null) {
                 throw new UnsupportedOperationException
                     ("Local property '" + key + "' cannot be removed");
@@ -409,7 +428,7 @@ public class ContextBase extends HashMap implements Context {
      *
      * @return The collection of values in this Context.
      */
-    public Collection values() {
+    public Collection<Object> values() {
 
         return (new ValuesImpl());
 
@@ -423,7 +442,7 @@ public class ContextBase extends HashMap implements Context {
      * <p>Return an <code>Iterator</code> over the set of <code>Map.Entry</code>
      * objects representing our key-value pairs.</p>
      */
-    private Iterator entriesIterator() {
+    private Iterator<Entry<String, Object>> entriesIterator() {
 
         return (new EntrySetIterator());
 
@@ -436,7 +455,7 @@ public class ContextBase extends HashMap implements Context {
      *
      * @param key Attribute key or property name
      */
-    private Map.Entry entry(Object key) {
+    private Map.Entry<String, Object> entry(String key) {
 
         if (containsKey(key)) {
             return (new MapEntryImpl(key, get(key)));
@@ -475,7 +494,7 @@ public class ContextBase extends HashMap implements Context {
             // Add descriptor (ignoring getClass() and isEmpty())
             if (!("class".equals(name) || "empty".equals(name))) {
                 if (descriptors == null) {
-                    descriptors = new HashMap((pd.length - 2));
+                    descriptors = new HashMap<String, PropertyDescriptor>((pd.length - 2));
                 }
                 descriptors.put(name, pd[i]);
                 super.put(name, singleton);
@@ -525,9 +544,9 @@ public class ContextBase extends HashMap implements Context {
      * @exception UnsupportedOperationException if the specified key
      *  identifies a property instead of an attribute
      */
-    private boolean remove(Map.Entry entry) {
+    private boolean remove(Map.Entry<String, Object> entry) {
 
-        Map.Entry actual = entry(entry.getKey());
+        Map.Entry<String, Object> actual = entry(entry.getKey());
         if (actual == null) {
             return (false);
         } else if (!entry.equals(actual)) {
@@ -544,7 +563,7 @@ public class ContextBase extends HashMap implements Context {
      * <p>Return an <code>Iterator</code> over the set of values in this
      * <code>Map</code>.</p>
      */
-    private Iterator valuesIterator() {
+    private Iterator<Object> valuesIterator() {
 
         return (new ValuesIterator());
 
@@ -590,17 +609,17 @@ public class ContextBase extends HashMap implements Context {
      * <p>Private implementation of <code>Set</code> that implements the
      * semantics required for the value returned by <code>entrySet()</code>.</p>
      */
-    private class EntrySetImpl extends AbstractSet {
+    private class EntrySetImpl extends AbstractSet<Entry<String, Object>> {
 
-        public void clear() {
+            public void clear() {
             ContextBase.this.clear();
         }
 
-        public boolean contains(Object obj) {
+            public boolean contains(Object obj) {
             if (!(obj instanceof Map.Entry)) {
                 return (false);
             }
-            Map.Entry entry = (Map.Entry) obj;
+            Map.Entry<String, Object> entry = (Map.Entry) obj;
             Entry actual = ContextBase.this.entry(entry.getKey());
             if (actual != null) {
                 return (actual.equals(entry));
@@ -609,23 +628,23 @@ public class ContextBase extends HashMap implements Context {
             }
         }
 
-        public boolean isEmpty() {
+            public boolean isEmpty() {
             return (ContextBase.this.isEmpty());
         }
 
-        public Iterator iterator() {
+            public Iterator<Entry<String, Object>> iterator() {
             return (ContextBase.this.entriesIterator());
         }
 
-        public boolean remove(Object obj) {
+            public boolean remove(Object obj) {
             if (obj instanceof Map.Entry) {
-                return (ContextBase.this.remove((Map.Entry) obj));
+                return (ContextBase.this.remove((Map.Entry<String, Object>) obj));
             } else {
                 return (false);
             }
         }
 
-        public int size() {
+            public int size() {
             return (ContextBase.this.size());
         }
 
@@ -636,16 +655,16 @@ public class ContextBase extends HashMap implements Context {
      * <p>Private implementation of <code>Iterator</code> for the
      * <code>Set</code> returned by <code>entrySet()</code>.</p>
      */
-    private class EntrySetIterator implements Iterator {
+    private class EntrySetIterator implements Iterator<Entry<String, Object>> {
 
-        private Map.Entry entry = null;
-        private Iterator keys = ContextBase.this.keySet().iterator();
+        private Map.Entry<String, Object> entry = null;
+        private Iterator<String> keys = ContextBase.this.keySet().iterator();
 
         public boolean hasNext() {
             return (keys.hasNext());
         }
 
-        public Object next() {
+        public Entry<String, Object> next() {
             entry = ContextBase.this.entry(keys.next());
             return (entry);
         }
@@ -661,17 +680,17 @@ public class ContextBase extends HashMap implements Context {
      * <p>Private implementation of <code>Map.Entry</code> for each item in
      * <code>EntrySetImpl</code>.</p>
      */
-    private class MapEntryImpl implements Map.Entry {
+    private class MapEntryImpl implements Map.Entry<String, Object> {
 
-        MapEntryImpl(Object key, Object value) {
+        MapEntryImpl(String key, Object value) {
             this.key = key;
             this.value = value;
         }
 
-        private Object key;
+        private String key;
         private Object value;
 
-        public boolean equals(Object obj) {
+            public boolean equals(Object obj) {
             if (obj == null) {
                 return (false);
             } else if (!(obj instanceof Map.Entry)) {
@@ -692,7 +711,7 @@ public class ContextBase extends HashMap implements Context {
             }
         }
 
-        public Object getKey() {
+        public String getKey() {
             return (this.key);
         }
 
@@ -712,7 +731,7 @@ public class ContextBase extends HashMap implements Context {
             return (previous);
         }
 
-        public String toString() {
+            public String toString() {
             return getKey() + "=" + getValue();
         }
     }
@@ -722,29 +741,29 @@ public class ContextBase extends HashMap implements Context {
      * <p>Private implementation of <code>Collection</code> that implements the
      * semantics required for the value returned by <code>values()</code>.</p>
      */
-    private class ValuesImpl extends AbstractCollection {
+    private class ValuesImpl extends AbstractCollection<Object> {
 
-        public void clear() {
+            public void clear() {
             ContextBase.this.clear();
         }
 
-        public boolean contains(Object obj) {
+            public boolean contains(Object obj) {
             if (!(obj instanceof Map.Entry)) {
                 return (false);
             }
-            Map.Entry entry = (Map.Entry) obj;
+            Map.Entry<?, ?> entry = (Map.Entry<?, ?>) obj;
             return (ContextBase.this.containsValue(entry.getValue()));
         }
 
-        public boolean isEmpty() {
+            public boolean isEmpty() {
             return (ContextBase.this.isEmpty());
         }
 
-        public Iterator iterator() {
+            public Iterator<Object> iterator() {
             return (ContextBase.this.valuesIterator());
         }
 
-        public boolean remove(Object obj) {
+            public boolean remove(Object obj) {
             if (obj instanceof Map.Entry) {
                 return (ContextBase.this.remove((Map.Entry) obj));
             } else {
@@ -752,7 +771,7 @@ public class ContextBase extends HashMap implements Context {
             }
         }
 
-        public int size() {
+            public int size() {
             return (ContextBase.this.size());
         }
 
@@ -763,10 +782,10 @@ public class ContextBase extends HashMap implements Context {
      * <p>Private implementation of <code>Iterator</code> for the
      * <code>Collection</code> returned by <code>values()</code>.</p>
      */
-    private class ValuesIterator implements Iterator {
+    private class ValuesIterator implements Iterator<Object> {
 
-        private Map.Entry entry = null;
-        private Iterator keys = ContextBase.this.keySet().iterator();
+        private Map.Entry<String, Object> entry = null;
+        private Iterator<String> keys = ContextBase.this.keySet().iterator();
 
         public boolean hasNext() {
             return (keys.hasNext());

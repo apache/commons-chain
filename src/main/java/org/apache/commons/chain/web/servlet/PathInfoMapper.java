@@ -33,10 +33,11 @@ import org.apache.commons.chain.generic.LookupCommand;
  * an environment, a request for the context-relative URI "/execute/foo"
  * would cause the "/foo" command to be loaded and executed.</p>
  *
+ * @param <C> Type of the context associated with this command
  * @author Craig R. McClanahan
  */
 
-public class PathInfoMapper extends LookupCommand implements Command {
+public class PathInfoMapper<C extends Context> extends LookupCommand<C> {
 
 
     // ------------------------------------------------------ Instance Variables
@@ -117,8 +118,8 @@ public class PathInfoMapper extends LookupCommand implements Command {
      *
      * @since Chain 1.2
      */
-    protected Catalog getCatalog(Context context) {
-        Catalog catalog = (Catalog) context.get(getCatalogKey());
+    protected Catalog getCatalog(C context) {
+        Catalog catalog = (Catalog) context.get(getCatalogName());
         if (catalog == null) {
             catalog = super.getCatalog(context);
         }

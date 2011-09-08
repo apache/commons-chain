@@ -19,6 +19,7 @@ package org.apache.commons.chain.web.servlet;
 
 import java.util.Map;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.chain.web.WebContext;
@@ -35,6 +36,12 @@ import org.apache.commons.chain.web.WebContext;
  */
 
 public class ServletWebContext extends WebContext {
+
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5852676730841544890L;
 
 
     // ------------------------------------------------------------ Constructors
@@ -71,80 +78,80 @@ public class ServletWebContext extends WebContext {
      * <p>The lazily instantiated <code>Map</code> of application scope
      * attributes.</p>
      */
-    private Map applicationScope = null;
+    private Map<String, Object> applicationScope = null;
 
 
     /**
      * <p>The <code>ServletContext</code> for this web application.</p>
      */
-    protected ServletContext context = null;
+    private ServletContext context = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of header name-value
      * combinations (immutable).</p>
      */
-    private Map header = null;
+    private Map<String, String> header = null;
 
 
     /**
      * <p>The lazily instantitated <code>Map</code> of header name-values
      * combinations (immutable).</p>
      */
-    private Map headerValues = null;
+    private Map<String, String[]> headerValues = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of context initialization
      * parameters.</p>
      */
-    private Map initParam = null;
+    private Map<String, String> initParam = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of cookies.</p>
      */
-    private Map cookieValues = null;
+    private Map<String, Cookie> cookieValues = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request
      * parameter name-value.</p>
      */
-    private Map param = null;
+    private Map<String, String> param = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request
      * parameter name-values.</p>
      */
-    private Map paramValues = null;
+    private Map<String, String[]> paramValues = null;
 
 
     /**
      * <p>The <code>HttpServletRequest</code> for this request.</p>
      */
-    protected HttpServletRequest request = null;
+    private HttpServletRequest request = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request scope
      * attributes.</p>
      */
-    private Map requestScope = null;
+    private Map<String, Object> requestScope = null;
 
 
     /**
      * <p>The <code>HttpServletResponse</code> for this request.</p>
      */
-    protected HttpServletResponse response = null;
+    private HttpServletResponse response = null;
 
 
     /**
      * <p>The lazily instantiated <code>Map</code> of session scope
      * attributes.</p>
      */
-    private Map sessionScope = null;
+    private Map<String, Object> sessionScope = null;
 
 
     // ---------------------------------------------------------- Public Methods
@@ -244,7 +251,7 @@ public class ServletWebContext extends WebContext {
      *
      * @return Application scope Map.
      */
-    public Map getApplicationScope() {
+    public Map<String, Object> getApplicationScope() {
 
         if ((applicationScope == null) && (context != null)) {
             applicationScope = new ServletApplicationScopeMap(context);
@@ -259,7 +266,7 @@ public class ServletWebContext extends WebContext {
      *
      * @return Header values Map.
      */
-    public Map getHeader() {
+    public Map<String, String> getHeader() {
 
         if ((header == null) && (request != null)) {
             header = new ServletHeaderMap(request);
@@ -274,7 +281,7 @@ public class ServletWebContext extends WebContext {
      *
      * @return Header values Map.
      */
-    public Map getHeaderValues() {
+    public Map<String, String[]> getHeaderValues() {
 
         if ((headerValues == null) && (request != null)) {
             headerValues = new ServletHeaderValuesMap(request);
@@ -289,7 +296,7 @@ public class ServletWebContext extends WebContext {
      *
      * @return Initialization parameter Map.
      */
-    public Map getInitParam() {
+    public Map<String, String> getInitParam() {
 
         if ((initParam == null) && (context != null)) {
             initParam = new ServletInitParamMap(context);
@@ -304,7 +311,7 @@ public class ServletWebContext extends WebContext {
      *
      * @return Request parameter Map.
      */
-    public Map getParam() {
+    public Map<String, String> getParam() {
 
         if ((param == null) && (request != null)) {
             param = new ServletParamMap(request);
@@ -319,7 +326,7 @@ public class ServletWebContext extends WebContext {
      *
      * @return Request parameter Map.
      */
-    public Map getParamValues() {
+    public Map<String, String[]> getParamValues() {
 
         if ((paramValues == null) && (request != null)) {
             paramValues = new ServletParamValuesMap(request);
@@ -335,7 +342,7 @@ public class ServletWebContext extends WebContext {
      * @return Map of Cookies.
      * @since Chain 1.1
      */
-    public Map getCookies() {
+    public Map<String, Cookie> getCookies() {
 
         if ((cookieValues == null) && (request != null)) {
             cookieValues = new ServletCookieMap(request);
@@ -350,7 +357,7 @@ public class ServletWebContext extends WebContext {
      *
      * @return Request scope Map.
      */
-    public Map getRequestScope() {
+    public Map<String, Object> getRequestScope() {
 
         if ((requestScope == null) && (request != null)) {
             requestScope = new ServletRequestScopeMap(request);
@@ -365,7 +372,7 @@ public class ServletWebContext extends WebContext {
      *
      * @return Session scope Map.
      */
-    public Map getSessionScope() {
+    public Map<String, Object> getSessionScope() {
 
         if ((sessionScope == null) && (request != null)) {
             sessionScope = new ServletSessionScopeMap(request);

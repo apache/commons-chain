@@ -16,13 +16,14 @@
  */
 package org.apache.commons.chain.impl;
 
+import static java.util.Collections.unmodifiableMap;
 
-import java.util.HashMap;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
 
 
 /**
@@ -45,7 +46,7 @@ public class CatalogBase implements Catalog {
     /**
      * <p>The map of named {@link Command}s, keyed by name.
      */
-    protected Map commands = Collections.synchronizedMap(new HashMap());
+    private final Map<String, Command<? extends Context>> commands = new ConcurrentHashMap<String, Command<? extends Context>>();
 
 
     // --------------------------------------------------------- Constructors
@@ -63,8 +64,8 @@ public class CatalogBase implements Catalog {
      *
      * @since Chain 1.1
      */
-    public CatalogBase( Map commands ) {
-        this.commands = Collections.synchronizedMap(commands);
+    public CatalogBase( Map<String, Command<? extends Context>> commands ) {
+        this.commands.putAll( commands );
     }
 
     // --------------------------------------------------------- Public Methods
@@ -75,11 +76,12 @@ public class CatalogBase implements Catalog {
      * to the set of named commands known to this {@link Catalog},
      * replacing any previous command for that name.
      *
+     * @param <C> Type of the context associated with this command
      * @param name Name of the new command
      * @param command {@link Command} to be returned
      *  for later lookups on this name
      */
-    public void addCommand(String name, Command command) {
+    public <C extends Context> void addCommand(String name, Command<C> command) {
 
         commands.put(name, command);
 
@@ -89,16 +91,28 @@ public class CatalogBase implements Catalog {
      * <p>Return the {@link Command} associated with the
      * specified name, if any; otherwise, return <code>null</code>.</p>
      *
+     * @param <C> Type of the context associated with this command
      * @param name Name for which a {@link Command}
      *  should be retrieved
      * @return The Command associated with the specified name.
      */
-    public Command getCommand(String name) {
+    public <C extends Context> Command<C> getCommand(String name) {
 
-        return ((Command) commands.get(name));
+        @SuppressWarnings( "unchecked" ) // will throw a cast exception at runtime!
+        Command<C> command = (Command<C>) commands.get(name);
+        return command;
 
     }
 
+    /**
+     * Returns the map of named {@link Command}s, keyed by name.
+     *
+     * @return The map of named {@link Command}s, keyed by name.
+     * @since 2.0
+     */
+    public Map<String, Command<? extends Context>> getCommands() {
+        return unmodifiableMap(commands);
+    }
 
     /**
      * <p>Return an <code>Iterator</code> over the set of named commands
@@ -106,9 +120,9 @@ public class CatalogBase implements Catalog {
      * an empty Iterator is returned.</p>
      * @return An iterator of the names in this Catalog.
      */
-    public Iterator getNames() {
+    public Iterator<String> getNames() {
 
-        return (commands.keySet().iterator());
+        return commands.keySet().iterator();
 
     }
 
@@ -118,7 +132,7 @@ public class CatalogBase implements Catalog {
      */
     public String toString() {
 
-        Iterator names = getNames();
+        Iterator<String> names = getNames();
         StringBuffer str =
             new StringBuffer("[" + this.getClass().getName() + ": ");
 

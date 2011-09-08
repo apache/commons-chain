@@ -26,9 +26,11 @@ import org.apache.commons.chain.web.AbstractGetLocaleCommand;
 /**
  * <p>Concrete implementation of {@link AbstractGetLocaleCommand} for
  * the JavaServer Faces API.</p>
+ *
+ * @param <C> Type of the context associated with this command
  */
 
-public class FacesGetLocaleCommand extends AbstractGetLocaleCommand {
+public class FacesGetLocaleCommand<C extends Context> extends AbstractGetLocaleCommand<C> {
 
 
     // ------------------------------------------------------- Protected Methods
@@ -40,7 +42,7 @@ public class FacesGetLocaleCommand extends AbstractGetLocaleCommand {
      * @param context The {@link Context} we are operating on.
      * @return The Locale for the request.
      */
-    protected Locale getLocale(Context context) {
+    protected Locale getLocale(C context) {
 
     FacesContext fcontext = (FacesContext)
         context.get("context");

@@ -17,8 +17,10 @@
 package org.apache.commons.chain.impl;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.List;
+
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
@@ -28,11 +30,13 @@ import org.apache.commons.chain.Filter;
 /**
  * <p>Convenience base class for {@link Chain} implementations.</p>
  *
+ * @param <C> Type of the context associated with this command
+ *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public class ChainBase implements Chain {
+public class ChainBase<C extends Context> implements Chain<C> {
 
 
     // ----------------------------------------------------------- Constructors
@@ -55,7 +59,7 @@ public class ChainBase implements Chain {
      * @exception IllegalArgumentException if <code>command</code>
      *  is <code>null</code>
      */
-    public ChainBase(Command command) {
+    public ChainBase(Command<C> command) {
 
         addCommand(command);
 
@@ -72,7 +76,7 @@ public class ChainBase implements Chain {
      *  or one of the individual {@link Command} elements,
      *  is <code>null</code>
      */
-    public ChainBase(Command[] commands) {
+    public ChainBase(Command<C>[] commands) {
 
         if (commands == null) {
             throw new IllegalArgumentException();
@@ -94,15 +98,12 @@ public class ChainBase implements Chain {
      *  or one of the individual {@link Command} elements,
      *  is <code>null</code>
      */
-    public ChainBase(Collection commands) {
+    public ChainBase(Collection<Command<C>> commands) {
 
         if (commands == null) {
             throw new IllegalArgumentException();
         }
-        Iterator elements = commands.iterator();
-        while (elements.hasNext()) {
-            addCommand((Command) elements.next());
-        }
+        this.commands.addAll( commands );
 
     }
 
@@ -115,14 +116,14 @@ public class ChainBase implements Chain {
      * the order in which they may delegate processing to the remainder of
      * the {@link Chain}.</p>
      */
-    protected Command[] commands = new Command[0];
+    private final List<Command<C>> commands = new ArrayList<Command<C>>();
 
 
     /**
      * <p>Flag indicating whether the configuration of our commands list
      * has been frozen by a call to the <code>execute()</code> method.</p>
      */
-    protected boolean frozen = false;
+    private boolean frozen = false;
 
 
     // ---------------------------------------------------------- Chain Methods
@@ -137,7 +138,7 @@ public class ChainBase implements Chain {
      *  is <code>null</code>
      * @exception IllegalStateException if no further configuration is allowed
      */
-    public void addCommand(Command command) {
+    public void addCommand(Command<C> command) {
 
         if (command == null) {
             throw new IllegalArgumentException();
@@ -145,10 +146,7 @@ public class ChainBase implements Chain {
         if (frozen) {
             throw new IllegalStateException();
         }
-        Command[] results = new Command[commands.length + 1];
-        System.arraycopy(commands, 0, results, 0, commands.length);
-        results[commands.length] = command;
-        commands = results;
+        commands.add( command );
 
     }
 
@@ -170,7 +168,7 @@ public class ChainBase implements Chain {
      *  of this {@link Context} should be delegated to a subsequent
      *  {@link Command} in an enclosing {@link Chain}
      */
-    public boolean execute(Context context) throws Exception {
+    public boolean execute(C context) throws Exception {
 
         // Verify our parameters
         if (context == null) {
@@ -185,10 +183,10 @@ public class ChainBase implements Chain {
         boolean saveResult = false;
         Exception saveException = null;
         int i = 0;
-        int n = commands.length;
+        int n = commands.size();
         for (i = 0; i < n; i++) {
             try {
-                saveResult = commands[i].execute(context);
+                saveResult = commands.get(i).execute(context);
                 if (saveResult) {
                     break;
                 }
@@ -205,10 +203,10 @@ public class ChainBase implements Chain {
         boolean handled = false;
         boolean result = false;
         for (int j = i; j >= 0; j--) {
-            if (commands[j] instanceof Filter) {
+            if (commands.get(j) instanceof Filter) {
                 try {
                     result =
-                        ((Filter) commands[j]).postprocess(context,
+                        ((Filter<C>) commands.get(j)).postprocess(context,
                                                            saveException);
                     if (result) {
                         handled = true;
@@ -228,6 +226,19 @@ public class ChainBase implements Chain {
 
     }
 
+    /**
+     * Returns true, if the configuration of our commands list
+     * has been frozen by a call to the <code>execute()</code> method,
+     * false otherwise.
+     *
+     * @return true, if the configuration of our commands list
+     * has been frozen by a call to the <code>execute()</code> method,
+     * false otherwise.
+     * @since 2.0
+     */
+    public boolean isFrozen() {
+        return frozen;
+    }
 
     // -------------------------------------------------------- Package Methods
 
@@ -237,7 +248,7 @@ public class ChainBase implements Chain {
      * {@link Chain}.  This method is package private, and is used only
      * for the unit tests.</p>
      */
-    Command[] getCommands() {
+    List<Command<C>> getCommands() {
 
         return (commands);
 

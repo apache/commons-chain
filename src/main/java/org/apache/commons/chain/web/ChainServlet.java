@@ -100,6 +100,12 @@ public class ChainServlet extends HttpServlet {
 
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = -6545081938506661333L;
+
+
+    /**
      * <p>The name of the context init parameter containing the name of the
      * servlet context attribute under which our resulting {@link Catalog}
      * will be stored.</p>
@@ -118,7 +124,7 @@ public class ChainServlet extends HttpServlet {
 
     /**
      * <p>The name of the context init parameter containing a comma-delimited
-     * list of web applicaton resources to be scanned.</p>
+     * list of web application resources to be scanned.</p>
      */
     public static final String CONFIG_WEB_RESOURCE =
         "org.apache.commons.chain.CONFIG_WEB_RESOURCE";
@@ -193,7 +199,7 @@ public class ChainServlet extends HttpServlet {
                 if (loader == null) {
                     loader = this.getClass().getClassLoader();
                 }
-                Class clazz = loader.loadClass(ruleSet);
+                Class<?> clazz = loader.loadClass(ruleSet);
                 parser.setRuleSet((RuleSet) clazz.newInstance());
             } catch (Exception e) {
                 throw new ServletException("Exception initalizing RuleSet '"
@@ -209,9 +215,9 @@ public class ChainServlet extends HttpServlet {
                 (context, webResources, parser);
         } else {
             ChainResources.parseClassResources
-                (catalog, classResources, parser);
+                (classResources, parser);
             ChainResources.parseWebResources
-                (catalog, context, webResources, parser);
+                (context, webResources, parser);
         }
 
         // Expose the completed catalog (if requested)

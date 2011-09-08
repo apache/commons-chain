@@ -47,12 +47,14 @@ import java.util.WeakHashMap;
  * silently ignored.  Otherwise, a lookup failure will trigger an
  * <code>IllegalArgumentException</code>.</p>
  *
+ * @param <C> Type of the context associated with this command
+ *
  * @author Sean Schofield
  * @version $Revision$
  * @since Chain 1.1
  */
 
-public class DispatchLookupCommand extends LookupCommand implements Filter {
+public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> implements Filter<C> {
 
     // -------------------------------------------------------------- Constructors
 
@@ -78,13 +80,13 @@ public class DispatchLookupCommand extends LookupCommand implements Filter {
      * The base implementation expects dispatch methods to take a <code>
      * Context</code> as their only argument.
      */
-    private static final Class[] DEFAULT_SIGNATURE =
-        new Class[] {Context.class};
+    private static final Class<?>[] DEFAULT_SIGNATURE =
+        new Class<?>[] {Context.class};
 
 
     // ----------------------------------------------------- Instance Variables
 
-    private WeakHashMap methods = new WeakHashMap();
+    private final WeakHashMap<String, Method> methods = new WeakHashMap<String, Method>();
 
 
     // ------------------------------------------------------------- Properties
@@ -137,7 +139,7 @@ public class DispatchLookupCommand extends LookupCommand implements Filter {
      * @throws Exception if no such {@link Command} can be found and the
      *  <code>optional</code> property is set to <code>false</code>
      */
-    public boolean execute(Context context) throws Exception {
+    public boolean execute(C context) throws Exception {
 
         if (this.getMethod() == null && this.getMethodKey() == null) {
             throw new IllegalStateException(
@@ -145,7 +147,7 @@ public class DispatchLookupCommand extends LookupCommand implements Filter {
             );
         }
 
-        Command command = getCommand(context);
+        Command<C> command = getCommand(context);
 
         if (command != null) {
             Method methodObject = extractMethod(command, context);
@@ -170,7 +172,7 @@ public class DispatchLookupCommand extends LookupCommand implements Filter {
      *
      * @return the expected method signature
      */
-    protected Class[] getSignature() {
+    protected Class<?>[] getSignature() {
         return DEFAULT_SIGNATURE;
     }
 
@@ -185,7 +187,7 @@ public class DispatchLookupCommand extends LookupCommand implements Filter {
      * @param context The context associated with the request
      * @return the method arguments to be used
      */
-    protected Object[] getArguments(Context context) {
+    protected Object[] getArguments(C context) {
         return new Object[] {context};
     }
 
@@ -208,7 +210,7 @@ public class DispatchLookupCommand extends LookupCommand implements Filter {
      *    specified name.
      * @throws NullPointerException if no methodName can be determined
      */
-    private Method extractMethod(Command command, Context context)
+    private Method extractMethod(Command<C> command, C context)
         throws NoSuchMethodException {
 
         String methodName = this.getMethod();
@@ -226,7 +228,7 @@ public class DispatchLookupCommand extends LookupCommand implements Filter {
         Method theMethod = null;
 
         synchronized (methods) {
-            theMethod = (Method) methods.get(methodName);
+            theMethod = methods.get(methodName);
 
             if (theMethod == null) {
                 theMethod = command.getClass().getMethod(methodName,

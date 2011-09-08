@@ -17,6 +17,7 @@
 package org.apache.commons.chain.web.portlet;
 
 
+import javax.servlet.http.Cookie;
 import org.apache.commons.chain.web.MockEnumeration;
 import org.apache.commons.chain.web.MockPrincipal;
 
@@ -312,4 +313,21 @@ public class MockPortletRequest implements PortletRequest {
         }
     }
 
+    public Cookie[] getCookies() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Map<String, String[]> getPrivateParameterMap() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Map<String, String[]> getPublicParameterMap() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public String getWindowID() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    
 }

@@ -197,7 +197,7 @@ public class ChainListener implements ServletContextListener {
                 if (loader == null) {
                     loader = this.getClass().getClassLoader();
                 }
-                Class clazz = loader.loadClass(ruleSet);
+                Class<?> clazz = loader.loadClass(ruleSet);
                 parser.setRuleSet((RuleSet) clazz.newInstance());
             } catch (Exception e) {
                 throw new RuntimeException("Exception initalizing RuleSet '"
@@ -214,11 +214,11 @@ public class ChainListener implements ServletContextListener {
             ChainResources.parseWebResources
                 (context, webResources, parser);
         } else {
-            parseJarResources(catalog, context, parser, log);
+            parseJarResources(context, parser, log);
             ChainResources.parseClassResources
-                (catalog, classResources, parser);
+                (classResources, parser);
             ChainResources.parseWebResources
-                (catalog, context, webResources, parser);
+                (context, webResources, parser);
         }
 
         // Expose the completed catalog (if requested)
@@ -242,15 +242,16 @@ public class ChainListener implements ServletContextListener {
     private void parseJarResources(ServletContext context,
                                    ConfigParser parser, Log log) {
 
-        Set jars = context.getResourcePaths("/WEB-INF/lib");
+        @SuppressWarnings( "unchecked" ) // it is known that always returns String inside
+        Set<String> jars = context.getResourcePaths("/WEB-INF/lib");
         if (jars == null) {
-            jars = new HashSet();
+            jars = new HashSet<String>();
         }
         String path = null;
-        Iterator paths = jars.iterator();
+        Iterator<String> paths = jars.iterator();
         while (paths.hasNext()) {
 
-            path = (String) paths.next();
+            path = paths.next();
             if (!path.endsWith(".jar")) {
                 continue;
             }
@@ -260,9 +261,6 @@ public class ChainListener implements ServletContextListener {
                 resourceURL = new URL("jar:"
                                       + translate(jarURL.toExternalForm())
                                       + "!/META-INF/chain-config.xml");
-                if (resourceURL == null) {
-                    continue;
-                }
                 InputStream is = null;
                 try {
                     is = resourceURL.openStream();
@@ -306,12 +304,13 @@ public class ChainListener implements ServletContextListener {
     private void parseJarResources(Catalog catalog, ServletContext context,
                                    ConfigParser parser, Log log) {
 
-        Set jars = context.getResourcePaths("/WEB-INF/lib");
+        @SuppressWarnings( "unchecked" ) // it is known that always returns String inside
+        Set<String> jars = context.getResourcePaths("/WEB-INF/lib");
         if (jars == null) {
-            jars = new HashSet();
+            jars = new HashSet<String>();
         }
         String path = null;
-        Iterator paths = jars.iterator();
+        Iterator<String> paths = jars.iterator();
         while (paths.hasNext()) {
 
             path = (String) paths.next();
@@ -324,9 +323,6 @@ public class ChainListener implements ServletContextListener {
                 resourceURL = new URL("jar:"
                                       + translate(jarURL.toExternalForm())
                                       + "!/META-INF/chain-config.xml");
-                if (resourceURL == null) {
-                    continue;
-                }
                 InputStream is = null;
                 try {
                     is = resourceURL.openStream();

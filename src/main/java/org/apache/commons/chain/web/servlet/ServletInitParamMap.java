@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +36,7 @@ import org.apache.commons.chain.web.MapEntry;
  * @version $Revision$ $Date$
  */
 
-final class ServletInitParamMap implements Map {
+final class ServletInitParamMap implements Map<String, String> {
 
 
     public ServletInitParamMap(ServletContext context) {
@@ -59,23 +58,18 @@ final class ServletInitParamMap implements Map {
 
 
     public boolean containsValue(Object value) {
-        Iterator values = values().iterator();
-        while (values.hasNext()) {
-            if (value.equals(values.next())) {
-                return (true);
-            }
-        }
-        return (false);
+        return values().contains(value);
     }
 
 
-    public Set entrySet() {
-        Set set = new HashSet();
-        Enumeration keys = context.getInitParameterNames();
+    public Set<Entry<String, String>> entrySet() {
+        Set<Entry<String, String>> set = new HashSet<Entry<String, String>>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
+        Enumeration<String> keys = context.getInitParameterNames();
         String key;
         while (keys.hasMoreElements()) {
-            key = (String) keys.nextElement();
-            set.add(new MapEntry(key, context.getInitParameter(key), false));
+            key = keys.nextElement();
+            set.add(new MapEntry<String, String>(key, context.getInitParameter(key), false));
         }
         return (set);
     }
@@ -86,7 +80,7 @@ final class ServletInitParamMap implements Map {
     }
 
 
-    public Object get(Object key) {
+    public String get(Object key) {
         return (context.getInitParameter(key(key)));
     }
 
@@ -101,34 +95,36 @@ final class ServletInitParamMap implements Map {
     }
 
 
-    public Set keySet() {
-        Set set = new HashSet();
-        Enumeration keys = context.getInitParameterNames();
+    public Set<String> keySet() {
+        Set<String> set = new HashSet<String>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
+        Enumeration<String> keys = context.getInitParameterNames();
+
         while (keys.hasMoreElements()) {
             set.add(keys.nextElement());
         }
         return (set);
     }
 
-
-    public Object put(Object key, Object value) {
+    public String put(String key, String value) {
         throw new UnsupportedOperationException();
     }
 
 
-    public void putAll(Map map) {
+    public void putAll(Map<? extends String, ? extends String> map) {
         throw new UnsupportedOperationException();
     }
 
 
-    public Object remove(Object key) {
+    public String remove(Object key) {
         throw new UnsupportedOperationException();
     }
 
 
     public int size() {
         int n = 0;
-        Enumeration keys = context.getInitParameterNames();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
+        Enumeration<String> keys = context.getInitParameterNames();
         while (keys.hasMoreElements()) {
             keys.nextElement();
             n++;
@@ -137,11 +133,12 @@ final class ServletInitParamMap implements Map {
     }
 
 
-    public Collection values() {
-        List list = new ArrayList();
-        Enumeration keys = context.getInitParameterNames();
+    public Collection<String> values() {
+        List<String> list = new ArrayList<String>();
+        @SuppressWarnings( "unchecked" ) // it is known that header names are String
+        Enumeration<String> keys = context.getInitParameterNames();
         while (keys.hasMoreElements()) {
-            list.add(context.getInitParameter((String) keys.nextElement()));
+            list.add(context.getInitParameter(keys.nextElement()));
         }
         return (list);
     }

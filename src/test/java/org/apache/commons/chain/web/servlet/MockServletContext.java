@@ -149,5 +149,8 @@ public class MockServletContext implements ServletContext {
         attributes.put(name, value);
     }
 
+    public String getContextPath() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }

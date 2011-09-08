@@ -500,7 +500,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         try {
             map.put("ckey3", "XXX");
             fail("Should have thrown UnsupportedOperationException");
-        } catch (UnsupportedOperationException e) {
+        } catch (ClassCastException e) {
             ; // expected result
         }
         try {

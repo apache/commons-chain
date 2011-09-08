@@ -20,6 +20,8 @@ package org.apache.commons.chain.web;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
+
 import javax.servlet.ServletContext;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.config.ConfigParser;
@@ -37,6 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 
 final class ChainResources {
+
+    /**
+     * This class uses a private constructor because it is a utility class.
+     */
+    private ChainResources() {
+    }
 
 
     // ---------------------------------------------------------- Static Methods
@@ -224,26 +232,21 @@ final class ChainResources {
      * @since Chain 1.1
      */
     static String[] getResourcePaths(String resources) {
-        List paths = new ArrayList();
+        if (resources == null || resources.length() == 0) {
+            return new String[0];
+        }
 
-        if (resources != null) {
-            String path;
-            int comma;
+        StringTokenizer resourcesTokenizer = new StringTokenizer(resources, ",");
+        List<String> paths = new ArrayList<String>(resourcesTokenizer.countTokens());
 
-            while ((comma = resources.indexOf(',')) >= 0) {
-                path = resources.substring(0, comma).trim();
-                if (path.length() > 0) {
-                    paths.add(path);
-                }
-                resources = resources.substring(comma + 1);
-            }
-            resources = resources.trim();
-            if (resources.length() > 0) {
-                paths.add(resources);
+        while (resourcesTokenizer.hasMoreTokens()) {
+            String path = resourcesTokenizer.nextToken().trim();
+            if (path.length() > 0) {
+                paths.add(path);
             }
         }
 
-        return (String[]) paths.toArray(new String[0]);
+        return paths.toArray(new String[paths.size()]);
     }
 
 

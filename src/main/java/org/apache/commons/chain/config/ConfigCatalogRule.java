@@ -104,7 +104,7 @@ class ConfigCatalogRule extends Rule {
 
         // Create and register a new Catalog instance if necessary
         if (catalog == null) {
-            Class clazz = digester.getClassLoader().loadClass(catalogClass);
+            Class<?> clazz = digester.getClassLoader().loadClass(catalogClass);
             catalog = (Catalog) clazz.newInstance();
             if (nameValue == null) {
                 factory.setCatalog(catalog);

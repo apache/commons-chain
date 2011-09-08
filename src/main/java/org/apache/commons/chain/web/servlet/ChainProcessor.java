@@ -61,6 +61,12 @@ public class ChainProcessor extends ChainServlet {
 
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = -6817532768031279260L;
+
+
+    /**
      * <p>The name of the servlet init parameter containing the name of the
      * {@link Catalog} to use for processing incoming requests.</p>
      */
@@ -182,7 +188,7 @@ public class ChainProcessor extends ChainServlet {
         if (attribute == null) {
             request.setAttribute(CATALOG_DEFAULT, theCatalog);
         }
-        Command command = theCatalog.getCommand(this.command);
+        Command<ServletWebContext> command = theCatalog.getCommand(this.command);
         try {
             command.execute(context);
         } catch (Exception e) {

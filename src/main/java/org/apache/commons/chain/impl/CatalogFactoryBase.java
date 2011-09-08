@@ -17,9 +17,9 @@
 
 package org.apache.commons.chain.impl;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 
@@ -55,7 +55,8 @@ public class CatalogFactoryBase extends CatalogFactory {
     /**
      * <p>Map of named {@link Catalog}s, keyed by catalog name.</p>
      */
-    private Map catalogs = new HashMap();
+    private final Map<String, Catalog> catalogs =
+            new ConcurrentHashMap<String, Catalog>();
 
 
     // --------------------------------------------------------- Public Methods
@@ -95,9 +96,7 @@ public class CatalogFactoryBase extends CatalogFactory {
      */
     public Catalog getCatalog(String name) {
 
-        synchronized (catalogs) {
-            return (Catalog) catalogs.get(name);
-        }
+        return catalogs.get(name);
 
     }
 
@@ -111,9 +110,7 @@ public class CatalogFactoryBase extends CatalogFactory {
      */
     public void addCatalog(String name, Catalog catalog) {
 
-        synchronized (catalogs) {
             catalogs.put(name, catalog);
-        }
 
     }
 
@@ -124,11 +121,9 @@ public class CatalogFactoryBase extends CatalogFactory {
      * If there are no known catalogs, an empty Iterator is returned.</p>
      * @return An Iterator of the names of the Catalogs known by this factory.
      */
-    public Iterator getNames() {
+    public Iterator<String> getNames() {
 
-        synchronized (catalogs) {
             return catalogs.keySet().iterator();
-        }
 
     }
 

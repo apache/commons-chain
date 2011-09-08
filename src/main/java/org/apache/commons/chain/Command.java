@@ -73,11 +73,13 @@ package org.apache.commons.chain;
  * being used in this fashion, as opposed to JavaBeans properties that simply
  * configure the internal operation of this {@link Command}.</p>
  *
+ * @param <C> Type of the context associated with this command
+ *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public interface Command {
+public interface Command<C extends Context> {
 
     /**
      * <p>Commands should return <code>CONTINUE_PROCESSING</code> if the processing
@@ -116,7 +118,8 @@ public interface Command {
      *  of this {@link Context} should be delegated to a subsequent
      *  {@link Command} in an enclosing {@link Chain}
      */
-    boolean execute(Context context) throws Exception;
+
+    boolean execute(C context) throws Exception;
 
 
 }

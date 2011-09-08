@@ -17,8 +17,11 @@
 package org.apache.commons.chain.web.faces;
 
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
 import org.apache.commons.chain.web.WebContext;
 
 
@@ -36,6 +39,12 @@ public class FacesWebContext extends WebContext {
 
 
     // ------------------------------------------------------------ Constructors
+
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1429681424077509130L;
 
 
     /**
@@ -119,7 +128,7 @@ public class FacesWebContext extends WebContext {
      *
      * @return Application scope Map.
      */
-    public Map getApplicationScope() {
+    public Map<String, Object> getApplicationScope() {
 
     return (context.getExternalContext().getApplicationMap());
 
@@ -131,7 +140,7 @@ public class FacesWebContext extends WebContext {
      *
      * @return Header values Map.
      */
-    public Map getHeader() {
+    public Map<String, String> getHeader() {
 
     return (context.getExternalContext().getRequestHeaderMap());
 
@@ -143,7 +152,7 @@ public class FacesWebContext extends WebContext {
      *
      * @return Header values Map.
      */
-    public Map getHeaderValues() {
+    public Map<String, String[]> getHeaderValues() {
 
     return (context.getExternalContext().getRequestHeaderValuesMap());
 
@@ -155,7 +164,7 @@ public class FacesWebContext extends WebContext {
      *
      * @return Initialization parameter Map.
      */
-    public Map getInitParam() {
+    public Map<String, String> getInitParam() {
 
     return (context.getExternalContext().getInitParameterMap());
 
@@ -167,7 +176,7 @@ public class FacesWebContext extends WebContext {
      *
      * @return Request parameter Map.
      */
-    public Map getParam() {
+    public Map<String, String> getParam() {
 
     return (context.getExternalContext().getRequestParameterMap());
 
@@ -179,7 +188,7 @@ public class FacesWebContext extends WebContext {
      *
      * @return Request parameter Map.
      */
-    public Map getParamValues() {
+    public Map<String, String[]> getParamValues() {
 
     return (context.getExternalContext().getRequestParameterValuesMap());
 
@@ -192,10 +201,33 @@ public class FacesWebContext extends WebContext {
      * @return Map of Cookies.
      * @since Chain 1.1
      */
-    public Map getCookies() {
+    public Map<String, Cookie> getCookies() {
 
-        return (context.getExternalContext().getRequestCookieMap());
+        Map<String, Object> facesCookieMap =
+                context.getExternalContext().getRequestCookieMap();
 
+        /* This ugly hack was done because the faces API implements
+         * the cookie collection using <String, Object> instead of <String, Cookie>.
+         * So we painstakingly check for type safety and cast it as a Map<String, Cookie>.
+         */
+        Iterator<Object> itr = facesCookieMap.values().iterator();
+
+        if (itr.hasNext()) {
+            Object cookieObj = itr.next();
+
+            if (cookieObj instanceof Cookie) {
+                Map<String, Cookie> cookieMap = Collections.checkedMap(
+                        (Map)facesCookieMap, String.class, Cookie.class);
+
+                return cookieMap;
+            } else {
+                String msg = "Could not cast cookie Map into <String, Cookie>. " +
+                        "Actual Cookie type is: " + cookieObj.getClass().toString();
+                throw new ClassCastException(msg);
+            }
+        } else {
+            return Collections.EMPTY_MAP;
+        }
     }
 
 
@@ -204,7 +236,7 @@ public class FacesWebContext extends WebContext {
      *
      * @return Request scope Map.
      */
-    public Map getRequestScope() {
+    public Map<String, Object> getRequestScope() {
 
     return (context.getExternalContext().getRequestMap());
 
@@ -216,7 +248,7 @@ public class FacesWebContext extends WebContext {
      *
      * @return Session scope Map.
      */
-    public Map getSessionScope() {
+    public Map<String, Object> getSessionScope() {
 
     return (context.getExternalContext().getSessionMap());
 

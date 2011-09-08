@@ -125,7 +125,7 @@ public class PortletGetLocaleCommandTestCase extends TestCase {
 
 
     // Test default behavior
-    public void testDefaut() throws Exception {
+    public void testDefault() throws Exception {
 
         assertEquals("locale", command.getLocaleKey());
         check(context, command);

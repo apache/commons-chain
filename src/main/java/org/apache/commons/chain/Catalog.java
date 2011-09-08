@@ -46,22 +46,24 @@ public interface Catalog {
      * to the set of named commands known to this {@link Catalog},
      * replacing any previous command for that name.
      *
+     * @param <C> Type of the context associated with this command
      * @param name Name of the new command
      * @param command {@link Command} or {@link Chain} to be returned
      *  for later lookups on this name
      */
-    void addCommand(String name, Command command);
+    <C extends Context> void addCommand(String name, Command<C> command);
 
 
     /**
      * <p>Return the {@link Command} or {@link Chain} associated with the
      * specified name, if any; otherwise, return <code>null</code>.</p>
      *
+     * @param <C> Type of the context associated with this command
      * @param name Name for which a {@link Command} or {@link Chain}
      *  should be retrieved
      * @return The Command associated with the specified name.
      */
-    Command getCommand(String name);
+    <C extends Context> Command<C> getCommand(String name);
 
 
 
@@ -71,7 +73,7 @@ public interface Catalog {
      * an empty Iterator is returned.</p>
      * @return An iterator of the names in this Catalog.
      */
-    Iterator getNames();
+    Iterator<String> getNames();
 
 
 }

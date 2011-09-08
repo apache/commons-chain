@@ -126,17 +126,23 @@ public class DispatchCommandTestCase extends TestCase {
     }
 
 
-    class TestAlternateContext extends java.util.HashMap implements Context {
+    class TestAlternateContext extends java.util.HashMap<String, Object> implements Context {
         Context wrappedContext = null;
          TestAlternateContext(Context context) {
             this.wrappedContext = context;
         }
 
+        @Override
         public Object get(Object o) {
             return this.wrappedContext.get(o);
         }
 
-        public Object put(Object key, Object value) {
+        public <T> T retrieve(String key) {
+            return wrappedContext.retrieve(key);
+        }
+
+        @Override
+        public Object put(String key, Object value) {
             return this.wrappedContext.put(key, value);
         }
 

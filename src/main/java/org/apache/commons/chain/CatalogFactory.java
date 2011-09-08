@@ -95,7 +95,7 @@ public abstract class CatalogFactory {
      * If there are no known catalogs, an empty Iterator is returned.</p>
      * @return An Iterator of the names of the Catalogs known by this factory.
      */
-    public abstract Iterator getNames();
+    public abstract Iterator<String> getNames();
 
 
     /**
@@ -114,6 +114,7 @@ public abstract class CatalogFactory {
      * more than one DELIMITER will cause an
      * <code>IllegalArgumentException</code> to be thrown.</p>
      *
+     * @param <C> Type of the context associated with this command
      * @param commandID the identifier of the command to return
      * @return the command located with commandID, or <code>null</code>
      *  if either the command name or the catalog name cannot be resolved
@@ -122,7 +123,7 @@ public abstract class CatalogFactory {
      *
      * @since Chain 1.1
      */
-    public Command getCommand(String commandID) {
+    public <C extends Context> Command<C> getCommand(String commandID) {
 
         String commandName = commandID;
         String catalogName = null;
@@ -169,7 +170,8 @@ public abstract class CatalogFactory {
      * <p>The set of registered {@link CatalogFactory} instances,
      * keyed by the relevant class loader.</p>
      */
-    private static Map factories = new HashMap();
+    private static final Map<ClassLoader, CatalogFactory> factories =
+            new HashMap<ClassLoader, CatalogFactory>();
 
 
     // -------------------------------------------------------- Static Methods
@@ -190,7 +192,7 @@ public abstract class CatalogFactory {
         CatalogFactory factory = null;
         ClassLoader cl = getClassLoader();
         synchronized (factories) {
-            factory = (CatalogFactory) factories.get(cl);
+            factory = factories.get(cl);
             if (factory == null) {
                 factory = new CatalogFactoryBase();
                 factories.put(cl, factory);

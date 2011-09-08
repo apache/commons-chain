@@ -26,9 +26,11 @@ import org.apache.commons.chain.web.AbstractSetLocaleCommand;
 /**
  * <p>Concrete implementation of {@link AbstractSetLocaleCommand} for
  * the JavaServer Faces API.</p>
+ *
+ * @param <C> Type of the context associated with this command
  */
 
-public class FacesSetLocaleCommand extends AbstractSetLocaleCommand {
+public class FacesSetLocaleCommand<C extends Context> extends AbstractSetLocaleCommand<C> {
 
 
     // ------------------------------------------------------- Protected Methods
