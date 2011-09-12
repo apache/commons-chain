@@ -138,7 +138,7 @@ public class DispatchCommandTestCase extends TestCase {
         }
 
         public <T> T retrieve(String key) {
-            return wrappedContext.retrieve(key);
+            return (T) wrappedContext.retrieve(key);
         }
 
         @Override
