@@ -16,10 +16,14 @@
  */
 package org.apache.commons.chain.impl;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
 import org.apache.commons.chain.Context;
+import org.junit.Before;
+import org.junit.Test;
 
 
 /**
@@ -30,34 +34,15 @@ import org.apache.commons.chain.Context;
 public class TestContextTestCase extends ContextBaseTestCase {
 
 
-    // ------------------------------------------------------------ Constructors
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public TestContextTestCase(String name) {
-        super(name);
-    }
-
-
     // ---------------------------------------------------- Overall Test Methods
 
 
     /**
      * Set up instance variables required by this test case.
      */
+    @Before
     public void setUp() {
         context = createContext();
-    }
-
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return (new TestSuite(TestContextTestCase.class));
     }
 
 
@@ -65,6 +50,7 @@ public class TestContextTestCase extends ContextBaseTestCase {
 
 
     // Test state of newly created instance
+    @Test
     public void testPristine() {
 
         super.testPristine();
@@ -76,6 +62,7 @@ public class TestContextTestCase extends ContextBaseTestCase {
 
 
     // Test a read only property on the Context implementation class
+    @Test
     public void testReadOnly() {
 
         Object readOnly = context.get("readOnly");
@@ -97,6 +84,7 @@ public class TestContextTestCase extends ContextBaseTestCase {
 
 
     // Test a read write property on the Context implementation class
+    @Test
     public void testReadWrite() {
 
         Object readWrite = context.get("readWrite");
@@ -116,6 +104,7 @@ public class TestContextTestCase extends ContextBaseTestCase {
 
 
     // Test a write only property on the Context implementation class
+    @Test
     public void testWriteOnly() {
 
         Object writeOnly = ((TestContext) context).returnWriteOnly();

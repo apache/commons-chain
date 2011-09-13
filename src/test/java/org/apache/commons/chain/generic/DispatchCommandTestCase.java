@@ -16,31 +16,20 @@
  */
 package org.apache.commons.chain.generic;
 
-import junit.framework.TestCase;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
+
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ContextBase;
+import org.junit.Test;
 
 /* JUnitTest case for class: org.apache.commons.chain.generic.DispatchCommand */
-public class DispatchCommandTestCase extends TestCase {
+public class DispatchCommandTestCase {
 
-    public DispatchCommandTestCase(String _name) {
-        super(_name);
-    }
-
-    /* setUp method for test case */
-    protected void setUp() {
-    }
-
-    /* tearDown method for test case */
-    protected void tearDown() {
-    }
-
-    /* Executes the test case */
-    public static void main(String[] argv) {
-        String[] testCaseList = {DispatchCommandTestCase.class.getName()};
-        junit.textui.TestRunner.main(testCaseList);
-    }
-
+    @Test
     public void testMethodDispatch() throws Exception {
         TestCommand test = new TestCommand();
 
@@ -56,6 +45,7 @@ public class DispatchCommandTestCase extends TestCase {
     }
 
 
+    @Test
     public void testMethodKeyDispatch() throws Exception {
         TestCommand test = new TestCommand();
 
@@ -71,6 +61,7 @@ public class DispatchCommandTestCase extends TestCase {
 
     }
 
+    @Test
     public void testAlternateContext() throws Exception {
         TestAlternateContextCommand test = new TestAlternateContextCommand();
 

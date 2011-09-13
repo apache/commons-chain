@@ -16,23 +16,31 @@
  */
 package org.apache.commons.chain.web.servlet;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-import org.apache.commons.chain.Context;
-import org.apache.commons.chain.impl.ContextBaseTestCase;
-import org.apache.commons.chain.web.WebContext;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Cookie;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.Collection;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.chain.Context;
+import org.apache.commons.chain.impl.ContextBaseTestCase;
+import org.apache.commons.chain.web.WebContext;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 
 /**
@@ -41,18 +49,6 @@ import java.util.Collection;
  */
 
 public class ServletWebContextTestCase extends ContextBaseTestCase {
-
-
-    // ---------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public ServletWebContextTestCase(String name) {
-        super(name);
-    }
 
 
     // ----------------------------------------------------- Instance Variables
@@ -71,6 +67,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Before
     public void setUp() {
         scontext = new MockServletContext();
         scontext.setAttribute("akey1", "avalue1");
@@ -103,16 +100,9 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return (new TestSuite(ServletWebContextTestCase.class));
-    }
-
-
-    /**
      * Tear down instance variables required by this test case.
      */
+    @After
     public void tearDown() {
         scontext = null;
         session = null;
@@ -126,6 +116,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getApplicationScope()
+    @Test
     public void testApplicationScope() {
 
         Map map = ((WebContext) context).getApplicationScope();
@@ -188,6 +179,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
     // Test equals() and hashCode()
     // Copied from ContextBaseTestCase with customized creation of "other"
+    @Test
     public void testEquals() {
 
         // FIXME - ServletWebContext needs a better equals()
@@ -216,6 +208,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getHeader()
+    @Test
     public void testHeader() {
 
         Map map = ((WebContext) context).getHeader();
@@ -263,6 +256,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getHeaderValues()
+    @Test
     public void testHeaderValues() {
 
         Map map = ((WebContext) context).getHeaderValues();
@@ -321,6 +315,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getInitParam()
+    @Test
     public void testInitParam() {
 
         Map map = ((WebContext) context).getInitParam();
@@ -371,6 +366,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getParam()
+    @Test
     public void testParam() {
 
         Map map = ((WebContext) context).getParam();
@@ -417,6 +413,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getParamValues()
+    @Test
     public void testParamValues() {
 
         Map map = ((WebContext) context).getParamValues();
@@ -472,6 +469,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getCookies()
+    @Test
     public void testCookies() {
 
         Map map = ((WebContext) context).getCookies();
@@ -519,6 +517,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     }
 
     // Test state of newly created instance
+    @Test
     public void testPristine() {
 
         super.testPristine();
@@ -559,6 +558,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test release()
+    @Test
     public void testRelease() {
 
         ServletWebContext swcontext = (ServletWebContext) context;
@@ -590,6 +590,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getRequestScope()
+    @Test
     public void testRequestScope() {
 
         Map map = ((WebContext) context).getRequestScope();
@@ -650,6 +651,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getSessionScope()
+    @Test
     public void testSessionScope() {
 
         Map map = ((WebContext) context).getSessionScope();
@@ -711,6 +713,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getSessionScope() without Session
+    @Test
     public void testSessionScopeWithoutSession() {
 
         // Create a Context without a session

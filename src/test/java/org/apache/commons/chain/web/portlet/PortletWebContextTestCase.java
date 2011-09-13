@@ -16,12 +16,14 @@
  */
 package org.apache.commons.chain.web.portlet;
 
+import static junit.framework.Assert.*;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ContextBaseTestCase;
 import org.apache.commons.chain.web.WebContext;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
@@ -42,18 +44,6 @@ import java.util.Collection;
 public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
-    // ---------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public PortletWebContextTestCase(String name) {
-        super(name);
-    }
-
-
     // ----------------------------------------------------- Instance Variables
 
 
@@ -70,6 +60,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Before
     public void setUp() {
         pcontext = new MockPortletContext();
         pcontext.setAttribute("akey1", "avalue1");
@@ -94,16 +85,9 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return (new TestSuite(PortletWebContextTestCase.class));
-    }
-
-
-    /**
      * Tear down instance variables required by this test case.
      */
+    @After
     public void tearDown() {
         pcontext = null;
         session = null;
@@ -117,6 +101,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getApplicationScope()
+    @Test
     public void testApplicationScope() {
 
         Map map = ((WebContext) context).getApplicationScope();
@@ -180,6 +165,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
     // Test equals() and hashCode()
     // Copied from ContextBaseTestCase with customized creation of "other"
+    @Test
     public void testEquals() {
 
         // Compare to self
@@ -206,6 +192,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getHeader()
+    @Test
     public void testHeader() {
 
         Map map = ((WebContext) context).getHeader();
@@ -225,6 +212,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getHeaderValues()
+    @Test
     public void testHeaderValues() {
 
         Map map = ((WebContext) context).getHeaderValues();
@@ -244,6 +232,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getInitParam()
+    @Test
     public void testInitParam() {
 
         Map map = ((WebContext) context).getInitParam();
@@ -294,6 +283,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getParam()
+    @Test
     public void testParam() {
 
         Map map = ((WebContext) context).getParam();
@@ -340,6 +330,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getParamValues()
+    @Test
     public void testParamValues() {
 
         Map map = ((WebContext) context).getParamValues();
@@ -395,6 +386,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getCookies()
+    @Test
     public void testCookies() {
 
         Map map = ((WebContext) context).getCookies();
@@ -412,6 +404,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
     }
 
     // Test state of newly created instance
+    @Test
     public void testPristine() {
 
         super.testPristine();
@@ -452,6 +445,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test release()
+    @Test
     public void testRelease() {
 
         PortletWebContext pwcontext = (PortletWebContext) context;
@@ -481,6 +475,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getRequestScope()
+    @Test
     public void testRequestScope() {
 
         Map map = ((WebContext) context).getRequestScope();
@@ -541,6 +536,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getSessionScope()
+    @Test
     public void testSessionScope() {
 
         Map map = ((WebContext) context).getSessionScope();
@@ -602,6 +598,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Test getSessionScope() without Session
+    @Test
     public void testSessionScopeWithoutSession() {
 
         // Create a Context without a session

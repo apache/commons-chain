@@ -17,16 +17,31 @@
 
 package org.apache.commons.chain.config;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
+
+import java.util.Iterator;
+
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
-import org.apache.commons.chain.impl.*;
+import org.apache.commons.chain.impl.AddingCommand;
+import org.apache.commons.chain.impl.CatalogBase;
+import org.apache.commons.chain.impl.CatalogFactoryBase;
+import org.apache.commons.chain.impl.ChainBase;
+import org.apache.commons.chain.impl.ContextBase;
+import org.apache.commons.chain.impl.DelegatingCommand;
+import org.apache.commons.chain.impl.DelegatingFilter;
+import org.apache.commons.chain.impl.ExceptionCommand;
+import org.apache.commons.chain.impl.ExceptionFilter;
+import org.apache.commons.chain.impl.NonDelegatingCommand;
+import org.apache.commons.chain.impl.NonDelegatingFilter;
 import org.apache.commons.digester.Digester;
-
-import java.util.Iterator;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 
 /**
@@ -35,24 +50,11 @@ import java.util.Iterator;
  * for the commands and chains used in the test.</p>
  */
 
-public class ConfigParser2TestCase extends TestCase {
+public class ConfigParser2TestCase {
 
 
     private static final String DEFAULT_XML =
         "/org/apache/commons/chain/config/test-config-2.xml";
-
-
-    // ------------------------------------------------------------ Constructors
-
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public ConfigParser2TestCase(String name) {
-        super(name);
-    }
 
 
     // ------------------------------------------------------ Instance Variables
@@ -82,6 +84,7 @@ public class ConfigParser2TestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Before
     public void setUp() {
         catalog = new CatalogBase();
         context = new ContextBase();
@@ -90,16 +93,9 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return (new TestSuite(ConfigParser2TestCase.class));
-    }
-
-
-    /**
      * Tear down instance variables required by this test case.
      */
+    @After
     public void tearDown() {
         parser = null;
         context = null;
@@ -111,6 +107,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Load the default test-config.xml file and examine the results
+    @Test
     public void testDefault() throws Exception {
 
         // Check overall command count
@@ -163,6 +160,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Test execution of chain "Execute2a"
+    @Test
     public void testExecute2a() throws Exception {
 
         load(DEFAULT_XML);
@@ -174,6 +172,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Test execution of chain "Execute2b"
+    @Test
     public void testExecute2b() throws Exception {
 
         load(DEFAULT_XML);
@@ -185,6 +184,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Test execution of chain "Execute2c"
+    @Test
     public void testExecute2c() throws Exception {
 
         load(DEFAULT_XML);
@@ -200,6 +200,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Test execution of chain "Execute2d"
+    @Test
     public void testExecute2d() throws Exception {
 
         load(DEFAULT_XML);
@@ -215,6 +216,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Test execution of chain "Execute4a"
+    @Test
     public void testExecute4a() throws Exception {
 
         load(DEFAULT_XML);
@@ -226,6 +228,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Test execution of chain "Execute2b"
+    @Test
     public void testExecute4b() throws Exception {
 
         load(DEFAULT_XML);
@@ -237,6 +240,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Test execution of chain "Execute4c"
+    @Test
     public void testExecute4c() throws Exception {
 
         load(DEFAULT_XML);
@@ -252,6 +256,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Test execution of chain "Execute4d"
+    @Test
     public void testExecute4d() throws Exception {
 
         load(DEFAULT_XML);
@@ -267,6 +272,7 @@ public class ConfigParser2TestCase extends TestCase {
 
 
     // Test a pristine ConfigParser instance
+    @Test
     public void testPristine() {
 
         // Validate the "digester" property

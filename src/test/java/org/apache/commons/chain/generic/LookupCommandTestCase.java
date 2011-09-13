@@ -16,19 +16,24 @@
  */
 package org.apache.commons.chain.generic;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Context;
-import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.impl.CatalogBase;
-import org.apache.commons.chain.impl.ContextBase;
-import org.apache.commons.chain.impl.ChainBase;
 import org.apache.commons.chain.impl.CatalogFactoryBase;
+import org.apache.commons.chain.impl.ChainBase;
+import org.apache.commons.chain.impl.ContextBase;
 import org.apache.commons.chain.impl.DelegatingCommand;
 import org.apache.commons.chain.impl.NonDelegatingCommand;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * <p>Test case for the <code>LookupCommand</code> class.</p>
@@ -37,7 +42,7 @@ import org.apache.commons.chain.impl.NonDelegatingCommand;
  * @version $Revision$
  */
 
-public class LookupCommandTestCase extends TestCase {
+public class LookupCommandTestCase {
 
 
     // ---------------------------------------------------- Instance Variables
@@ -58,24 +63,13 @@ public class LookupCommandTestCase extends TestCase {
     protected Context context = null;
 
 
-    // ---------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public LookupCommandTestCase(String name) {
-        super(name);
-    }
-
-
     // -------------------------------------------------- Overall Test Methods
 
 
     /**
      * Set up instance variables required by this test case.
      */
+    @Before
     public void setUp() {
         catalog = new CatalogBase();
         CatalogFactoryBase.getInstance().setCatalog(catalog);
@@ -83,17 +77,10 @@ public class LookupCommandTestCase extends TestCase {
         context = new ContextBase();
     }
 
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return (new TestSuite(LookupCommandTestCase.class));
-    }
-
     /**
      * Tear down instance variables required by this test case.
      */
+    @After
     public void tearDown() {
         catalog = null;
         CatalogFactoryBase.clear();
@@ -106,6 +93,7 @@ public class LookupCommandTestCase extends TestCase {
 
 
     // Test ability to lookup and execute single non-delegating command
+    @Test
     public void testExecuteMethodLookup_1a() {
 
         // use default catalog
@@ -122,6 +110,7 @@ public class LookupCommandTestCase extends TestCase {
     }
 
     // Test ability to lookup and execute a chain
+    @Test
     public void testExecuteMethodLookup_1b() {
 
         ChainBase<Context> chain = new ChainBase<Context>();
@@ -144,6 +133,7 @@ public class LookupCommandTestCase extends TestCase {
 
     // Test ability to lookup and execute single non-delegating command
     // using the context
+    @Test
     public void testExecuteMethodLookup_2a() {
 
         // use default catalog
@@ -161,6 +151,7 @@ public class LookupCommandTestCase extends TestCase {
     }
 
     // Test ability to lookup and execute a chain using the context 
+    @Test
     public void testExecuteMethodLookup_2b() {
 
         Chain<Context> chain = new ChainBase<Context>();
@@ -183,6 +174,7 @@ public class LookupCommandTestCase extends TestCase {
     }
 
     // Test ability to lookup and execute single non-delegating command, ignoring its result
+    @Test
     public void testExecuteMethodLookup_3a() {
 
         // use default catalog

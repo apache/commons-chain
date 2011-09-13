@@ -16,34 +16,27 @@
  */
 package org.apache.commons.chain.web.servlet;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import org.apache.commons.chain.Context;
+import java.util.Locale;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Locale;
+
+import org.apache.commons.chain.Context;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 
 // Test case for org.apache.commons.chain.web.servlet.ServletSetLocaleCommand
 
-public class ServletSetLocaleCommandTestCase extends TestCase {
-
-
-    // ---------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public ServletSetLocaleCommandTestCase(String name) {
-        super(name);
-    }
+public class ServletSetLocaleCommandTestCase {
 
 
     // ----------------------------------------------------- Instance Variables
@@ -59,7 +52,7 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
 
     // Chain API Objects
     protected Context context = null;
-    protected ServletGetLocaleCommand command = null;
+    protected ServletSetLocaleCommand command = null;
 
 
     // -------------------------------------------------- Overall Test Methods
@@ -68,6 +61,7 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Before
     public void setUp() {
 
     locale = new Locale("en", "US");
@@ -82,17 +76,7 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
 
     // Set up Chain API Objects
         context = new ServletWebContext(scontext, request, response);
-    command = new ServletGetLocaleCommand();
-
-    }
-
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return (new TestSuite(ServletGetLocaleCommandTestCase.class));
+    command = new ServletSetLocaleCommand();
 
     }
 
@@ -100,6 +84,7 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @After
     public void tearDown() {
 
         scontext = null;
@@ -117,6 +102,7 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
 
 
     // Test configured behavior
+    @Test
     public void testConfigured() throws Exception {
 
     command.setLocaleKey("special");
@@ -127,6 +113,7 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
 
 
     // Test default behavior
+    @Test
     public void testDefault() throws Exception {
 
     assertEquals("locale", command.getLocaleKey());
@@ -138,7 +125,7 @@ public class ServletSetLocaleCommandTestCase extends TestCase {
     // --------------------------------------------------------- Support Methods
 
 
-    protected void check(Context context, ServletGetLocaleCommand command)
+    protected void check(Context context, ServletSetLocaleCommand command)
     throws Exception {
 
     String localeKey = command.getLocaleKey();

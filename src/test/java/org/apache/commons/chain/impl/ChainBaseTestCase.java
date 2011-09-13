@@ -16,16 +16,19 @@
  */
 package org.apache.commons.chain.impl;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 
 import java.util.List;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 
 /**
@@ -35,7 +38,7 @@ import org.apache.commons.chain.Context;
  * @version $Revision$ $Date$
  */
 
-public class ChainBaseTestCase extends TestCase {
+public class ChainBaseTestCase {
 
 
     // ---------------------------------------------------- Instance Variables
@@ -53,40 +56,22 @@ public class ChainBaseTestCase extends TestCase {
     protected Context context = null;
 
 
-    // ---------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public ChainBaseTestCase(String name) {
-        super(name);
-    }
-
-
     // -------------------------------------------------- Overall Test Methods
 
 
     /**
      * Set up instance variables required by this test case.
      */
+    @Before
     public void setUp() {
         chain = new ChainBase();
         context = new ContextBase();
     }
 
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return (new TestSuite(ChainBaseTestCase.class));
-    }
-
     /**
      * Tear down instance variables required by this test case.
      */
+    @After
     public void tearDown() {
         chain = null;
         context = null;
@@ -97,6 +82,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test the ability to add commands
+    @Test
     public void testCommands() {
 
         checkCommandCount(0);
@@ -117,6 +103,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a single non-delegating command
+    @Test
     public void testExecute1a() {
         chain.addCommand(new NonDelegatingCommand("1"));
         try {
@@ -130,6 +117,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a single delegating command
+    @Test
     public void testExecute1b() {
         chain.addCommand(new DelegatingCommand("1"));
         try {
@@ -143,6 +131,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a single exception-throwing command
+    @Test
     public void testExecute1c() {
         chain.addCommand(new ExceptionCommand("1"));
         try {
@@ -157,6 +146,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of an attempt to add a new Command while executing
+    @Test
     public void testExecute1d() {
         chain.addCommand(new AddingCommand("1", chain));
         try {
@@ -171,6 +161,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a chain that should return true
+    @Test
     public void testExecute2a() {
         chain.addCommand(new DelegatingCommand("1"));
         chain.addCommand(new DelegatingCommand("2"));
@@ -186,6 +177,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a chain that should return false
+    @Test
     public void testExecute2b() {
         chain.addCommand(new DelegatingCommand("1"));
         chain.addCommand(new DelegatingCommand("2"));
@@ -201,6 +193,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a chain that should throw an exception
+    @Test
     public void testExecute2c() {
         chain.addCommand(new DelegatingCommand("1"));
         chain.addCommand(new DelegatingCommand("2"));
@@ -217,6 +210,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a chain that should throw an exception in the middle
+    @Test
     public void testExecute2d() {
         chain.addCommand(new DelegatingCommand("1"));
         chain.addCommand(new ExceptionCommand("2"));
@@ -233,6 +227,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a single non-delegating filter
+    @Test
     public void testExecute3a() {
         chain.addCommand(new NonDelegatingFilter("1", "a"));
         try {
@@ -246,6 +241,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a single delegating filter
+    @Test
     public void testExecute3b() {
         chain.addCommand(new DelegatingFilter("1", "a"));
         try {
@@ -259,6 +255,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a single exception-throwing filter
+    @Test
     public void testExecute3c() {
         chain.addCommand(new ExceptionFilter("1", "a"));
         try {
@@ -273,6 +270,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a chain that should return true
+    @Test
     public void testExecute4a() {
         chain.addCommand(new DelegatingFilter("1", "a"));
         chain.addCommand(new DelegatingCommand("2"));
@@ -288,6 +286,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a chain that should return false
+    @Test
     public void testExecute4b() {
         chain.addCommand(new DelegatingCommand("1"));
         chain.addCommand(new DelegatingFilter("2", "b"));
@@ -303,6 +302,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a chain that should throw an exception
+    @Test
     public void testExecute4c() {
         chain.addCommand(new DelegatingFilter("1", "a"));
         chain.addCommand(new DelegatingFilter("2", "b"));
@@ -319,6 +319,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test execution of a chain that should throw an exception in the middle
+    @Test
     public void testExecute4d() {
         chain.addCommand(new DelegatingFilter("1", "a"));
         chain.addCommand(new ExceptionFilter("2", "b"));
@@ -335,6 +336,7 @@ public class ChainBaseTestCase extends TestCase {
 
 
     // Test state of newly created instance
+    @Test
     public void testNewInstance() {
         checkCommandCount(0);
     }

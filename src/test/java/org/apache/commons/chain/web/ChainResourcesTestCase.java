@@ -16,27 +16,14 @@
  */
 package org.apache.commons.chain.web;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
+import org.junit.Test;
 
 // Test case for org.apache.commons.chain.web.ChainResources
 
-public class ChainResourcesTestCase extends TestCase {
-
-
-    // ---------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public ChainResourcesTestCase(String name) {
-        super(name);
-    }
+public class ChainResourcesTestCase {
 
 
     // ----------------------------------------------------- Instance Variables
@@ -60,6 +47,7 @@ public class ChainResourcesTestCase extends TestCase {
     // ------------------------------------------------ Individual Test Methods
 
 
+    @Test
     public void testGetPaths() throws Exception {
         for (int i = 0; i < data.length; i++) {
             TestData datum = data[i];

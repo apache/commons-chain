@@ -16,14 +16,18 @@
  */
 package org.apache.commons.chain.impl;
 
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import org.apache.commons.chain.Catalog;
-import org.apache.commons.chain.Command;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 
 import java.util.Iterator;
+
+import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.Command;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 
 /**
@@ -33,7 +37,7 @@ import java.util.Iterator;
  * @version $Revision$ $Date$
  */
 
-public class CatalogBaseTestCase extends TestCase {
+public class CatalogBaseTestCase {
 
 
     // ---------------------------------------------------- Instance Variables
@@ -45,39 +49,21 @@ public class CatalogBaseTestCase extends TestCase {
     protected CatalogBase catalog = null;
 
 
-    // ---------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public CatalogBaseTestCase(String name) {
-        super(name);
-    }
-
-
     // -------------------------------------------------- Overall Test Methods
 
 
     /**
      * Set up instance variables required by this test case.
      */
+    @Before
     public void setUp() {
         catalog = new CatalogBase();
-    }
-
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return (new TestSuite(CatalogBaseTestCase.class));
     }
 
     /**
      * Tear down instance variables required by this test case.
      */
+    @After
     public void tearDown() {
         catalog = null;
     }
@@ -87,6 +73,7 @@ public class CatalogBaseTestCase extends TestCase {
 
 
     // Test adding commands
+    @Test
     public void testAddCommand() {
         addCommands();
         checkCommandCount(8);
@@ -94,6 +81,7 @@ public class CatalogBaseTestCase extends TestCase {
 
 
     // Test getting commands
+    @Test
     public void testGetCommand() {
 
         addCommands();
@@ -138,6 +126,7 @@ public class CatalogBaseTestCase extends TestCase {
 
 
     // Test pristine instance
+    @Test
     public void testPristine() {
         checkCommandCount(0);
         assertNull(catalog.getCommand("AddingCommand"));

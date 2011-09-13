@@ -16,6 +16,11 @@
  */
 package org.apache.commons.chain.impl;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -28,11 +33,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.web.WebContext;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 
 
@@ -43,7 +48,7 @@ import org.apache.commons.chain.web.WebContext;
  * @version $Revision$ $Date$
  */
 
-public class ContextBaseTestCase extends TestCase {
+public class ContextBaseTestCase {
 
 
     // ---------------------------------------------------- Instance Variables
@@ -55,40 +60,21 @@ public class ContextBaseTestCase extends TestCase {
     protected Context context = null;
 
 
-
-    // ---------------------------------------------------------- Constructors
-
-    /**
-     * Construct a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public ContextBaseTestCase(String name) {
-        super(name);
-    }
-
-
     // -------------------------------------------------- Overall Test Methods
 
 
     /**
      * Set up instance variables required by this test case.
      */
+    @Before
     public void setUp() {
         context = createContext();
-    }
-
-
-    /**
-     * Return the tests included in this test suite.
-     */
-    public static Test suite() {
-        return (new TestSuite(ContextBaseTestCase.class));
     }
 
     /**
      * Tear down instance variables required by this test case.
      */
+    @After
     public void tearDown() {
         context = null;
     }
@@ -98,6 +84,7 @@ public class ContextBaseTestCase extends TestCase {
 
 
     // Test ability to get, put, and remove attributes
+    @Test
     public void testAttributes() {
 
         Object value = null;
@@ -157,6 +144,7 @@ public class ContextBaseTestCase extends TestCase {
 
 
     // Test containsKey() and containsValue()
+    @Test
     public void testContains() {
 
         assertTrue(!context.containsKey("bop"));
@@ -172,6 +160,7 @@ public class ContextBaseTestCase extends TestCase {
 
 
     // Test equals() and hashCode()
+    @Test
     public void testEquals() {
 
         // Compare to self
@@ -198,6 +187,7 @@ public class ContextBaseTestCase extends TestCase {
 
 
     // Test keySet()
+    @Test
     public void testKeySet() {
 
         Set keySet = null;
@@ -298,6 +288,7 @@ public class ContextBaseTestCase extends TestCase {
 
 
     // Test state of newly created instance
+    @Test
     public void testPristine() {
 
         checkAttributeCount(0);
@@ -308,6 +299,7 @@ public class ContextBaseTestCase extends TestCase {
 
 
     // Test putAll()
+    @Test
     public void testPutAll() {
 
         // Check preconditions
@@ -345,6 +337,7 @@ public class ContextBaseTestCase extends TestCase {
 
 
     // Test serialization
+    @Test
     public void testSeriaization() throws Exception {
 
         // ContextBase is implicitly declared Serializable because it
