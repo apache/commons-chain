@@ -325,6 +325,17 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      *  have both a read method and a write method
      */
     public Object put(String key, Object value) {
+        /*
+         * ConcurrentHashMap doesn't accept null values, see
+         * http://download.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/ConcurrentHashMap.html#put(K, V)
+         */
+        if (value == null) {
+            if (containsKey(key)) {
+                remove(key);
+            }
+
+            return null;
+        }
 
         // Case 1 -- no local properties
         if (descriptors == null) {
