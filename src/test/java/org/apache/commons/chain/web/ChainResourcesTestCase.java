@@ -16,70 +16,62 @@
  */
 package org.apache.commons.chain.web;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 // Test case for org.apache.commons.chain.web.ChainResources
 
+@RunWith(Parameterized.class)
 public class ChainResourcesTestCase {
 
 
-    // ----------------------------------------------------- Instance Variables
+    // ----------------------------------------------------- Test data source
 
+    @Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][] {
+            { "a,b,c",            new String[] {"a", "b", "c"} },
+            { "a , b , c ",       new String[] {"a", "b", "c"} },
+            { "a,\tb,\tc ",       new String[] {"a", "b", "c"} },
+            { "\na,\nb,\nc\n",    new String[] {"a", "b", "c"} },
+            { "a,,b,c ",          new String[] {"a", "b", "c"} },
+            { ",a,b,,c,,",        new String[] {"a", "b", "c"} },
+            { null,               new String[] {} },
+            { "",                 new String[] {} },
+            { ",",                new String[] {} },
+            { ",,",               new String[] {} }
+        });
+    }
 
-    protected TestData[] data = new TestData[]
-        {
-            new TestData("a,b,c",            new String[] {"a", "b", "c"}),
-            new TestData("a , b , c ",       new String[] {"a", "b", "c"}),
-            new TestData("a,\tb,\tc ",       new String[] {"a", "b", "c"}),
-            new TestData("\na,\nb,\nc\n",    new String[] {"a", "b", "c"}),
-            new TestData("a,,b,c ",          new String[] {"a", "b", "c"}),
-            new TestData(",a,b,,c,,",        new String[] {"a", "b", "c"}),
-            new TestData(null,               new String[] {}),
-            new TestData("",                 new String[] {}),
-            new TestData(",",                new String[] {}),
-            new TestData(",,",               new String[] {})
-        };
+    // ----------------------------------------------------- Public constructor
 
+    private final String input;
+
+    private final String[] expected;
+
+    public ChainResourcesTestCase(String input, String[] expected)
+    {
+        this.input = input;
+        this.expected = expected;
+    }
 
     // ------------------------------------------------ Individual Test Methods
 
 
     @Test
     public void testGetPaths() throws Exception {
-        for (int i = 0; i < data.length; i++) {
-            TestData datum = data[i];
-            String[] expected = datum.getExpected();
-            String[] actual = ChainResources.getResourcePaths(datum.getInput());
+        String[] actual = ChainResources.getResourcePaths(input);
 
-            assertNotNull(actual);
-            assertEquals(expected.length, actual.length);
-            for (int j = 0; j < actual.length; j++) {
-                assertEquals(expected[j], actual[j]);
-            }
-        }
-    }
-
-
-    // ---------------------------------------------------------- Inner classes
-
-
-    // Container for test data for one test
-    public static final class TestData {
-        private String input;
-        private String[] expected;
-        public TestData(String input, String[] expected) {
-            this.input = input;
-            this.expected = expected;
-        }
-        public String getInput() {
-            return input;
-        }
-        public String[] getExpected() {
-            return expected;
-        }
+        assertNotNull(actual);
+        assertArrayEquals(expected, actual);
     }
 
 }
