@@ -16,7 +16,7 @@
  */
 package org.apache.commons.chain.web.servlet;
 
-import static junit.framework.Assert.fail;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

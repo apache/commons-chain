@@ -16,7 +16,7 @@
  */
 package org.apache.commons.chain.generic;
 
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.Catalog;
