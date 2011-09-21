@@ -111,7 +111,7 @@
     <build>
         <testResources>
             <testResource>
-                <directory>src/test/java</directory>
+                <directory>src/test/resources</directory>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
@@ -122,8 +122,8 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptors>
-                        <descriptor>src/assembly/bin.xml</descriptor>
-                        <descriptor>src/assembly/src.xml</descriptor>
+                        <descriptor>${basedir}/src/main/assembly/bin.xml</descriptor>
+                        <descriptor>${basedir}/src/main/assembly/src.xml</descriptor>
                     </descriptors>
                     <tarLongFileMode>gnu</tarLongFileMode>
                 </configuration>
