@@ -25,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Iterator;
 
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.AddingCommand;
@@ -84,6 +85,7 @@ public class ConfigParserTestCase {
      */
     @Before
     public void setUp() {
+        CatalogFactory.clear();
         catalog = new CatalogBase();
         context = new ContextBase();
         parser = new ConfigParser();

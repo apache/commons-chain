@@ -69,6 +69,7 @@ public class CatalogFactoryBaseTestCase {
     @After
     public void tearDown() {
         factory = null;
+        CatalogFactory.clear();
     }
 
 
