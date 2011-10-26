@@ -129,8 +129,12 @@ public class FacesWebContext extends WebContext {
      * @return Application scope Map.
      */
     public Map<String, Object> getApplicationScope() {
-
-    return (context.getExternalContext().getApplicationMap());
+        
+        @SuppressWarnings("unchecked") // Assume faces is following contract
+        Map<String, Object> scope = (Map<String, Object>) 
+                context.getExternalContext().getApplicationMap();
+        
+        return (scope);
 
     }
 
@@ -141,8 +145,12 @@ public class FacesWebContext extends WebContext {
      * @return Header values Map.
      */
     public Map<String, String> getHeader() {
-
-    return (context.getExternalContext().getRequestHeaderMap());
+        
+        @SuppressWarnings("unchecked") // Assume faces is following contract
+        Map<String, String> headers = (Map<String, String>)
+                context.getExternalContext().getRequestHeaderMap();
+        
+        return (headers);
 
     }
 
@@ -153,8 +161,12 @@ public class FacesWebContext extends WebContext {
      * @return Header values Map.
      */
     public Map<String, String[]> getHeaderValues() {
-
-    return (context.getExternalContext().getRequestHeaderValuesMap());
+        
+        @SuppressWarnings("unchecked") // Assume faces is following contract
+        Map<String, String[]> headerValues = (Map<String, String[]>)
+            context.getExternalContext().getRequestHeaderValuesMap();    
+        
+        return (headerValues);
 
     }
 
@@ -165,8 +177,12 @@ public class FacesWebContext extends WebContext {
      * @return Initialization parameter Map.
      */
     public Map<String, String> getInitParam() {
-
-    return (context.getExternalContext().getInitParameterMap());
+        
+        @SuppressWarnings("unchecked") // Assume faces is following contract
+        Map<String, String> initParams = (Map<String, String>)
+                context.getExternalContext().getInitParameterMap();
+        
+        return (initParams);
 
     }
 
@@ -177,8 +193,11 @@ public class FacesWebContext extends WebContext {
      * @return Request parameter Map.
      */
     public Map<String, String> getParam() {
-
-    return (context.getExternalContext().getRequestParameterMap());
+        @SuppressWarnings("unchecked")
+        Map<String, String> params = (Map<String, String>)
+                context.getExternalContext().getRequestParameterMap();        
+        
+        return (params);
 
     }
 
@@ -189,8 +208,11 @@ public class FacesWebContext extends WebContext {
      * @return Request parameter Map.
      */
     public Map<String, String[]> getParamValues() {
-
-    return (context.getExternalContext().getRequestParameterValuesMap());
+        @SuppressWarnings("unchecked") // Assume faces is following contract
+        Map<String, String[]> paramValues = (Map<String, String[]>)
+                context.getExternalContext().getRequestParameterValuesMap();
+        
+        return (paramValues);
 
     }
 
@@ -203,7 +225,8 @@ public class FacesWebContext extends WebContext {
      */
     public Map<String, Cookie> getCookies() {
 
-        Map<String, Object> facesCookieMap =
+        @SuppressWarnings("unchecked") // Assume faces is following contract
+        Map<String, Object> facesCookieMap = (Map<String, Object>)
                 context.getExternalContext().getRequestCookieMap();
 
         /* This ugly hack was done because the faces API implements
@@ -216,6 +239,8 @@ public class FacesWebContext extends WebContext {
             Object cookieObj = itr.next();
 
             if (cookieObj instanceof Cookie) {
+                // See comment above about type safety check
+                @SuppressWarnings("unchecked")
                 Map<String, Cookie> cookieMap = Collections.checkedMap(
                         (Map)facesCookieMap, String.class, Cookie.class);
 
@@ -226,7 +251,7 @@ public class FacesWebContext extends WebContext {
                 throw new ClassCastException(msg);
             }
         } else {
-            return Collections.EMPTY_MAP;
+            return Collections.emptyMap();
         }
     }
 
@@ -237,8 +262,12 @@ public class FacesWebContext extends WebContext {
      * @return Request scope Map.
      */
     public Map<String, Object> getRequestScope() {
-
-    return (context.getExternalContext().getRequestMap());
+        
+        @SuppressWarnings("unchecked")  // Assume faces is following contract
+        Map<String, Object> scope = (Map<String, Object>)
+                context.getExternalContext().getRequestMap();
+        
+        return (scope);
 
     }
 
@@ -249,8 +278,12 @@ public class FacesWebContext extends WebContext {
      * @return Session scope Map.
      */
     public Map<String, Object> getSessionScope() {
-
-    return (context.getExternalContext().getSessionMap());
+        
+        @SuppressWarnings("unchecked")  // Assume faces is following contract
+        Map<String, Object> scope = (Map<String, Object>)
+                context.getExternalContext().getSessionMap();
+        
+        return (scope);
 
     }
 

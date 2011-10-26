@@ -58,6 +58,7 @@ public class PathInfoMapper<C extends Context> extends LookupCommand<C> {
      * @deprecated Use catalogName to specify the name of the catalog in the
      *  catalog factory
      */
+    @Deprecated
     public String getCatalogKey() {
 
         return (this.catalogKey);
@@ -74,6 +75,7 @@ public class PathInfoMapper<C extends Context> extends LookupCommand<C> {
      * @deprecated Use catalogName to specify the name of the catalog in the
      *  catalog factory
      */
+    @Deprecated
     public void setCatalogKey(String catalogKey) {
 
         this.catalogKey = catalogKey;
@@ -93,6 +95,7 @@ public class PathInfoMapper<C extends Context> extends LookupCommand<C> {
      *
      * @since Chain 1.2
      */
+    @Override
     protected String getCommandName(Context context) {
 
         // Look up the extra path information for this request
@@ -118,6 +121,7 @@ public class PathInfoMapper<C extends Context> extends LookupCommand<C> {
      *
      * @since Chain 1.2
      */
+    @Override
     protected Catalog getCatalog(C context) {
         Catalog catalog = (Catalog) context.get(getCatalogName());
         if (catalog == null) {

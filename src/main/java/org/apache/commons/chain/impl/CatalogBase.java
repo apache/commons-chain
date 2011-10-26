@@ -96,10 +96,9 @@ public class CatalogBase implements Catalog {
      *  should be retrieved
      * @return The Command associated with the specified name.
      */
-    public <C extends Context> Command<C> getCommand(String name) {
+    public Command<? extends Context> getCommand(String name) {
 
-        @SuppressWarnings( "unchecked" ) // will throw a cast exception at runtime!
-        Command<C> command = (Command<C>) commands.get(name);
+        Command<? extends Context> command = commands.get(name);
         return command;
 
     }
@@ -130,6 +129,7 @@ public class CatalogBase implements Catalog {
      * Converts this Catalog to a String.  Useful for debugging purposes.
      * @return a representation of this catalog as a String
      */
+    @Override
     public String toString() {
 
         Iterator<String> names = getNames();

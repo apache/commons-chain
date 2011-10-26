@@ -156,7 +156,7 @@ final class PortletApplicationScopeMap implements Map<String, Object> {
         List<Object> list = new ArrayList<Object>();
         Enumeration<String> keys = context.getAttributeNames();
         while (keys.hasMoreElements()) {
-            list.add(context.getAttribute((String) keys.nextElement()));
+            list.add(context.getAttribute(keys.nextElement()));
         }
         return (list);
     }

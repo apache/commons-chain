@@ -301,6 +301,7 @@ public class ChainListener implements ServletContextListener {
      * @deprecated Use the variant that does not take a catalog, on a
      *  configuration resource containing "catalog" element(s)
      */
+    @Deprecated
     private void parseJarResources(Catalog catalog, ServletContext context,
                                    ConfigParser parser, Log log) {
 
@@ -313,7 +314,7 @@ public class ChainListener implements ServletContextListener {
         Iterator<String> paths = jars.iterator();
         while (paths.hasNext()) {
 
-            path = (String) paths.next();
+            path = paths.next();
             if (!path.endsWith(".jar")) {
                 continue;
             }

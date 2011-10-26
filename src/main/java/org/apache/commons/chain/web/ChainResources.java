@@ -102,6 +102,7 @@ final class ChainResources {
      * @deprecated Use the variant that does not take a catalog, on a
      *  configuration resource containing "catalog" element(s)
      */
+    @Deprecated
     static void parseClassResources(Catalog catalog, String resources,
                                     ConfigParser parser) {
 
@@ -188,6 +189,7 @@ final class ChainResources {
      * @deprecated Use the variant that does not take a catalog, on a
      *  configuration resource containing "catalog" element(s)
      */
+    @Deprecated
     static void parseWebResources(Catalog catalog, ServletContext context,
                                   String resources,
                                   ConfigParser parser) {

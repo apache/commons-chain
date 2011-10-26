@@ -138,7 +138,7 @@ final class ServletParamValuesMap implements Map<String, String[]> {
         @SuppressWarnings( "unchecked" ) // it is known that header names are String
         Enumeration<String> keys = request.getParameterNames();
         while (keys.hasMoreElements()) {
-            list.add(request.getParameterValues((String) keys.nextElement()));
+            list.add(request.getParameterValues(keys.nextElement()));
         }
         return (list);
     }

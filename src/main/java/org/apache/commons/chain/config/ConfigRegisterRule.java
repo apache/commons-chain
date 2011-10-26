@@ -20,6 +20,7 @@ package org.apache.commons.chain.config;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
 import org.apache.commons.digester.Rule;
 import org.xml.sax.Attributes;
 
@@ -77,6 +78,7 @@ class ConfigRegisterRule extends Rule {
      *   the element name otherwise
      * @param attributes The attribute list of this element
      */
+    @Override
     public void begin(String namespace, String name, Attributes attributes)
         throws Exception {
 
@@ -86,7 +88,12 @@ class ConfigRegisterRule extends Rule {
             || !(top instanceof Command)) {
             return;
         }
-        Command command = (Command) top;
+        
+        /* All commands can consume a generic context. Here we depend on
+         * the configuration being correct because the rule binding is
+         * dynamic. */
+        @SuppressWarnings("unchecked")
+        Command<Context> command = (Command<Context>) top;
 
         // Is the next object a Catalog or a Chain?
         Object next = digester.peek(1);
@@ -98,10 +105,15 @@ class ConfigRegisterRule extends Rule {
         if (next instanceof Catalog) {
             String nameValue = attributes.getValue(nameAttribute);
             if (nameValue != null) {
-                ((Catalog) next).addCommand(nameValue, command);
+                Catalog catalog = (Catalog) next;
+                catalog.addCommand(nameValue, command);
             }
         } else if (next instanceof Chain) {
-            ((Chain) next).addCommand(command);
+            /* Like above - the chain is being dynamically generated,
+             * so we can add a generic context signature at compile-time. */
+            @SuppressWarnings("unchecked")
+            Chain<Context> chain = (Chain<Context>) next;
+            chain.addCommand(command);
         }
 
     }

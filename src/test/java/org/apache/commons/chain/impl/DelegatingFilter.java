@@ -29,7 +29,7 @@ import org.apache.commons.chain.Filter;
  * @version $Revision$ $Date$
  */
 
-public class DelegatingFilter extends NonDelegatingFilter {
+public class DelegatingFilter<C extends Context> extends NonDelegatingFilter<C> {
 
 
     // ------------------------------------------------------------ Constructor
@@ -50,7 +50,8 @@ public class DelegatingFilter extends NonDelegatingFilter {
 
 
     // Execution method for this Command
-    public boolean execute(Context context) throws Exception {
+    @Override
+    public boolean execute(C context) throws Exception {
 
         super.execute(context);
         return (false);

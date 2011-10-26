@@ -58,6 +58,7 @@ public class ServletPathMapper<C extends Context> extends LookupCommand<C> {
      * @deprecated Use catalogName to specify the name of the catalog in the
      *  catalog factory
      */
+    @Deprecated
     public String getCatalogKey() {
 
         return (this.catalogKey);
@@ -74,6 +75,7 @@ public class ServletPathMapper<C extends Context> extends LookupCommand<C> {
      * @deprecated Use catalogName to specify the name of the catalog in the
      *  catalog factory
      */
+    @Deprecated
     public void setCatalogKey(String catalogKey) {
 
         this.catalogKey = catalogKey;

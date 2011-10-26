@@ -73,6 +73,7 @@ public class RequestParameterMapper<C extends Context> extends LookupCommand<C> 
      * @deprecated Use catalogName to specify the name of the catalog in the
      *  catalog factory
      */
+    @Deprecated
     public void setCatalogKey(String catalogKey) {
 
         this.catalogKey = catalogKey;
@@ -89,6 +90,7 @@ public class RequestParameterMapper<C extends Context> extends LookupCommand<C> 
      * @deprecated Use catalogName to specify the name of the catalog in the
      *  catalog factory
      */
+    @Deprecated
     public String getParameter() {
 
         return (this.parameter);
@@ -121,6 +123,7 @@ public class RequestParameterMapper<C extends Context> extends LookupCommand<C> 
      *
      * @since Chain 1.2
      */
+    @Override
     protected String getCommandName(C context) {
 
         // Look up the specified request parameter for this request
@@ -142,6 +145,7 @@ public class RequestParameterMapper<C extends Context> extends LookupCommand<C> 
      *
      * @since Chain 1.2
      */
+    @Override
     protected Catalog getCatalog(C context) {
         Catalog catalog = (Catalog) context.get(getCatalogKey());
         if (catalog == null) {

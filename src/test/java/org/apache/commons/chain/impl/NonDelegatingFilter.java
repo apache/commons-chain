@@ -29,8 +29,8 @@ import org.apache.commons.chain.Filter;
  * @version $Revision$ $Date$
  */
 
-public class NonDelegatingFilter extends NonDelegatingCommand
-    implements Filter {
+public class NonDelegatingFilter<C extends Context>
+    extends NonDelegatingCommand<C> implements Filter<C> {
 
 
     // ------------------------------------------------------------- Constructor
@@ -64,7 +64,8 @@ public class NonDelegatingFilter extends NonDelegatingCommand
 
 
     // Execution method for this Command
-    public boolean execute(Context context) throws Exception {
+    @Override
+    public boolean execute(C context) throws Exception {
 
         super.execute(context);
         return (true);
@@ -73,7 +74,7 @@ public class NonDelegatingFilter extends NonDelegatingCommand
 
 
     // Postprocess method for this Filter
-    public boolean postprocess(Context context, Exception exception) {
+    public boolean postprocess(C context, Exception exception) {
         log(context, id2);
         return (false);
     }

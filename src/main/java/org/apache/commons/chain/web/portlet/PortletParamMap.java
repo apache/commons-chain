@@ -134,7 +134,7 @@ final class PortletParamMap implements Map<String, String> {
         List<String> list = new ArrayList<String>();
         Enumeration<String> keys = request.getParameterNames();
         while (keys.hasMoreElements()) {
-            list.add(request.getParameter((String) keys.nextElement()));
+            list.add(request.getParameter(keys.nextElement()));
         }
         return (list);
     }

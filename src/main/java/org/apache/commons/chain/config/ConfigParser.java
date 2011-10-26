@@ -156,6 +156,7 @@ public class ConfigParser {
      * @deprecated Use parse(URL) on a configuration resource with "factory"
      *  element(s) embedded
      */
+    @Deprecated
     public void parse(Catalog catalog, URL url) throws Exception {
 
         // Prepare our Digester instance

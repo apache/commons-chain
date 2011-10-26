@@ -52,7 +52,8 @@ import org.apache.commons.chain.Context;
  * @version $Revision$ $Date$
  */
 
-public class ContextBase extends ConcurrentHashMap<String, Object> implements Context {
+public class ContextBase extends ConcurrentHashMap<String, Object> 
+        implements Context {
 
 
     // ------------------------------------------------------------ Constructors
@@ -622,15 +623,23 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      */
     private class EntrySetImpl extends AbstractSet<Entry<String, Object>> {
 
+            @Override
             public void clear() {
             ContextBase.this.clear();
         }
 
+            @Override
             public boolean contains(Object obj) {
-            if (!(obj instanceof Map.Entry)) {
+            if (!(obj instanceof Map.Entry && 
+                    ((Map.Entry)obj).getKey() instanceof String)) {
                 return (false);
             }
-            Map.Entry<String, Object> entry = (Map.Entry) obj;
+            
+            /* The contains method is expecting the search type to be of the
+             * same type stored. This contract is enforced as a precondition.
+             * So we can safely suppress type safety warnings below. */
+            @SuppressWarnings("unchecked")
+            Map.Entry<String, Object> entry = (Map.Entry<String, Object>) obj;
             Entry actual = ContextBase.this.entry(entry.getKey());
             if (actual != null) {
                 return (actual.equals(entry));
@@ -639,6 +648,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             }
         }
 
+            @Override
             public boolean isEmpty() {
             return (ContextBase.this.isEmpty());
         }
@@ -647,9 +657,17 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             return (ContextBase.this.entriesIterator());
         }
 
+            @Override
             public boolean remove(Object obj) {
-            if (obj instanceof Map.Entry) {
-                return (ContextBase.this.remove((Map.Entry<String, Object>) obj));
+            if (obj instanceof Map.Entry && 
+                    ((Map.Entry)obj).getKey() instanceof String ) {
+                
+                /* The remove method is expecting an input of the the same
+                 * type as the entry set. This precondition is checked above,
+                 * so we can safely suppress the unchecked warnings. */
+                @SuppressWarnings("unchecked")
+                Map.Entry<String, Object> entry = (Map.Entry<String, Object>) obj;
+                return (ContextBase.this.remove(entry));
             } else {
                 return (false);
             }
@@ -701,6 +719,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
         private String key;
         private Object value;
 
+            @Override
             public boolean equals(Object obj) {
             if (obj == null) {
                 return (false);
@@ -730,6 +749,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             return (this.value);
         }
 
+        @Override
         public int hashCode() {
             return (((key == null) ? 0 : key.hashCode())
                    ^ ((value == null) ? 0 : value.hashCode()));
@@ -742,6 +762,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             return (previous);
         }
 
+            @Override
             public String toString() {
             return getKey() + "=" + getValue();
         }
@@ -754,10 +775,12 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
      */
     private class ValuesImpl extends AbstractCollection<Object> {
 
+            @Override
             public void clear() {
             ContextBase.this.clear();
         }
 
+            @Override
             public boolean contains(Object obj) {
             if (!(obj instanceof Map.Entry)) {
                 return (false);
@@ -766,6 +789,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             return (ContextBase.this.containsValue(entry.getValue()));
         }
 
+            @Override
             public boolean isEmpty() {
             return (ContextBase.this.isEmpty());
         }
@@ -774,9 +798,17 @@ public class ContextBase extends ConcurrentHashMap<String, Object> implements Co
             return (ContextBase.this.valuesIterator());
         }
 
+            @Override
             public boolean remove(Object obj) {
-            if (obj instanceof Map.Entry) {
-                return (ContextBase.this.remove((Map.Entry) obj));
+            if (obj instanceof Map.Entry && 
+                    ((Map.Entry)obj).getKey() instanceof String) {
+                
+                /* We are expecting the passed entry to be of a type
+                 * Entry<String, Object>. This is checked in the precondition
+                 * above, so we can safely suppress unchecked warnings. */
+                @SuppressWarnings("unchecked")
+                Map.Entry<String, Object> entry = (Map.Entry) obj;
+                return (ContextBase.this.remove(entry));
             } else {
                 return (false);
             }
