@@ -40,16 +40,14 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="2.0" description="Major release">
-      <action dev="simonetripodi" type="add" issue="CHAIN-61">
-        Chain 2.0 trunk build is throwing many warnings as a result of generification changes
-        - Contributed by Elijah Zupancic
+      <action dev="simonetripodi" type="add" issue="CHAIN-61" due-to="Elijah Zupancic">
+        Chain 2.0 trunk build is throwing many warnings as a result of generification changes.
       </action>
       <action dev="simonetripodi" type="add" issue="CHAIN-56">
          clever Context with generic type "auto-cast" feature.
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-53">
+      <action dev="simonetripodi" type="add" issue="CHAIN-53" due-to="Elijah Zupancic">
          Global Update of Chain - Generics, JDK 1.5, Update Dependency Versions.
-         Thanks to Elijah Zupancic.
       </action>
     </release>
 
