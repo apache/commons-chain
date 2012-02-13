@@ -28,14 +28,15 @@ import org.apache.commons.chain.Filter;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-public class ExceptionFilter extends ExceptionCommand implements Filter {
+public class ExceptionFilter
+    extends ExceptionCommand implements Filter<String, Object, Context<String, Object>> {
 
 
     // ------------------------------------------------------------- Constructor
 
 
     public ExceptionFilter() {
-    this("", "");
+        this("", "");
     }
 
 
@@ -50,10 +51,10 @@ public class ExceptionFilter extends ExceptionCommand implements Filter {
 
     protected String id2 = null;
     public String getId2() {
-    return (this.id2);
+        return (this.id2);
     }
     public void setId2(String id2) {
-    this.id2 = id2;
+        this.id2 = id2;
     }
 
 
@@ -61,7 +62,7 @@ public class ExceptionFilter extends ExceptionCommand implements Filter {
 
 
     // Postprocess command for this Filter
-    public boolean postprocess(Context context, Exception exception) {
+    public boolean postprocess(Context<String, Object> context, Exception exception) {
         log(context, id2);
         return (false);
     }

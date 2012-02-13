@@ -37,7 +37,7 @@ import org.apache.commons.chain.generic.LookupCommand;
  * @author Craig R. McClanahan
  */
 
-public class ServletPathMapper<C extends Context> extends LookupCommand<C> {
+public class ServletPathMapper extends LookupCommand<String, Object, ServletWebContext> {
 
 
     // ------------------------------------------------------ Instance Variables
@@ -95,10 +95,9 @@ public class ServletPathMapper<C extends Context> extends LookupCommand<C> {
      *
      * @since Chain 1.2
      */
-    protected String getCommandName(Context context) {
-
+    @Override
+    protected String getCommandName(ServletWebContext swcontext) {
         // Look up the servlet path for this request
-        ServletWebContext swcontext = (ServletWebContext) context;
         HttpServletRequest request = swcontext.getRequest();
         String servletPath = (String)
             request.getAttribute("javax.servlet.include.servlet_path");
@@ -120,12 +119,25 @@ public class ServletPathMapper<C extends Context> extends LookupCommand<C> {
      *
      * @since Chain 1.2
      */
-    protected Catalog getCatalog(C context) {
-        Catalog catalog = (Catalog) context.get(getCatalogName());
-        if (catalog == null) {
-            catalog = super.getCatalog(context);
-        }
+    @Override
+    protected Catalog<String, Object, ServletWebContext> getCatalog(ServletWebContext context) {
+
+        /* If the object returned from the passed context is not a valid catalog
+         * then we use the super class's catalog extraction logic to pull it
+         * or to error gracefully.
+         */
+        Object testCatalog = context.get(getCatalogName());
+
+        /* Assume that the underlying implementation is following convention and
+         * returning a catalog with the current context.
+         */
+        @SuppressWarnings("unchecked")
+        Catalog<String, Object, ServletWebContext> catalog = testCatalog != null && testCatalog instanceof Catalog ?
+                (Catalog<String, Object, ServletWebContext>) testCatalog :
+                super.getCatalog(context);
+
         return catalog;
+
     }
 
 }

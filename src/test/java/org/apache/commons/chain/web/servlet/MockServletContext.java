@@ -17,6 +17,13 @@
 package org.apache.commons.chain.web.servlet;
 
 
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Set;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
@@ -25,21 +32,14 @@ import javax.servlet.ServletException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Set;
-
 
 // Mock Object for ServletContext (Version 2.3)
 public class MockServletContext implements ServletContext {
 
 
     private Log log = LogFactory.getLog(MockServletContext.class);
-    private Hashtable attributes = new Hashtable();
-    private Hashtable parameters = new Hashtable();
+    private Hashtable<String, Object> attributes = new Hashtable<String, Object>();
+    private Hashtable<String, String> parameters = new Hashtable<String, String>();
 
 
     // --------------------------------------------------------- Public Methods
@@ -57,7 +57,7 @@ public class MockServletContext implements ServletContext {
         return (attributes.get(name));
     }
 
-    public Enumeration getAttributeNames() {
+    public Enumeration<String> getAttributeNames() {
         return (attributes.keys());
     }
 
@@ -69,7 +69,7 @@ public class MockServletContext implements ServletContext {
         return ((String) parameters.get(name));
     }
 
-    public Enumeration getInitParameterNames() {
+    public Enumeration<String> getInitParameterNames() {
         return (parameters.keys());
     }
 

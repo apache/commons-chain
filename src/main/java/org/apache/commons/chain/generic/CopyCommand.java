@@ -17,6 +17,8 @@
 package org.apache.commons.chain.generic;
 
 
+import java.util.Map;
+
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
@@ -25,26 +27,28 @@ import org.apache.commons.chain.Context;
  * <p>Copy a specified literal value, or a context attribute stored under
  * the <code>fromKey</code> (if any), to the <code>toKey</code>.</p>
  *
+ * @param <K> the type of keys maintained by the context associated with this command
+ * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public class CopyCommand<C extends Context> implements Command<C> {
+public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> {
 
 
     // -------------------------------------------------------------- Properties
 
 
-    private String fromKey = null;
+    private K fromKey = null;
 
 
     /**
      * <p>Return the context attribute key for the source attribute.</p>
      * @return The source attribute key.
      */
-    public String getFromKey() {
+    public K getFromKey() {
 
     return (this.fromKey);
 
@@ -56,21 +60,21 @@ public class CopyCommand<C extends Context> implements Command<C> {
      *
      * @param fromKey The new key
      */
-    public void setFromKey(String fromKey) {
+    public void setFromKey(K fromKey) {
 
     this.fromKey = fromKey;
 
     }
 
 
-    private String toKey = null;
+    private K toKey = null;
 
 
     /**
      * <p>Return the context attribute key for the destination attribute.</p>
      * @return The destination attribute key.
      */
-    public String getToKey() {
+    public K getToKey() {
 
     return (this.toKey);
 
@@ -82,21 +86,21 @@ public class CopyCommand<C extends Context> implements Command<C> {
      *
      * @param toKey The new key
      */
-    public void setToKey(String toKey) {
+    public void setToKey(K toKey) {
 
     this.toKey = toKey;
 
     }
 
 
-    private String value = null;
+    private V value = null;
 
 
     /**
      * <p>Return the literal value to be copied.</p>
      * @return The literal value.
      */
-    public String getValue() {
+    public V getValue() {
 
         return (this.value);
 
@@ -108,7 +112,7 @@ public class CopyCommand<C extends Context> implements Command<C> {
      *
      * @param value The new value
      */
-    public void setValue(String value) {
+    public void setValue(V value) {
 
         this.value = value;
 
@@ -129,7 +133,7 @@ public class CopyCommand<C extends Context> implements Command<C> {
      */
     public boolean execute(C context) throws Exception {
 
-        Object value = this.value;
+        V value = this.value;
 
         if (value == null) {
             value = context.get(getFromKey());

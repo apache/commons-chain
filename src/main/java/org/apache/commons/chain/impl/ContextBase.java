@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.chain.Context;
 
@@ -52,15 +51,14 @@ import org.apache.commons.chain.Context;
  * @version $Revision$ $Date$
  */
 
-public class ContextBase extends ConcurrentHashMap<String, Object> 
-        implements Context {
+public class ContextBase extends ContextMap<String, Object> {
 
 
     // ------------------------------------------------------------ Constructors
 
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = -3137668177106072122L;
 
@@ -127,7 +125,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
      * key that is actually a property.  This value is used to ensure that
      * <code>equals()</code> comparisons will always fail.</p>
      */
-    private static Object singleton;
+    private static final Object singleton;
 
     static {
 
@@ -328,7 +326,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
     public Object put(String key, Object value) {
         /*
          * ConcurrentHashMap doesn't accept null values, see
-         * http://download.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/ConcurrentHashMap.html#put(K, V)
+         * http://download.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/ConcurrentHashMap.html#put(String, Object)
          */
         if (value == null) {
             if (containsKey(key)) {
@@ -359,20 +357,6 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
         // Case 3 -- store or replace value in our underlying map
         return (super.put(key, value));
 
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    public <T> T retrieve(String key) {
-        Object valueObject = get(key);
-        if (valueObject == null) {
-            return null;
-        }
-        @SuppressWarnings("unchecked") // will throw ClassCastException if type are not assignable
-        T value = (T) valueObject;
-        return value;
     }
 
 
@@ -536,7 +520,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
                     ("Property '" + descriptor.getName()
                      + "' is not readable");
             }
-            return (method.invoke(this, zeroParams));
+            return method.invoke(this, zeroParams);
         } catch (Exception e) {
             throw new UnsupportedOperationException
                 ("Exception reading property '" + descriptor.getName()
@@ -623,24 +607,23 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
      */
     private class EntrySetImpl extends AbstractSet<Entry<String, Object>> {
 
-            @Override
-            public void clear() {
+        @Override
+        public void clear() {
             ContextBase.this.clear();
         }
 
-            @Override
-            public boolean contains(Object obj) {
-            if (!(obj instanceof Map.Entry && 
-                    ((Map.Entry)obj).getKey() instanceof String)) {
+        @Override
+        public boolean contains(Object obj) {
+            if (!(obj instanceof Map.Entry)) {
                 return (false);
             }
-            
+
             /* The contains method is expecting the search type to be of the
              * same type stored. This contract is enforced as a precondition.
              * So we can safely suppress type safety warnings below. */
             @SuppressWarnings("unchecked")
             Map.Entry<String, Object> entry = (Map.Entry<String, Object>) obj;
-            Entry actual = ContextBase.this.entry(entry.getKey());
+            Entry<String, Object> actual = ContextBase.this.entry(entry.getKey());
             if (actual != null) {
                 return (actual.equals(entry));
             } else {
@@ -648,20 +631,19 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
             }
         }
 
-            @Override
-            public boolean isEmpty() {
+        @Override
+        public boolean isEmpty() {
             return (ContextBase.this.isEmpty());
         }
 
-            public Iterator<Entry<String, Object>> iterator() {
+        public Iterator<Entry<String, Object>> iterator() {
             return (ContextBase.this.entriesIterator());
         }
 
-            @Override
-            public boolean remove(Object obj) {
-            if (obj instanceof Map.Entry && 
-                    ((Map.Entry)obj).getKey() instanceof String ) {
-                
+        @Override
+        public boolean remove(Object obj) {
+            if (obj instanceof Map.Entry) {
+
                 /* The remove method is expecting an input of the the same
                  * type as the entry set. This precondition is checked above,
                  * so we can safely suppress the unchecked warnings. */
@@ -673,7 +655,7 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
             }
         }
 
-            public int size() {
+        public int size() {
             return (ContextBase.this.size());
         }
 
@@ -719,14 +701,14 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
         private String key;
         private Object value;
 
-            @Override
-            public boolean equals(Object obj) {
+        @Override
+        public boolean equals(Object obj) {
             if (obj == null) {
                 return (false);
             } else if (!(obj instanceof Map.Entry)) {
                 return (false);
             }
-            Map.Entry entry = (Map.Entry) obj;
+            Map.Entry<?, ?> entry = (Map.Entry<?, ?>) obj;
             if (key == null) {
                 return (entry.getKey() == null);
             }
@@ -762,8 +744,8 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
             return (previous);
         }
 
-            @Override
-            public String toString() {
+        @Override
+        public String toString() {
             return getKey() + "=" + getValue();
         }
     }
@@ -775,13 +757,13 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
      */
     private class ValuesImpl extends AbstractCollection<Object> {
 
-            @Override
-            public void clear() {
+        @Override
+        public void clear() {
             ContextBase.this.clear();
         }
 
-            @Override
-            public boolean contains(Object obj) {
+        @Override
+        public boolean contains(Object obj) {
             if (!(obj instanceof Map.Entry)) {
                 return (false);
             }
@@ -789,32 +771,31 @@ public class ContextBase extends ConcurrentHashMap<String, Object>
             return (ContextBase.this.containsValue(entry.getValue()));
         }
 
-            @Override
-            public boolean isEmpty() {
+        @Override
+        public boolean isEmpty() {
             return (ContextBase.this.isEmpty());
         }
 
-            public Iterator<Object> iterator() {
+        public Iterator<Object> iterator() {
             return (ContextBase.this.valuesIterator());
         }
 
-            @Override
-            public boolean remove(Object obj) {
-            if (obj instanceof Map.Entry && 
-                    ((Map.Entry)obj).getKey() instanceof String) {
-                
+        @Override
+        public boolean remove(Object obj) {
+            if (obj instanceof Map.Entry) {
+
                 /* We are expecting the passed entry to be of a type
                  * Entry<String, Object>. This is checked in the precondition
                  * above, so we can safely suppress unchecked warnings. */
                 @SuppressWarnings("unchecked")
-                Map.Entry<String, Object> entry = (Map.Entry) obj;
+                Map.Entry<String, Object> entry = (Map.Entry<String, Object>) obj;
                 return (ContextBase.this.remove(entry));
             } else {
                 return (false);
             }
         }
 
-            public int size() {
+        public int size() {
             return (ContextBase.this.size());
         }
 

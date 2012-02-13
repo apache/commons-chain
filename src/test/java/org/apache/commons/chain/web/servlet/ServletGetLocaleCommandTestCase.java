@@ -29,7 +29,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.chain.Context;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +51,7 @@ public class ServletGetLocaleCommandTestCase {
     protected HttpSession session = null;
 
     // Chain API Objects
-    protected Context context = null;
+    protected ServletWebContext context = null;
     protected ServletGetLocaleCommand command = null;
 
 
@@ -127,7 +126,7 @@ public class ServletGetLocaleCommandTestCase {
     // --------------------------------------------------------- Support Methods
 
 
-    protected void check(Context context, ServletGetLocaleCommand command)
+    protected void check(ServletWebContext context, ServletGetLocaleCommand command)
     throws Exception {
 
     String localeKey = command.getLocaleKey();

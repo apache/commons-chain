@@ -56,11 +56,13 @@ import java.util.Map;
  * simultaneously unless this is explicitly documented for a particular
  * implementation.</p>
  *
+ * @param <K> the type of keys maintained by the context associated with this catalog
+ * @param <V> the type of mapped values
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public interface Context extends Map<String, Object> {
+public interface Context<K, V> extends Map<K, V> {
 
     /**
      * That method enhances the {@link #get(Object)} method that helps users
@@ -75,6 +77,6 @@ public interface Context extends Map<String, Object> {
      * @see #get(Object)
      * @since 2.0
      */
-    <T> T retrieve(String key);
+    <T extends V> T retrieve(K key);
 
 }

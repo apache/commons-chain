@@ -28,6 +28,7 @@ import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.config.ConfigParser;
 import org.apache.commons.chain.impl.CatalogBase;
+import org.apache.commons.chain.web.servlet.ServletWebContext;
 import org.apache.commons.digester.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -100,7 +101,7 @@ public class ChainServlet extends HttpServlet {
 
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = -6545081938506661333L;
 
@@ -182,11 +183,11 @@ public class ChainServlet extends HttpServlet {
         String webResources = context.getInitParameter(CONFIG_WEB_RESOURCE);
 
         // Retrieve or create the Catalog instance we may be updating
-        Catalog catalog = null;
+        Catalog<String, Object, ServletWebContext> catalog = null;
         if (attr != null) {
-            catalog = (Catalog) context.getAttribute(attr);
+            catalog = (Catalog<String, Object, ServletWebContext>) context.getAttribute(attr);
             if (catalog == null) {
-                catalog = new CatalogBase();
+                catalog = new CatalogBase<String, Object, ServletWebContext>();
             }
         }
 

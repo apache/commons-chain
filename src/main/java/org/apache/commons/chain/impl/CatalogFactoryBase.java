@@ -20,6 +20,7 @@ package org.apache.commons.chain.impl;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 
@@ -30,7 +31,7 @@ import org.apache.commons.chain.CatalogFactory;
  * @version $Revision$ $Date$
  */
 
-public class CatalogFactoryBase extends CatalogFactory {
+public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactory<K, V, C> {
 
 
     // ----------------------------------------------------------- Constructors
@@ -49,14 +50,14 @@ public class CatalogFactoryBase extends CatalogFactory {
     /**
      * <p>The default {@link Catalog} for this {@link CatalogFactory}.</p>
      */
-    private Catalog catalog = null;
+    private Catalog<K, V, C> catalog = null;
 
 
     /**
      * <p>Map of named {@link Catalog}s, keyed by catalog name.</p>
      */
-    private final Map<String, Catalog> catalogs =
-            new ConcurrentHashMap<String, Catalog>();
+    private final Map<String, Catalog<K, V, C>> catalogs =
+            new ConcurrentHashMap<String, Catalog<K, V, C>>();
 
 
     // --------------------------------------------------------- Public Methods
@@ -68,7 +69,7 @@ public class CatalogFactoryBase extends CatalogFactory {
      *
      * @return the default Catalog instance
      */
-    public Catalog getCatalog() {
+    public Catalog<K, V, C> getCatalog() {
 
         return catalog;
 
@@ -80,7 +81,7 @@ public class CatalogFactoryBase extends CatalogFactory {
      *
      * @param catalog the default Catalog instance
      */
-    public void setCatalog(Catalog catalog) {
+    public void setCatalog(Catalog<K, V, C> catalog) {
 
         this.catalog = catalog;
 
@@ -94,7 +95,8 @@ public class CatalogFactoryBase extends CatalogFactory {
      * @param name the name of the Catalog to retrieve
      * @return the specified Catalog
      */
-    public Catalog getCatalog(String name) {
+	@Override
+    public Catalog<K, V, C> getCatalog(String name) {
 
         return catalogs.get(name);
 
@@ -108,7 +110,7 @@ public class CatalogFactoryBase extends CatalogFactory {
      * @param name the name of the Catalog to add
      * @param catalog the Catalog to add
      */
-    public void addCatalog(String name, Catalog catalog) {
+    public void addCatalog(String name, Catalog<K, V, C> catalog) {
 
             catalogs.put(name, catalog);
 

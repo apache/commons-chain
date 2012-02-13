@@ -25,6 +25,11 @@ package org.apache.commons.chain.impl;
 public class TestContext extends ContextBase {
 
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -582126541014253603L;
+
     // Read-only property
     private String readOnly = "readOnly";
     public String getReadOnly() {

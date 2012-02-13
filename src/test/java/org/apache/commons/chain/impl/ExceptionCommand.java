@@ -50,7 +50,7 @@ public class ExceptionCommand extends NonDelegatingCommand {
 
 
     // Execution method for this Command
-    public void execute(Context context, Chain chain) throws Exception {
+    public void execute(Context<String, Object> context, Chain<String, Object, Context<String, Object>> chain) throws Exception {
 
         super.execute(context);
         throw new ArithmeticException(this.id);

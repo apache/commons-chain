@@ -43,7 +43,7 @@ import org.apache.commons.chain.impl.ContextBase;
 public abstract class WebContext extends ContextBase {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 6804961872140299027L;
 

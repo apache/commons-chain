@@ -47,6 +47,8 @@ import java.util.WeakHashMap;
  * silently ignored.  Otherwise, a lookup failure will trigger an
  * <code>IllegalArgumentException</code>.</p>
  *
+ * @param <K> the type of keys maintained by the context associated with this catalog
+ * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this command
  *
  * @author Sean Schofield
@@ -54,7 +56,8 @@ import java.util.WeakHashMap;
  * @since Chain 1.1
  */
 
-public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> implements Filter<C> {
+public class DispatchLookupCommand<K, V, C extends Context<K, V>>
+    extends LookupCommand<K, V, C> implements Filter<K, V, C> {
 
     // -------------------------------------------------------------- Constructors
 
@@ -70,7 +73,7 @@ public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> i
      * to given <code>factory</code>.
      * @param factory The Catalog Factory.
      */
-    public DispatchLookupCommand(CatalogFactory factory) {
+    public DispatchLookupCommand(CatalogFactory<K, V, C> factory) {
         super(factory);
     }
 
@@ -139,6 +142,7 @@ public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> i
      * @throws Exception if no such {@link Command} can be found and the
      *  <code>optional</code> property is set to <code>false</code>
      */
+	@Override
     public boolean execute(C context) throws Exception {
 
         if (this.getMethod() == null && this.getMethodKey() == null) {
@@ -147,7 +151,7 @@ public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> i
             );
         }
 
-        Command<C> command = getCommand(context);
+        Command<K, V, C> command = getCommand(context);
 
         if (command != null) {
             Method methodObject = extractMethod(command, context);
@@ -210,7 +214,7 @@ public class DispatchLookupCommand<C extends Context> extends LookupCommand<C> i
      *    specified name.
      * @throws NullPointerException if no methodName can be determined
      */
-    private Method extractMethod(Command<C> command, C context)
+    private Method extractMethod(Command<K, V, C> command, C context)
         throws NoSuchMethodException {
 
         String methodName = this.getMethod();

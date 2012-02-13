@@ -29,15 +29,15 @@ import org.apache.commons.chain.Filter;
  * @version $Revision$ $Date$
  */
 
-public class NonDelegatingFilter<C extends Context>
-    extends NonDelegatingCommand<C> implements Filter<C> {
+public class NonDelegatingFilter
+    extends NonDelegatingCommand implements Filter<String, Object, Context<String, Object>> {
 
 
     // ------------------------------------------------------------- Constructor
 
 
     public NonDelegatingFilter() {
-    this("", "");
+        this("", "");
     }
 
 
@@ -53,10 +53,10 @@ public class NonDelegatingFilter<C extends Context>
 
     protected String id2 = null;
     public String getId2() {
-    return (this.id2);
+        return (this.id2);
     }
     public void setId2(String id2) {
-    this.id2 = id2;
+        this.id2 = id2;
     }
 
 
@@ -65,7 +65,7 @@ public class NonDelegatingFilter<C extends Context>
 
     // Execution method for this Command
     @Override
-    public boolean execute(C context) throws Exception {
+    public boolean execute(Context<String, Object> context) throws Exception {
 
         super.execute(context);
         return (true);
@@ -74,7 +74,7 @@ public class NonDelegatingFilter<C extends Context>
 
 
     // Postprocess method for this Filter
-    public boolean postprocess(C context, Exception exception) {
+    public boolean postprocess(Context<String, Object> context, Exception exception) {
         log(context, id2);
         return (false);
     }

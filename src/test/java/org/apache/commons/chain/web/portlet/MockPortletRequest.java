@@ -52,9 +52,9 @@ public class MockPortletRequest implements PortletRequest {
     private PortletPreferences portletPreferences;
     private WindowState windowState;
     private Principal principal;
-    private Map parameters = new HashMap();
-    private Map attributes = new HashMap();
-    private Map properties = new HashMap();
+    private Map<String, String[]> parameters = new HashMap<String, String[]>();
+    private Map<String, Object> attributes = new HashMap<String, Object>();
+    private Map<String, String[]> properties = new HashMap<String, String[]>();
 
 
     public MockPortletRequest() {
@@ -70,7 +70,7 @@ public class MockPortletRequest implements PortletRequest {
     // --------------------------------------------------------- Public Methods
 
     public void addParameter(String name, String value) {
-        String values[] = (String[])parameters.get(name);
+        String values[] = parameters.get(name);
         if (values == null) {
             String results[] = new String[] { value };
             parameters.put(name, results);
@@ -83,7 +83,7 @@ public class MockPortletRequest implements PortletRequest {
     }
 
     public void addProperty(String name, String value) {
-        String values[] = (String[])properties.get(name);
+        String values[] = properties.get(name);
         if (values == null) {
             String results[] = new String[] { value };
             properties.put(name, results);
@@ -154,8 +154,8 @@ public class MockPortletRequest implements PortletRequest {
         return attributes.get(name);
     }
 
-    public Enumeration getAttributeNames() {
-        return new MockEnumeration(attributes.keySet().iterator());
+    public Enumeration<String> getAttributeNames() {
+        return new MockEnumeration<String>(attributes.keySet().iterator());
     }
 
     public String getAuthType() {
@@ -170,7 +170,7 @@ public class MockPortletRequest implements PortletRequest {
         return locale;
     }
 
-    public Enumeration getLocales() {
+    public Enumeration<Locale> getLocales() {
         throw new UnsupportedOperationException();
     }
 
@@ -183,24 +183,24 @@ public class MockPortletRequest implements PortletRequest {
         }
     }
 
-    public Map getParameterMap() {
+    public Map<String, String[]> getParameterMap() {
         return parameters;
     }
 
-    public Enumeration getParameterNames() {
-        return new MockEnumeration(parameters.keySet().iterator());
+    public Enumeration<String> getParameterNames() {
+        return new MockEnumeration<String>(parameters.keySet().iterator());
     }
 
     public String[] getParameterValues(String name) {
-        return (String[])parameters.get(name);
+        return parameters.get(name);
     }
 
     public PortalContext getPortalContext() {
-        return portalContext; 
+        return portalContext;
     }
 
     public PortletMode getPortletMode() {
-        return portletMode; 
+        return portletMode;
     }
 
     public PortletSession getPortletSession() {
@@ -215,11 +215,11 @@ public class MockPortletRequest implements PortletRequest {
     }
 
     public PortletPreferences getPreferences() {
-        return portletPreferences; 
+        return portletPreferences;
     }
 
-    public Enumeration getProperties(String name) {
-        throw new UnsupportedOperationException(); 
+    public Enumeration<String> getProperties(String name) {
+        throw new UnsupportedOperationException();
     }
 
     public String getProperty(String name) {
@@ -231,8 +231,8 @@ public class MockPortletRequest implements PortletRequest {
         }
      }
 
-    public Enumeration getPropertyNames() {
-        return new MockEnumeration(properties.keySet().iterator());
+    public Enumeration<String> getPropertyNames() {
+        return new MockEnumeration<String>(properties.keySet().iterator());
     }
 
 
@@ -252,8 +252,8 @@ public class MockPortletRequest implements PortletRequest {
         throw new UnsupportedOperationException();
     }
 
-    public Enumeration getResponseContentTypes() {
-        throw new UnsupportedOperationException(); 
+    public Enumeration<String> getResponseContentTypes() {
+        throw new UnsupportedOperationException();
     }
 
     public String getScheme() {
@@ -329,5 +329,5 @@ public class MockPortletRequest implements PortletRequest {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    
+
 }

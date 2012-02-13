@@ -33,7 +33,8 @@ import org.apache.commons.chain.Context;
  * @version $Revision$ $Date$
  */
 
-public abstract class AbstractGetLocaleCommand<C extends Context> implements Command<C> {
+public abstract class AbstractGetLocaleCommand<C extends WebContext>
+        implements Command<String, Object, C> {
 
 
     // -------------------------------------------------------------- Properties

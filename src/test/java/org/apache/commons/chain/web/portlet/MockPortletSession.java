@@ -17,15 +17,15 @@
 package org.apache.commons.chain.web.portlet;
 
 
-import org.apache.commons.chain.web.MockEnumeration;
-
-import javax.portlet.PortletContext;
-import javax.portlet.PortletSession;
-import javax.portlet.PortletContext;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Date;
+
+import javax.portlet.PortletContext;
+import javax.portlet.PortletSession;
+
+import org.apache.commons.chain.web.MockEnumeration;
 
 
 
@@ -40,8 +40,8 @@ public class MockPortletSession implements PortletSession {
     private int maxInactiveInterval = 100;
     private boolean newSession = true;
     private String id = "mockId" + creationTime.getTime();
-    private Map portletScope = new HashMap();
-    private Map applicationScope = new HashMap();
+    private Map<String, Object> portletScope = new HashMap<String, Object>();
+    private Map<String, Object> applicationScope = new HashMap<String, Object>();
 
 
     public MockPortletSession() {
@@ -85,14 +85,14 @@ public class MockPortletSession implements PortletSession {
     }
 
 
-    public Enumeration getAttributeNames() {
+    public Enumeration<String> getAttributeNames() {
         accessed();
         return getAttributeNames(PortletSession.PORTLET_SCOPE);
     }
 
-    public Enumeration getAttributeNames(int scope) {
+    public Enumeration<String> getAttributeNames(int scope) {
         accessed();
-        return new MockEnumeration(getScope(scope).keySet().iterator());
+        return new MockEnumeration<String>(getScope(scope).keySet().iterator());
     }
 
 
@@ -162,7 +162,7 @@ public class MockPortletSession implements PortletSession {
         lastAccessedTime = new Date();
     }
 
-    private Map getScope(int scope) {
+    private Map<String, Object> getScope(int scope) {
         if (scope == PortletSession.PORTLET_SCOPE) {
             return portletScope;
         } else if (scope == PortletSession.APPLICATION_SCOPE) {
@@ -180,5 +180,5 @@ public class MockPortletSession implements PortletSession {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    
+
 }

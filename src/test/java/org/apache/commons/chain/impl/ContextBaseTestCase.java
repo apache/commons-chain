@@ -57,7 +57,7 @@ public class ContextBaseTestCase {
     /**
      * The {@link Context} instance under test.
      */
-    protected Context context = null;
+    protected Context<String, Object> context = null;
 
 
     // -------------------------------------------------- Overall Test Methods
@@ -168,7 +168,7 @@ public class ContextBaseTestCase {
         assertTrue(context.hashCode() == context.hashCode());
 
         // Compare to equivalent instance
-        Context other = createContext();
+        Context<String, Object> other = createContext();
         assertTrue(context.equals(other));
         assertTrue(context.hashCode() == other.hashCode());
 
@@ -190,8 +190,8 @@ public class ContextBaseTestCase {
     @Test
     public void testKeySet() {
 
-        Set keySet = null;
-        Collection all = new ArrayList();
+        Set<String> keySet = null;
+        Collection<String> all = new ArrayList<String>();
 
         // Unsupported operations
         keySet = context.keySet();
@@ -202,7 +202,7 @@ public class ContextBaseTestCase {
             ; // Expected result
         }
         try {
-            Collection adds = new ArrayList();
+            Collection<String> adds = new ArrayList<String>();
             adds.add("bop");
             keySet.addAll(adds);
             fail("Should have thrown UnsupportedOperationException");
@@ -315,7 +315,7 @@ public class ContextBaseTestCase {
         assertTrue(!context.containsValue("baz value"));
 
         // Call putAll()
-        Map adds = new HashMap();
+        Map<String, String> adds = new HashMap<String, String>();
         adds.put("foo", "foo value");
         adds.put("bar", "bar value");
         adds.put("baz", "baz value");
@@ -365,7 +365,7 @@ public class ContextBaseTestCase {
         ByteArrayInputStream bais =
           new ByteArrayInputStream(baos.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
-        context = (Context) ois.readObject();
+        context = (Context<String, Object>) ois.readObject();
         ois.close();
 
         // Do some rudimentary checks to make sure we have the same contents
@@ -384,9 +384,9 @@ public class ContextBaseTestCase {
     // Verify the number of defined attributes
     protected void checkAttributeCount(int expected) {
         int actual = 0;
-        Iterator keys = context.keySet().iterator();
+        Iterator<String> keys = context.keySet().iterator();
         while (keys.hasNext()) {
-            Object key = (Object) keys.next();
+            keys.next();
             actual++;
         }
         assertEquals("Correct attribute count",
@@ -400,7 +400,7 @@ public class ContextBaseTestCase {
 
 
     // Create a new instance of the appropriate Context type for this test case
-    protected Context createContext() {
+    protected Context<String, Object> createContext() {
         return (new ContextBase());
     }
 

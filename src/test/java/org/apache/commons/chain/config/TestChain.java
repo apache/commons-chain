@@ -17,6 +17,7 @@
 package org.apache.commons.chain.config;
 
 
+import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.ChainBase;
 
 
@@ -25,7 +26,7 @@ import org.apache.commons.chain.impl.ChainBase;
  * <code>getCommands()</code> method publicy.</p>
  */
 
-public class TestChain extends ChainBase {
+public class TestChain extends ChainBase<String, Object, Context<String, Object>> {
 
 
     /*public Command[] getCommands() {

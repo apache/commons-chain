@@ -16,6 +16,8 @@
  */
 package org.apache.commons.chain;
 
+import java.util.Map;
+
 
 /**
  * <p>A {@link Chain} represents a configured list of
@@ -53,7 +55,7 @@ package org.apache.commons.chain;
  * @version $Revision$ $Date$
  */
 
-public interface Chain<C extends Context> extends Command<C> {
+public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
 
 
     /**
@@ -70,7 +72,7 @@ public interface Chain<C extends Context> extends Command<C> {
      * @exception IllegalStateException if this {@link Chain} has already
      *  been executed at least once, so no further configuration is allowed
      */
-    void addCommand(Command<C> command);
+    void addCommand(Command<K, V, C> command);
 
 
     /**

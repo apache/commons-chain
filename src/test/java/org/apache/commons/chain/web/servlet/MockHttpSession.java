@@ -17,13 +17,15 @@
 package org.apache.commons.chain.web.servlet;
 
 
-import org.apache.commons.chain.web.MockEnumeration;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
-import java.util.Enumeration;
-import java.util.HashMap;
+
+import org.apache.commons.chain.web.MockEnumeration;
 
 
 
@@ -44,7 +46,7 @@ public class MockHttpSession implements HttpSession {
 
 
 
-    protected HashMap attributes = new HashMap();
+    protected Map<String, Object> attributes = new HashMap<String, Object>();
     protected ServletContext servletContext = null;
 
 
@@ -64,8 +66,8 @@ public class MockHttpSession implements HttpSession {
     }
 
 
-    public Enumeration getAttributeNames() {
-        return (new MockEnumeration(attributes.keySet().iterator()));
+    public Enumeration<String> getAttributeNames() {
+        return (new MockEnumeration<String>(attributes.keySet().iterator()));
     }
 
 

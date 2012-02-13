@@ -17,6 +17,8 @@
 package org.apache.commons.chain.config;
 
 
+import java.util.Map;
+
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.digester.Rule;
@@ -89,12 +91,13 @@ class ConfigCatalogRule extends Rule {
      *   the element name otherwise
      * @param attributes The attribute list of this element
      */
+    @Override
     public void begin(String namespace, String name, Attributes attributes)
         throws Exception {
 
         // Retrieve any current Catalog with the specified name
-        Catalog catalog = null;
-        CatalogFactory factory = CatalogFactory.getInstance();
+        Catalog<Object, Object, Map<Object, Object>> catalog = null;
+        CatalogFactory<Object, Object, Map<Object, Object>> factory = CatalogFactory.getInstance();
         String nameValue = attributes.getValue(nameAttribute);
         if (nameValue == null) {
             catalog = factory.getCatalog();
@@ -105,8 +108,16 @@ class ConfigCatalogRule extends Rule {
         // Create and register a new Catalog instance if necessary
         if (catalog == null) {
             Class<?> clazz = digester.getClassLoader().loadClass(catalogClass);
-            catalog = (Catalog) clazz.newInstance();
+
+            /* Convert catalog pulled from digester to default generic signature
+             * with the assumption that the Catalog returned from digester will
+             * comply with the the historic chain contract. */
+            Catalog<Object, Object, Map<Object, Object>> digesterCatalog = (Catalog<Object, Object, Map<Object, Object>>) clazz.newInstance();
+
+            catalog = digesterCatalog;
+
             if (nameValue == null) {
+
                 factory.setCatalog(catalog);
             } else {
                 factory.addCatalog(nameValue, catalog);
@@ -115,8 +126,6 @@ class ConfigCatalogRule extends Rule {
 
         // Push this Catalog onto the top of the stack
         digester.push(catalog);
-
     }
-
 
 }

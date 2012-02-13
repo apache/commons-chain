@@ -23,6 +23,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.CatalogBase;
@@ -50,17 +51,17 @@ public class LookupCommandTestCase {
     /**
      * The instance of {@link Catalog} to use when looking up commands
      */
-    protected Catalog catalog;
+    protected Catalog<String, Object, Context<String, Object>> catalog;
 
     /**
      * The {@link LookupCommand} instance under test.
      */
-    protected LookupCommand<Context> command;
+    protected LookupCommand<String, Object, Context<String, Object>> command;
 
     /**
      * The {@link Context} instance on which to execute the chain.
      */
-    protected Context context = null;
+    protected Context<String, Object> context = null;
 
 
     // -------------------------------------------------- Overall Test Methods
@@ -71,9 +72,10 @@ public class LookupCommandTestCase {
      */
     @Before
     public void setUp() {
-        catalog = new CatalogBase();
-        CatalogFactoryBase.getInstance().setCatalog(catalog);
-        command = new LookupCommand<Context>();
+        catalog = new CatalogBase<String, Object, Context<String, Object>>();
+        CatalogFactory<String, Object, Context<String, Object>> catalogFactory = CatalogFactoryBase.getInstance();
+        catalogFactory.setCatalog(catalog);
+        command = new LookupCommand<String, Object, Context<String, Object>>();
         context = new ContextBase();
     }
 
@@ -113,11 +115,12 @@ public class LookupCommandTestCase {
     @Test
     public void testExecuteMethodLookup_1b() {
 
-        ChainBase<Context> chain = new ChainBase<Context>();
+        ChainBase<String, Object, Context<String, Object>> chain =
+            new ChainBase<String, Object, Context<String, Object>>();
         chain.addCommand(new DelegatingCommand("1b1"));
         chain.addCommand(new DelegatingCommand("1b2"));
         chain.addCommand(new NonDelegatingCommand("1b3"));
-        
+
         // use default catalog
         catalog.addCommand("foo", chain);
         command.setName("foo");
@@ -150,11 +153,12 @@ public class LookupCommandTestCase {
         checkExecuteLog("2a");
     }
 
-    // Test ability to lookup and execute a chain using the context 
+    // Test ability to lookup and execute a chain using the context
     @Test
     public void testExecuteMethodLookup_2b() {
 
-        Chain<Context> chain = new ChainBase<Context>();
+        Chain<String, Object, Context<String, Object>> chain =
+            new ChainBase<String, Object, Context<String, Object>>();
         chain.addCommand(new DelegatingCommand("2b1"));
         chain.addCommand(new DelegatingCommand("2b2"));
         chain.addCommand(new NonDelegatingCommand("2b3"));
@@ -178,7 +182,8 @@ public class LookupCommandTestCase {
     public void testExecuteMethodLookup_3a() {
 
         // use default catalog
-        catalog.addCommand("foo", new NonDelegatingCommand<Context>("3a"));
+        catalog.addCommand("foo",
+                new NonDelegatingCommand("3a"));
         command.setIgnoreExecuteResult(true);
         command.setName("foo");
 

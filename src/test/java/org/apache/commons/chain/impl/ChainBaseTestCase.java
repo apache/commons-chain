@@ -47,13 +47,13 @@ public class ChainBaseTestCase {
     /**
      * The {@link Chain} instance under test.
      */
-    protected Chain chain = null;
+    protected Chain<String, Object, Context<String, Object>> chain = null;
 
 
     /**
      * The {@link Context} instance on which to execute the chain.
      */
-    protected Context context = null;
+    protected Context<String, Object> context = null;
 
 
     // -------------------------------------------------- Overall Test Methods
@@ -64,7 +64,7 @@ public class ChainBaseTestCase {
      */
     @Before
     public void setUp() {
-        chain = new ChainBase();
+        chain = new ChainBase<String, Object, Context<String, Object>>();
         context = new ContextBase();
     }
 
@@ -87,15 +87,15 @@ public class ChainBaseTestCase {
 
         checkCommandCount(0);
 
-        Command command1 = new NonDelegatingCommand("1");
+        Command<String, Object, Context<String, Object>> command1 = new NonDelegatingCommand("1");
         chain.addCommand(command1);
         checkCommandCount(1);
 
-        Command command2 = new DelegatingCommand("2");
+        Command<String, Object, Context<String, Object>> command2 = new DelegatingCommand("2");
         chain.addCommand(command2);
         checkCommandCount(2);
 
-        Command command3 = new ExceptionCommand("3");
+        Command<String, Object, Context<String, Object>> command3 = new ExceptionCommand("3");
         chain.addCommand(command3);
         checkCommandCount(3);
 
@@ -348,7 +348,8 @@ public class ChainBaseTestCase {
     // Verify the number of configured commands
     protected void checkCommandCount(int expected) {
         if (chain instanceof ChainBase) {
-            List<Command> commands = ((ChainBase) chain).getCommands();
+            List<Command<String, Object, Context<String, Object>>> commands =
+                ((ChainBase<String, Object, Context<String, Object>>) chain).getCommands();
             assertNotNull("getCommands() returned a non-null array",
                           commands);
             assertEquals("Correct command count", expected, commands.size());

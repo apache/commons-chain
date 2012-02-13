@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -119,7 +120,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testApplicationScope() {
 
-        Map map = ((WebContext) context).getApplicationScope();
+        Map<String, Object> map = ((WebContext) context).getApplicationScope();
         assertNotNull(map);
 
         // Initial contents
@@ -131,7 +132,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
         // Transparency - entrySet()
         checkEntrySet(map, true);
- 
+
         // Transparency - removal via web object
         scontext.removeAttribute("akey1");
         checkMapSize(map, 3);
@@ -167,8 +168,8 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         checkMapSize(map, 0);
 
         // Test putAll()
-        Map values = new HashMap();
-        values.put(new Integer(1), "One");
+        Map<String, Object> values = new HashMap<String, Object>();
+        values.put("1", "One");
         values.put("2", "Two");
         map.putAll(values);
         assertEquals("putAll(1)", "One", map.get("1"));
@@ -189,7 +190,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertTrue(context.hashCode() == context.hashCode());
 
         // Compare to equivalent instance
-        Context other = new ServletWebContext(scontext, request, response);
+        Context<String, Object> other = new ServletWebContext(scontext, request, response);
         // assertTrue(context.equals(other));
         assertTrue(context.hashCode() == other.hashCode());
 
@@ -204,14 +205,14 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         // assertTrue(!context.equals(other));
         assertTrue(context.hashCode() != other.hashCode());
 
-    }        
+    }
 
 
     // Test getHeader()
     @Test
     public void testHeader() {
 
-        Map map = ((WebContext) context).getHeader();
+        Map<String, String> map = ((WebContext) context).getHeader();
         assertNotNull(map);
 
         // Initial contents
@@ -225,7 +226,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
         // Transparency - entrySet()
         checkEntrySet(map, false);
- 
+
         // Unsupported operations on read-only map
         try {
             map.clear();
@@ -240,7 +241,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
             ; // expected result
         }
         try {
-            map.putAll(new HashMap());
+            map.putAll(new HashMap<String, String>());
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
             ; // expected result
@@ -259,7 +260,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testHeaderValues() {
 
-        Map map = ((WebContext) context).getHeaderValues();
+        Map<String, String[]> map = ((WebContext) context).getHeaderValues();
         assertNotNull(map);
 
         // Initial contents
@@ -284,7 +285,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
         // Transparency - entrySet()
         checkEntrySet(map, false);
- 
+
         // Unsupported operations on read-only map
         try {
             map.clear();
@@ -299,7 +300,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
             ; // expected result
         }
         try {
-            map.putAll(new HashMap());
+            map.putAll(new HashMap<String, String[]>());
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
             ; // expected result
@@ -318,7 +319,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testInitParam() {
 
-        Map map = ((WebContext) context).getInitParam();
+        Map<String, String> map = ((WebContext) context).getInitParam();
         assertNotNull(map);
 
         // Initial contents
@@ -335,7 +336,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
         // Transparency - entrySet()
         checkEntrySet(map, false);
- 
+
         // Unsupported operations on read-only map
         try {
             map.clear();
@@ -350,7 +351,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
             ; // expected result
         }
         try {
-            map.putAll(new HashMap());
+            map.putAll(new HashMap<String, String>());
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
             ; // expected result
@@ -369,7 +370,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testParam() {
 
-        Map map = ((WebContext) context).getParam();
+        Map<String, String> map = ((WebContext) context).getParam();
         assertNotNull(map);
 
         // Initial contents
@@ -397,7 +398,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
             ; // expected result
         }
         try {
-            map.putAll(new HashMap());
+            map.putAll(new HashMap<String, String>());
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
             ; // expected result
@@ -416,7 +417,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testParamValues() {
 
-        Map map = ((WebContext) context).getParamValues();
+        Map<String, String[]> map = ((WebContext) context).getParamValues();
         assertNotNull(map);
 
         // Initial contents
@@ -453,7 +454,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
             ; // expected result
         }
         try {
-            map.putAll(new HashMap());
+            map.putAll(new HashMap<String, String[]>());
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
             ; // expected result
@@ -472,7 +473,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testCookies() {
 
-        Map map = ((WebContext) context).getCookies();
+        Map<String, Cookie> map = ((WebContext) context).getCookies();
         assertNotNull(map);
 
         // Initial contents
@@ -495,14 +496,17 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         } catch (UnsupportedOperationException e) {
             ; // expected result
         }
+        /* TODO remove
+           map is typed, that assignment is not possible by definition
         try {
             map.put("ckey3", "XXX");
             fail("Should have thrown UnsupportedOperationException");
         } catch (ClassCastException e) {
             ; // expected result
         }
+        */
         try {
-            map.putAll(new HashMap());
+            map.putAll(new HashMap<String, Cookie>());
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
             ; // expected result
@@ -593,7 +597,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testRequestScope() {
 
-        Map map = ((WebContext) context).getRequestScope();
+        Map<String, Object> map = ((WebContext) context).getRequestScope();
         assertNotNull(map);
 
         // Initial contents
@@ -603,7 +607,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
         // Transparency - entrySet()
         checkEntrySet(map, true);
- 
+
         // Transparency - removal via web object
         request.removeAttribute("rkey1");
         checkMapSize(map, 1);
@@ -639,14 +643,14 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         checkMapSize(map, 0);
 
         // Test putAll()
-        Map values = new HashMap();
-        values.put(new Integer(1), "One");
+        Map<String, Object> values = new HashMap<String, Object>();
+        values.put("1", "One");
         values.put("2", "Two");
         map.putAll(values);
         assertEquals("putAll(1)", "One", map.get("1"));
         assertEquals("putAll(2)", "Two", map.get("2"));
         checkMapSize(map, 2);
-        
+
     }
 
 
@@ -654,7 +658,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testSessionScope() {
 
-        Map map = ((WebContext) context).getSessionScope();
+        Map<String, Object> map = ((WebContext) context).getSessionScope();
         assertNotNull(map);
 
         // Initial contents
@@ -665,7 +669,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
         // Transparency - entrySet()
         checkEntrySet(map, true);
- 
+
         // Transparency - removal via web object
         session.removeAttribute("skey1");
         checkMapSize(map, 2);
@@ -701,8 +705,8 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         checkMapSize(map, 0);
 
         // Test putAll()
-        Map values = new HashMap();
-        values.put(new Integer(1), "One");
+        Map<String, Object> values = new HashMap<String, Object>();
+        values.put("1", "One");
         values.put("2", "Two");
         map.putAll(values);
         assertEquals("putAll(1)", "One", map.get("1"));
@@ -717,12 +721,12 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     public void testSessionScopeWithoutSession() {
 
         // Create a Context without a session
-        ServletWebContext ctx = new ServletWebContext(scontext, 
+        ServletWebContext ctx = new ServletWebContext(scontext,
            new MockHttpServletRequest(), response);
         assertNull("Session(A)", ctx.getRequest().getSession(false));
 
         // Get the session Map & check session doesn't exist
-        Map sessionMap = ctx.getSessionScope();
+        Map<String, Object> sessionMap = ctx.getSessionScope();
         assertNull("Session(B)", ctx.getRequest().getSession(false));
         assertNotNull("Session Map(A)", sessionMap);
 
@@ -739,7 +743,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertNull("Session(E)", ctx.getRequest().getSession(false));
 
         // test entrySet()
-        Set entrySet = sessionMap.entrySet();
+        Set<Entry<String, Object>> entrySet = sessionMap.entrySet();
         assertNotNull("entrySet", entrySet);
         assertEquals("entrySet Size", 0, entrySet.size());
         assertNull("Session(F)", ctx.getRequest().getSession(false));
@@ -761,13 +765,13 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertNull("Session(J)", ctx.getRequest().getSession(false));
 
         // test keySet()
-        Set keySet = sessionMap.keySet();
+        Set<String> keySet = sessionMap.keySet();
         assertNotNull("keySet", keySet);
         assertEquals("keySet Size", 0, keySet.size());
         assertNull("Session(K)", ctx.getRequest().getSession(false));
 
         // test putAll() with an empty Map
-        sessionMap.putAll(new HashMap());
+        sessionMap.putAll(new HashMap<String, Object>());
         assertNull("Session(L)", ctx.getRequest().getSession(false));
 
         // test remove()
@@ -779,7 +783,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertNull("Session(N)", ctx.getRequest().getSession(false));
 
         // test values()
-        Collection values = sessionMap.values();
+        Collection<Object> values = sessionMap.values();
         assertNotNull("values", values);
         assertEquals("values Size", 0, values.size());
         assertNull("Session(O)", ctx.getRequest().getSession(false));
@@ -799,12 +803,12 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     // ------------------------------------------------------- Protected Methods
 
 
-    protected void checkMapSize(Map map, int size) {
+    protected void checkMapSize(Map<?, ?> map, int size) {
         // Check reported size of the map
         assertEquals(size, map.size());
         // Iterate over key set
         int nk = 0;
-        Iterator keys = map.keySet().iterator();
+        Iterator<?> keys = map.keySet().iterator();
         while (keys.hasNext()) {
             keys.next();
             nk++;
@@ -812,7 +816,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertEquals(size, nk);
         // Iterate over entry set
         int nv = 0;
-        Iterator values = map.entrySet().iterator();
+        Iterator<?> values = map.entrySet().iterator();
         while (values.hasNext()) {
             values.next();
             nv++;
@@ -825,28 +829,25 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     // Test to ensure proper entrySet() and are modifiable optionally
     protected void checkEntrySet(Map map, boolean modifiable) {
         assertTrue(map.size() > 1);
-        Set entries = map.entrySet();
+        Set<Entry> entries = map.entrySet();
         assertTrue(map.size() == entries.size());
-        Object o = entries.iterator().next();
-
-        assertTrue(o instanceof Map.Entry);
+        Entry o = entries.iterator().next();
 
         if (!modifiable) {
             try {
-                ((Map.Entry)o).setValue(new Object());
+                o.setValue(new Object());
                 fail("Should have thrown UnsupportedOperationException");
             } catch (UnsupportedOperationException e) {
                 ; // expected result
             }
         } else {
             // Should pass and not throw UnsupportedOperationException
-            Map.Entry e = (Map.Entry)o;
-            e.setValue(e.setValue(new Object()));
-        }    
-    }    
+            o.setValue(o.setValue(new Object()));
+        }
+    }
 
     // Create a new instance of the appropriate Context type for this test case
-    protected Context createContext() {
+    protected Context<String, Object> createContext() {
         return (new ServletWebContext(scontext, request, response));
     }
 

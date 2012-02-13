@@ -42,7 +42,7 @@ public class FacesWebContext extends WebContext {
 
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = -1429681424077509130L;
 
@@ -129,11 +129,11 @@ public class FacesWebContext extends WebContext {
      * @return Application scope Map.
      */
     public Map<String, Object> getApplicationScope() {
-        
+
         @SuppressWarnings("unchecked") // Assume faces is following contract
-        Map<String, Object> scope = (Map<String, Object>) 
+        Map<String, Object> scope = (Map<String, Object>)
                 context.getExternalContext().getApplicationMap();
-        
+
         return (scope);
 
     }
@@ -145,11 +145,11 @@ public class FacesWebContext extends WebContext {
      * @return Header values Map.
      */
     public Map<String, String> getHeader() {
-        
+
         @SuppressWarnings("unchecked") // Assume faces is following contract
         Map<String, String> headers = (Map<String, String>)
                 context.getExternalContext().getRequestHeaderMap();
-        
+
         return (headers);
 
     }
@@ -161,11 +161,11 @@ public class FacesWebContext extends WebContext {
      * @return Header values Map.
      */
     public Map<String, String[]> getHeaderValues() {
-        
+
         @SuppressWarnings("unchecked") // Assume faces is following contract
         Map<String, String[]> headerValues = (Map<String, String[]>)
-            context.getExternalContext().getRequestHeaderValuesMap();    
-        
+            context.getExternalContext().getRequestHeaderValuesMap();
+
         return (headerValues);
 
     }
@@ -177,11 +177,11 @@ public class FacesWebContext extends WebContext {
      * @return Initialization parameter Map.
      */
     public Map<String, String> getInitParam() {
-        
+
         @SuppressWarnings("unchecked") // Assume faces is following contract
         Map<String, String> initParams = (Map<String, String>)
                 context.getExternalContext().getInitParameterMap();
-        
+
         return (initParams);
 
     }
@@ -195,8 +195,8 @@ public class FacesWebContext extends WebContext {
     public Map<String, String> getParam() {
         @SuppressWarnings("unchecked")
         Map<String, String> params = (Map<String, String>)
-                context.getExternalContext().getRequestParameterMap();        
-        
+                context.getExternalContext().getRequestParameterMap();
+
         return (params);
 
     }
@@ -211,7 +211,7 @@ public class FacesWebContext extends WebContext {
         @SuppressWarnings("unchecked") // Assume faces is following contract
         Map<String, String[]> paramValues = (Map<String, String[]>)
                 context.getExternalContext().getRequestParameterValuesMap();
-        
+
         return (paramValues);
 
     }
@@ -241,8 +241,8 @@ public class FacesWebContext extends WebContext {
             if (cookieObj instanceof Cookie) {
                 // See comment above about type safety check
                 @SuppressWarnings("unchecked")
-                Map<String, Cookie> cookieMap = Collections.checkedMap(
-                        (Map)facesCookieMap, String.class, Cookie.class);
+                Map<String, Cookie> cookieMap = (Map<String, Cookie>) Collections.checkedMap(
+                        (Map) facesCookieMap, String.class, Cookie.class);
 
                 return cookieMap;
             } else {
@@ -262,11 +262,11 @@ public class FacesWebContext extends WebContext {
      * @return Request scope Map.
      */
     public Map<String, Object> getRequestScope() {
-        
+
         @SuppressWarnings("unchecked")  // Assume faces is following contract
         Map<String, Object> scope = (Map<String, Object>)
                 context.getExternalContext().getRequestMap();
-        
+
         return (scope);
 
     }
@@ -278,11 +278,11 @@ public class FacesWebContext extends WebContext {
      * @return Session scope Map.
      */
     public Map<String, Object> getSessionScope() {
-        
+
         @SuppressWarnings("unchecked")  // Assume faces is following contract
         Map<String, Object> scope = (Map<String, Object>)
                 context.getExternalContext().getSessionMap();
-        
+
         return (scope);
 
     }

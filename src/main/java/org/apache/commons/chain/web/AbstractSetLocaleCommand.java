@@ -34,7 +34,8 @@ import org.apache.commons.chain.Context;
  * @version $Revision$ $Date$
  */
 
-public abstract class AbstractSetLocaleCommand<C extends Context> implements Command<C> {
+public abstract class AbstractSetLocaleCommand<C extends WebContext>
+        implements Command<String, Object, C> {
 
 
     // -------------------------------------------------------------- Properties

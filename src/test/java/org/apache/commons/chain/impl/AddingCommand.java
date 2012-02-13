@@ -39,25 +39,25 @@ public class AddingCommand extends NonDelegatingCommand {
 
 
     public AddingCommand() {
-    this("", null);
+        this("", null);
     }
 
     // Construct an instance that will log the specified identifier
-    public AddingCommand(String id, Chain parent) {
+    public AddingCommand(String id, Chain<String, Object, Context<String, Object>> parent) {
         super(id);
         this.parent = parent;
     }
 
 
     // The parent Chain
-    private Chain parent = null;
+    private Chain<String, Object, Context<String, Object>> parent = null;
 
 
     // -------------------------------------------------------- Command Methods
 
 
     // Execution method for this Command
-    public boolean execute(Context context, Chain chain) throws Exception {
+    public boolean execute(Context<String, Object> context, Chain<String, Object, Context<String, Object>> chain) throws Exception {
 
         super.execute(context);
         parent.addCommand(new NonDelegatingCommand("NEW")); // Should cause ISE

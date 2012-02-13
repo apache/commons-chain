@@ -29,7 +29,7 @@ import org.apache.commons.chain.Context;
  * @version $Revision$ $Date$
  */
 
-public class NonDelegatingCommand<C extends Context> implements Command<C> {
+public class NonDelegatingCommand implements Command<String, Object, Context<String, Object>> {
 
 
     // ------------------------------------------------------------ Constructor
@@ -65,7 +65,7 @@ public class NonDelegatingCommand<C extends Context> implements Command<C> {
 
 
     // Execution method for this Command
-    public boolean execute(C context) throws Exception {
+    public boolean execute(Context<String, Object> context) throws Exception {
 
         if (context == null) {
             throw new IllegalArgumentException();
@@ -88,7 +88,7 @@ public class NonDelegatingCommand<C extends Context> implements Command<C> {
      * @param context The {@link Context} into which we log the identifiers
      * @param id The identifier to be logged
      */
-    protected void log(Context context, String id) {
+    protected void log(Context<String, Object> context, String id) {
         StringBuffer sb = (StringBuffer) context.get("log");
         if (sb == null) {
             sb = new StringBuffer();

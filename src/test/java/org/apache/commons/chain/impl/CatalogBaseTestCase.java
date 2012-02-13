@@ -25,6 +25,7 @@ import java.util.Iterator;
 
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +47,7 @@ public class CatalogBaseTestCase {
     /**
      * The {@link Catalog} instance under test.
      */
-    protected CatalogBase catalog = null;
+    protected CatalogBase<String, Object, Context<String, Object>> catalog = null;
 
 
     // -------------------------------------------------- Overall Test Methods
@@ -57,7 +58,7 @@ public class CatalogBaseTestCase {
      */
     @Before
     public void setUp() {
-        catalog = new CatalogBase();
+        catalog = new CatalogBase<String, Object, Context<String, Object>>();
     }
 
     /**
@@ -85,7 +86,7 @@ public class CatalogBaseTestCase {
     public void testGetCommand() {
 
         addCommands();
-        Command command = null;
+        Command<String, Object, Context<String, Object>> command = null;
 
         command = catalog.getCommand("AddingCommand");
         assertNotNull(command);
@@ -154,16 +155,16 @@ public class CatalogBaseTestCase {
         catalog.addCommand("ExceptionFilter", new ExceptionFilter("", ""));
         catalog.addCommand("NonDelegatingCommand", new NonDelegatingCommand(""));
         catalog.addCommand("NonDelegatingFilter", new NonDelegatingFilter("", ""));
-        catalog.addCommand("ChainBase", new ChainBase());
+        catalog.addCommand("ChainBase", new ChainBase<String, Object, Context<String, Object>>());
     }
 
 
     // Verify the number of configured commands
     protected void checkCommandCount(int expected) {
         int n = 0;
-        Iterator names = catalog.getNames();
+        Iterator<String> names = catalog.getNames();
         while (names.hasNext()) {
-            String name = (String) names.next();
+            String name = names.next();
             n++;
             assertNotNull(name + " exists", catalog.getCommand(name));
         }

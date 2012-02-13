@@ -25,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Iterator;
 
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.impl.AddingCommand;
@@ -63,13 +64,13 @@ public class ConfigParser2TestCase {
     /**
      * <p>The <code>Catalog</code> to contain our configured commands.</p>
      */
-    protected Catalog catalog = null;
+    protected Catalog<String, Object, Context<String, Object>> catalog = null;
 
 
     /**
      * <p>The <code>Context</code> to use for execution tests.</p>
      */
-    protected Context context = null;
+    protected Context<String, Object> context = null;
 
 
     /**
@@ -86,7 +87,7 @@ public class ConfigParser2TestCase {
      */
     @Before
     public void setUp() {
-        catalog = new CatalogBase();
+        catalog = new CatalogBase<String, Object, Context<String, Object>>();
         context = new ContextBase();
         parser = new ConfigParser();
     }
@@ -115,7 +116,7 @@ public class ConfigParser2TestCase {
         checkCommandCount(17);
 
         // Check individual single command instances
-        Command command = null;
+        Command<String, Object, Context<String, Object>> command = null;
 
         command = catalog.getCommand("AddingCommand");
         assertNotNull(command);
@@ -315,9 +316,9 @@ public class ConfigParser2TestCase {
     // Verify the number of configured commands
     protected void checkCommandCount(int expected) {
         int n = 0;
-        Iterator names = catalog.getNames();
+        Iterator<String> names = catalog.getNames();
         while (names.hasNext()) {
-            String name = (String) names.next();
+            String name = names.next();
             n++;
             assertNotNull(name + " exists", catalog.getCommand(name));
         }
@@ -337,7 +338,9 @@ public class ConfigParser2TestCase {
     // Load the specified catalog from the specified resource path
     protected void load(String path) throws Exception {
         parser.parse(catalog, this.getClass().getResource(path));
-        catalog = CatalogFactoryBase.getInstance().getCatalog("foo");
+        CatalogFactory<String, Object, Context<String, Object>> catalogFactory
+            = CatalogFactoryBase.getInstance();
+        catalog = catalogFactory.getCatalog("foo");
     }
 
 

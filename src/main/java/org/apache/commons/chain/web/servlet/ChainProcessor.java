@@ -18,9 +18,12 @@ package org.apache.commons.chain.web.servlet;
 
 
 import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Command;
@@ -61,7 +64,7 @@ public class ChainProcessor extends ChainServlet {
 
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = -6817532768031279260L;
 
@@ -131,6 +134,7 @@ public class ChainProcessor extends ChainServlet {
     /**
      * <p>Clean up as this application is shut down.</p>
      */
+    @Override
     public void destroy() {
 
         super.destroy();
@@ -146,6 +150,7 @@ public class ChainProcessor extends ChainServlet {
      *
      * @exception ServletException if an initialization error occurs
      */
+    @Override
     public void init() throws ServletException {
 
         super.init();
@@ -170,27 +175,47 @@ public class ChainProcessor extends ChainServlet {
      * @exception IOException if an input/output error occurs
      * @exception ServletException if a servlet exception occurs
      */
+    @Override
     public void service(HttpServletRequest request,
                         HttpServletResponse response)
         throws IOException, ServletException {
 
         ServletWebContext context =
             new ServletWebContext(getServletContext(), request, response);
-        Catalog theCatalog = null;
+        Catalog<String, Object, ServletWebContext> theCatalog = null;
+
         if (attribute != null) {
-            theCatalog = (Catalog) getServletContext().getAttribute
-                (this.attribute);
+            ServletContext servletContext = getServletContext();
+            Object testAttribute = servletContext.getAttribute(this.attribute);
+
+            if (testAttribute instanceof Catalog) {
+                /* "attribute" should always contain an instance of a
+                 * Catalog class according to the historical chain convention.
+                 * Although, we now double-check that it is in fact a catalog
+                 * here, we still need to suppress warnings because of the
+                 * type erasure of generics. */
+                @SuppressWarnings("unchecked")
+                Catalog<String, Object, ServletWebContext> attributeCatalog =
+                     (Catalog<String, Object, ServletWebContext>)testAttribute;
+                theCatalog = attributeCatalog;
+            }
+            else {
+                String msg = "The object stored as the attribute [" +
+                        attribute + "] was not of the expected type [" +
+                        "Catalog]";
+                throw new IllegalArgumentException(msg);
+            }
         } else if (catalog != null) {
-            theCatalog = CatalogFactory.getInstance().getCatalog(catalog);
+            theCatalog = CatalogFactory.<String, Object, ServletWebContext>getInstance().getCatalog(catalog);
         } else {
-            theCatalog = CatalogFactory.getInstance().getCatalog();
+            theCatalog = CatalogFactory.<String, Object, ServletWebContext>getInstance().getCatalog();
         }
         if (attribute == null) {
             request.setAttribute(CATALOG_DEFAULT, theCatalog);
         }
-        Command<ServletWebContext> command = theCatalog.getCommand(this.command);
+        Command<String, Object, ServletWebContext> cmd = theCatalog.getCommand(this.command);
         try {
-            command.execute(context);
+            cmd.execute(context);
         } catch (Exception e) {
             throw new ServletException(e);
         }

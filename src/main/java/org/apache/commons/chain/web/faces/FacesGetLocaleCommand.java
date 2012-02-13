@@ -18,7 +18,9 @@ package org.apache.commons.chain.web.faces;
 
 
 import java.util.Locale;
+
 import javax.faces.context.FacesContext;
+
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.web.AbstractGetLocaleCommand;
 
@@ -30,7 +32,8 @@ import org.apache.commons.chain.web.AbstractGetLocaleCommand;
  * @param <C> Type of the context associated with this command
  */
 
-public class FacesGetLocaleCommand<C extends Context> extends AbstractGetLocaleCommand<C> {
+public class FacesGetLocaleCommand
+        extends AbstractGetLocaleCommand<FacesWebContext> {
 
 
     // ------------------------------------------------------- Protected Methods
@@ -42,7 +45,7 @@ public class FacesGetLocaleCommand<C extends Context> extends AbstractGetLocaleC
      * @param context The {@link Context} we are operating on.
      * @return The Locale for the request.
      */
-    protected Locale getLocale(C context) {
+    protected Locale getLocale(FacesWebContext context) {
 
     FacesContext fcontext = (FacesContext)
         context.get("context");

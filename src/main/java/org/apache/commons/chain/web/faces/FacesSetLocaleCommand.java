@@ -30,7 +30,8 @@ import org.apache.commons.chain.web.AbstractSetLocaleCommand;
  * @param <C> Type of the context associated with this command
  */
 
-public class FacesSetLocaleCommand<C extends Context> extends AbstractSetLocaleCommand<C> {
+public class FacesSetLocaleCommand
+        extends AbstractSetLocaleCommand<FacesWebContext> {
 
 
     // ------------------------------------------------------- Protected Methods
@@ -42,7 +43,7 @@ public class FacesSetLocaleCommand<C extends Context> extends AbstractSetLocaleC
      * @param context The {@link Context} we are operating on.
      * @param locale The Locale for the request.
      */
-    protected void setLocale(Context context, Locale locale) {
+    protected void setLocale(FacesWebContext context, Locale locale) {
 
     FacesContext fcontext = (FacesContext)
         context.get("context");

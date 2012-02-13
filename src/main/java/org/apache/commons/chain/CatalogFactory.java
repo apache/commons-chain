@@ -19,8 +19,8 @@ package org.apache.commons.chain;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import org.apache.commons.chain.impl.CatalogFactoryBase;
 
+import org.apache.commons.chain.impl.CatalogFactoryBase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -34,11 +34,15 @@ import org.apache.commons.logging.LogFactory;
  * a resolution mechanism which allows lookup of a command based on a single
  * String which encodes both the catalog and command names.</p>
  *
+ * @param <K> the type of keys maintained by the context associated with this command
+ * @param <V> the type of mapped values
+ * @param <C> Type of the context associated with this command
+ *
  * @author Sean Schofield
  * @version $Revision$ $Date$
  */
 
-public abstract class CatalogFactory {
+public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
 
 
     /**
@@ -58,7 +62,7 @@ public abstract class CatalogFactory {
      *
      * @return the default Catalog instance
      */
-    public abstract Catalog getCatalog();
+    public abstract Catalog<K, V, C> getCatalog();
 
 
     /**
@@ -66,7 +70,7 @@ public abstract class CatalogFactory {
      *
      * @param catalog the default Catalog instance
      */
-    public abstract void setCatalog(Catalog catalog);
+    public abstract void setCatalog(Catalog<K, V, C> catalog);
 
 
     /**
@@ -76,7 +80,7 @@ public abstract class CatalogFactory {
      * @param name the name of the Catalog to retrieve
      * @return the specified Catalog
      */
-    public abstract Catalog getCatalog(String name);
+    public abstract Catalog<K, V, C> getCatalog(String name);
 
 
     /**
@@ -86,7 +90,7 @@ public abstract class CatalogFactory {
      * @param name the name of the Catalog to add
      * @param catalog the Catalog to add
      */
-    public abstract void addCatalog(String name, Catalog catalog);
+    public abstract void addCatalog(String name, Catalog<K, V, C> catalog);
 
 
     /**
@@ -123,11 +127,11 @@ public abstract class CatalogFactory {
      *
      * @since Chain 1.1
      */
-    public <C extends Context> Command<C> getCommand(String commandID) {
+    public Command<K, V, C> getCommand(String commandID) {
 
         String commandName = commandID;
         String catalogName = null;
-        Catalog catalog = null;
+        Catalog<K, V, C> catalog = null;
 
         if (commandID != null) {
             int splitPos = commandID.indexOf(DELIMITER);
@@ -170,8 +174,8 @@ public abstract class CatalogFactory {
      * <p>The set of registered {@link CatalogFactory} instances,
      * keyed by the relevant class loader.</p>
      */
-    private static final Map<ClassLoader, CatalogFactory> factories =
-            new HashMap<ClassLoader, CatalogFactory>();
+    private static final Map<ClassLoader, CatalogFactory<?, ?, ? extends Map<?, ?>>> factories =
+            new HashMap<ClassLoader, CatalogFactory<?, ?, ? extends Map<?, ?>>>();
 
 
     // -------------------------------------------------------- Static Methods
@@ -187,19 +191,24 @@ public abstract class CatalogFactory {
      *
      * @return the per-application singleton instance of {@link CatalogFactory}
      */
-    public static CatalogFactory getInstance() {
+    public static <K, V, C extends Map<K, V>> CatalogFactory<K, V, C> getInstance() {
 
-        CatalogFactory factory = null;
+        CatalogFactory<?, ?, ? extends Map<?, ?>> factory = null;
         ClassLoader cl = getClassLoader();
         synchronized (factories) {
             factory = factories.get(cl);
             if (factory == null) {
-                factory = new CatalogFactoryBase();
+                factory = new CatalogFactoryBase<K, V, C>();
                 factories.put(cl, factory);
             }
         }
-        return factory;
 
+        /* This should always convert cleanly because we are using the
+         * base most generic for definition. */
+        @SuppressWarnings("unchecked")
+        CatalogFactory<K, V, C> result = (CatalogFactory<K, V, C>) factory;
+
+        return result;
     }
 
 

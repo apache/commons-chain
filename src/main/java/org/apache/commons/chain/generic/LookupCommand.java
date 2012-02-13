@@ -17,6 +17,8 @@
 package org.apache.commons.chain.generic;
 
 
+import java.util.Map;
+
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Command;
@@ -46,7 +48,7 @@ import org.apache.commons.chain.Filter;
  * @version $Revision$ $Date$
  */
 
-public class LookupCommand<C extends Context> implements Filter<C> {
+public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C> {
 
 
     // -------------------------------------------------------------- Constructors
@@ -58,7 +60,7 @@ public class LookupCommand<C extends Context> implements Filter<C> {
      * @since Chain 1.1
      */
     public LookupCommand() {
-        this(CatalogFactory.getInstance());
+        this(CatalogFactory.<K, V, C>getInstance());
     }
 
     /**
@@ -69,14 +71,14 @@ public class LookupCommand<C extends Context> implements Filter<C> {
      *
      * @since Chain 1.1
      */
-    public LookupCommand(CatalogFactory factory) {
+    public LookupCommand(CatalogFactory<K, V, C> factory) {
         this.catalogFactory = factory;
     }
 
 
     // -------------------------------------------------------------- Properties
 
-    private CatalogFactory catalogFactory = null;
+    private CatalogFactory<K, V, C> catalogFactory = null;
 
     /**
      * <p>Set the {@link CatalogFactory} from which lookups will be
@@ -86,7 +88,7 @@ public class LookupCommand<C extends Context> implements Filter<C> {
      *
      * @since Chain 1.1
      */
-    public void setCatalogFactory(CatalogFactory catalogFactory) {
+    public void setCatalogFactory(CatalogFactory<K, V, C> catalogFactory) {
         this.catalogFactory = catalogFactory;
     }
 
@@ -96,7 +98,7 @@ public class LookupCommand<C extends Context> implements Filter<C> {
      *
      * @since Chain 1.1
      */
-    public CatalogFactory getCatalogFactory() {
+    public CatalogFactory<K, V, C> getCatalogFactory() {
 
         return this.catalogFactory;
     }
@@ -302,7 +304,7 @@ public class LookupCommand<C extends Context> implements Filter<C> {
      */
     public boolean execute(C context) throws Exception {
 
-        Command<C> command = getCommand(context);
+        Command<K, V, C> command = getCommand(context);
         if (command != null) {
             boolean result = (command.execute(context));
             if (isIgnoreExecuteResult()) {
@@ -331,10 +333,10 @@ public class LookupCommand<C extends Context> implements Filter<C> {
      */
     public boolean postprocess(C context, Exception exception) {
 
-        Command<C> command = getCommand(context);
+        Command<K, V, C> command = getCommand(context);
         if (command != null) {
             if (command instanceof Filter) {
-                boolean result = (((Filter<C>) command).postprocess(context, exception));
+                boolean result = (((Filter<K, V, C>) command).postprocess(context, exception));
                 if (isIgnorePostprocessResult()) {
                     return false;
                 }
@@ -359,14 +361,14 @@ public class LookupCommand<C extends Context> implements Filter<C> {
      *
      * @since Chain 1.2
      */
-    protected Catalog getCatalog(C context) {
-        CatalogFactory lookupFactory = this.catalogFactory;
+    protected Catalog<K, V, C> getCatalog(C context) {
+        CatalogFactory<K, V, C> lookupFactory = this.catalogFactory;
         if (lookupFactory == null) {
             lookupFactory = CatalogFactory.getInstance();
         }
 
         String catalogName = getCatalogName();
-        Catalog catalog = null;
+        Catalog<K, V, C> catalog = null;
         if (catalogName == null) {
             // use default catalog
             catalog = lookupFactory.getCatalog();
@@ -396,11 +398,11 @@ public class LookupCommand<C extends Context> implements Filter<C> {
      *  can be found and the <code>optional</code> property is set
      *  to <code>false</code>
      */
-    protected Command<C> getCommand(C context) {
+    protected Command<K, V, C> getCommand(C context) {
 
-        Catalog catalog = getCatalog(context);
+        Catalog<K, V, C> catalog = getCatalog(context);
 
-        Command<C> command = null;
+        Command<K, V, C> command = null;
         String name = getCommandName(context);
         if (name != null) {
             command = catalog.getCommand(name);

@@ -29,7 +29,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 
-import org.apache.commons.chain.Context;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +51,7 @@ public class PortletGetLocaleCommandTestCase {
     protected PortletSession session = null;
 
     // Chain API Objects
-    protected Context context = null;
+    protected PortletWebContext context = null;
     protected PortletGetLocaleCommand command = null;
 
 
@@ -124,7 +123,7 @@ public class PortletGetLocaleCommandTestCase {
     // --------------------------------------------------------- Support Methods
 
 
-    protected void check(Context context, PortletGetLocaleCommand command)
+    protected void check(PortletWebContext context, PortletGetLocaleCommand command)
         throws Exception {
 
         String localeKey = command.getLocaleKey();

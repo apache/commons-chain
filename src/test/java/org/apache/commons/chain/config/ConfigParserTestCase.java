@@ -62,13 +62,13 @@ public class ConfigParserTestCase {
     /**
      * <p>The <code>Catalog</code> to contain our configured commands.</p>
      */
-    protected Catalog catalog = null;
+    protected Catalog<String, Object, Context<String, Object>> catalog = null;
 
 
     /**
      * <p>The <code>Context</code> to use for execution tests.</p>
      */
-    protected Context context = null;
+    protected Context<String, Object> context = null;
 
 
     /**
@@ -86,7 +86,7 @@ public class ConfigParserTestCase {
     @Before
     public void setUp() {
         CatalogFactory.clear();
-        catalog = new CatalogBase();
+        catalog = new CatalogBase<String, Object, Context<String, Object>>();
         context = new ContextBase();
         parser = new ConfigParser();
     }
@@ -115,7 +115,7 @@ public class ConfigParserTestCase {
         checkCommandCount(17);
 
         // Check individual single command instances
-        Command command = null;
+        Command<String, Object, Context<String, Object>> command = null;
 
         command = catalog.getCommand("AddingCommand");
         assertNotNull(command);
@@ -315,9 +315,9 @@ public class ConfigParserTestCase {
     // Verify the number of configured commands
     protected void checkCommandCount(int expected) {
         int n = 0;
-        Iterator names = catalog.getNames();
+        Iterator<String> names = catalog.getNames();
         while (names.hasNext()) {
-            String name = (String) names.next();
+            String name = names.next();
             n++;
             assertNotNull(name + " exists", catalog.getCommand(name));
         }
@@ -337,7 +337,9 @@ public class ConfigParserTestCase {
     // Load the specified catalog from the specified resource path
     protected void load(String path) throws Exception {
         parser.parse(this.getClass().getResource(path));
-        catalog = CatalogFactoryBase.getInstance().getCatalog();
+        CatalogFactory<String, Object, Context<String, Object>> catalogFactory
+            = CatalogFactoryBase.getInstance();
+        catalog = catalogFactory.getCatalog();
     }
 
 

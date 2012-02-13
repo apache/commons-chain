@@ -34,7 +34,7 @@ public class DispatchCommandTestCase {
         TestCommand test = new TestCommand();
 
         test.setMethod("testMethod");
-        Context context = new ContextBase();
+        Context<String, Object> context = new ContextBase();
         assertNull(context.get("foo"));
         boolean result = test.execute(context);
         assertTrue(result);
@@ -50,7 +50,7 @@ public class DispatchCommandTestCase {
         TestCommand test = new TestCommand();
 
         test.setMethodKey("foo");
-        Context context = new ContextBase();
+        Context<String, Object> context = new ContextBase();
         context.put("foo", "testMethodKey");
         assertNull(context.get("bar"));
         boolean result = test.execute(context);
@@ -66,7 +66,7 @@ public class DispatchCommandTestCase {
         TestAlternateContextCommand test = new TestAlternateContextCommand();
 
         test.setMethod("foo");
-        Context context = new ContextBase();
+        Context<String, Object> context = new ContextBase();
         assertNull(context.get("elephant"));
         boolean result = test.execute(context);
         assertTrue(result);
@@ -76,17 +76,17 @@ public class DispatchCommandTestCase {
 
     }
 
-    
-    class TestCommand extends DispatchCommand {
-        
 
-        public boolean testMethod(Context context) {
+    class TestCommand extends DispatchCommand<String, Object, Context<String, Object>> {
+
+
+        public boolean testMethod(Context<String, Object> context) {
             context.put("foo", "foo");
             return true;
         }
 
-        public boolean testMethodKey(Context context) {
-            
+        public boolean testMethodKey(Context<String, Object> context) {
+
             context.put("bar", "bar");
             return false;
         }
@@ -98,14 +98,14 @@ public class DispatchCommandTestCase {
      * @author germuska
      * @version 0.2-dev
      */
-    class TestAlternateContextCommand extends DispatchCommand {
+    class TestAlternateContextCommand extends DispatchCommand<String, Object, Context<String, Object>> {
 
 
-        protected Class[] getSignature() {
+        protected Class<?>[] getSignature() {
             return new Class[] { TestAlternateContext.class };
         }
 
-        protected Object[] getArguments(Context context) {
+        protected Object[] getArguments(Context<String, Object> context) {
             return new Object[] { new TestAlternateContext(context) };
         }
 
@@ -113,13 +113,17 @@ public class DispatchCommandTestCase {
             context.put("elephant", "elephant");
             return true;
         }
-        
+
     }
 
 
-    class TestAlternateContext extends java.util.HashMap<String, Object> implements Context {
-        Context wrappedContext = null;
-         TestAlternateContext(Context context) {
+    class TestAlternateContext extends java.util.HashMap<String, Object>
+            implements Context<String, Object> {
+
+        private static final long serialVersionUID = -8169700369254126548L;
+
+        Context<String, Object> wrappedContext = null;
+        TestAlternateContext(Context<String, Object> context) {
             this.wrappedContext = context;
         }
 
@@ -128,7 +132,7 @@ public class DispatchCommandTestCase {
             return this.wrappedContext.get(o);
         }
 
-        public <T> T retrieve(String key) {
+        public <T extends Object> T retrieve(String key) {
             return wrappedContext.<T>retrieve(key);
         }
 

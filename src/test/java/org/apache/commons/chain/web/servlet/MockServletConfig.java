@@ -31,7 +31,7 @@ import org.apache.commons.chain.web.MockEnumeration;
 public class MockServletConfig implements ServletConfig {
     private final String servletName;
     private final ServletContext servletContext;
-    private final Map parameters = new HashMap();
+    private final Map<String, Object> parameters = new HashMap<String, Object>();
 
     /**
      * Default Constructor.
@@ -75,8 +75,8 @@ public class MockServletConfig implements ServletConfig {
      *
      * @return the set of parameter names
      */
-    public Enumeration getInitParameterNames() {
-        return (new MockEnumeration(parameters.keySet().iterator()));
+    public Enumeration<String> getInitParameterNames() {
+        return (new MockEnumeration<String>(parameters.keySet().iterator()));
     }
 
     /**

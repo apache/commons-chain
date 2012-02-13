@@ -24,26 +24,28 @@ import org.apache.commons.chain.Context;
 /**
  * <p>Remove any context attribute stored under the <code>fromKey</code>.</p>
  *
+ * @param <K> the type of keys maintained by the context associated with this catalog
+ * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public class RemoveCommand<C extends Context> implements Command<C> {
+public class RemoveCommand<K, V, C extends Context<K, V>> implements Command<K, V, C> {
 
 
     // -------------------------------------------------------------- Properties
 
 
-    private String fromKey = null;
+    private K fromKey = null;
 
 
     /**
      * <p>Return the context attribute key for the attribute.</p>
      * @return The context attribute key.
      */
-    public String getFromKey() {
+    public K getFromKey() {
 
     return (this.fromKey);
 
@@ -55,7 +57,7 @@ public class RemoveCommand<C extends Context> implements Command<C> {
      *
      * @param fromKey The new key
      */
-    public void setFromKey(String fromKey) {
+    public void setFromKey(K fromKey) {
 
     this.fromKey = fromKey;
 

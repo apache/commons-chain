@@ -127,7 +127,7 @@ public class TestContextTestCase extends ContextBaseTestCase {
 
 
     // Create a new instance of the appropriate Context type for this test case
-    protected Context createContext() {
+    protected Context<String, Object> createContext() {
         return (new TestContext());
     }
 

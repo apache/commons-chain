@@ -26,15 +26,15 @@ import java.util.Iterator;
  * <code>Iterator</code> specified to our controller.</p>
  */
 
-public class MockEnumeration implements Enumeration {
+public class MockEnumeration<E> implements Enumeration<E> {
 
 
-    public MockEnumeration(Iterator iterator) {
+    public MockEnumeration(Iterator<E> iterator) {
         this.iterator = iterator;
     }
 
 
-    protected Iterator iterator;
+    protected Iterator<E> iterator;
 
 
     public boolean hasMoreElements() {
@@ -42,7 +42,7 @@ public class MockEnumeration implements Enumeration {
     }
 
 
-    public Object nextElement() {
+    public E nextElement() {
         return (iterator.next());
     }
 

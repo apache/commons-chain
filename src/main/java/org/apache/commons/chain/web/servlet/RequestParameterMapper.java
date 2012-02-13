@@ -38,7 +38,8 @@ import org.apache.commons.chain.generic.LookupCommand;
  * @author Craig R. McClanahan
  */
 
-public class RequestParameterMapper<C extends Context> extends LookupCommand<C> {
+public class RequestParameterMapper
+        extends LookupCommand<String, Object, ServletWebContext> {
 
 
     // ------------------------------------------------------ Instance Variables
@@ -124,11 +125,9 @@ public class RequestParameterMapper<C extends Context> extends LookupCommand<C> 
      * @since Chain 1.2
      */
     @Override
-    protected String getCommandName(C context) {
-
+    protected String getCommandName(ServletWebContext context) {
         // Look up the specified request parameter for this request
-        ServletWebContext swcontext = (ServletWebContext) context;
-        HttpServletRequest request = swcontext.getRequest();
+        HttpServletRequest request = context.getRequest();
         String value = request.getParameter(getCatalogName());
         return value;
 
@@ -146,11 +145,16 @@ public class RequestParameterMapper<C extends Context> extends LookupCommand<C> 
      * @since Chain 1.2
      */
     @Override
-    protected Catalog getCatalog(C context) {
-        Catalog catalog = (Catalog) context.get(getCatalogKey());
+    protected Catalog<String, Object, ServletWebContext> getCatalog(ServletWebContext context) {
+        /* Assume that the returned value will be null or of a valid catalog
+         * type according to chain's historical contract. */
+        @SuppressWarnings("unchecked")
+        Catalog<String, Object, ServletWebContext> catalog = (Catalog<String, Object, ServletWebContext>) context.get(getCatalogKey());
+
         if (catalog == null) {
             catalog = super.getCatalog(context);
         }
+
         return catalog;
     }
 

@@ -19,6 +19,7 @@ package org.apache.commons.chain.config;
 
 import java.net.URL;
 import org.apache.commons.chain.Catalog;
+import org.apache.commons.chain.Context;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.RuleSet;
 
@@ -157,7 +158,7 @@ public class ConfigParser {
      *  element(s) embedded
      */
     @Deprecated
-    public void parse(Catalog catalog, URL url) throws Exception {
+    public <K, V, C extends Context<K, V>> void parse(Catalog<K, V, C> catalog, URL url) throws Exception {
 
         // Prepare our Digester instance
         Digester digester = getDigester();

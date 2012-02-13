@@ -16,6 +16,8 @@
  */
 package org.apache.commons.chain;
 
+import java.util.Map;
+
 
 /**
  * <p>A {@link Filter} is a specialized {@link Command} that also expects
@@ -37,13 +39,15 @@ package org.apache.commons.chain;
  * can reliably release such resources in the <code>postprocess()</code>
  * method, which is guaranteed to be called by the owning {@link Chain}.</p>
  *
+ * @param <K> the type of keys maintained by the context associated with this command
+ * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public interface Filter<C extends Context> extends Command<C> {
+public interface Filter<K, V, C extends Map<K, V>> extends Command<K, V, C> {
 
 
     /**

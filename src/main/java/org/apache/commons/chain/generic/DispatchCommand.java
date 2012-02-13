@@ -29,11 +29,13 @@ import java.util.WeakHashMap;
  * For use by developers who prefer to group related functionality into a single class
  * rather than an inheritance family.
  *
+ * @param <K> the type of keys maintained by the context associated with this command
+ * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this command
  *
  * @since Chain 1.1
  */
-public abstract class DispatchCommand<C extends Context> implements Command<C> {
+public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements Command<K, V, C> {
 
     /** Cache of methods */
     private final Map<String, Method> methods = new WeakHashMap<String, Method>();

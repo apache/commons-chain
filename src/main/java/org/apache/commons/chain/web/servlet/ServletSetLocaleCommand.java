@@ -31,7 +31,8 @@ import org.apache.commons.chain.web.AbstractSetLocaleCommand;
  *
  */
 
-public class ServletSetLocaleCommand<C extends Context> extends AbstractSetLocaleCommand<C> {
+public class ServletSetLocaleCommand
+        extends AbstractSetLocaleCommand<ServletWebContext> {
 
 
     // ------------------------------------------------------- Protected Methods
@@ -43,7 +44,7 @@ public class ServletSetLocaleCommand<C extends Context> extends AbstractSetLocal
      * @param context The {@link Context} we are operating on.
      * @param locale The Locale for the request.
      */
-    protected void setLocale(C context, Locale locale) {
+    protected void setLocale(ServletWebContext context, Locale locale) {
 
     HttpServletResponse response = (HttpServletResponse)
         context.get("response");

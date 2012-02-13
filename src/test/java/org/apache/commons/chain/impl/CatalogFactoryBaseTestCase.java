@@ -28,6 +28,7 @@ import java.util.Iterator;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +49,7 @@ public class CatalogFactoryBaseTestCase {
     /**
      * <p>The {@link CatalogFactory} instance under test.</p>
      */
-    protected CatalogFactory factory = null;
+    protected CatalogFactory<String, Object, Context<String, Object>> factory = null;
 
 
     // -------------------------------------------------- Overall Test Methods
@@ -96,7 +97,7 @@ public class CatalogFactoryBaseTestCase {
     @Test
     public void testDefaultCatalog() {
 
-        Catalog catalog = new CatalogBase();
+        Catalog<String, Object, Context<String, Object>> catalog = new CatalogBase<String, Object, Context<String, Object>>();
         factory.setCatalog(catalog);
         assertTrue(catalog == factory.getCatalog());
         assertEquals(0, getCatalogCount());
@@ -110,13 +111,13 @@ public class CatalogFactoryBaseTestCase {
     @Test
     public void testSpecificCatalog() {
 
-        Catalog catalog = new CatalogBase();
+        Catalog<String, Object, Context<String, Object>> catalog = new CatalogBase<String, Object, Context<String, Object>>();
         factory.setCatalog(catalog);
-        catalog = new CatalogBase();
+        catalog = new CatalogBase<String, Object, Context<String, Object>>();
         factory.addCatalog("foo", catalog);
         assertTrue(catalog == factory.getCatalog("foo"));
         assertEquals(1, getCatalogCount());
-        factory.addCatalog("foo", new CatalogBase());
+        factory.addCatalog("foo", new CatalogBase<String, Object, Context<String, Object>>());
         assertEquals(1, getCatalogCount());
         assertTrue(!(catalog == factory.getCatalog("foo")));
         CatalogFactory.clear();
@@ -132,20 +133,20 @@ public class CatalogFactoryBaseTestCase {
     @Test
     public void testCatalogIdentifier() {
 
-        Catalog defaultCatalog = new CatalogBase();
-        Command defaultFoo = new NonDelegatingCommand();
+        Catalog<String, Object, Context<String, Object>> defaultCatalog = new CatalogBase<String, Object, Context<String, Object>>();
+        Command<String, Object, Context<String, Object>> defaultFoo = new NonDelegatingCommand();
         defaultCatalog.addCommand("foo", defaultFoo);
-        Command fallback = new NonDelegatingCommand();
+        Command<String, Object, Context<String, Object>> fallback = new NonDelegatingCommand();
         defaultCatalog.addCommand("noSuchCatalog:fallback", fallback);
 
         factory.setCatalog(defaultCatalog);
 
-        Catalog specificCatalog = new CatalogBase();
-        Command specificFoo = new NonDelegatingCommand();
+        Catalog<String, Object, Context<String, Object>> specificCatalog = new CatalogBase<String, Object, Context<String, Object>>();
+        Command<String, Object, Context<String, Object>> specificFoo = new NonDelegatingCommand();
         specificCatalog.addCommand("foo", specificFoo);
         factory.addCatalog("specific", specificCatalog);
 
-        Command command = factory.getCommand("foo");
+        Command<String, Object, Context<String, Object>> command = factory.getCommand("foo");
         assertSame(defaultFoo, command);
 
         command = factory.getCommand("specific:foo");
@@ -183,7 +184,7 @@ public class CatalogFactoryBaseTestCase {
      */
     private int getCatalogCount() {
 
-        Iterator names = factory.getNames();
+        Iterator<String> names = factory.getNames();
         assertNotNull(names);
         int n = 0;
         while (names.hasNext()) {

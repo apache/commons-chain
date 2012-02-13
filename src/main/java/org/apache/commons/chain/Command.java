@@ -16,6 +16,8 @@
  */
 package org.apache.commons.chain;
 
+import java.util.Map;
+
 
 /**
  * <p>A {@link Command} encapsulates a unit of processing work to be
@@ -73,13 +75,15 @@ package org.apache.commons.chain;
  * being used in this fashion, as opposed to JavaBeans properties that simply
  * configure the internal operation of this {@link Command}.</p>
  *
+ * @param <K> the type of keys maintained by the context associated with this command
+ * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public interface Command<C extends Context> {
+public interface Command<K, V, C extends Map<K, V>> {
 
     /**
      * <p>Commands should return <code>CONTINUE_PROCESSING</code> if the processing
@@ -98,6 +102,7 @@ public interface Command<C extends Context> {
      * @since Chain 1.1
      */
     public static final boolean PROCESSING_COMPLETE = true;
+
     /**
      * <p>Execute a unit of processing work to be performed.  This
      * {@link Command} may either complete the required processing
@@ -118,8 +123,6 @@ public interface Command<C extends Context> {
      *  of this {@link Context} should be delegated to a subsequent
      *  {@link Command} in an enclosing {@link Chain}
      */
-
     boolean execute(C context) throws Exception;
-
 
 }

@@ -18,6 +18,7 @@ package org.apache.commons.chain.generic;
 
 import static org.junit.Assert.*;
 
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.Context;
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.impl.CatalogBase;
@@ -43,17 +44,17 @@ public class DispatchLookupCommandTestCase {
     /**
      * The instance of {@link Catalog} to use when looking up commands
      */
-    protected Catalog catalog;
+    protected Catalog<String, Object, Context<String, Object>> catalog;
 
     /**
      * The {@link DispatchLookupCommand} instance under test.
      */
-    protected DispatchLookupCommand<Context> command;
+    protected DispatchLookupCommand<String, Object, Context<String, Object>> command;
 
     /**
      * The {@link Context} instance on which to execute the chain.
      */
-    protected Context context = null;
+    protected Context<String, Object> context = null;
 
 
     // -------------------------------------------------- Overall Test Methods
@@ -64,9 +65,10 @@ public class DispatchLookupCommandTestCase {
      */
     @Before
     public void setUp() {
-        catalog = new CatalogBase();
-        CatalogFactoryBase.getInstance().setCatalog(catalog);
-        command = new DispatchLookupCommand<Context>();
+        catalog = new CatalogBase<String, Object, Context<String, Object>>();
+        CatalogFactory<String, Object, Context<String, Object>> catalogFactory = CatalogFactoryBase.getInstance();
+        catalogFactory.setCatalog(catalog);
+        command = new DispatchLookupCommand<String, Object, Context<String, Object>>();
         context = new ContextBase();
     }
 
@@ -85,18 +87,18 @@ public class DispatchLookupCommandTestCase {
     // ------------------------------------------------ Individual Test Methods
 
 
-    // Test ability to lookup and execute a dispatch method on a single 
+    // Test ability to lookup and execute a dispatch method on a single
     // non-delegating command
     @Test
     public void testExecuteDispatchLookup_1a() {
 
         // use default catalog
-        catalog.addCommand("fooCommand", new TestCommand<Context>("1"));
-        
+        catalog.addCommand("fooCommand", new TestCommand<Context<String, Object>>("1"));
+
         // command should lookup the fooCommand and execute the fooMethod
         command.setName("fooCommand");
         command.setMethod("fooMethod");
-        
+
         try {
             assertTrue("Command should return true",
                        command.execute(context));
@@ -104,7 +106,7 @@ public class DispatchLookupCommandTestCase {
 
             fail("Threw exception: " + e);
         }
-        
+
         // command should lookup the fooCommand and execute the barMethod
         command.setMethod("barMethod");
 
@@ -114,17 +116,17 @@ public class DispatchLookupCommandTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        
+
         checkExecuteLog("1/1");
-        
+
     }
-    
+
     // Test IllegalArgumentException when incorrect command name specified
     @Test
     public void testExecuteDispatchLookup_2() {
 
         // use default catalog
-        catalog.addCommand("barCommand", new TestCommand("2"));
+        catalog.addCommand("barCommand", new TestCommand<Context<String, Object>>("2"));
 
         // command should lookup the fooCommand and execute the fooMethod
         command.setName("fooCommand");
@@ -138,17 +140,17 @@ public class DispatchLookupCommandTestCase {
         } catch (Exception e) {
             // this is a failure
         }
-      
+
         fail("Expected IllegalArgumentException");
     }
 
-    // Test ability to lookup and execute a dispatch method on a single 
+    // Test ability to lookup and execute a dispatch method on a single
     // non-delegating command (using context to specify method name)
     @Test
     public void testExecuteDispatchLookup_3() {
 
         // use default catalog
-        catalog.addCommand("fooCommand", new TestCommand("3"));
+        catalog.addCommand("fooCommand", new TestCommand<Context<String, Object>>("3"));
 
         // command should lookup the fooCommand and execute the fooMethod
         command.setName("fooCommand");
@@ -193,23 +195,23 @@ public class DispatchLookupCommandTestCase {
     // ---------------------------------------------------------- Inner Classes
 
 
-    class TestCommand<C extends Context> extends NonDelegatingCommand<C> {
+    class TestCommand<C extends Context<String, Object>> extends NonDelegatingCommand {
 
         public TestCommand(String id)
         {
             super(id);
         }
-    
+
         public boolean fooMethod(C context) {
-            log(context, id);            
+            log(context, id);
             return true;
         }
-        
+
         public boolean barMethod(C context) {
             log(context, id);
             return true;
         }
-        
+
     }
 
 }

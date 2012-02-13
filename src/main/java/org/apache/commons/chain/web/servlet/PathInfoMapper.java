@@ -37,7 +37,7 @@ import org.apache.commons.chain.generic.LookupCommand;
  * @author Craig R. McClanahan
  */
 
-public class PathInfoMapper<C extends Context> extends LookupCommand<C> {
+public class PathInfoMapper extends LookupCommand<String, Object, ServletWebContext> {
 
 
     // ------------------------------------------------------ Instance Variables
@@ -96,11 +96,9 @@ public class PathInfoMapper<C extends Context> extends LookupCommand<C> {
      * @since Chain 1.2
      */
     @Override
-    protected String getCommandName(Context context) {
-
+    protected String getCommandName(ServletWebContext context) {
         // Look up the extra path information for this request
-        ServletWebContext swcontext = (ServletWebContext) context;
-        HttpServletRequest request = swcontext.getRequest();
+        HttpServletRequest request = context.getRequest();
         String pathInfo = (String)
             request.getAttribute("javax.servlet.include.path_info");
         if (pathInfo == null) {
@@ -122,8 +120,11 @@ public class PathInfoMapper<C extends Context> extends LookupCommand<C> {
      * @since Chain 1.2
      */
     @Override
-    protected Catalog getCatalog(C context) {
-        Catalog catalog = (Catalog) context.get(getCatalogName());
+    protected Catalog<String, Object, ServletWebContext> getCatalog(ServletWebContext context) {
+        /* Assume that the object returned will be a catalog because of chain's
+         * historical contract. */
+        @SuppressWarnings("unchecked")
+        Catalog<String, Object, ServletWebContext> catalog = (Catalog<String, Object, ServletWebContext>) context.get(getCatalogName());
         if (catalog == null) {
             catalog = super.getCatalog(context);
         }

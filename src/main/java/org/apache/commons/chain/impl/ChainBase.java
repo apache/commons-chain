@@ -20,6 +20,7 @@ package org.apache.commons.chain.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
@@ -30,13 +31,15 @@ import org.apache.commons.chain.Filter;
 /**
  * <p>Convenience base class for {@link Chain} implementations.</p>
  *
- * @param <C> Type of the context associated with this command
+ * @param <K> the type of keys maintained by the context associated with this chain
+ * @param <V> the type of mapped values
+ * @param <C> Type of the context associated with this chain
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 
-public class ChainBase<C extends Context> implements Chain<C> {
+public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
 
 
     // ----------------------------------------------------------- Constructors
@@ -59,7 +62,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      * @exception IllegalArgumentException if <code>command</code>
      *  is <code>null</code>
      */
-    public ChainBase(Command<C> command) {
+    public ChainBase(Command<K, V, C> command) {
 
         addCommand(command);
 
@@ -76,7 +79,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      *  or one of the individual {@link Command} elements,
      *  is <code>null</code>
      */
-    public ChainBase(Command<C>[] commands) {
+    public ChainBase(Command<K, V, C>[] commands) {
 
         if (commands == null) {
             throw new IllegalArgumentException();
@@ -98,7 +101,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      *  or one of the individual {@link Command} elements,
      *  is <code>null</code>
      */
-    public ChainBase(Collection<Command<C>> commands) {
+    public ChainBase(Collection<Command<K, V, C>> commands) {
 
         if (commands == null) {
             throw new IllegalArgumentException();
@@ -116,7 +119,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      * the order in which they may delegate processing to the remainder of
      * the {@link Chain}.</p>
      */
-    private final List<Command<C>> commands = new ArrayList<Command<C>>();
+    private final List<Command<K, V, C>> commands = new ArrayList<Command<K, V, C>>();
 
 
     /**
@@ -138,7 +141,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      *  is <code>null</code>
      * @exception IllegalStateException if no further configuration is allowed
      */
-    public void addCommand(Command<C> command) {
+    public void addCommand(Command<K, V, C> command) {
 
         if (command == null) {
             throw new IllegalArgumentException();
@@ -206,7 +209,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
             if (commands.get(j) instanceof Filter) {
                 try {
                     result =
-                        ((Filter<C>) commands.get(j)).postprocess(context,
+                        ((Filter<K, V, C>) commands.get(j)).postprocess(context,
                                                            saveException);
                     if (result) {
                         handled = true;
@@ -248,7 +251,7 @@ public class ChainBase<C extends Context> implements Chain<C> {
      * {@link Chain}.  This method is package private, and is used only
      * for the unit tests.</p>
      */
-    List<Command<C>> getCommands() {
+    List<Command<K, V, C>> getCommands() {
 
         return (commands);
 

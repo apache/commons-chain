@@ -26,7 +26,7 @@ import org.apache.commons.chain.Context;
  * configurable properties.</p>
  */
 
-public class TestCommand implements Command {
+public class TestCommand implements Command<String, Object, Context<String, Object>> {
 
 
     private String bar = null;
@@ -47,7 +47,7 @@ public class TestCommand implements Command {
     }
 
 
-    public boolean execute(Context context) throws Exception {
+    public boolean execute(Context<String, Object> context) throws Exception {
     return (false);
     }
 
