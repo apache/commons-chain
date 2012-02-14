@@ -338,7 +338,7 @@ public class ContextBaseTestCase {
 
     // Test serialization
     @Test
-    public void testSeriaization() throws Exception {
+    public void testSerialization() throws Exception {
 
         // ContextBase is implicitly declared Serializable because it
         // extends HashMap.  However, it is not possible to make
