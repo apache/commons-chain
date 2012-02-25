@@ -82,6 +82,11 @@
       <id>niallp</id>
       <email>niallp at apache.org</email>
     </developer>
+    <developer>
+      <name>Simone Tripodi</name>
+      <id>simonetripodi</id>
+      <email>simonetripodi at apache dot org</email>
+    </developer>
   </developers>
 
   <contributors>
