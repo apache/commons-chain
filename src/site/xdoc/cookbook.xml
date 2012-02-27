@@ -267,11 +267,11 @@
       <source><![CDATA[package org.apache.commons.mailreader;
 
 import junit.framework.TestCase;
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
-import org.apache.commons.chain.mailreader.commands.ProfileCheck;
-import org.apache.commons.chain.mailreader.commands.Profile;
-import org.apache.commons.chain.impl.ContextBase;
+import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.mailreader.commands.ProfileCheck;
+import org.apache.commons.chain2.mailreader.commands.Profile;
+import org.apache.commons.chain2.impl.ContextBase;
 
 public class ProfileCheckTest extends TestCase {
 
@@ -351,10 +351,10 @@ public class ProfileCheckTest extends TestCase {
     <example>
       <title>A Command to create a Profile, if one doesn't exist.</title>
 
-      <source><![CDATA[package org.apache.commons.chain.mailreader.commands;
+      <source><![CDATA[package org.apache.commons.chain2.mailreader.commands;
 
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
+import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Context;
 
 public class ProfileCheck implements Command {
 
@@ -378,7 +378,7 @@ public class ProfileCheck implements Command {
     <example>
       <title>The simplest Profile class that can possibly work.</title>
 
-      <source><![CDATA[package org.apache.commons.chain.mailreader.commands; 
+      <source><![CDATA[package org.apache.commons.chain2.mailreader.commands; 
 public class Profile { 
     public static String PROFILE_KEY = "profile"; 
 }]]></source>
@@ -538,7 +538,7 @@ public class Profile {
         <p><source><![CDATA[package org.apache.commons.mailreader;
 import junit.framework.TestCase;
 import junit.framework.Assert;
-import org.apache.commons.chain.mailreader.MailReader;
+import org.apache.commons.chain2.mailreader.MailReader;
 import java.util.Locale;
 
 public class LocaleValueTest extends TestCase {
@@ -580,8 +580,8 @@ public class LocaleValueTest extends TestCase {
         <title>The simplest MailReader object that will pass
         LocalValueTest.</title>
 
-        <p><source><![CDATA[package org.apache.commons.chain.mailreader;
-import org.apache.commons.chain.impl.ContextBase;
+        <p><source><![CDATA[package org.apache.commons.chain2.mailreader;
+import org.apache.commons.chain2.impl.ContextBase;
 import java.util.Locale;
 
 public class MailReader extends ContextBase {Prop
@@ -605,8 +605,8 @@ public class MailReader extends ContextBase {Prop
         <title>An even simpler MailReader Context (but that would fail
         LocalValueTest).</title>
 
-        <p><source><![CDATA[package org.apache.commons.chain.mailreader;
-import org.apache.commons.chain.Context;
+        <p><source><![CDATA[package org.apache.commons.chain2.mailreader;
+import org.apache.commons.chain2.Context;
 import java.util.Hashmap;
 
 public class MailReader extends Hashmap implements Context {
@@ -690,10 +690,10 @@ public class MailReader extends Hashmap implements Context {
 <catalog>
   <command 
     name="LocaleChange" 
-    className="org.apache.commons.chain.mailreader.commands.LocaleChange"/>
+    className="org.apache.commons.chain2.mailreader.commands.LocaleChange"/>
   <command 
     name="LogonUser" 
-    className="org.apache.commons.chain.mailreader.commands.LogonUser"/>
+    className="org.apache.commons.chain2.mailreader.commands.LogonUser"/>
 </catalog>]]></source></p>
       </example>The application needs to know the name given to a Command we
     want to execute, but it does not need to know the classname of the
@@ -711,13 +711,13 @@ public class MailReader extends Hashmap implements Context {
         <p><source><![CDATA[<catalog>
   <chain name="LocaleChange">
     <command 
-      className="org.apache.commons.chain.mailreader.commands.ProfileCheck"/>
+      className="org.apache.commons.chain2.mailreader.commands.ProfileCheck"/>
     <command 
-      className="org.apache.commons.chain.mailreader.commands.LocaleChange"/>
+      className="org.apache.commons.chain2.mailreader.commands.LocaleChange"/>
   </chain>
   <command 
     name="LogonUser" 
-    className="org.apache.commons.chain.mailreader.commands.LogonUser"/>
+    className="org.apache.commons.chain2.mailreader.commands.LogonUser"/>
 </catalog>]]></source></p>
       </example></p>
 
@@ -758,11 +758,11 @@ public class MailReader extends Hashmap implements Context {
 
         <source><![CDATA[<!-- Commons Chain listener to load catalogs  -->
 <context-param>
-  <param-name>org.apache.commons.chain.CONFIG_CLASS_RESOURCE</param-name>
+  <param-name>org.apache.commons.chain2.CONFIG_CLASS_RESOURCE</param-name>
   <param-value>resources/catalog.xml</param-value>
 </context-param>
 <listener>
-  <listener-class>org.apache.commons.chain.web.ChainListener</listener-class>
+  <listener-class>org.apache.commons.chain2.web.ChainListener</listener-class>
 </listener>]]></source>
       </example></p>
     <p>The elements in <!-- Example 11 --> this example expect that there is a
@@ -910,7 +910,7 @@ public class MailReader extends Hashmap implements Context {
 <catalog>
     <command
         name="<em>LocaleChange</em>"
-        className="org.apache.commons.chain.mailreader.commands.LocaleChange" />
+        className="org.apache.commons.chain2.mailreader.commands.LocaleChange" />
 </catalog>
 
 <!-- validation.xml -->
@@ -945,7 +945,7 @@ public class MailReader extends Hashmap implements Context {
     <action-mappings>
         <action path="/LocaleChange"
             name="<em>LocaleChange</em>"
-            type="org.apache.commons.chain.mailreader.struts.CommandAction">
+            type="org.apache.commons.chain2.mailreader.struts.CommandAction">
         <forward name="success" path="/Welcome.do" />
         </action>
     </action-mappings>
@@ -958,11 +958,11 @@ public class MailReader extends Hashmap implements Context {
         <title>The CommandAction links the form-bean name with the Command
         name</title>
 
-        <p><source><![CDATA[package org.apache.commons.chain.mailreader.struts;
-import org.apache.commons.chain.Catalog;
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
-import org.apache.commons.chain.web.servlet.ServletWebContext;
+        <p><source><![CDATA[package org.apache.commons.chain2.mailreader.struts;
+import org.apache.commons.chain2.Catalog;
+import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;as the ActionForm name.
@@ -1295,8 +1295,8 @@ import org.apache.commons.agility.ProcessException;
 import org.apache.commons.agility.Request;
 import org.apache.commons.agility.RequestHandler;
 import org.apache.commons.agility.Response;
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
+import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Context;
 
 public class HandlerCommand implements Command, RequestHandler {
     String name =  null;
@@ -1353,7 +1353,7 @@ public class HandlerCommand implements Command, RequestHandler {
         <p><source><![CDATA[package org.apache.commons.agility.impl;
 
 import org.apache.commons.agility.Response;
-import org.apache.commons.chain.impl.ContextBase;
+import org.apache.commons.chain2.impl.ContextBase;
 
 public class ResponseContext extends ContextBase implements Response {
 
@@ -1387,8 +1387,8 @@ import org.apache.commons.agility.Controller;
 import org.apache.commons.agility.ProcessException;
 import org.apache.commons.agility.Request;
 import org.apache.commons.agility.RequestHandler;
-import org.apache.commons.chain.impl.CatalogBase;
-import org.apache.commons.chain.Command;
+import org.apache.commons.chain2.impl.CatalogBase;
+import org.apache.commons.chain2.Command;
 
 public class ControllerCatalog extends CatalogBase implements Controller {
     public RequestHandler getHandler(String name) {
@@ -1434,7 +1434,7 @@ public class ControllerCatalog extends CatalogBase implements Controller {
 
 import org.apache.commons.agility.Request;
 import org.apache.commons.agility.Response;
-import org.apache.commons.chain.impl.ContextBase;
+import org.apache.commons.chain2.impl.ContextBase;
 
 public class RequestContext extends ContextBase implements Request {
 

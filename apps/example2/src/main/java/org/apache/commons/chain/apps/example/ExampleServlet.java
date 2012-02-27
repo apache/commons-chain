@@ -14,17 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain.apps.example;
+package org.apache.commons.chain2.apps.example;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.chain.Catalog;
-import org.apache.commons.chain.CatalogFactory;
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.web.servlet.ServletWebContext;
+import org.apache.commons.chain2.Catalog;
+import org.apache.commons.chain2.CatalogFactory;
+import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

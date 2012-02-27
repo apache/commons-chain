@@ -89,7 +89,7 @@
 
   <p>The fundamental API contracts of the Chain of Responsibility
   pattern are encapsulated in the following interfaces in package
-  <code>org.apache.commons.chain</code>:</p>
+  <code>org.apache.commons.chain2</code>:</p>
 
   <ul>
     <li><strong>Command</strong> - An individual unit of work whose
@@ -129,22 +129,22 @@
   the availability of the corresponding APIs at compile time):</p>
 
   <ul>
-    <li><strong>org.apache.commons.chain.impl</strong> -
+    <li><strong>org.apache.commons.chain2.impl</strong> -
     Convenience base class implementations of the fundamental API
     contracts.</li>
 
-    <li><strong>org.apache.commons.chain.generic</strong> -
+    <li><strong>org.apache.commons.chain2.generic</strong> -
     Implementations of <code>Command</code> that are completely
     generic across any execution environment.</li>
 
-    <li><strong>org.apache.commons.chain.config</strong> -
+    <li><strong>org.apache.commons.chain2.config</strong> -
     Implementation of XML parsing rules (via the use of Commons
     Digester) so that a <code>Catalog</code> instance can be
     populated with <code>Command</code> and <code>Chain</code>
     instances configured from an XML document. Optional, compiled
     only if commons-digester.jar is available.</li>
 
-    <li><strong>org.apache.commons.chain.web</strong> - Abstract
+    <li><strong>org.apache.commons.chain2.web</strong> - Abstract
     implementation of <code>Context</code> that represents the
     fundamental characteristics of request, session, and
     application scope objects in a web application environment,
@@ -153,17 +153,17 @@
     identical to the "implicit variables" of the expression
     language that is defined by JSTL 1.0 and JSP 2.0.</li>
 
-    <li><strong>org.apache.commons.chain.web.faces</strong> - Concrete
+    <li><strong>org.apache.commons.chain2.web.faces</strong> - Concrete
     implementation of <code>WebContext</code> for the JavaServer
     Faces API. Optional, compiled only if the JavaServer Faces API
     classes are available.</li>
 
-    <li><strong>org.apache.commons.chain.web.portlet</strong> - Concrete
+    <li><strong>org.apache.commons.chain2.web.portlet</strong> - Concrete
     implementation of <code>WebContext</code> for the Portlet API.
     Optional, compiled only if the Portlet API classes are
     available.</li>
 
-    <li><strong>org.apache.commons.chain.web.servlet</strong> - Concrete
+    <li><strong>org.apache.commons.chain2.web.servlet</strong> - Concrete
     implementation of <code>WebContext</code> for the Servlet API.
     Optional, compiled only if the Servlet API classes are
     available.</li>
@@ -175,7 +175,7 @@
   should be maintained so that a user of commons-chain need only
   provide the APIs that he or she cares about. Likewise, for
   maximum reuse, command implementations should be based on the
-  <code>org.apache.commons.chain.Context</code> API, rather than a
+  <code>org.apache.commons.chain2.Context</code> API, rather than a
   more specialized implementation class, if at all possible.</p>
 
   <h3>(1.5) Interaction With Other Packages</h3>
@@ -187,21 +187,21 @@
 
     <li>Commons BeanUtils (version 1.6 or later). OPTIONAL,
     required only to use the
-    <code>org.apache.commons.chain.config</code> package.</li>
+    <code>org.apache.commons.chain2.config</code> package.</li>
 
     <li>Commons Collections (version 1.0 or later). OPTIONAL,
     required only to use the
-    <code>org.apache.commons.chain.config</code> package.</li>
+    <code>org.apache.commons.chain2.config</code> package.</li>
 
     <li>Commons Digester (version 1.3 or later). OPTIONAL, required
-    only to use the <code>org.apache.commons.chain.config</code>
+    only to use the <code>org.apache.commons.chain2.config</code>
     package.</li>
 
     <li>Commons Logging (version 1.0.3 or later). OPTIONAL,
     required only to use the
-    <code>org.apache.commons.chain.config</code> package and
+    <code>org.apache.commons.chain2.config</code> package and
     to build and use the
-    <code>org.apache.commons.chain.web.servlet.config</code>
+    <code>org.apache.commons.chain2.web.servlet.config</code>
     package.</li>
 
     <li>JavaServer Faces API (version 1.0 or later). OPTIONAL,

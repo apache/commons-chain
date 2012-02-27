@@ -14,14 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain.apps.example;
+package org.apache.commons.chain2.apps.example;
 
 
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
+import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Context;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.chain.web.servlet.ServletWebContext;
+import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import javax.servlet.RequestDispatcher;
 
 /**

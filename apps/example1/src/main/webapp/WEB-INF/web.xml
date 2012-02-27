@@ -22,26 +22,26 @@
     <display-name>Chain Example</display-name>
 
     <context-param>
-        <param-name>org.apache.commons.chain.CONFIG_WEB_RESOURCE</param-name>
+        <param-name>org.apache.commons.chain2.CONFIG_WEB_RESOURCE</param-name>
         <param-value>/WEB-INF/chain-config.xml</param-value>
     </context-param>
 
     <!-- "Path Info" Servlet Configuration (uses default catalog) -->
     <servlet>
         <servlet-name>pathinfo</servlet-name>
-        <servlet-class>org.apache.commons.chain.web.servlet.ChainProcessor</servlet-class>
+        <servlet-class>org.apache.commons.chain2.web.servlet.ChainProcessor</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <!-- "Request Parameter" Servlet Configuration -->
     <servlet>
         <servlet-name>reqparam</servlet-name>
-        <servlet-class>org.apache.commons.chain.web.servlet.ChainProcessor</servlet-class>
+        <servlet-class>org.apache.commons.chain2.web.servlet.ChainProcessor</servlet-class>
         <load-on-startup>2</load-on-startup>
 
         <!-- Configure catalog name -->
         <init-param>
-            <param-name>org.apache.commons.chain.CATALOG</param-name>
+            <param-name>org.apache.commons.chain2.CATALOG</param-name>
             <param-value>reqparam</param-value>
         </init-param>
 
@@ -50,12 +50,12 @@
     <!-- "Servlet Path" Servlet Configuration -->
     <servlet>
         <servlet-name>servletpath</servlet-name>
-        <servlet-class>org.apache.commons.chain.web.servlet.ChainProcessor</servlet-class>
+        <servlet-class>org.apache.commons.chain2.web.servlet.ChainProcessor</servlet-class>
         <load-on-startup>3</load-on-startup>
 
         <!-- Configure catalog name -->
         <init-param>
-            <param-name>org.apache.commons.chain.CATALOG</param-name>
+            <param-name>org.apache.commons.chain2.CATALOG</param-name>
             <param-value>servletpath</param-value>
         </init-param>
 

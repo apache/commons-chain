@@ -22,35 +22,35 @@
     <display-name>Chain Example</display-name>
 
     <context-param>
-        <param-name>org.apache.commons.chain.CONFIG_WEB_RESOURCE</param-name>
+        <param-name>org.apache.commons.chain2.CONFIG_WEB_RESOURCE</param-name>
         <param-value>/WEB-INF/chain-config.xml</param-value>
     </context-param>
 
     <!-- Configuration Listener -->
     <listener>
         <listener-class>
-            org.apache.commons.chain.web.ChainListener
+            org.apache.commons.chain2.web.ChainListener
         </listener-class>
     </listener>
 
     <!-- "Path Info" Servlet Configuration -->
     <servlet>
         <servlet-name>pathinfo</servlet-name>
-        <servlet-class>org.apache.commons.chain.apps.example.ExampleServlet</servlet-class>
+        <servlet-class>org.apache.commons.chain2.apps.example.ExampleServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <!-- "Request Parameter" Servlet Configuration -->
     <servlet>
         <servlet-name>reqparam</servlet-name>
-        <servlet-class>org.apache.commons.chain.apps.example.ExampleServlet</servlet-class>
+        <servlet-class>org.apache.commons.chain2.apps.example.ExampleServlet</servlet-class>
         <load-on-startup>2</load-on-startup>
     </servlet>
 
     <!-- "Servlet Path" Servlet Configuration -->
     <servlet>
         <servlet-name>servletpath</servlet-name>
-        <servlet-class>org.apache.commons.chain.apps.example.ExampleServlet</servlet-class>
+        <servlet-class>org.apache.commons.chain2.apps.example.ExampleServlet</servlet-class>
         <load-on-startup>3</load-on-startup>
     </servlet>
 
