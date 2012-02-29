@@ -52,6 +52,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="simonetripodi" type="add" issue="CHAIN-56">
          clever Context with generic type "auto-cast" feature.
       </action>
+      <action dev="simonetripodi" type="add" issue="CHAIN-55">
+         split the huge project in submodules.
+      </action>
       <action dev="simonetripodi" type="add" issue="CHAIN-53" due-to="Elijah Zupancic">
          Global Update of Chain - Generics, JDK 1.5, Update Dependency Versions.
       </action>

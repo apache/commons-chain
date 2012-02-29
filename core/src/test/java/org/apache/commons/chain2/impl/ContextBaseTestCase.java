@@ -35,7 +35,6 @@ import java.util.Set;
 
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.impl.ContextBase;
-import org.apache.commons.chain2.web.WebContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -346,7 +345,7 @@ public class ContextBaseTestCase {
         // the concrete subclasses of WebContext Serializable, because
         // the underlying container objects that they wrap will not be.
         // Therefore, skip testing serializability of these implementations
-        if (context instanceof WebContext) {
+        if (ContextBase.class != context.getClass()) {
             return;
         }
 
