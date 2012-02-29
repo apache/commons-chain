@@ -31,7 +31,7 @@
   <artifactId>commons-chain2-dist</artifactId>
   <packaging>pom</packaging>
 
-  <name>Apache Commons Chains :: Distribution Packages</name>
+  <name>Apache Commons Chain :: Distribution Packages</name>
 
   <dependencies>
     <dependency>
