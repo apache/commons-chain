@@ -30,7 +30,7 @@
 
   <artifactId>commons-chain2</artifactId>
 
-  <name>Apache Commons Chains :: Core</name>
+  <name>Apache Commons Chain :: Core</name>
 
   <build>
     <resources>

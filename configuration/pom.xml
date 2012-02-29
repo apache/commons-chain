@@ -30,7 +30,7 @@
 
   <artifactId>commons-chain2-configuration</artifactId>
 
-  <name>Apache Commons Chains :: Configuration</name>
+  <name>Apache Commons Chain :: Configuration</name>
 
   <dependencies>
     <dependency>

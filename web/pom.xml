@@ -30,7 +30,7 @@
 
   <artifactId>commons-chain2-web</artifactId>
 
-  <name>Apache Commons Chains :: Web</name>
+  <name>Apache Commons Chain :: Web</name>
 
   <dependencies>
     <dependency>
