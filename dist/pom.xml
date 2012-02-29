@@ -70,7 +70,7 @@
           </descriptors>
           <tarLongFileMode>gnu</tarLongFileMode>
           <attach>false</attach>
-          <finalName>commons-digester3-${project.version}</finalName>
+          <finalName>commons-chain2-${project.version}</finalName>
         </configuration>
       </plugin>
       <plugin>
