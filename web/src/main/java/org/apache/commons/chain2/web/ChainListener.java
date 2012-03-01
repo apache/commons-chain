@@ -31,7 +31,7 @@ import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.config.ConfigParser;
 import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.web.servlet.ServletWebContext;
-import org.apache.commons.digester.RuleSet;
+import org.apache.commons.digester3.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

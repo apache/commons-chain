@@ -17,7 +17,7 @@
 package org.apache.commons.chain2.config;
 
 
-import org.apache.commons.digester.Rule;
+import org.apache.commons.digester3.Rule;
 import org.xml.sax.Attributes;
 
 
@@ -94,10 +94,10 @@ class ConfigDefineRule extends Rule {
         String classValue = attributes.getValue(classAttribute);
 
         // Add rules for this new element
-        digester.addObjectCreate("*/" + nameValue, classValue);
-        digester.addSetProperties("*/" + nameValue);
-        digester.addRule("*/" + nameValue,
-                         new ConfigRegisterRule(nameAttribute));
+        getDigester().addObjectCreate("*/" + nameValue, classValue);
+        getDigester().addSetProperties("*/" + nameValue);
+        getDigester().addRule("*/" + nameValue,
+                              new ConfigRegisterRule(nameAttribute));
 
     }
 

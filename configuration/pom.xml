@@ -37,12 +37,11 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>commons-chain2</artifactId>
       <version>${project.parent.version}</version>
-      <scope>compile</scope>
     </dependency>
+
     <dependency>
-      <groupId>commons-digester</groupId>
-      <artifactId>commons-digester</artifactId>
-      <version>2.1</version>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>commons-digester3</artifactId>
     </dependency>
 
     <dependency>

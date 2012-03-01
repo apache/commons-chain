@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
-import org.apache.commons.digester.Rule;
+import org.apache.commons.digester3.Rule;
 import org.xml.sax.Attributes;
 
 
@@ -107,7 +107,7 @@ class ConfigCatalogRule extends Rule {
 
         // Create and register a new Catalog instance if necessary
         if (catalog == null) {
-            Class<?> clazz = digester.getClassLoader().loadClass(catalogClass);
+            Class<?> clazz = getDigester().getClassLoader().loadClass(catalogClass);
 
             /* Convert catalog pulled from digester to default generic signature
              * with the assumption that the Catalog returned from digester will
@@ -125,7 +125,7 @@ class ConfigCatalogRule extends Rule {
         }
 
         // Push this Catalog onto the top of the stack
-        digester.push(catalog);
+        getDigester().push(catalog);
     }
 
 }

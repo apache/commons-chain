@@ -17,8 +17,8 @@
 package org.apache.commons.chain2.config;
 
 
-import org.apache.commons.digester.Digester;
-import org.apache.commons.digester.RuleSetBase;
+import org.apache.commons.digester3.Digester;
+import org.apache.commons.digester3.RuleSetBase;
 
 
 /**

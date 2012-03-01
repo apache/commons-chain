@@ -42,13 +42,18 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>commons-chain2</artifactId>
       <version>${project.parent.version}</version>
-      <scope>compile</scope>
     </dependency>
+
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>commons-chain2-configuration</artifactId>
       <version>${project.parent.version}</version>
-      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>commons-digester3</artifactId>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>

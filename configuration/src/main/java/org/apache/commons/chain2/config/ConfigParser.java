@@ -21,8 +21,8 @@ import java.net.URL;
 
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.digester.Digester;
-import org.apache.commons.digester.RuleSet;
+import org.apache.commons.digester3.Digester;
+import org.apache.commons.digester3.RuleSet;
 
 
 /**

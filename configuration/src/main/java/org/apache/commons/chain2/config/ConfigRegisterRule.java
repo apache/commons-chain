@@ -22,8 +22,7 @@ import java.util.Map;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Command;
-import org.apache.commons.chain2.Context;
-import org.apache.commons.digester.Rule;
+import org.apache.commons.digester3.Rule;
 import org.xml.sax.Attributes;
 
 
@@ -85,7 +84,7 @@ class ConfigRegisterRule extends Rule {
         throws Exception {
 
         // Is the top object a Command?
-        Object top = digester.peek(0);
+        Object top = getDigester().peek(0);
         if ((top == null)
             || !(top instanceof Command)) {
             return;
@@ -98,7 +97,7 @@ class ConfigRegisterRule extends Rule {
                 (Command<Object, Object, Map<Object, Object>>) top;
 
         // Is the next object a Catalog or a Chain?
-        Object next = digester.peek(1);
+        Object next = getDigester().peek(1);
         if (next == null) {
             return;
         }
