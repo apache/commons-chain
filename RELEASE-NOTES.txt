@@ -50,7 +50,7 @@ The Recommended Dependency Set for Chain 2.0 is:
    Chain 2.0 + Logging 1.1.1:
 
 The Recommended Dependency Set for Chain Configuration 2.0 is:
-   Chain 2.0 + Digester 2.1 + Logging 1.1.1 + BeanUtils 1.8.3
+   Chain 2.0 + Digester 3.2 (and related transitive dependencies)
 
 The Recommended Dependency Set for Chain Web 2.0 is:
    Chain 2.0 + Chain Configuration 2.0 + Container Provided dependencies
