@@ -1,43 +1,84 @@
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
 $Id$
 
-                           Commons Chain Package
-                                Version 1.2
+
+                          Commons Chain Package
+                                Version 2.0
                                Release Notes
 
-INTRODUCTION:
+
+INTRODUCTION
 ============
-The changes-report.html provides details of changes in each release:
-o http://commons.apache.org/chain/changes-report.html
 
-For more information on Apache Commons Chain, see
-o http://commons.apache.org/chain/
+This is an update release with new features. New projects are encouraged to
+use this release of Chain. There is no urgency for existing projects to
+upgrade; Chain 1.2 has proven to be a stable release.
 
-COMPATIBILITY
+IMPORTANT NOTES
+================
+
+BREAKING CHANGES:
+
+ * The minimum JDK version required is 1.5;
+
+ * APIs are NOT backward compatible;
+
+ * Classes have been split in submodules (core, XML configuration and WEB).
+
+DEPENDENCIES
 =============
-Chain 1.2 is binary and source compatible with version 1.1.
 
-The minimum JDK version required is 1.3
+Chain 2.0 users should upgrade to the recommended dependency set below
+where possible.
 
+The Recommended Dependency Set for Chain 2.0 is:
+   Chain 2.0 + Logging 1.1.1:
 
-NEW FEATURES:
+The Recommended Dependency Set for Chain Configuration 2.0 is:
+   Chain 2.0 + Digester 2.1 + Logging 1.1.1 + BeanUtils 1.8.3
+
+The Recommended Dependency Set for Chain Web 2.0 is:
+   Chain 2.0 + Chain Configuration 2.0 + Container Provided dependencies
+
+NEW FEATURES
+=============
+
+ * [CHAIN-58] Update Chain Context interface to use K,V generics
+ * [CHAIN-56] clever Context with generic type "auto-cast" feature.
+ * [CHAIN-55] split the huge project in submodules.
+
+BUGS FIXED SINCE PREVIOUS RELEASE
+===========================
+
+ * [CHAIN-61] Chain 2.0 trunk build is throwing many warnings as a result of generification changes.
+
+IMPROVEMENTS OVER PREVIOUS RELEASE
+===================================
+
+ * [CHAIN-65] Rename package org.apache.commons.chain to org.apache.commons.chain2 for v2 of chain.
+ * [CHAIN-53] Global Update of Chain - Generics, JDK 1.5, Update Dependency Versions.
+
+DEPRECATIONS
 ============
-o First OSGi-enabled release of Commons Chain
-o CHAIN-36: Add Example webapp for Servlet Mapper Commands. 
 
+ * NONE
 
-CHANGES:
-========
-o CHAIN-32: Improve instantiation performance of ContextBase subclasses. 
-o CHAIN-4: Update servlet implementation classes to be aware of CatalogFactory. 
+OTHER NOTES
+============
 
-      
-BUG REPORTS ADDRESSED:
-=====================
-o CHAIN-44: CatalogFactory instance variable prevents ChainProcessor from being serializable.
-o CHAIN-43: ChainListener URL translation does not work as expected. 
-o CHAIN-42: Various scope mappers use incorrect equalization.
-o CHAIN-41: Ant build fails due to usage of old Digester.
-o CHAIN-35: PathInfoMapper command can not obtain the current catalog instance.
-o CHAIN-34: Unbalanced tags in JavaDoc for ContextBase class.
-o CHAIN-33: Upgrade to Digester 1.8 to fix bug loading webapp resources.
-
+ * This is the first version of Apache Commons Chain which contains sub-modules
