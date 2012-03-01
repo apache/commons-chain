@@ -44,12 +44,6 @@ public class ConfigParser {
 
 
     /**
-     * <p>The <code>Digester</code> to be used for parsing.</p>
-     */
-    private Digester digester = null;
-
-
-    /**
      * <p>The <code>RuleSet</code> to be used for configuring our Digester
      * parsing rules.</p>
      */
@@ -72,14 +66,12 @@ public class ConfigParser {
      */
     public Digester getDigester() {
 
-        if (digester == null) {
-            digester = new Digester();
-            RuleSet ruleSet = getRuleSet();
-            digester.setNamespaceAware(ruleSet.getNamespaceURI() != null);
-            digester.setUseContextClassLoader(getUseContextClassLoader());
-            digester.setValidating(false);
-            digester.addRuleSet(ruleSet);
-        }
+        Digester digester = new Digester();
+        RuleSet ruleSet = getRuleSet();
+        digester.setNamespaceAware(ruleSet.getNamespaceURI() != null);
+        digester.setUseContextClassLoader(getUseContextClassLoader());
+        digester.setValidating(false);
+        digester.addRuleSet(ruleSet);
         return (digester);
 
     }
@@ -108,7 +100,6 @@ public class ConfigParser {
      */
     public void setRuleSet(RuleSet ruleSet) {
 
-        this.digester = null;
         this.ruleSet = ruleSet;
 
     }
