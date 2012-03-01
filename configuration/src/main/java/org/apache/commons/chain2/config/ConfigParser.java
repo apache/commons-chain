@@ -47,7 +47,7 @@ public class ConfigParser {
      * <p>The <code>RuleSet</code> to be used for configuring our Digester
      * parsing rules.</p>
      */
-    private RuleSet ruleSet = null;
+    private RuleSet ruleSet = new ConfigRuleSet();
 
 
     /**
@@ -84,9 +84,6 @@ public class ConfigParser {
      */
     public RuleSet getRuleSet() {
 
-        if (ruleSet == null) {
-            ruleSet = new ConfigRuleSet();
-        }
         return (ruleSet);
 
     }
