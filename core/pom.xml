@@ -32,6 +32,13 @@
 
   <name>Apache Commons Chain :: Core</name>
 
+  <dependencies>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+    </dependency>
+  </dependencies>
+
   <build>
     <resources>
       <resource>
