@@ -59,27 +59,30 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
      * @param context The Context to be processed by this Command.
      * @return the result of method being dispatched to.
      * @throws IllegalStateException if neither 'method' nor 'methodKey' properties are defined
-     * @throws Exception if any is thrown by the invocation.  Note that if invoking the method
+     * @throws DispatchException if any is thrown by the invocation. Note that if invoking the method
      * results in an InvocationTargetException, the cause of that exception is thrown instead of
      * the exception itself, unless the cause is an <code>Error</code> or other <code>Throwable</code>
      * which is not an <code>Exception</code>.
      */
-    public boolean execute(C context) throws Exception {
+    public boolean execute(C context) {
 
         if (this.getMethod() == null && this.getMethodKey() == null) {
             throw new IllegalStateException("Neither 'method' nor 'methodKey' properties are defined ");
         }
 
-        Method methodObject = extractMethod(context);
-
         try {
-            return evaluateResult(methodObject.invoke(this, getArguments(context)));
+
+            Method methodObject = extractMethod(context);
+            return evaluateResult(methodObject.invoke(this,
+                    getArguments(context)));
+
+        } catch (NoSuchMethodException e) {
+            throw new DispatchException("Error extracting method from context", e, context, this);
+        } catch (IllegalAccessException e) {
+            throw new DispatchException("Error accessing method", e, context, this);
         } catch (InvocationTargetException e) {
             Throwable cause = e.getTargetException();
-            if (cause instanceof Exception) {
-                throw (Exception)cause;
-            }
-            throw e;
+            throw new DispatchException("Error in reflected dispatched command", cause, context, this);
         }
     }
 

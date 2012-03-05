@@ -65,7 +65,7 @@ public class NonDelegatingFilter
 
     // Execution method for this Command
     @Override
-    public boolean execute(Context<String, Object> context) throws Exception {
+    public boolean execute(Context<String, Object> context) {
 
         super.execute(context);
         return (true);

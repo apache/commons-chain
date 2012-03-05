@@ -50,7 +50,7 @@ public class DelegatingCommand extends NonDelegatingCommand {
 
 
     // Execution method for this Command
-    public boolean execute(Context<String, Object> context) throws Exception {
+    public boolean execute(Context<String, Object> context) {
 
         super.execute(context);
         return (false);

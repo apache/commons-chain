@@ -47,7 +47,7 @@ public class TestCommand implements Command<String, Object, Context<String, Obje
     }
 
 
-    public boolean execute(Context<String, Object> context) throws Exception {
+    public boolean execute(Context<String, Object> context) {
     return (false);
     }
 

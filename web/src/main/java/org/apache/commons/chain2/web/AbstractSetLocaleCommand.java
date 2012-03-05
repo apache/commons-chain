@@ -17,10 +17,10 @@
 package org.apache.commons.chain2.web;
 
 
-import java.util.Locale;
-
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+
+import java.util.Locale;
 
 
 /**
@@ -83,10 +83,10 @@ public abstract class AbstractSetLocaleCommand<C extends WebContext>
      *
      * @param context The {@link Context} we are operating on
      *
-     * @return <code>false</code> so that processng will continue
-     * @throws Exception If an error occurs during execution.
+     * @return <code>false</code> so that processing will continue
+     * @throws org.apache.commons.chain2.ChainException If an error occurs during execution.
      */
-    public boolean execute(C context) throws Exception {
+    public boolean execute(C context) {
 
     setLocale(context,
           (Locale) context.get(getLocaleKey()));

@@ -74,9 +74,9 @@ public class RemoveCommand<K, V, C extends Context<K, V>> implements Command<K, 
      * @param context {@link Context} in which we are operating
      *
      * @return <code>false</code> so that processing will continue
-     * @throws Exception if and error occurs.
+     * @throws org.apache.commons.chain2.ChainException if and error occurs.
      */
-    public boolean execute(C context) throws Exception {
+    public boolean execute(C context) {
 
     context.remove(getFromKey());
     return (false);

@@ -23,7 +23,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.generic.DispatchCommand;
 import org.apache.commons.chain2.impl.ContextBase;
 import org.junit.Test;
 

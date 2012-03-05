@@ -116,7 +116,7 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      *  of this {@link Context} should be delegated to a subsequent
      *  {@link Command} in an enclosing {@link Chain}
      */
-    boolean execute(C context) throws Exception;
+    boolean execute(C context);
 
 
 }

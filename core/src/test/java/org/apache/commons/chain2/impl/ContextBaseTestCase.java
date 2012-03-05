@@ -34,7 +34,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.impl.ContextBase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

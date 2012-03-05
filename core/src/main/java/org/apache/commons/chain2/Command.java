@@ -113,7 +113,7 @@ public interface Command<K, V, C extends Map<K, V>> {
      * @param context The {@link Context} to be processed by this
      *  {@link Command}
      *
-     * @exception Exception general purpose exception return
+     * @exception ChainException general purpose exception return
      *  to indicate abnormal termination
      * @exception IllegalArgumentException if <code>context</code>
      *  is <code>null</code>
@@ -123,6 +123,6 @@ public interface Command<K, V, C extends Map<K, V>> {
      *  of this {@link Context} should be delegated to a subsequent
      *  {@link Command} in an enclosing {@link Chain}
      */
-    boolean execute(C context) throws Exception;
+    boolean execute(C context);
 
 }

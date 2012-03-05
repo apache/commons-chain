@@ -26,8 +26,6 @@ import java.util.Iterator;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.impl.CatalogBase;
-import org.apache.commons.chain2.impl.ChainBase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

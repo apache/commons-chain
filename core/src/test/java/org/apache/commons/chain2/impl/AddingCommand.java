@@ -57,7 +57,7 @@ public class AddingCommand extends NonDelegatingCommand {
 
 
     // Execution method for this Command
-    public boolean execute(Context<String, Object> context, Chain<String, Object, Context<String, Object>> chain) throws Exception {
+    public boolean execute(Context<String, Object> context, Chain<String, Object, Context<String, Object>> chain) {
 
         super.execute(context);
         parent.addCommand(new NonDelegatingCommand("NEW")); // Should cause ISE

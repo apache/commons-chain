@@ -65,7 +65,7 @@ public class NonDelegatingCommand implements Command<String, Object, Context<Str
 
 
     // Execution method for this Command
-    public boolean execute(Context<String, Object> context) throws Exception {
+    public boolean execute(Context<String, Object> context) {
 
         if (context == null) {
             throw new IllegalArgumentException();

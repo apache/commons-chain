@@ -300,9 +300,9 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * <code>false</code> if no command is found or if the command
      * is found but the <code>ignoreExecuteResult</code> property of this
      * instance is <code>true</code>
-     * @throws Exception if and error occurs in the looked-up Command.
+     * @throws org.apache.commons.chain2.ChainException if and error occurs in the looked-up Command.
      */
-    public boolean execute(C context) throws Exception {
+    public boolean execute(C context) {
 
         Command<K, V, C> command = getCommand(context);
         if (command != null) {

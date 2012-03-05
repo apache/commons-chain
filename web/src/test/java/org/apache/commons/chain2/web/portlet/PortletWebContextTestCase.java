@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.impl.ContextBaseTestCase;
 import org.apache.commons.chain2.web.WebContext;
-import org.apache.commons.chain2.web.portlet.PortletWebContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

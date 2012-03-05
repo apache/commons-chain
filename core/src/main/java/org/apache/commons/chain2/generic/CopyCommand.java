@@ -17,10 +17,10 @@
 package org.apache.commons.chain2.generic;
 
 
-import java.util.Map;
-
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+
+import java.util.Map;
 
 
 /**
@@ -129,9 +129,9 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
      * @param context {@link Context} in which we are operating
      *
      * @return <code>false</code> so that processing will continue
-     * @throws Exception in the if an error occurs during execution.
+     * @throws org.apache.commons.chain2.ChainException in the if an error occurs during execution.
      */
-    public boolean execute(C context) throws Exception {
+    public boolean execute(C context) {
 
         V value = this.value;
 

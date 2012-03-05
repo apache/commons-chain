@@ -22,6 +22,7 @@ import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Filter;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.WeakHashMap;
 
@@ -140,26 +141,35 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
      * @return the result of executing the looked-up command's method, or
      * <code>false</code> if no command is found.
      *
-     * @throws Exception if no such {@link Command} can be found and the
+     * @throws DispatchException if no such {@link Command} can be found and the
      *  <code>optional</code> property is set to <code>false</code>
      */
 	@Override
-    public boolean execute(C context) throws Exception {
+    public boolean execute(C context) {
 
         if (this.getMethod() == null && this.getMethodKey() == null) {
-            throw new IllegalStateException(
-                "Neither 'method' nor 'methodKey' properties are defined "
-            );
+            throw new IllegalStateException("Neither 'method' nor 'methodKey' properties are defined");
         }
 
         Command<K, V, C> command = getCommand(context);
 
         if (command != null) {
-            Method methodObject = extractMethod(command, context);
-            Object obj = methodObject.invoke(command, getArguments(context));
-            Boolean result = (Boolean)obj;
+            try {
+                Method methodObject = extractMethod(command, context);
+                Object obj = methodObject.invoke(command, getArguments(context));
 
-            return (result != null && result.booleanValue());
+                Boolean result = (Boolean)obj;
+                return (result != null && result);
+
+            } catch (NoSuchMethodException e) {
+                throw new DispatchException("Error extracting method from context", e, context, this);
+            } catch (IllegalAccessException e) {
+                throw new DispatchException("Error accessing method", e, context, this);
+            } catch (InvocationTargetException e) {
+                Throwable cause = e.getTargetException();
+                throw new DispatchException("Error in reflected dispatched command", cause, context, this);
+        }
+
         } else {
             return false;
         }

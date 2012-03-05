@@ -40,6 +40,9 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="2.0" description="Major release">
+      <action dev="simonetripodi" type="add" issue="CHAIN-67" due-to="Elijah Zupancic">
+        Refactor of explicit Exception throws to a RuntimeException type
+      </action>
       <action dev="simonetripodi" type="add" issue="CHAIN-65" due-to="Elijah Zupancic">
         Rename package org.apache.commons.chain to org.apache.commons.chain2 for v2 of chain.
       </action>

@@ -39,7 +39,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.impl.ContextBaseTestCase;
 import org.apache.commons.chain2.web.WebContext;
-import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
