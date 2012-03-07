@@ -123,7 +123,7 @@
     <commons.osgi.import>!javax.portlet,*</commons.osgi.import>
     <commons.osgi.dynamicImport>javax.portlet</commons.osgi.dynamicImport>
 
-    <surefire.version>2.12</surefire.version>
+    <commons.surefire.version>2.12</commons.surefire.version>
   </properties>
 
   <dependencyManagement>
@@ -171,12 +171,6 @@
           </execution>
         </executions>
       </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire.version}</version>
-      </plugin>
     </plugins>
   </build>
 
@@ -202,7 +196,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>${surefire.version}</version>
+        <version>${commons.surefire.version}</version>
         <configuration>
           <aggregate>true</aggregate>
         </configuration>
