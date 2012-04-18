@@ -43,6 +43,7 @@
     <module>core</module>
     <module>configuration</module>
     <module>web</module>
+    <module>apps</module>
     <module>dist</module>
   </modules>
 
@@ -200,7 +201,7 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>2.9.1</version>
         <configuration>
-          <configLocation>org/apache/commons/chain2/checkstyle.xml</configLocation>
+          <configLocation>build-tools/src/main/resources/org/apache/commons/chain2/checkstyle.xml</configLocation>
           <enableRulesSummary>false</enableRulesSummary>
           <headerLocation>org/apache/commons/chain2/license-header.txt</headerLocation>
         </configuration>

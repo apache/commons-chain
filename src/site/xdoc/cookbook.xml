@@ -264,31 +264,26 @@
     <example>
       <title>Testing whether a Profile object is created</title>
 
-      <source><![CDATA[package org.apache.commons.mailreader;
+      <source><![CDATA[package org.apache.commons.chain2.cookbook.profile;
 
-import junit.framework.TestCase;
 import org.apache.commons.chain2.Command;
-import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.mailreader.commands.ProfileCheck;
-import org.apache.commons.chain2.mailreader.commands.Profile;
-import org.apache.commons.chain2.impl.ContextBase;
+import org.junit.Test;
+import static org.junit.Assert.assertNotNull;
 
-public class ProfileCheckTest extends TestCase {
+public class ProfileCheckTest {
 
-   public void testProfileCheckNeed() {
+    @Test
+    public void testProfileCheckNeed() {
 
-        Context context = new ContextBase();
-        Command command = new ProfileCheck();
-        try {
-            command.execute(context);
-        } catch (Exception e) {
-            fail(e.getMessage());
-        }
+        ProfileContext context = new ProfileContext();
+        Command<String, Object, ProfileContext> command = new ProfileCheck();
 
-        Profile profile = (Profile) context.get(Profile.PROFILE_KEY);
-        assertNotNull("Missing Profile", profile);
+        command.execute(context);
 
-    }]]></source>
+        Profile profile = context.getProfile();
+        assertNotNull("Missing org.apache.commons.chain2.cookbook.profile.Profile", profile);
+    }
+}]]></source>
     </example>
 
     <p>Since we're using a test-first approach, we can't run or even
@@ -351,20 +346,19 @@ public class ProfileCheckTest extends TestCase {
     <example>
       <title>A Command to create a Profile, if one doesn't exist.</title>
 
-      <source><![CDATA[package org.apache.commons.chain2.mailreader.commands;
+      <source><![CDATA[package org.apache.commons.chain2.cookbook.profile;
 
 import org.apache.commons.chain2.Command;
-import org.apache.commons.chain2.Context;
 
-public class ProfileCheck implements Command {
+public class ProfileCheck implements Command<String, Object, ProfileContext> {
 
-    public Profile newProfile(Context context) { return new Profile(); }
+    public Profile newProfile(ProfileContext context) { return new Profile(); }
 
-    public boolean execute(Context context) throws Exception {
-        Object profile = context.get(Profile.PROFILE_KEY);
+    public boolean execute(ProfileContext context) {
+        Profile profile = context.getProfile();
+
         if (null == profile) {
-            profile = newProfile(context);
-            context.put(Profile.PROFILE_KEY, profile);
+            context.setProfile(newProfile(context));
         }
         return false;
     }
@@ -378,9 +372,10 @@ public class ProfileCheck implements Command {
     <example>
       <title>The simplest Profile class that can possibly work.</title>
 
-      <source><![CDATA[package org.apache.commons.chain2.mailreader.commands; 
-public class Profile { 
-    public static String PROFILE_KEY = "profile"; 
+      <source><![CDATA[package org.apache.commons.chain2.cookbook.profile;
+
+public class Profile {
+    public static String PROFILE_KEY = "profile";
 }]]></source>
     </example>
 
@@ -397,7 +392,7 @@ public class Profile {
     test.</p>
 
     <p><figure>
-        <title>Green bar for org.apache.commons.mailreader.ProfileCheckTest
+        <title>Green bar for org.apache.commons.chain2.cookbook.ProfileCheckTest
         [TODO: Screen capture]</title>
 
         <mediaobject>
@@ -465,13 +460,16 @@ public class Profile {
     interface.</p>
 
     <p><example>
-        <title>The Context interface is a "marker" interface extending
-        Map.</title>
+        <title>The Context interface is a interface extending
+        Map with a single method for returning type-safe values.</title>
 
-        <p><source><![CDATA[public interface Context extends Map {
+        <p><source><![CDATA[public interface Context<K, V> extends Map<K, V> {
+
+    <T extends V> T retrieve(K key);
+
 }]]></source></p>
-      </example>However, to provide developers with type-safety,
-    encapsulation, and interoperability, Chain provides a sophisticated
+      </example>In addition, to provide developers with type-safety,
+    encapsulation, and interoperability, Chain also provides a sophisticated
     <code>ContextBase</code> class that also supports JavaBean
     properties.</p>
 
@@ -535,44 +533,46 @@ public class Profile {
         <title>LocaleValueTest proves that our context is interoperable and
         type-safe.</title>
 
-        <p><source><![CDATA[package org.apache.commons.mailreader;
-import junit.framework.TestCase;
-import junit.framework.Assert;
-import org.apache.commons.chain2.mailreader.MailReader;
-import java.util.Locale;
+        <p><source><![CDATA[package org.apache.commons.chain2.cookbook.mailreader;
 
-public class LocaleValueTest extends TestCase {
+import org.junit.Before;
+import org.junit.Test;
+import java.util.Locale;
+import static org.junit.Assert.*;
+
+public class LocaleValueTest {
 
     MailReader context;
 
+    @Before
     public void setUp() {
         context = new MailReader();
     }
 
+    @Test
     public void testLocaleSetPropertyGetMap() {
         Locale expected = Locale.CANADA_FRENCH;
         context.setLocale(expected);
-        Locale locale = (Locale) context.get(MailReader.LOCALE_KEY);
-        Assert.assertNotNull(locale);
-        Assert.assertEquals(expected, locale);
+        // the retrieve() method is a nice type-safe alternative to get()
+        Locale locale = context.retrieve(MailReader.LOCALE_KEY);
+        assertNotNull(locale);
+        assertEquals(expected, locale);
     }
 
+    @Test
     public void testLocalePutMapGetProperty() {
         Locale expected = Locale.ITALIAN;
         context.put(MailReader.LOCALE_KEY, expected);
         Locale locale = context.getLocale();
-        Assert.assertNotNull(locale);
-        Assert.assertEquals(expected, locale);
+        assertNotNull(locale);
+        assertEquals(expected, locale);
     }
 
+    @Test(expected = UnsupportedOperationException.class)
     public void testLocaleSetTypedWithStringException() {
         String localeString = Locale.US.toString();
-        try {
-            context.put(MailReader.LOCALE_KEY, localeString);
-            fail("Expected 'argument type mismatch' error");
-        } catch (UnsupportedOperationException expected) {
-            ;
-        }
+        // Expected 'argument type mismatch' error
+        context.put(MailReader.LOCALE_KEY, localeString);
     }
 }]]></source></p>
       </example>A <code>MailReader</code> Context object that passes
@@ -580,13 +580,19 @@ public class LocaleValueTest extends TestCase {
         <title>The simplest MailReader object that will pass
         LocalValueTest.</title>
 
-        <p><source><![CDATA[package org.apache.commons.chain2.mailreader;
+        <p><source><![CDATA[package org.apache.commons.chain2.cookbook.mailreader;
+
 import org.apache.commons.chain2.impl.ContextBase;
 import java.util.Locale;
 
-public class MailReader extends ContextBase {Prop
+public class MailReader extends ContextBase {
+
     public static String LOCALE_KEY = "locale";
+
     private Locale locale;
+
+    public MailReader() {}
+
     public Locale getLocale() {
         return locale;
     }
@@ -609,12 +615,12 @@ public class MailReader extends ContextBase {Prop
 import org.apache.commons.chain2.Context;
 import java.util.Hashmap;
 
-public class MailReader extends Hashmap implements Context {
+public class MailReader extends Hashmap<String, Locale> implements Context<String, Locale> {
     public static String LOCALE_KEY = "locale";
 }]]></source></p>
       </example>By extending the stock ContextBase subclass, or rolling your
     own class with a HashMap, you can use whatever type of context is best for
-    your own artichtecture.</p>
+    your own architecture.</p>
   </section>
 
   <section name="Create a Catalog">
@@ -658,19 +664,22 @@ public class MailReader extends Hashmap implements Context {
         <title>A Catalog stores Commands that an application can lookup and
         execute.</title>
 
-        <p><source><![CDATA[   boolean executeCatalogCommand(Context context,
-            String name, HttpServletRequest request) 
-        throws Exception {
-    
+        <p><source><![CDATA[    private boolean executeCatalogCommand(MailReader context,
+            String name, HttpServletRequest request) {
+
         ServletContext servletContext =
-                request.getSession().getServletContext();  
-        Catalog catalog =
-                (Catalog) servletContext.getAttribute("catalog");
-        Command command = catalog.getCommand(name);
-        boolean stop = command.execute(context);
-        return stop;
+                request.getSession().getServletContext();
         
-    } ]]></source></p>
+        // Due to the servlet API limitations, we have to do a cast here
+        @SuppressWarnings("unchecked")
+        Catalog<String, Object, MailReader> catalog = 
+                (Catalog<String, Object, MailReader>) servletContext
+                        .getAttribute("catalog");
+        
+        Command<String, Object, MailReader> command = catalog.getCommand(name);
+
+        return command.execute(context);
+    }]]></source></p>
       </example></p>
 
     <!-- p><remark>[Glossary: Add <em>"type-safety"</em>,
@@ -703,7 +712,8 @@ public class MailReader extends Hashmap implements Context {
     a user profile before changing a user's locale setting. If we wanted to
     make running a <code>CheckProfile</code> Command part of
     "LocaleChange", we could change the Catalog to make "LocaleChange" a
-    Chain. <!-- Example 10 --> The following example shows Catalog metadata where "LocaleChange" is a Chain.
+    Chain. <!-- Example 10 --> The following example shows Catalog metadata where
+    "LocaleChange" is a Chain.
     <example>
         <title>A Catalog can be refactored with zero-changes to the
         application code.</title>
@@ -805,13 +815,15 @@ public class MailReader extends Hashmap implements Context {
     <code>HttpServletRequest</code> instance, you can access the
     catalog by coding:</p>
 
-    <p><source><![CDATA[Catalog catalog = (Catalog) request.getSession()
-        .getServletContext().getAttribute("catalog");]]></source></p>
+    <p><source><![CDATA[Catalog<String, Object, MailReader> catalog =
+        (Catalog) request.getSession()
+            .getServletContext().getAttribute("catalog");]]></source></p>
 
     <p>Given the catalog, you can execute a command and pass it a context,
     like so:</p>
 
-    <p><source><![CDATA[Command command = catalog.getCommand(commandName);  
+    <p><source><![CDATA[Command<String, Object, MailReader> command =
+            catalog.getCommand(commandName);
     boolean stop = command.execute(context);]]></source></p>
 
     <p>Of course, the hard part is populating the context and determining
@@ -823,6 +835,9 @@ public class MailReader extends Hashmap implements Context {
   </section>
 
   <section name="Call a Command From Struts">
+
+    <p><em>Note: Struts documentation is out of date and does not include
+      the proper usage of the new generics API in 2.xx.</em></p>
 
     <p><em>Problem:</em> You'd like to call Commands from
     within a Struts application.</p>
@@ -1051,7 +1066,7 @@ public class CommandAction extends Action {
     this:<source><![CDATA[        String name = mapping.getParameter();
   +     if ((null==name) || (name=="")) name = mapping.getName();]]></source></p>
 
-    <p>Or you could mix and match the two approches, using CommandAction
+    <p>Or you could mix and match the two approaches, using CommandAction
     when the formbean name and the command name match, and a
     CommandParameterAction, when they do not. Struts allows you to use as many
     Actions, and standard Actions, as you like.</p>
@@ -1189,18 +1204,21 @@ public class CommandAction extends Action {
         <title>Test to assert that our Controller can process a Request and
         return an appropriate Response</title>
 
-        <p><source><![CDATA[package org.apache.commons.agility;
+        <p><source><![CDATA[package org.apache.commons.chain2.cookbook.agility;
 
-import junit.framework.TestCase; 
-import org.apache.commons.agility.impl.ControllerCatalog;
-import org.apache.commons.agility.impl.HandlerCommand;
-import org.apache.commons.agility.impl.RequestContext;
+import org.apache.commons.chain2.cookbook.agility.impl.ControllerCatalog;
+import org.apache.commons.chain2.cookbook.agility.impl.HandlerCommand;
+import org.apache.commons.chain2.cookbook.agility.impl.RequestContext;
+import org.junit.Test;
 
-public class ProcessingTest extends TestCase {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+public class ProcessingTest {
+
+    @Test
     public void testRequestResponseName() {
-        
-        String NAME = "TestProcessing"; 
+        String NAME = "TestProcessing";
 
         Controller controller = new ControllerCatalog();
 
@@ -1234,7 +1252,8 @@ public class ProcessingTest extends TestCase {
         interfaces.</title>
 
         <p><source><![CDATA[// Controller.java
-package org.apache.commons.agility;
+package org.apache.commons.chain2.cookbook.agility;
+
 public interface Controller {
     void addHandler(RequestHandler handler);
     RequestHandler getHandler(String name) throws ProcessException;
@@ -1242,7 +1261,8 @@ public interface Controller {
 }
 
 // Request.java
-package org.apache.commons.agility;
+package org.apache.commons.chain2.cookbook.agility;
+
 public interface Request {
     String getName();
     Response getResponse();
@@ -1250,21 +1270,24 @@ public interface Request {
 }
 
 // Response.java
-package org.apache.commons.agility;
+package org.apache.commons.chain2.cookbook.agility;
+
 public interface Response {
     String getName();
 }
 
 // RequestHandler.java
-package org.apache.commons.agility;
+package org.apache.commons.chain2.cookbook.agility;
+
 public interface RequestHandler {
     String getName();
     void handle(Request request) throws ProcessException;
 }
 
 // ProcessException.java
-package org.apache.commons.agility;
-public class ProcessException extends Exception {
+package org.apache.commons.chain2.cookbook.agility;
+
+public class ProcessException extends RuntimeException {
     public ProcessException(Throwable cause) {
         super(cause);
     }
@@ -1289,16 +1312,32 @@ public class ProcessException extends Exception {
         <title>HandlerCommand provides default behavior that subclasses can
         override</title>
 
-        <p><source><![CDATA[package org.apache.commons.agility.impl;
+        <p><source><![CDATA[/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.chain2.cookbook.agility.impl;
 
-import org.apache.commons.agility.ProcessException;
-import org.apache.commons.agility.Request;
-import org.apache.commons.agility.RequestHandler;
-import org.apache.commons.agility.Response;
 import org.apache.commons.chain2.Command;
-import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.cookbook.agility.ProcessException;
+import org.apache.commons.chain2.cookbook.agility.Request;
+import org.apache.commons.chain2.cookbook.agility.RequestHandler;
+import org.apache.commons.chain2.cookbook.agility.Response;
 
-public class HandlerCommand implements Command, RequestHandler {
+public class HandlerCommand implements Command<String, Object, RequestContext>,
+        RequestHandler {
     String name =  null;
 
     public HandlerCommand(String name) {
@@ -1309,11 +1348,6 @@ public class HandlerCommand implements Command, RequestHandler {
         return name;
     }
 
-    public boolean execute(Context context) throws Exception {
-        handle((Request) context);
-        return true;
-    }
-
     public void handle(Request request) throws ProcessException {
         try {
             String name = request.getName();
@@ -1322,6 +1356,12 @@ public class HandlerCommand implements Command, RequestHandler {
         } catch (Exception e) {
             throw new ProcessException(e);
         }
+    }
+
+    public boolean execute(RequestContext requestContext) {
+        handle(requestContext);
+
+        return CONTINUE_PROCESSING;
     }
 }]]></source></p>
       </example>The <code>handle(Request)</code> method of
@@ -1350,9 +1390,9 @@ public class HandlerCommand implements Command, RequestHandler {
         <title>Many other implementations of ResponseContext are possible.
         They just need to implement Response and extend ContextBase.</title>
 
-        <p><source><![CDATA[package org.apache.commons.agility.impl;
+        <p><source><![CDATA[package org.apache.commons.chain2.cookbook.agility.impl;
 
-import org.apache.commons.agility.Response;
+import org.apache.commons.chain2.cookbook.agility.Response;
 import org.apache.commons.chain2.impl.ContextBase;
 
 public class ResponseContext extends ContextBase implements Response {
@@ -1381,26 +1421,35 @@ public class ResponseContext extends ContextBase implements Response {
         <title>RequestHandlers can be added to the CatalogController
         programatically or through metadata</title>
 
-        <p><source><![CDATA[package org.apache.commons.agility.impl;
+        <p><source><![CDATA[package org.apache.commons.chain2.cookbook.agility.impl;
 
-import org.apache.commons.agility.Controller;
-import org.apache.commons.agility.ProcessException;
-import org.apache.commons.agility.Request;
-import org.apache.commons.agility.RequestHandler;
-import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.cookbook.agility.Controller;
+import org.apache.commons.chain2.cookbook.agility.ProcessException;
+import org.apache.commons.chain2.cookbook.agility.Request;
+import org.apache.commons.chain2.cookbook.agility.RequestHandler;
+import org.apache.commons.chain2.impl.CatalogBase;
 
-public class ControllerCatalog extends CatalogBase implements Controller {
+public class ControllerCatalog extends CatalogBase<String, Object, RequestContext>
+        implements Controller {
+
     public RequestHandler getHandler(String name) {
-        return (RequestHandler) getCommand(request.getName());
+        @SuppressWarnings("unchecked")
+        RequestHandler handler = (RequestHandler) getCommand(name);
+
+        return handler;
     }
 
     public void addHandler(RequestHandler handler) {
-        this.addCommand(handler.getName(), (Command) handler);
+        @SuppressWarnings("unchecked")
+        Command<String, Object, RequestContext> command =
+                (Command<String, Object, RequestContext>)handler;
+
+        this.addCommand(handler.getName(), command);
     }
 
     public void process(Request request) throws ProcessException {
-        Handler handler = getHandler(request.getName());
+        RequestHandler handler = getHandler(request.getName());
         if (handler != null) handler.handle(request);
     }
 }]]></source></p>
@@ -1430,10 +1479,10 @@ public class ControllerCatalog extends CatalogBase implements Controller {
     <p><example>
         <title>RequestContext ties it all together</title>
 
-        <p><source><![CDATA[package org.apache.commons.agility.impl;
+        <p><source><![CDATA[package org.apache.commons.chain2.cookbook.agility.impl;
 
-import org.apache.commons.agility.Request;
-import org.apache.commons.agility.Response;
+import org.apache.commons.chain2.cookbook.agility.Request;
+import org.apache.commons.chain2.cookbook.agility.Response;
 import org.apache.commons.chain2.impl.ContextBase;
 
 public class RequestContext extends ContextBase implements Request {

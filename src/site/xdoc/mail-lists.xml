@@ -22,11 +22,11 @@ limitations under the License.
  |****                    DO NOT EDIT DIRECTLY                      ****|
  |****                                                              ****|
  +======================================================================+
- | TEMPLATE FILE: mail-lists-template.xml                               |
+ | TEMPLATE FILE: mailreader-lists-template.xml                               |
  | commons-build-plugin/trunk/src/main/resources/commons-xdoc-templates |
  +======================================================================+
  |                                                                      |
- | 1) Re-generate using: mvn commons:mail-page                          |
+ | 1) Re-generate using: mvn commons:mailreader-page                          |
  |                                                                      |
  | 2) Set the following properties in the component's pom:              |
  |    - commons.componentid (required, alphabetic, lower case)          |

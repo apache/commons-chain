@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
  * @version $Revision$ $Date$
  */
 
-public class CountCommand implements Command {
+public class CountCommand implements Command<String, Object, WebContext> {
 
 
     private Log log = LogFactory.getLog(CountCommand.class);
@@ -67,13 +67,12 @@ public class CountCommand implements Command {
      * @return <code>false</code> so that processng will continue
      * @throws Exception If an error occurs during execution.
      */
-    public boolean execute(Context context) throws Exception {
+    public boolean execute(WebContext context) {
 
         count++;
         log.info("Executing: " + attribute + "=" + count);
 
-        WebContext webContext = (WebContext)context;
-        webContext.getSessionScope().put(attribute, new Integer(count));
+        context.getSessionScope().put(attribute, new Integer(count));
 
         return false;
 

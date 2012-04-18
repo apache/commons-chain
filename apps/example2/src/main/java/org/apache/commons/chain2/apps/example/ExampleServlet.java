@@ -17,6 +17,8 @@
 package org.apache.commons.chain2.apps.example;
 
 import java.io.IOException;
+import java.lang.Object;
+import java.lang.String;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +34,11 @@ import org.apache.commons.logging.LogFactory;
  * Custom chain servlet implementation.
  */
 public class ExampleServlet extends HttpServlet {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     private String servletName;
 
@@ -64,23 +71,18 @@ public class ExampleServlet extends HttpServlet {
      */
     public void service(HttpServletRequest request,
                         HttpServletResponse response)
-        throws IOException, ServletException {
-        
-        CatalogFactory factory = CatalogFactory.getInstance();
-        Catalog catalog = factory.getCatalog(servletName);
+        throws IOException {
+
+        CatalogFactory<String, Object, ServletWebContext> factory = CatalogFactory.getInstance();
+        Catalog<String, Object, ServletWebContext> catalog = factory.getCatalog(servletName);
         if (catalog == null) {
             catalog = factory.getCatalog();
         }
 
         ServletWebContext context =
             new ServletWebContext(getServletContext(), request, response);
-        Command command = catalog.getCommand("COMMAND_MAPPER");
-        try {
-            command.execute(context);
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
-
+        Command<String, Object, ServletWebContext> command = catalog.getCommand("COMMAND_MAPPER");
+        command.execute(context);
     }
 
 }
