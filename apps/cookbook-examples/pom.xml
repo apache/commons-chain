@@ -74,10 +74,10 @@
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
         <artifactId>tomcat7-maven-plugin</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <version>2.0-beta-1</version>
         <configuration>
           <!-- http port -->
-          <port>9091</port>
+          <port>8080</port>
           <path>/</path>
         </configuration>
       </plugin>
