@@ -18,6 +18,6 @@ package org.apache.commons.chain2.cookbook.agility;
 
 public interface Controller {
     void addHandler(RequestHandler handler);
-    RequestHandler getHandler(String name) throws ProcessException;
-    void process(Request request) throws ProcessException;
+    RequestHandler getHandler(String name);
+    void process(Request request);
 }

@@ -17,12 +17,12 @@
 package org.apache.commons.chain2.web.servlet;
 
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.generic.LookupCommand;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -35,7 +35,6 @@ import org.apache.commons.chain2.generic.LookupCommand;
  * "/foo.execute?command=bar" would cause the "/bar" command to be loaded
  * and executed.</p>
  *
- * @param <C> Type of the context associated with this command
  * @author Craig R. McClanahan
  */
 
@@ -150,7 +149,8 @@ public class RequestParameterMapper
         /* Assume that the returned value will be null or of a valid catalog
          * type according to chain's historical contract. */
         @SuppressWarnings("unchecked")
-        Catalog<String, Object, ServletWebContext> catalog = (Catalog<String, Object, ServletWebContext>) context.get(getCatalogKey());
+        Catalog<String, Object, ServletWebContext> catalog =
+                (Catalog<String, Object, ServletWebContext>) context.get(getCatalogKey());
 
         if (catalog == null) {
             catalog = super.getCatalog(context);

@@ -16,19 +16,18 @@
  */
 package org.apache.commons.chain2.apps.example;
 
-import java.io.IOException;
-import java.lang.Object;
-import java.lang.String;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Custom chain servlet implementation.
@@ -67,7 +66,6 @@ public class ExampleServlet extends HttpServlet {
      * @param response The response we are creating
      *
      * @exception IOException if an input/output error occurs
-     * @exception ServletException if a servlet exception occurs
      */
     public void service(HttpServletRequest request,
                         HttpServletResponse response)

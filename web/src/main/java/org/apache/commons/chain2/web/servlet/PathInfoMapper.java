@@ -17,12 +17,12 @@
 package org.apache.commons.chain2.web.servlet;
 
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.generic.LookupCommand;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -34,7 +34,6 @@ import org.apache.commons.chain2.generic.LookupCommand;
  * an environment, a request for the context-relative URI "/execute/foo"
  * would cause the "/foo" command to be loaded and executed.</p>
  *
- * @param <C> Type of the context associated with this command
  * @author Craig R. McClanahan
  */
 
@@ -125,7 +124,8 @@ public class PathInfoMapper extends LookupCommand<String, Object, ServletWebCont
         /* Assume that the object returned will be a catalog because of chain's
          * historical contract. */
         @SuppressWarnings("unchecked")
-        Catalog<String, Object, ServletWebContext> catalog = (Catalog<String, Object, ServletWebContext>) context.get(getCatalogName());
+        Catalog<String, Object, ServletWebContext> catalog =
+                (Catalog<String, Object, ServletWebContext>) context.get(getCatalogName());
         if (catalog == null) {
             catalog = super.getCatalog(context);
         }

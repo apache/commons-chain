@@ -17,18 +17,17 @@
 package org.apache.commons.chain2.web.portlet;
 
 
-import java.util.Locale;
-import javax.portlet.PortletRequest;
-
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.web.AbstractGetLocaleCommand;
+
+import javax.portlet.PortletRequest;
+import java.util.Locale;
 
 
 /**
  * <p>Concrete implementation of {@link AbstractGetLocaleCommand} for
  * the Portlet API.</p>
  *
- * @param <C> Type of the context associated with this command
  */
 
 public class PortletGetLocaleCommand
@@ -46,9 +45,8 @@ public class PortletGetLocaleCommand
      */
     protected Locale getLocale(PortletWebContext context) {
 
-    PortletRequest request = (PortletRequest)
-        context.get("request");
-    return (request.getLocale());
+        PortletRequest request = (PortletRequest)context.get("request");
+        return (request.getLocale());
 
     }
 

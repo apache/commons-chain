@@ -16,8 +16,11 @@
  */
 package org.apache.commons.chain2.impl;
 
-import static java.lang.String.format;
-import org.apache.commons.chain2.*;
+import org.apache.commons.chain2.Chain;
+import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Filter;
+import org.apache.commons.chain2.ChainException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -157,7 +160,6 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      * @param context The {@link Context} to be processed by this
      *  {@link Chain}
      *
-     * @throws Exception if thrown by one of the {@link Command}s
      *  in this {@link Chain} but not handled by a <code>postprocess()</code>
      *  method of a {@link Filter}
      * @throws IllegalArgumentException if <code>context</code>
@@ -203,7 +205,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
             i--;
         }
         boolean handled = false;
-        boolean result = false;
+        boolean result;
         for (int j = i; j >= 0; j--) {
             if (commands.get(j) instanceof Filter) {
                 try {
@@ -248,7 +250,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
 
         String msg = failedCommand == null ?
                         "An error occurred when executing the chain" :
-                        format("An error occurred when executing the command %s in the chain",
+                        String.format("An error occurred when executing the command %s in the chain",
                                failedCommand.getClass().getName());
 
         return new ChainException(msg, unhandled, context, failedCommand);

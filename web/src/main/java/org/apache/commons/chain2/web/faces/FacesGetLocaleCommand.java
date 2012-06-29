@@ -17,19 +17,16 @@
 package org.apache.commons.chain2.web.faces;
 
 
-import java.util.Locale;
-
-import javax.faces.context.FacesContext;
-
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.web.AbstractGetLocaleCommand;
+
+import javax.faces.context.FacesContext;
+import java.util.Locale;
 
 
 /**
  * <p>Concrete implementation of {@link AbstractGetLocaleCommand} for
  * the JavaServer Faces API.</p>
- *
- * @param <C> Type of the context associated with this command
  */
 
 public class FacesGetLocaleCommand
@@ -47,9 +44,9 @@ public class FacesGetLocaleCommand
      */
     protected Locale getLocale(FacesWebContext context) {
 
-    FacesContext fcontext = (FacesContext)
-        context.get("context");
-    return (fcontext.getViewRoot().getLocale());
+        FacesContext fcontext = (FacesContext)context.get("context");
+
+        return (fcontext.getViewRoot().getLocale());
 
     }
 

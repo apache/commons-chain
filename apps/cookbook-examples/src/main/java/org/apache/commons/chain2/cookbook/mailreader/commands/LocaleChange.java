@@ -31,8 +31,7 @@ public class LocaleChange implements Command<String, Object, MailReader> {
             Writer logger = mailReader.getLogger();
             logger.write("LocaleChange.execute ");
             logger.write("[Locale is: " + mailReader.getLocale() + "]\n");
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         }
 

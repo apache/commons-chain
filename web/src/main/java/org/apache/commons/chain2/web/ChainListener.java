@@ -17,15 +17,6 @@
 package org.apache.commons.chain2.web;
 
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.config.ConfigParser;
@@ -34,6 +25,14 @@ import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.apache.commons.digester3.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -58,7 +57,7 @@ import org.apache.commons.logging.LogFactory;
  *     contain <code>&lt;catalog&gt;</code> elements (which will
  *     cause registration of the created {@link Catalog}s into
  *     the {@link CatalogFactory} for this application, and no
- *     servet context attribute will be created.
+ *     servlet context attribute will be created.
  *     <strong>NOTE</strong> - This parameter is deprecated.</p>
  * <li><strong>org.apache.commons.chain2.RULE_SET</strong> -
  *     Fully qualified class name of a Digester <code>RuleSet</code>
@@ -78,7 +77,7 @@ import org.apache.commons.logging.LogFactory;
  * <li>Resources loaded from specified resource paths from the
  *     webapp's class loader (via <code>ClassLoader.getResource()</code>).</li>
  * <li>Resources loaded from specified resource paths in the web application
- *     archive (via <code>ServetContext.getResource()</code>).</li>
+ *     archive (via <code>ServletContext.getResource()</code>).</li>
  * </ul>
  *
  * <p>If no attribute key is specified, on the other hand, parsed configuration
@@ -184,7 +183,11 @@ public class ChainListener implements ServletContextListener {
         // Retrieve or create the Catalog instance we may be updating
         Catalog<String, Object, ServletWebContext> catalog = null;
         if (attr != null) {
+
+            /* Assume that we are getting an object of the type Catalog from the context's
+             * attribute because that is the historical contract. */
             catalog = (Catalog<String, Object, ServletWebContext>) context.getAttribute(attr);
+
             if (catalog == null) {
                 catalog = new CatalogBase<String, Object, ServletWebContext>();
             }
@@ -249,11 +252,11 @@ public class ChainListener implements ServletContextListener {
         if (jars == null) {
             jars = new HashSet<String>();
         }
-        String path = null;
-        Iterator<String> paths = jars.iterator();
-        while (paths.hasNext()) {
+        String path;
 
-            path = paths.next();
+        for (String jar : jars) {
+
+            path = jar;
             if (!path.endsWith(".jar")) {
                 continue;
             }
@@ -261,13 +264,13 @@ public class ChainListener implements ServletContextListener {
             try {
                 URL jarURL = context.getResource(path);
                 resourceURL = new URL("jar:"
-                                      + translate(jarURL.toExternalForm())
-                                      + "!/META-INF/chain-config.xml");
+                        + translate(jarURL.toExternalForm())
+                        + "!/META-INF/chain-config.xml");
                 InputStream is = null;
                 try {
                     is = resourceURL.openStream();
                 } catch (Exception e) {
-                      // means there is no such resource
+                    // means there is no such resource
                 }
                 if (is == null) {
                     if (log.isDebugEnabled()) {
@@ -283,77 +286,13 @@ public class ChainListener implements ServletContextListener {
                 parser.parse(resourceURL);
             } catch (Exception e) {
                 throw new RuntimeException
-                    ("Exception parsing chain config resource '"
-                     + resourceURL.toExternalForm() + "': "
-                     + e.getMessage());
+                        ("Exception parsing chain config resource '"
+                                + resourceURL.toExternalForm() + "': "
+                                + e.getMessage());
             }
         }
 
     }
-
-
-    /**
-     * <p>Parse resources found in JAR files in the <code>/WEB-INF/lib</code>
-     * subdirectory (if any).</p>
-     *
-     * @param catalog {@link Catalog} we are populating
-     * @param context <code>ServletContext</code> for this web application
-     * @param parser {@link ConfigParser} to use for parsing
-     *
-     * @deprecated Use the variant that does not take a catalog, on a
-     *  configuration resource containing "catalog" element(s)
-     */
-    @Deprecated
-    private void parseJarResources(Catalog catalog, ServletContext context,
-                                   ConfigParser parser, Log log) {
-
-        @SuppressWarnings( "unchecked" ) // it is known that always returns String inside
-        Set<String> jars = context.getResourcePaths("/WEB-INF/lib");
-        if (jars == null) {
-            jars = new HashSet<String>();
-        }
-        String path = null;
-        Iterator<String> paths = jars.iterator();
-        while (paths.hasNext()) {
-
-            path = paths.next();
-            if (!path.endsWith(".jar")) {
-                continue;
-            }
-            URL resourceURL = null;
-            try {
-                URL jarURL = context.getResource(path);
-                resourceURL = new URL("jar:"
-                                      + translate(jarURL.toExternalForm())
-                                      + "!/META-INF/chain-config.xml");
-                InputStream is = null;
-                try {
-                    is = resourceURL.openStream();
-                } catch (Exception e) {
-                      // means there is no such resource
-                }
-                if (is == null) {
-                    if (log.isDebugEnabled()) {
-                        log.debug("Not Found: " + resourceURL);
-                    }
-                    continue;
-                } else {
-                    is.close();
-                }
-                if (log.isDebugEnabled()) {
-                    log.debug("Parsing: " + resourceURL);
-                }
-                parser.parse(catalog, resourceURL);
-            } catch (Exception e) {
-                throw new RuntimeException
-                    ("Exception parsing chain config resource '"
-                     + resourceURL.toExternalForm() + "': "
-                     + e.getMessage());
-            }
-        }
-
-    }
-
 
     /**
      * <p>Translate space character into <code>&pct;20</code> to avoid problems

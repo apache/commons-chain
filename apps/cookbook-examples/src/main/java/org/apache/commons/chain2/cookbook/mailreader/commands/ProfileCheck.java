@@ -28,8 +28,7 @@ public class ProfileCheck implements Command<String, Object, MailReader> {
     public boolean execute(MailReader mailReader) {
         try {
             mailReader.getLogger().write("ProfileCheck.execute\n");
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         }
 

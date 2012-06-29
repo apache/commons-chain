@@ -49,6 +49,8 @@ import java.util.Map;
  * the <code>execute()</code> method of the {@link Chain} is first called.
  * After that, the configuration of the {@link Chain} is frozen.</p>
  *
+ * @param <K> Context key type
+ * @param <V> Context value type
  * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
@@ -105,9 +107,6 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      * @param context The {@link Context} to be processed by this
      *  {@link Chain}
      *
-     * @exception Exception if thrown by one of the {@link Command}s
-     *  in this {@link Chain} but not handled by a <code>postprocess()</code>
-     *  method of a {@link Filter}
      * @exception IllegalArgumentException if <code>context</code>
      *  is <code>null</code>
      *

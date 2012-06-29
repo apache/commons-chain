@@ -24,7 +24,7 @@ import org.apache.commons.chain2.cookbook.agility.Response;
 
 public class HandlerCommand implements Command<String, Object, RequestContext>,
         RequestHandler {
-    String name =  null;
+    private String name =  null;
 
     public HandlerCommand(String name) {
         this.name = name;
@@ -34,7 +34,7 @@ public class HandlerCommand implements Command<String, Object, RequestContext>,
         return name;
     }
 
-    public void handle(Request request) throws ProcessException {
+    public void handle(Request request) {
         try {
             String name = request.getName();
             Response response = new ResponseContext(name);

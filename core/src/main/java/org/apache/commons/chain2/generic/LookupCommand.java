@@ -17,13 +17,13 @@
 package org.apache.commons.chain2.generic;
 
 
-import java.util.Map;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Filter;
+
+import java.util.Map;
 
 
 /**
@@ -42,6 +42,8 @@ import org.apache.commons.chain2.Filter;
  * silently ignored.  Otherwise, a lookup failure will trigger an
  * <code>IllegalArgumentException</code>.</p>
  *
+ * @param <K> Context key type
+ * @param <V> Context value type
  * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
@@ -337,10 +339,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         if (command != null) {
             if (command instanceof Filter) {
                 boolean result = (((Filter<K, V, C>) command).postprocess(context, exception));
-                if (isIgnorePostprocessResult()) {
-                    return false;
-                }
-                return result;
+                return !isIgnorePostprocessResult() && result;
             }
         }
         return (false);
@@ -391,7 +390,6 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
     /**
      * <p>Return the {@link Command} instance to be delegated to.</p>
      *
-     * @param <C> Type of the context associated with this command
      * @param context {@link Context} for this request
      * @return The looked-up Command.
      * @exception IllegalArgumentException if no such {@link Command}
@@ -402,7 +400,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
 
         Catalog<K, V, C> catalog = getCatalog(context);
 
-        Command<K, V, C> command = null;
+        Command<K, V, C> command;
         String name = getCommandName(context);
         if (name != null) {
             command = catalog.getCommand(name);

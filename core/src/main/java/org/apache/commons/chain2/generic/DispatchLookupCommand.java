@@ -144,7 +144,7 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
      * @throws DispatchException if no such {@link Command} can be found and the
      *  <code>optional</code> property is set to <code>false</code>
      */
-	@Override
+    @Override
     public boolean execute(C context) {
 
         if (this.getMethod() == null && this.getMethodKey() == null) {
@@ -158,7 +158,7 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
                 Method methodObject = extractMethod(command, context);
                 Object obj = methodObject.invoke(command, getArguments(context));
 
-                Boolean result = (Boolean)obj;
+                Boolean result = (Boolean) obj;
                 return (result != null && result);
 
             } catch (NoSuchMethodException e) {
@@ -168,7 +168,7 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
             } catch (InvocationTargetException e) {
                 Throwable cause = e.getTargetException();
                 throw new DispatchException("Error in reflected dispatched command", cause, context, this);
-        }
+            }
 
         } else {
             return false;

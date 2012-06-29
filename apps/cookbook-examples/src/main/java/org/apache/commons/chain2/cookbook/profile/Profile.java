@@ -17,5 +17,5 @@
 package org.apache.commons.chain2.cookbook.profile;
 
 public class Profile {
-    public static String PROFILE_KEY = "profile";
+    public static final String PROFILE_KEY = "profile";
 }

@@ -42,12 +42,21 @@ public class ChainException extends RuntimeException {
      */
     private final Command<?, ?, ?> failedCommand;
 
+    /**
+     * Create an exception object with a message.
+     * @param message Message to associate with exception
+     */
     public ChainException(String message) {
         super(message);
         this.context = null;
         this.failedCommand = null;
     }
 
+    /**
+     * Create an exception object with a message and chain it to another exception.
+     * @param message Message to associate with exception
+     * @param cause Exception to chain to this exception
+     */
     public ChainException(String message, Throwable cause) {
         super(message, cause);
         this.context = null;
@@ -57,6 +66,9 @@ public class ChainException extends RuntimeException {
     /**
      * Constructs a new ChainException with references to the {@link Context}
      * and {@link Command} associated with the exception being wrapped (cause).
+     * @param <K> Context key type
+     * @param <V> Context value type
+     * @param <C> Type of the context associated with this command
      * @param   message   the detail message. The detail message is saved for
      *          later retrieval by the {@link #getMessage()} method.
      * @param cause the cause (which is saved for later retrieval by the

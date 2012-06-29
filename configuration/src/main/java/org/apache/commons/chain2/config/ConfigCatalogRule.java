@@ -17,12 +17,12 @@
 package org.apache.commons.chain2.config;
 
 
-import java.util.Map;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.digester3.Rule;
 import org.xml.sax.Attributes;
+
+import java.util.Map;
 
 
 /**
@@ -96,7 +96,7 @@ class ConfigCatalogRule extends Rule {
         throws Exception {
 
         // Retrieve any current Catalog with the specified name
-        Catalog<Object, Object, Map<Object, Object>> catalog = null;
+        Catalog<Object, Object, Map<Object, Object>> catalog;
         CatalogFactory<Object, Object, Map<Object, Object>> factory = CatalogFactory.getInstance();
         String nameValue = attributes.getValue(nameAttribute);
         if (nameValue == null) {
@@ -112,7 +112,9 @@ class ConfigCatalogRule extends Rule {
             /* Convert catalog pulled from digester to default generic signature
              * with the assumption that the Catalog returned from digester will
              * comply with the the historic chain contract. */
-            Catalog<Object, Object, Map<Object, Object>> digesterCatalog = (Catalog<Object, Object, Map<Object, Object>>) clazz.newInstance();
+            @SuppressWarnings("unchecked")
+            Catalog<Object, Object, Map<Object, Object>> digesterCatalog =
+                    (Catalog<Object, Object, Map<Object, Object>>) clazz.newInstance();
 
             catalog = digesterCatalog;
 

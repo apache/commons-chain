@@ -25,10 +25,9 @@ import org.apache.commons.logging.LogFactory;
 import javax.servlet.ServletException;
 import javax.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.lang.RuntimeException;
 
 /**
- * <p>Foo Command</p>
+ * <p>Forward Command</p>
  *
  * @version $Revision$ $Date$
  */
@@ -65,7 +64,6 @@ public class ForwardCommand implements Command<String, Object, ServletWebContext
      *
      * @param context The {@link Context} we are operating on
      * @return <code>false</code> so that processng will continue
-     * @throws Exception If an error occurs during execution.
      */
     public boolean execute(ServletWebContext context) {
         try {

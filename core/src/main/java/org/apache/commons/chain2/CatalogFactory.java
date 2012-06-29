@@ -16,13 +16,13 @@
  */
 package org.apache.commons.chain2;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * <p>A {@link CatalogFactory} is a class used to store and retrieve
@@ -118,7 +118,6 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      * more than one DELIMITER will cause an
      * <code>IllegalArgumentException</code> to be thrown.</p>
      *
-     * @param <C> Type of the context associated with this command
      * @param commandID the identifier of the command to return
      * @return the command located with commandID, or <code>null</code>
      *  if either the command name or the catalog name cannot be resolved
@@ -189,6 +188,9 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      * instance for each application, even if this class is loaded from
      * a shared parent class loader.</p>
      *
+     * @param <K> Context key type
+     * @param <V> Context value type
+     * @param <C> Type of the context associated with this command
      * @return the per-application singleton instance of {@link CatalogFactory}
      */
     public static <K, V, C extends Map<K, V>> CatalogFactory<K, V, C> getInstance() {

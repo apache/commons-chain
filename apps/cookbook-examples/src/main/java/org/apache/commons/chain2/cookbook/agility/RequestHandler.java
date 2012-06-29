@@ -18,5 +18,5 @@ package org.apache.commons.chain2.cookbook.agility;
 
 public interface RequestHandler {
     String getName();
-    void handle(Request request) throws ProcessException;
+    void handle(Request request);
 }

@@ -17,14 +17,14 @@
 package org.apache.commons.chain2.web.portlet;
 
 
-import java.util.Collections;
-import java.util.Map;
+import org.apache.commons.chain2.web.WebContext;
+
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.http.Cookie;
-
-import org.apache.commons.chain2.web.WebContext;
+import java.util.Collections;
+import java.util.Map;
 
 
 /**
@@ -41,7 +41,7 @@ public class PortletWebContext extends WebContext {
 
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = -6928446126906631819L;
 
@@ -374,7 +374,5 @@ public class PortletWebContext extends WebContext {
         return (sessionScope);
 
     }
-
-
 
 }

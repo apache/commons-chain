@@ -65,7 +65,6 @@ public class CountCommand implements Command<String, Object, WebContext> {
      *
      * @param context The {@link Context} we are operating on
      * @return <code>false</code> so that processng will continue
-     * @throws Exception If an error occurs during execution.
      */
     public boolean execute(WebContext context) {
 

@@ -17,12 +17,12 @@
 package org.apache.commons.chain2.config;
 
 
-import java.net.URL;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.RuleSet;
+
+import java.net.URL;
 
 
 /**
@@ -135,7 +135,11 @@ public class ConfigParser {
      * <code>RuleSet</code>, registering top level commands into the specified
      * {@link Catalog}.  Use this method <strong>only</strong> if you have
      * <strong>NOT</strong> included any <code>factory</code> element in your
-     * configuration resource, and wish to supply the catalog explictly.</p>
+     * configuration resource, and wish to supply the catalog explicitly.</p>
+     *
+     * @param <K> Context key type
+     * @param <V> Context value type
+     * @param <C> Type of the context associated with this command
      *
      * @param catalog {@link Catalog} into which configured chains are
      *  to be registered

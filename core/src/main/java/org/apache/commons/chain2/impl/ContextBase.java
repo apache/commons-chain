@@ -16,6 +16,7 @@
  */
 package org.apache.commons.chain2.impl;
 
+import org.apache.commons.chain2.Context;
 
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -29,9 +30,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.chain2.Context;
-
 
 /**
  * <p>Convenience base class for {@link Context} implementations.</p>
@@ -187,17 +185,16 @@ public class ContextBase extends ContextMap<String, Object> {
         // Case 1 -- no local properties
         if (descriptors == null) {
             return (super.containsValue(value));
-        }
 
         // Case 2 -- value found in the underlying Map
-        else if (super.containsValue(value)) {
+        } else if (super.containsValue(value)) {
             return (true);
         }
 
         // Case 3 -- check the values of our readable properties
-        for (int i = 0; i < pd.length; i++) {
-            if (pd[i].getReadMethod() != null) {
-                Object prop = readProperty(pd[i]);
+        for (PropertyDescriptor aPd : pd) {
+            if (aPd.getReadMethod() != null) {
+                Object prop = readProperty(aPd);
                 if (value == null) {
                     if (prop == null) {
                         return (true);

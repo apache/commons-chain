@@ -21,7 +21,8 @@ import org.apache.commons.chain2.impl.ContextBase;
 public class ProfileContext extends ContextBase {
     private Profile profile;
 
-    public ProfileContext() {}
+    public ProfileContext() {
+    }
 
     public Profile getProfile() {
         return profile;

@@ -23,12 +23,14 @@ import java.util.Locale;
 
 public class MailReader extends ContextBase {
 
-    public static String LOCALE_KEY = "locale";
+    public static final String LOCALE_KEY = "locale";
 
     private Writer logger;
     private Locale locale;
 
-    public MailReader() {}
+    public MailReader() {
+
+    }
 
     public Locale getLocale() {
         return locale;

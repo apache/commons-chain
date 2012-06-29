@@ -18,7 +18,6 @@ package org.apache.commons.chain2.cookbook.agility.impl;
 
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.cookbook.agility.Controller;
-import org.apache.commons.chain2.cookbook.agility.ProcessException;
 import org.apache.commons.chain2.cookbook.agility.Request;
 import org.apache.commons.chain2.cookbook.agility.RequestHandler;
 import org.apache.commons.chain2.impl.CatalogBase;
@@ -27,10 +26,8 @@ public class ControllerCatalog extends CatalogBase<String, Object, RequestContex
         implements Controller {
 
     public RequestHandler getHandler(String name) {
-        @SuppressWarnings("unchecked")
-        RequestHandler handler = (RequestHandler) getCommand(name);
 
-        return handler;
+        return (RequestHandler) getCommand(name);
     }
 
     public void addHandler(RequestHandler handler) {
@@ -41,8 +38,11 @@ public class ControllerCatalog extends CatalogBase<String, Object, RequestContex
         this.addCommand(handler.getName(), command);
     }
 
-    public void process(Request request) throws ProcessException {
+    public void process(Request request) {
         RequestHandler handler = getHandler(request.getName());
-        if (handler != null) handler.handle(request);
+
+        if (handler != null) {
+            handler.handle(request);
+        }
     }
 }

@@ -27,6 +27,9 @@ import org.apache.commons.chain2.CatalogFactory;
 /**
  * <p>A simple implementation of {@link CatalogFactory}.</p>
  *
+ * @param <K> Context key type
+ * @param <V> Context value type
+ * @param <C> Type of the context associated with this command
  * @author Sean Schofield
  * @version $Revision$ $Date$
  */
@@ -41,7 +44,8 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      * <p>Construct an empty instance of {@link CatalogFactoryBase}.  This
      * constructor is intended solely for use by {@link CatalogFactory}.</p>
      */
-    public CatalogFactoryBase() { }
+    public CatalogFactoryBase() {
+    }
 
 
     // ----------------------------------------------------- Instance Variables
@@ -95,7 +99,7 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      * @param name the name of the Catalog to retrieve
      * @return the specified Catalog
      */
-	@Override
+    @Override
     public Catalog<K, V, C> getCatalog(String name) {
 
         return catalogs.get(name);
@@ -107,12 +111,12 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      * <p>Adds a named instance of Catalog to the factory (for subsequent
      * retrieval later).</p>
      *
-     * @param name the name of the Catalog to add
+     * @param name    the name of the Catalog to add
      * @param catalog the Catalog to add
      */
     public void addCatalog(String name, Catalog<K, V, C> catalog) {
 
-            catalogs.put(name, catalog);
+        catalogs.put(name, catalog);
 
     }
 
@@ -121,11 +125,12 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      * <p>Return an <code>Iterator</code> over the set of named
      * {@link Catalog}s known to this {@link CatalogFactory}.
      * If there are no known catalogs, an empty Iterator is returned.</p>
+     *
      * @return An Iterator of the names of the Catalogs known by this factory.
      */
     public Iterator<String> getNames() {
 
-            return catalogs.keySet().iterator();
+        return catalogs.keySet().iterator();
 
     }
 

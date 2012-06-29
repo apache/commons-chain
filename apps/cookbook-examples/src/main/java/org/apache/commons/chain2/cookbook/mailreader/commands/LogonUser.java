@@ -28,8 +28,7 @@ public class LogonUser implements Command<String, Object, MailReader> {
     public boolean execute(MailReader mailReader) {
         try {
             mailReader.getLogger().write("LogonUser.execute");
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         }
 

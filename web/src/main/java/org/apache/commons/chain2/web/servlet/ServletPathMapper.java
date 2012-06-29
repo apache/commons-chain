@@ -17,12 +17,12 @@
 package org.apache.commons.chain2.web.servlet;
 
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.generic.LookupCommand;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -34,7 +34,6 @@ import org.apache.commons.chain2.generic.LookupCommand;
  * an environment, a request for a context relative URI of "/foo.execute"
  * would cause the "/foo.execute" command to be loaded and executed.</p>
  *
- * @param <C> Type of the context associated with this command
  * @author Craig R. McClanahan
  */
 
@@ -91,7 +90,7 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
      * <p>Look up the servlet path information for this request, and use it to
      * select an appropriate {@link Command} to be executed.
      *
-     * @param context Context for the current request
+     * @param swcontext Context for the current request
      * @return The name of the {@link Command} instance
      *
      * @since Chain 1.2

@@ -17,13 +17,13 @@
 package org.apache.commons.chain2.web.servlet;
 
 
-import java.util.Map;
+import org.apache.commons.chain2.web.WebContext;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.chain2.web.WebContext;
+import java.util.Map;
 
 
 /**
@@ -38,10 +38,6 @@ import org.apache.commons.chain2.web.WebContext;
 
 public class ServletWebContext extends WebContext {
 
-
-    /**
-     * 
-     */
     private static final long serialVersionUID = 5852676730841544890L;
 
 
@@ -381,7 +377,6 @@ public class ServletWebContext extends WebContext {
         return (sessionScope);
 
     }
-
 
 
 }

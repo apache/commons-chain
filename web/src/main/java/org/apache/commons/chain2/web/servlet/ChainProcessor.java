@@ -17,17 +17,16 @@
 package org.apache.commons.chain2.web.servlet;
 
 
-import java.io.IOException;
+import org.apache.commons.chain2.Catalog;
+import org.apache.commons.chain2.CatalogFactory;
+import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.web.ChainServlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.chain2.Catalog;
-import org.apache.commons.chain2.CatalogFactory;
-import org.apache.commons.chain2.Command;
-import org.apache.commons.chain2.web.ChainServlet;
+import java.io.IOException;
 
 
 /**
@@ -176,13 +175,12 @@ public class ChainProcessor extends ChainServlet {
      * @exception ServletException if a servlet exception occurs
      */
     @Override
-    public void service(HttpServletRequest request,
-                        HttpServletResponse response)
+    public void service(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
 
         ServletWebContext context =
             new ServletWebContext(getServletContext(), request, response);
-        Catalog<String, Object, ServletWebContext> theCatalog = null;
+        Catalog<String, Object, ServletWebContext> theCatalog;
 
         if (attribute != null) {
             ServletContext servletContext = getServletContext();
@@ -198,8 +196,7 @@ public class ChainProcessor extends ChainServlet {
                 Catalog<String, Object, ServletWebContext> attributeCatalog =
                      (Catalog<String, Object, ServletWebContext>)testAttribute;
                 theCatalog = attributeCatalog;
-            }
-            else {
+            } else {
                 String msg = "The object stored as the attribute [" +
                         attribute + "] was not of the expected type [" +
                         "Catalog]";
