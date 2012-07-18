@@ -47,6 +47,9 @@
     <subsection name="Configuration module">
       <p>The <i>Configuration</i> module is an auxiliary module which is able to create chains from XML configurations.</p>
 
+      <p><i>Configuration</i> APIs are included in the
+      <a href="/api-release/org/apache/commons/chain2/config/package-summary.html">org.apache.commons.chain2.config</a> package.</p>
+
       <p>Apache Maven users can import the <i>Configuration</i> module simply by declaring the following dependency:</p>
 
       <source><![CDATA[  <dependencies>
@@ -63,6 +66,9 @@
     <subsection name="Web module">
       <p>The <i>Web</i> module is an auxiliary module which is able to create chains inside a <i>Servlet container</i>,
       in a <i>Portlet</i> or embedded in a <i>Faces</i> application.</p>
+
+      <p><i>Web</i> APIs are included in the
+      <a href="/api-release/org/apache/commons/chain2/web/package-summary.html">org.apache.commons.chain2.web</a> package.</p>
 
       <p>Apache Maven users can import the <i>Web</i> module simply by declaring the following dependency:</p>
 
