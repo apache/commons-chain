@@ -129,9 +129,8 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
                 str.append(", ");
             }
         }
-        str.append("]");
 
-        return str.toString();
+        return str.append("]").toString();
     }
 
 }
