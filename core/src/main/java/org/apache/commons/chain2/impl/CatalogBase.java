@@ -121,7 +121,7 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
     @Override
     public String toString() {
         Iterator<String> names = getNames();
-        StringBuffer str = new StringBuffer("[").append(this.getClass().getName()).append(": ");
+        StringBuilder str = new StringBuilder("[").append(this.getClass().getName()).append(": ");
 
         while (names.hasNext()) {
             str.append(names.next());
