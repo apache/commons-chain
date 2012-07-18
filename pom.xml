@@ -142,7 +142,9 @@
         <version>3.2</version>
       </dependency>
     </dependencies>
-  </dependencyManagement><dependencies>
+  </dependencyManagement>
+
+  <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
