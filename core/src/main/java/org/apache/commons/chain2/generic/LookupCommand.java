@@ -279,9 +279,8 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
                 return false;
             }
             return result;
-        } else {
-            return (false);
         }
+        return (false);
     }
 
 
@@ -376,9 +375,8 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
                 }
             }
             return (command);
-        } else {
-            throw new IllegalArgumentException("No command name");
         }
+        throw new IllegalArgumentException("No command name");
     }
 
     /**
