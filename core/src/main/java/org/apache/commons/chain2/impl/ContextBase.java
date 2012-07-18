@@ -399,9 +399,8 @@ public class ContextBase extends ContextMap<String, Object> {
     private Map.Entry<String, Object> entry(String key) {
         if (containsKey(key)) {
             return (new MapEntryImpl(key, get(key)));
-        } else {
-            return (null);
         }
+        return (null);
     }
 
     /**
@@ -552,9 +551,8 @@ public class ContextBase extends ContextMap<String, Object> {
             Entry<String, Object> actual = ContextBase.this.entry(entry.getKey());
             if (actual != null) {
                 return (actual.equals(entry));
-            } else {
-                return (false);
             }
+            return (false);
         }
 
         @Override
@@ -576,14 +574,14 @@ public class ContextBase extends ContextMap<String, Object> {
                 @SuppressWarnings("unchecked")
                 Map.Entry<String, Object> entry = (Map.Entry<String, Object>) obj;
                 return (ContextBase.this.remove(entry));
-            } else {
-                return (false);
             }
+            return (false);
         }
 
         public int size() {
             return (ContextBase.this.size());
         }
+
     }
 
     /**
@@ -610,7 +608,6 @@ public class ContextBase extends ContextMap<String, Object> {
         }
 
     }
-
 
     /**
      * <p>Private implementation of <code>Map.Entry</code> for each item in
@@ -641,12 +638,10 @@ public class ContextBase extends ContextMap<String, Object> {
             if (key.equals(entry.getKey())) {
                 if (value == null) {
                     return (entry.getValue() == null);
-                } else {
-                    return (value.equals(entry.getValue()));
                 }
-            } else {
-                return (false);
+                return (value.equals(entry.getValue()));
             }
+            return (false);
         }
 
         public String getKey() {
@@ -716,9 +711,8 @@ public class ContextBase extends ContextMap<String, Object> {
                 @SuppressWarnings("unchecked")
                 Map.Entry<String, Object> entry = (Map.Entry<String, Object>) obj;
                 return (ContextBase.this.remove(entry));
-            } else {
-                return (false);
             }
+            return (false);
         }
 
         public int size() {
