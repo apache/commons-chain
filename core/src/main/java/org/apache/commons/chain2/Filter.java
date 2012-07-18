@@ -18,7 +18,6 @@ package org.apache.commons.chain2;
 
 import java.util.Map;
 
-
 /**
  * <p>A {@link Filter} is a specialized {@link Command} that also expects
  * the {@link Chain} that is executing it to call the
@@ -46,9 +45,7 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-
 public interface Filter<K, V, C extends Map<K, V>> extends Command<K, V, C> {
-
 
     /**
      * <p>Execute any cleanup activities, such as releasing resources that
@@ -69,6 +66,5 @@ public interface Filter<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      *  otherwise return <code>false</code>
      */
    boolean postprocess(C context, Exception exception);
-
 
 }

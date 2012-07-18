@@ -16,10 +16,8 @@
  */
 package org.apache.commons.chain2;
 
-
 import java.util.Iterator;
 import java.util.Map;
-
 
 /**
  * <p>A {@link Catalog} is a collection of named {@link Command}s (or
@@ -35,16 +33,13 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-
 public interface Catalog<K, V, C extends Map<K, V>> {
-
 
     /**
      * <p>A default context attribute for storing a default {@link Catalog},
      * provided as a convenience only.</p>
      */
     String CATALOG_KEY = "org.apache.commons.chain2.CATALOG";
-
 
     /**
      * <p>Add a new name and associated {@link Command} or {@link Chain}
@@ -57,7 +52,6 @@ public interface Catalog<K, V, C extends Map<K, V>> {
      */
     void addCommand(String name, Command<K, V, C> command);
 
-
     /**
      * <p>Return the {@link Command} or {@link Chain} associated with the
      * specified name, if any; otherwise, return <code>null</code>.</p>
@@ -68,8 +62,6 @@ public interface Catalog<K, V, C extends Map<K, V>> {
      */
     Command<K, V, C> getCommand(String name);
 
-
-
     /**
      * <p>Return an <code>Iterator</code> over the set of named commands
      * known to this {@link Catalog}.  If there are no known commands,
@@ -78,6 +70,4 @@ public interface Catalog<K, V, C extends Map<K, V>> {
      */
     Iterator<String> getNames();
 
-
 }
-

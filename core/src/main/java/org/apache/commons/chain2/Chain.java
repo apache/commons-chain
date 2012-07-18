@@ -18,7 +18,6 @@ package org.apache.commons.chain2;
 
 import java.util.Map;
 
-
 /**
  * <p>A {@link Chain} represents a configured list of
  * {@link Command}s that will be executed in order to perform processing
@@ -56,9 +55,7 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-
 public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
-
 
     /**
      * <p>Add a {@link Command} to the list of {@link Command}s that will
@@ -75,7 +72,6 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      *  been executed at least once, so no further configuration is allowed
      */
     void addCommand(Command<K, V, C> command);
-
 
     /**
      * <p>Execute the processing represented by this {@link Chain} according
@@ -116,6 +112,5 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      *  {@link Command} in an enclosing {@link Chain}
      */
     boolean execute(C context);
-
 
 }

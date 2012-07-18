@@ -41,9 +41,7 @@ import java.util.Map;
  * @author Sean Schofield
  * @version $Revision$ $Date$
  */
-
 public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
-
 
     /**
      * <p>Values passed to the <code>getCommand(String)</code> method should
@@ -52,9 +50,7 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      */
     public static final String DELIMITER = ":";
 
-
     // --------------------------------------------------------- Public Methods
-
 
     /**
      * <p>Gets the default instance of Catalog associated with the factory
@@ -64,14 +60,12 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      */
     public abstract Catalog<K, V, C> getCatalog();
 
-
     /**
      * <p>Sets the default instance of Catalog associated with the factory.</p>
      *
      * @param catalog the default Catalog instance
      */
     public abstract void setCatalog(Catalog<K, V, C> catalog);
-
 
     /**
      * <p>Retrieves a Catalog instance by name (if any); otherwise
@@ -82,7 +76,6 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      */
     public abstract Catalog<K, V, C> getCatalog(String name);
 
-
     /**
      * <p>Adds a named instance of Catalog to the factory (for subsequent
      * retrieval later).</p>
@@ -92,7 +85,6 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      */
     public abstract void addCatalog(String name, Catalog<K, V, C> catalog);
 
-
     /**
      * <p>Return an <code>Iterator</code> over the set of named
      * {@link Catalog}s known to this {@link CatalogFactory}.
@@ -100,7 +92,6 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      * @return An Iterator of the names of the Catalogs known by this factory.
      */
     public abstract Iterator<String> getNames();
-
 
     /**
      * <p>Return a <code>Command</code> based on the given commandID.</p>
@@ -127,7 +118,6 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      * @since Chain 1.1
      */
     public Command<K, V, C> getCommand(String commandID) {
-
         String commandName = commandID;
         String catalogName = null;
         Catalog<K, V, C> catalog = null;
@@ -162,12 +152,9 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
         }
 
         return catalog.getCommand(commandName);
-
     }
 
-
     // ------------------------------------------------------- Static Variables
-
 
     /**
      * <p>The set of registered {@link CatalogFactory} instances,
@@ -176,9 +163,7 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
     private static final Map<ClassLoader, CatalogFactory<?, ?, ? extends Map<?, ?>>> factories =
             new HashMap<ClassLoader, CatalogFactory<?, ?, ? extends Map<?, ?>>>();
 
-
     // -------------------------------------------------------- Static Methods
-
 
     /**
      * <p>Return the singleton {@link CatalogFactory} instance
@@ -194,7 +179,6 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      * @return the per-application singleton instance of {@link CatalogFactory}
      */
     public static <K, V, C extends Map<K, V>> CatalogFactory<K, V, C> getInstance() {
-
         CatalogFactory<?, ?, ? extends Map<?, ?>> factory = null;
         ClassLoader cl = getClassLoader();
         synchronized (factories) {
@@ -213,7 +197,6 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
         return result;
     }
 
-
     /**
      * <p>Clear all references to registered catalogs, as well as to the
      * relevant class loader.  This method should be called, for example,
@@ -221,16 +204,12 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      * service, to allow for garbage collection.</p>
      */
     public static void clear() {
-
         synchronized (factories) {
             factories.remove(getClassLoader());
         }
-
     }
 
-
     // ------------------------------------------------------- Private Methods
-
 
     /**
      * <p>Return the relevant <code>ClassLoader</code> to use as a Map key
@@ -238,13 +217,11 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      * that; otherwise, return the class loader that loaded this class.</p>
      */
     private static ClassLoader getClassLoader() {
-
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         if (cl == null) {
             cl = CatalogFactory.class.getClassLoader();
         }
         return cl;
-
     }
 
 }

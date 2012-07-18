@@ -18,7 +18,6 @@ package org.apache.commons.chain2;
 
 import java.util.Map;
 
-
 /**
  * <p>A {@link Command} encapsulates a unit of processing work to be
  * performed, whose purpose is to examine and/or modify the state of a
@@ -82,8 +81,8 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-
 public interface Command<K, V, C extends Map<K, V>> {
+
     /**
      * <p>Commands should return <code>CONTINUE_PROCESSING</code> if the processing
      *  of the given {@link Context} should be delegated to a subsequent

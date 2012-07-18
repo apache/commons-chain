@@ -27,6 +27,7 @@ import java.util.Map;
  * @since 2.0
  */
 public class ChainException extends RuntimeException {
+
     /**
      *
      */
@@ -102,4 +103,5 @@ public class ChainException extends RuntimeException {
     public Command<?, ?, ?> getFailedCommand() {
         return failedCommand;
     }
+
 }

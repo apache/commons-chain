@@ -16,9 +16,7 @@
  */
 package org.apache.commons.chain2;
 
-
 import java.util.Map;
-
 
 /**
  * <p>A {@link Context} represents the state information that is
@@ -61,7 +59,6 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-
 public interface Context<K, V> extends Map<K, V> {
 
     /**
