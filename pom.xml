@@ -106,14 +106,12 @@
       <id>simonetripodi</id>
       <email>simonetripodi at apache dot org</email>
     </developer>
-  </developers>
-
-  <contributors>
-    <contributor>
+    <developer>
+      <id>elijah</id>
       <name>Elijah Zupancic</name>
       <email>elijah at zupancic dot name</email>
-    </contributor>
-  </contributors>
+    </developer>
+  </developers>
 
   <properties>
     <maven.compile.source>1.5</maven.compile.source>
