@@ -34,7 +34,7 @@
       <item name="Javadoc (latest release)" href="api-release/index.html"/>
       <item name="Wiki"          href="http://wiki.apache.org/commons/Chain"/>
     </menu>
-    
+
     <menu name="Development">
       <item name="Mailing Lists"           href="/mail-lists.html"/>
       <item name="Issue Tracking"          href="/issue-tracking.html"/>
