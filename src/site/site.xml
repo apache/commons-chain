@@ -27,23 +27,22 @@
 
   <body>
     <menu name="Chain">
-      <item name="Overview"      href="/index.html"/>
-      <item name="Download"      href="http://commons.apache.org/chain/download_chain.cgi"/>
-      <item name="Release Notes" href="/changes-report.html"/>
-      <item name="Cookbook"      href="/cookbook.html"/>
-      <item name="Modules"       href="/modules.html"/>
-      <item name="Javadoc (latest release)" href="api-release/index.html"/>
-      <item name="Wiki"          href="http://wiki.apache.org/commons/Chain"/>
+      <item name="Overview"      href="/index.html" />
+      <item name="Download"      href="http://commons.apache.org/chain/download_chain.cgi" />
+      <item name="Release Notes" href="/changes-report.html" />
+      <item name="Cookbook"      href="/cookbook.html" />
+      <item name="Modules"       href="/modules.html" />
+      <item name="Javadoc (latest release)" href="api-release/index.html" />
+      <item name="Wiki"          href="http://wiki.apache.org/commons/Chain" />
     </menu>
 
     <menu name="Development">
-      <item name="Mailing Lists"           href="/mail-lists.html"/>
-      <item name="Issue Tracking"          href="/issue-tracking.html"/>
-      <item name="Source Repository"       href="/source-repository.html"/>
-      <item name="Javadoc (latest)"        href="http://commons.apache.org/chain/apidocs/index.html"/>
-      <item name="Building"                href="/building.html"/>
+      <item name="Mailing Lists"           href="/mail-lists.html" />
+      <item name="Issue Tracking"          href="/issue-tracking.html" />
+      <item name="Source Repository"       href="/source-repository.html" />
+      <item name="Javadoc (latest)"        href="http://commons.apache.org/chain/apidocs/index.html" />
+      <item name="Building"                href="/building.html" />
     </menu>
-
   </body>
 
 </project>
