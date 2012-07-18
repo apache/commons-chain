@@ -32,13 +32,12 @@ property to the number of days since the last release.
 
 The <action> type attribute can be add,update,fix,remove.
 -->
-
 <document>
   <properties>
     <title>Release Notes</title>
   </properties>
-  <body>
 
+  <body>
     <release version="2.0" description="Major release">
       <action dev="simonetripodi" type="add" issue="CHAIN-69" due-to="Elijah Zupancic">
         Fixed Checkstyle / PMD Warnings
@@ -208,6 +207,6 @@ The <action> type attribute can be add,update,fix,remove.
          Added JavaDoc and a toString() method to CatalogBase.
       </action>
     </release>
-    
   </body>
+
 </document>
