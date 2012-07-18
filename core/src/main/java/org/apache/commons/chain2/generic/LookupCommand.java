@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.generic;
 
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
@@ -24,7 +23,6 @@ import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Filter;
 
 import java.util.Map;
-
 
 /**
  * <p>Look up a specified {@link Command} (which could also be a
@@ -49,9 +47,7 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-
 public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C> {
-
 
     // -------------------------------------------------------------- Constructors
 
@@ -77,7 +73,6 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         this.catalogFactory = factory;
     }
 
-
     // -------------------------------------------------------------- Properties
 
     private CatalogFactory<K, V, C> catalogFactory = null;
@@ -101,10 +96,8 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @since Chain 1.1
      */
     public CatalogFactory<K, V, C> getCatalogFactory() {
-
         return this.catalogFactory;
     }
-
 
     private String catalogName = null;
 
@@ -114,11 +107,8 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @return The Catalog name.
      */
     public String getCatalogName() {
-
         return (this.catalogName);
-
     }
-
 
     /**
      * <p>Set the name of the {@link Catalog} to be searched, or
@@ -127,14 +117,10 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @param catalogName The new {@link Catalog} name or <code>null</code>
      */
     public void setCatalogName(String catalogName) {
-
         this.catalogName = catalogName;
-
     }
 
-
     private String name = null;
-
 
     /**
      * <p>Return the name of the {@link Command} that we will look up and
@@ -142,11 +128,8 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @return The name of the Command.
      */
     public String getName() {
-
         return (this.name);
-
     }
-
 
     /**
      * <p>Set the name of the {@link Command} that we will look up and
@@ -155,14 +138,10 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @param name The new command name
      */
     public void setName(String name) {
-
         this.name = name;
-
     }
 
-
     private String nameKey = null;
-
 
     /**
      * <p>Return the context attribute key under which the {@link Command}
@@ -170,11 +149,8 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @return The context key of the Command.
      */
     public String getNameKey() {
-
         return (this.nameKey);
-
     }
-
 
     /**
      * <p>Set the context attribute key under which the {@link Command}
@@ -183,14 +159,10 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @param nameKey The new context attribute key
      */
     public void setNameKey(String nameKey) {
-
         this.nameKey = nameKey;
-
     }
 
-
     private boolean optional = false;
-
 
     /**
      * <p>Return <code>true</code> if locating the specified command
@@ -198,11 +170,8 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @return <code>true</code> if the Command is optional.
      */
     public boolean isOptional() {
-
         return (this.optional);
-
     }
-
 
     /**
      * <p>Set the optional flag for finding the specified command.</p>
@@ -210,9 +179,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @param optional The new optional flag
      */
     public void setOptional(boolean optional) {
-
         this.optional = optional;
-
     }
 
     private boolean ignoreExecuteResult = false;
@@ -281,8 +248,8 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
     public void setIgnorePostprocessResult(boolean ignorePostprocessResult) {
         this.ignorePostprocessResult = ignorePostprocessResult;
     }
-    // ---------------------------------------------------------- Filter Methods
 
+    // ---------------------------------------------------------- Filter Methods
 
     /**
      * <p>Look up the specified command, and (if found) execute it.
@@ -305,7 +272,6 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @throws org.apache.commons.chain2.ChainException if and error occurs in the looked-up Command.
      */
     public boolean execute(C context) {
-
         Command<K, V, C> command = getCommand(context);
         if (command != null) {
             boolean result = (command.execute(context));
@@ -316,7 +282,6 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         } else {
             return (false);
         }
-
     }
 
 
@@ -334,7 +299,6 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * case <code>IllegalArgumentException</code> will be thrown.
      */
     public boolean postprocess(C context, Exception exception) {
-
         Command<K, V, C> command = getCommand(context);
         if (command != null) {
             if (command instanceof Filter) {
@@ -343,12 +307,9 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
             }
         }
         return (false);
-
     }
 
-
     // --------------------------------------------------------- Private Methods
-
 
     /**
      * <p>Return the {@link Catalog} to look up the {@link Command} in.</p>
@@ -397,7 +358,6 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      *  to <code>false</code>
      */
     protected Command<K, V, C> getCommand(C context) {
-
         Catalog<K, V, C> catalog = getCatalog(context);
 
         Command<K, V, C> command;
@@ -419,7 +379,6 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         } else {
             throw new IllegalArgumentException("No command name");
         }
-
     }
 
     /**
@@ -431,13 +390,11 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @since Chain 1.2
      */
     protected String getCommandName(C context) {
-
         String name = getName();
         if (name == null) {
             name = (String) context.get(getNameKey());
         }
         return name;
-
     }
 
 }

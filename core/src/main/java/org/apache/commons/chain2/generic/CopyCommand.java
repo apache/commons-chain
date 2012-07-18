@@ -16,12 +16,10 @@
  */
 package org.apache.commons.chain2.generic;
 
-
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 
 import java.util.Map;
-
 
 /**
  * <p>Copy a specified literal value, or a context attribute stored under
@@ -34,26 +32,19 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-
 public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> {
-
 
     // -------------------------------------------------------------- Properties
 
-
     private K fromKey = null;
-
 
     /**
      * <p>Return the context attribute key for the source attribute.</p>
      * @return The source attribute key.
      */
     public K getFromKey() {
-
-    return (this.fromKey);
-
+        return (this.fromKey);
     }
-
 
     /**
      * <p>Set the context attribute key for the source attribute.</p>
@@ -61,25 +52,18 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
      * @param fromKey The new key
      */
     public void setFromKey(K fromKey) {
-
-    this.fromKey = fromKey;
-
+        this.fromKey = fromKey;
     }
 
-
     private K toKey = null;
-
 
     /**
      * <p>Return the context attribute key for the destination attribute.</p>
      * @return The destination attribute key.
      */
     public K getToKey() {
-
-    return (this.toKey);
-
+        return (this.toKey);
     }
-
 
     /**
      * <p>Set the context attribute key for the destination attribute.</p>
@@ -87,25 +71,18 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
      * @param toKey The new key
      */
     public void setToKey(K toKey) {
-
-    this.toKey = toKey;
-
+        this.toKey = toKey;
     }
 
-
     private V value = null;
-
 
     /**
      * <p>Return the literal value to be copied.</p>
      * @return The literal value.
      */
     public V getValue() {
-
         return (this.value);
-
     }
-
 
     /**
      * <p>Set the literal value to be copied.</p>
@@ -113,14 +90,10 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
      * @param value The new value
      */
     public void setValue(V value) {
-
         this.value = value;
-
     }
 
-
     // ---------------------------------------------------------- Filter Methods
-
 
     /**
      * <p>Copy a specified literal value, or a context attribute stored under
@@ -132,7 +105,6 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
      * @throws org.apache.commons.chain2.ChainException in the if an error occurs during execution.
      */
     public boolean execute(C context) {
-
         V value = this.value;
 
         if (value == null) {
@@ -146,8 +118,6 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
         }
 
         return (false);
-
     }
-
 
 }

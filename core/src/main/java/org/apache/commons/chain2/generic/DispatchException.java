@@ -29,6 +29,7 @@ import org.apache.commons.chain2.Command;
  * @version $Id$
  */
 public class DispatchException extends ChainException {
+
     /**
      *
      */
@@ -46,4 +47,5 @@ public class DispatchException extends ChainException {
                                                          C context, Command<K, V, C> failedCommand) {
         super(message, cause, context, failedCommand);
     }
+
 }

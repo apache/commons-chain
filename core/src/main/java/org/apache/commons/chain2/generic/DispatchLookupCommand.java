@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.generic;
 
-
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
@@ -57,7 +56,6 @@ import java.util.WeakHashMap;
  * @version $Revision$
  * @since Chain 1.1
  */
-
 public class DispatchLookupCommand<K, V, C extends Context<K, V>>
     extends LookupCommand<K, V, C> implements Filter<K, V, C> {
 
@@ -85,18 +83,16 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
      * The base implementation expects dispatch methods to take a <code>
      * Context</code> as their only argument.
      */
-    private static final Class<?>[] DEFAULT_SIGNATURE =
-        new Class<?>[] {Context.class};
-
+    private static final Class<?>[] DEFAULT_SIGNATURE = new Class<?>[] {Context.class};
 
     // ----------------------------------------------------- Instance Variables
 
     private final WeakHashMap<String, Method> methods = new WeakHashMap<String, Method>();
 
-
     // ------------------------------------------------------------- Properties
 
     private String method = null;
+
     private String methodKey = null;
 
     /**
@@ -131,7 +127,6 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
         this.methodKey = methodKey;
     }
 
-
     // --------------------------------------------------------- Public Methods
 
     /**
@@ -146,7 +141,6 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
      */
     @Override
     public boolean execute(C context) {
-
         if (this.getMethod() == null && this.getMethodKey() == null) {
             throw new IllegalStateException("Neither 'method' nor 'methodKey' properties are defined");
         }
@@ -160,7 +154,6 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
 
                 Boolean result = (Boolean) obj;
                 return (result != null && result);
-
             } catch (NoSuchMethodException e) {
                 throw new DispatchException("Error extracting method from context", e, context, this);
             } catch (IllegalAccessException e) {
@@ -169,13 +162,10 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
                 Throwable cause = e.getTargetException();
                 throw new DispatchException("Error in reflected dispatched command", cause, context, this);
             }
-
         } else {
             return false;
         }
-
     }
-
 
     // ------------------------------------------------------ Protected Methods
 
@@ -206,9 +196,7 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
         return new Object[] {context};
     }
 
-
     // -------------------------------------------------------- Private Methods
-
 
     /**
      * Extract the dispatch method.  The base implementation uses the
@@ -225,20 +213,16 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
      *    specified name.
      * @throws NullPointerException if no methodName can be determined
      */
-    private Method extractMethod(Command<K, V, C> command, C context)
-        throws NoSuchMethodException {
-
+    private Method extractMethod(Command<K, V, C> command, C context) throws NoSuchMethodException {
         String methodName = this.getMethod();
 
         if (methodName == null) {
             Object methodContextObj = context.get(getMethodKey());
             if (methodContextObj == null) {
-                throw new NullPointerException("No value found in context under " +
-                                               getMethodKey());
+                throw new NullPointerException("No value found in context under " + getMethodKey());
             }
             methodName = methodContextObj.toString();
         }
-
 
         Method theMethod = null;
 

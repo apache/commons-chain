@@ -52,7 +52,6 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
      */
     protected static final Class<?>[] DEFAULT_SIGNATURE = new Class<?>[] {Context.class};
 
-
     /**
      * Look up the method specified by either "method" or "methodKey" and invoke it,
      * returning a boolean value as interpreted by <code>evaluateResult</code>.
@@ -65,13 +64,11 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
      * which is not an <code>Exception</code>.
      */
     public boolean execute(C context) {
-
         if (this.getMethod() == null && this.getMethodKey() == null) {
             throw new IllegalStateException("Neither 'method' nor 'methodKey' properties are defined ");
         }
 
         try {
-
             Method methodObject = extractMethod(context);
             return evaluateResult(methodObject.invoke(this,
                     getArguments(context)));
@@ -97,7 +94,6 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
      * @throws NullPointerException if no methodName cannot be determined
      */
     protected Method extractMethod(C context) throws NoSuchMethodException {
-
         String methodName = this.getMethod();
 
         if (methodName == null) {
@@ -107,7 +103,6 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
             }
             methodName = methodContextObj.toString();
         }
-
 
         Method theMethod = null;
 
@@ -131,10 +126,8 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
      * @return The evaluated result/
      */
     protected boolean evaluateResult(Object o) {
-
         Boolean result = (Boolean) o;
         return (result != null && result.booleanValue());
-
     }
 
     /**

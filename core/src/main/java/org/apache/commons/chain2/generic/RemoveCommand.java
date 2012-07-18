@@ -16,10 +16,8 @@
  */
 package org.apache.commons.chain2.generic;
 
-
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
-
 
 /**
  * <p>Remove any context attribute stored under the <code>fromKey</code>.</p>
@@ -31,26 +29,19 @@ import org.apache.commons.chain2.Context;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-
 public class RemoveCommand<K, V, C extends Context<K, V>> implements Command<K, V, C> {
-
 
     // -------------------------------------------------------------- Properties
 
-
     private K fromKey = null;
-
 
     /**
      * <p>Return the context attribute key for the attribute.</p>
      * @return The context attribute key.
      */
     public K getFromKey() {
-
-    return (this.fromKey);
-
+        return (this.fromKey);
     }
-
 
     /**
      * <p>Set the context attribute key for the attribute.</p>
@@ -58,14 +49,10 @@ public class RemoveCommand<K, V, C extends Context<K, V>> implements Command<K, 
      * @param fromKey The new key
      */
     public void setFromKey(K fromKey) {
-
-    this.fromKey = fromKey;
-
+        this.fromKey = fromKey;
     }
 
-
     // ---------------------------------------------------------- Filter Methods
-
 
     /**
      * <p>Copy the specified source attribute to the specified destination
@@ -77,11 +64,8 @@ public class RemoveCommand<K, V, C extends Context<K, V>> implements Command<K, 
      * @throws org.apache.commons.chain2.ChainException if and error occurs.
      */
     public boolean execute(C context) {
-
-    context.remove(getFromKey());
-    return (false);
-
+        context.remove(getFromKey());
+        return (false);
     }
-
 
 }
