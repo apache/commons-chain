@@ -203,9 +203,8 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
             // Wrap and rethrow exception
             throw wrapUnhandledExceptions(saveException, context,
                     lastCommand);
-        } else {
-            return (saveResult);
         }
+        return (saveResult);
     }
 
     /**
