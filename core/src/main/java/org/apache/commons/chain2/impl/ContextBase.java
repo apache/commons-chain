@@ -48,29 +48,22 @@ import java.util.Set;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-
 public class ContextBase extends ContextMap<String, Object> {
 
-
     // ------------------------------------------------------------ Constructors
-
 
     /**
      *
      */
     private static final long serialVersionUID = -3137668177106072122L;
 
-
     /**
      * Default, no argument constructor.
      */
     public ContextBase() {
-
         super();
         initialize();
-
     }
-
 
     /**
      * <p>Initialize the contents of this {@link Context} by copying the
@@ -86,16 +79,12 @@ public class ContextBase extends ContextMap<String, Object> {
      *  have a write method.
      */
     public ContextBase(Map<? extends String, ? extends Object> map) {
-
         super(map);
         initialize();
         putAll(map);
-
     }
 
-
     // ------------------------------------------------------ Instance Variables
-
 
     // NOTE - PropertyDescriptor instances are not Serializable, so the
     // following variables must be declared as transient.  When a ContextBase
@@ -111,12 +100,10 @@ public class ContextBase extends ContextMap<String, Object> {
      */
     private transient Map<String, PropertyDescriptor> descriptors = null;
 
-
     /**
      * <p>The same <code>PropertyDescriptor</code>s as an array.</p>
      */
     private transient PropertyDescriptor[] pd = null;
-
 
     /**
      * <p>Distinguished singleton value that is stored in the map for each
@@ -126,7 +113,6 @@ public class ContextBase extends ContextMap<String, Object> {
     private static final Object singleton;
 
     static {
-
         singleton = new Serializable() {
                 private static final long serialVersionUID = -6023767081282668587L;
 
@@ -134,9 +120,7 @@ public class ContextBase extends ContextMap<String, Object> {
                     return (false);
                 }
             };
-
     }
-
 
     /**
      * <p>Zero-length array of parameter values for calling property getters.
@@ -144,16 +128,13 @@ public class ContextBase extends ContextMap<String, Object> {
      */
     private static Object[] zeroParams = new Object[0];
 
-
     // ------------------------------------------------------------- Map Methods
-
 
     /**
      * <p>Override the default <code>Map</code> behavior to clear all keys and
      * values except those corresponding to JavaBeans properties.</p>
      */
     public void clear() {
-
         if (descriptors == null) {
             super.clear();
         } else {
@@ -165,9 +146,7 @@ public class ContextBase extends ContextMap<String, Object> {
                 }
             }
         }
-
     }
-
 
     /**
      * <p>Override the default <code>Map</code> behavior to return
@@ -181,7 +160,6 @@ public class ContextBase extends ContextMap<String, Object> {
      *  throws an exception
      */
     public boolean containsValue(Object value) {
-
         // Case 1 -- no local properties
         if (descriptors == null) {
             return (super.containsValue(value));
@@ -205,9 +183,7 @@ public class ContextBase extends ContextMap<String, Object> {
             }
         }
         return (false);
-
     }
-
 
     /**
      * <p>Override the default <code>Map</code> behavior to return a
@@ -219,11 +195,8 @@ public class ContextBase extends ContextMap<String, Object> {
      * @return Set of entries in the Context.
      */
     public Set<Entry<String, Object>> entrySet() {
-
         return (new EntrySetImpl());
-
     }
-
 
     /**
      * <p>Override the default <code>Map</code> behavior to return the value
@@ -244,7 +217,6 @@ public class ContextBase extends ContextMap<String, Object> {
      *  have a read method.
      */
     public Object get(Object key) {
-
         // Case 1 -- no local properties
         if (descriptors == null) {
             return (super.get(key));
@@ -264,9 +236,7 @@ public class ContextBase extends ContextMap<String, Object> {
 
         // Case 3 -- retrieve value from our underlying Map
         return (super.get(key));
-
     }
-
 
     /**
      * <p>Override the default <code>Map</code> behavior to return
@@ -277,7 +247,6 @@ public class ContextBase extends ContextMap<String, Object> {
      *  <code>false</code>.
      */
     public boolean isEmpty() {
-
         // Case 1 -- no local properties
         if (descriptors == null) {
             return (super.isEmpty());
@@ -285,9 +254,7 @@ public class ContextBase extends ContextMap<String, Object> {
 
         // Case 2 -- compare key count to property count
         return (super.size() <= descriptors.size());
-
     }
-
 
     /**
      * <p>Override the default <code>Map</code> behavior to return a
@@ -299,12 +266,8 @@ public class ContextBase extends ContextMap<String, Object> {
      * @return The set of keys for objects in this Context.
      */
     public Set<String> keySet() {
-
-
         return (super.keySet());
-
     }
-
 
     /**
      * <p>Override the default <code>Map</code> behavior to set the value
@@ -353,9 +316,7 @@ public class ContextBase extends ContextMap<String, Object> {
 
         // Case 3 -- store or replace value in our underlying map
         return (super.put(key, value));
-
     }
-
 
     /**
      * <p>Override the default <code>Map</code> behavior to call the
@@ -371,13 +332,10 @@ public class ContextBase extends ContextMap<String, Object> {
      *  have both a read method and a write method
      */
     public void putAll(Map<? extends String, ? extends Object> map) {
-
         for (Entry<? extends String, ? extends Object> pair : map.entrySet()) {
             put(pair.getKey(), pair.getValue());
         }
-
     }
-
 
     /**
      * <p>Override the default <code>Map</code> behavior to throw
@@ -391,7 +349,6 @@ public class ContextBase extends ContextMap<String, Object> {
      *  <code>key</code> matches the name of a local property
      */
     public Object remove(Object key) {
-
         // Case 1 -- no local properties
         if (descriptors == null) {
             return (super.remove(key));
@@ -408,9 +365,7 @@ public class ContextBase extends ContextMap<String, Object> {
 
         // Case 3 -- remove from underlying Map
         return (super.remove(key));
-
     }
-
 
     /**
      * <p>Override the default <code>Map</code> behavior to return a
@@ -422,25 +377,18 @@ public class ContextBase extends ContextMap<String, Object> {
      * @return The collection of values in this Context.
      */
     public Collection<Object> values() {
-
         return (new ValuesImpl());
-
     }
 
-
     // --------------------------------------------------------- Private Methods
-
 
     /**
      * <p>Return an <code>Iterator</code> over the set of <code>Map.Entry</code>
      * objects representing our key-value pairs.</p>
      */
     private Iterator<Entry<String, Object>> entriesIterator() {
-
         return (new EntrySetIterator());
-
     }
-
 
     /**
      * <p>Return a <code>Map.Entry</code> for the specified key value, if it
@@ -449,15 +397,12 @@ public class ContextBase extends ContextMap<String, Object> {
      * @param key Attribute key or property name
      */
     private Map.Entry<String, Object> entry(String key) {
-
         if (containsKey(key)) {
             return (new MapEntryImpl(key, get(key)));
         } else {
             return (null);
         }
-
     }
-
 
     /**
      * <p>Customize the contents of our underlying <code>Map</code> so that
@@ -471,7 +416,6 @@ public class ContextBase extends ContextMap<String, Object> {
      *  have a write method.
      */
     private void initialize() {
-
         // Retrieve the set of property descriptors for this Context class
         try {
             pd = Introspector.getBeanInfo
@@ -493,9 +437,7 @@ public class ContextBase extends ContextMap<String, Object> {
                 super.put(name, singleton);
             }
         }
-
     }
-
 
     /**
      * <p>Get and return the value for the specified property.</p>
@@ -509,7 +451,6 @@ public class ContextBase extends ContextMap<String, Object> {
      *  have a read method.
      */
     private Object readProperty(PropertyDescriptor descriptor) {
-
         try {
             Method method = descriptor.getReadMethod();
             if (method == null) {
@@ -523,9 +464,7 @@ public class ContextBase extends ContextMap<String, Object> {
                 ("Exception reading property '" + descriptor.getName()
                  + "': " + e.getMessage());
         }
-
     }
-
 
     /**
      * <p>Remove the specified key-value pair, if it exists, and return
@@ -538,7 +477,6 @@ public class ContextBase extends ContextMap<String, Object> {
      *  identifies a property instead of an attribute
      */
     private boolean remove(Map.Entry<String, Object> entry) {
-
         Map.Entry<String, Object> actual = entry(entry.getKey());
         if (actual == null) {
             return (false);
@@ -548,20 +486,15 @@ public class ContextBase extends ContextMap<String, Object> {
             remove(entry.getKey());
             return (true);
         }
-
     }
-
 
     /**
      * <p>Return an <code>Iterator</code> over the set of values in this
      * <code>Map</code>.</p>
      */
     private Iterator<Object> valuesIterator() {
-
         return (new ValuesIterator());
-
     }
-
 
     /**
      * <p>Set the value for the specified property.</p>
@@ -577,7 +510,6 @@ public class ContextBase extends ContextMap<String, Object> {
      *  have a write method.
      */
     private void writeProperty(PropertyDescriptor descriptor, Object value) {
-
         try {
             Method method = descriptor.getWriteMethod();
             if (method == null) {
@@ -591,12 +523,9 @@ public class ContextBase extends ContextMap<String, Object> {
                 ("Exception writing property '" + descriptor.getName()
                  + "': " + e.getMessage());
         }
-
     }
 
-
     // --------------------------------------------------------- Private Classes
-
 
     /**
      * <p>Private implementation of <code>Set</code> that implements the
@@ -655,9 +584,7 @@ public class ContextBase extends ContextMap<String, Object> {
         public int size() {
             return (ContextBase.this.size());
         }
-
     }
-
 
     /**
      * <p>Private implementation of <code>Iterator</code> for the
@@ -666,6 +593,7 @@ public class ContextBase extends ContextMap<String, Object> {
     private class EntrySetIterator implements Iterator<Entry<String, Object>> {
 
         private Map.Entry<String, Object> entry = null;
+
         private Iterator<String> keys = ContextBase.this.keySet().iterator();
 
         public boolean hasNext() {
@@ -696,6 +624,7 @@ public class ContextBase extends ContextMap<String, Object> {
         }
 
         private String key;
+
         private Object value;
 
         @Override
@@ -806,6 +735,7 @@ public class ContextBase extends ContextMap<String, Object> {
     private class ValuesIterator implements Iterator<Object> {
 
         private Map.Entry<String, Object> entry = null;
+
         private Iterator<String> keys = ContextBase.this.keySet().iterator();
 
         public boolean hasNext() {
@@ -822,6 +752,5 @@ public class ContextBase extends ContextMap<String, Object> {
         }
 
     }
-
 
 }

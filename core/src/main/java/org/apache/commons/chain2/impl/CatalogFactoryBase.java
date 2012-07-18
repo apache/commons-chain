@@ -33,12 +33,9 @@ import org.apache.commons.chain2.CatalogFactory;
  * @author Sean Schofield
  * @version $Revision$ $Date$
  */
-
 public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactory<K, V, C> {
 
-
     // ----------------------------------------------------------- Constructors
-
 
     /**
      * <p>Construct an empty instance of {@link CatalogFactoryBase}.  This
@@ -47,25 +44,19 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
     public CatalogFactoryBase() {
     }
 
-
     // ----------------------------------------------------- Instance Variables
-
 
     /**
      * <p>The default {@link Catalog} for this {@link CatalogFactory}.</p>
      */
     private Catalog<K, V, C> catalog = null;
 
-
     /**
      * <p>Map of named {@link Catalog}s, keyed by catalog name.</p>
      */
-    private final Map<String, Catalog<K, V, C>> catalogs =
-            new ConcurrentHashMap<String, Catalog<K, V, C>>();
-
+    private final Map<String, Catalog<K, V, C>> catalogs = new ConcurrentHashMap<String, Catalog<K, V, C>>();
 
     // --------------------------------------------------------- Public Methods
-
 
     /**
      * <p>Gets the default instance of Catalog associated with the factory
@@ -74,11 +65,8 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      * @return the default Catalog instance
      */
     public Catalog<K, V, C> getCatalog() {
-
         return catalog;
-
     }
-
 
     /**
      * <p>Sets the default instance of Catalog associated with the factory.</p>
@@ -86,11 +74,8 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      * @param catalog the default Catalog instance
      */
     public void setCatalog(Catalog<K, V, C> catalog) {
-
         this.catalog = catalog;
-
     }
-
 
     /**
      * <p>Retrieves a Catalog instance by name (if any); otherwise
@@ -101,11 +86,8 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      */
     @Override
     public Catalog<K, V, C> getCatalog(String name) {
-
         return catalogs.get(name);
-
     }
-
 
     /**
      * <p>Adds a named instance of Catalog to the factory (for subsequent
@@ -115,11 +97,8 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      * @param catalog the Catalog to add
      */
     public void addCatalog(String name, Catalog<K, V, C> catalog) {
-
         catalogs.put(name, catalog);
-
     }
-
 
     /**
      * <p>Return an <code>Iterator</code> over the set of named
@@ -129,10 +108,7 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      * @return An Iterator of the names of the Catalogs known by this factory.
      */
     public Iterator<String> getNames() {
-
         return catalogs.keySet().iterator();
-
     }
-
 
 }

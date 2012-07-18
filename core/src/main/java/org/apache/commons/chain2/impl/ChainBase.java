@@ -27,7 +27,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * <p>Convenience base class for {@link Chain} implementations.</p>
  *
@@ -38,20 +37,15 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
-
 public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
 
-
     // ----------------------------------------------------------- Constructors
-
 
     /**
      * <p>Construct a {@link Chain} with no configured {@link Command}s.</p>
      */
     public ChainBase() {
-
     }
-
 
     /**
      * <p>Construct a {@link Chain} configured with the specified
@@ -63,11 +57,8 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      *  is <code>null</code>
      */
     public ChainBase(Command<K, V, C> command) {
-
         addCommand(command);
-
     }
-
 
     /**
      * <p>Construct a {@link Chain} configured with the specified
@@ -80,16 +71,13 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      *  is <code>null</code>
      */
     public ChainBase(Command<K, V, C>[] commands) {
-
         if (commands == null) {
             throw new IllegalArgumentException();
         }
         for (int i = 0; i < commands.length; i++) {
             addCommand(commands[i]);
         }
-
     }
-
 
     /**
      * <p>Construct a {@link Chain} configured with the specified
@@ -102,17 +90,13 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      *  is <code>null</code>
      */
     public ChainBase(Collection<Command<K, V, C>> commands) {
-
         if (commands == null) {
             throw new IllegalArgumentException();
         }
         this.commands.addAll( commands );
-
     }
 
-
     // ----------------------------------------------------- Instance Variables
-
 
     /**
      * <p>The list of {@link Command}s configured for this {@link Chain}, in
@@ -121,16 +105,13 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      */
     private final List<Command<K, V, C>> commands = new ArrayList<Command<K, V, C>>();
 
-
     /**
      * <p>Flag indicating whether the configuration of our commands list
      * has been frozen by a call to the <code>execute()</code> method.</p>
      */
     private boolean frozen = false;
 
-
     // ---------------------------------------------------------- Chain Methods
-
 
     /**
      * See the {@link Chain} JavaDoc.
@@ -142,7 +123,6 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      * @exception IllegalStateException if no further configuration is allowed
      */
     public void addCommand(Command<K, V, C> command) {
-
         if (command == null) {
             throw new IllegalArgumentException();
         }
@@ -150,9 +130,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
             throw new IllegalStateException();
         }
         commands.add( command );
-
     }
-
 
     /**
      * See the {@link Chain} JavaDoc.
@@ -171,7 +149,6 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      *  {@link Command} in an enclosing {@link Chain}
      */
     public boolean execute(C context) {
-
         // Verify our parameters
         if (context == null) {
             throw new IllegalArgumentException("Can't execute a null context");
@@ -229,7 +206,6 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
         } else {
             return (saveResult);
         }
-
     }
 
     /**
@@ -272,17 +248,13 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
 
     // -------------------------------------------------------- Package Methods
 
-
     /**
      * <p>Return an array of the configured {@link Command}s for this
      * {@link Chain}.  This method is package private, and is used only
      * for the unit tests.</p>
      */
     List<Command<K, V, C>> getCommands() {
-
         return (commands);
-
     }
-
 
 }

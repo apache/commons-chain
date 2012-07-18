@@ -25,7 +25,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
 
-
 /**
  * <p>Simple in-memory implementation of {@link Catalog}.  This class can
  * also be used as the basis for more advanced implementations.</p>
@@ -40,19 +39,14 @@ import org.apache.commons.chain2.Command;
  * @author Matthew J. Sgarlata
  * @version $Revision$ $Date$
  */
-
 public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> {
 
-
     // ----------------------------------------------------- Instance Variables
-
 
     /**
      * <p>The map of named {@link Command}s, keyed by name.
      */
-    private final Map<String, Command<K, V, C>> commands =
-            new ConcurrentHashMap<String, Command<K, V, C>>();
-
+    private final Map<String, Command<K, V, C>> commands = new ConcurrentHashMap<String, Command<K, V, C>>();
 
     // --------------------------------------------------------- Constructors
 
@@ -75,7 +69,6 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
 
     // --------------------------------------------------------- Public Methods
 
-
     /**
      * <p>Add a new name and associated {@link Command}
      * to the set of named commands known to this {@link Catalog},
@@ -86,9 +79,7 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
      *  for later lookups on this name
      */
     public void addCommand(String name, Command<K, V, C> command) {
-
         commands.put(name, command);
-
     }
 
     /**
@@ -100,9 +91,7 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
      * @return The Command associated with the specified name.
      */
     public Command<K, V, C> getCommand(String name) {
-
         return commands.get(name);
-
     }
 
     /**
@@ -122,9 +111,7 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
      * @return An iterator of the names in this Catalog.
      */
     public Iterator<String> getNames() {
-
         return commands.keySet().iterator();
-
     }
 
     /**
@@ -133,7 +120,6 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
      */
     @Override
     public String toString() {
-
         Iterator<String> names = getNames();
         StringBuffer str =
             new StringBuffer("[" + this.getClass().getName() + ": ");
@@ -141,12 +127,12 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
         while (names.hasNext()) {
             str.append(names.next());
             if (names.hasNext()) {
-            str.append(", ");
+                str.append(", ");
             }
         }
         str.append("]");
 
         return str.toString();
-
     }
+
 }
