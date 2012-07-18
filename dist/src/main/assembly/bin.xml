@@ -24,15 +24,21 @@
   </formats>
   <baseDirectory>${project.build.finalName}-bin</baseDirectory>
   <includeSiteDirectory>false</includeSiteDirectory>
+  <!-- Use the N&L files which apply to the included dependencies -->
+  <files>
+    <file>
+      <source>${basedir}/src/main/assembly/LICENSE-with-deps.txt</source>
+      <destName>LICENSE.txt</destName>
+    </file>
+    <file>
+      <source>${basedir}/src/main/assembly/NOTICE-with-deps.txt</source>
+      <destName>NOTICE.txt</destName>
+    </file>
+    <file>
+      <source>${basedir}/../RELEASE-NOTES.txt</source>
+    </file>
+  </files>
   <fileSets>
-    <fileSet>
-      <directory>${basedir}/../</directory>
-      <includes>
-        <include>LICENSE.txt</include>
-        <include>NOTICE.txt</include>
-        <include>RELEASE-NOTES.txt</include>
-      </includes>
-    </fileSet>
     <fileSet>
       <directory>${basedir}/../target/site/apidocs</directory>
       <outputDirectory>apidocs</outputDirectory>
@@ -42,7 +48,7 @@
   <dependencySets>
     <dependencySet>
       <useProjectArtifact>false</useProjectArtifact>
-      <useTransitiveDependencies>false</useTransitiveDependencies>
+      <useTransitiveDependencies>true</useTransitiveDependencies>
     </dependencySet>
   </dependencySets>
 </assembly>
