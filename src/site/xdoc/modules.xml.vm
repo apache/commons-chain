@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<document>
+
+  <properties>
+    <title>Commons Chain modules</title>
+    <author email="dev@commons.apache.org">Commons Documentation Team</author>
+  </properties>
+
+  <body>
+
+  <section name="Commons Chain modules">
+
+    <subsection name="Core module">
+      <p>The <i>Core</i> module is the main Commons-Chain2 module which contains principal definitions of interfaces
+      and basic implementation. This module is necessary to work with the component.</p>
+
+      <p>Apache Maven users can import the <i>Core</i> module simply by declaring the following dependency:</p>
+
+      <source><![CDATA[  <dependencies>
+    ...
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>commons-chain2-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    ...
+  </dependencies>]]></source>
+    </subsection>
+
+    <subsection name="Configuration module">
+      <p>The <i>Configuration</i> module is an auxiliary module which is able to create chains from XML configurations.</p>
+
+      <p>Apache Maven users can import the <i>Configuration</i> module simply by declaring the following dependency:</p>
+
+      <source><![CDATA[  <dependencies>
+    ...
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>commons-chain2-configuration</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    ...
+  </dependencies>]]></source>
+    </subsection>
+
+    <subsection name="Web module">
+      <p>The <i>Web</i> module is an auxiliary module which is able to create chains inside a <i>Servlet container</i>,
+      in a <i>Portlet</i> or embedded in a <i>Faces</i> application.</p>
+
+      <p>Apache Maven users can import the <i>Web</i> module simply by declaring the following dependency:</p>
+
+      <source><![CDATA[  <dependencies>
+    ...
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>commons-chain2-web</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    ...
+  </dependencies>]]></source>
+
+      <p><b>NOTE</b> <i>Web</i> module dependencies are not transitives since they are scoped as <i>provided</i>,
+      users have to take care to included which of them are needed for their runtime environment.</p>
+    </subsection>
+  </section>
+
+</body>
+</document>

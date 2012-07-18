@@ -31,6 +31,7 @@
       <item name="Download"      href="http://commons.apache.org/chain/download_chain.cgi"/>
       <item name="Release Notes" href="/changes-report.html"/>
       <item name="Cookbook"      href="/cookbook.html"/>
+      <item name="Modules"       href="/modules.html"/>
       <item name="Javadoc (latest release)" href="api-release/index.html"/>
       <item name="Wiki"          href="http://wiki.apache.org/commons/Chain"/>
     </menu>
