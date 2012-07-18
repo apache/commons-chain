@@ -28,7 +28,7 @@
     <relativePath>../</relativePath>
   </parent>
 
-  <artifactId>commons-chain2-dist</artifactId>
+  <artifactId>commons-chain2</artifactId>
   <packaging>pom</packaging>
 
   <name>Apache Commons Chain :: Distribution Packages</name>
@@ -70,7 +70,6 @@
           </descriptors>
           <tarLongFileMode>gnu</tarLongFileMode>
           <attach>false</attach>
-          <finalName>commons-chain2-${project.version}</finalName>
         </configuration>
       </plugin>
     </plugins>

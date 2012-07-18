@@ -22,7 +22,7 @@
     <format>tar.gz</format>
     <format>zip</format>
   </formats>
-  <baseDirectory>commons-chain2-${project.version}-src</baseDirectory>
+  <baseDirectory>${project.build.finalName}-src</baseDirectory>
   <fileSets>
     <fileSet>
       <directory>${basedir}/../</directory>
