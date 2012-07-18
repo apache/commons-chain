@@ -41,6 +41,10 @@
     <module>cookbook-examples</module>
   </modules>
 
+  <properties>
+    <maven.site.deploy.skip>true</maven.site.deploy.skip>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
