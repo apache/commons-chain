@@ -76,13 +76,4 @@
     </plugins>
   </build>
 
-  <profiles>
-    <profile>
-      <id>rc</id>
-      <build>
-        
-      </build>
-    </profile>
-  </profiles>
-
 </project>
