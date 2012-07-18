@@ -162,9 +162,8 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
                 Throwable cause = e.getTargetException();
                 throw new DispatchException("Error in reflected dispatched command", cause, context, this);
             }
-        } else {
-            return false;
         }
+        return false;
     }
 
     // ------------------------------------------------------ Protected Methods
