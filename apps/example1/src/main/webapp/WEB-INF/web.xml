@@ -35,28 +35,24 @@
   <servlet>
     <servlet-name>reqparam</servlet-name>
     <servlet-class>org.apache.commons.chain2.web.servlet.ChainProcessor</servlet-class>
-    <load-on-startup>2</load-on-startup>
-
     <!-- Configure catalog name -->
     <init-param>
       <param-name>org.apache.commons.chain2.CATALOG</param-name>
       <param-value>reqparam</param-value>
     </init-param>
-
+    <load-on-startup>2</load-on-startup>
   </servlet>
 
   <!-- "Servlet Path" Servlet Configuration -->
   <servlet>
     <servlet-name>servletpath</servlet-name>
     <servlet-class>org.apache.commons.chain2.web.servlet.ChainProcessor</servlet-class>
-    <load-on-startup>3</load-on-startup>
-
     <!-- Configure catalog name -->
     <init-param>
       <param-name>org.apache.commons.chain2.CATALOG</param-name>
       <param-value>servletpath</param-value>
     </init-param>
-
+    <load-on-startup>3</load-on-startup>
   </servlet>
 
   <!-- "Path Info" Servlet Mappings -->
