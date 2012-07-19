@@ -33,7 +33,6 @@ import org.apache.commons.chain2.web.MapEntry;
  * <p>Private implementation of <code>Map</code> for portlet request
  * attributes.</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 

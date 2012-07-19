@@ -32,7 +32,6 @@ import org.apache.commons.chain2.web.WebContext;
  * collections of the underlying <code>FacesContext</code> instance
  * that is passed to the constructor (or the initialize method).</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 

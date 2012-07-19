@@ -25,7 +25,6 @@ import org.apache.commons.chain2.Context;
  * <p>Implementation of {@link Command} that simply logs its identifier
  * and returns.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

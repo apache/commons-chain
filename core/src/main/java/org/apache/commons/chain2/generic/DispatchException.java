@@ -25,7 +25,6 @@ import org.apache.commons.chain2.Command;
  * Runtime Exception that wraps an underlying exception thrown during the
  * execution of a {@link org.apache.commons.chain2.Command} or {@link org.apache.commons.chain2.Chain}.
  *
- * @author Elijah Zupancic
  * @version $Id$
  */
 public class DispatchException extends ChainException {

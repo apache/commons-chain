@@ -91,9 +91,6 @@ import org.apache.commons.logging.LogFactory;
  * parameters. Because of this, you can use both facilities in the
  * same application, if desired.</p>
  *
- * @author Matthew J. Sgarlata
- * @author Craig R. McClanahan
- * @author Ted Husted
  * @version $Id$
  */
 

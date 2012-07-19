@@ -35,7 +35,6 @@ import javax.servlet.http.HttpServletRequest;
  * "/foo.execute?command=bar" would cause the "/bar" command to be loaded
  * and executed.</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 

@@ -45,7 +45,6 @@ import java.util.Set;
  * read-only property defined by the <code>Map</code> interface, it may not
  * be utilized as an attribute key or property name.</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 public class ContextBase extends ContextMap<String, Object> {

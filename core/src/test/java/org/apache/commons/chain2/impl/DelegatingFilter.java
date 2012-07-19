@@ -25,7 +25,6 @@ import org.apache.commons.chain2.Filter;
  * <p>Implementation of {@link Filter} that logs its identifier and
  * and delegates to the rest of the chain.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

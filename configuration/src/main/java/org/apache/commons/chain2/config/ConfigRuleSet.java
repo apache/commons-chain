@@ -73,7 +73,6 @@ import org.apache.commons.digester3.RuleSetBase;
  *     [null]</li>
  * </ul>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 

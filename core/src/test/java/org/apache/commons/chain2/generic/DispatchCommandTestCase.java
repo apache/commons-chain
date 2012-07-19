@@ -95,7 +95,6 @@ public class DispatchCommandTestCase {
 
     /**
      * Command which uses alternate method signature.
-     * @author germuska
      * @version 0.2-dev
      */
     class TestAlternateContextCommand extends DispatchCommand<String, Object, Context<String, Object>> {

@@ -33,7 +33,6 @@ import java.util.Map;
  * collections of the underlying portlet context, request, and response
  * instances that are passed to the constructor (or the initialize method).</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 

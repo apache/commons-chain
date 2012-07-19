@@ -30,7 +30,6 @@ import java.util.Locale;
  *
  * @param <C> Type of the context associated with this command
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 

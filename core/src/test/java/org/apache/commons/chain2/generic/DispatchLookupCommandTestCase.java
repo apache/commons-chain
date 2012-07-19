@@ -32,7 +32,6 @@ import org.junit.Test;
 /**
  * <p>Test case for the <code>DispatchLookupCommand</code> class.</p>
  *
- * @author Sean Schofield
  * @version $Revision$
  */
 

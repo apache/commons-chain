@@ -34,7 +34,6 @@ import javax.servlet.http.HttpServletRequest;
  * an environment, a request for a context relative URI of "/foo.execute"
  * would cause the "/foo.execute" command to be loaded and executed.</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 

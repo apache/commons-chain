@@ -22,7 +22,6 @@ import java.util.Map;
  * Runtime Exception that wraps an underlying exception thrown during the
  * execution of a {@link Command} or {@link Chain}.
  *
- * @author Elijah Zupancic
  * @version $Id$
  * @since 2.0
  */

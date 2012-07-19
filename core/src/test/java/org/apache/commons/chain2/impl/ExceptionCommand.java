@@ -26,7 +26,6 @@ import org.apache.commons.chain2.Context;
  * <p>Implementation of {@link Command} that logs its identifier and
  * and throws an Exception.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 public class ExceptionCommand extends NonDelegatingCommand {

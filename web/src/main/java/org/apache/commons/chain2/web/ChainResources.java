@@ -35,8 +35,6 @@ import org.apache.commons.logging.LogFactory;
  * to configure a {@link Catalog}.  These methods are shared between
  * <code>ChainListener</code> and <code>ChainServlet</code>.</p>
  *
- * @author Craig R. McClanahan
- * @author Ted Husted
  * @version $Id$
  */
 

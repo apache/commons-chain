@@ -34,7 +34,6 @@ import org.junit.Test;
 /**
  * <p>Test case for the <code>CatalogBase</code> class.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

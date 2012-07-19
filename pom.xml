@@ -72,11 +72,6 @@
       <email>craigmcc at apache.org</email>
     </developer>
     <developer>
-      <name>Ted Husted</name>
-      <id>husted</id>
-      <email>husted at apache.org</email>
-    </developer>
-    <developer>
       <name>Martin Cooper</name>
       <id>martinc</id>
       <email>martinc at apache.org</email>
@@ -112,6 +107,20 @@
       <email>elijah at zupancic dot name</email>
     </developer>
   </developers>
+
+  <contributors>
+    <contributor>
+      <name>Matthew J. Sgarlata</name>
+    </contributor>
+    <contributor>
+      <name>Sean Schofield</name>
+      <email>schof at apache dot org</email>
+    </contributor>
+    <contributor>
+      <name>Ted Husted</name>
+      <email>husted at apache.org</email>
+    </contributor>
+  </contributors>
 
   <properties>
     <maven.compile.source>1.5</maven.compile.source>

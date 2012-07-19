@@ -28,7 +28,6 @@ import org.apache.commons.chain2.Context;
  * should cause an IllegalStateException if the {@link Chain} implementation
  * subclasses <code>ChainBase</code>.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

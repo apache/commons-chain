@@ -35,8 +35,6 @@ import org.apache.commons.chain2.Command;
  * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this catalog
  *
- * @author Craig R. McClanahan
- * @author Matthew J. Sgarlata
  * @version $Id$
  */
 public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> {

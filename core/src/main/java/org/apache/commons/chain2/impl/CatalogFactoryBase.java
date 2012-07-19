@@ -30,7 +30,6 @@ import org.apache.commons.chain2.CatalogFactory;
  * @param <K> Context key type
  * @param <V> Context value type
  * @param <C> Type of the context associated with this command
- * @author Sean Schofield
  * @version $Id$
  */
 public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactory<K, V, C> {

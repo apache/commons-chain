@@ -92,8 +92,6 @@ import java.util.Set;
  * of <em>context</em> init parameters.  Because of this, you can use
  * both facilities in the same application, if desired.</p>
  *
- * @author Craig R. McClanahan
- * @author Ted Husted
  * @version $Id$
  */
 

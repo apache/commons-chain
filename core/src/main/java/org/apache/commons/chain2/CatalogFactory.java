@@ -38,7 +38,6 @@ import java.util.Map;
  * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this command
  *
- * @author Sean Schofield
  * @version $Id$
  */
 public abstract class CatalogFactory<K, V, C extends Map<K, V>> {

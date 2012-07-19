@@ -33,7 +33,6 @@ import org.apache.commons.chain2.web.MapEntry;
  * <p>Private implementation of <code>Map</code> for servlet parameter
  * name-values[].</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 

@@ -33,7 +33,6 @@ import java.util.Map;
  * under which to register this {@link Catalog}.  Otherwise, this will
  * become the default {@link Catalog} for this application.</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 class ConfigCatalogRule extends Rule {

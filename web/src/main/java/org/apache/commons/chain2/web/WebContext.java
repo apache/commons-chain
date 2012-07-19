@@ -37,7 +37,6 @@ import org.apache.commons.chain2.impl.ContextBase;
  * a series of JavaBeans properties (and mapped to read-only attributes
  * of the same name, as supported by {@link ContextBase}.</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 

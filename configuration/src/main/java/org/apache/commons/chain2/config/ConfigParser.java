@@ -34,7 +34,6 @@ import java.net.URL;
  * is legal to call the <code>parse()</code> method more than once, in order
  * to parse more than one configuration document.</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 public class ConfigParser {

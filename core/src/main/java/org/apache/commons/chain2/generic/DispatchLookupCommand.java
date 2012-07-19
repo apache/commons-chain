@@ -52,7 +52,6 @@ import java.util.WeakHashMap;
  * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this command
  *
- * @author Sean Schofield
  * @version $Id$
  * @since Chain 1.1
  */

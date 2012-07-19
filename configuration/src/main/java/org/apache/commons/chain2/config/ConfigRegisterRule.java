@@ -34,7 +34,6 @@ import org.xml.sax.Attributes;
  * a value for the specified attribute that contains the name under which
  * it should be registered.</p>
  *
- * @author Craig R. McClanahan
  * @version $Id$
  */
 class ConfigRegisterRule extends Rule {
