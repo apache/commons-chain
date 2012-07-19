@@ -50,7 +50,7 @@ import java.util.Map;
  *
  * @param <K> Context key type
  * @param <V> Context value type
- * @param <C> Type of the context associated with this command
+ * @param <C> Type of the context associated with this chain
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
