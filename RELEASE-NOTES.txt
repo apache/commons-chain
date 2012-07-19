@@ -58,6 +58,7 @@ The Recommended Dependency Set for Chain Web 2.0 is:
 NEW FEATURES
 =============
 
+ * [CHAIN-70] Add a small EDSL to simplify Chain setup and execution
  * [CHAIN-58] Update Chain Context interface to use K,V generics
  * [CHAIN-56] clever Context with generic type "auto-cast" feature.
  * [CHAIN-55] split the huge project in submodules.
