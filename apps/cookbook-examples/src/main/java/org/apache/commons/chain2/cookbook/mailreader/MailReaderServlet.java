@@ -30,6 +30,7 @@ import java.io.IOException;
  * @version $Id$
  */
 public class MailReaderServlet extends HttpServlet {
+
     public MailReaderServlet() {
     }
 
@@ -53,4 +54,5 @@ public class MailReaderServlet extends HttpServlet {
 
         profileCheckCmd.execute(context);
     }
+
 }

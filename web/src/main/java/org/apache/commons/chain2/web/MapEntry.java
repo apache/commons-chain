@@ -16,9 +16,7 @@
  */
 package org.apache.commons.chain2.web;
 
-
 import java.util.Map;
-
 
 /**
  * <p>Map.Entry implementation that can be constructed to either be read-only
@@ -29,9 +27,7 @@ import java.util.Map;
  *
  * @version $Id$
  */
-
 public class MapEntry<K, V> implements Map.Entry<K, V> {
-
 
     /**
      * <p>The entry key.</p>
@@ -48,7 +44,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
      */
     private boolean modifiable = false;
 
-
     /**
      * <p>Creates a map entry that can either allow modifications or not.</p>
      *
@@ -62,7 +57,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
         this.modifiable = modifiable;
     }
 
-
     /**
      * <p>Gets the entry key.</p>
      *
@@ -72,7 +66,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
         return key;
     }
 
-
     /**
      * <p>Gets the entry value.</p>
      *
@@ -81,7 +74,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
     public V getValue() {
         return value;
     }
-
 
     /**
      * <p>Sets the entry value if the entry can be modified.</p>
@@ -100,7 +92,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
         }
     }
 
-
     /**
      * <p>Determines if this entry is equal to the passed object.</p>
      *
@@ -118,7 +109,6 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
         return false;
     }
 
-
     /**
      * <p>Returns the hashcode for this entry.</p>
      *
@@ -128,4 +118,5 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
         return (this.getKey() == null   ? 0 : this.getKey().hashCode()) ^
                (this.getValue() == null ? 0 : this.getValue().hashCode());
     }
+
 }

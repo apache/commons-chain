@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -28,39 +27,31 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.chain2.web.MapEntry;
 
-
 /**
  * <p>Private implementation of <code>Map</code> for servlet context
  * init parameters.</p>
  *
  * @version $Id$
  */
-
 final class ServletInitParamMap implements Map<String, String> {
-
 
     public ServletInitParamMap(ServletContext context) {
         this.context = context;
     }
 
-
     private ServletContext context = null;
-
 
     public void clear() {
         throw new UnsupportedOperationException();
     }
 
-
     public boolean containsKey(Object key) {
         return (context.getInitParameter(key(key)) != null);
     }
 
-
     public boolean containsValue(Object value) {
         return values().contains(value);
     }
-
 
     public Set<Entry<String, String>> entrySet() {
         Set<Entry<String, String>> set = new HashSet<Entry<String, String>>();
@@ -74,26 +65,21 @@ final class ServletInitParamMap implements Map<String, String> {
         return (set);
     }
 
-
     public boolean equals(Object o) {
         return (context.equals(o));
     }
-
 
     public String get(Object key) {
         return (context.getInitParameter(key(key)));
     }
 
-
     public int hashCode() {
         return (context.hashCode());
     }
 
-
     public boolean isEmpty() {
         return (size() < 1);
     }
-
 
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
@@ -110,16 +96,13 @@ final class ServletInitParamMap implements Map<String, String> {
         throw new UnsupportedOperationException();
     }
 
-
     public void putAll(Map<? extends String, ? extends String> map) {
         throw new UnsupportedOperationException();
     }
 
-
     public String remove(Object key) {
         throw new UnsupportedOperationException();
     }
-
 
     public int size() {
         int n = 0;
@@ -132,7 +115,6 @@ final class ServletInitParamMap implements Map<String, String> {
         return (n);
     }
 
-
     public Collection<String> values() {
         List<String> list = new ArrayList<String>();
         @SuppressWarnings( "unchecked" ) // it is known that header names are String
@@ -143,7 +125,6 @@ final class ServletInitParamMap implements Map<String, String> {
         return (list);
     }
 
-
     private String key(Object key) {
         if (key == null) {
             throw new IllegalArgumentException();
@@ -153,6 +134,5 @@ final class ServletInitParamMap implements Map<String, String> {
             return (key.toString());
         }
     }
-
 
 }

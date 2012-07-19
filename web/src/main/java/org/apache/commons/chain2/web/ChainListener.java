@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web;
 
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.config.ConfigParser;
@@ -33,7 +32,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
-
 
 /**
  * <p><code>ServletContextListener</code> that automatically
@@ -94,12 +92,9 @@ import java.util.Set;
  *
  * @version $Id$
  */
-
 public class ChainListener implements ServletContextListener {
 
-
     // ------------------------------------------------------ Manifest Constants
-
 
     /**
      * <p>The name of the context init parameter containing the name of the
@@ -109,7 +104,6 @@ public class ChainListener implements ServletContextListener {
     public static final String CONFIG_ATTR =
         "org.apache.commons.chain2.CONFIG_ATTR";
 
-
     /**
      * <p>The name of the context init parameter containing a comma-delimited
      * list of class loader resources to be scanned.</p>
@@ -117,14 +111,12 @@ public class ChainListener implements ServletContextListener {
     public static final String CONFIG_CLASS_RESOURCE =
         "org.apache.commons.chain2.CONFIG_CLASS_RESOURCE";
 
-
     /**
      * <p>The name of the context init parameter containing a comma-delimited
      * list of web applicaton resources to be scanned.</p>
      */
     public static final String CONFIG_WEB_RESOURCE =
         "org.apache.commons.chain2.CONFIG_WEB_RESOURCE";
-
 
     /**
      * <p>The name of the context init parameter containing the fully
@@ -134,9 +126,7 @@ public class ChainListener implements ServletContextListener {
     public static final String RULE_SET =
         "org.apache.commons.chain2.RULE_SET";
 
-
     // ------------------------------------------ ServletContextListener Methods
-
 
     /**
      * <p>Remove the configured {@link Catalog} from the servlet context
@@ -145,16 +135,13 @@ public class ChainListener implements ServletContextListener {
      * @param event <code>ServletContextEvent</code> to be processed
      */
     public void contextDestroyed(ServletContextEvent event) {
-
         ServletContext context = event.getServletContext();
         String attr = context.getInitParameter(CONFIG_ATTR);
         if (attr != null) {
             context.removeAttribute(attr);
         }
         CatalogFactory.clear();
-
     }
-
 
     /**
      * <p>Scan the required chain configuration resources, assemble the
@@ -164,7 +151,6 @@ public class ChainListener implements ServletContextListener {
      * @param event <code>ServletContextEvent</code> to be processed
      */
     public void contextInitialized(ServletContextEvent event) {
-
         Log log = LogFactory.getLog(ChainListener.class);
         if (log.isInfoEnabled()) {
             log.info("Initializing chain listener");
@@ -228,12 +214,9 @@ public class ChainListener implements ServletContextListener {
         if (attr != null) {
             context.setAttribute(attr, catalog);
         }
-
     }
 
-
     // --------------------------------------------------------- Private Methods
-
 
     /**
      * <p>Parse resources found in JAR files in the <code>/WEB-INF/lib</code>
@@ -244,7 +227,6 @@ public class ChainListener implements ServletContextListener {
      */
     private void parseJarResources(ServletContext context,
                                    ConfigParser parser, Log log) {
-
         @SuppressWarnings( "unchecked" ) // it is known that always returns String inside
         Set<String> jars = context.getResourcePaths("/WEB-INF/lib");
         if (jars == null) {
@@ -289,7 +271,6 @@ public class ChainListener implements ServletContextListener {
                                 + e.getMessage());
             }
         }
-
     }
 
     /**
@@ -299,7 +280,6 @@ public class ChainListener implements ServletContextListener {
      * @param value Value to translate
      */
     private String translate(String value) {
-
         while (true) {
             int index = value.indexOf(' ');
             if (index < 0) {
@@ -308,8 +288,6 @@ public class ChainListener implements ServletContextListener {
             value = value.substring(0, index) + "%20" + value.substring(index + 1);
         }
         return (value);
-
     }
-
 
 }

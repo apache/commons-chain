@@ -16,13 +16,11 @@
  */
 package org.apache.commons.chain2.web.portlet;
 
-
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.web.AbstractGetLocaleCommand;
 
 import javax.portlet.PortletRequest;
 import java.util.Locale;
-
 
 /**
  * <p>Concrete implementation of {@link AbstractGetLocaleCommand} for
@@ -30,13 +28,10 @@ import java.util.Locale;
  *
  * @version $Id$
  */
-
 public class PortletGetLocaleCommand
         extends AbstractGetLocaleCommand<PortletWebContext> {
 
-
     // ------------------------------------------------------- Protected Methods
-
 
     /**
      * <p>Retrieve and return the <code>Locale</code> for this request.</p>
@@ -45,11 +40,8 @@ public class PortletGetLocaleCommand
      * @return The Locale for the request.
      */
     protected Locale getLocale(PortletWebContext context) {
-
         PortletRequest request = (PortletRequest)context.get("request");
         return (request.getLocale());
-
     }
-
 
 }

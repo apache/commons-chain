@@ -25,6 +25,7 @@ import java.io.IOException;
  * @version $Id$
  */
 public class ProfileCheck implements Command<String, Object, MailReader> {
+
     public ProfileCheck() {
     }
 
@@ -37,4 +38,5 @@ public class ProfileCheck implements Command<String, Object, MailReader> {
 
         return CONTINUE_PROCESSING;
     }
+
 }

@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.apps.example;
 
-
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.web.servlet.ServletWebContext;
@@ -32,14 +31,11 @@ import java.lang.RuntimeException;
  *
  * @version $Id$
  */
-
 public class ForwardCommand implements Command<String, Object, ServletWebContext> {
-
 
     private Log log = LogFactory.getLog(ForwardCommand.class);
 
     private String forward;
-
 
     /**
      * Return the uri to forward to.
@@ -49,7 +45,6 @@ public class ForwardCommand implements Command<String, Object, ServletWebContext
     public String getForward() {
         return forward;
     }
-
 
     /**
      * Set the uri to forward to.

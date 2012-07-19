@@ -16,14 +16,12 @@
  */
 package org.apache.commons.chain2.config;
 
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.RuleSet;
 
 import java.net.URL;
-
 
 /**
  * <p>Class to parse the contents of an XML configuration file (using
@@ -38,9 +36,7 @@ import java.net.URL;
  */
 public class ConfigParser {
 
-
     // ----------------------------------------------------- Instance Variables
-
 
     /**
      * <p>The <code>RuleSet</code> to be used for configuring our Digester
@@ -48,15 +44,12 @@ public class ConfigParser {
      */
     private RuleSet ruleSet = new ConfigRuleSet();
 
-
     /**
      * <p>Should Digester use the context class loader?
      */
     private boolean useContextClassLoader = true;
 
-
     // ------------------------------------------------------------- Properties
-
 
     /**
      * <p>Return the <code>Digester</code> instance to be used for
@@ -64,7 +57,6 @@ public class ConfigParser {
      * @return A Digester instance.
      */
     public Digester getDigester() {
-
         Digester digester = new Digester();
         RuleSet ruleSet = getRuleSet();
         digester.setNamespaceAware(ruleSet.getNamespaceURI() != null);
@@ -72,9 +64,7 @@ public class ConfigParser {
         digester.setValidating(false);
         digester.addRuleSet(ruleSet);
         return (digester);
-
     }
-
 
     /**
      * <p>Return the <code>RuleSet</code> to be used for configuring
@@ -82,11 +72,8 @@ public class ConfigParser {
      * @return The RuleSet for configuring a Digester instance.
      */
     public RuleSet getRuleSet() {
-
         return (ruleSet);
-
     }
-
 
     /**
      * <p>Set the <code>RuleSet</code> to be used for configuring
@@ -95,11 +82,8 @@ public class ConfigParser {
      * @param ruleSet The new RuleSet to use
      */
     public void setRuleSet(RuleSet ruleSet) {
-
         this.ruleSet = ruleSet;
-
     }
-
 
     /**
      * <p>Return the "use context class loader" flag.  If set to
@@ -108,11 +92,8 @@ public class ConfigParser {
      * @return <code>true</code> if Digester should use the context class loader.
      */
     public boolean getUseContextClassLoader() {
-
         return (this.useContextClassLoader);
-
     }
-
 
     /**
      * <p>Set the "use context class loader" flag.</p>
@@ -120,14 +101,10 @@ public class ConfigParser {
      * @param useContextClassLoader The new flag value
      */
     public void setUseContextClassLoader(boolean useContextClassLoader) {
-
         this.useContextClassLoader = useContextClassLoader;
-
     }
 
-
     // --------------------------------------------------------- Public Methods
-
 
     /**
      * <p>Parse the XML document at the specified URL, using the configured
@@ -151,7 +128,6 @@ public class ConfigParser {
      */
     @Deprecated
     public <K, V, C extends Context<K, V>> void parse(Catalog<K, V, C> catalog, URL url) throws Exception {
-
         // Prepare our Digester instance
         Digester digester = getDigester();
         digester.clear();
@@ -159,9 +135,7 @@ public class ConfigParser {
 
         // Parse the configuration document
         digester.parse(url);
-
     }
-
 
     /**
      * <p>Parse the XML document at the specified URL using the configured
@@ -175,15 +149,12 @@ public class ConfigParser {
      * @exception Exception if a parsing error occurs
      */
     public void parse(URL url) throws Exception {
-
         // Prepare our Digester instance
         Digester digester = getDigester();
         digester.clear();
 
         // Parse the configuration document
         digester.parse(url);
-
     }
-
 
 }

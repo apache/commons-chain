@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -28,34 +27,27 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.chain2.web.MapEntry;
 
-
 /**
  * <p>Private implementation of <code>Map</code> for servlet request
  * name-values[].</p>
  *
  * @version $Id$
  */
-
 final class ServletHeaderValuesMap implements Map<String, String[]> {
-
 
     public ServletHeaderValuesMap(HttpServletRequest request) {
         this.request = request;
     }
 
-
     private HttpServletRequest request = null;
-
 
     public void clear() {
         throw new UnsupportedOperationException();
     }
 
-
     public boolean containsKey(Object key) {
         return (request.getHeader(key(key)) != null);
     }
-
 
     public boolean containsValue(Object value) {
         if (!(value instanceof String[])) {
@@ -81,7 +73,6 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
         return (false);
     }
 
-
     public Set<Entry<String, String[]>> entrySet() {
         Set<Entry<String, String[]>> set = new HashSet<Entry<String, String[]>>();
         @SuppressWarnings( "unchecked" ) // it is known that header names are String
@@ -101,11 +92,9 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
         return (set);
     }
 
-
     public boolean equals(Object o) {
         return (request.equals(o));
     }
-
 
     public String[] get(Object key) {
         @SuppressWarnings( "unchecked" ) // it is known that header names are String
@@ -115,16 +104,13 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
         return valuesArray;
     }
 
-
     public int hashCode() {
         return (request.hashCode());
     }
 
-
     public boolean isEmpty() {
         return (size() < 1);
     }
-
 
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
@@ -136,21 +122,17 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
         return (set);
     }
 
-
     public String[] put(String key, String[] value) {
         throw new UnsupportedOperationException();
     }
-
 
     public void putAll(Map<? extends String, ? extends String[]> map) {
         throw new UnsupportedOperationException();
     }
 
-
     public String[] remove(Object key) {
         throw new UnsupportedOperationException();
     }
-
 
     public int size() {
         int n = 0;
@@ -162,7 +144,6 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
         }
         return (n);
     }
-
 
     public Collection<String[]> values() {
         List<String[]> list = new ArrayList<String[]>();
@@ -202,6 +183,5 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
             return (key.toString());
         }
     }
-
 
 }

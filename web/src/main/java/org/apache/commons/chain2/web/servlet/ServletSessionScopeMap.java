@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -29,26 +28,22 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.chain2.web.MapEntry;
 
-
 /**
  * <p>Private implementation of <code>Map</code> for HTTP session
  * attributes.</p>
  *
  * @version $Id$
  */
-
 final class ServletSessionScopeMap implements Map<String, Object> {
-
 
     public ServletSessionScopeMap(HttpServletRequest request) {
         this.request = request;
         sessionExists();
     }
 
-
     private HttpSession session = null;
-    private HttpServletRequest request = null;
 
+    private HttpServletRequest request = null;
 
     public void clear() {
         if (sessionExists()) {
@@ -58,11 +53,9 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         }
     }
 
-
     public boolean containsKey(Object key) {
         return sessionExists() && session.getAttribute(key(key)) != null;
     }
-
 
     public boolean containsValue(Object value) {
         if (value == null || !sessionExists()) {
@@ -79,7 +72,6 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         return false;
     }
 
-
     public Set<Entry<String, Object>> entrySet() {
         Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
         if (sessionExists()) {
@@ -94,11 +86,9 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         return set;
     }
 
-
     public boolean equals(Object o) {
         return sessionExists() && session.equals(o);
     }
-
 
     public Object get(Object key) {
         if (sessionExists()) {
@@ -107,7 +97,6 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         return null;
     }
 
-
     public int hashCode() {
         if (sessionExists()) {
             return session.hashCode();
@@ -115,11 +104,9 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         return 0;
     }
 
-
     public boolean isEmpty() {
         return !sessionExists() || !session.getAttributeNames().hasMoreElements();
     }
-
 
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
@@ -132,7 +119,6 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         }
         return set;
     }
-
 
     public Object put(String key, Object value) {
         if (value == null) {
@@ -151,13 +137,11 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         return previous;
     }
 
-
     public void putAll(Map<? extends String, ? extends Object> map) {
         for (Entry<? extends String, ? extends Object> entry : map.entrySet()) {
             put(key(entry.getKey()), entry.getValue());
         }
     }
-
 
     public Object remove(Object key) {
         if (sessionExists()) {
@@ -168,7 +152,6 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         }
         return null;
     }
-
 
     public int size() {
         int n = 0;
@@ -183,7 +166,6 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         return n;
     }
 
-
     public Collection<Object> values() {
         List<Object> list = new ArrayList<Object>();
         if (sessionExists()) {
@@ -195,7 +177,6 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         }
         return list;
     }
-
 
     private String key(Object key) {
         if (key == null) {

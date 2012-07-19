@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web.portlet;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -35,32 +34,25 @@ import org.apache.commons.chain2.web.MapEntry;
  *
  * @version $Id$
  */
-
 final class PortletParamValuesMap implements Map<String, String[]> {
-
 
     public PortletParamValuesMap(PortletRequest request) {
         this.request = request;
     }
 
-
     private PortletRequest request = null;
-
 
     public void clear() {
         throw new UnsupportedOperationException();
     }
 
-
     public boolean containsKey(Object key) {
         return (request.getParameter(key(key)) != null);
     }
 
-
     public boolean containsValue(Object value) {
         return values().contains(value);
     }
-
 
     public Set<Entry<String, String[]>> entrySet() {
         Set<Entry<String, String[]>> set = new HashSet<Entry<String, String[]>>();
@@ -73,26 +65,21 @@ final class PortletParamValuesMap implements Map<String, String[]> {
         return (set);
     }
 
-
     public boolean equals(Object o) {
         return (request.equals(o));
     }
-
 
     public String[] get(Object key) {
         return (request.getParameterValues(key(key)));
     }
 
-
     public int hashCode() {
         return (request.hashCode());
     }
 
-
     public boolean isEmpty() {
         return (size() < 1);
     }
-
 
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
@@ -103,21 +90,17 @@ final class PortletParamValuesMap implements Map<String, String[]> {
         return (set);
     }
 
-
     public String[] put(String key, String[] value) {
         throw new UnsupportedOperationException();
     }
-
 
     public void putAll(Map<? extends String, ? extends String[]> map) {
         throw new UnsupportedOperationException();
     }
 
-
     public String[] remove(Object key) {
         throw new UnsupportedOperationException();
     }
-
 
     public int size() {
         int n = 0;
@@ -129,7 +112,6 @@ final class PortletParamValuesMap implements Map<String, String[]> {
         return (n);
     }
 
-
     public Collection<String[]> values() {
         List<String[]> list = new ArrayList<String[]>();
         Enumeration<String> keys = request.getParameterNames();
@@ -138,7 +120,6 @@ final class PortletParamValuesMap implements Map<String, String[]> {
         }
         return (list);
     }
-
 
     private String key(Object key) {
         if (key == null) {
@@ -149,6 +130,5 @@ final class PortletParamValuesMap implements Map<String, String[]> {
             return (key.toString());
         }
     }
-
 
 }

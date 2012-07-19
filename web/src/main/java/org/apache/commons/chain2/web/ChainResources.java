@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web;
 
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,6 @@ import org.apache.commons.chain2.config.ConfigParser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>Utility methods for loading class loader and web application resources
  * to configure a {@link Catalog}.  These methods are shared between
@@ -37,7 +35,6 @@ import org.apache.commons.logging.LogFactory;
  *
  * @version $Id$
  */
-
 final class ChainResources {
 
     /**
@@ -46,9 +43,7 @@ final class ChainResources {
     private ChainResources() {
     }
 
-
     // ---------------------------------------------------------- Static Methods
-
 
     /**
      * <p>Parse the specified class loader resources.</p>
@@ -58,7 +53,6 @@ final class ChainResources {
      */
     static void parseClassResources(String resources,
                                     ConfigParser parser) {
-
         if (resources == null) {
             return;
         }
@@ -88,9 +82,7 @@ final class ChainResources {
                 ("Exception parsing chain config resource '" + path + "': "
                  + e.getMessage());
         }
-
     }
-
 
     /**
      * <p>Parse the specified class loader resources.</p>
@@ -105,7 +97,6 @@ final class ChainResources {
     @Deprecated
     static void parseClassResources(Catalog catalog, String resources,
                                     ConfigParser parser) {
-
         if (resources == null) {
             return;
         }
@@ -135,9 +126,7 @@ final class ChainResources {
                 ("Exception parsing chain config resource '" + path + "': "
                  + e.getMessage());
         }
-
     }
-
 
     /**
      * <p>Parse the specified web application resources.</p>
@@ -149,7 +138,6 @@ final class ChainResources {
     static void parseWebResources(ServletContext context,
                                   String resources,
                                   ConfigParser parser) {
-
         if (resources == null) {
             return;
         }
@@ -174,9 +162,7 @@ final class ChainResources {
                 ("Exception parsing chain config resource '" + path + "': "
                  + e.getMessage());
         }
-
     }
-
 
     /**
      * <p>Parse the specified web application resources.</p>
@@ -193,7 +179,6 @@ final class ChainResources {
     static void parseWebResources(Catalog catalog, ServletContext context,
                                   String resources,
                                   ConfigParser parser) {
-
         if (resources == null) {
             return;
         }
@@ -218,9 +203,7 @@ final class ChainResources {
                 ("Exception parsing chain config resource '" + path + "': "
                  + e.getMessage());
         }
-
     }
-
 
     /**
      * <p> Parse the resource string into an array of paths. Empty entries will
@@ -250,6 +233,5 @@ final class ChainResources {
 
         return paths.toArray(new String[paths.size()]);
     }
-
 
 }

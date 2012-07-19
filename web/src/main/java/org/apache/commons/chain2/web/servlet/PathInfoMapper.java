@@ -16,14 +16,12 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.generic.LookupCommand;
 
 import javax.servlet.http.HttpServletRequest;
-
 
 /**
  * <p>{@link Command} that uses the "path info" component of the request URI
@@ -36,18 +34,13 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @version $Id$
  */
-
 public class PathInfoMapper extends LookupCommand<String, Object, ServletWebContext> {
-
 
     // ------------------------------------------------------ Instance Variables
 
-
     private String catalogKey = ChainProcessor.CATALOG_DEFAULT;
 
-
     // -------------------------------------------------------------- Properties
-
 
     /**
      * <p>Return the context key under which our {@link Catalog} has been
@@ -60,11 +53,8 @@ public class PathInfoMapper extends LookupCommand<String, Object, ServletWebCont
      */
     @Deprecated
     public String getCatalogKey() {
-
         return (this.catalogKey);
-
     }
-
 
     /**
      * <p>Set the context key under which our {@link Catalog} has been
@@ -77,14 +67,10 @@ public class PathInfoMapper extends LookupCommand<String, Object, ServletWebCont
      */
     @Deprecated
     public void setCatalogKey(String catalogKey) {
-
         this.catalogKey = catalogKey;
-
     }
 
-
     // --------------------------------------------------------- Command Methods
-
 
     /**
      * <p>Look up the extra path information for this request, and use it to
@@ -106,7 +92,6 @@ public class PathInfoMapper extends LookupCommand<String, Object, ServletWebCont
         }
 
         return pathInfo;
-
     }
 
     /**

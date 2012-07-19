@@ -16,14 +16,12 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.generic.LookupCommand;
 
 import javax.servlet.http.HttpServletRequest;
-
 
 /**
  * <p>{@link Command} that uses a specified request parameter
@@ -37,20 +35,16 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @version $Id$
  */
-
 public class RequestParameterMapper
         extends LookupCommand<String, Object, ServletWebContext> {
 
-
     // ------------------------------------------------------ Instance Variables
 
-
     private String catalogKey = ChainProcessor.CATALOG_DEFAULT;
+
     private String parameter = "command";
 
-
     // -------------------------------------------------------------- Properties
-
 
     /**
      * <p>Return the context key under which our {@link Catalog} has been
@@ -59,11 +53,8 @@ public class RequestParameterMapper
      * @return The context key for the Catalog.
      */
     public String getCatalogKey() {
-
         return (this.catalogKey);
-
     }
-
 
     /**
      * <p>Set the context key under which our {@link Catalog} has been
@@ -76,11 +67,8 @@ public class RequestParameterMapper
      */
     @Deprecated
     public void setCatalogKey(String catalogKey) {
-
         this.catalogKey = catalogKey;
-
     }
-
 
     /**
      * <p>Return the name of the request parameter to use for
@@ -93,11 +81,8 @@ public class RequestParameterMapper
      */
     @Deprecated
     public String getParameter() {
-
         return (this.parameter);
-
     }
-
 
     /**
      * <p>Set the name of the request parameter to use for
@@ -106,14 +91,10 @@ public class RequestParameterMapper
      * @param parameter The new parameter name
      */
     public void setParameter(String parameter) {
-
         this.parameter = parameter;
-
     }
 
-
     // --------------------------------------------------------- Command Methods
-
 
     /**
      * <p>Look up the specified request parameter for this request, and use it
@@ -130,9 +111,7 @@ public class RequestParameterMapper
         HttpServletRequest request = context.getRequest();
         String value = request.getParameter(getCatalogName());
         return value;
-
     }
-
 
     /**
      * <p>Return the {@link Catalog} to look up the {@link Command} in.</p>
@@ -158,6 +137,5 @@ public class RequestParameterMapper
 
         return catalog;
     }
-
 
 }

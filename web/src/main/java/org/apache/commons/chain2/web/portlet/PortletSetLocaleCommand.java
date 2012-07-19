@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web.portlet;
 
-
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.web.AbstractSetLocaleCommand;
 
@@ -24,20 +23,16 @@ import java.util.Locale;
 
 //import javax.portlet.PortletResponse;
 
-
 /**
  * <p>Concrete implementation of {@link AbstractSetLocaleCommand} for
  * the Portlet API.</p>
  *
  * @version $Id$
  */
-
 public class PortletSetLocaleCommand
         extends AbstractSetLocaleCommand<PortletWebContext> {
 
-
     // ------------------------------------------------------- Protected Methods
-
 
     /**
      * <p>Establish the specified <code>Locale</code> for this response.</p>
@@ -46,13 +41,10 @@ public class PortletSetLocaleCommand
      * @param locale The Locale for the request.
      */
     protected void setLocale(PortletWebContext context, Locale locale) {
-
         // PortletResponse response = (PortletResponse)
         //    context.get("response");
         //  response.setLocale(locale);
         // Not supported by the Portlet API
-
     }
-
 
 }

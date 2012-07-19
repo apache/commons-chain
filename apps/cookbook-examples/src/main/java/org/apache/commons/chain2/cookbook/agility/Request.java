@@ -20,7 +20,11 @@ package org.apache.commons.chain2.cookbook.agility;
  * @version $Id$
  */
 public interface Request {
+
     String getName();
+
     Response getResponse();
+
     void setResponse(Response response);
+
 }

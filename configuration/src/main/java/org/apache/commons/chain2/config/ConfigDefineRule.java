@@ -16,10 +16,8 @@
  */
 package org.apache.commons.chain2.config;
 
-
 import org.apache.commons.digester3.Rule;
 import org.xml.sax.Attributes;
-
 
 /**
  * <p>Digester rule that will dynamically register a new set of rules
@@ -32,12 +30,9 @@ import org.xml.sax.Attributes;
  *
  * @version $Id$
  */
-
 class ConfigDefineRule extends Rule {
 
-
     // ----------------------------------------------------------- Constructors
-
 
     /**
      * <p>Construct a new instance of this rule that will in turn
@@ -54,9 +49,7 @@ class ConfigDefineRule extends Rule {
         this.classAttribute = classAttribute;
     }
 
-
     // ----------------------------------------------------- Instance Variables
-
 
     /**
      * <p>The name of the attribute under which we can retrieve the
@@ -65,16 +58,13 @@ class ConfigDefineRule extends Rule {
      */
     private String classAttribute = null;
 
-
     /**
      * <p>The name of the attribute under which we can retrieve the name
      * this element for which rules should be created.</p>
      */
     private String nameAttribute = null;
 
-
     // --------------------------------------------------------- Public Methods
-
 
     /**
      * <p>Register new rules for the specified name and class.</p>
@@ -86,9 +76,7 @@ class ConfigDefineRule extends Rule {
      *   the element name otherwise
      * @param attributes The attribute list of this element
      */
-    public void begin(String namespace, String name, Attributes attributes)
-        throws Exception {
-
+    public void begin(String namespace, String name, Attributes attributes) throws Exception {
         // Extract the actual name and implementation class to use
         String nameValue = attributes.getValue(nameAttribute);
         String classValue = attributes.getValue(classAttribute);
@@ -96,10 +84,7 @@ class ConfigDefineRule extends Rule {
         // Add rules for this new element
         getDigester().addObjectCreate("*/" + nameValue, classValue);
         getDigester().addSetProperties("*/" + nameValue);
-        getDigester().addRule("*/" + nameValue,
-                              new ConfigRegisterRule(nameAttribute));
-
+        getDigester().addRule("*/" + nameValue, new ConfigRegisterRule(nameAttribute));
     }
-
 
 }

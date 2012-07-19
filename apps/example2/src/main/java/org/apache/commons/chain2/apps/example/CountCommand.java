@@ -16,29 +16,24 @@
  */
 package org.apache.commons.chain2.apps.example;
 
-
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.web.WebContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>Bar Command</p>
  *
  * @version $Id$
  */
-
 public class CountCommand implements Command<String, Object, WebContext> {
-
 
     private Log log = LogFactory.getLog(CountCommand.class);
 
     private int count;
 
     private String attribute = "count";
-
 
     /**
      * Return the request attribute name to store the count under.
@@ -49,7 +44,6 @@ public class CountCommand implements Command<String, Object, WebContext> {
         return attribute;
     }
 
-
     /**
      * Set the request attribute name to store the count under.
      *
@@ -59,7 +53,6 @@ public class CountCommand implements Command<String, Object, WebContext> {
         this.attribute = attribute;
     }
 
-
     /**
      * <p>Execute the command.</p>
      *
@@ -67,15 +60,12 @@ public class CountCommand implements Command<String, Object, WebContext> {
      * @return <code>false</code> so that processng will continue
      */
     public boolean execute(WebContext context) {
-
         count++;
         log.info("Executing: " + attribute + "=" + count);
 
         context.getSessionScope().put(attribute, new Integer(count));
 
         return false;
-
     }
-
 
 }

@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web.portlet;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -28,39 +27,31 @@ import javax.portlet.PortletContext;
 
 import org.apache.commons.chain2.web.MapEntry;
 
-
 /**
  * <p>Private implementation of <code>Map</code> for portlet context
  * init parameters.</p>
  *
  * @version $Id$
  */
-
 final class PortletInitParamMap implements Map<String, String> {
-
 
     public PortletInitParamMap(PortletContext context) {
         this.context = context;
     }
 
-
     private PortletContext context = null;
-
 
     public void clear() {
         throw new UnsupportedOperationException();
     }
 
-
     public boolean containsKey(Object key) {
         return (context.getInitParameter(key(key)) != null);
     }
 
-
     public boolean containsValue(Object value) {
         return values().contains(value);
     }
-
 
     public Set<Entry<String, String>> entrySet() {
         Set<Entry<String, String>> set = new HashSet<Entry<String, String>>();
@@ -73,26 +64,21 @@ final class PortletInitParamMap implements Map<String, String> {
         return (set);
     }
 
-
     public boolean equals(Object o) {
         return (context.equals(o));
     }
-
 
     public String get(Object key) {
         return (context.getInitParameter(key(key)));
     }
 
-
     public int hashCode() {
         return (context.hashCode());
     }
 
-
     public boolean isEmpty() {
         return (size() < 1);
     }
-
 
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
@@ -103,21 +89,17 @@ final class PortletInitParamMap implements Map<String, String> {
         return (set);
     }
 
-
     public String put(String key, String value) {
         throw new UnsupportedOperationException();
     }
-
 
     public void putAll(Map<? extends String, ? extends String> map) {
         throw new UnsupportedOperationException();
     }
 
-
     public String remove(Object key) {
         throw new UnsupportedOperationException();
     }
-
 
     public int size() {
         int n = 0;
@@ -129,7 +111,6 @@ final class PortletInitParamMap implements Map<String, String> {
         return (n);
     }
 
-
     public Collection<String> values() {
         List<String> list = new ArrayList<String>();
         Enumeration<String> keys = context.getInitParameterNames();
@@ -138,7 +119,6 @@ final class PortletInitParamMap implements Map<String, String> {
         }
         return (list);
     }
-
 
     private String key(Object key) {
         if (key == null) {
@@ -149,6 +129,5 @@ final class PortletInitParamMap implements Map<String, String> {
             return (key.toString());
         }
     }
-
 
 }

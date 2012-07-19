@@ -48,4 +48,5 @@ public class ControllerCatalog extends CatalogBase<String, Object, RequestContex
             handler.handle(request);
         }
     }
+
 }

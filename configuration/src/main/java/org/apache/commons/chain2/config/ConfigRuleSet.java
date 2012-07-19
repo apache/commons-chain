@@ -16,10 +16,8 @@
  */
 package org.apache.commons.chain2.config;
 
-
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.RuleSetBase;
-
 
 /**
  * <p>Digester <code>RuleSet</code> for configuring <em>Chain of
@@ -75,25 +73,27 @@ import org.apache.commons.digester3.RuleSetBase;
  *
  * @version $Id$
  */
-
 public class ConfigRuleSet extends RuleSetBase {
-
 
     // ----------------------------------------------------- Instance Variables
 
-
     private String catalogClass = "org.apache.commons.chain2.impl.CatalogBase";
+
     private String catalogElement = "catalog";
+
     private String chainClass = "org.apache.commons.chain2.impl.ChainBase";
+
     private String chainElement = "chain";
+
     private String classAttribute = "className";
+
     private String commandElement = "command";
+
     private String defineElement = "define";
+
     private String nameAttribute = "name";
 
-
     // ------------------------------------------------------------- Properties
-
 
     /**
      * <p>Return the fully qualified {@link org.apache.commons.chain2.Catalog}
@@ -103,7 +103,6 @@ public class ConfigRuleSet extends RuleSetBase {
     public String getCatalogClass() {
         return (this.catalogClass);
     }
-
 
     /**
      * <p>Set the fully qualified {@link org.apache.commons.chain2.Catalog}
@@ -116,7 +115,6 @@ public class ConfigRuleSet extends RuleSetBase {
         this.catalogClass = catalogClass;
     }
 
-
     /**
      * <p>Return the element name of a catalog element.</p>
      * @return The element name of a catalog element.
@@ -124,7 +122,6 @@ public class ConfigRuleSet extends RuleSetBase {
     public String getCatalogElement() {
         return (this.catalogElement);
     }
-
 
     /**
      * <p>Set the element name of a catalog element.</p>
@@ -135,7 +132,6 @@ public class ConfigRuleSet extends RuleSetBase {
         this.catalogElement = catalogElement;
     }
 
-
     /**
      * <p>Return the fully qualified {@link org.apache.commons.chain2.Chain}
      * implementation class.</p>
@@ -144,7 +140,6 @@ public class ConfigRuleSet extends RuleSetBase {
     public String getChainClass() {
         return (this.chainClass);
     }
-
 
     /**
      * <p>Set the fully qualified {@link org.apache.commons.chain2.Chain}
@@ -157,7 +152,6 @@ public class ConfigRuleSet extends RuleSetBase {
         this.chainClass = chainClass;
     }
 
-
     /**
      * <p>Return the element name of a chain element.</p>
      * @return The element name of a catalog element.
@@ -165,7 +159,6 @@ public class ConfigRuleSet extends RuleSetBase {
     public String getChainElement() {
         return (this.chainElement);
     }
-
 
     /**
      * <p>Set the element name of a chain element.</p>
@@ -176,7 +169,6 @@ public class ConfigRuleSet extends RuleSetBase {
         this.chainElement = chainElement;
     }
 
-
     /**
      * <p>Return the attribute name of a class attribute.</p>
      * @return The attribute name of a class attribute.
@@ -184,7 +176,6 @@ public class ConfigRuleSet extends RuleSetBase {
     public String getClassAttribute() {
         return (this.classAttribute);
     }
-
 
     /**
      * <p>Set the attribute name of a class attribute.</p>
@@ -195,7 +186,6 @@ public class ConfigRuleSet extends RuleSetBase {
         this.classAttribute = classAttribute;
     }
 
-
     /**
      * <p>Return the element name of a command element.</p>
      * @return The element name of a command element.
@@ -203,7 +193,6 @@ public class ConfigRuleSet extends RuleSetBase {
     public String getCommandElement() {
         return (this.commandElement);
     }
-
 
     /**
      * <p>Set the element name of a command element.</p>
@@ -214,7 +203,6 @@ public class ConfigRuleSet extends RuleSetBase {
         this.commandElement = commandElement;
     }
 
-
     /**
      * <p>Return the element name of a define element.</p>
      * @return The element name of a define element.
@@ -222,7 +210,6 @@ public class ConfigRuleSet extends RuleSetBase {
     public String getDefineElement() {
         return (this.defineElement);
     }
-
 
     /**
      * <p>Set the element name of a define element.</p>
@@ -233,7 +220,6 @@ public class ConfigRuleSet extends RuleSetBase {
         this.defineElement = defineElement;
     }
 
-
     /**
      * <p>Return the attribute name of a name attribute.</p>
      * @return The attribute name of an attribute element.
@@ -241,7 +227,6 @@ public class ConfigRuleSet extends RuleSetBase {
     public String getNameAttribute() {
         return (this.nameAttribute);
     }
-
 
     /**
      * <p>Set the attribute name of a name attribute.</p>
@@ -252,9 +237,7 @@ public class ConfigRuleSet extends RuleSetBase {
         this.nameAttribute = nameAttribute;
     }
 
-
     // --------------------------------------------------------- Public Methods
-
 
     /**
      * <p>Add the set of Rule instances defined in this RuleSet to the
@@ -266,7 +249,6 @@ public class ConfigRuleSet extends RuleSetBase {
      *  should be added.
      */
     public void addRuleInstances(Digester digester) {
-
         // Add rules for a catalog element
         digester.addRule("*/" + getCatalogElement(),
                          new ConfigCatalogRule(nameAttribute, catalogClass));
@@ -292,8 +274,6 @@ public class ConfigRuleSet extends RuleSetBase {
         digester.addRule("*/" + getDefineElement(),
                          new ConfigDefineRule(getNameAttribute(),
                                               getClassAttribute()));
-
     }
-
 
 }

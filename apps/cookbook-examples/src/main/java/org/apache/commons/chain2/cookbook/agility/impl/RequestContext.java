@@ -26,6 +26,7 @@ import org.apache.commons.chain2.impl.ContextBase;
 public class RequestContext extends ContextBase implements Request {
 
     private String name;
+
     private Response response;
 
     public RequestContext(String name) {
@@ -44,4 +45,5 @@ public class RequestContext extends ContextBase implements Request {
     public void setResponse(Response response) {
         this.response = response;
     }
+
 }

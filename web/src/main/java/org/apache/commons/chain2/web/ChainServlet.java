@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web;
 
-
 import java.io.IOException;
 
 import javax.servlet.ServletConfig;
@@ -34,7 +33,6 @@ import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.apache.commons.digester3.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * <p><code>Servlet</code> that automatically scans chain configuration files
@@ -93,18 +91,14 @@ import org.apache.commons.logging.LogFactory;
  *
  * @version $Id$
  */
-
 public class ChainServlet extends HttpServlet {
 
-
     // ------------------------------------------------------ Manifest Constants
-
 
     /**
      *
      */
     private static final long serialVersionUID = -6545081938506661333L;
-
 
     /**
      * <p>The name of the context init parameter containing the name of the
@@ -114,7 +108,6 @@ public class ChainServlet extends HttpServlet {
     public static final String CONFIG_ATTR =
         "org.apache.commons.chain2.CONFIG_ATTR";
 
-
     /**
      * <p>The name of the context init parameter containing a comma-delimited
      * list of class loader resources to be scanned.</p>
@@ -122,14 +115,12 @@ public class ChainServlet extends HttpServlet {
     public static final String CONFIG_CLASS_RESOURCE =
         "org.apache.commons.chain2.CONFIG_CLASS_RESOURCE";
 
-
     /**
      * <p>The name of the context init parameter containing a comma-delimited
      * list of web application resources to be scanned.</p>
      */
     public static final String CONFIG_WEB_RESOURCE =
         "org.apache.commons.chain2.CONFIG_WEB_RESOURCE";
-
 
     /**
      * <p>The name of the context init parameter containing the fully
@@ -139,15 +130,12 @@ public class ChainServlet extends HttpServlet {
     public static final String RULE_SET =
         "org.apache.commons.chain2.RULE_SET";
 
-
     // --------------------------------------------------------- Servlet Methods
-
 
     /**
      * <p>Clean up after ourselves as this application shuts down.</p>
      */
     public void destroy() {
-
         ServletConfig config = getServletConfig();
         ServletContext context = getServletContext();
         String attr = config.getInitParameter(CONFIG_ATTR);
@@ -155,9 +143,7 @@ public class ChainServlet extends HttpServlet {
             context.removeAttribute(attr);
         }
         CatalogFactory.clear();
-
     }
-
 
     /**
      * <p>Create (if necessary) and configure a {@link Catalog} from the
@@ -166,7 +152,6 @@ public class ChainServlet extends HttpServlet {
      * @throws ServletException if the servlet could not be initialized
      */
     public void init() throws ServletException {
-
         Log log = LogFactory.getLog(ChainServlet.class);
         ServletConfig config = getServletConfig();
         ServletContext context = getServletContext();
@@ -225,9 +210,7 @@ public class ChainServlet extends HttpServlet {
         if (attr != null) {
             context.setAttribute(attr, catalog);
         }
-
     }
-
 
     /**
      * <p>Does nothing; this servlet's only purpose is to initialize a Chain
@@ -242,10 +225,7 @@ public class ChainServlet extends HttpServlet {
     public void service(HttpServletRequest request,
                         HttpServletResponse response)
         throws ServletException, IOException {
-
           // do nothing
-
     }
-
 
 }

@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.config;
 
-
 import java.util.Map;
 
 import org.apache.commons.chain2.Catalog;
@@ -24,7 +23,6 @@ import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.digester3.Rule;
 import org.xml.sax.Attributes;
-
 
 /**
  * <p>Digester rule that will cause the top-most element on the Digester
@@ -38,9 +36,7 @@ import org.xml.sax.Attributes;
  */
 class ConfigRegisterRule extends Rule {
 
-
     // ----------------------------------------------------------- Constructors
-
 
     /**
      * <p>Construct a new instance of this rule that looks for an attribute
@@ -54,9 +50,7 @@ class ConfigRegisterRule extends Rule {
         this.nameAttribute = nameAttribute;
     }
 
-
     // ----------------------------------------------------- Instance Variables
-
 
     /**
      * <p>The name of the attribute under which we can retrieve the name
@@ -64,9 +58,7 @@ class ConfigRegisterRule extends Rule {
      */
     private String nameAttribute = null;
 
-
     // --------------------------------------------------------- Public Methods
-
 
     /**
      * <p>Register the top {@link Command} if appropriate.</p>
@@ -79,9 +71,7 @@ class ConfigRegisterRule extends Rule {
      * @param attributes The attribute list of this element
      */
     @Override
-    public void begin(String namespace, String name, Attributes attributes)
-        throws Exception {
-
+    public void begin(String namespace, String name, Attributes attributes) throws Exception {
         // Is the top object a Command?
         Object top = getDigester().peek(0);
         if ((top == null)
@@ -118,6 +108,5 @@ class ConfigRegisterRule extends Rule {
             chain.addCommand(command);
         }
     }
-
 
 }

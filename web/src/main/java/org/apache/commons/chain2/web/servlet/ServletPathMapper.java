@@ -16,14 +16,12 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.generic.LookupCommand;
 
 import javax.servlet.http.HttpServletRequest;
-
 
 /**
  * <p>{@link Command} that uses the "servlet path" component of the request URI
@@ -36,18 +34,13 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @version $Id$
  */
-
 public class ServletPathMapper extends LookupCommand<String, Object, ServletWebContext> {
-
 
     // ------------------------------------------------------ Instance Variables
 
-
     private String catalogKey = ChainProcessor.CATALOG_DEFAULT;
 
-
     // -------------------------------------------------------------- Properties
-
 
     /**
      * <p>Return the context key under which our {@link Catalog} has been
@@ -60,11 +53,8 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
      */
     @Deprecated
     public String getCatalogKey() {
-
         return (this.catalogKey);
-
     }
-
 
     /**
      * <p>Set the context key under which our {@link Catalog} has been
@@ -77,14 +67,10 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
      */
     @Deprecated
     public void setCatalogKey(String catalogKey) {
-
         this.catalogKey = catalogKey;
-
     }
 
-
     // --------------------------------------------------------- Command Methods
-
 
     /**
      * <p>Look up the servlet path information for this request, and use it to
@@ -106,7 +92,6 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
         }
 
         return servletPath;
-
     }
 
     /**
@@ -121,7 +106,6 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
      */
     @Override
     protected Catalog<String, Object, ServletWebContext> getCatalog(ServletWebContext context) {
-
         /* If the object returned from the passed context is not a valid catalog
          * then we use the super class's catalog extraction logic to pull it
          * or to error gracefully.
@@ -137,7 +121,6 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
                 super.getCatalog(context);
 
         return catalog;
-
     }
 
 }

@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web.portlet;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -28,24 +27,19 @@ import javax.portlet.PortletRequest;
 
 import org.apache.commons.chain2.web.MapEntry;
 
-
 /**
  * <p>Private implementation of <code>Map</code> for portlet request
  * attributes.</p>
  *
  * @version $Id$
  */
-
 final class PortletRequestScopeMap implements Map<String, Object> {
-
 
     public PortletRequestScopeMap(PortletRequest request) {
         this.request = request;
     }
 
-
     private PortletRequest request = null;
-
 
     public void clear() {
         for (String key : keySet()) {
@@ -53,11 +47,9 @@ final class PortletRequestScopeMap implements Map<String, Object> {
         }
     }
 
-
     public boolean containsKey(Object key) {
         return (request.getAttribute(key(key)) != null);
     }
-
 
     public boolean containsValue(Object value) {
         if (value == null) {
@@ -73,7 +65,6 @@ final class PortletRequestScopeMap implements Map<String, Object> {
         return (false);
     }
 
-
     public Set<Entry<String, Object>> entrySet() {
         Set<Entry<String, Object>> set = new HashSet<Entry<String, Object>>();
         Enumeration<String> keys = request.getAttributeNames();
@@ -85,26 +76,21 @@ final class PortletRequestScopeMap implements Map<String, Object> {
         return (set);
     }
 
-
     public boolean equals(Object o) {
         return (request.equals(o));
     }
-
 
     public Object get(Object key) {
         return (request.getAttribute(key(key)));
     }
 
-
     public int hashCode() {
         return (request.hashCode());
     }
 
-
     public boolean isEmpty() {
         return (size() < 1);
     }
-
 
     public Set<String> keySet() {
         Set<String> set = new HashSet<String>();
@@ -114,7 +100,6 @@ final class PortletRequestScopeMap implements Map<String, Object> {
         }
         return (set);
     }
-
 
     public Object put(String key, Object value) {
         if (value == null) {
@@ -126,13 +111,11 @@ final class PortletRequestScopeMap implements Map<String, Object> {
         return (previous);
     }
 
-
     public void putAll(Map<? extends String, ? extends Object> map) {
         for (Entry<? extends String, ? extends Object> entry : map.entrySet()) {
             put(key(entry.getKey()), entry.getValue());
         }
     }
-
 
     public Object remove(Object key) {
         String skey = key(key);
@@ -140,7 +123,6 @@ final class PortletRequestScopeMap implements Map<String, Object> {
         request.removeAttribute(skey);
         return (previous);
     }
-
 
     public int size() {
         int n = 0;
@@ -152,7 +134,6 @@ final class PortletRequestScopeMap implements Map<String, Object> {
         return (n);
     }
 
-
     public Collection<Object> values() {
         List<Object> list = new ArrayList<Object>();
         Enumeration<String> keys = request.getAttributeNames();
@@ -161,7 +142,6 @@ final class PortletRequestScopeMap implements Map<String, Object> {
         }
         return (list);
     }
-
 
     private String key(Object key) {
         if (key == null) {
@@ -172,6 +152,5 @@ final class PortletRequestScopeMap implements Map<String, Object> {
             return (key.toString());
         }
     }
-
 
 }

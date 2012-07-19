@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web.faces;
 
-
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
@@ -24,7 +23,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 
 import org.apache.commons.chain2.web.WebContext;
-
 
 /**
  * <p>Concrete implementation of {@link WebContext} suitable for use in
@@ -34,25 +32,20 @@ import org.apache.commons.chain2.web.WebContext;
  *
  * @version $Id$
  */
-
 public class FacesWebContext extends WebContext {
 
-
     // ------------------------------------------------------------ Constructors
-
 
     /**
      *
      */
     private static final long serialVersionUID = -1429681424077509130L;
 
-
     /**
      * <p>Construct an uninitialized {@link FacesWebContext} instance.</p>
      */
     public FacesWebContext() {
     }
-
 
     /**
      * <p>Construct a {@link FacesWebContext} instance that is initialized
@@ -61,14 +54,10 @@ public class FacesWebContext extends WebContext {
      * @param context The <code>FacesContext</code> for this request
      */
     public FacesWebContext(FacesContext context) {
-
         initialize(context);
-
     }
 
-
     // ------------------------------------------------------ Instance Variables
-
 
     /**
      * <p>The <code>FacesContext</code> instance for the request represented
@@ -76,9 +65,7 @@ public class FacesWebContext extends WebContext {
      */
     private FacesContext context = null;
 
-
     // ---------------------------------------------------------- Public Methods
-
 
     /**
      * <p>Return the <code>FacesContext</code> instance for the request
@@ -87,11 +74,8 @@ public class FacesWebContext extends WebContext {
      * @return The <code>FacesContext</code> for this request
      */
     public FacesContext getContext() {
-
-    return (this.context);
-
+        return (this.context);
     }
-
 
     /**
      * <p>Initialize (or reinitialize) this {@link FacesWebContext} instance
@@ -100,11 +84,8 @@ public class FacesWebContext extends WebContext {
      * @param context The <code>FacesContext</code> for this request
      */
     public void initialize(FacesContext context) {
-
         this.context = context;
-
     }
-
 
     /**
      * <p>Release references to allocated resources acquired in
@@ -113,15 +94,10 @@ public class FacesWebContext extends WebContext {
      * <code>initialize()</code> will return undefined results.</p>
      */
     public void release() {
-
         context = null;
-
     }
 
-
-
     // ------------------------------------------------------ WebContext Methods
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -129,15 +105,11 @@ public class FacesWebContext extends WebContext {
      * @return Application scope Map.
      */
     public Map<String, Object> getApplicationScope() {
-
         @SuppressWarnings("unchecked") // Assume faces is following contract
         Map<String, Object> scope = (Map<String, Object>)
                 context.getExternalContext().getApplicationMap();
-
         return (scope);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -145,15 +117,12 @@ public class FacesWebContext extends WebContext {
      * @return Header values Map.
      */
     public Map<String, String> getHeader() {
-
         @SuppressWarnings("unchecked") // Assume faces is following contract
         Map<String, String> headers = (Map<String, String>)
                 context.getExternalContext().getRequestHeaderMap();
 
         return (headers);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -161,15 +130,12 @@ public class FacesWebContext extends WebContext {
      * @return Header values Map.
      */
     public Map<String, String[]> getHeaderValues() {
-
         @SuppressWarnings("unchecked") // Assume faces is following contract
         Map<String, String[]> headerValues = (Map<String, String[]>)
             context.getExternalContext().getRequestHeaderValuesMap();
 
         return (headerValues);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -177,15 +143,12 @@ public class FacesWebContext extends WebContext {
      * @return Initialization parameter Map.
      */
     public Map<String, String> getInitParam() {
-
         @SuppressWarnings("unchecked") // Assume faces is following contract
         Map<String, String> initParams = (Map<String, String>)
                 context.getExternalContext().getInitParameterMap();
 
         return (initParams);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -198,9 +161,7 @@ public class FacesWebContext extends WebContext {
                 context.getExternalContext().getRequestParameterMap();
 
         return (params);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -213,9 +174,7 @@ public class FacesWebContext extends WebContext {
                 context.getExternalContext().getRequestParameterValuesMap();
 
         return (paramValues);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -224,7 +183,6 @@ public class FacesWebContext extends WebContext {
      * @since Chain 1.1
      */
     public Map<String, Cookie> getCookies() {
-
         @SuppressWarnings("unchecked") // Assume faces is following contract
         Map<String, Object> facesCookieMap = (Map<String, Object>)
                 context.getExternalContext().getRequestCookieMap();
@@ -255,22 +213,18 @@ public class FacesWebContext extends WebContext {
         }
     }
 
-
     /**
      * See the {@link WebContext}'s Javadoc.
      *
      * @return Request scope Map.
      */
     public Map<String, Object> getRequestScope() {
-
         @SuppressWarnings("unchecked")  // Assume faces is following contract
         Map<String, Object> scope = (Map<String, Object>)
                 context.getExternalContext().getRequestMap();
 
         return (scope);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -278,15 +232,11 @@ public class FacesWebContext extends WebContext {
      * @return Session scope Map.
      */
     public Map<String, Object> getSessionScope() {
-
         @SuppressWarnings("unchecked")  // Assume faces is following contract
         Map<String, Object> scope = (Map<String, Object>)
                 context.getExternalContext().getSessionMap();
 
         return (scope);
-
     }
-
-
 
 }

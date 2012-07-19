@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web.portlet;
 
-
 import org.apache.commons.chain2.web.WebContext;
 
 import javax.portlet.PortletContext;
@@ -26,7 +25,6 @@ import javax.servlet.http.Cookie;
 import java.util.Collections;
 import java.util.Map;
 
-
 /**
  * <p>Concrete implementation of {@link WebContext} suitable for use in
  * portlets.  The abstract methods are mapped to the appropriate
@@ -35,25 +33,20 @@ import java.util.Map;
  *
  * @version $Id$
  */
-
 public class PortletWebContext extends WebContext {
-
 
     /**
      *
      */
     private static final long serialVersionUID = -6928446126906631819L;
 
-
     // ------------------------------------------------------------ Constructors
-
 
     /**
      * <p>Construct an uninitialized {@link PortletWebContext} instance.</p>
      */
     public PortletWebContext() {
     }
-
 
     /**
      * <p>Construct a {@link PortletWebContext} instance that is initialized
@@ -66,14 +59,10 @@ public class PortletWebContext extends WebContext {
     public PortletWebContext(PortletContext context,
                              PortletRequest request,
                              PortletResponse response) {
-
         initialize(context, request, response);
-
     }
 
-
     // ------------------------------------------------------ Instance Variables
-
 
     /**
      * <p>The lazily instantiated <code>Map</code> of application scope
@@ -81,12 +70,10 @@ public class PortletWebContext extends WebContext {
      */
     private Map<String, Object> applicationScope = null;
 
-
     /**
      * <p>The <code>PortletContext</code> for this web application.</p>
      */
     private PortletContext context = null;
-
 
     /**
      * <p>The lazily instantiated <code>Map</code> of header name-value
@@ -94,13 +81,11 @@ public class PortletWebContext extends WebContext {
      */
     private Map<String, String> header = null;
 
-
     /**
      * <p>The lazily instantitated <code>Map</code> of header name-values
      * combinations (immutable).</p>
      */
     private Map<String, String[]> headerValues = null;
-
 
     /**
      * <p>The lazily instantiated <code>Map</code> of context initialization
@@ -108,13 +93,11 @@ public class PortletWebContext extends WebContext {
      */
     private Map<String, String> initParam = null;
 
-
     /**
      * <p>The lazily instantiated <code>Map</code> of request
      * parameter name-value.</p>
      */
     private Map<String, String> param = null;
-
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request
@@ -122,12 +105,10 @@ public class PortletWebContext extends WebContext {
      */
     private Map<String, String[]> paramValues = null;
 
-
     /**
      * <p>The <code>PortletRequest</code> for this request.</p>
      */
     private PortletRequest request = null;
-
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request scope
@@ -135,12 +116,10 @@ public class PortletWebContext extends WebContext {
      */
     private Map<String, Object> requestScope = null;
 
-
     /**
      * <p>The <code>PortletResponse</code> for this request.</p>
      */
     private PortletResponse response = null;
-
 
     /**
      * <p>The lazily instantiated <code>Map</code> of session scope
@@ -148,9 +127,7 @@ public class PortletWebContext extends WebContext {
      */
     private Map<String, Object> sessionScope = null;
 
-
     // ---------------------------------------------------------- Public Methods
-
 
     /**
      * <p>Return the {@link PortletContext} for this context.</p>
@@ -158,11 +135,8 @@ public class PortletWebContext extends WebContext {
      * @return The <code>PortletContext</code> for this request
      */
     public PortletContext getContext() {
-
-    return (this.context);
-
+        return (this.context);
     }
-
 
     /**
      * <p>Return the {@link PortletRequest} for this context.</p>
@@ -170,11 +144,8 @@ public class PortletWebContext extends WebContext {
      * @return The <code>PortletRequest</code> for this context.
      */
     public PortletRequest getRequest() {
-
-    return (this.request);
-
+        return (this.request);
     }
-
 
     /**
      * <p>Return the {@link PortletResponse} for this context.</p>
@@ -182,11 +153,8 @@ public class PortletWebContext extends WebContext {
      * @return The <code>PortletResponse</code> for this context.
      */
     public PortletResponse getResponse() {
-
-    return (this.response);
-
+        return (this.response);
     }
-
 
     /**
      * <p>Initialize (or reinitialize) this {@link PortletWebContext} instance
@@ -199,16 +167,13 @@ public class PortletWebContext extends WebContext {
     public void initialize(PortletContext context,
                            PortletRequest request,
                            PortletResponse response) {
-
         // Save the specified Portlet API object references
         this.context = context;
         this.request = request;
         this.response = response;
 
         // Perform other setup as needed
-
     }
-
 
     /**
      * <p>Release references to allocated resources acquired in
@@ -217,7 +182,6 @@ public class PortletWebContext extends WebContext {
      * <code>initialize()</code> will return undefined results.</p>
      */
     public void release() {
-
         // Release references to allocated collections
         applicationScope = null;
         header = null;
@@ -232,13 +196,9 @@ public class PortletWebContext extends WebContext {
         context = null;
         request = null;
         response = null;
-
     }
 
-
-
     // ------------------------------------------------------ WebContext Methods
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -246,14 +206,11 @@ public class PortletWebContext extends WebContext {
      * @return Application scope Map.
      */
     public Map<String, Object> getApplicationScope() {
-
         if ((applicationScope == null) && (context != null)) {
             applicationScope = new PortletApplicationScopeMap(context);
         }
         return (applicationScope);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -261,13 +218,11 @@ public class PortletWebContext extends WebContext {
      * @return Header values Map.
      */
     public Map<String, String> getHeader() {
-
         if ((header == null) && (request != null)) {
-        //            header = new PortletHeaderMap(request);
-        header = Collections.emptyMap();
+            // header = new PortletHeaderMap(request);
+            header = Collections.emptyMap();
         }
         return (header);
-
     }
 
     /**
@@ -276,15 +231,12 @@ public class PortletWebContext extends WebContext {
      * @return Header values Map.
      */
     public Map<String, String[]> getHeaderValues() {
-
         if ((headerValues == null) && (request != null)) {
-        //            headerValues = new PortletHeaderValuesMap(request);
-        headerValues = Collections.emptyMap();
+            // headerValues = new PortletHeaderValuesMap(request);
+            headerValues = Collections.emptyMap();
         }
         return (headerValues);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -292,14 +244,11 @@ public class PortletWebContext extends WebContext {
      * @return Initialization parameter Map.
      */
     public Map<String, String> getInitParam() {
-
         if ((initParam == null) && (context != null)) {
             initParam = new PortletInitParamMap(context);
         }
         return (initParam);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -307,14 +256,11 @@ public class PortletWebContext extends WebContext {
      * @return Request parameter Map.
      */
     public Map<String, String> getParam() {
-
         if ((param == null) && (request != null)) {
             param = new PortletParamMap(request);
         }
         return (param);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -322,14 +268,11 @@ public class PortletWebContext extends WebContext {
      * @return Request parameter Map.
      */
     public Map<String, String[]> getParamValues() {
-
         if ((paramValues == null) && (request != null)) {
             paramValues = new PortletParamValuesMap(request);
         }
         return (paramValues);
-
     }
-
 
     /**
      * Returns an empty Map - portlets don't support Cookies.
@@ -338,11 +281,8 @@ public class PortletWebContext extends WebContext {
      * @since Chain 1.1
      */
     public Map<String, Cookie> getCookies() {
-
         return Collections.emptyMap();
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -350,14 +290,11 @@ public class PortletWebContext extends WebContext {
      * @return Request scope Map.
      */
     public Map<String, Object> getRequestScope() {
-
         if ((requestScope == null) && (request != null)) {
             requestScope = new PortletRequestScopeMap(request);
         }
         return (requestScope);
-
     }
-
 
     /**
      * See the {@link WebContext}'s Javadoc.
@@ -365,13 +302,11 @@ public class PortletWebContext extends WebContext {
      * @return Session scope Map.
      */
     public Map<String, Object> getSessionScope() {
-
         if ((sessionScope == null) && (request != null)) {
             sessionScope =
             new PortletSessionScopeMap(request);
         }
         return (sessionScope);
-
     }
 
 }

@@ -58,7 +58,6 @@ public class ExampleServlet extends HttpServlet {
         }
     }
 
-
     /**
      * <p>Configure a {@link ServletWebContext} for the current request, and
      * pass it to the <code>execute()</code> method of the specified

@@ -20,7 +20,9 @@ package org.apache.commons.chain2.cookbook.agility;
  * @version $Id$
  */
 public class ProcessException extends RuntimeException {
+
     public ProcessException(Throwable cause) {
         super(cause);
     }
+
 }

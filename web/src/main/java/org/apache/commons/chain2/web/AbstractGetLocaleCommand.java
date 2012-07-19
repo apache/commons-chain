@@ -16,12 +16,10 @@
  */
 package org.apache.commons.chain2.web;
 
-
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 
 import java.util.Locale;
-
 
 /**
  * <p>Abstract base {@link Command} implementation for retrieving the
@@ -32,19 +30,15 @@ import java.util.Locale;
  *
  * @version $Id$
  */
-
 public abstract class AbstractGetLocaleCommand<C extends WebContext>
         implements Command<String, Object, C> {
 
-
     // -------------------------------------------------------------- Properties
-
 
     /**
      * <p>The context attribute key used to store the <code>Locale</code>.</p>
      */
     private String localeKey = "locale";
-
 
     /**
      * <p>Return the context attribute key under which we will store
@@ -53,11 +47,8 @@ public abstract class AbstractGetLocaleCommand<C extends WebContext>
      * @return The context attribute key of the request <code>Locale</code>.
      */
     public String getLocaleKey() {
-
-    return (this.localeKey);
-
+        return (this.localeKey);
     }
-
 
     /**
      * <p>Set the context attribute key under which we will store
@@ -66,14 +57,10 @@ public abstract class AbstractGetLocaleCommand<C extends WebContext>
      * @param localeKey The new context attribute key
      */
     public void setLocaleKey(String localeKey) {
-
-    this.localeKey = localeKey;
-
+        this.localeKey = localeKey;
     }
 
-
     // --------------------------------------------------------- Command Methods
-
 
     /**
      * <p>Retrieve the <code>Locale</code> for this request, and store it
@@ -85,15 +72,11 @@ public abstract class AbstractGetLocaleCommand<C extends WebContext>
      * @throws org.apache.commons.chain2.ChainException If an error occurs during execution.
      */
     public boolean execute(C context) {
-
-    context.put(getLocaleKey(), getLocale(context));
-    return (false);
-
+        context.put(getLocaleKey(), getLocale(context));
+        return (false);
     }
 
-
     // ------------------------------------------------------- Protected Methods
-
 
     /**
      * <p>Retrieve and return the <code>Locale</code> for this request.</p>
@@ -101,6 +84,5 @@ public abstract class AbstractGetLocaleCommand<C extends WebContext>
      * @return The Locale for the request.
      */
     protected abstract Locale getLocale(C context);
-
 
 }

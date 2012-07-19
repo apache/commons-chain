@@ -22,6 +22,7 @@ import org.apache.commons.chain2.impl.ContextBase;
  * @version $Id$
  */
 public class ProfileContext extends ContextBase {
+
     private Profile profile;
 
     public ProfileContext() {
@@ -34,4 +35,5 @@ public class ProfileContext extends ContextBase {
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
+
 }

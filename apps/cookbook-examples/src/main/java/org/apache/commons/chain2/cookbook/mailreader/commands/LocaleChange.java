@@ -26,6 +26,7 @@ import java.io.Writer;
  * @version $Id$
  */
 public class LocaleChange implements Command<String, Object, MailReader> {
+
     public LocaleChange() {
     }
 
@@ -40,4 +41,5 @@ public class LocaleChange implements Command<String, Object, MailReader> {
 
         return CONTINUE_PROCESSING;
     }
+
 }

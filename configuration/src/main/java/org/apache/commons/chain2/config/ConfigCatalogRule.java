@@ -16,14 +16,12 @@
  */
 package org.apache.commons.chain2.config;
 
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.digester3.Rule;
 import org.xml.sax.Attributes;
 
 import java.util.Map;
-
 
 /**
  * <p>Digester rule that will cause the top-most element on the Digester
@@ -37,9 +35,7 @@ import java.util.Map;
  */
 class ConfigCatalogRule extends Rule {
 
-
     // ----------------------------------------------------------- Constructors
-
 
     /**
      * <p>Construct a new instance of this rule that looks for an attribute
@@ -56,9 +52,7 @@ class ConfigCatalogRule extends Rule {
         this.catalogClass = catalogClass;
     }
 
-
     // ----------------------------------------------------- Instance Variables
-
 
     /**
      * <p>The fully qualified class name of a {@link Catalog} class to use for
@@ -66,16 +60,13 @@ class ConfigCatalogRule extends Rule {
      */
     private String catalogClass = null;
 
-
     /**
      * <p>The name of the attribute under which we can retrieve the name
      * this catalog should be registered with (if any).</p>
      */
     private String nameAttribute = null;
 
-
     // --------------------------------------------------------- Public Methods
-
 
     /**
      * <p>Retrieve or create a {@link Catalog} with the name specified by
@@ -91,9 +82,7 @@ class ConfigCatalogRule extends Rule {
      * @param attributes The attribute list of this element
      */
     @Override
-    public void begin(String namespace, String name, Attributes attributes)
-        throws Exception {
-
+    public void begin(String namespace, String name, Attributes attributes) throws Exception {
         // Retrieve any current Catalog with the specified name
         Catalog<Object, Object, Map<Object, Object>> catalog;
         CatalogFactory<Object, Object, Map<Object, Object>> factory = CatalogFactory.getInstance();

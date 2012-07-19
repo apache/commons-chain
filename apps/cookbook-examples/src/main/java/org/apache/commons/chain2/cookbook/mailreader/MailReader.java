@@ -29,6 +29,7 @@ public class MailReader extends ContextBase {
     public static final String LOCALE_KEY = "locale";
 
     private Writer logger;
+
     private Locale locale;
 
     public MailReader() {
@@ -49,4 +50,5 @@ public class MailReader extends ContextBase {
     public void setLogger(Writer logger) {
         this.logger = logger;
     }
+
 }

@@ -27,6 +27,7 @@ import org.apache.commons.chain2.cookbook.agility.Response;
  */
 public class HandlerCommand implements Command<String, Object, RequestContext>,
         RequestHandler {
+
     private String name =  null;
 
     public HandlerCommand(String name) {
@@ -52,4 +53,5 @@ public class HandlerCommand implements Command<String, Object, RequestContext>,
 
         return CONTINUE_PROCESSING;
     }
+
 }

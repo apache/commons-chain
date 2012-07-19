@@ -25,6 +25,7 @@ import java.io.IOException;
  * @version $Id$
  */
 public class LogonUser implements Command<String, Object, MailReader> {
+
     public LogonUser() {
     }
 
@@ -37,4 +38,5 @@ public class LogonUser implements Command<String, Object, MailReader> {
 
         return CONTINUE_PROCESSING;
     }
+
 }

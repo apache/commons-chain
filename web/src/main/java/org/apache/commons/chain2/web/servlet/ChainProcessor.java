@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
@@ -27,7 +26,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 
 /**
  * <p>Custom subclass of {@link ChainServlet} that also dispatches incoming
@@ -57,18 +55,14 @@ import java.io.IOException;
  *
  * @version $Id$
  */
-
 public class ChainProcessor extends ChainServlet {
 
-
     // ------------------------------------------------------ Manifest Constants
-
 
     /**
      *
      */
     private static final long serialVersionUID = -6817532768031279260L;
-
 
     /**
      * <p>The name of the servlet init parameter containing the name of the
@@ -77,14 +71,12 @@ public class ChainProcessor extends ChainServlet {
     public static final String CATALOG =
         "org.apache.commons.chain2.CATALOG";
 
-
     /**
      * <p>The default request attribute under which we expose the
      * {@link Catalog} being used to subordinate {@link Command}s.</p>
      */
     public static final String CATALOG_DEFAULT =
         "org.apache.commons.chain2.CATALOG";
-
 
     /**
      * <p>The name of the servlet init parameter containing the name of the
@@ -94,15 +86,12 @@ public class ChainProcessor extends ChainServlet {
     public static final String COMMAND =
         "org.apache.commons.chain2.COMMAND";
 
-
     /**
      * <p>The default command name.</p>
      */
     private static final String COMMAND_DEFAULT = "command";
 
-
     // ------------------------------------------------------ Instance Variables
-
 
     /**
      * <p>The name of the context attribute under which our {@link Catalog}
@@ -113,7 +102,6 @@ public class ChainProcessor extends ChainServlet {
      */
     private String attribute = null;
 
-
     /**
      * <p>The name of the {@link Catalog} to retrieve from the
      * {@link CatalogFactory} for this application, or <code>null</code>
@@ -121,30 +109,24 @@ public class ChainProcessor extends ChainServlet {
      */
     private String catalog = null;
 
-
     /**
      * <p>The name of the {@link Command} to be executed for each incoming
      * request.</p>
      */
     private String command = null;
 
-
     // --------------------------------------------------------- Servlet Methods
-
 
     /**
      * <p>Clean up as this application is shut down.</p>
      */
     @Override
     public void destroy() {
-
         super.destroy();
         attribute = null;
         catalog = null;
         command = null;
-
     }
-
 
     /**
      * <p>Cache the name of the command we should execute for each request.</p>
@@ -153,7 +135,6 @@ public class ChainProcessor extends ChainServlet {
      */
     @Override
     public void init() throws ServletException {
-
         super.init();
         attribute = getServletConfig().getInitParameter(CONFIG_ATTR);
         catalog = getServletConfig().getInitParameter(CATALOG);
@@ -161,9 +142,7 @@ public class ChainProcessor extends ChainServlet {
         if (command == null) {
             command = COMMAND_DEFAULT;
         }
-
     }
-
 
     /**
      * <p>Configure a {@link ServletWebContext} for the current request, and
@@ -218,8 +197,6 @@ public class ChainProcessor extends ChainServlet {
         } catch (Exception e) {
             throw new ServletException(e);
         }
-
     }
-
 
 }
