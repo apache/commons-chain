@@ -44,10 +44,10 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="simonetripodi" type="add" issue="CHAIN-70">
         Add a small EDSL to simplify Chain setup and execution.
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-69" due-to="Elijah Zupancic">
+      <action dev="simonetripodi" type="fix" issue="CHAIN-69" due-to="Elijah Zupancic">
         Fixed Checkstyle / PMD Warnings
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-68" due-to="Elijah Zupancic">
+      <action dev="simonetripodi" type="fix" issue="CHAIN-68" due-to="Elijah Zupancic">
         SNAPSHOT tomcat plugin breaks the build
       </action>
       <action dev="simonetripodi" type="add" issue="CHAIN-67" due-to="Elijah Zupancic">
