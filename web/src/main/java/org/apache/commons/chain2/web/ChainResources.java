@@ -37,6 +37,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Craig R. McClanahan
  * @author Ted Husted
+ * @version $Id$
  */
 
 final class ChainResources {

@@ -21,6 +21,9 @@ import org.apache.commons.chain2.cookbook.mailreader.MailReader;
 
 import java.io.IOException;
 
+/**
+ * @version $Id$
+ */
 public class ProfileCheck implements Command<String, Object, MailReader> {
     public ProfileCheck() {
     }

@@ -28,6 +28,7 @@ import java.util.Locale;
  * <p>Concrete implementation of {@link AbstractSetLocaleCommand} for
  * the Servlet API.</p>
  *
+ * @version $Id$
  */
 
 public class ServletSetLocaleCommand

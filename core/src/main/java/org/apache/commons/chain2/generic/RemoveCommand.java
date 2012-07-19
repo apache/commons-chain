@@ -27,7 +27,7 @@ import org.apache.commons.chain2.Context;
  * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class RemoveCommand<K, V, C extends Context<K, V>> implements Command<K, V, C> {
 

@@ -39,7 +39,7 @@ import java.util.Map;
  * @param <C> Type of the context associated with this command
  *
  * @author Sean Schofield
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
 

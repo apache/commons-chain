@@ -32,7 +32,7 @@ import org.apache.commons.chain2.web.MapEntry;
 /**
  * <p>Private implementation of <code>Map</code> for servlet cookies</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since Chain 1.1
  */
 

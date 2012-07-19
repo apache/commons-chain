@@ -34,7 +34,7 @@ import org.apache.commons.chain2.web.MapEntry;
  * name-value.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 final class PortletParamMap implements Map<String, String> {

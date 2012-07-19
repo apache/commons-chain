@@ -22,6 +22,9 @@ import org.apache.commons.chain2.cookbook.agility.Request;
 import org.apache.commons.chain2.cookbook.agility.RequestHandler;
 import org.apache.commons.chain2.cookbook.agility.Response;
 
+/**
+ * @version $Id$
+ */
 public class HandlerCommand implements Command<String, Object, RequestContext>,
         RequestHandler {
     private String name =  null;

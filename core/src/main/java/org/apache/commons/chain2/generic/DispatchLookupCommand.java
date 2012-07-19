@@ -53,7 +53,7 @@ import java.util.WeakHashMap;
  * @param <C> Type of the context associated with this command
  *
  * @author Sean Schofield
- * @version $Revision$
+ * @version $Id$
  * @since Chain 1.1
  */
 public class DispatchLookupCommand<K, V, C extends Context<K, V>>

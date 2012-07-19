@@ -94,7 +94,7 @@ import java.util.Set;
  *
  * @author Craig R. McClanahan
  * @author Ted Husted
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class ChainListener implements ServletContextListener {

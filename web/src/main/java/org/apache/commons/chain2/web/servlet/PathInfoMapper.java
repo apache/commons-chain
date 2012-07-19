@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
  * would cause the "/foo" command to be loaded and executed.</p>
  *
  * @author Craig R. McClanahan
+ * @version $Id$
  */
 
 public class PathInfoMapper extends LookupCommand<String, Object, ServletWebContext> {

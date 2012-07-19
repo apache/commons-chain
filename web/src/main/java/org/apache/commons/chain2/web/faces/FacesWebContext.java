@@ -33,7 +33,7 @@ import org.apache.commons.chain2.web.WebContext;
  * that is passed to the constructor (or the initialize method).</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class FacesWebContext extends WebContext {

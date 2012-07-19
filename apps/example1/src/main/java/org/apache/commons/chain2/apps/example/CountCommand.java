@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>Bar Command</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class CountCommand implements Command<String, Object, WebContext> {

@@ -57,7 +57,7 @@ import java.util.Map;
  * @param <K> the type of keys maintained by the context associated with this catalog
  * @param <V> the type of mapped values
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public interface Context<K, V> extends Map<K, V> {
 

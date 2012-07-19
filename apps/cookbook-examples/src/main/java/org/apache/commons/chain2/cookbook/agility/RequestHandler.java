@@ -16,6 +16,9 @@
  */
 package org.apache.commons.chain2.cookbook.agility;
 
+/**
+ * @version $Id$
+ */
 public interface RequestHandler {
     String getName();
     void handle(Request request);

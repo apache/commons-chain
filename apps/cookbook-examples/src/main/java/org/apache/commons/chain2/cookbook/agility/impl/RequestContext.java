@@ -20,6 +20,9 @@ import org.apache.commons.chain2.cookbook.agility.Request;
 import org.apache.commons.chain2.cookbook.agility.Response;
 import org.apache.commons.chain2.impl.ContextBase;
 
+/**
+ * @version $Id$
+ */
 public class RequestContext extends ContextBase implements Request {
 
     private String name;

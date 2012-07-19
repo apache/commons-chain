@@ -53,7 +53,7 @@ import java.util.Map;
  * @param <C> Type of the context associated with this chain
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
 

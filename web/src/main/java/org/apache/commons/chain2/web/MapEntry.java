@@ -27,7 +27,7 @@ import java.util.Map;
  * @param <K> the type of keys maintained by this map
  * @param <V> the type of mapped values
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class MapEntry<K, V> implements Map.Entry<K, V> {

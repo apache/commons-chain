@@ -34,7 +34,7 @@ import java.util.Map;
  * instances that are passed to the constructor (or the initialize method).</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class PortletWebContext extends WebContext {

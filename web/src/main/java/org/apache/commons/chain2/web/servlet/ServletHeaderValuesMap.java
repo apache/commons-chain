@@ -34,7 +34,7 @@ import org.apache.commons.chain2.web.MapEntry;
  * name-values[].</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 final class ServletHeaderValuesMap implements Map<String, String[]> {

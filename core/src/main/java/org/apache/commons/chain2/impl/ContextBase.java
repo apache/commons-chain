@@ -46,7 +46,7 @@ import java.util.Set;
  * be utilized as an attribute key or property name.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class ContextBase extends ContextMap<String, Object> {
 

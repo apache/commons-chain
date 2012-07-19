@@ -19,6 +19,9 @@ package org.apache.commons.chain2.cookbook.agility.impl;
 import org.apache.commons.chain2.cookbook.agility.Response;
 import org.apache.commons.chain2.impl.ContextBase;
 
+/**
+ * @version $Id$
+ */
 public class ResponseContext extends ContextBase implements Response {
 
     private String name;

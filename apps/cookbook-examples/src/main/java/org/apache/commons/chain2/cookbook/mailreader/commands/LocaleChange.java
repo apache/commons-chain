@@ -22,6 +22,9 @@ import org.apache.commons.chain2.cookbook.mailreader.MailReader;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * @version $Id$
+ */
 public class LocaleChange implements Command<String, Object, MailReader> {
     public LocaleChange() {
     }

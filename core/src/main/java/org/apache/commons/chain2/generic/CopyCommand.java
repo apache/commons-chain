@@ -30,7 +30,7 @@ import java.util.Map;
  * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> {
 

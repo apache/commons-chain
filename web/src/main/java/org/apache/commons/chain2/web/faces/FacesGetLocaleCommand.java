@@ -27,6 +27,8 @@ import java.util.Locale;
 /**
  * <p>Concrete implementation of {@link AbstractGetLocaleCommand} for
  * the JavaServer Faces API.</p>
+ *
+ * @version $Id$
  */
 
 public class FacesGetLocaleCommand

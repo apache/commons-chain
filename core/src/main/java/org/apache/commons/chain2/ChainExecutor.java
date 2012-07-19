@@ -24,6 +24,7 @@ import java.util.Map;
  * @param <K> Context key type
  * @param <V> Context value type
  * @param <C> Type of the context associated with this chain executor
+ * @version $Id$
  * @since 2.0
  */
 public interface ChainExecutor<K, V, C extends Map<K, V>> extends CommandSetter<K, V, C, ChainExecutor<K, V, C>> {

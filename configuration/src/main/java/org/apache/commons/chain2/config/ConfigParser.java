@@ -35,7 +35,7 @@ import java.net.URL;
  * to parse more than one configuration document.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class ConfigParser {
 

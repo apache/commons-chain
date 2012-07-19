@@ -35,7 +35,7 @@ import org.apache.commons.chain2.web.MapEntry;
  * attributes.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 final class PortletSessionScopeMap implements Map<String, Object> {

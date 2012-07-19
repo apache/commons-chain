@@ -36,6 +36,7 @@ import javax.servlet.http.HttpServletRequest;
  * and executed.</p>
  *
  * @author Craig R. McClanahan
+ * @version $Id$
  */
 
 public class RequestParameterMapper

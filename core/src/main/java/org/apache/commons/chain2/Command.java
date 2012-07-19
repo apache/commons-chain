@@ -79,7 +79,7 @@ import java.util.Map;
  * @param <C> Type of the context associated with this command
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public interface Command<K, V, C extends Map<K, V>> {
 

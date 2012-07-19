@@ -21,6 +21,9 @@ import org.apache.commons.chain2.impl.ContextBase;
 import java.io.Writer;
 import java.util.Locale;
 
+/**
+ * @version $Id$
+ */
 public class MailReader extends ContextBase {
 
     public static final String LOCALE_KEY = "locale";

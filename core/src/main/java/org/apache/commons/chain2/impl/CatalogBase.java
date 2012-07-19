@@ -37,7 +37,7 @@ import org.apache.commons.chain2.Command;
  *
  * @author Craig R. McClanahan
  * @author Matthew J. Sgarlata
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> {
 

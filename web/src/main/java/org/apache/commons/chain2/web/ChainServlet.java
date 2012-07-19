@@ -94,6 +94,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Matthew J. Sgarlata
  * @author Craig R. McClanahan
  * @author Ted Husted
+ * @version $Id$
  */
 
 public class ChainServlet extends HttpServlet {

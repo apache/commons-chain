@@ -34,7 +34,7 @@ import java.util.Map;
  * become the default {@link Catalog} for this application.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 class ConfigCatalogRule extends Rule {
 

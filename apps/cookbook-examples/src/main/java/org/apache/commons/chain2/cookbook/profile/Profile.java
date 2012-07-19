@@ -16,6 +16,9 @@
  */
 package org.apache.commons.chain2.cookbook.profile;
 
+/**
+ * @version $Id$
+ */
 public class Profile {
     public static final String PROFILE_KEY = "profile";
 }

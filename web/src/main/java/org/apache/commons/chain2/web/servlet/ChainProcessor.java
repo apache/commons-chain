@@ -54,6 +54,8 @@ import java.io.IOException;
  * {@link Command}s processing our requests, in addition to its definition
  * of the <code>ServletContext</code> attribute key under which the
  * {@link Catalog} is available.</p>
+ *
+ * @version $Id$
  */
 
 public class ChainProcessor extends ChainServlet {

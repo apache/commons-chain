@@ -22,6 +22,9 @@ import org.apache.commons.chain2.cookbook.agility.Request;
 import org.apache.commons.chain2.cookbook.agility.RequestHandler;
 import org.apache.commons.chain2.impl.CatalogBase;
 
+/**
+ * @version $Id$
+ */
 public class ControllerCatalog extends CatalogBase<String, Object, RequestContext>
         implements Controller {
 

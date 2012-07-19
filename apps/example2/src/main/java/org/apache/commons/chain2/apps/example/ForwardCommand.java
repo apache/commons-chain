@@ -29,7 +29,7 @@ import java.io.IOException;
 /**
  * <p>Forward Command</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class ForwardCommand implements Command<String, Object, ServletWebContext> {

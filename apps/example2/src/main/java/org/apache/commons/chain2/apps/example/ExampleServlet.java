@@ -31,6 +31,8 @@ import java.io.IOException;
 
 /**
  * Custom chain servlet implementation.
+ *
+ * @version $Id$
  */
 public class ExampleServlet extends HttpServlet {
 

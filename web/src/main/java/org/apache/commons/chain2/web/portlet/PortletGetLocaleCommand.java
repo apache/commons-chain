@@ -28,6 +28,7 @@ import java.util.Locale;
  * <p>Concrete implementation of {@link AbstractGetLocaleCommand} for
  * the Portlet API.</p>
  *
+ * @version $Id$
  */
 
 public class PortletGetLocaleCommand
