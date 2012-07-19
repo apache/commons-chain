@@ -55,29 +55,36 @@ The Recommended Dependency Set for Chain Configuration 2.0 is:
 The Recommended Dependency Set for Chain Web 2.0 is:
    Chain 2.0 + Chain Configuration 2.0 + Container Provided dependencies
 
-NEW FEATURES
-=============
-
- * [CHAIN-70] Add a small EDSL to simplify Chain setup and execution
- * [CHAIN-58] Update Chain Context interface to use K,V generics
- * [CHAIN-56] clever Context with generic type "auto-cast" feature.
- * [CHAIN-55] split the huge project in submodules.
-
-BUGS FIXED SINCE PREVIOUS RELEASE
-===========================
-
- * [CHAIN-61] Chain 2.0 trunk build is throwing many warnings as a result of generification changes.
-
-IMPROVEMENTS OVER PREVIOUS RELEASE
-===================================
-
- * [CHAIN-65] Rename package org.apache.commons.chain to org.apache.commons.chain2 for v2 of chain.
- * [CHAIN-53] Global Update of Chain - Generics, JDK 1.5, Update Dependency Versions.
-
-DEPRECATIONS
+BUG
 ============
 
- * NONE
+ * [CHAIN-57] - Chain 2.0 does not build on older JDKs
+ * [CHAIN-60] - In certain build configurations unit tests fail with the following message: testDefault: Correct command count expected:<17> but was:<19>
+ * [CHAIN-61] - Chain 2.0 trunk build is throwing many warnings as a result of generification changes
+ * [CHAIN-64] - Context should be Map<String, ? extends Object>
+ * [CHAIN-68] - SNAPSHOT tomcat plugin breaks the build
+
+IMPROVEMENT
+============
+
+ * [CHAIN-54] - upgrate JUnit dependency to latest released version and adapt tests
+ * [CHAIN-55] - split the huge project in submodules
+ * [CHAIN-56] - clever Context with generic type "auto-cast" feature
+ * [CHAIN-58] - Update Chain Context interface to use K,V generics
+ * [CHAIN-63] - Replace Context with Map<String, ? extends Object>
+ * [CHAIN-66] - Updated Chain documentation to include new changes to the API
+ * [CHAIN-67] - Refactor of explicit Exception throws to a RuntimeException type
+ * [CHAIN-69] - Fixed Checkstyle / PMD Warnings
+
+NEW FEATURE
+============
+
+ * [CHAIN-70] - Add a small EDSL to simplify Chain setup and execution.
+
+TASK
+============
+
+ * [CHAIN-65] - Rename package org.apache.commons.chain to org.apache.commons.chain2 for v2 of chain
 
 OTHER NOTES
 ============
