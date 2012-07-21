@@ -16,17 +16,16 @@
  */
 package org.apache.commons.chain2.web;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-
-import javax.servlet.ServletContext;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.config.ConfigParser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import javax.servlet.ServletContext;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * <p>Utility methods for loading class loader and web application resources
@@ -85,50 +84,6 @@ final class ChainResources {
     }
 
     /**
-     * <p>Parse the specified class loader resources.</p>
-     *
-     * @param catalog {@link Catalog} we are populating
-     * @param resources Comma-delimited list of resources (or <code>null</code>)
-     * @param parser {@link ConfigParser} to use for parsing
-     *
-     * @deprecated Use the variant that does not take a catalog, on a
-     *  configuration resource containing "catalog" element(s)
-     */
-    @Deprecated
-    static void parseClassResources(Catalog catalog, String resources,
-                                    ConfigParser parser) {
-        if (resources == null) {
-            return;
-        }
-        Log log = LogFactory.getLog(ChainResources.class);
-        ClassLoader loader =
-            Thread.currentThread().getContextClassLoader();
-        if (loader == null) {
-            loader = ChainResources.class.getClassLoader();
-        }
-        String[] paths = getResourcePaths(resources);
-        String path = null;
-        try {
-            for (int i = 0; i < paths.length; i++) {
-                path = paths[i];
-                URL url = loader.getResource(path);
-                if (url == null) {
-                    throw new IllegalStateException
-                        ("Missing chain config resource '" + path + "'");
-                }
-                if (log.isDebugEnabled()) {
-                    log.debug("Loading chain config resource '" + path + "'");
-                }
-                parser.parse(catalog, url);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException
-                ("Exception parsing chain config resource '" + path + "': "
-                 + e.getMessage());
-        }
-    }
-
-    /**
      * <p>Parse the specified web application resources.</p>
      *
      * @param context <code>ServletContext</code> for this web application
@@ -156,47 +111,6 @@ final class ChainResources {
                     log.debug("Loading chain config resource '" + path + "'");
                 }
                 parser.parse(url);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException
-                ("Exception parsing chain config resource '" + path + "': "
-                 + e.getMessage());
-        }
-    }
-
-    /**
-     * <p>Parse the specified web application resources.</p>
-     *
-     * @param catalog {@link Catalog} we are populating
-     * @param context <code>ServletContext</code> for this web application
-     * @param resources Comma-delimited list of resources (or <code>null</code>)
-     * @param parser {@link ConfigParser} to use for parsing
-     *
-     * @deprecated Use the variant that does not take a catalog, on a
-     *  configuration resource containing "catalog" element(s)
-     */
-    @Deprecated
-    static void parseWebResources(Catalog catalog, ServletContext context,
-                                  String resources,
-                                  ConfigParser parser) {
-        if (resources == null) {
-            return;
-        }
-        Log log = LogFactory.getLog(ChainResources.class);
-        String[] paths = getResourcePaths(resources);
-        String path = null;
-        try {
-            for (int i = 0; i < paths.length; i++) {
-                path = paths[i];
-                URL url = context.getResource(path);
-                if (url == null) {
-                    throw new IllegalStateException
-                        ("Missing chain config resource '" + path + "'");
-                }
-                if (log.isDebugEnabled()) {
-                    log.debug("Loading chain config resource '" + path + "'");
-                }
-                parser.parse(catalog, url);
             }
         } catch (Exception e) {
             throw new RuntimeException

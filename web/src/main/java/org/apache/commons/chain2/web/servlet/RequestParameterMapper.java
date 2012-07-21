@@ -57,34 +57,6 @@ public class RequestParameterMapper
     }
 
     /**
-     * <p>Set the context key under which our {@link Catalog} has been
-     * stored.</p>
-     *
-     * @param catalogKey The new catalog key
-     *
-     * @deprecated Use catalogName to specify the name of the catalog in the
-     *  catalog factory
-     */
-    @Deprecated
-    public void setCatalogKey(String catalogKey) {
-        this.catalogKey = catalogKey;
-    }
-
-    /**
-     * <p>Return the name of the request parameter to use for
-     * selecting the {@link Command} to be executed.</p>
-     *
-     * @return The name of the request parameter.
-     *
-     * @deprecated Use catalogName to specify the name of the catalog in the
-     *  catalog factory
-     */
-    @Deprecated
-    public String getParameter() {
-        return (this.parameter);
-    }
-
-    /**
      * <p>Set the name of the request parameter to use for
      * selecting the {@link Command} to be executed.</p>
      *

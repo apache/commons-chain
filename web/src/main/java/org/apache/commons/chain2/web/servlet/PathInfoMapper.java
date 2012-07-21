@@ -36,40 +36,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class PathInfoMapper extends LookupCommand<String, Object, ServletWebContext> {
 
-    // ------------------------------------------------------ Instance Variables
-
-    private String catalogKey = ChainProcessor.CATALOG_DEFAULT;
-
-    // -------------------------------------------------------------- Properties
-
-    /**
-     * <p>Return the context key under which our {@link Catalog} has been
-     * stored.</p>
-     *
-     * @return The context key for the Catalog.
-     *
-     * @deprecated Use catalogName to specify the name of the catalog in the
-     *  catalog factory
-     */
-    @Deprecated
-    public String getCatalogKey() {
-        return (this.catalogKey);
-    }
-
-    /**
-     * <p>Set the context key under which our {@link Catalog} has been
-     * stored.</p>
-     *
-     * @param catalogKey The new catalog key
-     *
-     * @deprecated Use catalogName to specify the name of the catalog in the
-     *  catalog factory
-     */
-    @Deprecated
-    public void setCatalogKey(String catalogKey) {
-        this.catalogKey = catalogKey;
-    }
-
     // --------------------------------------------------------- Command Methods
 
     /**
