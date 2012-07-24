@@ -16,10 +16,10 @@
  */
 package org.apache.commons.chain2.generic;
 
-import java.util.Map;
-
 import org.apache.commons.chain2.ChainException;
 import org.apache.commons.chain2.Command;
+
+import java.util.Map;
 
 /**
  * Runtime Exception that wraps an underlying exception thrown during the
@@ -32,7 +32,7 @@ public class DispatchException extends ChainException {
     /**
      *
      */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 20120724L;
 
     public DispatchException(String message) {
         super(message);

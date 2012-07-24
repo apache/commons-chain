@@ -16,10 +16,10 @@
  */
 package org.apache.commons.chain2.impl;
 
+import org.apache.commons.chain2.Context;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.commons.chain2.Context;
 
 /**
  * Convenience base class for {@link Context} implementations.
@@ -35,7 +35,7 @@ public class ContextMap<K, V> extends ConcurrentHashMap<K, V> implements Context
     /**
      *
      */
-    private static final long serialVersionUID = 6980950395387220980L;
+    private static final long serialVersionUID = 20120724L;
 
     /**
      * Creates a new, empty Context with a default initial capacity, load factor, and concurrencyLevel.

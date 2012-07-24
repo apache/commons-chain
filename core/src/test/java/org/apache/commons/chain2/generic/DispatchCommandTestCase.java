@@ -16,15 +16,11 @@
  */
 package org.apache.commons.chain2.generic;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.impl.ContextBase;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /* JUnitTest case for class: org.apache.commons.chain2.generic.DispatchCommand */
 public class DispatchCommandTestCase {
@@ -119,7 +115,7 @@ public class DispatchCommandTestCase {
     class TestAlternateContext extends java.util.HashMap<String, Object>
             implements Context<String, Object> {
 
-        private static final long serialVersionUID = -8169700369254126548L;
+        private static final long serialVersionUID = 20120724L;
 
         Context<String, Object> wrappedContext = null;
         TestAlternateContext(Context<String, Object> context) {

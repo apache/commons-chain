@@ -16,13 +16,13 @@
  */
 package org.apache.commons.chain2.web.faces;
 
+import org.apache.commons.chain2.web.WebContext;
+
+import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.Cookie;
-
-import org.apache.commons.chain2.web.WebContext;
 
 /**
  * <p>Concrete implementation of {@link WebContext} suitable for use in
@@ -39,7 +39,7 @@ public class FacesWebContext extends WebContext {
     /**
      *
      */
-    private static final long serialVersionUID = -1429681424077509130L;
+    private static final long serialVersionUID = 20120724L;
 
     /**
      * <p>Construct an uninitialized {@link FacesWebContext} instance.</p>

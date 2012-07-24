@@ -16,15 +16,6 @@
  */
 package org.apache.commons.chain2.web;
 
-import java.io.IOException;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.config.ConfigParser;
@@ -33,6 +24,14 @@ import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.apache.commons.digester3.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * <p><code>Servlet</code> that automatically scans chain configuration files
@@ -98,7 +97,7 @@ public class ChainServlet extends HttpServlet {
     /**
      *
      */
-    private static final long serialVersionUID = -6545081938506661333L;
+    private static final long serialVersionUID = 20120724L;
 
     /**
      * <p>The name of the context init parameter containing the name of the

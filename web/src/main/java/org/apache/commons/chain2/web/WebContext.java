@@ -16,10 +16,10 @@
  */
 package org.apache.commons.chain2.web;
 
-import java.util.Map;
-import javax.servlet.http.Cookie;
-
 import org.apache.commons.chain2.impl.ContextBase;
+
+import javax.servlet.http.Cookie;
+import java.util.Map;
 
 /**
  * <p>Abstract base implementation of {@link org.apache.commons.chain2.Context} that
@@ -42,7 +42,7 @@ public abstract class WebContext extends ContextBase {
     /**
      *
      */
-    private static final long serialVersionUID = 6804961872140299027L;
+    private static final long serialVersionUID = 20120724L;
 
     // ---------------------------------------------------------- Public Methods
 

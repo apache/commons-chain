@@ -54,7 +54,7 @@ public class ContextBase extends ContextMap<String, Object> {
     /**
      *
      */
-    private static final long serialVersionUID = -3137668177106072122L;
+    private static final long serialVersionUID = 20120724L;
 
     /**
      * Default, no argument constructor.
@@ -113,7 +113,7 @@ public class ContextBase extends ContextMap<String, Object> {
 
     static {
         singleton = new Serializable() {
-                private static final long serialVersionUID = -6023767081282668587L;
+                private static final long serialVersionUID = 20120724L;
 
                 public boolean equals(Object object) {
                     return (false);

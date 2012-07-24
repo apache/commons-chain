@@ -38,7 +38,7 @@ public class PortletWebContext extends WebContext {
     /**
      *
      */
-    private static final long serialVersionUID = -6928446126906631819L;
+    private static final long serialVersionUID = 20120724L;
 
     // ------------------------------------------------------------ Constructors
 

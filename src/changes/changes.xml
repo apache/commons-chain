@@ -41,6 +41,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="2.0" description="Major release">
+      <action dev="elijah" type="update" issue="CHAIN-75">
+        Update serialVersionUID in all classes to a date based format.
+      </action>
       <action dev="simonetripodi" type="update" issue="CHAIN-74">
         Improve Chain/Catalog use of Generics.
       </action>

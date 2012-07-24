@@ -16,9 +16,6 @@
  */
 package org.apache.commons.chain2.impl;
 
-import org.apache.commons.chain2.impl.ContextBase;
-
-
 /**
  * Subclass of <code>ContextBase</code> to exercize the automatic
  * delegation to properties of the <code>Context</code> class.
@@ -30,7 +27,7 @@ public class TestContext extends ContextBase {
     /**
      *
      */
-    private static final long serialVersionUID = -582126541014253603L;
+    private static final long serialVersionUID = 20120724L;
 
     // Read-only property
     private String readOnly = "readOnly";
