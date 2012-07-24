@@ -103,43 +103,47 @@ public class ConfigParser2TestCase {
         checkCommandCount(17);
 
         // Check individual single command instances
-        Command<String, Object, Context<String, Object>> command = null;
+        {
+            AddingCommand command = catalog.getCommand("AddingCommand");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("AddingCommand");
-        assertNotNull(command);
-        assertTrue(command instanceof AddingCommand);
+        {
+            DelegatingCommand command = catalog.getCommand("DelegatingCommand");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("DelegatingCommand");
-        assertNotNull(command);
-        assertTrue(command instanceof DelegatingCommand);
+        {
+            DelegatingFilter command = catalog.getCommand("DelegatingFilter");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("DelegatingFilter");
-        assertNotNull(command);
-        assertTrue(command instanceof DelegatingFilter);
+        {
+            ExceptionCommand command = catalog.getCommand("ExceptionCommand");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("ExceptionCommand");
-        assertNotNull(command);
-        assertTrue(command instanceof ExceptionCommand);
+        {
+            ExceptionFilter command = catalog.getCommand("ExceptionFilter");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("ExceptionFilter");
-        assertNotNull(command);
-        assertTrue(command instanceof ExceptionFilter);
+        {
+            NonDelegatingCommand command = catalog.getCommand("NonDelegatingCommand");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("NonDelegatingCommand");
-        assertNotNull(command);
-        assertTrue(command instanceof NonDelegatingCommand);
+        {
+            NonDelegatingFilter command = catalog.getCommand("NonDelegatingFilter");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("NonDelegatingFilter");
-        assertNotNull(command);
-        assertTrue(command instanceof NonDelegatingFilter);
-
-        command = catalog.getCommand("ChainBase");
-        assertNotNull(command);
-        assertTrue(command instanceof ChainBase);
-        assertTrue(command instanceof TestChain);
+        ChainBase chain = catalog.getCommand("ChainBase");
+        assertNotNull(chain);
+        assertTrue(chain instanceof TestChain);
 
         // Check configurable properties instance
-        TestCommand tcommand = (TestCommand) catalog.getCommand("Configurable");
+        TestCommand tcommand = catalog.getCommand("Configurable");
         assertNotNull(tcommand);
         assertEquals("Foo Value", tcommand.getFoo());
         assertEquals("Bar Value", tcommand.getBar());
