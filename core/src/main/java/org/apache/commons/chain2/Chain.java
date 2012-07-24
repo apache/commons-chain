@@ -63,6 +63,7 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      * at least once, it is no longer possible to add additional
      * {@link Command}s; instead, an exception will be thrown.</p>
      *
+     * @param <CMD> the {@link Command} type to be added in the {@link Chain}
      * @param command The {@link Command} to be added
      *
      * @exception IllegalArgumentException if <code>command</code>
@@ -70,7 +71,7 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      * @exception IllegalStateException if this {@link Chain} has already
      *  been executed at least once, so no further configuration is allowed
      */
-    void addCommand(Command<K, V, C> command);
+    <CMD extends Command<K, V, C>> void addCommand(CMD command);
 
     /**
      * <p>Execute the processing represented by this {@link Chain} according

@@ -72,11 +72,12 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
      * to the set of named commands known to this {@link Catalog},
      * replacing any previous command for that name.
      *
+     * @param <CMD> the {@link Command} type to be added in the {@link Catalog}
      * @param name Name of the new command
      * @param command {@link Command} to be returned
      *  for later lookups on this name
      */
-    public void addCommand(String name, Command<K, V, C> command) {
+    public <CMD extends Command<K, V, C>> void addCommand(String name, CMD command) {
         commands.put(name, command);
     }
 
@@ -84,12 +85,15 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
      * <p>Return the {@link Command} associated with the
      * specified name, if any; otherwise, return <code>null</code>.</p>
      *
+     * @param <CMD> the expected {@link Command} type to be returned
      * @param name Name for which a {@link Command}
      *  should be retrieved
      * @return The Command associated with the specified name.
      */
-    public Command<K, V, C> getCommand(String name) {
-        return commands.get(name);
+    public <CMD extends Command<K, V, C>> CMD getCommand(String name) {
+        @SuppressWarnings("unchecked") // it would throw ClassCastException if users try to cast to a different type
+        CMD command = (CMD) commands.get(name);
+        return command;
     }
 
     /**

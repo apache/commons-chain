@@ -41,6 +41,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="2.0" description="Major release">
+      <action dev="simonetripodi" type="update" issue="CHAIN-74">
+        Improve Chain/Catalog use of Generics.
+      </action>
       <action dev="simonetripodi" type="add" issue="CHAIN-73">
         Add a small EDSL to simplify Catalog setup.
       </action>

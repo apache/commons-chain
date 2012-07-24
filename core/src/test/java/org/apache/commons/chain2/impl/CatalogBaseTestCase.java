@@ -85,40 +85,46 @@ public class CatalogBaseTestCase {
     public void testGetCommand() {
 
         addCommands();
-        Command<String, Object, Context<String, Object>> command = null;
 
-        command = catalog.getCommand("AddingCommand");
-        assertNotNull(command);
-        assertTrue(command instanceof AddingCommand);
+        {
+            AddingCommand command = catalog.getCommand("AddingCommand");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("DelegatingCommand");
-        assertNotNull(command);
-        assertTrue(command instanceof DelegatingCommand);
+        {
+            DelegatingCommand command = catalog.getCommand("DelegatingCommand");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("DelegatingFilter");
-        assertNotNull(command);
-        assertTrue(command instanceof DelegatingFilter);
+        {
+            DelegatingFilter command = catalog.getCommand("DelegatingFilter");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("ExceptionCommand");
-        assertNotNull(command);
-        assertTrue(command instanceof ExceptionCommand);
+        {
+            ExceptionCommand command = catalog.getCommand("ExceptionCommand");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("ExceptionFilter");
-        assertNotNull(command);
-        assertTrue(command instanceof ExceptionFilter);
+        {
+            ExceptionFilter command = catalog.getCommand("ExceptionFilter");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("NonDelegatingCommand");
-        assertNotNull(command);
-        assertTrue(command instanceof NonDelegatingCommand);
+        {
+            NonDelegatingCommand command = catalog.getCommand("NonDelegatingCommand");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("NonDelegatingFilter");
-        assertNotNull(command);
-        assertTrue(command instanceof NonDelegatingFilter);
+        {
+            NonDelegatingFilter command = catalog.getCommand("NonDelegatingFilter");
+            assertNotNull(command);
+        }
 
-        command = catalog.getCommand("ChainBase");
-        assertNotNull(command);
-        assertTrue(command instanceof ChainBase);
-
+        {
+            ChainBase<String, Object, Context<String, Object>> command = catalog.getCommand("ChainBase");
+            assertNotNull(command);
+        }
     }
 
 

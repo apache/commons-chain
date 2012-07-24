@@ -115,13 +115,14 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
     /**
      * See the {@link Chain} JavaDoc.
      *
+     * @param <CMD> the {@link Command} type to be added in the {@link Chain}
      * @param command The {@link Command} to be added
      *
      * @exception IllegalArgumentException if <code>command</code>
      *  is <code>null</code>
      * @exception IllegalStateException if no further configuration is allowed
      */
-    public void addCommand(Command<K, V, C> command) {
+    public <CMD extends Command<K, V, C>> void addCommand(CMD command) {
         if (command == null) {
             throw new IllegalArgumentException();
         }

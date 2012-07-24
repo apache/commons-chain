@@ -45,21 +45,23 @@ public interface Catalog<K, V, C extends Map<K, V>> {
      * to the set of named commands known to this {@link Catalog},
      * replacing any previous command for that name.
      *
+     * @param <CMD> the {@link Command} type to be added in the {@link Catalog}
      * @param name Name of the new command
      * @param command {@link Command} or {@link Chain} to be returned
      *  for later lookups on this name
      */
-    void addCommand(String name, Command<K, V, C> command);
+    <CMD extends Command<K, V, C>> void addCommand(String name, CMD command);
 
     /**
      * <p>Return the {@link Command} or {@link Chain} associated with the
      * specified name, if any; otherwise, return <code>null</code>.</p>
      *
+     * @param <CMD> the expected {@link Command} type to be returned
      * @param name Name for which a {@link Command} or {@link Chain}
      *  should be retrieved
      * @return The Command associated with the specified name.
      */
-    Command<K, V, C> getCommand(String name);
+    <CMD extends Command<K, V, C>> CMD getCommand(String name);
 
     /**
      * <p>Return an <code>Iterator</code> over the set of named commands

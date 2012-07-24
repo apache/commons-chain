@@ -108,6 +108,7 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      * more than one DELIMITER will cause an
      * <code>IllegalArgumentException</code> to be thrown.</p>
      *
+     * @param <CMD> the expected {@link Command} type to be returned
      * @param commandID the identifier of the command to return
      * @return the command located with commandID, or <code>null</code>
      *  if either the command name or the catalog name cannot be resolved
@@ -116,7 +117,7 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      *
      * @since Chain 1.1
      */
-    public Command<K, V, C> getCommand(String commandID) {
+    public <CMD extends Command<K, V, C>> CMD getCommand(String commandID) {
         String commandName = commandID;
         String catalogName = null;
         Catalog<K, V, C> catalog = null;
@@ -150,7 +151,7 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
             }
         }
 
-        return catalog.getCommand(commandName);
+        return catalog.<CMD>getCommand(commandName);
     }
 
     // ------------------------------------------------------- Static Variables
