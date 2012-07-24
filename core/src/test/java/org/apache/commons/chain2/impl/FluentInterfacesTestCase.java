@@ -16,19 +16,25 @@
  */
 package org.apache.commons.chain2.impl;
 
-import static org.junit.Assert.assertTrue;
 import static org.apache.commons.chain2.Chains.on;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import org.apache.commons.chain2.Catalog;
+import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Context;
 import org.junit.Test;
-
-import org.apache.commons.chain2.Chain;
 
 public final class FluentInterfacesTestCase {
 
     @Test(expected = IllegalArgumentException.class)
     public void doesNotAcceptNullChain() {
         on((Chain<String, Object, Context<String, Object>>) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void doesNotAcceptNullCatalog() {
+        on((Catalog<String, Object, Context<String, Object>>) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -44,6 +50,18 @@ public final class FluentInterfacesTestCase {
         .execute(null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void doesNotAcceptNullCommandInCatalog() {
+        on(new CatalogBase<String, Object, Context<String, Object>>())
+        .addCommand(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void doesNotAcceptNullName() {
+        on(new CatalogBase<String, Object, Context<String, Object>>())
+        .addCommand(new DelegatingFilter("1", "a")).identifiedBy(null);
+    }
+
     @Test
     public void justMakeSureChainIsExecuted() {
         ContextBase context = new ContextBase();
@@ -55,6 +73,31 @@ public final class FluentInterfacesTestCase {
         .execute(context);
 
         assertTrue(context.containsKey("log"));
+    }
+
+    @Test
+    public void justMakeSureCatalogIsSetup() {
+        CatalogBase<String, Object, Context<String, Object>> catalog =
+            new CatalogBase<String, Object, Context<String, Object>>();
+
+        on(catalog)
+        .addCommand(new AddingCommand("", null)).identifiedBy("AddingCommand")
+        .addCommand(new DelegatingCommand("")).identifiedBy("DelegatingCommand")
+        .addCommand(new DelegatingFilter("", "")).identifiedBy("DelegatingFilter")
+        .addCommand(new ExceptionCommand("")).identifiedBy("ExceptionCommand")
+        .addCommand(new ExceptionFilter("", "")).identifiedBy("ExceptionFilter")
+        .addCommand(new NonDelegatingCommand("")).identifiedBy("NonDelegatingCommand")
+        .addCommand(new NonDelegatingFilter("", "")).identifiedBy("NonDelegatingFilter")
+        .addCommand(new ChainBase<String, Object, Context<String, Object>>()).identifiedBy("ChainBase");
+
+        assertNotNull(catalog.getCommand("AddingCommand"));
+        assertNotNull(catalog.getCommand("DelegatingCommand"));
+        assertNotNull(catalog.getCommand("DelegatingFilter"));
+        assertNotNull(catalog.getCommand("ExceptionCommand"));
+        assertNotNull(catalog.getCommand("ExceptionFilter"));
+        assertNotNull(catalog.getCommand("NonDelegatingCommand"));
+        assertNotNull(catalog.getCommand("NonDelegatingFilter"));
+        assertNotNull(catalog.getCommand("ChainBase"));
     }
 
 }

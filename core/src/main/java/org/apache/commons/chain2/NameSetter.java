@@ -19,25 +19,22 @@ package org.apache.commons.chain2;
 import java.util.Map;
 
 /**
- * Generic builder that allows adding commands to the target {@link Chain} has to be executed.
+ * Allows specifying a name for a {@link Command} in a {@link Catalog} instance.
  *
  * @param <K> Context key type
  * @param <V> Context value type
- * @param <C> Type of the context associated with this command setter
- * @param <R> Type of the next chain builder
+ * @param <C> Type of the context associated with this name setter
  * @since 2.0
  * @version $Id$
  */
-public interface CommandSetter<K, V, C extends Map<K, V>, R> {
+public interface NameSetter<K, V, C extends Map<K, V>> {
 
     /**
-     * Add the given command to the target {@link Chain} has to be executed.
+     * Specifies a name for a {@link Command} in a {@link Catalog} instance.
      *
-     * @param <CMD> Type of the command has to be added
-     * @param command the command has to be added in the target chain
-     * @return next chain builder
-     * @see Chain#addCommand(Command)
+     * @param name the name of the previous set {@link Command}
+     * @return a new builder to add a new {@link Command}
      */
-    <CMD extends Command<K, V, C>> R addCommand(CMD command);
+    NamedCommandSetter<K, V, C> identifiedBy(String name);
 
 }
