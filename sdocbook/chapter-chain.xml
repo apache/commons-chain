@@ -973,7 +973,7 @@ public class MailReader extends Hashmap implements Context {
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.web.servlet.ServletWebContext;
+import org.apache.commons.chain2.web.servlet.ServletWebContextBase;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;as the ActionForm name.

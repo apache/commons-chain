@@ -41,6 +41,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="2.0" description="Major release">
+      <action dev="elijah" type="fix" issue="CHAIN-47">
+          WebContext, ServletWebContext are now interfaces
+      </action>
       <action dev="elijah" type="update" issue="CHAIN-75">
         Update serialVersionUID in all classes to a date based format.
       </action>

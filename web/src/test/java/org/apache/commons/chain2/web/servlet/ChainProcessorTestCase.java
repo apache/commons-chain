@@ -16,17 +16,15 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-import static org.junit.Assert.fail;
+import org.junit.Test;
 
+import javax.servlet.ServletConfig;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import javax.servlet.ServletConfig;
-
-import org.apache.commons.chain2.web.servlet.ChainProcessor;
-import org.junit.Test;
+import static org.junit.Assert.fail;
 
 /**
  *  Test case for {@link ChainProcessor}.

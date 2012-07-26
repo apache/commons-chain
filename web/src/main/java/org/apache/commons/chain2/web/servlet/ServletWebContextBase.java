@@ -14,51 +14,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.web.portlet;
+package org.apache.commons.chain2.web.servlet;
 
 import org.apache.commons.chain2.web.WebContextBase;
 
-import javax.portlet.PortletContext;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
-import java.util.Collections;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
  * <p>Concrete implementation of {@link org.apache.commons.chain2.web.WebContext} suitable for use in
- * portlets.  The abstract methods are mapped to the appropriate
- * collections of the underlying portlet context, request, and response
+ * Servlets and JSP pages.  The abstract methods are mapped to the appropriate
+ * collections of the underlying servlet context, request, and response
  * instances that are passed to the constructor (or the initialize method).</p>
  *
  * @version $Id$
  */
-public class PortletWebContext extends WebContextBase {
+public class ServletWebContextBase extends WebContextBase
+        implements ServletWebContext<String, Object> {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 20120724L;
 
     // ------------------------------------------------------------ Constructors
 
     /**
-     * <p>Construct an uninitialized {@link PortletWebContext} instance.</p>
+     * <p>Construct an uninitialized {@link ServletWebContextBase} instance.</p>
      */
-    public PortletWebContext() {
+    public ServletWebContextBase() {
     }
 
     /**
-     * <p>Construct a {@link PortletWebContext} instance that is initialized
-     * with the specified Portlet API objects.</p>
+     * <p>Construct a {@link ServletWebContextBase} instance that is initialized
+     * with the specified Servlet API objects.</p>
      *
-     * @param context The <code>PortletContext</code> for this web application
-     * @param request The <code>PortletRequest</code> for this request
-     * @param response The <code>PortletResponse</code> for this request
+     * @param context The <code>ServletContext</code> for this web application
+     * @param request The <code>HttpServletRequest</code> for this request
+     * @param response The <code>HttpServletResponse</code> for this request
      */
-    public PortletWebContext(PortletContext context,
-                             PortletRequest request,
-                             PortletResponse response) {
+    public ServletWebContextBase(ServletContext context,
+                                 HttpServletRequest request,
+                                 HttpServletResponse response) {
         initialize(context, request, response);
     }
 
@@ -71,9 +68,9 @@ public class PortletWebContext extends WebContextBase {
     private Map<String, Object> applicationScope = null;
 
     /**
-     * <p>The <code>PortletContext</code> for this web application.</p>
+     * <p>The <code>ServletContext</code> for this web application.</p>
      */
-    private PortletContext context = null;
+    private ServletContext context = null;
 
     /**
      * <p>The lazily instantiated <code>Map</code> of header name-value
@@ -94,6 +91,11 @@ public class PortletWebContext extends WebContextBase {
     private Map<String, String> initParam = null;
 
     /**
+     * <p>The lazily instantiated <code>Map</code> of cookies.</p>
+     */
+    private Map<String, Cookie> cookieValues = null;
+
+    /**
      * <p>The lazily instantiated <code>Map</code> of request
      * parameter name-value.</p>
      */
@@ -106,9 +108,9 @@ public class PortletWebContext extends WebContextBase {
     private Map<String, String[]> paramValues = null;
 
     /**
-     * <p>The <code>PortletRequest</code> for this request.</p>
+     * <p>The <code>HttpServletRequest</code> for this request.</p>
      */
-    private PortletRequest request = null;
+    private HttpServletRequest request = null;
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request scope
@@ -117,9 +119,9 @@ public class PortletWebContext extends WebContextBase {
     private Map<String, Object> requestScope = null;
 
     /**
-     * <p>The <code>PortletResponse</code> for this request.</p>
+     * <p>The <code>HttpServletResponse</code> for this request.</p>
      */
-    private PortletResponse response = null;
+    private HttpServletResponse response = null;
 
     /**
      * <p>The lazily instantiated <code>Map</code> of session scope
@@ -129,45 +131,22 @@ public class PortletWebContext extends WebContextBase {
 
     // ---------------------------------------------------------- Public Methods
 
-    /**
-     * <p>Return the {@link PortletContext} for this context.</p>
-     *
-     * @return The <code>PortletContext</code> for this request
-     */
-    public PortletContext getContext() {
+    public ServletContext getContext() {
         return (this.context);
     }
 
-    /**
-     * <p>Return the {@link PortletRequest} for this context.</p>
-     *
-     * @return The <code>PortletRequest</code> for this context.
-     */
-    public PortletRequest getRequest() {
+    public HttpServletRequest getRequest() {
         return (this.request);
     }
 
-    /**
-     * <p>Return the {@link PortletResponse} for this context.</p>
-     *
-     * @return The <code>PortletResponse</code> for this context.
-     */
-    public PortletResponse getResponse() {
+    public HttpServletResponse getResponse() {
         return (this.response);
     }
 
-    /**
-     * <p>Initialize (or reinitialize) this {@link PortletWebContext} instance
-     * for the specified Portlet API objects.</p>
-     *
-     * @param context The <code>PortletContext</code> for this web application
-     * @param request The <code>PortletRequest</code> for this request
-     * @param response The <code>PortletResponse</code> for this request
-     */
-    public void initialize(PortletContext context,
-                           PortletRequest request,
-                           PortletResponse response) {
-        // Save the specified Portlet API object references
+    public void initialize(ServletContext context,
+                           HttpServletRequest request,
+                           HttpServletResponse response) {
+        // Save the specified Servlet API object references
         this.context = context;
         this.request = request;
         this.response = response;
@@ -175,12 +154,6 @@ public class PortletWebContext extends WebContextBase {
         // Perform other setup as needed
     }
 
-    /**
-     * <p>Release references to allocated resources acquired in
-     * <code>initialize()</code> of via subsequent processing.  After this
-     * method is called, subsequent calls to any other method than
-     * <code>initialize()</code> will return undefined results.</p>
-     */
     public void release() {
         // Release references to allocated collections
         applicationScope = null;
@@ -189,10 +162,11 @@ public class PortletWebContext extends WebContextBase {
         initParam = null;
         param = null;
         paramValues = null;
+        cookieValues = null;
         requestScope = null;
         sessionScope = null;
 
-        // Release references to Portlet API objects
+        // Release references to Servlet API objects
         context = null;
         request = null;
         response = null;
@@ -200,111 +174,66 @@ public class PortletWebContext extends WebContextBase {
 
     // ------------------------------------------------------ WebContextBase Methods
 
-    /**
-     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
-     *
-     * @return Application scope Map.
-     */
     public Map<String, Object> getApplicationScope() {
         if ((applicationScope == null) && (context != null)) {
-            applicationScope = new PortletApplicationScopeMap(context);
+            applicationScope = new ServletApplicationScopeMap(context);
         }
         return (applicationScope);
     }
 
-    /**
-     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
-     *
-     * @return Header values Map.
-     */
     public Map<String, String> getHeader() {
         if ((header == null) && (request != null)) {
-            // header = new PortletHeaderMap(request);
-            header = Collections.emptyMap();
+            header = new ServletHeaderMap(request);
         }
         return (header);
     }
 
-    /**
-     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
-     *
-     * @return Header values Map.
-     */
     public Map<String, String[]> getHeaderValues() {
         if ((headerValues == null) && (request != null)) {
-            // headerValues = new PortletHeaderValuesMap(request);
-            headerValues = Collections.emptyMap();
+            headerValues = new ServletHeaderValuesMap(request);
         }
         return (headerValues);
     }
 
-    /**
-     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
-     *
-     * @return Initialization parameter Map.
-     */
     public Map<String, String> getInitParam() {
         if ((initParam == null) && (context != null)) {
-            initParam = new PortletInitParamMap(context);
+            initParam = new ServletInitParamMap(context);
         }
         return (initParam);
     }
 
-    /**
-     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
-     *
-     * @return Request parameter Map.
-     */
     public Map<String, String> getParam() {
         if ((param == null) && (request != null)) {
-            param = new PortletParamMap(request);
+            param = new ServletParamMap(request);
         }
         return (param);
     }
 
-    /**
-     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
-     *
-     * @return Request parameter Map.
-     */
     public Map<String, String[]> getParamValues() {
         if ((paramValues == null) && (request != null)) {
-            paramValues = new PortletParamValuesMap(request);
+            paramValues = new ServletParamValuesMap(request);
         }
         return (paramValues);
     }
 
-    /**
-     * Returns an empty Map - portlets don't support Cookies.
-     *
-     * @return An empty Map.
-     * @since Chain 1.1
-     */
     public Map<String, Cookie> getCookies() {
-        return Collections.emptyMap();
+        if ((cookieValues == null) && (request != null)) {
+            cookieValues = new ServletCookieMap(request);
+        }
+        return (cookieValues);
     }
 
-    /**
-     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
-     *
-     * @return Request scope Map.
-     */
     public Map<String, Object> getRequestScope() {
         if ((requestScope == null) && (request != null)) {
-            requestScope = new PortletRequestScopeMap(request);
+            requestScope = new ServletRequestScopeMap(request);
         }
         return (requestScope);
     }
 
-    /**
-     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
-     *
-     * @return Session scope Map.
-     */
+
     public Map<String, Object> getSessionScope() {
         if ((sessionScope == null) && (request != null)) {
-            sessionScope =
-            new PortletSessionScopeMap(request);
+            sessionScope = new ServletSessionScopeMap(request);
         }
         return (sessionScope);
     }

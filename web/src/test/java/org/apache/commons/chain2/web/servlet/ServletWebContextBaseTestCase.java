@@ -16,26 +16,6 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.impl.ContextBaseTestCase;
 import org.apache.commons.chain2.web.WebContext;
@@ -43,13 +23,23 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.*;
+import java.util.Map.Entry;
+
+import static org.junit.Assert.*;
+
 
 /**
  * Extension of <code>ContextBaseTestCase</code> to validate the
  * extra functionality of this implementation.
  */
 
-public class ServletWebContextTestCase extends ContextBaseTestCase {
+public class ServletWebContextBaseTestCase extends ContextBaseTestCase {
 
 
     // ----------------------------------------------------- Instance Variables
@@ -183,14 +173,14 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testEquals() {
 
-        // FIXME - ServletWebContext needs a better equals()
+        // FIXME - ServletWebContextBase needs a better equals()
 
         // Compare to self
         assertTrue(context.equals(context));
         assertTrue(context.hashCode() == context.hashCode());
 
         // Compare to equivalent instance
-        Context<String, Object> other = new ServletWebContext(scontext, request, response);
+        Context<String, Object> other = new ServletWebContextBase(scontext, request, response);
         // assertTrue(context.equals(other));
         assertTrue(context.hashCode() == other.hashCode());
 
@@ -200,7 +190,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
         assertTrue(context.hashCode() != other.hashCode());
 
         // Compare to non-equivalent instance - self modified
-        other = new ServletWebContext(scontext, request, response);
+        other = new ServletWebContextBase(scontext, request, response);
         context.put("bop", "bop value");
         // assertTrue(!context.equals(other));
         assertTrue(context.hashCode() != other.hashCode());
@@ -212,7 +202,8 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testHeader() {
 
-        Map<String, String> map = ((WebContext) context).getHeader();
+        @SuppressWarnings("unchecked")
+        Map<String, String> map = ((WebContext<String, Object>) context).getHeader();
         assertNotNull(map);
 
         // Initial contents
@@ -721,7 +712,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
     public void testSessionScopeWithoutSession() {
 
         // Create a Context without a session
-        ServletWebContext ctx = new ServletWebContext(scontext,
+        ServletWebContext<String, Object> ctx = new ServletWebContextBase(scontext,
            new MockHttpServletRequest(), response);
         assertNull("Session(A)", ctx.getRequest().getSession(false));
 
@@ -848,7 +839,7 @@ public class ServletWebContextTestCase extends ContextBaseTestCase {
 
     // Create a new instance of the appropriate Context type for this test case
     protected Context<String, Object> createContext() {
-        return (new ServletWebContext(scontext, request, response));
+        return (new ServletWebContextBase(scontext, request, response));
     }
 
 

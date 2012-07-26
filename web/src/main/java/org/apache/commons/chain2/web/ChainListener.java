@@ -165,15 +165,16 @@ public class ChainListener implements ServletContextListener {
         String webResources = context.getInitParameter(CONFIG_WEB_RESOURCE);
 
         // Retrieve or create the Catalog instance we may be updating
-        Catalog<String, Object, ServletWebContext> catalog = null;
+        Catalog<String, Object, ServletWebContext<String, Object>> catalog = null;
         if (attr != null) {
+            Object catalogRef = context.getAttribute(attr);
 
-            /* Assume that we are getting an object of the type Catalog from the context's
-             * attribute because that is the historical contract. */
-            catalog = (Catalog<String, Object, ServletWebContext>) context.getAttribute(attr);
-
-            if (catalog == null) {
-                catalog = new CatalogBase<String, Object, ServletWebContext>();
+            if (catalogRef == null || !(catalogRef instanceof Catalog) ) {
+                catalog = new CatalogBase<String, Object, ServletWebContext<String, Object>>();
+            } else {
+                /* Assume that we are getting an object of the type Catalog from the context's
+                 * attribute because that is the historical contract. */
+                catalog = (Catalog<String, Object, ServletWebContext<String, Object>>)catalogRef;
             }
         }
 

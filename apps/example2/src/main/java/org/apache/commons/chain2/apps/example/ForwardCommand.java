@@ -30,7 +30,7 @@ import java.io.IOException;
  *
  * @version $Id$
  */
-public class ForwardCommand implements Command<String, Object, ServletWebContext> {
+public class ForwardCommand implements Command<String, Object, ServletWebContext<String, Object>> {
 
     private Log log = LogFactory.getLog(ForwardCommand.class);
 
@@ -60,7 +60,7 @@ public class ForwardCommand implements Command<String, Object, ServletWebContext
      * @param context The {@link Context} we are operating on
      * @return <code>false</code> so that processng will continue
      */
-    public boolean execute(ServletWebContext context) {
+    public boolean execute(ServletWebContext<String, Object> context) {
         try {
             String uri = getForward(context);
             if (uri != null) {
@@ -89,7 +89,7 @@ public class ForwardCommand implements Command<String, Object, ServletWebContext
      * @param context The {@link Context} we are operating on
      * @return The uri to forward to
      */
-    protected String getForward(ServletWebContext context) {
+    protected String getForward(ServletWebContext<String, Object> context) {
         String uri = (String)context.get("forward");
         if (uri == null) {
             uri = getForward();

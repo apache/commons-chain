@@ -29,7 +29,7 @@ import java.util.Locale;
  * @version $Id$
  */
 public class ServletGetLocaleCommand
-        extends AbstractGetLocaleCommand<ServletWebContext> {
+        extends AbstractGetLocaleCommand<ServletWebContext<String, Object>> {
 
     // ------------------------------------------------------- Protected Methods
 
@@ -39,7 +39,7 @@ public class ServletGetLocaleCommand
      * @param context The {@link Context} we are operating on.
      * @return The Locale for the request.
      */
-    protected Locale getLocale(ServletWebContext context) {
+    protected Locale getLocale(ServletWebContext<String, Object> context) {
         HttpServletRequest request = (HttpServletRequest)
             context.get("request");
         return (request.getLocale());

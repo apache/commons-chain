@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @version $Id$
  */
-public class ServletPathMapper extends LookupCommand<String, Object, ServletWebContext> {
+public class ServletPathMapper extends LookupCommand<String, Object, ServletWebContext<String, Object>> {
 
     // --------------------------------------------------------- Command Methods
 
@@ -48,7 +48,7 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
      * @since Chain 1.2
      */
     @Override
-    protected String getCommandName(ServletWebContext swcontext) {
+    protected String getCommandName(ServletWebContext<String, Object> swcontext) {
         // Look up the servlet path for this request
         HttpServletRequest request = swcontext.getRequest();
         String servletPath = (String)
@@ -71,7 +71,8 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
      * @since Chain 1.2
      */
     @Override
-    protected Catalog<String, Object, ServletWebContext> getCatalog(ServletWebContext context) {
+    protected Catalog<String, Object, ServletWebContext<String, Object>>
+            getCatalog(ServletWebContext<String, Object> context) {
         /* If the object returned from the passed context is not a valid catalog
          * then we use the super class's catalog extraction logic to pull it
          * or to error gracefully.
@@ -82,9 +83,10 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
          * returning a catalog with the current context.
          */
         @SuppressWarnings("unchecked")
-        Catalog<String, Object, ServletWebContext> catalog = testCatalog != null && testCatalog instanceof Catalog ?
-                (Catalog<String, Object, ServletWebContext>) testCatalog :
-                super.getCatalog(context);
+        Catalog<String, Object, ServletWebContext<String, Object>> catalog =
+                testCatalog != null && testCatalog instanceof Catalog ?
+                    (Catalog<String, Object, ServletWebContext<String, Object>>) testCatalog :
+                    super.getCatalog(context);
 
         return catalog;
     }

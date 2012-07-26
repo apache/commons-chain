@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @version $Id$
  */
-public class PathInfoMapper extends LookupCommand<String, Object, ServletWebContext> {
+public class PathInfoMapper extends LookupCommand<String, Object, ServletWebContext<String, Object>> {
 
     // --------------------------------------------------------- Command Methods
 
@@ -48,7 +48,7 @@ public class PathInfoMapper extends LookupCommand<String, Object, ServletWebCont
      * @since Chain 1.2
      */
     @Override
-    protected String getCommandName(ServletWebContext context) {
+    protected String getCommandName(ServletWebContext<String, Object> context) {
         // Look up the extra path information for this request
         HttpServletRequest request = context.getRequest();
         String pathInfo = (String)
@@ -71,12 +71,13 @@ public class PathInfoMapper extends LookupCommand<String, Object, ServletWebCont
      * @since Chain 1.2
      */
     @Override
-    protected Catalog<String, Object, ServletWebContext> getCatalog(ServletWebContext context) {
+    protected Catalog<String, Object, ServletWebContext<String, Object>>
+            getCatalog(ServletWebContext<String, Object> context) {
         /* Assume that the object returned will be a catalog because of chain's
          * historical contract. */
         @SuppressWarnings("unchecked")
-        Catalog<String, Object, ServletWebContext> catalog =
-                (Catalog<String, Object, ServletWebContext>) context.get(getCatalogName());
+        Catalog<String, Object, ServletWebContext<String, Object>> catalog =
+                (Catalog<String, Object, ServletWebContext<String, Object>>) context.get(getCatalogName());
         if (catalog == null) {
             catalog = super.getCatalog(context);
         }

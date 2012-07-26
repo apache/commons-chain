@@ -16,24 +16,17 @@
  */
 package org.apache.commons.chain2.web.portlet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Locale;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
+import java.util.Locale;
 
-import org.apache.commons.chain2.web.portlet.PortletGetLocaleCommand;
-import org.apache.commons.chain2.web.portlet.PortletWebContext;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 
 // Test case for org.apache.commons.chain2.web.portlet.PortletGetLocaleCommand

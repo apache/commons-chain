@@ -16,7 +16,7 @@
  */
 package org.apache.commons.chain2.web.faces;
 
-import org.apache.commons.chain2.web.WebContext;
+import org.apache.commons.chain2.web.WebContextBase;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
@@ -25,14 +25,14 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * <p>Concrete implementation of {@link WebContext} suitable for use in
+ * <p>Concrete implementation of {@link org.apache.commons.chain2.web.WebContext} suitable for use in
  * JavaServer Faces apps.  The abstract methods are mapped to the appropriate
  * collections of the underlying <code>FacesContext</code> instance
  * that is passed to the constructor (or the initialize method).</p>
  *
  * @version $Id$
  */
-public class FacesWebContext extends WebContext {
+public class FacesWebContext extends WebContextBase {
 
     // ------------------------------------------------------------ Constructors
 
@@ -61,7 +61,7 @@ public class FacesWebContext extends WebContext {
 
     /**
      * <p>The <code>FacesContext</code> instance for the request represented
-     * by this {@link WebContext}.</p>
+     * by this {@link org.apache.commons.chain2.web.WebContext}.</p>
      */
     private FacesContext context = null;
 
@@ -97,10 +97,10 @@ public class FacesWebContext extends WebContext {
         context = null;
     }
 
-    // ------------------------------------------------------ WebContext Methods
+    // ------------------------------------------------------ WebContextBase Methods
 
     /**
-     * See the {@link WebContext}'s Javadoc.
+     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Application scope Map.
      */
@@ -112,7 +112,7 @@ public class FacesWebContext extends WebContext {
     }
 
     /**
-     * See the {@link WebContext}'s Javadoc.
+     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Header values Map.
      */
@@ -125,7 +125,7 @@ public class FacesWebContext extends WebContext {
     }
 
     /**
-     * See the {@link WebContext}'s Javadoc.
+     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Header values Map.
      */
@@ -138,7 +138,7 @@ public class FacesWebContext extends WebContext {
     }
 
     /**
-     * See the {@link WebContext}'s Javadoc.
+     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Initialization parameter Map.
      */
@@ -151,7 +151,7 @@ public class FacesWebContext extends WebContext {
     }
 
     /**
-     * See the {@link WebContext}'s Javadoc.
+     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Request parameter Map.
      */
@@ -164,7 +164,7 @@ public class FacesWebContext extends WebContext {
     }
 
     /**
-     * See the {@link WebContext}'s Javadoc.
+     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Request parameter Map.
      */
@@ -177,7 +177,7 @@ public class FacesWebContext extends WebContext {
     }
 
     /**
-     * See the {@link WebContext}'s Javadoc.
+     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Map of Cookies.
      * @since Chain 1.1
@@ -214,7 +214,7 @@ public class FacesWebContext extends WebContext {
     }
 
     /**
-     * See the {@link WebContext}'s Javadoc.
+     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Request scope Map.
      */
@@ -227,7 +227,7 @@ public class FacesWebContext extends WebContext {
     }
 
     /**
-     * See the {@link WebContext}'s Javadoc.
+     * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Session scope Map.
      */

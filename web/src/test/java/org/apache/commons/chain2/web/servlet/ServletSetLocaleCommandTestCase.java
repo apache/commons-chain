@@ -16,23 +16,17 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import java.util.Locale;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Locale;
 
-import org.apache.commons.chain2.web.servlet.ServletSetLocaleCommand;
-import org.apache.commons.chain2.web.servlet.ServletWebContext;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 
 // Test case for org.apache.commons.chain2.web.servlet.ServletSetLocaleCommand
@@ -52,7 +46,7 @@ public class ServletSetLocaleCommandTestCase {
     protected HttpSession session = null;
 
     // Chain API Objects
-    protected ServletWebContext context = null;
+    protected ServletWebContextBase context = null;
     protected ServletSetLocaleCommand command = null;
 
 
@@ -76,7 +70,7 @@ public class ServletSetLocaleCommandTestCase {
         response = new MockHttpServletResponse();
 
     // Set up Chain API Objects
-        context = new ServletWebContext(scontext, request, response);
+        context = new ServletWebContextBase(scontext, request, response);
     command = new ServletSetLocaleCommand();
 
     }
@@ -126,22 +120,20 @@ public class ServletSetLocaleCommandTestCase {
     // --------------------------------------------------------- Support Methods
 
 
-    protected void check(ServletWebContext context, ServletSetLocaleCommand command)
-    throws Exception {
+    protected void check(ServletWebContextBase context, ServletSetLocaleCommand command)
+            throws Exception {
 
-    String localeKey = command.getLocaleKey();
-    assertNotNull(localeKey);
-    Object value = context.get(localeKey);
-    assertNull(value);
-    context.put(localeKey, locale);
-    assertNotNull(context.get(localeKey));
-    assertNull(response.getLocale());
-    boolean result = command.execute(context);
-    assertFalse(result);
-    assertNotNull(response.getLocale());
-    assertEquals(locale, response.getLocale());
-
+        String localeKey = command.getLocaleKey();
+        assertNotNull(localeKey);
+        Object value = context.get(localeKey);
+        assertNull(value);
+        context.put(localeKey, locale);
+        assertNotNull(context.get(localeKey));
+        assertNull(response.getLocale());
+        boolean result = command.execute(context);
+        assertFalse(result);
+        assertNotNull(response.getLocale());
+        assertEquals(locale, response.getLocale());
     }
-
 
 }

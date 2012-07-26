@@ -159,9 +159,9 @@ public class ChainProcessor extends ChainServlet {
     public void service(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
 
-        ServletWebContext context =
-            new ServletWebContext(getServletContext(), request, response);
-        Catalog<String, Object, ServletWebContext> theCatalog;
+        ServletWebContext<String, Object> context =
+            new ServletWebContextBase(getServletContext(), request, response);
+        Catalog<String, Object, ServletWebContext<String, Object>> theCatalog;
 
         if (attribute != null) {
             ServletContext servletContext = getServletContext();
@@ -174,8 +174,8 @@ public class ChainProcessor extends ChainServlet {
                  * here, we still need to suppress warnings because of the
                  * type erasure of generics. */
                 @SuppressWarnings("unchecked")
-                Catalog<String, Object, ServletWebContext> attributeCatalog =
-                     (Catalog<String, Object, ServletWebContext>)testAttribute;
+                Catalog<String, Object, ServletWebContext<String, Object>> attributeCatalog =
+                     (Catalog<String, Object, ServletWebContext<String, Object>>)testAttribute;
                 theCatalog = attributeCatalog;
             } else {
                 String msg = "The object stored as the attribute [" +
@@ -184,14 +184,17 @@ public class ChainProcessor extends ChainServlet {
                 throw new IllegalArgumentException(msg);
             }
         } else if (catalog != null) {
-            theCatalog = CatalogFactory.<String, Object, ServletWebContext>getInstance().getCatalog(catalog);
+            theCatalog = CatalogFactory.<String, Object, ServletWebContext<String, Object>>getInstance()
+                    .getCatalog(catalog);
         } else {
-            theCatalog = CatalogFactory.<String, Object, ServletWebContext>getInstance().getCatalog();
+            theCatalog = CatalogFactory.<String, Object, ServletWebContext<String, Object>>getInstance()
+                    .getCatalog();
         }
         if (attribute == null) {
             request.setAttribute(CATALOG_DEFAULT, theCatalog);
         }
-        Command<String, Object, ServletWebContext> cmd = theCatalog.getCommand(this.command);
+        Command<String, Object, ServletWebContext<String, Object>> cmd = theCatalog
+                .<Command<String, Object, ServletWebContext<String, Object>>>getCommand(this.command);
         try {
             cmd.execute(context);
         } catch (Exception e) {

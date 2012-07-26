@@ -16,24 +16,17 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Locale;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Locale;
 
-import org.apache.commons.chain2.web.servlet.ServletGetLocaleCommand;
-import org.apache.commons.chain2.web.servlet.ServletWebContext;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 
 // Test case for org.apache.commons.chain2.web.servlet.ServletGetLocaleCommand
@@ -53,7 +46,7 @@ public class ServletGetLocaleCommandTestCase {
     protected HttpSession session = null;
 
     // Chain API Objects
-    protected ServletWebContext context = null;
+    protected ServletWebContext<String, Object> context = null;
     protected ServletGetLocaleCommand command = null;
 
 
@@ -78,7 +71,7 @@ public class ServletGetLocaleCommandTestCase {
         response = new MockHttpServletResponse();
 
     // Set up Chain API Objects
-        context = new ServletWebContext(scontext, request, response);
+        context = new ServletWebContextBase(scontext, request, response);
     command = new ServletGetLocaleCommand();
 
     }

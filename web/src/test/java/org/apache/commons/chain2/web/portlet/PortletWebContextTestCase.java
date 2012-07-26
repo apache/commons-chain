@@ -16,8 +16,6 @@
  */
 package org.apache.commons.chain2.web.portlet;
 
-import static org.junit.Assert.*;
-
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.impl.ContextBaseTestCase;
 import org.apache.commons.chain2.web.WebContext;
@@ -30,13 +28,10 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.servlet.http.Cookie;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Collection;
+
+import static org.junit.Assert.*;
 
 
 /**
@@ -107,7 +102,8 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testApplicationScope() {
 
-        Map<String, Object> map = ((WebContext) context).getApplicationScope();
+        @SuppressWarnings("unchecked")
+        Map<String, Object> map = ((WebContext<String, Object>)context).getApplicationScope();
         assertNotNull(map);
 
         // Initial contents
@@ -198,7 +194,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testHeader() {
 
-        Map<String, String> map = ((WebContext) context).getHeader();
+        Map<String, String> map = ((WebContext<String, Object>) context).getHeader();
         assertNotNull("Header Map Null", map);
 
         // Initial contents
@@ -208,7 +204,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
             map.put("hkey3", "hvalue3");
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
-            ; // expected result
+            // expected result
         }
 
     }
@@ -218,7 +214,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testHeaderValues() {
 
-        Map<String, String[]> map = ((WebContext) context).getHeaderValues();
+        Map<String, String[]> map = ((WebContext<String, Object>) context).getHeaderValues();
         assertNotNull("HeaderValues Map Null", map);
 
         // Initial contents
@@ -241,7 +237,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testInitParam() {
 
-        Map<String, String> map = ((WebContext) context).getInitParam();
+        Map<String, String> map = ((WebContext<String, Object>) context).getInitParam();
         assertNotNull(map);
 
         // Initial contents
@@ -292,7 +288,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testParam() {
 
-        Map<String, String> map = ((WebContext) context).getParam();
+        Map<String, String> map = ((WebContext<String, Object>) context).getParam();
         assertNotNull(map);
 
         // Initial contents
@@ -339,7 +335,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testParamValues() {
 
-        Map<String, String[]> map = ((WebContext) context).getParamValues();
+        Map<String, String[]> map = ((WebContext<String, Object>) context).getParamValues();
         assertNotNull(map);
 
         // Initial contents
@@ -395,7 +391,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
     @Test
     public void testCookies() {
 
-        Map<String, Cookie> map = ((WebContext) context).getCookies();
+        Map<String, Cookie> map = ((WebContext<String, Object>) context).getCookies();
         assertNotNull(map);
 
         // Initial contents

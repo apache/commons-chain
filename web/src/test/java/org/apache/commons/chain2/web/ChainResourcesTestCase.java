@@ -16,17 +16,16 @@
  */
 package org.apache.commons.chain2.web;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.Arrays;
-import java.util.Collection;
-
-import org.apache.commons.chain2.web.ChainResources;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
 
 // Test case for org.apache.commons.chain2.web.ChainResources
 

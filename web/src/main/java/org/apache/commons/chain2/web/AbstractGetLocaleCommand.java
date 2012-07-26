@@ -30,7 +30,7 @@ import java.util.Locale;
  *
  * @version $Id$
  */
-public abstract class AbstractGetLocaleCommand<C extends WebContext>
+public abstract class AbstractGetLocaleCommand<C extends WebContext<String, Object>>
         implements Command<String, Object, C> {
 
     // -------------------------------------------------------------- Properties

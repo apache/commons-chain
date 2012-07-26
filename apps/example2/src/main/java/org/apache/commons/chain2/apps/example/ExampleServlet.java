@@ -20,6 +20,7 @@ import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.web.servlet.ServletWebContext;
+import org.apache.commons.chain2.web.servlet.ServletWebContextBase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -59,7 +60,7 @@ public class ExampleServlet extends HttpServlet {
     }
 
     /**
-     * <p>Configure a {@link ServletWebContext} for the current request, and
+     * <p>Configure a {@link org.apache.commons.chain2.web.servlet.ServletWebContext} for the current request, and
      * pass it to the <code>execute()</code> method of the specified
      * {@link Command}, loaded from our configured {@link Catalog}.</p>
      *
@@ -72,15 +73,20 @@ public class ExampleServlet extends HttpServlet {
                         HttpServletResponse response)
         throws IOException {
 
-        CatalogFactory<String, Object, ServletWebContext> factory = CatalogFactory.getInstance();
-        Catalog<String, Object, ServletWebContext> catalog = factory.getCatalog(servletName);
+        CatalogFactory<String, Object, ServletWebContext<String, Object>> factory =
+                CatalogFactory.getInstance();
+        Catalog<String, Object, ServletWebContext<String, Object>> catalog =
+                factory.getCatalog(servletName);
+
         if (catalog == null) {
             catalog = factory.getCatalog();
         }
 
-        ServletWebContext context =
-            new ServletWebContext(getServletContext(), request, response);
-        Command<String, Object, ServletWebContext> command = catalog.getCommand("COMMAND_MAPPER");
+        ServletWebContext<String, Object> context =
+            new ServletWebContextBase(getServletContext(), request, response);
+
+        Command<String, Object, ServletWebContext<String, Object>> command = catalog.
+                <Command<String, Object, ServletWebContext<String, Object>>>getCommand("COMMAND_MAPPER");
         command.execute(context);
     }
 

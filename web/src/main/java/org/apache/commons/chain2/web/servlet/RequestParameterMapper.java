@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version $Id$
  */
 public class RequestParameterMapper
-        extends LookupCommand<String, Object, ServletWebContext> {
+        extends LookupCommand<String, Object, ServletWebContext<String, Object>> {
 
     // ------------------------------------------------------ Instance Variables
 
@@ -96,12 +96,13 @@ public class RequestParameterMapper
      * @since Chain 1.2
      */
     @Override
-    protected Catalog<String, Object, ServletWebContext> getCatalog(ServletWebContext context) {
+    protected Catalog<String, Object, ServletWebContext<String, Object>>
+            getCatalog(ServletWebContext<String, Object> context) {
         /* Assume that the returned value will be null or of a valid catalog
          * type according to chain's historical contract. */
         @SuppressWarnings("unchecked")
-        Catalog<String, Object, ServletWebContext> catalog =
-                (Catalog<String, Object, ServletWebContext>) context.get(getCatalogKey());
+        Catalog<String, Object, ServletWebContext<String, Object>> catalog =
+                (Catalog<String, Object, ServletWebContext<String, Object>>) context.get(getCatalogKey());
 
         if (catalog == null) {
             catalog = super.getCatalog(context);
