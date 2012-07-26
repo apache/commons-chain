@@ -120,14 +120,14 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
     public <CMD extends Command<K, V, C>> CMD getCommand(String commandID) {
         String commandName = commandID;
         String catalogName = null;
-        Catalog<K, V, C> catalog = null;
+        Catalog<K, V, C> catalog;
 
         if (commandID != null) {
             int splitPos = commandID.indexOf(DELIMITER);
             if (splitPos != -1) {
                 catalogName = commandID.substring(0, splitPos);
                 commandName = commandID.substring(splitPos + DELIMITER.length());
-                if (commandName.indexOf(DELIMITER) != -1) {
+                if (commandName.contains(DELIMITER)) {
                     throw new IllegalArgumentException("commandID [" +
                                                        commandID +
                                                        "] has too many delimiters (reserved for future use)");
@@ -179,7 +179,7 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
      * @return the per-application singleton instance of {@link CatalogFactory}
      */
     public static <K, V, C extends Map<K, V>> CatalogFactory<K, V, C> getInstance() {
-        CatalogFactory<?, ?, ? extends Map<?, ?>> factory = null;
+        CatalogFactory<?, ?, ? extends Map<?, ?>> factory;
         ClassLoader cl = getClassLoader();
         synchronized (factories) {
             factory = factories.get(cl);
@@ -224,4 +224,20 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
         return cl;
     }
 
+    /**
+     * Check to see if we have an implementation of a valid configuration
+     * parsing class loaded at runtime. If not, we throw a
+     * ChainConfigurationException.
+     */
+    public static void checkForValidConfigurationModule() {
+        try {
+            ClassLoader cl = getClassLoader();
+            cl.loadClass("org.apache.commons.chain2.config.ConfigParser");
+        } catch (ClassNotFoundException e) {
+            String msg = "Couldn't not find a configuration implementation. " +
+                    "Load a chain configuration module such as xml-configuration " +
+                    "into the classpath and try again.";
+            throw new ChainConfigurationException(msg, e);
+        }
+    }
 }

@@ -25,13 +25,13 @@ import java.util.Map;
 
 /**
  * <p>Digester rule that will cause the top-most element on the Digester
- * stack (if it is a {@link Catalog} to be registered with the
- * {@link CatalogFactory} instance for our application.  If the attribute
+ * stack (if it is a {@link org.apache.commons.chain2.Catalog} to be registered with the
+ * {@link org.apache.commons.chain2.CatalogFactory} instance for our application.  If the attribute
  * specified to our constructor has a value, that will be used as the name
- * under which to register this {@link Catalog}.  Otherwise, this will
- * become the default {@link Catalog} for this application.</p>
+ * under which to register this {@link org.apache.commons.chain2.Catalog}.  Otherwise, this will
+ * become the default {@link org.apache.commons.chain2.Catalog} for this application.</p>
  *
- * @version $Id$
+ * @version $Id: ConfigCatalogRule.java 1363305 2012-07-19 11:42:53Z simonetripodi $
  */
 class ConfigCatalogRule extends Rule {
 
@@ -44,7 +44,7 @@ class ConfigCatalogRule extends Rule {
      * @param nameAttribute Name of the attribute containing the name under
      *  which this command should be registered
      * @param catalogClass Name of the implementation class for newly
-     *  created {@link Catalog} instances
+     *  created {@link org.apache.commons.chain2.Catalog} instances
      */
     public ConfigCatalogRule(String nameAttribute, String catalogClass) {
         super();
@@ -55,7 +55,7 @@ class ConfigCatalogRule extends Rule {
     // ----------------------------------------------------- Instance Variables
 
     /**
-     * <p>The fully qualified class name of a {@link Catalog} class to use for
+     * <p>The fully qualified class name of a {@link org.apache.commons.chain2.Catalog} class to use for
      * instantiating new instances.</p>
      */
     private String catalogClass = null;
@@ -69,8 +69,8 @@ class ConfigCatalogRule extends Rule {
     // --------------------------------------------------------- Public Methods
 
     /**
-     * <p>Retrieve or create a {@link Catalog} with the name specified by
-     * the <code>nameAttribute</code> attribute, or the default {@link Catalog}
+     * <p>Retrieve or create a {@link org.apache.commons.chain2.Catalog} with the name specified by
+     * the <code>nameAttribute</code> attribute, or the default {@link org.apache.commons.chain2.Catalog}
      * if there is no such attribute defined.  Push it onto the top of the
      * stack.</p>
      *

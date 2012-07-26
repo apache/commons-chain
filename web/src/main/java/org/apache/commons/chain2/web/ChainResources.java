@@ -64,12 +64,12 @@ final class ChainResources {
         String[] paths = getResourcePaths(resources);
         String path = null;
         try {
-            for (int i = 0; i < paths.length; i++) {
-                path = paths[i];
+            for (String path1 : paths) {
+                path = path1;
                 URL url = loader.getResource(path);
                 if (url == null) {
                     throw new IllegalStateException
-                        ("Missing chain config resource '" + path + "'");
+                            ("Missing chain config resource '" + path + "'");
                 }
                 if (log.isDebugEnabled()) {
                     log.debug("Loading chain config resource '" + path + "'");
@@ -100,12 +100,12 @@ final class ChainResources {
         String[] paths = getResourcePaths(resources);
         String path = null;
         try {
-            for (int i = 0; i < paths.length; i++) {
-                path = paths[i];
+            for (String path1 : paths) {
+                path = path1;
                 URL url = context.getResource(path);
                 if (url == null) {
                     throw new IllegalStateException
-                        ("Missing chain config resource '" + path + "'");
+                            ("Missing chain config resource '" + path + "'");
                 }
                 if (log.isDebugEnabled()) {
                     log.debug("Loading chain config resource '" + path + "'");

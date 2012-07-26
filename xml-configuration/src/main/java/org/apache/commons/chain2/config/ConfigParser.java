@@ -16,7 +16,7 @@
  */
 package org.apache.commons.chain2.config;
 
-import org.apache.commons.chain2.Catalog;
+import org.apache.commons.chain2.ChainConfigurationException;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.RuleSet;
 
@@ -25,16 +25,15 @@ import java.net.URL;
 /**
  * <p>Class to parse the contents of an XML configuration file (using
  * Commons Digester) that defines and configures commands and command chains
- * to be registered in a {@link Catalog}.  Advanced users can configure the
+ * to be registered in a {@link org.apache.commons.chain2.Catalog}.  Advanced users can configure the
  * detailed parsing behavior by configuring the properties of an instance
  * of this class prior to calling the <code>parse()</code> method.  It
  * is legal to call the <code>parse()</code> method more than once, in order
  * to parse more than one configuration document.</p>
  *
- * @version $Id$
+ * @version $Id: ConfigParser.java 1364104 2012-07-21 14:25:54Z elijah $
  */
 public class ConfigParser {
-
     // ----------------------------------------------------- Instance Variables
 
     /**
@@ -47,6 +46,31 @@ public class ConfigParser {
      * <p>Should Digester use the context class loader?
      */
     private boolean useContextClassLoader = true;
+
+    // ------------------------------------------------------------- Constructor
+
+    public ConfigParser() {
+    }
+
+    public ConfigParser(String ruleSet, ClassLoader loader) {
+        if (ruleSet == null) {
+            throw new IllegalArgumentException("ConfigParser can't be " +
+                    "instantiated with a null ruleSet class name");
+        }
+        if (loader == null) {
+            throw new IllegalArgumentException("ConfigParser can't be " +
+                    "instantiated with a null class loader reference");
+        }
+
+        try {
+            Class<?> clazz = loader.loadClass(ruleSet);
+            setRuleSet((RuleSet) clazz.newInstance());
+        } catch (Exception e) {
+            throw new RuntimeException("Exception initializing RuleSet '"
+                    + ruleSet + "' instance: "
+                    + e.getMessage());
+        }
+    }
 
     // ------------------------------------------------------------- Properties
 
@@ -114,15 +138,22 @@ public class ConfigParser {
      *
      * @param url <code>URL</code> of the XML document to be parsed
      *
-     * @exception Exception if a parsing error occurs
+     * @exception ChainConfigurationException if a parsing error occurs
      */
-    public void parse(URL url) throws Exception {
+    public void parse(URL url) throws ChainConfigurationException {
         // Prepare our Digester instance
         Digester digester = getDigester();
         digester.clear();
 
         // Parse the configuration document
-        digester.parse(url);
+        try {
+            digester.parse(url);
+        } catch (Exception e) {
+            String msg = String.format(
+                    "Error parsing digestor configuration at url: %s",
+                    url);
+            throw new ChainConfigurationException(msg, e);
+        }
     }
 
 }

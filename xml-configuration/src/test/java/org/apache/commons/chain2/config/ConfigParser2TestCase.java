@@ -17,43 +17,31 @@
 
 package org.apache.commons.chain2.config;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Iterator;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
-import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.impl.AddingCommand;
-import org.apache.commons.chain2.impl.CatalogBase;
-import org.apache.commons.chain2.impl.CatalogFactoryBase;
-import org.apache.commons.chain2.impl.ChainBase;
-import org.apache.commons.chain2.impl.ContextBase;
-import org.apache.commons.chain2.impl.DelegatingCommand;
-import org.apache.commons.chain2.impl.DelegatingFilter;
-import org.apache.commons.chain2.impl.ExceptionCommand;
-import org.apache.commons.chain2.impl.ExceptionFilter;
-import org.apache.commons.chain2.impl.NonDelegatingCommand;
-import org.apache.commons.chain2.impl.NonDelegatingFilter;
+import org.apache.commons.chain2.impl.*;
 import org.apache.commons.digester3.Digester;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+
+import static org.junit.Assert.*;
+
 
 /**
- * <p>Test Case for <code>org.apache.commons.chain2.config.ConfigParser</code>.</p>
+ * <p>Test case identical to {@link ConfigParserTestCase} except
+ * that it uses the <code>define</code> rule to define aliases
+ * for the commands and chains used in the test.</p>
  */
 
-public class ConfigParserTestCase {
+public class ConfigParser2TestCase {
 
 
     private static final String DEFAULT_XML =
-        "/org/apache/commons/chain2/config/test-config.xml";
+        "/org/apache/commons/chain2/config/test-config-2.xml";
 
 
     // ------------------------------------------------------ Instance Variables
@@ -85,7 +73,6 @@ public class ConfigParserTestCase {
      */
     @Before
     public void setUp() {
-        CatalogFactory.clear();
         catalog = new CatalogBase<String, Object, Context<String, Object>>();
         context = new ContextBase();
         parser = new ConfigParser();
@@ -343,7 +330,7 @@ public class ConfigParserTestCase {
         parser.parse(this.getClass().getResource(path));
         CatalogFactory<String, Object, Context<String, Object>> catalogFactory
             = CatalogFactoryBase.getInstance();
-        catalog = catalogFactory.getCatalog();
+        catalog = catalogFactory.getCatalog("foo");
     }
 
 

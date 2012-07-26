@@ -28,9 +28,9 @@
     <relativePath>../</relativePath>
   </parent>
 
-  <artifactId>commons-chain2-configuration</artifactId>
+  <artifactId>commons-chain2-configuration-api</artifactId>
 
-  <name>Apache Commons Chain :: Configuration</name>
+  <name>Apache Commons Chain :: Configuration API</name>
 
   <dependencies>
     <dependency>
@@ -41,16 +41,17 @@
 
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>commons-digester3</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>${project.groupId}</groupId>
       <artifactId>commons-chain2-core</artifactId>
       <version>${project.parent.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
+
+  <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+  </dependency>
+
   </dependencies>
 
   <build>

@@ -49,8 +49,14 @@ public class MailReaderServlet extends HttpServlet {
         Catalog<String, Object, MailReader> catalog =
                 catalogFactory.getCatalog();
 
+        if (catalog == null) {
+            String msg = String.format("No catalog returned from factory: %s",
+                    catalogFactory.getClass().getName());
+            throw new IllegalArgumentException(msg);
+        }
+
         Command<String, Object, MailReader> profileCheckCmd =
-                catalog.getCommand("LocaleChange");
+                catalog.<Command<String, Object, MailReader>>getCommand("LocaleChange");
 
         profileCheckCmd.execute(context);
     }

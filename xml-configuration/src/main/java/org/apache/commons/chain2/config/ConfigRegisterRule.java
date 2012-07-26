@@ -16,23 +16,23 @@
  */
 package org.apache.commons.chain2.config;
 
-import java.util.Map;
-
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.digester3.Rule;
 import org.xml.sax.Attributes;
 
+import java.util.Map;
+
 /**
  * <p>Digester rule that will cause the top-most element on the Digester
- * stack (if it is a {@link Command} to be registered with the next-to-top
- * element on the Digester stack (if it is a {@link Catalog} or {@link Chain}).
- * To be registered with a {@link Catalog}, the top-most element must contain
+ * stack (if it is a {@link org.apache.commons.chain2.Command} to be registered with the next-to-top
+ * element on the Digester stack (if it is a {@link org.apache.commons.chain2.Catalog} or {@link org.apache.commons.chain2.Chain}).
+ * To be registered with a {@link org.apache.commons.chain2.Catalog}, the top-most element must contain
  * a value for the specified attribute that contains the name under which
  * it should be registered.</p>
  *
- * @version $Id$
+ * @version $Id: ConfigRegisterRule.java 1363305 2012-07-19 11:42:53Z simonetripodi $
  */
 class ConfigRegisterRule extends Rule {
 
@@ -61,7 +61,7 @@ class ConfigRegisterRule extends Rule {
     // --------------------------------------------------------- Public Methods
 
     /**
-     * <p>Register the top {@link Command} if appropriate.</p>
+     * <p>Register the top {@link org.apache.commons.chain2.Command} if appropriate.</p>
      *
      * @param namespace the namespace URI of the matching element, or an
      *   empty string if the parser is not namespace aware or the element has

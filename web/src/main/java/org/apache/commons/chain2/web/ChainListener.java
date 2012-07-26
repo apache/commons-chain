@@ -21,7 +21,6 @@ import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.config.ConfigParser;
 import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.web.servlet.ServletWebContext;
-import org.apache.commons.digester3.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -93,6 +92,9 @@ import java.util.Set;
  * @version $Id$
  */
 public class ChainListener implements ServletContextListener {
+    {
+        CatalogFactory.checkForValidConfigurationModule();
+    }
 
     // ------------------------------------------------------ Manifest Constants
 
@@ -179,22 +181,12 @@ public class ChainListener implements ServletContextListener {
         }
 
         // Construct the configuration resource parser we will use
-        ConfigParser parser = new ConfigParser();
-        if (ruleSet != null) {
-            try {
-                ClassLoader loader =
-                    Thread.currentThread().getContextClassLoader();
-                if (loader == null) {
-                    loader = this.getClass().getClassLoader();
-                }
-                Class<?> clazz = loader.loadClass(ruleSet);
-                parser.setRuleSet((RuleSet) clazz.newInstance());
-            } catch (Exception e) {
-                throw new RuntimeException("Exception initalizing RuleSet '"
-                                           + ruleSet + "' instance: "
-                                           + e.getMessage());
-            }
-        }
+        ClassLoader cl = Thread.currentThread().getContextClassLoader() == null ?
+                this.getClass().getClassLoader() :
+                Thread.currentThread().getContextClassLoader();
+
+        ConfigParser parser = ruleSet == null ?
+                new ConfigParser() : new ConfigParser(ruleSet, cl);
 
         // Parse the resources specified in our init parameters (if any)
         if (attr == null) {

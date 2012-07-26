@@ -41,6 +41,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="2.0" description="Major release">
+        <action dev="elijah" type="update" issue="CHAIN-72">
+            Refactored configuration module to a facade that supports multiple implementations.
+        </action>
       <action dev="elijah" type="fix" issue="CHAIN-47">
           WebContext, ServletWebContext are now interfaces
       </action>
