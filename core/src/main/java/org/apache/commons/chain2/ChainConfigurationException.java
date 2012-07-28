@@ -37,9 +37,4 @@ public class ChainConfigurationException extends RuntimeException {
     public ChainConfigurationException(Throwable cause) {
         super(cause);
     }
-
-    public ChainConfigurationException(String message, Throwable cause,
-            boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
 }
