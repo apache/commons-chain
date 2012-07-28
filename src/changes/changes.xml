@@ -41,55 +41,55 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="2.0" description="Major release">
-        <action dev="elijah" type="update" issue="CHAIN-72">
+        <action issue="CHAIN-72" dev="elijah" type="update">
             Refactored configuration module to a facade that supports multiple implementations.
         </action>
-      <action dev="elijah" type="fix" issue="CHAIN-47">
+      <action issue="CHAIN-47" dev="elijah" type="fix">
           WebContext, ServletWebContext are now interfaces
       </action>
-      <action dev="elijah" type="update" issue="CHAIN-75">
+      <action issue="CHAIN-75" dev="elijah" type="update">
         Update serialVersionUID in all classes to a date based format.
       </action>
-      <action dev="simonetripodi" type="update" issue="CHAIN-74">
+      <action issue="CHAIN-74" dev="simonetripodi" type="update">
         Improve Chain/Catalog use of Generics.
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-73">
+      <action issue="CHAIN-73" dev="simonetripodi" type="add">
         Add a small EDSL to simplify Catalog setup.
       </action>
-      <action dev="elijah" type="update" issue="CHAIN-71">
+      <action issue="CHAIN-71" dev="elijah" type="update">
         Removed methods deprecated in 1.xx releases.
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-70">
+      <action issue="CHAIN-70" dev="simonetripodi" type="add">
         Add a small EDSL to simplify Chain setup and execution.
       </action>
-      <action dev="simonetripodi" type="fix" issue="CHAIN-69" due-to="Elijah Zupancic">
+      <action issue="CHAIN-69" dev="simonetripodi" type="fix" due-to="Elijah Zupancic">
         Fixed Checkstyle / PMD Warnings
       </action>
-      <action dev="simonetripodi" type="fix" issue="CHAIN-68" due-to="Elijah Zupancic">
+      <action issue="CHAIN-68" dev="simonetripodi" type="fix" due-to="Elijah Zupancic">
         SNAPSHOT tomcat plugin breaks the build
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-67" due-to="Elijah Zupancic">
+      <action issue="CHAIN-67" dev="simonetripodi" type="add" due-to="Elijah Zupancic">
         Refactor of explicit Exception throws to a RuntimeException type
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-66" due-to="Elijah Zupancic">
+      <action issue="CHAIN-66" dev="simonetripodi" type="add" due-to="Elijah Zupancic">
         Updated Chain documentation to include new changes to the API
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-65" due-to="Elijah Zupancic">
+      <action issue="CHAIN-65" dev="simonetripodi" type="add" due-to="Elijah Zupancic">
         Rename package org.apache.commons.chain to org.apache.commons.chain2 for v2 of chain.
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-61" due-to="Elijah Zupancic">
+      <action issue="CHAIN-61" dev="simonetripodi" type="add" due-to="Elijah Zupancic">
         Chain 2.0 trunk build is throwing many warnings as a result of generification changes.
       </action>
-      <action dev="simonetripodi" type="update" issue="CHAIN-58" due-to="Elijah Zupancic">
+      <action issue="CHAIN-58" dev="simonetripodi" type="update" due-to="Elijah Zupancic">
         Update Chain Context interface to use K,V generics
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-56">
+      <action issue="CHAIN-56" dev="simonetripodi" type="add">
          clever Context with generic type "auto-cast" feature.
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-55">
+      <action issue="CHAIN-55" dev="simonetripodi" type="add">
          split the huge project in submodules.
       </action>
-      <action dev="simonetripodi" type="add" issue="CHAIN-53" due-to="Elijah Zupancic">
+      <action issue="CHAIN-53" dev="simonetripodi" type="add" due-to="Elijah Zupancic">
          Global Update of Chain - Generics, JDK 1.5, Update Dependency Versions.
       </action>
     </release>
