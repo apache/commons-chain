@@ -41,12 +41,6 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="2.0" description="Major release">
-      <action issue="CHAIN-72" dev="elijah" type="update">
-        Refactored configuration module to a facade that supports multiple implementations.
-      </action>
-      <action issue="CHAIN-47" dev="elijah" type="fix">
-        WebContext, ServletWebContext are now interfaces
-      </action>
       <action issue="CHAIN-75" dev="elijah" type="update">
         Update serialVersionUID in all classes to a date based format.
       </action>
@@ -55,6 +49,9 @@ The <action> type attribute can be add,update,fix,remove.
       </action>
       <action issue="CHAIN-73" dev="simonetripodi" type="add">
         Add a small EDSL to simplify Catalog setup.
+      </action>
+      <action issue="CHAIN-72" dev="elijah" type="update">
+        Refactored configuration module to a facade that supports multiple implementations.
       </action>
       <action issue="CHAIN-71" dev="elijah" type="update">
         Removed methods deprecated in 1.xx releases.
@@ -91,6 +88,9 @@ The <action> type attribute can be add,update,fix,remove.
       </action>
       <action issue="CHAIN-53" dev="simonetripodi" type="add" due-to="Elijah Zupancic">
         Global Update of Chain - Generics, JDK 1.5, Update Dependency Versions.
+      </action>
+      <action issue="CHAIN-47" dev="elijah" type="fix">
+        WebContext, ServletWebContext are now interfaces
       </action>
     </release>
 
