@@ -41,8 +41,8 @@
   <modules>
     <module>build-tools</module>
     <module>core</module>
-    <module>configuration-api</module>
-    <module>xml-configuration</module>
+    <module>configuration/api</module>
+    <module>configuration/xml</module>
     <module>web</module>
     <module>apps</module>
     <module>dist</module>

@@ -22,12 +22,13 @@
         <artifactId>commons-chain-parent</artifactId>
         <groupId>org.apache.commons</groupId>
         <version>2.0-SNAPSHOT</version>
+        <relativePath>../../</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-chain2-xml-configuration</artifactId>
-    <name>Apache Commons Chain :: XML Configuration</name>
+    <name>Apache Commons Chain :: Configuration :: XML</name>
 
     <dependencies>
         <dependency>
@@ -53,7 +54,7 @@
     <build>
         <resources>
             <resource>
-                <directory>${basedir}/../</directory>
+                <directory>${basedir}/../../</directory>
                 <targetPath>META-INF</targetPath>
                 <includes>
                     <include>NOTICE.txt</include>
