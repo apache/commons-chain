@@ -90,7 +90,7 @@ public class ForwardCommand implements Command<String, Object, ServletWebContext
      * @param context The {@link Context} we are operating on
      * @return The uri to forward to
      */
-    protected String getForward(ServletWebContext context) {
+    protected String getForward(ServletWebContext<String, Object> context) {
         String uri = (String)context.get("forward");
         if (uri == null) {
             uri = getForward();

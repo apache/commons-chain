@@ -60,7 +60,7 @@ public class CountCommand implements Command<String, Object,
      * @param context The {@link Context} we are operating on
      * @return <code>false</code> so that processng will continue
      */
-    public boolean execute(WebContext context) {
+    public boolean execute(WebContext<String, Object> context) {
         count++;
         log.info("Executing: " + attribute + "=" + count);
 
