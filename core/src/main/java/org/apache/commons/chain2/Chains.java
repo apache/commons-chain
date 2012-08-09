@@ -76,6 +76,12 @@ public final class Chains {
             return new DefaultChainExecutor<K, V, C>(chain);
         }
 
+        @Override
+        public <F extends Filter<K, V, C>> ChainExecutor<K, V, C> addFilter(F filter) {
+            chain.addCommand(checkNotNullArgument(filter, "Chain does not accept null Filter instances"));
+            return new DefaultChainExecutor<K, V, C>(chain);
+        }
+
     }
 
     private static final class DefaultChainExecutor<K, V, C extends Map<K, V>> implements ChainExecutor<K, V, C> {
@@ -88,6 +94,12 @@ public final class Chains {
 
         public <CMD extends Command<K, V, C>> ChainExecutor<K, V, C> addCommand(CMD command) {
             chain.addCommand(checkNotNullArgument(command, "Chain does not accept null Command instances"));
+            return this;
+        }
+
+        @Override
+        public <F extends Filter<K, V, C>> ChainExecutor<K, V, C> addFilter(F filter) {
+            chain.addCommand(checkNotNullArgument(filter, "Chain does not accept null Filter instances"));
             return this;
         }
 
@@ -109,6 +121,12 @@ public final class Chains {
         public <CMD extends Command<K, V, C>> NameSetter<K, V, C> addCommand(CMD command) {
             CMD checkedCommand = checkNotNullArgument( command, "Catalog does not accept null Command instances" );
             return new DefaultNameSetter<K, V, C>(catalog, checkedCommand);
+        }
+
+        @Override
+        public <F extends Filter<K, V, C>> NameSetter<K, V, C> addFilter(F filter) {
+            F checkedFilter = checkNotNullArgument(filter, "Catalog does not accept null Filter instances");
+            return new DefaultNameSetter<K, V, C>(catalog, checkedFilter);
         }
 
     }
