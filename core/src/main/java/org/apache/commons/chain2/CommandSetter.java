@@ -38,7 +38,7 @@ public interface CommandSetter<K, V, C extends Map<K, V>, R> {
      * @return next chain builder
      * @see Chain#addCommand(Command)
      */
-    <CMD extends Command<K, V, C>> R addCommand(CMD command);
+    <CMD extends Command<K, V, C>> R add(CMD command);
 
     /**
      * Add the given filter to the target {@link Chain} has to be executed.
@@ -48,6 +48,6 @@ public interface CommandSetter<K, V, C extends Map<K, V>, R> {
      * @return next chain builder
      * @see Chain#addCommand(Command)
      */
-    <F extends Filter<K, V, C>> R addFilter(F filter);
+    <F extends Filter<K, V, C>> R add(F filter);
 
 }

@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Chain;
+import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.junit.Test;
 
@@ -40,26 +41,26 @@ public final class FluentInterfacesTestCase {
     @Test(expected = IllegalArgumentException.class)
     public void doesNotAcceptNullCommand() {
         on(new ChainBase<String, Object, Context<String, Object>>())
-        .addCommand(null);
+        .add(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void doesNotAcceptNullContext() {
         on(new ChainBase<String, Object, Context<String, Object>>())
-        .addCommand(new NonDelegatingFilter("3", "c"))
+        .add(new NonDelegatingFilter("3", "c"))
         .execute(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void doesNotAcceptNullCommandInCatalog() {
         on(new CatalogBase<String, Object, Context<String, Object>>())
-        .addCommand(null);
+        .add((Command<String, Object, Context<String, Object>>) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void doesNotAcceptNullName() {
         on(new CatalogBase<String, Object, Context<String, Object>>())
-        .addCommand(new DelegatingFilter("1", "a")).identifiedBy(null);
+        .add(new DelegatingFilter("1", "a")).identifiedBy(null);
     }
 
     @Test
@@ -67,9 +68,9 @@ public final class FluentInterfacesTestCase {
         ContextBase context = new ContextBase();
 
         on(new ChainBase<String, Object, Context<String, Object>>())
-        .addCommand(new DelegatingFilter("1", "a"))
-        .addCommand(new ExceptionFilter("2", "b"))
-        .addCommand(new NonDelegatingFilter("3", "c"))
+        .add(new DelegatingFilter("1", "a"))
+        .add(new ExceptionFilter("2", "b"))
+        .add(new NonDelegatingFilter("3", "c"))
         .execute(context);
 
         assertTrue(context.containsKey("log"));
@@ -81,14 +82,14 @@ public final class FluentInterfacesTestCase {
             new CatalogBase<String, Object, Context<String, Object>>();
 
         on(catalog)
-        .addCommand(new AddingCommand("", null)).identifiedBy("AddingCommand")
-        .addCommand(new DelegatingCommand("")).identifiedBy("DelegatingCommand")
-        .addCommand(new DelegatingFilter("", "")).identifiedBy("DelegatingFilter")
-        .addCommand(new ExceptionCommand("")).identifiedBy("ExceptionCommand")
-        .addCommand(new ExceptionFilter("", "")).identifiedBy("ExceptionFilter")
-        .addCommand(new NonDelegatingCommand("")).identifiedBy("NonDelegatingCommand")
-        .addCommand(new NonDelegatingFilter("", "")).identifiedBy("NonDelegatingFilter")
-        .addCommand(new ChainBase<String, Object, Context<String, Object>>()).identifiedBy("ChainBase");
+        .add(new AddingCommand("", null)).identifiedBy("AddingCommand")
+        .add(new DelegatingCommand("")).identifiedBy("DelegatingCommand")
+        .add(new DelegatingFilter("", "")).identifiedBy("DelegatingFilter")
+        .add(new ExceptionCommand("")).identifiedBy("ExceptionCommand")
+        .add(new ExceptionFilter("", "")).identifiedBy("ExceptionFilter")
+        .add(new NonDelegatingCommand("")).identifiedBy("NonDelegatingCommand")
+        .add(new NonDelegatingFilter("", "")).identifiedBy("NonDelegatingFilter")
+        .add(new ChainBase<String, Object, Context<String, Object>>()).identifiedBy("ChainBase");
 
         assertNotNull(catalog.getCommand("AddingCommand"));
         assertNotNull(catalog.getCommand("DelegatingCommand"));

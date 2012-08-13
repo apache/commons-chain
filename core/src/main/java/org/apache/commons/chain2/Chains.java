@@ -71,13 +71,13 @@ public final class Chains {
             this.chain = chain;
         }
 
-        public <CMD extends Command<K, V, C>> ChainExecutor<K, V, C> addCommand(CMD command) {
+        public <CMD extends Command<K, V, C>> ChainExecutor<K, V, C> add(CMD command) {
             chain.addCommand(checkNotNullArgument(command, "Chain does not accept null Command instances"));
             return new DefaultChainExecutor<K, V, C>(chain);
         }
 
         @Override
-        public <F extends Filter<K, V, C>> ChainExecutor<K, V, C> addFilter(F filter) {
+        public <F extends Filter<K, V, C>> ChainExecutor<K, V, C> add(F filter) {
             chain.addCommand(checkNotNullArgument(filter, "Chain does not accept null Filter instances"));
             return new DefaultChainExecutor<K, V, C>(chain);
         }
@@ -92,13 +92,13 @@ public final class Chains {
             this.chain = chain;
         }
 
-        public <CMD extends Command<K, V, C>> ChainExecutor<K, V, C> addCommand(CMD command) {
+        public <CMD extends Command<K, V, C>> ChainExecutor<K, V, C> add(CMD command) {
             chain.addCommand(checkNotNullArgument(command, "Chain does not accept null Command instances"));
             return this;
         }
 
         @Override
-        public <F extends Filter<K, V, C>> ChainExecutor<K, V, C> addFilter(F filter) {
+        public <F extends Filter<K, V, C>> ChainExecutor<K, V, C> add(F filter) {
             chain.addCommand(checkNotNullArgument(filter, "Chain does not accept null Filter instances"));
             return this;
         }
@@ -118,13 +118,13 @@ public final class Chains {
             this.catalog = catalog;
         }
 
-        public <CMD extends Command<K, V, C>> NameSetter<K, V, C> addCommand(CMD command) {
+        public <CMD extends Command<K, V, C>> NameSetter<K, V, C> add(CMD command) {
             CMD checkedCommand = checkNotNullArgument( command, "Catalog does not accept null Command instances" );
             return new DefaultNameSetter<K, V, C>(catalog, checkedCommand);
         }
 
         @Override
-        public <F extends Filter<K, V, C>> NameSetter<K, V, C> addFilter(F filter) {
+        public <F extends Filter<K, V, C>> NameSetter<K, V, C> add(F filter) {
             F checkedFilter = checkNotNullArgument(filter, "Catalog does not accept null Filter instances");
             return new DefaultNameSetter<K, V, C>(catalog, checkedFilter);
         }
