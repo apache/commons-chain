@@ -129,6 +129,12 @@ public final class Chains {
             return new DefaultNameSetter<K, V, C>(catalog, checkedFilter);
         }
 
+        @Override
+        public <CH extends Chain<K, V, C>> NameSetter<K, V, C> add(CH chain) {
+            CH checkedChain = checkNotNullArgument(chain, "Catalog does not accept null Chain instances");
+            return new DefaultNameSetter<K, V, C>(catalog, checkedChain);
+        }
+
     }
 
     private static final class DefaultNameSetter<K, V, C extends Map<K, V>> implements NameSetter<K, V, C> {
