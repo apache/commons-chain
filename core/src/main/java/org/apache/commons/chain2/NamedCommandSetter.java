@@ -30,14 +30,4 @@ import java.util.Map;
 public interface NamedCommandSetter<K, V, C extends Map<K, V>>
     extends CommandSetter<K, V, C, NameSetter<K, V, C>> {
 
-    /**
-     * Add the given chain to the target {@link Chain} has to be added in the catalog.
-     *
-     * @param <CH> Type of the chain has to be added
-     * @param chain the chain has to be added in the target catalog
-     * @return next catalog builder
-     * @see Catalog#addCommand(String, Command)
-     */
-    <CH extends Chain<K, V, C>> NameSetter<K, V, C> add(CH chain);
-
 }
