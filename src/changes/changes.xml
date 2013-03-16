@@ -41,6 +41,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="2.0" description="Major release">
+      <action issue="CHAIN-78" dev="simonetripodi" type="update" due-to="Steve Westwood">
+        Move to a more recent version of commons-parent POM
+      </action>
       <action issue="CHAIN-75" dev="elijah" type="update">
         Update serialVersionUID in all classes to a date based format.
       </action>
