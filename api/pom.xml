@@ -28,20 +28,14 @@
     <relativePath>../</relativePath>
   </parent>
 
-  <artifactId>commons-chain2-core</artifactId>
+  <artifactId>commons-chain2-api</artifactId>
 
-  <name>Apache Commons Chain :: Core</name>
+  <name>Apache Commons Chain :: APIs</name>
 
   <dependencies>
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>commons-chain2-api</artifactId>
-      <version>${project.version}</version>
     </dependency>
   </dependencies>
 
@@ -56,19 +50,6 @@
         </includes>
       </resource>
     </resources>
-    <plugins>
-     <plugin>
-       <groupId>org.apache.maven.plugins</groupId>
-       <artifactId>maven-jar-plugin</artifactId>
-       <executions>
-         <execution>
-           <goals>
-             <goal>test-jar</goal>
-           </goals>
-         </execution>
-       </executions>
-     </plugin>
-    </plugins>
   </build>
 
 </project>

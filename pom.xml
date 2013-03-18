@@ -40,6 +40,7 @@
 
   <modules>
     <module>build-tools</module>
+    <module>api</module>
     <module>core</module>
     <module>configuration/api</module>
     <module>configuration/xml</module>
