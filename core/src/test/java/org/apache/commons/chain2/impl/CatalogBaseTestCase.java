@@ -19,9 +19,10 @@ package org.apache.commons.chain2.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
@@ -145,7 +146,31 @@ public class CatalogBaseTestCase {
         assertNull(catalog.getCommand("ChainBase"));
     }
 
+    // Test construction with commands collection
+    @Test
+    public void testInstantiationWithMapOfCommands() {
+        @SuppressWarnings("serial")
+        Map<String, Command<String, Object, Context<String, Object>>> 
+            commands = new ConcurrentHashMap<String, Command<String, Object, Context<String, Object>>>() {
+            {
+                put("AddingCommand", new AddingCommand("", null));
+            }
+        };
 
+        CatalogBase<String, Object, Context<String, Object>> 
+            catalog = new CatalogBase<String, Object, Context<String, Object>>(commands);
+
+        assertEquals("Correct command count", 1, catalog.getCommands().size());
+    }
+
+    // Examine construction with null commands collection
+    @Test(expected = IllegalArgumentException.class)
+    public void testInstantiationWithNullMapOfCommands() {
+        Map<String, Command<String, Object, Context<String, Object>>> commands = null;
+        @SuppressWarnings("unused")
+        CatalogBase<String, Object, Context<String, Object>> 
+            catalog = new CatalogBase<String, Object, Context<String, Object>>(commands);
+    }
 
 
     // -------------------------------------------------------- Support Methods

@@ -58,10 +58,16 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
      * All Map keys should be <code>String</code> and all values should be <code>Command</code>.</p>
      *
      * @param commands Map of Commands.
+     * 
+     * @exception IllegalArgumentException if <code>commands</code> 
+     * is <code>null</code>
      *
      * @since Chain 1.1
      */
-    public CatalogBase(Map<String, Command<K, V, C>> commands ) {
+    public CatalogBase(Map<String, Command<K, V, C>> commands) {
+        if (commands == null) {
+            throw new IllegalArgumentException("'commands' parameter must be not null");
+        }
         this.commands.putAll( commands );
     }
 
