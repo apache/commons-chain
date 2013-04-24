@@ -40,7 +40,7 @@ public class CatalogTest {
     @Mock private HttpServletRequest request;
     @Mock private Catalog<String, Object, MailReader> testCatalog;
     @Mock private Command<String, Object, MailReader> testCommand;
-    
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -59,15 +59,15 @@ public class CatalogTest {
 
         // Due to limitation with the servlet API we have to do a cast here
         @SuppressWarnings("unchecked")
-        Catalog<String, Object, MailReader> catalog = 
+        Catalog<String, Object, MailReader> catalog =
                 (Catalog<String, Object, MailReader>) servletContext
                         .getAttribute("catalog");
-        
+
         Command<String, Object, MailReader> command = catalog.getCommand(name);
 
         return command.execute(context);
     }
-    
+
     @Test
     public void loadCatalogTest() {
         MailReader context = new MailReader();

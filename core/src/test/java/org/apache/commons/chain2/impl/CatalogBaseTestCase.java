@@ -150,14 +150,14 @@ public class CatalogBaseTestCase {
     @Test
     public void testInstantiationWithMapOfCommands() {
         @SuppressWarnings("serial")
-        Map<String, Command<String, Object, Context<String, Object>>> 
+        Map<String, Command<String, Object, Context<String, Object>>>
             commands = new ConcurrentHashMap<String, Command<String, Object, Context<String, Object>>>() {
             {
                 put("AddingCommand", new AddingCommand("", null));
             }
         };
 
-        CatalogBase<String, Object, Context<String, Object>> 
+        CatalogBase<String, Object, Context<String, Object>>
             catalog = new CatalogBase<String, Object, Context<String, Object>>(commands);
 
         assertEquals("Correct command count", 1, catalog.getCommands().size());
@@ -168,7 +168,7 @@ public class CatalogBaseTestCase {
     public void testInstantiationWithNullMapOfCommands() {
         Map<String, Command<String, Object, Context<String, Object>>> commands = null;
         @SuppressWarnings("unused")
-        CatalogBase<String, Object, Context<String, Object>> 
+        CatalogBase<String, Object, Context<String, Object>>
             catalog = new CatalogBase<String, Object, Context<String, Object>>(commands);
     }
 
