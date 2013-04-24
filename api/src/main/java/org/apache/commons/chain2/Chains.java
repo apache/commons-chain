@@ -48,7 +48,7 @@ public final class Chains {
      * @param <K> Context key type
      * @param <V> Context value type
      * @param <C> Type of the context associated with this command
-     * @param <CH> Type of the {@link Chain} to execute
+     * @param <CA> Type of the {@link Catalog} to execute
      * @param catalog the catalog instance reference to be setup
      * @return next chain builder
      */
