@@ -106,8 +106,7 @@ public class FacesWebContext extends WebContextBase {
      */
     public Map<String, Object> getApplicationScope() {
         @SuppressWarnings("unchecked") // Assume faces is following contract
-        Map<String, Object> scope = (Map<String, Object>)
-                context.getExternalContext().getApplicationMap();
+        Map<String, Object> scope = context.getExternalContext().getApplicationMap();
         return (scope);
     }
 
@@ -118,8 +117,7 @@ public class FacesWebContext extends WebContextBase {
      */
     public Map<String, String> getHeader() {
         @SuppressWarnings("unchecked") // Assume faces is following contract
-        Map<String, String> headers = (Map<String, String>)
-                context.getExternalContext().getRequestHeaderMap();
+        Map<String, String> headers = context.getExternalContext().getRequestHeaderMap();
 
         return (headers);
     }
@@ -131,8 +129,7 @@ public class FacesWebContext extends WebContextBase {
      */
     public Map<String, String[]> getHeaderValues() {
         @SuppressWarnings("unchecked") // Assume faces is following contract
-        Map<String, String[]> headerValues = (Map<String, String[]>)
-            context.getExternalContext().getRequestHeaderValuesMap();
+        Map<String, String[]> headerValues = context.getExternalContext().getRequestHeaderValuesMap();
 
         return (headerValues);
     }
@@ -144,8 +141,7 @@ public class FacesWebContext extends WebContextBase {
      */
     public Map<String, String> getInitParam() {
         @SuppressWarnings("unchecked") // Assume faces is following contract
-        Map<String, String> initParams = (Map<String, String>)
-                context.getExternalContext().getInitParameterMap();
+        Map<String, String> initParams = context.getExternalContext().getInitParameterMap();
 
         return (initParams);
     }
@@ -157,8 +153,7 @@ public class FacesWebContext extends WebContextBase {
      */
     public Map<String, String> getParam() {
         @SuppressWarnings("unchecked")
-        Map<String, String> params = (Map<String, String>)
-                context.getExternalContext().getRequestParameterMap();
+        Map<String, String> params = context.getExternalContext().getRequestParameterMap();
 
         return (params);
     }
@@ -170,8 +165,7 @@ public class FacesWebContext extends WebContextBase {
      */
     public Map<String, String[]> getParamValues() {
         @SuppressWarnings("unchecked") // Assume faces is following contract
-        Map<String, String[]> paramValues = (Map<String, String[]>)
-                context.getExternalContext().getRequestParameterValuesMap();
+        Map<String, String[]> paramValues = context.getExternalContext().getRequestParameterValuesMap();
 
         return (paramValues);
     }
@@ -184,8 +178,7 @@ public class FacesWebContext extends WebContextBase {
      */
     public Map<String, Cookie> getCookies() {
         @SuppressWarnings("unchecked") // Assume faces is following contract
-        Map<String, Object> facesCookieMap = (Map<String, Object>)
-                context.getExternalContext().getRequestCookieMap();
+        Map<String, Object> facesCookieMap = context.getExternalContext().getRequestCookieMap();
 
         /* This ugly hack was done because the faces API implements
          * the cookie collection using <String, Object> instead of <String, Cookie>.
@@ -199,7 +192,7 @@ public class FacesWebContext extends WebContextBase {
             if (cookieObj instanceof Cookie) {
                 // See comment above about type safety check
                 @SuppressWarnings("unchecked")
-                Map<String, Cookie> cookieMap = (Map<String, Cookie>) Collections.checkedMap(
+                Map<String, Cookie> cookieMap = Collections.checkedMap(
                         (Map) facesCookieMap, String.class, Cookie.class);
 
                 return cookieMap;
@@ -220,8 +213,7 @@ public class FacesWebContext extends WebContextBase {
      */
     public Map<String, Object> getRequestScope() {
         @SuppressWarnings("unchecked")  // Assume faces is following contract
-        Map<String, Object> scope = (Map<String, Object>)
-                context.getExternalContext().getRequestMap();
+        Map<String, Object> scope = context.getExternalContext().getRequestMap();
 
         return (scope);
     }
@@ -233,8 +225,7 @@ public class FacesWebContext extends WebContextBase {
      */
     public Map<String, Object> getSessionScope() {
         @SuppressWarnings("unchecked")  // Assume faces is following contract
-        Map<String, Object> scope = (Map<String, Object>)
-                context.getExternalContext().getSessionMap();
+        Map<String, Object> scope = context.getExternalContext().getSessionMap();
 
         return (scope);
     }

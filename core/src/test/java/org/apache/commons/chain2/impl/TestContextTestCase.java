@@ -56,8 +56,8 @@ public class TestContextTestCase extends ContextBaseTestCase {
     public void testPristine() {
 
         super.testPristine();
-        assertEquals("readOnly", (String) context.get("readOnly"));
-        assertEquals("readWrite", (String) context.get("readWrite"));
+        assertEquals("readOnly", context.get("readOnly"));
+        assertEquals("readWrite", context.get("readWrite"));
         assertEquals("writeOnly", ((TestContext) context).returnWriteOnly());
 
     }
@@ -80,7 +80,7 @@ public class TestContextTestCase extends ContextBaseTestCase {
             // Expected result
         }
         assertEquals("readOnly unchanged", "readOnly",
-                     (String) context.get("readOnly"));
+                     context.get("readOnly"));
 
     }
 
