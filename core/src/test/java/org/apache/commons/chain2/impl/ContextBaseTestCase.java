@@ -359,13 +359,14 @@ public class ContextBaseTestCase {
         ByteArrayInputStream bais =
           new ByteArrayInputStream(baos.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
-        context = (Context<String, Object>) ois.readObject();
+        @SuppressWarnings("unchecked") // assume it has the correct type
+        Context<String, Object> newContext = (Context<String, Object>) ois.readObject();
         ois.close();
 
         // Do some rudimentary checks to make sure we have the same contents
-        assertTrue(context.containsKey("foo"));
-        assertTrue(context.containsKey("bar"));
-        assertTrue(context.containsKey("baz"));
+        assertTrue(newContext.containsKey("foo"));
+        assertTrue(newContext.containsKey("bar"));
+        assertTrue(newContext.containsKey("baz"));
         checkAttributeCount(3);
 
     }
