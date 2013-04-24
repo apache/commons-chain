@@ -258,9 +258,13 @@ public class ChainListener implements ServletContextListener {
                 }
                 parser.parse(resourceURL);
             } catch (Exception e) {
+                String externalURL = "null";
+                if (resourceURL != null) {
+                    externalURL = resourceURL.toExternalForm();
+                }
                 throw new RuntimeException
                         ("Exception parsing chain config resource '"
-                                + resourceURL.toExternalForm() + "': "
+                                + externalURL + "': "
                                 + e.getMessage());
             }
         }
