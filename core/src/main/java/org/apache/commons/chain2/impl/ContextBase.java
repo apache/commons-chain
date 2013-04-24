@@ -119,6 +119,11 @@ public class ContextBase extends ContextMap<String, Object> {
                 public boolean equals(Object object) {
                     return (false);
                 }
+
+                @Override
+                public int hashCode() {
+                    return super.hashCode();
+                }
             };
     }
 
