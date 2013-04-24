@@ -152,7 +152,7 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
                 Object obj = methodObject.invoke(command, getArguments(context));
 
                 Boolean result = (Boolean) obj;
-                return (result != null && result);
+                return (result != null && result.booleanValue()); // might cause NPE (obj could be null)
             } catch (NoSuchMethodException e) {
                 throw new DispatchException("Error extracting method from context", e, context, this);
             } catch (IllegalAccessException e) {
