@@ -40,6 +40,7 @@ public class TestContextTestCase extends ContextBaseTestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     @Before
     public void setUp() {
         context = createContext();
@@ -50,6 +51,7 @@ public class TestContextTestCase extends ContextBaseTestCase {
 
 
     // Test state of newly created instance
+    @Override
     @Test
     public void testPristine() {
 
@@ -127,6 +129,7 @@ public class TestContextTestCase extends ContextBaseTestCase {
 
 
     // Create a new instance of the appropriate Context type for this test case
+    @Override
     protected Context<String, Object> createContext() {
         return (new TestContext());
     }

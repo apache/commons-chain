@@ -115,6 +115,7 @@ public class ContextBase extends ContextMap<String, Object> {
         singleton = new Serializable() {
                 private static final long serialVersionUID = 20120724L;
 
+                @Override
                 public boolean equals(Object object) {
                     return (false);
                 }
@@ -133,6 +134,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * <p>Override the default <code>Map</code> behavior to clear all keys and
      * values except those corresponding to JavaBeans properties.</p>
      */
+    @Override
     public void clear() {
         if (descriptors == null) {
             super.clear();
@@ -158,6 +160,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * @exception IllegalArgumentException if a property getter
      *  throws an exception
      */
+    @Override
     public boolean containsValue(Object value) {
         // Case 1 -- no local properties
         if (descriptors == null) {
@@ -193,6 +196,7 @@ public class ContextBase extends ContextMap<String, Object> {
      *
      * @return Set of entries in the Context.
      */
+    @Override
     public Set<Entry<String, Object>> entrySet() {
         return (new EntrySetImpl());
     }
@@ -215,6 +219,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * @exception UnsupportedOperationException if this local property does not
      *  have a read method.
      */
+    @Override
     public Object get(Object key) {
         // Case 1 -- no local properties
         if (descriptors == null) {
@@ -245,6 +250,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * @return <code>true</code> if this Context is empty, otherwise
      *  <code>false</code>.
      */
+    @Override
     public boolean isEmpty() {
         // Case 1 -- no local properties
         if (descriptors == null) {
@@ -264,6 +270,7 @@ public class ContextBase extends ContextMap<String, Object> {
      *
      * @return The set of keys for objects in this Context.
      */
+    @Override
     public Set<String> keySet() {
         return (super.keySet());
     }
@@ -282,6 +289,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * @exception UnsupportedOperationException if this local property does not
      *  have both a read method and a write method
      */
+    @Override
     public Object put(String key, Object value) {
         /*
          * ConcurrentHashMap doesn't accept null values, see
@@ -330,6 +338,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * @exception UnsupportedOperationException if a local property does not
      *  have both a read method and a write method
      */
+    @Override
     public void putAll(Map<? extends String, ? extends Object> map) {
         for (Entry<? extends String, ? extends Object> pair : map.entrySet()) {
             put(pair.getKey(), pair.getValue());
@@ -347,6 +356,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * @exception UnsupportedOperationException if the specified
      *  <code>key</code> matches the name of a local property
      */
+    @Override
     public Object remove(Object key) {
         // Case 1 -- no local properties
         if (descriptors == null) {
@@ -375,6 +385,7 @@ public class ContextBase extends ContextMap<String, Object> {
      *
      * @return The collection of values in this Context.
      */
+    @Override
     public Collection<Object> values() {
         return (new ValuesImpl());
     }

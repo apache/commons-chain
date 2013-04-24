@@ -65,6 +65,7 @@ final class PortletParamValuesMap implements Map<String, String[]> {
         return (set);
     }
 
+    @Override
     public boolean equals(Object o) {
         return (request.equals(o));
     }
@@ -73,6 +74,7 @@ final class PortletParamValuesMap implements Map<String, String[]> {
         return (request.getParameterValues(key(key)));
     }
 
+    @Override
     public int hashCode() {
         return (request.hashCode());
     }

@@ -92,6 +92,7 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
         return (set);
     }
 
+    @Override
     public boolean equals(Object o) {
         return (request.equals(o));
     }
@@ -104,6 +105,7 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
         return valuesArray;
     }
 
+    @Override
     public int hashCode() {
         return (request.hashCode());
     }

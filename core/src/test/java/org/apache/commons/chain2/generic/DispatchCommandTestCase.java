@@ -96,10 +96,12 @@ public class DispatchCommandTestCase {
     class TestAlternateContextCommand extends DispatchCommand<String, Object, Context<String, Object>> {
 
 
+        @Override
         protected Class<?>[] getSignature() {
             return new Class[] { TestAlternateContext.class };
         }
 
+        @Override
         protected Object[] getArguments(Context<String, Object> context) {
             return new Object[] { new TestAlternateContext(context) };
         }

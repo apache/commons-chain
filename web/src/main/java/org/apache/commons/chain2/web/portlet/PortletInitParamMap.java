@@ -64,6 +64,7 @@ final class PortletInitParamMap implements Map<String, String> {
         return (set);
     }
 
+    @Override
     public boolean equals(Object o) {
         return (context.equals(o));
     }
@@ -72,6 +73,7 @@ final class PortletInitParamMap implements Map<String, String> {
         return (context.getInitParameter(key(key)));
     }
 
+    @Override
     public int hashCode() {
         return (context.hashCode());
     }

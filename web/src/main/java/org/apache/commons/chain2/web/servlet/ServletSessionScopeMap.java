@@ -86,6 +86,7 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         return set;
     }
 
+    @Override
     public boolean equals(Object o) {
         return sessionExists() && session.equals(o);
     }
@@ -97,6 +98,7 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         return null;
     }
 
+    @Override
     public int hashCode() {
         if (sessionExists()) {
             return session.hashCode();

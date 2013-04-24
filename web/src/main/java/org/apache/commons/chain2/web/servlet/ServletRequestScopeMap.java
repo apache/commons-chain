@@ -78,6 +78,7 @@ final class ServletRequestScopeMap implements Map<String, Object> {
         return (set);
     }
 
+    @Override
     public boolean equals(Object o) {
         return (request.equals(o));
     }
@@ -86,6 +87,7 @@ final class ServletRequestScopeMap implements Map<String, Object> {
         return (request.getAttribute(key(key)));
     }
 
+    @Override
     public int hashCode() {
         return (request.hashCode());
     }

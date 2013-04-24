@@ -72,6 +72,7 @@ final class ServletCookieMap implements Map<String, Cookie> {
         return (set);
     }
 
+    @Override
     public boolean equals(Object o) {
         return (request.equals(o));
     }
@@ -88,6 +89,7 @@ final class ServletCookieMap implements Map<String, Cookie> {
         return null;
     }
 
+    @Override
     public int hashCode() {
         return (request.hashCode());
     }
