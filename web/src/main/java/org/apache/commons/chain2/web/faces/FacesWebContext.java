@@ -191,7 +191,7 @@ public class FacesWebContext extends WebContextBase {
 
             if (cookieObj instanceof Cookie) {
                 // See comment above about type safety check
-                @SuppressWarnings("unchecked")
+                @SuppressWarnings({ "unchecked", "rawtypes" })
                 Map<String, Cookie> cookieMap = Collections.checkedMap(
                         (Map) facesCookieMap, String.class, Cookie.class);
 
