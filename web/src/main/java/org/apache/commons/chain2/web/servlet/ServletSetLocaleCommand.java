@@ -39,6 +39,7 @@ public class ServletSetLocaleCommand
      * @param context The {@link Context} we are operating on.
      * @param locale The Locale for the request.
      */
+    @Override
     protected void setLocale(ServletWebContext<String, Object> context, Locale locale) {
         HttpServletResponse response = (HttpServletResponse)
             context.get("response");

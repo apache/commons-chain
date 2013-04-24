@@ -63,6 +63,7 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      *
      * @return the default Catalog instance
      */
+    @Override
     public Catalog<K, V, C> getCatalog() {
         return catalog;
     }
@@ -72,6 +73,7 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      *
      * @param catalog the default Catalog instance
      */
+    @Override
     public void setCatalog(Catalog<K, V, C> catalog) {
         this.catalog = catalog;
     }
@@ -95,6 +97,7 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      * @param name    the name of the Catalog to add
      * @param catalog the Catalog to add
      */
+    @Override
     public void addCatalog(String name, Catalog<K, V, C> catalog) {
         catalogs.put(name, catalog);
     }
@@ -106,6 +109,7 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> extends CatalogFactor
      *
      * @return An Iterator of the names of the Catalogs known by this factory.
      */
+    @Override
     public Iterator<String> getNames() {
         return catalogs.keySet().iterator();
     }

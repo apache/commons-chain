@@ -40,6 +40,7 @@ public class PortletSetLocaleCommand
      * @param context The {@link Context} we are operating on.
      * @param locale The Locale for the request.
      */
+    @Override
     protected void setLocale(PortletWebContext context, Locale locale) {
         // PortletResponse response = (PortletResponse)
         //    context.get("response");

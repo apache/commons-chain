@@ -570,6 +570,7 @@ public class ContextBase extends ContextMap<String, Object> {
             return (ContextBase.this.isEmpty());
         }
 
+        @Override
         public Iterator<Entry<String, Object>> iterator() {
             return (ContextBase.this.entriesIterator());
         }
@@ -588,6 +589,7 @@ public class ContextBase extends ContextMap<String, Object> {
             return (false);
         }
 
+        @Override
         public int size() {
             return (ContextBase.this.size());
         }
@@ -707,6 +709,7 @@ public class ContextBase extends ContextMap<String, Object> {
             return (ContextBase.this.isEmpty());
         }
 
+        @Override
         public Iterator<Object> iterator() {
             return (ContextBase.this.valuesIterator());
         }
@@ -725,6 +728,7 @@ public class ContextBase extends ContextMap<String, Object> {
             return (false);
         }
 
+        @Override
         public int size() {
             return (ContextBase.this.size());
         }
