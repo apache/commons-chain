@@ -39,7 +39,7 @@ final class PortletParamMap implements Map<String, String> {
         this.request = request;
     }
 
-    private PortletRequest request = null;
+    private final PortletRequest request;
 
     public void clear() {
         throw new UnsupportedOperationException();

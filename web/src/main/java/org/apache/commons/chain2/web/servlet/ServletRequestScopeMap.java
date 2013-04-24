@@ -39,7 +39,7 @@ final class ServletRequestScopeMap implements Map<String, Object> {
         this.request = request;
     }
 
-    private HttpServletRequest request = null;
+    private final HttpServletRequest request;
 
     public void clear() {
         for (String key : keySet()) {

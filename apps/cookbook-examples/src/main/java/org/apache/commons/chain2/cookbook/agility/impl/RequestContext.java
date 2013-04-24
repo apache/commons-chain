@@ -25,7 +25,7 @@ import org.apache.commons.chain2.impl.ContextBase;
  */
 public class RequestContext extends ContextBase implements Request {
 
-    private String name;
+    private final String name;
 
     private Response response;
 

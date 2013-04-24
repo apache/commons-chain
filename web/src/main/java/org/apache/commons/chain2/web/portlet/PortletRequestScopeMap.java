@@ -39,7 +39,7 @@ final class PortletRequestScopeMap implements Map<String, Object> {
         this.request = request;
     }
 
-    private PortletRequest request = null;
+    private final PortletRequest request;
 
     public void clear() {
         for (String key : keySet()) {

@@ -28,7 +28,7 @@ import org.apache.commons.chain2.cookbook.agility.Response;
 public class HandlerCommand implements Command<String, Object, RequestContext>,
         RequestHandler {
 
-    private String name =  null;
+    private final String name;
 
     public HandlerCommand(String name) {
         this.name = name;

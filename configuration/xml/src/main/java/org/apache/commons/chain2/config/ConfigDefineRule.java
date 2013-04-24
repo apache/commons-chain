@@ -56,13 +56,13 @@ class ConfigDefineRule extends Rule {
      * fully qualified class name of the implementation class for this
      * new element.</p>
      */
-    private String classAttribute = null;
+    private final String classAttribute;
 
     /**
      * <p>The name of the attribute under which we can retrieve the name
      * this element for which rules should be created.</p>
      */
-    private String nameAttribute = null;
+    private final String nameAttribute;
 
     // --------------------------------------------------------- Public Methods
 

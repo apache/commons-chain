@@ -33,7 +33,7 @@ import java.net.URL;
  * @version $Id$
  */
 public class ConfigParser {
-    private Log logger = LogFactory.getLog(getClass());
+    private final Log logger = LogFactory.getLog(getClass());
 
     /**
      * Constructor for loading a configuration parser with the default settings.

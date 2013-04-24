@@ -24,7 +24,7 @@ import org.apache.commons.chain2.impl.ContextBase;
  */
 public class ResponseContext extends ContextBase implements Response {
 
-    private String name;
+    private final String name;
 
     public ResponseContext(String name) {
         super();

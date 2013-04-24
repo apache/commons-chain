@@ -56,7 +56,7 @@ class ConfigRegisterRule extends Rule {
      * <p>The name of the attribute under which we can retrieve the name
      * this command should be registered with.</p>
      */
-    private String nameAttribute = null;
+    private final String nameAttribute;
 
     // --------------------------------------------------------- Public Methods
 

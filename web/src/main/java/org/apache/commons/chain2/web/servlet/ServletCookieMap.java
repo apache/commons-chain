@@ -39,7 +39,7 @@ final class ServletCookieMap implements Map<String, Cookie> {
         this.request = request;
     }
 
-    private HttpServletRequest request = null;
+    private final HttpServletRequest request;
 
     public void clear() {
         throw new UnsupportedOperationException();

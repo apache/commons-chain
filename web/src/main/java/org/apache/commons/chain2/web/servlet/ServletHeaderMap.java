@@ -39,7 +39,7 @@ final class ServletHeaderMap implements Map<String, String> {
         this.request = request;
     }
 
-    private HttpServletRequest request = null;
+    private final HttpServletRequest request;
 
     public void clear() {
         throw new UnsupportedOperationException();

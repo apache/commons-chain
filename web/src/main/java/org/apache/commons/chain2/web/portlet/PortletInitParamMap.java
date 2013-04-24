@@ -39,7 +39,7 @@ final class PortletInitParamMap implements Map<String, String> {
         this.context = context;
     }
 
-    private PortletContext context = null;
+    private final PortletContext context;
 
     public void clear() {
         throw new UnsupportedOperationException();

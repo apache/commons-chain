@@ -39,7 +39,7 @@ final class ServletApplicationScopeMap implements Map<String, Object> {
         this.context = context;
     }
 
-    private ServletContext context = null;
+    private final ServletContext context;
 
     public void clear() {
         for (String key : keySet()) {

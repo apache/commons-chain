@@ -39,7 +39,7 @@ final class PortletApplicationScopeMap implements Map<String, Object> {
         this.context = context;
     }
 
-    private PortletContext context = null;
+    private final PortletContext context;
 
     public void clear() {
         for (String key : keySet()) {

@@ -39,7 +39,7 @@ final class ServletInitParamMap implements Map<String, String> {
         this.context = context;
     }
 
-    private ServletContext context = null;
+    private final ServletContext context;
 
     public void clear() {
         throw new UnsupportedOperationException();

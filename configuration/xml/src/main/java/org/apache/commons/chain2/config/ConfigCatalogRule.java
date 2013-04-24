@@ -58,13 +58,13 @@ class ConfigCatalogRule extends Rule {
      * <p>The fully qualified class name of a {@link org.apache.commons.chain2.Catalog} class to use for
      * instantiating new instances.</p>
      */
-    private String catalogClass = null;
+    private final String catalogClass;
 
     /**
      * <p>The name of the attribute under which we can retrieve the name
      * this catalog should be registered with (if any).</p>
      */
-    private String nameAttribute = null;
+    private final String nameAttribute;
 
     // --------------------------------------------------------- Public Methods
 

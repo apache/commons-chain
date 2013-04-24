@@ -32,7 +32,7 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
     /**
      * <p>The entry key.</p>
      */
-    private K key;
+    private final K key;
 
     /**
      * <p>The entry value.</p>
