@@ -151,7 +151,7 @@ public class ChainBaseTestCase {
         try {
             chain.execute(context);
         } catch (IllegalStateException e) {
-            ; // Expected result
+            // Expected result
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }

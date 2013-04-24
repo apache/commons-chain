@@ -65,7 +65,7 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
      * This property can be set later using <code>setProperty</code>, or if it is not set,
      * the static singleton instance from <code>CatalogFactory.getInstance()</code> will be used.
      */
-    public DispatchLookupCommand() {  super();  };
+    public DispatchLookupCommand() {  super();  }
 
     /**
      * Create an instance and initialize the <code>catalogFactory</code> property

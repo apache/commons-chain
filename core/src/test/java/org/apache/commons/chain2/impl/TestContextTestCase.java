@@ -77,7 +77,7 @@ public class TestContextTestCase extends ContextBaseTestCase {
             context.put("readOnly", "new readOnly");
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
-            ; // Expected result
+            // Expected result
         }
         assertEquals("readOnly unchanged", "readOnly",
                      (String) context.get("readOnly"));

@@ -197,7 +197,7 @@ public class ContextBaseTestCase {
             keySet.add("bop");
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
-            ; // Expected result
+            // Expected result
         }
         try {
             Collection<String> adds = new ArrayList<String>();
@@ -205,7 +205,7 @@ public class ContextBaseTestCase {
             keySet.addAll(adds);
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
-            ; // Expected result
+            // Expected result
         }
 
         // Before-modification checks
