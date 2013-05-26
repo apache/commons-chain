@@ -14,9 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.apache.commons.chain2.config;
 
 /**
- * Optional package for configuring command chains in a catalog
- * (using Digester) from an XML configuration file.
+ * Runtime exception representing an exception that occurred during a
+ * configuration phase within a chain component.
+ *
+ * @version $Id:  $
  */
-package org.apache.commons.chain2.config;
+public class ChainConfigurationException extends RuntimeException {
+    public ChainConfigurationException() {
+    }
+
+    public ChainConfigurationException(String message) {
+        super(message);
+    }
+
+    public ChainConfigurationException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public ChainConfigurationException(Throwable cause) {
+        super(cause);
+    }
+}

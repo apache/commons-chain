@@ -16,13 +16,13 @@
  */
 package org.apache.commons.chain2;
 
-import org.apache.commons.chain2.impl.CatalogFactoryBase;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import org.apache.commons.chain2.impl.CatalogFactoryBase;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>A {@link CatalogFactory} is a class used to store and retrieve
@@ -237,7 +237,7 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
             String msg = "Couldn't not find a configuration implementation. " +
                     "Load a chain configuration module such as xml-configuration " +
                     "into the classpath and try again.";
-            throw new ChainConfigurationException(msg, e);
+            throw new RuntimeException(msg, e);
         }
     }
 }

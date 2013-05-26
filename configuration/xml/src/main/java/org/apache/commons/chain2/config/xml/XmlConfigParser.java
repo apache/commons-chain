@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.config;
+package org.apache.commons.chain2.config.xml;
 
-import org.apache.commons.chain2.ChainConfigurationException;
+import org.apache.commons.chain2.config.ChainConfigurationException;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.RuleSet;
 
@@ -33,7 +33,7 @@ import java.net.URL;
  *
  * @version $Id: ConfigParser.java 1364104 2012-07-21 14:25:54Z elijah $
  */
-public class ConfigParser {
+public class XmlConfigParser {
     // ----------------------------------------------------- Instance Variables
 
     /**
@@ -49,10 +49,10 @@ public class ConfigParser {
 
     // ------------------------------------------------------------- Constructor
 
-    public ConfigParser() {
+    public XmlConfigParser() {
     }
 
-    public ConfigParser(String ruleSet, ClassLoader loader) {
+    public XmlConfigParser(String ruleSet, ClassLoader loader) {
         if (ruleSet == null) {
             throw new IllegalArgumentException("ConfigParser can't be " +
                     "instantiated with a null ruleSet class name");

@@ -14,27 +14,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2;
+package org.apache.commons.chain2.config.xml;
+
+
+import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Context;
+
 
 /**
- * Runtime exception representing an exception that occurred during a
- * configuration phase within a chain component.
- *
- * @version $Id:  $
+ * <p>Test implementation of <code>Command</code> that exposes
+ * configurable properties.</p>
  */
-public class ChainConfigurationException extends RuntimeException {
-    public ChainConfigurationException() {
+
+public class TestCommand implements Command<String, Object, Context<String, Object>> {
+
+
+    private String bar = null;
+    public String getBar() {
+    return (this.bar);
+    }
+    public void setBar(String bar) {
+    this.bar = bar;
     }
 
-    public ChainConfigurationException(String message) {
-        super(message);
+
+    private String foo = null;
+    public String getFoo() {
+    return (this.foo);
+    }
+    public void setFoo(String foo) {
+    this.foo = foo;
     }
 
-    public ChainConfigurationException(String message, Throwable cause) {
-        super(message, cause);
+
+    public boolean execute(Context<String, Object> context) {
+    return (false);
     }
 
-    public ChainConfigurationException(Throwable cause) {
-        super(cause);
-    }
+
 }

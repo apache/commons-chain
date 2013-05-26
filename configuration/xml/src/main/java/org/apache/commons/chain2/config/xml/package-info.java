@@ -14,26 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.config;
-
-
-import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.impl.ChainBase;
-
 
 /**
- * <p>Test implementation of <code>Chain</code> that exposes the
- * <code>getCommands()</code> method publicy.</p>
+ * Optional package for configuring command chains in a catalog
+ * (using Digester) from an XML configuration file.
  */
-
-public class TestChain extends ChainBase<String, Object, Context<String, Object>> {
-
-
-    /*public Command[] getCommands() {
-
-    return (commands);
-
-    }*/
-
-
-}
+package org.apache.commons.chain2.config.xml;

@@ -16,12 +16,9 @@
  */
 package org.apache.commons.chain2.config;
 
-import org.apache.commons.chain2.Catalog;
-import org.apache.commons.chain2.ChainConfigurationException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import java.net.URL;
+
+import org.apache.commons.chain2.Catalog;
 
 /**
  * <p>Facade class to abstract the functionality of parsing an arbitrary
@@ -32,25 +29,7 @@ import java.net.URL;
  *
  * @version $Id$
  */
-public class ConfigParser {
-    private final Log logger = LogFactory.getLog(getClass());
-
-    /**
-     * Constructor for loading a configuration parser with the default settings.
-     */
-    public ConfigParser() {
-        logger.info("ConfigParser() instantiated");
-    }
-
-    /**
-     * Constructor for loading a configuration parser with a specified rule
-     * set class.
-     * @param ruleSet class name as string of the rule set
-     * @param loader class loader to use to create instance of rule set class
-     */
-    public ConfigParser(String ruleSet, ClassLoader loader) {
-        logger.info("ConfigParser(ruleSet, loader) instantiated");
-    }
+public interface ConfigParser {
 
     // --------------------------------------------------------- Public Methods
 
@@ -64,7 +43,6 @@ public class ConfigParser {
      * @param url <code>URL</code> of the configuration document to be parsed
      * @exception ChainConfigurationException if a parsing error occurs
      */
-    public void parse(URL url) throws ChainConfigurationException {
-        logger.info("Parsing configuration - doing nothing");
-    }
+    void parse(URL url) throws ChainConfigurationException;
+
 }

@@ -15,33 +15,34 @@
  * limitations under the License.
  */
 
-package org.apache.commons.chain2.config;
+package org.apache.commons.chain2.config.xml;
 
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.config.xml.ConfigRuleSet;
+import org.apache.commons.chain2.config.xml.XmlConfigParser;
 import org.apache.commons.chain2.impl.*;
 import org.apache.commons.digester3.Digester;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.net.URL;
 import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
 
 /**
- * <p>Test case identical to {@link ConfigParserTestCase} except
- * that it uses the <code>define</code> rule to define aliases
- * for the commands and chains used in the test.</p>
+ * <p>Test Case for <code>org.apache.commons.chain2.config.ConfigParser</code>.</p>
  */
 
-public class ConfigParser2TestCase {
+public class ConfigParserTestCase {
 
 
     private static final String DEFAULT_XML =
-        "/org/apache/commons/chain2/config/test-config-2.xml";
+        "/org/apache/commons/chain2/config/xml/test-config.xml";
 
 
     // ------------------------------------------------------ Instance Variables
@@ -62,7 +63,7 @@ public class ConfigParser2TestCase {
     /**
      * <p>The <code>ConfigParser</code> instance under test.</p>
      */
-    protected ConfigParser parser = null;
+    protected XmlConfigParser parser = null;
 
 
     // ---------------------------------------------------- Overall Test Methods
@@ -73,9 +74,10 @@ public class ConfigParser2TestCase {
      */
     @Before
     public void setUp() {
+        CatalogFactory.clear();
         catalog = new CatalogBase<String, Object, Context<String, Object>>();
         context = new ContextBase();
-        parser = new ConfigParser();
+        parser = new XmlConfigParser();
     }
 
 
@@ -327,10 +329,17 @@ public class ConfigParser2TestCase {
 
     // Load the specified catalog from the specified resource path
     protected void load(String path) throws Exception {
-        parser.parse(this.getClass().getResource(path));
+        URL url = this.getClass().getResource(path);
+
+        if (url == null) {
+            String msg = String.format("Can't find resource for path: %s", path);
+            throw new IllegalArgumentException(msg);
+        }
+
+        parser.parse(url);
         CatalogFactory<String, Object, Context<String, Object>> catalogFactory
             = CatalogFactoryBase.getInstance();
-        catalog = catalogFactory.getCatalog("foo");
+        catalog = catalogFactory.getCatalog();
     }
 
 

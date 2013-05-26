@@ -17,7 +17,7 @@
 package org.apache.commons.chain2.web;
 
 import org.apache.commons.chain2.Catalog;
-import org.apache.commons.chain2.config.ConfigParser;
+import org.apache.commons.chain2.config.xml.XmlConfigParser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -48,10 +48,10 @@ final class ChainResources {
      * <p>Parse the specified class loader resources.</p>
      *
      * @param resources Comma-delimited list of resources (or <code>null</code>)
-     * @param parser {@link ConfigParser} to use for parsing
+     * @param parser {@link XmlConfigParser} to use for parsing
      */
     static void parseClassResources(String resources,
-                                    ConfigParser parser) {
+                                    XmlConfigParser parser) {
         if (resources == null) {
             return;
         }
@@ -88,11 +88,11 @@ final class ChainResources {
      *
      * @param context <code>ServletContext</code> for this web application
      * @param resources Comma-delimited list of resources (or <code>null</code>)
-     * @param parser {@link ConfigParser} to use for parsing
+     * @param parser {@link XmlConfigParser} to use for parsing
      */
     static void parseWebResources(ServletContext context,
                                   String resources,
-                                  ConfigParser parser) {
+                                  XmlConfigParser parser) {
         if (resources == null) {
             return;
         }

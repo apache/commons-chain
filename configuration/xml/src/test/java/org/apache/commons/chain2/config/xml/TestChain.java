@@ -14,42 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.config;
+package org.apache.commons.chain2.config.xml;
 
 
-import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.impl.ChainBase;
 
 
 /**
- * <p>Test implementation of <code>Command</code> that exposes
- * configurable properties.</p>
+ * <p>Test implementation of <code>Chain</code> that exposes the
+ * <code>getCommands()</code> method publicy.</p>
  */
 
-public class TestCommand implements Command<String, Object, Context<String, Object>> {
+public class TestChain extends ChainBase<String, Object, Context<String, Object>> {
 
 
-    private String bar = null;
-    public String getBar() {
-    return (this.bar);
-    }
-    public void setBar(String bar) {
-    this.bar = bar;
-    }
+    /*public Command[] getCommands() {
 
+    return (commands);
 
-    private String foo = null;
-    public String getFoo() {
-    return (this.foo);
-    }
-    public void setFoo(String foo) {
-    this.foo = foo;
-    }
-
-
-    public boolean execute(Context<String, Object> context) {
-    return (false);
-    }
+    }*/
 
 
 }

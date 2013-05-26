@@ -16,13 +16,7 @@
  */
 package org.apache.commons.chain2.web;
 
-import org.apache.commons.chain2.Catalog;
-import org.apache.commons.chain2.CatalogFactory;
-import org.apache.commons.chain2.config.ConfigParser;
-import org.apache.commons.chain2.impl.CatalogBase;
-import org.apache.commons.chain2.web.servlet.ServletWebContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.io.IOException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -30,7 +24,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import org.apache.commons.chain2.Catalog;
+import org.apache.commons.chain2.CatalogFactory;
+import org.apache.commons.chain2.config.xml.XmlConfigParser;
+import org.apache.commons.chain2.config.xml.XmlConfigParser;
+import org.apache.commons.chain2.impl.CatalogBase;
+import org.apache.commons.chain2.web.servlet.ServletWebContext;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <p><code>Servlet</code> that automatically scans chain configuration files
@@ -126,7 +128,7 @@ public class ChainServlet extends HttpServlet {
     /**
      * <p>The name of the context init parameter containing the fully
      * qualified class name of the <code>RuleSet</code> implementation
-     * for configuring our {@link ConfigParser}.</p>
+     * for configuring our {@link XmlConfigParser}.</p>
      */
     public static final String RULE_SET =
         "org.apache.commons.chain2.RULE_SET";
@@ -187,8 +189,8 @@ public class ChainServlet extends HttpServlet {
                 this.getClass().getClassLoader() :
                 Thread.currentThread().getContextClassLoader();
 
-        ConfigParser parser = ruleSet == null ?
-                new ConfigParser() : new ConfigParser(ruleSet, cl);
+        XmlConfigParser parser = ruleSet == null ?
+                new XmlConfigParser() : new XmlConfigParser(ruleSet, cl);
 
         // Parse the resources specified in our init parameters (if any)
         if (attr == null) {

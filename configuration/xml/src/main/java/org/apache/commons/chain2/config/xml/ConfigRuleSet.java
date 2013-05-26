@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.config;
+package org.apache.commons.chain2.config.xml;
 
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.RuleSetBase;

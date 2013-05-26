@@ -32,11 +32,11 @@
   <command   name="NonDelegatingFilter"
         className="org.apache.commons.chain2.impl.NonDelegatingFilter"/>
   <chain     name="ChainBase"
-        className="org.apache.commons.chain2.config.TestChain"/>
+        className="org.apache.commons.chain2.config.xml.TestChain"/>
 
   <!-- Configurable command with settable properties -->
   <command   name="Configurable"
-        className="org.apache.commons.chain2.config.TestCommand"
+        className="org.apache.commons.chain2.config.xml.TestCommand"
               foo="Foo Value"
               bar="Bar Value"/>
 

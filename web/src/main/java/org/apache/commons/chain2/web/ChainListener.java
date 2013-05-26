@@ -16,21 +16,23 @@
  */
 package org.apache.commons.chain2.web;
 
-import org.apache.commons.chain2.Catalog;
-import org.apache.commons.chain2.CatalogFactory;
-import org.apache.commons.chain2.config.ConfigParser;
-import org.apache.commons.chain2.impl.CatalogBase;
-import org.apache.commons.chain2.web.servlet.ServletWebContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+import org.apache.commons.chain2.Catalog;
+import org.apache.commons.chain2.CatalogFactory;
+import org.apache.commons.chain2.config.xml.XmlConfigParser;
+import org.apache.commons.chain2.config.xml.XmlConfigParser;
+import org.apache.commons.chain2.impl.CatalogBase;
+import org.apache.commons.chain2.web.servlet.ServletWebContext;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <p><code>ServletContextListener</code> that automatically
@@ -123,7 +125,7 @@ public class ChainListener implements ServletContextListener {
     /**
      * <p>The name of the context init parameter containing the fully
      * qualified class name of the <code>RuleSet</code> implementation
-     * for configuring our {@link ConfigParser}.</p>
+     * for configuring our {@link XmlConfigParser}.</p>
      */
     public static final String RULE_SET =
         "org.apache.commons.chain2.RULE_SET";
@@ -185,8 +187,8 @@ public class ChainListener implements ServletContextListener {
                 this.getClass().getClassLoader() :
                 Thread.currentThread().getContextClassLoader();
 
-        ConfigParser parser = ruleSet == null ?
-                new ConfigParser() : new ConfigParser(ruleSet, cl);
+        XmlConfigParser parser = ruleSet == null ?
+                new XmlConfigParser() : new XmlConfigParser(ruleSet, cl);
 
         // Parse the resources specified in our init parameters (if any)
         if (attr == null) {
@@ -216,10 +218,10 @@ public class ChainListener implements ServletContextListener {
      * subdirectory (if any).</p>
      *
      * @param context <code>ServletContext</code> for this web application
-     * @param parser {@link ConfigParser} to use for parsing
+     * @param parser {@link XmlConfigParser} to use for parsing
      */
     private void parseJarResources(ServletContext context,
-                                   ConfigParser parser, Log log) {
+                                   XmlConfigParser parser, Log log) {
         @SuppressWarnings( "unchecked" ) // it is known that always returns String inside
         Set<String> jars = context.getResourcePaths("/WEB-INF/lib");
         if (jars == null) {

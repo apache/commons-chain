@@ -32,9 +32,9 @@
   <define    name="non-delegating-filter"
         className="org.apache.commons.chain2.impl.NonDelegatingFilter"/>
   <define    name="test-chain"
-        className="org.apache.commons.chain2.config.TestChain"/>
+        className="org.apache.commons.chain2.config.xml.TestChain"/>
   <define    name="test-command"
-        className="org.apache.commons.chain2.config.TestCommand"/>
+        className="org.apache.commons.chain2.config.xml.TestCommand"/>
 
   <!-- Single command "chains" from CatalogBaseTestCase -->
   <adding-command
