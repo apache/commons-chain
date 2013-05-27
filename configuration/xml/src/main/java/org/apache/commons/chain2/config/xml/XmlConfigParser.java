@@ -17,6 +17,7 @@
 package org.apache.commons.chain2.config.xml;
 
 import org.apache.commons.chain2.config.ChainConfigurationException;
+import org.apache.commons.chain2.config.ConfigParser;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.RuleSet;
 
@@ -33,7 +34,7 @@ import java.net.URL;
  *
  * @version $Id: ConfigParser.java 1364104 2012-07-21 14:25:54Z elijah $
  */
-public class XmlConfigParser {
+public class XmlConfigParser implements ConfigParser {
     // ----------------------------------------------------- Instance Variables
 
     /**
