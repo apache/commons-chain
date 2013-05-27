@@ -226,8 +226,8 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
 
     /**
      * Check to see if we have an implementation of a valid configuration
-     * parsing class loaded at runtime. If not, we throw a
-     * ChainConfigurationException.
+     * parsing class loaded at runtime. If not, we throw an
+     * IllegalStateException.
      */
     public static void checkForValidConfigurationModule() {
         try {
@@ -237,7 +237,7 @@ public abstract class CatalogFactory<K, V, C extends Map<K, V>> {
             String msg = "Couldn't not find a configuration implementation. " +
                     "Load a chain configuration module such as xml-configuration " +
                     "into the classpath and try again.";
-            throw new RuntimeException(msg, e);
+            throw new IllegalStateException(msg, e);
         }
     }
 }
