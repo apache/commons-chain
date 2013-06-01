@@ -20,23 +20,20 @@ package org.apache.commons.chain2.impl;
  * Subclass of <code>ContextBase</code> to exercize the automatic
  * delegation to properties of the <code>Context</code> class.
  */
-
 public class TestContext extends ContextBase {
 
-
-    /**
-     *
-     */
     private static final long serialVersionUID = 20120724L;
 
     // Read-only property
     private String readOnly = "readOnly";
+
     public String getReadOnly() {
         return (this.readOnly);
     }
 
     // Read-write property
     private String readWrite = "readWrite";
+
     public String getReadWrite() {
         return (this.readWrite);
     }
@@ -46,13 +43,14 @@ public class TestContext extends ContextBase {
 
     // Write-only property
     private String writeOnly = "writeOnly";
-    public String returnWriteOnly() { // Not a JavaBeans getter
+
+    // Not a JavaBeans getter
+    public String returnWriteOnly() {
         return (this.writeOnly);
     }
     public void setWriteOnly(String writeOnly) {
         this.writeOnly = writeOnly;
     }
-
 
 }
 
