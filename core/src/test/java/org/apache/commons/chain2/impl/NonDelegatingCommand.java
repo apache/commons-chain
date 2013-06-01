@@ -88,9 +88,9 @@ public class NonDelegatingCommand implements Command<String, Object, Context<Str
      * @param id The identifier to be logged
      */
     protected void log(Context<String, Object> context, String id) {
-        StringBuffer sb = (StringBuffer) context.get("log");
+        StringBuilder sb = (StringBuilder) context.get("log");
         if (sb == null) {
-            sb = new StringBuffer();
+            sb = new StringBuilder();
             context.put("log", sb);
         }
         if (sb.length() > 0) {

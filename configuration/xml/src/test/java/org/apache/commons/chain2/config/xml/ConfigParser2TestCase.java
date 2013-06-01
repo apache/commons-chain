@@ -320,7 +320,7 @@ public class ConfigParser2TestCase {
 
     // Verify the contents of the execution log
     protected void checkExecuteLog(String expected) {
-        StringBuffer log = (StringBuffer) context.get("log");
+        StringBuilder log = (StringBuilder) context.get("log");
         assertNotNull("Context returned log");
         assertEquals("Context returned correct log",
                      expected, log.toString());

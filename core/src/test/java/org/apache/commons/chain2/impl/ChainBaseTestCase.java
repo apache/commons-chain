@@ -358,7 +358,7 @@ public class ChainBaseTestCase {
 
     // Verify the contents of the execution log
     protected void checkExecuteLog(String expected) {
-        StringBuffer log = (StringBuffer) context.get("log");
+        StringBuilder log = (StringBuilder) context.get("log");
         assertNotNull("Context failed to return log", log);
         assertEquals("Context returned correct log",
                      expected, log.toString());

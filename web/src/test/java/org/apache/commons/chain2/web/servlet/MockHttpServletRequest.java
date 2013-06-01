@@ -232,7 +232,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
 
 
     public String getRequestURI() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (contextPath != null) {
             sb.append(contextPath);
         }
