@@ -37,6 +37,7 @@ public class TestContext extends ContextBase {
     public String getReadWrite() {
         return (this.readWrite);
     }
+
     public void setReadWrite(String readWrite) {
         this.readWrite = readWrite;
     }
@@ -48,6 +49,7 @@ public class TestContext extends ContextBase {
     public String returnWriteOnly() {
         return (this.writeOnly);
     }
+
     public void setWriteOnly(String writeOnly) {
         this.writeOnly = writeOnly;
     }
