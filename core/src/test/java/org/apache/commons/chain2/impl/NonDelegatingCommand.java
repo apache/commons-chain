@@ -35,7 +35,7 @@ public class NonDelegatingCommand implements Command<String, Object, Context<Str
 
 
     public NonDelegatingCommand() {
-    this("");
+        this("");
     }
 
 
