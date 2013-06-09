@@ -28,8 +28,7 @@ limitations under the License.
   <a href="http://ant.apache.org">Ant</a> as a build system.
 </p>
 <p>
-  Chain 1.2 requires a minimum of JDK 1.3 to build, although the Maven 2 build
-  requires JDK 1.4+
+  Chain 2.0 requires a minimum of JDK 1.5 to build.
 </p>
 </section>
 <section name="Maven 2 Goals">
