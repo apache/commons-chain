@@ -151,7 +151,7 @@ public class XmlConfigParser implements ConfigParser {
             digester.parse(url);
         } catch (Exception e) {
             String msg = String.format(
-                    "Error parsing digestor configuration at url: %s",
+                    "Error parsing digester configuration at url: %s",
                     url);
             throw new ChainConfigurationException(msg, e);
         }
