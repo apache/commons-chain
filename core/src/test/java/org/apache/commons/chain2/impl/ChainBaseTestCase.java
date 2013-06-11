@@ -367,7 +367,6 @@ public class ChainBaseTestCase {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    @Ignore // FIXME this one fails although javadoc says it shouldn't
     public void testConstructorCollectionWithNullElements() throws Exception {
         List<Command<String, Object, Context<String, Object>>> commands = new ArrayList<Command<String, Object, Context<String, Object>>>();
         commands.add(new DelegatingFilter("1", "a"));
