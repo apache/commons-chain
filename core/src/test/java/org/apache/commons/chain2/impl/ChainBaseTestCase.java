@@ -21,6 +21,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.chain2.Chain;
@@ -28,6 +30,7 @@ import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -338,6 +341,39 @@ public class ChainBaseTestCase {
     @Test
     public void testNewInstance() {
         checkCommandCount(0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorCommandNull() throws Exception {
+        new ChainBase<String, Object, Context<String, Object>>((Command<String, Object, Context<String, Object>>) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorVarArgsNull() throws Exception {
+        new ChainBase<String, Object, Context<String, Object>>((Command<String, Object, Context<String, Object>>[]) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorVarArgsWithNullElements() throws Exception {
+        new ChainBase<String, Object, Context<String, Object>>(
+                new DelegatingFilter("1", "a"),
+                null,
+                new ExceptionFilter("2", "b"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorCollectionNull() throws Exception {
+        new ChainBase<String, Object, Context<String, Object>>((Collection<Command<String, Object, Context<String, Object>>>) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    @Ignore // FIXME this one fails although javadoc says it shouldn't
+    public void testConstructorCollectionWithNullElements() throws Exception {
+        List<Command<String, Object, Context<String, Object>>> commands = new ArrayList<Command<String, Object, Context<String, Object>>>();
+        commands.add(new DelegatingFilter("1", "a"));
+        commands.add(null);
+        commands.add(new ExceptionFilter("2", "b"));
+        new ChainBase<String, Object, Context<String, Object>>(commands);
     }
 
 
