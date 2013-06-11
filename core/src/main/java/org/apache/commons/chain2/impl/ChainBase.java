@@ -73,8 +73,8 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
         if (commands == null) {
             throw new IllegalArgumentException();
         }
-        for (int i = 0; i < commands.length; i++) {
-            addCommand(commands[i]);
+        for (Command<K, V, C> command : commands) {
+            addCommand(command);
         }
     }
 
