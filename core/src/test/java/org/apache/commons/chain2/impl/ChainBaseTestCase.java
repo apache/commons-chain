@@ -30,7 +30,6 @@ import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 
