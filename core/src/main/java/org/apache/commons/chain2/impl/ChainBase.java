@@ -61,9 +61,9 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
 
     /**
      * <p>Construct a {@link Chain} configured with the specified
-     * {@link Command}s.</p>
+     * {@link Command Commands}.</p>
      *
-     * @param commands The {@link Command}s to be configured
+     * @param commands The {@link Command Commands} to be configured
      *
      * @exception IllegalArgumentException if <code>commands</code>,
      *  or one of the individual {@link Command} elements,
