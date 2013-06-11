@@ -69,7 +69,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      *  or one of the individual {@link Command} elements,
      *  is <code>null</code>
      */
-    public ChainBase(Command<K, V, C>[] commands) {
+    public ChainBase(Command<K, V, C>... commands) {
         if (commands == null) {
             throw new IllegalArgumentException();
         }
