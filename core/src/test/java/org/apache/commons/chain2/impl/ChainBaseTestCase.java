@@ -384,9 +384,8 @@ public class ChainBaseTestCase {
         if (chain instanceof ChainBase) {
             List<Command<String, Object, Context<String, Object>>> commands =
                 ((ChainBase<String, Object, Context<String, Object>>) chain).getCommands();
-            assertNotNull("getCommands() returned a non-null array",
-                          commands);
-            assertEquals("Correct command count", expected, commands.size());
+            assertNotNull("getCommands() returned null", commands);
+            assertEquals("Command count doesn't match", expected, commands.size());
         }
     }
 
@@ -395,7 +394,7 @@ public class ChainBaseTestCase {
     protected void checkExecuteLog(String expected) {
         StringBuilder log = (StringBuilder) context.get("log");
         assertNotNull("Context failed to return log", log);
-        assertEquals("Context returned correct log",
+        assertEquals("Context returned wrong log",
                      expected, log.toString());
     }
 
