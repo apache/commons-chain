@@ -208,10 +208,10 @@ public class ContextBaseTestCase {
         // Before-modification checks
         keySet = context.keySet();
         assertEquals(createContext().size(), keySet.size());
-        assertTrue(!keySet.contains("foo"));
-        assertTrue(!keySet.contains("bar"));
-        assertTrue(!keySet.contains("baz"));
-        assertTrue(!keySet.contains("bop"));
+        assertFalse(keySet.contains("foo"));
+        assertFalse(keySet.contains("bar"));
+        assertFalse(keySet.contains("baz"));
+        assertFalse(keySet.contains("bop"));
 
         // Add the new elements
         context.put("foo", "foo value");
@@ -227,7 +227,7 @@ public class ContextBaseTestCase {
         assertTrue(keySet.contains("foo"));
         assertTrue(keySet.contains("bar"));
         assertTrue(keySet.contains("baz"));
-        assertTrue(!keySet.contains("bop"));
+        assertFalse(keySet.contains("bop"));
         assertTrue(keySet.containsAll(all));
 
         // Remove a single element via remove()
@@ -236,9 +236,9 @@ public class ContextBaseTestCase {
         keySet = context.keySet();
         assertEquals(expectedAttributeCount() + 2, keySet.size());
         assertTrue(keySet.contains("foo"));
-        assertTrue(!keySet.contains("bar"));
+        assertFalse(keySet.contains("bar"));
         assertTrue(keySet.contains("baz"));
-        assertTrue(!keySet.contains("bop"));
+        assertFalse(keySet.contains("bop"));
         assertTrue(keySet.containsAll(all));
 
         // Remove a single element via keySet.remove()
@@ -247,19 +247,19 @@ public class ContextBaseTestCase {
         keySet = context.keySet();
         assertEquals(expectedAttributeCount() + 1, keySet.size());
         assertTrue(keySet.contains("foo"));
-        assertTrue(!keySet.contains("bar"));
-        assertTrue(!keySet.contains("baz"));
-        assertTrue(!keySet.contains("bop"));
+        assertFalse(keySet.contains("bar"));
+        assertFalse(keySet.contains("baz"));
+        assertFalse(keySet.contains("bop"));
         assertTrue(keySet.containsAll(all));
 
         // Remove all elements via keySet.clear()
         keySet.clear();
         all.clear();
         assertEquals(expectedAttributeCount(), keySet.size());
-        assertTrue(!keySet.contains("foo"));
-        assertTrue(!keySet.contains("bar"));
-        assertTrue(!keySet.contains("baz"));
-        assertTrue(!keySet.contains("bop"));
+        assertFalse(keySet.contains("foo"));
+        assertFalse(keySet.contains("bar"));
+        assertFalse(keySet.contains("baz"));
+        assertFalse(keySet.contains("bop"));
         assertTrue(keySet.containsAll(all));
 
         // Add the new elements #2
@@ -276,7 +276,7 @@ public class ContextBaseTestCase {
         assertTrue(keySet.contains("foo"));
         assertTrue(keySet.contains("bar"));
         assertTrue(keySet.contains("baz"));
-        assertTrue(!keySet.contains("bop"));
+        assertFalse(keySet.contains("bop"));
         assertTrue(keySet.containsAll(all));
 
     }
@@ -302,12 +302,12 @@ public class ContextBaseTestCase {
         assertNull(context.get("foo"));
         assertNull(context.get("bar"));
         assertNull(context.get("baz"));
-        assertTrue(!context.containsKey("foo"));
-        assertTrue(!context.containsKey("bar"));
-        assertTrue(!context.containsKey("baz"));
-        assertTrue(!context.containsValue("foo value"));
-        assertTrue(!context.containsValue("bar value"));
-        assertTrue(!context.containsValue("baz value"));
+        assertFalse(context.containsKey("foo"));
+        assertFalse(context.containsKey("bar"));
+        assertFalse(context.containsKey("baz"));
+        assertFalse(context.containsValue("foo value"));
+        assertFalse(context.containsValue("bar value"));
+        assertFalse(context.containsValue("baz value"));
 
         // Call putAll()
         Map<String, String> adds = new HashMap<String, String>();
