@@ -17,6 +17,7 @@
 package org.apache.commons.chain2.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -141,14 +142,14 @@ public class ContextBaseTestCase {
     @Test
     public void testContains() {
 
-        assertTrue(!context.containsKey("bop"));
-        assertTrue(!context.containsValue("bop value"));
+        assertFalse(context.containsKey("bop"));
+        assertFalse(context.containsValue("bop value"));
         context.put("bop", "bop value");
         assertTrue(context.containsKey("bop"));
         assertTrue(context.containsValue("bop value"));
         context.remove("bop");
-        assertTrue(!context.containsKey("bop"));
-        assertTrue(!context.containsValue("bop value"));
+        assertFalse(context.containsKey("bop"));
+        assertFalse(context.containsValue("bop value"));
 
     }
 
