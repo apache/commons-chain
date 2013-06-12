@@ -43,7 +43,7 @@ import org.junit.Test;
 /**
  * <p>Test case for the <code>ContextBase</code> class.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id $
  */
 
 public class ContextBaseTestCase {
