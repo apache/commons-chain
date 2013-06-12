@@ -329,7 +329,7 @@ public class ConfigParser2TestCase {
 
     // Load the specified catalog from the specified resource path
     protected void load(String path) throws Exception {
-        parser.parse(this.getClass().getResource(path));
+        parser.parse(getClass().getResource(path));
         CatalogFactory<String, Object, Context<String, Object>> catalogFactory
             = CatalogFactoryBase.getInstance();
         catalog = catalogFactory.getCatalog("foo");

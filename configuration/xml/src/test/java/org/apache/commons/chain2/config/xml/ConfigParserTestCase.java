@@ -329,7 +329,7 @@ public class ConfigParserTestCase {
 
     // Load the specified catalog from the specified resource path
     protected void load(String path) throws Exception {
-        URL url = this.getClass().getResource(path);
+        URL url = getClass().getResource(path);
 
         if (url == null) {
             String msg = String.format("Can't find resource for path: %s", path);
