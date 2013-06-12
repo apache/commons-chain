@@ -321,7 +321,7 @@ public class ConfigParserTestCase {
     // Verify the contents of the execution log
     protected void checkExecuteLog(String expected) {
         StringBuilder log = (StringBuilder) context.get("log");
-        assertNotNull("Context returned log");
+        assertNotNull("Context returned log", log);
         assertEquals("Context returned correct log",
                      expected, log.toString());
     }
