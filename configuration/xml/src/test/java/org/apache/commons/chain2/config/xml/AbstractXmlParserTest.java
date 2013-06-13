@@ -32,6 +32,9 @@ import org.apache.commons.chain2.impl.ContextBase;
 import org.junit.After;
 import org.junit.Before;
 
+/**
+ * @version $Id$
+ */
 public abstract class AbstractXmlParserTest {
 
     // ------------------------------------------------------ Instance Variables
