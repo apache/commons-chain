@@ -27,7 +27,6 @@ import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.impl.CatalogBase;
-import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.impl.ContextBase;
 import org.junit.After;
 import org.junit.Before;
