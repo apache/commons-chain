@@ -20,9 +20,10 @@ package org.apache.commons.chain2.config;
  * Runtime exception representing an exception that occurred during a
  * configuration phase within a chain component.
  *
- * @version $Id:  $
+ * @version $Id$
  */
 public class ChainConfigurationException extends RuntimeException {
+
     public ChainConfigurationException() {
     }
 
@@ -37,4 +38,5 @@ public class ChainConfigurationException extends RuntimeException {
     public ChainConfigurationException(Throwable cause) {
         super(cause);
     }
+
 }
