@@ -38,7 +38,7 @@ import static org.junit.Assert.*;
  * <p>Test Case for <code>org.apache.commons.chain2.config.ConfigParser</code>.</p>
  */
 
-public class ConfigParserTestCase {
+public class XmlConfigParserTestCase {
 
 
     private static final String DEFAULT_XML =

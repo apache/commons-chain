@@ -20,8 +20,6 @@ package org.apache.commons.chain2.config.xml;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.config.xml.ConfigRuleSet;
-import org.apache.commons.chain2.config.xml.XmlConfigParser;
 import org.apache.commons.chain2.impl.*;
 import org.apache.commons.digester3.Digester;
 import org.junit.After;
@@ -34,12 +32,12 @@ import static org.junit.Assert.*;
 
 
 /**
- * <p>Test case identical to {@link ConfigParserTestCase} except
+ * <p>Test case identical to {@link XmlConfigParserTestCase} except
  * that it uses the <code>define</code> rule to define aliases
  * for the commands and chains used in the test.</p>
  */
 
-public class ConfigParser2TestCase {
+public class XmlConfigParser2TestCase {
 
 
     private static final String DEFAULT_XML =
