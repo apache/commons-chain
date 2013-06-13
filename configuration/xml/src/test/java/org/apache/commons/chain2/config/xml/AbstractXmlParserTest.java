@@ -91,16 +91,16 @@ public abstract class AbstractXmlParserTest {
         while (names.hasNext()) {
             String name = names.next();
             n++;
-            assertNotNull(name + " exists", catalog.getCommand(name));
+            assertNotNull(name + " does not exist", catalog.getCommand(name));
         }
-        assertEquals("Correct command count", expected, n);
+        assertEquals("Command count is not correct", expected, n);
     }
 
     // Verify the contents of the execution log
     protected void checkExecuteLog(String expected) {
         StringBuilder log = (StringBuilder) context.get("log");
-        assertNotNull("Context returned log", log);
-        assertEquals("Context returned correct log",
+        assertNotNull("Context did not return log", log);
+        assertEquals("Context did not return correct log",
                      expected, log.toString());
     }
 
