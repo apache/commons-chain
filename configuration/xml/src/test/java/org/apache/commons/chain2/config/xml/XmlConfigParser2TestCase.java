@@ -22,16 +22,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Iterator;
-
-import org.apache.commons.chain2.Catalog;
-import org.apache.commons.chain2.CatalogFactory;
-import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.impl.AddingCommand;
-import org.apache.commons.chain2.impl.CatalogBase;
-import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.impl.ChainBase;
-import org.apache.commons.chain2.impl.ContextBase;
 import org.apache.commons.chain2.impl.DelegatingCommand;
 import org.apache.commons.chain2.impl.DelegatingFilter;
 import org.apache.commons.chain2.impl.ExceptionCommand;
@@ -39,8 +31,6 @@ import org.apache.commons.chain2.impl.ExceptionFilter;
 import org.apache.commons.chain2.impl.NonDelegatingCommand;
 import org.apache.commons.chain2.impl.NonDelegatingFilter;
 import org.apache.commons.digester3.Digester;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 
