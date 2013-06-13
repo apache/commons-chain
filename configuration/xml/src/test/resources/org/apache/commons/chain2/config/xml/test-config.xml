@@ -14,7 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<catalog>
+<catalog name="foo">
 
   <!-- Single command "chains" from CatalogBaseTestCase -->
   <command   name="AddingCommand"

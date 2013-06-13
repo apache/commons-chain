@@ -50,57 +50,12 @@ import org.junit.Test;
  * for the commands and chains used in the test.</p>
  */
 
-public class XmlConfigParser2TestCase {
+public class XmlConfigParser2TestCase extends AbstractXmlParserTest {
 
 
     private static final String DEFAULT_XML =
         "/org/apache/commons/chain2/config/xml/test-config-2.xml";
 
-
-    // ------------------------------------------------------ Instance Variables
-
-
-    /**
-     * <p>The <code>Catalog</code> to contain our configured commands.</p>
-     */
-    protected Catalog<String, Object, Context<String, Object>> catalog = null;
-
-
-    /**
-     * <p>The <code>Context</code> to use for execution tests.</p>
-     */
-    protected Context<String, Object> context = null;
-
-
-    /**
-     * <p>The <code>ConfigParser</code> instance under test.</p>
-     */
-    protected XmlConfigParser parser = null;
-
-
-    // ---------------------------------------------------- Overall Test Methods
-
-
-    /**
-     * Set up instance variables required by this test case.
-     */
-    @Before
-    public void setUp() {
-        catalog = new CatalogBase<String, Object, Context<String, Object>>();
-        context = new ContextBase();
-        parser = new XmlConfigParser();
-    }
-
-
-    /**
-     * Tear down instance variables required by this test case.
-     */
-    @After
-    public void tearDown() {
-        parser = null;
-        context = null;
-        catalog = null;
-    }
 
 
     // ------------------------------------------------ Individual Test Methods
@@ -310,40 +265,6 @@ public class XmlConfigParser2TestCase {
         // Ensure that there are no preconfigured commands in the catalog
         checkCommandCount(0);
 
-    }
-
-
-    // --------------------------------------------------------- Private Methods
-
-
-    // Verify the number of configured commands
-    protected void checkCommandCount(int expected) {
-        int n = 0;
-        Iterator<String> names = catalog.getNames();
-        while (names.hasNext()) {
-            String name = names.next();
-            n++;
-            assertNotNull(name + " exists", catalog.getCommand(name));
-        }
-        assertEquals("Correct command count", expected, n);
-    }
-
-
-    // Verify the contents of the execution log
-    protected void checkExecuteLog(String expected) {
-        StringBuilder log = (StringBuilder) context.get("log");
-        assertNotNull("Context returned log", log);
-        assertEquals("Context returned correct log",
-                     expected, log.toString());
-    }
-
-
-    // Load the specified catalog from the specified resource path
-    protected void load(String path) throws Exception {
-        parser.parse(getClass().getResource(path));
-        CatalogFactory<String, Object, Context<String, Object>> catalogFactory
-            = CatalogFactoryBase.getInstance();
-        catalog = catalogFactory.getCatalog("foo");
     }
 
 
