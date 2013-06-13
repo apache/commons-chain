@@ -17,8 +17,10 @@
 package org.apache.commons.chain2.config;
 
 import java.net.URL;
+import java.util.Map;
 
 import org.apache.commons.chain2.Catalog;
+import org.apache.commons.chain2.CatalogFactory;
 
 /**
  * <p>Facade class to abstract the functionality of parsing an arbitrary
@@ -40,9 +42,13 @@ public interface ConfigParser {
      * if you have included one or more <code>factory</code> elements in your
      * configuration resource.</p>
      *
+     * @param <K> - the type of keys maintained by the context associated with this command
+     * @param <V> - the type of mapped values
+     * @param <C> - Type of the context associated with this command
      * @param url <code>URL</code> of the configuration document to be parsed
+     * @return a CatalogFactory instance parsed from the given location
      * @exception ChainConfigurationException if a parsing error occurs
      */
-    void parse(URL url) throws ChainConfigurationException;
+    <K, V, C extends Map<K, V>> CatalogFactory<K, V, C> parse(URL url) throws ChainConfigurationException;
 
 }

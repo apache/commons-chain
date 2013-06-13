@@ -108,6 +108,11 @@
       <name>Elijah Zupancic</name>
       <email>elijah at zupancic dot name</email>
     </developer>
+    <developer>
+      <id>britter</id>
+      <name>Benedikt Ritter</name>
+      <email>britter at apache dot org</email>
+    </developer>
   </developers>
 
   <contributors>

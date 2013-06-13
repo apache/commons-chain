@@ -16,12 +16,14 @@
  */
 package org.apache.commons.chain2.config.xml;
 
+import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.config.ChainConfigurationException;
 import org.apache.commons.chain2.config.ConfigParser;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.RuleSet;
 
 import java.net.URL;
+import java.util.Map;
 
 /**
  * <p>Class to parse the contents of an XML configuration file (using
@@ -137,11 +139,14 @@ public class XmlConfigParser implements ConfigParser {
      * if you have included one or more <code>factory</code> elements in your
      * configuration resource.</p>
      *
+     * @param <K> - the type of keys maintained by the context associated with this command
+     * @param <V> - the type of mapped values
+     * @param <C> - Type of the context associated with this command
      * @param url <code>URL</code> of the XML document to be parsed
-     *
+     * @return a CatalogFactory instance parsed from the given location
      * @exception ChainConfigurationException if a parsing error occurs
      */
-    public void parse(URL url) throws ChainConfigurationException {
+    public <K, V, C extends Map<K, V>> CatalogFactory<K, V, C> parse(URL url) throws ChainConfigurationException {
         // Prepare our Digester instance
         Digester digester = getDigester();
         digester.clear();
@@ -155,6 +160,8 @@ public class XmlConfigParser implements ConfigParser {
                     url);
             throw new ChainConfigurationException(msg, e);
         }
+        // FIXME get rid of singleton pattern and create a new instance here
+        return CatalogFactory.getInstance();
     }
 
 }

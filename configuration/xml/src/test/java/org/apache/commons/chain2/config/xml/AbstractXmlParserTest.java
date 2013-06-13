@@ -113,9 +113,7 @@ public abstract class AbstractXmlParserTest {
             throw new IllegalArgumentException(msg);
         }
 
-        parser.parse(url);
-        CatalogFactory<String, Object, Context<String, Object>> catalogFactory
-                = CatalogFactoryBase.getInstance();
+        CatalogFactory<String, Object, Context<String, Object>> catalogFactory = parser.parse(url);
         catalog = catalogFactory.getCatalog("foo");
     }
 
