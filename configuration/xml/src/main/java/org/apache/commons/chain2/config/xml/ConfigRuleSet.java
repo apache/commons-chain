@@ -249,28 +249,37 @@ public class ConfigRuleSet extends RuleSetBase {
      *  should be added.
      */
     public void addRuleInstances(Digester digester) {
-        // Add rules for a catalog element
-        digester.addRule("*/" + getCatalogElement(),
-                         new ConfigCatalogRule(nameAttribute, catalogClass));
-        digester.addSetProperties("*/" + getCatalogElement());
+        addCatalogRules(digester);
+        addChainRules(digester);
+        addCommandRules(digester);
+        addDefineElementRule(digester);
+    }
 
-        // Add rules for a chain element
+    private void addCatalogRules(Digester digester) {
+        digester.addRule("*/" + getCatalogElement(),
+                new ConfigCatalogRule(nameAttribute, catalogClass));
+        digester.addSetProperties("*/" + getCatalogElement());
+    }
+
+    private void addChainRules(Digester digester) {
         digester.addObjectCreate("*/" + getChainElement(),
-                                 getChainClass(),
-                                 getClassAttribute());
+                getChainClass(),
+                getClassAttribute());
         digester.addSetProperties("*/" + getChainElement());
         digester.addRule("*/" + getChainElement(),
-                         new ConfigRegisterRule(nameAttribute));
+                new ConfigRegisterRule(nameAttribute));
+    }
 
-        // Add rules for a command element
+    private void addCommandRules(Digester digester) {
         digester.addObjectCreate("*/" + getCommandElement(),
-                                 null,
-                                 getClassAttribute());
+                null,
+                getClassAttribute());
         digester.addSetProperties("*/" + getCommandElement());
         digester.addRule("*/" + getCommandElement(),
-                         new ConfigRegisterRule(nameAttribute));
+                new ConfigRegisterRule(nameAttribute));
+    }
 
-        // Add rules for a define element
+    private void addDefineElementRule(Digester digester) {
         digester.addRule("*/" + getDefineElement(),
                          new ConfigDefineRule(getNameAttribute(),
                                               getClassAttribute()));
