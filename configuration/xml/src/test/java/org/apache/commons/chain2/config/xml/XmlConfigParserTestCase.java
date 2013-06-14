@@ -79,12 +79,16 @@ public class XmlConfigParserTestCase {
 
     @Before
     public void setUp() throws Exception {
+        init();
+        load(configLocation);
+    }
+
+    private void init() {
         CatalogFactory.clear();
         catalog = new CatalogBase<String, Object, Context<String, Object>>();
         context = new ContextBase();
         parser = new XmlConfigParser();
     }
-
 
     @After
     public void tearDown() {
@@ -98,7 +102,6 @@ public class XmlConfigParserTestCase {
     public void testDefault() throws Exception {
 
         // Check overall command count
-        load(configLocation);
         checkCommandCount(17);
 
         // Check individual single command instances
@@ -154,7 +157,6 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute2a() throws Exception {
 
-        load(configLocation);
         assertTrue("Chain returned true",
                 catalog.getCommand("Execute2a").execute(context));
         checkExecuteLog("1/2/3");
@@ -166,7 +168,6 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute2b() throws Exception {
 
-        load(configLocation);
         assertTrue("Chain returned false",
                 !catalog.getCommand("Execute2b").execute(context));
         checkExecuteLog("1/2/3");
@@ -178,7 +179,6 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute2c() throws Exception {
 
-        load(configLocation);
         try {
             catalog.getCommand("Execute2c").execute(context);
         } catch (ArithmeticException e) {
@@ -194,7 +194,6 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute2d() throws Exception {
 
-        load(configLocation);
         try {
             catalog.getCommand("Execute2d").execute(context);
         } catch (ArithmeticException e) {
@@ -210,7 +209,6 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute4a() throws Exception {
 
-        load(configLocation);
         assertTrue("Chain returned true",
                 catalog.getCommand("Execute4a").execute(context));
         checkExecuteLog("1/2/3/c/a");
@@ -222,7 +220,6 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute4b() throws Exception {
 
-        load(configLocation);
         assertTrue("Chain returned false",
                 !catalog.getCommand("Execute4b").execute(context));
         checkExecuteLog("1/2/3/b");
@@ -234,7 +231,6 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute4c() throws Exception {
 
-        load(configLocation);
         try {
             catalog.getCommand("Execute4c").execute(context);
         } catch (ArithmeticException e) {
@@ -250,7 +246,6 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute4d() throws Exception {
 
-        load(configLocation);
         try {
             catalog.getCommand("Execute4d").execute(context);
         } catch (ArithmeticException e) {
@@ -266,6 +261,7 @@ public class XmlConfigParserTestCase {
     @Test
     public void testPristine() throws Exception {
 
+        init();
         // Validate the "digester" property
         Digester digester = parser.getDigester();
         assertNotNull("Returned a Digester instance", digester);
