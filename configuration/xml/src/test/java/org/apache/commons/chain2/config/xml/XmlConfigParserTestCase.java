@@ -18,6 +18,7 @@
 package org.apache.commons.chain2.config.xml;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -168,8 +169,8 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute2b() throws Exception {
 
-        assertTrue("Chain returned false",
-                !catalog.getCommand("Execute2b").execute(context));
+        assertFalse("Chain returned false",
+                catalog.getCommand("Execute2b").execute(context));
         checkExecuteLog("1/2/3");
 
     }
@@ -220,8 +221,8 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute4b() throws Exception {
 
-        assertTrue("Chain returned false",
-                !catalog.getCommand("Execute4b").execute(context));
+        assertFalse("Chain returned false",
+                catalog.getCommand("Execute4b").execute(context));
         checkExecuteLog("1/2/3/b");
 
     }
@@ -265,12 +266,12 @@ public class XmlConfigParserTestCase {
         // Validate the "digester" property
         Digester digester = parser.getDigester();
         assertNotNull("Returned a Digester instance", digester);
-        assertTrue("Default namespaceAware",
-                !digester.getNamespaceAware());
+        assertFalse("Default namespaceAware",
+                digester.getNamespaceAware());
         assertTrue("Default useContextClassLoader",
                 digester.getUseContextClassLoader());
-        assertTrue("Default validating",
-                !digester.getValidating());
+        assertFalse("Default validating",
+                digester.getValidating());
 
         // Validate the "ruleSet" property
         ConfigRuleSet ruleSet = (ConfigRuleSet) parser.getRuleSet();
