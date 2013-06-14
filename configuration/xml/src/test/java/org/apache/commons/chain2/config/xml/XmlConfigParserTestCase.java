@@ -22,8 +22,18 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.commons.chain2.Catalog;
+import org.apache.commons.chain2.CatalogFactory;
+import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.impl.AddingCommand;
+import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.impl.ChainBase;
+import org.apache.commons.chain2.impl.ContextBase;
 import org.apache.commons.chain2.impl.DelegatingCommand;
 import org.apache.commons.chain2.impl.DelegatingFilter;
 import org.apache.commons.chain2.impl.ExceptionCommand;
@@ -31,29 +41,64 @@ import org.apache.commons.chain2.impl.ExceptionFilter;
 import org.apache.commons.chain2.impl.NonDelegatingCommand;
 import org.apache.commons.chain2.impl.NonDelegatingFilter;
 import org.apache.commons.digester3.Digester;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 /**
- * <p>Test Case for <code>org.apache.commons.chain2.config.ConfigParser</code>.</p>
+ * Parameterized test case for {@link XmlConfigParser}, that uses config locations as data points.
+ *
+ * <p><strong>Note:</strong> This test case assumes, that all config files will be parsed to the same catalog
+ * and command instances.</p>
+ *
+ * @version $Id$
  */
+@RunWith(Parameterized.class)
+public class XmlConfigParserTestCase {
 
-public class XmlConfigParserTestCase extends AbstractXmlParserTest {
+    private Catalog<String, Object, Context<String, Object>> catalog = null;
+    private Context<String, Object> context = null;
+    private XmlConfigParser parser = null;
+    private final String configLocation;
+
+    @Parameterized.Parameters
+    public static List<Object[]> data() {
+        return Arrays.asList(new Object[][]
+            {
+                {"/org/apache/commons/chain2/config/xml/test-config.xml"},
+                {"/org/apache/commons/chain2/config/xml/test-config-2.xml"}
+            }
+        );
+    }
+
+    public XmlConfigParserTestCase(String configLocation) {
+        this.configLocation = configLocation;
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        CatalogFactory.clear();
+        catalog = new CatalogBase<String, Object, Context<String, Object>>();
+        context = new ContextBase();
+        parser = new XmlConfigParser();
+    }
 
 
-    private static final String DEFAULT_XML =
-        "/org/apache/commons/chain2/config/xml/test-config.xml";
-
-
-    // ------------------------------------------------ Individual Test Methods
-
+    @After
+    public void tearDown() {
+        parser = null;
+        context = null;
+        catalog = null;
+    }
 
     // Load the default test-config.xml file and examine the results
     @Test
     public void testDefault() throws Exception {
 
         // Check overall command count
-        load(DEFAULT_XML);
+        load(configLocation);
         checkCommandCount(17);
 
         // Check individual single command instances
@@ -109,9 +154,9 @@ public class XmlConfigParserTestCase extends AbstractXmlParserTest {
     @Test
     public void testExecute2a() throws Exception {
 
-        load(DEFAULT_XML);
+        load(configLocation);
         assertTrue("Chain returned true",
-                   catalog.getCommand("Execute2a").execute(context));
+                catalog.getCommand("Execute2a").execute(context));
         checkExecuteLog("1/2/3");
 
     }
@@ -121,9 +166,9 @@ public class XmlConfigParserTestCase extends AbstractXmlParserTest {
     @Test
     public void testExecute2b() throws Exception {
 
-        load(DEFAULT_XML);
+        load(configLocation);
         assertTrue("Chain returned false",
-                   !catalog.getCommand("Execute2b").execute(context));
+                !catalog.getCommand("Execute2b").execute(context));
         checkExecuteLog("1/2/3");
 
     }
@@ -133,12 +178,12 @@ public class XmlConfigParserTestCase extends AbstractXmlParserTest {
     @Test
     public void testExecute2c() throws Exception {
 
-        load(DEFAULT_XML);
+        load(configLocation);
         try {
             catalog.getCommand("Execute2c").execute(context);
         } catch (ArithmeticException e) {
             assertEquals("Correct exception id",
-                         "3", e.getMessage());
+                    "3", e.getMessage());
         }
         checkExecuteLog("1/2/3");
 
@@ -149,12 +194,12 @@ public class XmlConfigParserTestCase extends AbstractXmlParserTest {
     @Test
     public void testExecute2d() throws Exception {
 
-        load(DEFAULT_XML);
+        load(configLocation);
         try {
             catalog.getCommand("Execute2d").execute(context);
         } catch (ArithmeticException e) {
             assertEquals("Correct exception id",
-                         "2", e.getMessage());
+                    "2", e.getMessage());
         }
         checkExecuteLog("1/2");
 
@@ -165,9 +210,9 @@ public class XmlConfigParserTestCase extends AbstractXmlParserTest {
     @Test
     public void testExecute4a() throws Exception {
 
-        load(DEFAULT_XML);
+        load(configLocation);
         assertTrue("Chain returned true",
-                   catalog.getCommand("Execute4a").execute(context));
+                catalog.getCommand("Execute4a").execute(context));
         checkExecuteLog("1/2/3/c/a");
 
     }
@@ -177,9 +222,9 @@ public class XmlConfigParserTestCase extends AbstractXmlParserTest {
     @Test
     public void testExecute4b() throws Exception {
 
-        load(DEFAULT_XML);
+        load(configLocation);
         assertTrue("Chain returned false",
-                   !catalog.getCommand("Execute4b").execute(context));
+                !catalog.getCommand("Execute4b").execute(context));
         checkExecuteLog("1/2/3/b");
 
     }
@@ -189,12 +234,12 @@ public class XmlConfigParserTestCase extends AbstractXmlParserTest {
     @Test
     public void testExecute4c() throws Exception {
 
-        load(DEFAULT_XML);
+        load(configLocation);
         try {
             catalog.getCommand("Execute4c").execute(context);
         } catch (ArithmeticException e) {
             assertEquals("Correct exception id",
-                         "3", e.getMessage());
+                    "3", e.getMessage());
         }
         checkExecuteLog("1/2/3/c/b/a");
 
@@ -205,12 +250,12 @@ public class XmlConfigParserTestCase extends AbstractXmlParserTest {
     @Test
     public void testExecute4d() throws Exception {
 
-        load(DEFAULT_XML);
+        load(configLocation);
         try {
             catalog.getCommand("Execute4d").execute(context);
         } catch (ArithmeticException e) {
             assertEquals("Correct exception id",
-                         "2", e.getMessage());
+                    "2", e.getMessage());
         }
         checkExecuteLog("1/2/b/a");
 
@@ -219,40 +264,72 @@ public class XmlConfigParserTestCase extends AbstractXmlParserTest {
 
     // Test a pristine ConfigParser instance
     @Test
-    public void testPristine() {
+    public void testPristine() throws Exception {
 
         // Validate the "digester" property
         Digester digester = parser.getDigester();
         assertNotNull("Returned a Digester instance", digester);
         assertTrue("Default namespaceAware",
-                   !digester.getNamespaceAware());
+                !digester.getNamespaceAware());
         assertTrue("Default useContextClassLoader",
-                   digester.getUseContextClassLoader());
+                digester.getUseContextClassLoader());
         assertTrue("Default validating",
-                   !digester.getValidating());
+                !digester.getValidating());
 
         // Validate the "ruleSet" property
         ConfigRuleSet ruleSet = (ConfigRuleSet) parser.getRuleSet();
         assertNotNull("Returned a RuleSet instance", ruleSet);
         assertEquals("Default chainElement",
-                     "chain", ruleSet.getChainElement());
+                "chain", ruleSet.getChainElement());
         assertEquals("Default classAttribute",
-                     "className", ruleSet.getClassAttribute());
+                "className", ruleSet.getClassAttribute());
         assertEquals("Default commandElement",
-                     "command", ruleSet.getCommandElement());
+                "command", ruleSet.getCommandElement());
         assertEquals("Default nameAttribute",
-                     "name", ruleSet.getNameAttribute());
+                "name", ruleSet.getNameAttribute());
         assertNull("Default namespaceURI",
-                   ruleSet.getNamespaceURI());
+                ruleSet.getNamespaceURI());
 
         // Validate the "useContextClassLoader" property
         assertTrue("Defaults to use context class loader",
-                   parser.getUseContextClassLoader());
+                parser.getUseContextClassLoader());
 
         // Ensure that there are no preconfigured commands in the catalog
         checkCommandCount(0);
 
     }
 
+    // Verify the number of configured commands
+    private void checkCommandCount(int expected) {
+        int n = 0;
+        Iterator<String> names = catalog.getNames();
+        while (names.hasNext()) {
+            String name = names.next();
+            n++;
+            assertNotNull(name + " does not exist", catalog.getCommand(name));
+        }
+        assertEquals("Command count is not correct", expected, n);
+    }
+
+    // Verify the contents of the execution log
+    private void checkExecuteLog(String expected) {
+        StringBuilder log = (StringBuilder) context.get("log");
+        assertNotNull("Context did not return log", log);
+        assertEquals("Context did not return correct log",
+                expected, log.toString());
+    }
+
+    // Load the specified catalog from the specified resource path
+    private void load(String path) throws Exception {
+        URL url = getClass().getResource(path);
+
+        if (url == null) {
+            String msg = String.format("Can't find resource for path: %s", path);
+            throw new IllegalArgumentException(msg);
+        }
+
+        CatalogFactory<String, Object, Context<String, Object>> catalogFactory = parser.parse(url);
+        catalog = catalogFactory.getCatalog("foo");
+    }
 
 }
