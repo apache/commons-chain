@@ -42,9 +42,9 @@ public interface ConfigParser {
      * if you have included one or more <code>factory</code> elements in your
      * configuration resource.</p>
      *
-     * @param <K> - the type of keys maintained by the context associated with this command
-     * @param <V> - the type of mapped values
-     * @param <C> - Type of the context associated with this command
+     * @param <K> the type of keys maintained by the context associated with this command
+     * @param <V> the type of mapped values
+     * @param <C> Type of the context associated with this command
      * @param url <code>URL</code> of the configuration document to be parsed
      * @return a CatalogFactory instance parsed from the given location
      * @exception ChainConfigurationException if a parsing error occurs
