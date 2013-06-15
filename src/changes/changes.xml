@@ -44,7 +44,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="CHAIN-88" dev="britter" type="update" due-to="Stephan Köninger">
           Refactor tests in class ContextBaseTestCase
       </action>
-      <action issue="CHAIN-83" dev="britter" type="add">
+      <action issue="CHAIN-83" dev="britter" type="update">
           Rename o.a.c.chain2.generic package to o.a.c.chain2.base
       </action>
       <action issue="CHAIN-90" dev="britter" type="add">
