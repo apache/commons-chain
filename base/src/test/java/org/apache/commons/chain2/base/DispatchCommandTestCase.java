@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.generic;
+package org.apache.commons.chain2.base;
 
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.impl.ContextBase;
@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/* JUnitTest case for class: org.apache.commons.chain2.generic.DispatchCommand */
+/* JUnitTest case for class: org.apache.commons.chain2.base.DispatchCommand */
 public class DispatchCommandTestCase {
 
     @Test

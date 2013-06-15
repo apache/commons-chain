@@ -28,9 +28,9 @@
     <relativePath>../</relativePath>
   </parent>
 
-  <artifactId>commons-chain2-core</artifactId>
+  <artifactId>commons-chain2-base</artifactId>
 
-  <name>Apache Commons Chain :: Core</name>
+  <name>Apache Commons Chain :: Base</name>
 
   <dependencies>
     <dependency>

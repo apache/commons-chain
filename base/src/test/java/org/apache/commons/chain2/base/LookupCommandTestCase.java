@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.generic;
+package org.apache.commons.chain2.base;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,6 +26,7 @@ import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.base.LookupCommand;
 import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.impl.ChainBase;

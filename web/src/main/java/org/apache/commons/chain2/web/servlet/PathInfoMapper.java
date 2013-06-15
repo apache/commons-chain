@@ -19,7 +19,7 @@ package org.apache.commons.chain2.web.servlet;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.generic.LookupCommand;
+import org.apache.commons.chain2.base.LookupCommand;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -41,7 +41,7 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>commons-chain2-core</artifactId>
+      <artifactId>commons-chain2-base</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>

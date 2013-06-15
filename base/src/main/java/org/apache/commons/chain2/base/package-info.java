@@ -19,4 +19,4 @@
  * Concrete implementations of generic Commands that are useful in many
  * different environments, not tied to a particular tier such as Servlets).
  */
-package org.apache.commons.chain2.generic;
+package org.apache.commons.chain2.base;

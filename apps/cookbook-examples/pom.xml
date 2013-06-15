@@ -34,7 +34,7 @@
   <dependencies>
     <dependency>
       <groupId>org.apache.commons</groupId>
-      <artifactId>commons-chain2-core</artifactId>
+      <artifactId>commons-chain2-base</artifactId>
       <version>${project.version}</version>
     </dependency>
 

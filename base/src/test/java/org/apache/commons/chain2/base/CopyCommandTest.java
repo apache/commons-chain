@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.commons.chain2.generic;
+package org.apache.commons.chain2.base;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
