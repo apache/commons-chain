@@ -21,7 +21,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,7 +29,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -181,32 +179,27 @@ public class ContextBaseTestCase {
     }
 
 
+    @Test(expected=UnsupportedOperationException.class)
+    public void contextKeySetDoesNotSupportAdd() throws Exception {
+        Set<String> keySet = context.keySet();
+        keySet.add("bop");
+    }
+    
+    @Test(expected=UnsupportedOperationException.class)
+    public void contextKeySetDoesNotSupportAddAll() throws Exception {
+        Collection<String> adds = new ArrayList<String>();
+        adds.add("bop");
+
+        Set<String> keySet = context.keySet();
+        keySet.addAll(adds);
+    }
+    
     // Test keySet()
     @Test
     public void testKeySet() {
-
-        Set<String> keySet = null;
-        Collection<String> all = new ArrayList<String>();
-
-        // Unsupported operations
-        keySet = context.keySet();
-        try {
-            keySet.add("bop");
-            fail("Should have thrown UnsupportedOperationException");
-        } catch (UnsupportedOperationException e) {
-            // Expected result
-        }
-        try {
-            Collection<String> adds = new ArrayList<String>();
-            adds.add("bop");
-            keySet.addAll(adds);
-            fail("Should have thrown UnsupportedOperationException");
-        } catch (UnsupportedOperationException e) {
-            // Expected result
-        }
+        Set<String> keySet = context.keySet();
 
         // Before-modification checks
-        keySet = context.keySet();
         assertEquals(createContext().size(), keySet.size());
         assertFalse(keySet.contains("foo"));
         assertFalse(keySet.contains("bar"));
@@ -217,6 +210,8 @@ public class ContextBaseTestCase {
         context.put("foo", "foo value");
         context.put("bar", "bar value");
         context.put("baz", "baz value");
+        
+        Collection<String> all = new ArrayList<String>();
         all.add("foo");
         all.add("bar");
         all.add("baz");
@@ -379,18 +374,12 @@ public class ContextBaseTestCase {
 
     // Verify the number of defined attributes
     protected void checkAttributeCount(int expected) {
-        int actual = 0;
-        Iterator<String> keys = context.keySet().iterator();
-        while (keys.hasNext()) {
-            keys.next();
-            actual++;
-        }
-        assertEquals("Correct attribute count",
-                     expectedAttributeCount() + expected, actual);
+        int actual = context.keySet().size();
+        assertEquals("Correct attribute count", expectedAttributeCount() + expected, actual);
         if (expected == 0) {
             assertTrue("Context should be empty", context.isEmpty());
         } else {
-            assertTrue("Context should not be empty", !context.isEmpty());
+            assertFalse("Context should not be empty", context.isEmpty());
         }
     }
 
