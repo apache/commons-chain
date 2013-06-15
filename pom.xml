@@ -71,47 +71,47 @@
     <developer>
       <name>Craig McClanahan</name>
       <id>craigmcc</id>
-      <email>craigmcc at apache.org</email>
+      <email>craigmcc@apache.org</email>
     </developer>
     <developer>
       <name>Martin Cooper</name>
       <id>martinc</id>
-      <email>martinc at apache.org</email>
+      <email>martinc@apache.org</email>
     </developer>
     <developer>
       <name>Don Brown</name>
       <id>mrdon</id>
-      <email>mrdon at apache.org</email>
+      <email>mrdon@apache.org</email>
     </developer>
     <developer>
       <name>James Mitchell</name>
       <id>jmitchell</id>
-      <email>jmitchell at apache.org</email>
+      <email>jmitchell@apache.org</email>
     </developer>
     <developer>
       <name>Joe Germuska</name>
       <id>germuska</id>
-      <email>germuska at apache.org</email>
+      <email>germuska@apache.org</email>
     </developer>
     <developer>
       <name>Niall Pemberton</name>
       <id>niallp</id>
-      <email>niallp at apache.org</email>
+      <email>niallp@apache.org</email>
     </developer>
     <developer>
       <name>Simone Tripodi</name>
       <id>simonetripodi</id>
-      <email>simonetripodi at apache dot org</email>
+      <email>simonetripodi@apache.org</email>
     </developer>
     <developer>
       <id>elijah</id>
       <name>Elijah Zupancic</name>
-      <email>elijah at zupancic dot name</email>
+      <email>elijah@zupancic.name</email>
     </developer>
     <developer>
       <id>britter</id>
       <name>Benedikt Ritter</name>
-      <email>britter at apache dot org</email>
+      <email>britter@apache.org</email>
     </developer>
   </developers>
 
@@ -121,15 +121,15 @@
     </contributor>
     <contributor>
       <name>Sean Schofield</name>
-      <email>schof at apache dot org</email>
+      <email>schof@apache.org</email>
     </contributor>
     <contributor>
       <name>Ted Husted</name>
-      <email>husted at apache.org</email>
+      <email>husted@apache.org</email>
     </contributor>
     <contributor>
       <name>Stephan Köninger</name>
-      <email>commons at stephan-koeninger dot de</email>
+      <email>commons@stephan-koeninger.de</email>
     </contributor>
   </contributors>
 
