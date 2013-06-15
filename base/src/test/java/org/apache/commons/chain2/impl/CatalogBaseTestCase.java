@@ -35,7 +35,7 @@ import org.junit.Test;
 /**
  * <p>Test case for the <code>CatalogBase</code> class.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class CatalogBaseTestCase {
