@@ -151,11 +151,8 @@ public class CatalogBaseTestCase {
     public void testInstantiationWithMapOfCommands() {
         @SuppressWarnings("serial")
         Map<String, Command<String, Object, Context<String, Object>>>
-            commands = new ConcurrentHashMap<String, Command<String, Object, Context<String, Object>>>() {
-            {
-                put("AddingCommand", new AddingCommand("", null));
-            }
-        };
+            commands = new ConcurrentHashMap<String, Command<String, Object, Context<String, Object>>>();
+        commands.put("AddingCommand", new AddingCommand("", null));
 
         CatalogBase<String, Object, Context<String, Object>>
             catalog = new CatalogBase<String, Object, Context<String, Object>>(commands);
