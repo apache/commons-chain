@@ -17,10 +17,12 @@
 
 package org.apache.commons.chain2.config.xml;
 
+import static org.apache.commons.chain2.testutils.HasLog.hasLog;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.net.URL;
@@ -160,7 +162,7 @@ public class XmlConfigParserTestCase {
 
         assertTrue("Chain returned true",
                 catalog.getCommand("Execute2a").execute(context));
-        checkExecuteLog("1/2/3");
+        assertThat(context, hasLog("1/2/3"));
 
     }
 
@@ -171,7 +173,7 @@ public class XmlConfigParserTestCase {
 
         assertFalse("Chain returned false",
                 catalog.getCommand("Execute2b").execute(context));
-        checkExecuteLog("1/2/3");
+        assertThat(context, hasLog("1/2/3"));
 
     }
 
@@ -186,7 +188,7 @@ public class XmlConfigParserTestCase {
             assertEquals("Correct exception id",
                     "3", e.getMessage());
         }
-        checkExecuteLog("1/2/3");
+        assertThat(context, hasLog("1/2/3"));
 
     }
 
@@ -201,7 +203,7 @@ public class XmlConfigParserTestCase {
             assertEquals("Correct exception id",
                     "2", e.getMessage());
         }
-        checkExecuteLog("1/2");
+        assertThat(context, hasLog("1/2"));
 
     }
 
@@ -212,7 +214,7 @@ public class XmlConfigParserTestCase {
 
         assertTrue("Chain returned true",
                 catalog.getCommand("Execute4a").execute(context));
-        checkExecuteLog("1/2/3/c/a");
+        assertThat(context, hasLog("1/2/3/c/a"));
 
     }
 
@@ -223,7 +225,7 @@ public class XmlConfigParserTestCase {
 
         assertFalse("Chain returned false",
                 catalog.getCommand("Execute4b").execute(context));
-        checkExecuteLog("1/2/3/b");
+        assertThat(context, hasLog("1/2/3/b"));
 
     }
 
@@ -238,7 +240,7 @@ public class XmlConfigParserTestCase {
             assertEquals("Correct exception id",
                     "3", e.getMessage());
         }
-        checkExecuteLog("1/2/3/c/b/a");
+        assertThat(context, hasLog("1/2/3/c/b/a"));
 
     }
 
@@ -253,7 +255,7 @@ public class XmlConfigParserTestCase {
             assertEquals("Correct exception id",
                     "2", e.getMessage());
         }
-        checkExecuteLog("1/2/b/a");
+        assertThat(context, hasLog("1/2/b/a"));
 
     }
 
@@ -306,14 +308,6 @@ public class XmlConfigParserTestCase {
             assertNotNull(name + " does not exist", catalog.getCommand(name));
         }
         assertEquals("Command count is not correct", expected, n);
-    }
-
-    // Verify the contents of the execution log
-    private void checkExecuteLog(String expected) {
-        StringBuilder log = (StringBuilder) context.get("log");
-        assertNotNull("Context did not return log", log);
-        assertEquals("Context did not return correct log",
-                expected, log.toString());
     }
 
     // Load the specified catalog from the specified resource path

@@ -16,8 +16,10 @@
  */
 package org.apache.commons.chain2.impl;
 
+import static org.apache.commons.chain2.testutils.HasLog.hasLog;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -113,7 +115,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1");
+        assertThat(context, hasLog("1"));
     }
 
 
@@ -127,7 +129,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1");
+        assertThat(context, hasLog("1"));
     }
 
 
@@ -142,7 +144,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1");
+        assertThat(context, hasLog("1"));
     }
 
 
@@ -157,7 +159,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1");
+        assertThat(context, hasLog("1"));
     }
 
 
@@ -173,7 +175,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/2/3");
+        assertThat(context, hasLog("1/2/3"));
     }
 
 
@@ -189,7 +191,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/2/3");
+        assertThat(context, hasLog("1/2/3"));
     }
 
 
@@ -206,7 +208,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/2/3");
+        assertThat(context, hasLog("1/2/3"));
     }
 
 
@@ -223,7 +225,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/2");
+        assertThat(context, hasLog("1/2"));
     }
 
 
@@ -237,7 +239,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/a");
+        assertThat(context, hasLog("1/a"));
     }
 
 
@@ -251,7 +253,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/a");
+        assertThat(context, hasLog("1/a"));
     }
 
 
@@ -266,7 +268,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/a");
+        assertThat(context, hasLog("1/a"));
     }
 
 
@@ -282,7 +284,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/2/3/c/a");
+        assertThat(context, hasLog("1/2/3/c/a"));
     }
 
 
@@ -298,7 +300,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/2/3/b");
+        assertThat(context, hasLog("1/2/3/b"));
     }
 
 
@@ -315,7 +317,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/2/3/c/b/a");
+        assertThat(context, hasLog("1/2/3/c/b/a"));
     }
 
 
@@ -332,7 +334,7 @@ public class ChainBaseTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1/2/b/a");
+        assertThat(context, hasLog("1/2/b/a"));
     }
 
 
@@ -387,15 +389,5 @@ public class ChainBaseTestCase {
             assertEquals("Command count doesn't match", expected, commands.size());
         }
     }
-
-
-    // Verify the contents of the execution log
-    protected void checkExecuteLog(String expected) {
-        StringBuilder log = (StringBuilder) context.get("log");
-        assertNotNull("Context failed to return log", log);
-        assertEquals("Context returned wrong log",
-                     expected, log.toString());
-    }
-
 
 }

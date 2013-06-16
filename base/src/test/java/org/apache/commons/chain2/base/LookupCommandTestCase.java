@@ -16,9 +16,11 @@
  */
 package org.apache.commons.chain2.base;
 
+import static org.apache.commons.chain2.testutils.HasLog.hasLog;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -108,7 +110,7 @@ public class LookupCommandTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1a");
+        assertThat(context, hasLog("1a"));
     }
 
     // Test ability to lookup and execute a chain
@@ -131,7 +133,7 @@ public class LookupCommandTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("1b1/1b2/1b3");
+        assertThat(context, hasLog("1b1/1b2/1b3"));
     }
 
     // Test ability to lookup and execute single non-delegating command
@@ -150,7 +152,7 @@ public class LookupCommandTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("2a");
+        assertThat(context, hasLog("2a"));
     }
 
     // Test ability to lookup and execute a chain using the context
@@ -174,7 +176,7 @@ public class LookupCommandTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("2b1/2b2/2b3");
+        assertThat(context, hasLog("2b1/2b2/2b3"));
     }
 
     // Test ability to lookup and execute single non-delegating command, ignoring its result
@@ -193,20 +195,7 @@ public class LookupCommandTestCase {
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
-        checkExecuteLog("3a");
+        assertThat(context, hasLog("3a"));
     }
-
-
-    // -------------------------------------------------------- Support Methods
-
-
-    // Verify the contents of the execution log
-    protected void checkExecuteLog(String expected) {
-        StringBuilder log = (StringBuilder) context.get("log");
-        assertNotNull("Context failed to return log", log);
-        assertEquals("Context returned correct log",
-                     expected, log.toString());
-    }
-
 
 }

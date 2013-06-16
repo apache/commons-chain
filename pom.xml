@@ -47,6 +47,7 @@
     <module>web</module>
     <module>apps</module>
     <module>dist</module>
+    <module>test-utils</module>
   </modules>
 
   <scm>

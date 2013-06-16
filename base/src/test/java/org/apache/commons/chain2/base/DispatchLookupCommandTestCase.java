@@ -16,12 +16,12 @@
  */
 package org.apache.commons.chain2.base;
 
+import static org.apache.commons.chain2.testutils.HasLog.hasLog;
 import static org.junit.Assert.*;
 
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.base.DispatchLookupCommand;
 import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.impl.ContextBase;
@@ -117,7 +117,7 @@ public class DispatchLookupCommandTestCase {
             fail("Threw exception: " + e);
         }
 
-        checkExecuteLog("1/1");
+        assertThat(context, hasLog("1/1"));
 
     }
 
@@ -176,21 +176,10 @@ public class DispatchLookupCommandTestCase {
             fail("Threw exception: " + e);
         }
 
-        checkExecuteLog("3/3");
+        assertThat(context, hasLog("3/3"));
 
     }
 
-
-    // -------------------------------------------------------- Support Methods
-
-
-    // Verify the contents of the execution log
-    protected void checkExecuteLog(String expected) {
-        StringBuilder log = (StringBuilder) context.get("log");
-        assertNotNull("Context failed to return log", log);
-        assertEquals("Context returned correct log",
-                     expected, log.toString());
-    }
 
     // ---------------------------------------------------------- Inner Classes
 
