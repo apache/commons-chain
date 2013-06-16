@@ -16,11 +16,12 @@
  */
 package org.apache.commons.chain2.impl;
 
+import static org.apache.commons.chain2.testutils.HasCommandCount.hasCommandCount;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -84,7 +85,7 @@ public class CatalogBaseTestCase {
     @Test
     public void testAddCommand() {
         addCommands();
-        checkCommandCount(8);
+        assertThat(catalog, hasCommandCount(8));
     }
 
 
@@ -135,14 +136,10 @@ public class CatalogBaseTestCase {
         }
     }
 
-
-    // The getNames() method is implicitly tested by checkCommandCount()
-
-
     // Test pristine instance
     @Test
     public void testPristine() {
-        checkCommandCount(0);
+        assertThat(catalog, hasCommandCount(0));
         assertNull(catalog.getCommand("AddingCommand"));
         assertNull(catalog.getCommand("DelegatingCommand"));
         assertNull(catalog.getCommand("DelegatingFilter"));
@@ -191,19 +188,5 @@ public class CatalogBaseTestCase {
         catalog.addCommand("NonDelegatingFilter", new NonDelegatingFilter("", ""));
         catalog.addCommand("ChainBase", new ChainBase<String, Object, Context<String, Object>>());
     }
-
-
-    // Verify the number of configured commands
-    protected void checkCommandCount(int expected) {
-        int n = 0;
-        Iterator<String> names = catalog.getNames();
-        while (names.hasNext()) {
-            String name = names.next();
-            n++;
-            assertNotNull(name + " exists", catalog.getCommand(name));
-        }
-        assertEquals("Correct command count", expected, n);
-    }
-
 
 }

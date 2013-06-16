@@ -17,6 +17,7 @@
 
 package org.apache.commons.chain2.config.xml;
 
+import static org.apache.commons.chain2.testutils.HasCommandCount.hasCommandCount;
 import static org.apache.commons.chain2.testutils.HasLog.hasLog;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -27,7 +28,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.chain2.Catalog;
@@ -105,7 +105,7 @@ public class XmlConfigParserTestCase {
     public void testDefault() throws Exception {
 
         // Check overall command count
-        checkCommandCount(17);
+        assertThat(catalog, hasCommandCount(17));
 
         // Check individual single command instances
         {
@@ -294,20 +294,8 @@ public class XmlConfigParserTestCase {
                 parser.getUseContextClassLoader());
 
         // Ensure that there are no preconfigured commands in the catalog
-        checkCommandCount(0);
+        assertThat(catalog, hasCommandCount(0));
 
-    }
-
-    // Verify the number of configured commands
-    private void checkCommandCount(int expected) {
-        int n = 0;
-        Iterator<String> names = catalog.getNames();
-        while (names.hasNext()) {
-            String name = names.next();
-            n++;
-            assertNotNull(name + " does not exist", catalog.getCommand(name));
-        }
-        assertEquals("Command count is not correct", expected, n);
     }
 
     // Load the specified catalog from the specified resource path
