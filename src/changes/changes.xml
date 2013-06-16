@@ -41,6 +41,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="2.0" description="Major release">
+      <action issue="CHAIN-92" dev="britter" type="add">
+          Create a new module containing common test code and utilities
+      </action>
       <action issue="CHAIN-88" dev="britter" type="update" due-to="Stephan Köninger">
           Refactor tests in class ContextBaseTestCase
       </action>
