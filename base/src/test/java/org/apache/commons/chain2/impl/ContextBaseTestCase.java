@@ -386,13 +386,13 @@ public class ContextBaseTestCase {
 
     // Create a new instance of the appropriate Context type for this test case
     protected Context<String, Object> createContext() {
-        return (new ContextBase());
+        return new ContextBase();
     }
 
 
     // Return the expected size() for a Context for this test case
     protected int expectedAttributeCount() {
-        return (createContext().size());
+        return createContext().size();
     }
 
 
