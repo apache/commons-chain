@@ -18,19 +18,19 @@
 
   <!-- Define command and chain aliases -->
   <define    name="adding-command"
-        className="org.apache.commons.chain2.impl.AddingCommand"/>
+        className="org.apache.commons.chain2.testutils.AddingCommand"/>
   <define    name="delegating-command"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
   <define    name="delegating-filter"
-        className="org.apache.commons.chain2.impl.DelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.DelegatingFilter"/>
   <define    name="exception-command"
-        className="org.apache.commons.chain2.impl.ExceptionCommand"/>
+        className="org.apache.commons.chain2.testutils.ExceptionCommand"/>
   <define    name="exception-filter"
-        className="org.apache.commons.chain2.impl.ExceptionFilter"/>
+        className="org.apache.commons.chain2.testutils.ExceptionFilter"/>
   <define    name="non-delegating-command"
-        className="org.apache.commons.chain2.impl.NonDelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.NonDelegatingCommand"/>
   <define    name="non-delegating-filter"
-        className="org.apache.commons.chain2.impl.NonDelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.NonDelegatingFilter"/>
   <define    name="test-chain"
         className="org.apache.commons.chain2.config.xml.TestChain"/>
   <define    name="test-command"

@@ -14,34 +14,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.impl;
+package org.apache.commons.chain2.testutils;
 
 
+import org.apache.commons.chain2.Chain;
+import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.Filter;
 
 
 /**
- * <p>Implementation of {@link Filter} that logs its identifier and
- * and delegates to the rest of the chain.</p>
+ * <p>Implementation of {@link Command} that logs its identifier and
+ * and throws an Exception.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
-
-public class DelegatingFilter extends NonDelegatingFilter {
+public class ExceptionCommand extends NonDelegatingCommand {
 
 
     // ------------------------------------------------------------ Constructor
 
 
-    public DelegatingFilter() {
-    this("", "");
+    public ExceptionCommand() {
+    this("");
     }
 
 
     // Construct an instance that will log the specified identifier
-    public DelegatingFilter(String id1, String id2) {
-        super(id1, id2);
+    public ExceptionCommand(String id) {
+        super(id);
     }
 
 
@@ -49,11 +49,10 @@ public class DelegatingFilter extends NonDelegatingFilter {
 
 
     // Execution method for this Command
-    @Override
-    public boolean execute(Context<String, Object> context) {
+    public void execute(Context<String, Object> context, Chain<String, Object, Context<String, Object>> chain) {
 
         super.execute(context);
-        return (false);
+        throw new ArithmeticException(this.id);
 
     }
 

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.impl;
+package org.apache.commons.chain2.testutils;
 
 
 import org.apache.commons.chain2.Context;
@@ -23,32 +23,30 @@ import org.apache.commons.chain2.Filter;
 
 /**
  * <p>Implementation of {@link Filter} that logs its identifier and
- * and returns <code>true</code>.</p>
+ * and throws an Exception.</p>
  *
  * @version $Revision$ $Date$
  */
-
-public class NonDelegatingFilter
-    extends NonDelegatingCommand implements Filter<String, Object, Context<String, Object>> {
+public class ExceptionFilter
+    extends ExceptionCommand implements Filter<String, Object, Context<String, Object>> {
 
 
     // ------------------------------------------------------------- Constructor
 
 
-    public NonDelegatingFilter() {
+    public ExceptionFilter() {
         this("", "");
     }
 
 
     // Construct an instance that will log the specified identifier
-    public NonDelegatingFilter(String id1, String id2) {
+    public ExceptionFilter(String id1, String id2) {
         super(id1);
         this.id2 = id2;
     }
 
 
     // -------------------------------------------------------------- Properties
-
 
     protected String id2 = null;
     public String getId2() {
@@ -62,17 +60,7 @@ public class NonDelegatingFilter
     // --------------------------------------------------------- Command Methods
 
 
-    // Execution method for this Command
-    @Override
-    public boolean execute(Context<String, Object> context) {
-
-        super.execute(context);
-        return (true);
-
-    }
-
-
-    // Postprocess method for this Filter
+    // Postprocess command for this Filter
     public boolean postprocess(Context<String, Object> context, Exception exception) {
         log(context, id2);
         return (false);

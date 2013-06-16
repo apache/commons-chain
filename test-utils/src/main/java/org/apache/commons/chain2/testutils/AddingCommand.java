@@ -14,45 +14,54 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.impl;
+package org.apache.commons.chain2.testutils;
 
 
 import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.testutils.NonDelegatingCommand;
 
 
 /**
  * <p>Implementation of {@link Command} that logs its identifier and
- * and throws an Exception.</p>
+ * and attempts to add a new {@link Command} to the {@link Chain}.  This
+ * should cause an IllegalStateException if the {@link Chain} implementation
+ * subclasses <code>ChainBase</code>.</p>
  *
- * @version $Id$
+ * @version $Revision$ $Date$
  */
-public class ExceptionCommand extends NonDelegatingCommand {
+
+public class AddingCommand extends NonDelegatingCommand {
 
 
     // ------------------------------------------------------------ Constructor
 
 
-    public ExceptionCommand() {
-    this("");
+    public AddingCommand() {
+        this("", null);
     }
-
 
     // Construct an instance that will log the specified identifier
-    public ExceptionCommand(String id) {
+    public AddingCommand(String id, Chain<String, Object, Context<String, Object>> parent) {
         super(id);
+        this.parent = parent;
     }
+
+
+    // The parent Chain
+    private Chain<String, Object, Context<String, Object>> parent = null;
 
 
     // -------------------------------------------------------- Command Methods
 
 
     // Execution method for this Command
-    public void execute(Context<String, Object> context, Chain<String, Object, Context<String, Object>> chain) {
+    public boolean execute(Context<String, Object> context, Chain<String, Object, Context<String, Object>> chain) {
 
         super.execute(context);
-        throw new ArithmeticException(this.id);
+        parent.addCommand(new NonDelegatingCommand("NEW")); // Should cause ISE
+        return (true);
 
     }
 

@@ -14,38 +14,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.impl;
+package org.apache.commons.chain2.testutils;
 
 
-import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Filter;
 
 
 /**
- * <p>Implementation of {@link Command} that logs its identifier and
- * and delegates to the rest of the chain.</p>
+ * <p>Implementation of {@link Filter} that logs its identifier and
+ * and returns <code>true</code>.</p>
  *
  * @version $Revision$ $Date$
  */
 
-public class DelegatingCommand extends NonDelegatingCommand {
+public class NonDelegatingFilter
+    extends NonDelegatingCommand implements Filter<String, Object, Context<String, Object>> {
 
 
-    // ------------------------------------------------------------ Constructor
+    // ------------------------------------------------------------- Constructor
 
 
-    public DelegatingCommand() {
-    this("");
+    public NonDelegatingFilter() {
+        this("", "");
     }
 
 
     // Construct an instance that will log the specified identifier
-    public DelegatingCommand(String id) {
-        super(id);
+    public NonDelegatingFilter(String id1, String id2) {
+        super(id1);
+        this.id2 = id2;
     }
 
 
-    // -------------------------------------------------------- Command Methods
+    // -------------------------------------------------------------- Properties
+
+
+    protected String id2 = null;
+    public String getId2() {
+        return (this.id2);
+    }
+    public void setId2(String id2) {
+        this.id2 = id2;
+    }
+
+
+    // --------------------------------------------------------- Command Methods
 
 
     // Execution method for this Command
@@ -53,8 +67,15 @@ public class DelegatingCommand extends NonDelegatingCommand {
     public boolean execute(Context<String, Object> context) {
 
         super.execute(context);
-        return (false);
+        return (true);
 
+    }
+
+
+    // Postprocess method for this Filter
+    public boolean postprocess(Context<String, Object> context, Exception exception) {
+        log(context, id2);
+        return (false);
     }
 
 

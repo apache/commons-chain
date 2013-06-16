@@ -24,6 +24,13 @@ import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.testutils.AddingCommand;
+import org.apache.commons.chain2.testutils.DelegatingCommand;
+import org.apache.commons.chain2.testutils.DelegatingFilter;
+import org.apache.commons.chain2.testutils.ExceptionCommand;
+import org.apache.commons.chain2.testutils.ExceptionFilter;
+import org.apache.commons.chain2.testutils.NonDelegatingCommand;
+import org.apache.commons.chain2.testutils.NonDelegatingFilter;
 import org.junit.Test;
 
 public final class FluentInterfacesTestCase {

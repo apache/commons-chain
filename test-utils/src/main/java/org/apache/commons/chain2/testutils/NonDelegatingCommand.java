@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.impl;
+package org.apache.commons.chain2.testutils;
 
 
 import org.apache.commons.chain2.Command;

@@ -28,13 +28,12 @@ import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.base.LookupCommand;
 import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.impl.ChainBase;
 import org.apache.commons.chain2.impl.ContextBase;
-import org.apache.commons.chain2.impl.DelegatingCommand;
-import org.apache.commons.chain2.impl.NonDelegatingCommand;
+import org.apache.commons.chain2.testutils.DelegatingCommand;
+import org.apache.commons.chain2.testutils.NonDelegatingCommand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -129,7 +128,7 @@ public class LookupCommandTestCase {
 
         try {
             assertTrue("Command should return true",
-                       command.execute(context));
+                    command.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -148,7 +147,7 @@ public class LookupCommandTestCase {
 
         try {
             assertTrue("Command should return true",
-                       command.execute(context));
+                    command.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }

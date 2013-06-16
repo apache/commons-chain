@@ -18,19 +18,19 @@
 
   <!-- Single command "chains" from CatalogBaseTestCase -->
   <command   name="AddingCommand"
-        className="org.apache.commons.chain2.impl.AddingCommand"/>
+        className="org.apache.commons.chain2.testutils.AddingCommand"/>
   <command   name="DelegatingCommand"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
   <command   name="DelegatingFilter"
-        className="org.apache.commons.chain2.impl.DelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.DelegatingFilter"/>
   <command   name="ExceptionCommand"
-        className="org.apache.commons.chain2.impl.ExceptionCommand"/>
+        className="org.apache.commons.chain2.testutils.ExceptionCommand"/>
   <command   name="ExceptionFilter"
-        className="org.apache.commons.chain2.impl.ExceptionFilter"/>
+        className="org.apache.commons.chain2.testutils.ExceptionFilter"/>
   <command   name="NonDelegatingCommand"
-        className="org.apache.commons.chain2.impl.NonDelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.NonDelegatingCommand"/>
   <command   name="NonDelegatingFilter"
-        className="org.apache.commons.chain2.impl.NonDelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.NonDelegatingFilter"/>
   <chain     name="ChainBase"
         className="org.apache.commons.chain2.config.xml.TestChain"/>
 
@@ -43,76 +43,76 @@
   <!-- Chains with nested commands -->
   <chain     name="Execute2a">
     <command   id="1"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
     <command   id="2"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
     <command   id="3"
-        className="org.apache.commons.chain2.impl.NonDelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.NonDelegatingCommand"/>
   </chain>
   <chain     name="Execute2b">
     <command   id="1"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
     <command   id="2"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
     <command   id="3"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
   </chain>
   <chain     name="Execute2c">
     <command   id="1"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
     <command   id="2"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
     <command   id="3"
-        className="org.apache.commons.chain2.impl.ExceptionCommand"/>
+        className="org.apache.commons.chain2.testutils.ExceptionCommand"/>
   </chain>
   <chain      name="Execute2d">
     <command   id="1"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
     <command   id="2"
-        className="org.apache.commons.chain2.impl.ExceptionCommand"/>
+        className="org.apache.commons.chain2.testutils.ExceptionCommand"/>
     <command   id="3"
-        className="org.apache.commons.chain2.impl.NonDelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.NonDelegatingCommand"/>
   </chain>
   <chain      name="Execute4a">
     <command   id="1"
               id2="a"
-        className="org.apache.commons.chain2.impl.DelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.DelegatingFilter"/>
     <command   id="2"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
     <command   id="3"
               id2="c"
-        className="org.apache.commons.chain2.impl.NonDelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.NonDelegatingFilter"/>
   </chain>
   <chain      name="Execute4b">
     <command   id="1"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
     <command   id="2"
               id2="b"
-        className="org.apache.commons.chain2.impl.DelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.DelegatingFilter"/>
     <command   id="3"
-        className="org.apache.commons.chain2.impl.DelegatingCommand"/>
+        className="org.apache.commons.chain2.testutils.DelegatingCommand"/>
   </chain>
   <chain      name="Execute4c">
     <command   id="1"
               id2="a"
-        className="org.apache.commons.chain2.impl.DelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.DelegatingFilter"/>
     <command   id="2"
               id2="b"
-        className="org.apache.commons.chain2.impl.DelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.DelegatingFilter"/>
     <command   id="3"
               id2="c"
-        className="org.apache.commons.chain2.impl.ExceptionFilter"/>
+        className="org.apache.commons.chain2.testutils.ExceptionFilter"/>
   </chain>
   <chain      name="Execute4d">
     <command   id="1"
               id2="a"
-        className="org.apache.commons.chain2.impl.DelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.DelegatingFilter"/>
     <command   id="2"
               id2="b"
-        className="org.apache.commons.chain2.impl.ExceptionFilter"/>
+        className="org.apache.commons.chain2.testutils.ExceptionFilter"/>
     <command   id="3"
               id2="c"
-        className="org.apache.commons.chain2.impl.NonDelegatingFilter"/>
+        className="org.apache.commons.chain2.testutils.NonDelegatingFilter"/>
   </chain>
 
 </catalog>

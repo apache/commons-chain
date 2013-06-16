@@ -14,56 +14,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.impl;
+package org.apache.commons.chain2.testutils;
 
 
+import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.Filter;
 
 
 /**
- * <p>Implementation of {@link Filter} that logs its identifier and
- * and throws an Exception.</p>
+ * <p>Implementation of {@link Command} that logs its identifier and
+ * and delegates to the rest of the chain.</p>
  *
  * @version $Revision$ $Date$
  */
-public class ExceptionFilter
-    extends ExceptionCommand implements Filter<String, Object, Context<String, Object>> {
+
+public class DelegatingCommand extends NonDelegatingCommand {
 
 
-    // ------------------------------------------------------------- Constructor
+    // ------------------------------------------------------------ Constructor
 
 
-    public ExceptionFilter() {
-        this("", "");
+    public DelegatingCommand() {
+    this("");
     }
 
 
     // Construct an instance that will log the specified identifier
-    public ExceptionFilter(String id1, String id2) {
-        super(id1);
-        this.id2 = id2;
+    public DelegatingCommand(String id) {
+        super(id);
     }
 
 
-    // -------------------------------------------------------------- Properties
-
-    protected String id2 = null;
-    public String getId2() {
-        return (this.id2);
-    }
-    public void setId2(String id2) {
-        this.id2 = id2;
-    }
+    // -------------------------------------------------------- Command Methods
 
 
-    // --------------------------------------------------------- Command Methods
+    // Execution method for this Command
+    @Override
+    public boolean execute(Context<String, Object> context) {
 
-
-    // Postprocess command for this Filter
-    public boolean postprocess(Context<String, Object> context, Exception exception) {
-        log(context, id2);
+        super.execute(context);
         return (false);
+
     }
 
 
