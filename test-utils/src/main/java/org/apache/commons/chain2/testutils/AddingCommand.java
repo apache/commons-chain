@@ -29,7 +29,7 @@ import org.apache.commons.chain2.testutils.NonDelegatingCommand;
  * should cause an IllegalStateException if the {@link Chain} implementation
  * subclasses <code>ChainBase</code>.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class AddingCommand extends NonDelegatingCommand {

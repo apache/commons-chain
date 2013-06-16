@@ -25,7 +25,7 @@ import org.apache.commons.chain2.Context;
  * <p>Implementation of {@link Command} that simply logs its identifier
  * and returns.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class NonDelegatingCommand implements Command<String, Object, Context<String, Object>> {

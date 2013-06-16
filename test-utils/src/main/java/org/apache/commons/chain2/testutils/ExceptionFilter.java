@@ -25,7 +25,7 @@ import org.apache.commons.chain2.Filter;
  * <p>Implementation of {@link Filter} that logs its identifier and
  * and throws an Exception.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class ExceptionFilter
     extends ExceptionCommand implements Filter<String, Object, Context<String, Object>> {

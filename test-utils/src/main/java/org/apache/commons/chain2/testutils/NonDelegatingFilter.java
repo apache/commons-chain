@@ -25,7 +25,7 @@ import org.apache.commons.chain2.Filter;
  * <p>Implementation of {@link Filter} that logs its identifier and
  * and returns <code>true</code>.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class NonDelegatingFilter
