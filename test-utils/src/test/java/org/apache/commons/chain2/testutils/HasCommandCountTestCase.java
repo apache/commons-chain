@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * @version $Id$
  */
-public class HasCommandCountTest {
+public class HasCommandCountTestCase {
 
     private Catalog<String, Object, Context<String, Object>> catalog;
     private HasCommandCount matcher;

@@ -31,7 +31,7 @@ import org.junit.Test;
 /**
  * @version $Id$
  */
-public class CopyCommandTest {
+public class CopyCommandTestCase {
 
     private CopyCommand<String, Object, Map<String, Object>> command;
     private Map<String, Object> context;

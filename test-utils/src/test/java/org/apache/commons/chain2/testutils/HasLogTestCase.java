@@ -32,7 +32,7 @@ import org.junit.Test;
 /**
  * @version $Id$
  */
-public class HasLogTest {
+public class HasLogTestCase {
 
     private Context<String, Object> context;
     private HasLog matcher;
