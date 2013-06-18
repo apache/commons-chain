@@ -35,7 +35,7 @@ import org.junit.Test;
 /**
  * <p>Test case for the <code>DispatchLookupCommand</code> class.</p>
  *
- * @version $Revision$
+ * @version $Id$
  */
 
 public class DispatchLookupCommandTestCase {
