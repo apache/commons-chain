@@ -19,8 +19,12 @@ package org.apache.commons.chain2.base;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.collection.IsMapContaining.hasEntry;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +39,7 @@ public class CopyCommandTestCase {
 
     private CopyCommand<String, Object, Map<String, Object>> command;
     private Map<String, Object> context;
+    private Map<String, Object> originalContext;
 
     @Before
     public void setUp() throws Exception {
@@ -44,6 +49,8 @@ public class CopyCommandTestCase {
         context.put("one", "one");
         context.put("two", "two");
         context.put("three", "three");
+
+        originalContext = Collections.unmodifiableMap(new HashMap<String, Object>(context));
     }
 
     @After
@@ -59,47 +66,32 @@ public class CopyCommandTestCase {
     }
 
     @Test
-    public void noToKeyAssociatedValueToNull() throws Exception {
-        command.setValue("five");
-        execute();
-
-        assertEquals("five", context.get(null));
-    }
-
-    @Test
-    public void noToKeyAssociatesValueFromFromKeyToNull() throws Exception {
+    public void noToKeyDoesNotAlterContext() throws Exception {
         command.setFromKey("one");
         execute();
 
-        String expected = (String) context.get(command.getFromKey());
-        assertEquals(expected, context.get(null));
+        assertEquals(originalContext, context);
     }
 
     @Test
-    public void noValueAndNoFromKeyRemovesToKey() throws Exception {
+    public void noToFromKeyDoesNotAlterContext() throws Exception {
         command.setToKey("one");
         execute();
 
-        assertNull(context.get("one"));
+        assertEquals(originalContext, context);
     }
 
     @Test
-    public void givenFromAndToKeyValueIsCopied() throws Exception {
+    public void bothKeysExistsValueIsCopied() throws Exception {
         command.setFromKey("one");
-        command.setToKey("three");
+        command.setToKey("two");
+
         execute();
 
-        assertEquals("one", context.get("three"));
-    }
-
-    @Test
-    public void givenFromAndToKeyAndValueTheValueIsCopied() throws Exception {
-        command.setFromKey("one");
-        command.setToKey("three");
-        command.setValue("five");
-        execute();
-
-        assertEquals("five", context.get("three"));
+        assertThat(context, hasEntry("one", (Object) "one"));
+        assertThat(context, hasEntry("two", (Object) "one"));
+        assertThat(context, hasEntry("three", (Object) "three"));
+        assertThat(context.keySet(), hasSize(3));
     }
 
     private void execute() {

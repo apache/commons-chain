@@ -73,25 +73,6 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
         this.toKey = toKey;
     }
 
-    private V value = null;
-
-    /**
-     * <p>Return the literal value to be copied.</p>
-     * @return The literal value.
-     */
-    public V getValue() {
-        return (this.value);
-    }
-
-    /**
-     * <p>Set the literal value to be copied.</p>
-     *
-     * @param value The new value
-     */
-    public void setValue(V value) {
-        this.value = value;
-    }
-
     // ---------------------------------------------------------- Filter Methods
 
     /**
@@ -104,19 +85,15 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
      * @throws org.apache.commons.chain2.ChainException in the if an error occurs during execution.
      */
     public boolean execute(C context) {
-        V value = this.value;
-
-        if (value == null) {
-            value = context.get(getFromKey());
-        }
-
-        if (value != null) {
+        if (containsKeys(context)) {
+            V value = context.get(getFromKey());
             context.put(getToKey(), value);
-        } else {
-            context.remove(getToKey());
         }
+        return false;
+    }
 
-        return (false);
+    private boolean containsKeys(C context) {
+        return context.containsKey(getFromKey()) && context.containsKey(getToKey());
     }
 
 }
