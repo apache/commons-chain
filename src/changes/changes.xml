@@ -41,6 +41,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="2.0" description="Major release">
+      <action issue="CHAIN-100" dev="britter" type="add">
+          Add Maven PMD Plugin to the site build
+      </action>
       <action issue="CHAIN-91" dev="britter" type="update">
           Split up CopyCommand
       </action>
