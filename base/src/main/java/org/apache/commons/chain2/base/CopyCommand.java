@@ -16,10 +16,9 @@
  */
 package org.apache.commons.chain2.base;
 
-import org.apache.commons.chain2.Command;
-import org.apache.commons.chain2.Context;
-
 import java.util.Map;
+
+import org.apache.commons.chain2.Command;
 
 /**
  * <p>Copy a specified literal value, or a context attribute stored under
@@ -79,7 +78,7 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
      * <p>Copy a specified literal value, or a context attribute stored under
      * the <code>fromKey</code> (if any), to the <code>toKey</code>.</p>
      *
-     * @param context {@link Context} in which we are operating
+     * @param context {@link org.apache.commons.chain2.Context Context} in which we are operating
      *
      * @return <code>false</code> so that processing will continue
      * @throws org.apache.commons.chain2.ChainException in the if an error occurs during execution.
