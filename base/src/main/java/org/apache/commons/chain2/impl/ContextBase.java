@@ -439,15 +439,15 @@ public class ContextBase extends ContextMap<String, Object> {
         }
 
         // Initialize the underlying Map contents
-        for (int i = 0; i < pd.length; i++) {
-            String name = pd[i].getName();
+        for (PropertyDescriptor propertyDescriptor : pd) {
+            String name = propertyDescriptor.getName();
 
             // Add descriptor (ignoring getClass() and isEmpty())
             if (!("class".equals(name) || "empty".equals(name))) {
                 if (descriptors == null) {
                     descriptors = new HashMap<String, PropertyDescriptor>(pd.length - 2);
                 }
-                descriptors.put(name, pd[i]);
+                descriptors.put(name, propertyDescriptor);
                 super.put(name, singleton);
             }
         }
