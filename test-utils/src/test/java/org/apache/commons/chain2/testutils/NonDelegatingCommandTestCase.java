@@ -18,12 +18,11 @@
 package org.apache.commons.chain2.testutils;
 
 import static org.apache.commons.chain2.testutils.HasLog.hasLog;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 import org.apache.commons.chain2.Context;
@@ -53,7 +52,7 @@ public class NonDelegatingCommandTestCase {
 
     @Test
     public void createsLogInEmptyContext() throws Exception {
-        command.execute(context);
+        execute();
 
         assertThat(context.keySet(), hasSize(1));
         assertThat(context, hasKey("log"));
@@ -63,8 +62,12 @@ public class NonDelegatingCommandTestCase {
     @Test
     public void existingLogIsReused() throws Exception {
         context.put("log", new StringBuilder("some content"));
-        command.execute(context);
+        execute();
 
         assertThat(context, hasLog("some content/" + ID));
+    }
+
+    private void execute() {
+        assertThat(command.execute(context), is(true));
     }
 }
