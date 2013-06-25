@@ -201,12 +201,12 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
         }
 
         // Return the exception or result state from the last execute()
-        if ((saveException != null) && !handled) {
+        if (saveException != null && !handled) {
             // Wrap and rethrow exception
             throw wrapUnhandledExceptions(saveException, context,
                     lastCommand);
         }
-        return (saveResult);
+        return saveResult;
     }
 
     /**
@@ -255,7 +255,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      * for the unit tests.</p>
      */
     List<Command<K, V, C>> getCommands() {
-        return (commands);
+        return commands;
     }
 
 }

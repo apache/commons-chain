@@ -117,7 +117,7 @@ public class ContextBase extends ContextMap<String, Object> {
 
                 @Override
                 public boolean equals(Object object) {
-                    return (false);
+                    return false;
                 }
 
                 @Override
@@ -169,11 +169,11 @@ public class ContextBase extends ContextMap<String, Object> {
     public boolean containsValue(Object value) {
         // Case 1 -- no local properties
         if (descriptors == null) {
-            return (super.containsValue(value));
+            return super.containsValue(value);
 
         // Case 2 -- value found in the underlying Map
         } else if (super.containsValue(value)) {
-            return (true);
+            return true;
         }
 
         // Case 3 -- check the values of our readable properties
@@ -182,14 +182,14 @@ public class ContextBase extends ContextMap<String, Object> {
                 Object prop = readProperty(aPd);
                 if (value == null) {
                     if (prop == null) {
-                        return (true);
+                        return true;
                     }
                 } else if (value.equals(prop)) {
-                    return (true);
+                    return true;
                 }
             }
         }
-        return (false);
+        return false;
     }
 
     /**
@@ -203,7 +203,7 @@ public class ContextBase extends ContextMap<String, Object> {
      */
     @Override
     public Set<Entry<String, Object>> entrySet() {
-        return (new EntrySetImpl());
+        return new EntrySetImpl();
     }
 
     /**
@@ -228,7 +228,7 @@ public class ContextBase extends ContextMap<String, Object> {
     public Object get(Object key) {
         // Case 1 -- no local properties
         if (descriptors == null) {
-            return (super.get(key));
+            return super.get(key);
         }
 
         // Case 2 -- this is a local property
@@ -236,15 +236,15 @@ public class ContextBase extends ContextMap<String, Object> {
             PropertyDescriptor descriptor = descriptors.get(key);
             if (descriptor != null) {
                 if (descriptor.getReadMethod() != null) {
-                    return (readProperty(descriptor));
+                    return readProperty(descriptor);
                 } else {
-                    return (null);
+                    return null;
                 }
             }
         }
 
         // Case 3 -- retrieve value from our underlying Map
-        return (super.get(key));
+        return super.get(key);
     }
 
     /**
@@ -259,11 +259,11 @@ public class ContextBase extends ContextMap<String, Object> {
     public boolean isEmpty() {
         // Case 1 -- no local properties
         if (descriptors == null) {
-            return (super.isEmpty());
+            return super.isEmpty();
         }
 
         // Case 2 -- compare key count to property count
-        return (super.size() <= descriptors.size());
+        return super.size() <= descriptors.size();
     }
 
     /**
@@ -277,7 +277,7 @@ public class ContextBase extends ContextMap<String, Object> {
      */
     @Override
     public Set<String> keySet() {
-        return (super.keySet());
+        return super.keySet();
     }
 
     /**
@@ -310,7 +310,7 @@ public class ContextBase extends ContextMap<String, Object> {
 
         // Case 1 -- no local properties
         if (descriptors == null) {
-            return (super.put(key, value));
+            return super.put(key, value);
         }
 
         // Case 2 -- this is a local property
@@ -322,12 +322,12 @@ public class ContextBase extends ContextMap<String, Object> {
                     previous = readProperty(descriptor);
                 }
                 writeProperty(descriptor, value);
-                return (previous);
+                return previous;
             }
         }
 
         // Case 3 -- store or replace value in our underlying map
-        return (super.put(key, value));
+        return super.put(key, value);
     }
 
     /**
@@ -365,7 +365,7 @@ public class ContextBase extends ContextMap<String, Object> {
     public Object remove(Object key) {
         // Case 1 -- no local properties
         if (descriptors == null) {
-            return (super.remove(key));
+            return super.remove(key);
         }
 
         // Case 2 -- this is a local property
@@ -378,7 +378,7 @@ public class ContextBase extends ContextMap<String, Object> {
         }
 
         // Case 3 -- remove from underlying Map
-        return (super.remove(key));
+        return super.remove(key);
     }
 
     /**
@@ -392,7 +392,7 @@ public class ContextBase extends ContextMap<String, Object> {
      */
     @Override
     public Collection<Object> values() {
-        return (new ValuesImpl());
+        return new ValuesImpl();
     }
 
     // --------------------------------------------------------- Private Methods
@@ -402,7 +402,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * objects representing our key-value pairs.</p>
      */
     private Iterator<Entry<String, Object>> entriesIterator() {
-        return (new EntrySetIterator());
+        return new EntrySetIterator();
     }
 
     /**
@@ -413,9 +413,9 @@ public class ContextBase extends ContextMap<String, Object> {
      */
     private Map.Entry<String, Object> entry(String key) {
         if (containsKey(key)) {
-            return (new MapEntryImpl(key, get(key)));
+            return new MapEntryImpl(key, get(key));
         }
-        return (null);
+        return null;
     }
 
     /**
@@ -445,7 +445,7 @@ public class ContextBase extends ContextMap<String, Object> {
             // Add descriptor (ignoring getClass() and isEmpty())
             if (!("class".equals(name) || "empty".equals(name))) {
                 if (descriptors == null) {
-                    descriptors = new HashMap<String, PropertyDescriptor>((pd.length - 2));
+                    descriptors = new HashMap<String, PropertyDescriptor>(pd.length - 2);
                 }
                 descriptors.put(name, pd[i]);
                 super.put(name, singleton);
@@ -493,12 +493,12 @@ public class ContextBase extends ContextMap<String, Object> {
     private boolean remove(Map.Entry<String, Object> entry) {
         Map.Entry<String, Object> actual = entry(entry.getKey());
         if (actual == null) {
-            return (false);
+            return false;
         } else if (!entry.equals(actual)) {
-            return (false);
+            return false;
         } else {
             remove(entry.getKey());
-            return (true);
+            return true;
         }
     }
 
@@ -507,7 +507,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * <code>Map</code>.</p>
      */
     private Iterator<Object> valuesIterator() {
-        return (new ValuesIterator());
+        return new ValuesIterator();
     }
 
     /**
@@ -555,7 +555,7 @@ public class ContextBase extends ContextMap<String, Object> {
         @Override
         public boolean contains(Object obj) {
             if (!(obj instanceof Map.Entry)) {
-                return (false);
+                return false;
             }
 
             /* The contains method is expecting the search type to be of the
@@ -565,19 +565,19 @@ public class ContextBase extends ContextMap<String, Object> {
             Map.Entry<String, Object> entry = (Map.Entry<String, Object>) obj;
             Entry<String, Object> actual = ContextBase.this.entry(entry.getKey());
             if (actual != null) {
-                return (actual.equals(entry));
+                return actual.equals(entry);
             }
-            return (false);
+            return false;
         }
 
         @Override
         public boolean isEmpty() {
-            return (ContextBase.this.isEmpty());
+            return ContextBase.this.isEmpty();
         }
 
         @Override
         public Iterator<Entry<String, Object>> iterator() {
-            return (ContextBase.this.entriesIterator());
+            return ContextBase.this.entriesIterator();
         }
 
         @Override
@@ -589,14 +589,14 @@ public class ContextBase extends ContextMap<String, Object> {
                  * so we can safely suppress the unchecked warnings. */
                 @SuppressWarnings("unchecked")
                 Map.Entry<String, Object> entry = (Map.Entry<String, Object>) obj;
-                return (ContextBase.this.remove(entry));
+                return ContextBase.this.remove(entry);
             }
-            return (false);
+            return false;
         }
 
         @Override
         public int size() {
-            return (ContextBase.this.size());
+            return ContextBase.this.size();
         }
 
     }
@@ -612,12 +612,12 @@ public class ContextBase extends ContextMap<String, Object> {
         private Iterator<String> keys = ContextBase.this.keySet().iterator();
 
         public boolean hasNext() {
-            return (keys.hasNext());
+            return keys.hasNext();
         }
 
         public Entry<String, Object> next() {
             entry = ContextBase.this.entry(keys.next());
-            return (entry);
+            return entry;
         }
 
         public void remove() {
@@ -644,42 +644,42 @@ public class ContextBase extends ContextMap<String, Object> {
         @Override
         public boolean equals(Object obj) {
             if (obj == null) {
-                return (false);
+                return false;
             } else if (!(obj instanceof Map.Entry)) {
-                return (false);
+                return false;
             }
             Map.Entry<?, ?> entry = (Map.Entry<?, ?>) obj;
             if (key == null) {
-                return (entry.getKey() == null);
+                return entry.getKey() == null;
             }
             if (key.equals(entry.getKey())) {
                 if (value == null) {
-                    return (entry.getValue() == null);
+                    return entry.getValue() == null;
                 }
-                return (value.equals(entry.getValue()));
+                return value.equals(entry.getValue());
             }
-            return (false);
+            return false;
         }
 
         public String getKey() {
-            return (this.key);
+            return this.key;
         }
 
         public Object getValue() {
-            return (this.value);
+            return this.value;
         }
 
         @Override
         public int hashCode() {
-            return (((key == null) ? 0 : key.hashCode())
-                   ^ ((value == null) ? 0 : value.hashCode()));
+            return (key == null ? 0 : key.hashCode())
+                   ^ (value == null ? 0 : value.hashCode());
         }
 
         public Object setValue(Object value) {
             Object previous = this.value;
             ContextBase.this.put(this.key, value);
             this.value = value;
-            return (previous);
+            return previous;
         }
 
         @Override
@@ -703,20 +703,20 @@ public class ContextBase extends ContextMap<String, Object> {
         @Override
         public boolean contains(Object obj) {
             if (!(obj instanceof Map.Entry)) {
-                return (false);
+                return false;
             }
             Map.Entry<?, ?> entry = (Map.Entry<?, ?>) obj;
-            return (ContextBase.this.containsValue(entry.getValue()));
+            return ContextBase.this.containsValue(entry.getValue());
         }
 
         @Override
         public boolean isEmpty() {
-            return (ContextBase.this.isEmpty());
+            return ContextBase.this.isEmpty();
         }
 
         @Override
         public Iterator<Object> iterator() {
-            return (ContextBase.this.valuesIterator());
+            return ContextBase.this.valuesIterator();
         }
 
         @Override
@@ -728,14 +728,14 @@ public class ContextBase extends ContextMap<String, Object> {
                  * above, so we can safely suppress unchecked warnings. */
                 @SuppressWarnings("unchecked")
                 Map.Entry<String, Object> entry = (Map.Entry<String, Object>) obj;
-                return (ContextBase.this.remove(entry));
+                return ContextBase.this.remove(entry);
             }
-            return (false);
+            return false;
         }
 
         @Override
         public int size() {
-            return (ContextBase.this.size());
+            return ContextBase.this.size();
         }
 
     }
@@ -752,12 +752,12 @@ public class ContextBase extends ContextMap<String, Object> {
         private Iterator<String> keys = ContextBase.this.keySet().iterator();
 
         public boolean hasNext() {
-            return (keys.hasNext());
+            return keys.hasNext();
         }
 
         public Object next() {
             entry = ContextBase.this.entry(keys.next());
-            return (entry.getValue());
+            return entry.getValue();
         }
 
         public void remove() {

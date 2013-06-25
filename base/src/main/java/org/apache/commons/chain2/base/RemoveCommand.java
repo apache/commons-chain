@@ -39,7 +39,7 @@ public class RemoveCommand<K, V, C extends Context<K, V>> implements Command<K, 
      * @return The context attribute key.
      */
     public K getFromKey() {
-        return (this.fromKey);
+        return this.fromKey;
     }
 
     /**
@@ -64,7 +64,7 @@ public class RemoveCommand<K, V, C extends Context<K, V>> implements Command<K, 
      */
     public boolean execute(C context) {
         context.remove(getFromKey());
-        return (false);
+        return false;
     }
 
 }

@@ -128,7 +128,7 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
      */
     protected boolean evaluateResult(Object o) {
         Boolean result = (Boolean) o;
-        return (result != null && result.booleanValue());
+        return result != null && result.booleanValue();
     }
 
     /**

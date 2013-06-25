@@ -41,7 +41,7 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
      * @return The source attribute key.
      */
     public K getFromKey() {
-        return (this.fromKey);
+        return this.fromKey;
     }
 
     /**
@@ -60,7 +60,7 @@ public class CopyCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> 
      * @return The destination attribute key.
      */
     public K getToKey() {
-        return (this.toKey);
+        return this.toKey;
     }
 
     /**

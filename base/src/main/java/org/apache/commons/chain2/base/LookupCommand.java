@@ -106,7 +106,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @return The Catalog name.
      */
     public String getCatalogName() {
-        return (this.catalogName);
+        return this.catalogName;
     }
 
     /**
@@ -127,7 +127,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @return The name of the Command.
      */
     public String getName() {
-        return (this.name);
+        return this.name;
     }
 
     /**
@@ -148,7 +148,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @return The context key of the Command.
      */
     public String getNameKey() {
-        return (this.nameKey);
+        return this.nameKey;
     }
 
     /**
@@ -169,7 +169,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @return <code>true</code> if the Command is optional.
      */
     public boolean isOptional() {
-        return (this.optional);
+        return this.optional;
     }
 
     /**
@@ -273,13 +273,13 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
     public boolean execute(C context) {
         Command<K, V, C> command = getCommand(context);
         if (command != null) {
-            boolean result = (command.execute(context));
+            boolean result = command.execute(context);
             if (isIgnoreExecuteResult()) {
                 return false;
             }
             return result;
         }
-        return (false);
+        return false;
     }
 
 
@@ -300,11 +300,11 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         Command<K, V, C> command = getCommand(context);
         if (command != null) {
             if (command instanceof Filter) {
-                boolean result = (((Filter<K, V, C>) command).postprocess(context, exception));
+                boolean result = ((Filter<K, V, C>) command).postprocess(context, exception);
                 return !isIgnorePostprocessResult() && result;
             }
         }
-        return (false);
+        return false;
     }
 
     // --------------------------------------------------------- Private Methods
@@ -362,7 +362,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         String name = getCommandName(context);
         if (name != null) {
             command = catalog.getCommand(name);
-            if ((command == null) && !isOptional()) {
+            if (command == null && !isOptional()) {
                 if (catalogName == null) {
                     throw new IllegalArgumentException
                         ("Cannot find command '" + name
@@ -373,7 +373,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
                          + "' in catalog '" + catalogName + "'");
                 }
             }
-            return (command);
+            return command;
         }
         throw new IllegalArgumentException("No command name");
     }
