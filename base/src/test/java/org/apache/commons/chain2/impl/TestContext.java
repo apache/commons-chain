@@ -19,6 +19,8 @@ package org.apache.commons.chain2.impl;
 /**
  * Subclass of <code>ContextBase</code> to exercize the automatic
  * delegation to properties of the <code>Context</code> class.
+ *
+ * @version $Id$
  */
 public class TestContext extends ContextBase {
 
