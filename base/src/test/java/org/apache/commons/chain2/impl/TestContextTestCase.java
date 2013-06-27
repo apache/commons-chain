@@ -31,113 +31,74 @@ import org.junit.Test;
  * Extension of <code>ContextBaseTestCase</code> to validate property
  * delegation.
  */
-
 public class TestContextTestCase extends ContextBaseTestCase {
 
-
-    // ---------------------------------------------------- Overall Test Methods
-
-    /**
-     * Set up instance variables required by this test case.
-     */
     @Override
     @Before
     public void setUp() {
-
         context = createContext();
-
     }
 
-
-    // ------------------------------------------------- Individual Test Methods
-
-
-    // Test state of newly created instance
     @Override
     @Test
     public void testPristine() {
-
         super.testPristine();
         assertEquals("readOnly", context.get("readOnly"));
         assertEquals("readWrite", context.get("readWrite"));
         assertEquals("writeOnly", ((TestContext) context).returnWriteOnly());
-
     }
 
     @Test
     public void readOnlyIsInstanceOfString() {
-
         assertThat(context.get("readOnly"), instanceOf(String.class));
-
     }
 
     @Test
     public void readOnlyIsProvidedByContext() {
-
         assertEquals("readOnly", context.get("readOnly"));
-
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void putReadOnlyThrowsException() {
-
         context.put("readOnly", "new readOnly");
-
     }
 
     @Test
     public void writeOnlyIsInstanceOfString() {
-
-        assertThat(((TestContext) context).returnWriteOnly(), 
+        assertThat(((TestContext) context).returnWriteOnly(),
                 instanceOf(String.class));
-
     }
 
     @Test
     public void writeOnlyIsNotProvidedByContext() {
-
         assertNull(context.get("writeOnly"));
-
     }
 
     @Test
     public void putNewWriteOnlyProperty() {
-
         context.put("writeOnly", "new writeOnly");
         assertEquals("new writeOnly", ((TestContext) context).returnWriteOnly());
-
     }
 
     @Test
     public void readWriteIsInstanceOfString() {
-
         assertThat(context.get("readWrite"), instanceOf(String.class));
-
     }
 
     @Test
     public void readWriteIsProvidedByContext() {
-
         assertEquals("readWrite", context.get("readWrite"));
-
     }
 
     @Test
     public void putNewReadWriteProperty() {
-
         context.put("readWrite", "new readWrite");
         assertEquals("new readWrite", context.get("readWrite"));
-
     }
 
-    // ------------------------------------------------------- Protected Methods
-
-
-    // Create a new instance of the appropriate Context type for this test case
     @Override
     protected Context<String, Object> createContext() {
         return (new TestContext());
     }
-
 
 }
