@@ -89,7 +89,7 @@ public class XmlConfigParser implements ConfigParser {
         digester.setUseContextClassLoader(getUseContextClassLoader());
         digester.setValidating(false);
         digester.addRuleSet(ruleSet);
-        return (digester);
+        return digester;
     }
 
     /**
@@ -98,7 +98,7 @@ public class XmlConfigParser implements ConfigParser {
      * @return The RuleSet for configuring a Digester instance.
      */
     public RuleSet getRuleSet() {
-        return (ruleSet);
+        return ruleSet;
     }
 
     /**
@@ -118,7 +118,7 @@ public class XmlConfigParser implements ConfigParser {
      * @return <code>true</code> if Digester should use the context class loader.
      */
     public boolean getUseContextClassLoader() {
-        return (this.useContextClassLoader);
+        return this.useContextClassLoader;
     }
 
     /**
