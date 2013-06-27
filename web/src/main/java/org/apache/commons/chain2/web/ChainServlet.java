@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.config.xml.XmlConfigParser;
-import org.apache.commons.chain2.config.xml.XmlConfigParser;
 import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.apache.commons.logging.Log;
