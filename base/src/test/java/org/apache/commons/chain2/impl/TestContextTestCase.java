@@ -16,10 +16,11 @@
  */
 package org.apache.commons.chain2.impl;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 import org.apache.commons.chain2.Context;
 import org.junit.Before;
@@ -36,14 +37,15 @@ public class TestContextTestCase extends ContextBaseTestCase {
 
     // ---------------------------------------------------- Overall Test Methods
 
-
     /**
      * Set up instance variables required by this test case.
      */
     @Override
     @Before
     public void setUp() {
+
         context = createContext();
+
     }
 
 
@@ -62,68 +64,71 @@ public class TestContextTestCase extends ContextBaseTestCase {
 
     }
 
-
-    // Test a read only property on the Context implementation class
     @Test
-    public void testReadOnly() {
+    public void readOnlyIsInstanceOfString() {
 
-        Object readOnly = context.get("readOnly");
-        assertNotNull("readOnly found", readOnly);
-        assertTrue("readOnly String",
-                   readOnly instanceof String);
-        assertEquals("readOnly value", "readOnly", readOnly);
-
-        try {
-            context.put("readOnly", "new readOnly");
-            fail("Should have thrown UnsupportedOperationException");
-        } catch (UnsupportedOperationException e) {
-            // Expected result
-        }
-        assertEquals("readOnly unchanged", "readOnly",
-                     context.get("readOnly"));
+        assertThat(context.get("readOnly"), instanceOf(String.class));
 
     }
 
-
-    // Test a read write property on the Context implementation class
     @Test
-    public void testReadWrite() {
+    public void readOnlyIsProvidedByContext() {
 
-        Object readWrite = context.get("readWrite");
-        assertNotNull("readWrite found", readWrite);
-        assertTrue("readWrite String",
-                   readWrite instanceof String);
-        assertEquals("readWrite value", "readWrite", readWrite);
-
-        context.put("readWrite", "new readWrite");
-        readWrite = context.get("readWrite");
-        assertNotNull("readWrite found", readWrite);
-        assertTrue("readWrite String",
-                   readWrite instanceof String);
-        assertEquals("readWrite value", "new readWrite", readWrite);
+        assertEquals("readOnly", context.get("readOnly"));
 
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void putReadOnlyThrowsException() {
 
-    // Test a write only property on the Context implementation class
+        context.put("readOnly", "new readOnly");
+
+    }
+
     @Test
-    public void testWriteOnly() {
+    public void writeOnlyIsInstanceOfString() {
 
-        Object writeOnly = ((TestContext) context).returnWriteOnly();
-        assertNotNull("writeOnly found", writeOnly);
-        assertTrue("writeOnly String",
-                   writeOnly instanceof String);
-        assertEquals("writeOnly value", "writeOnly", writeOnly);
+        assertThat(((TestContext) context).returnWriteOnly(), 
+                instanceOf(String.class));
+
+    }
+
+    @Test
+    public void writeOnlyIsNotProvidedByContext() {
+
+        assertNull(context.get("writeOnly"));
+
+    }
+
+    @Test
+    public void putNewWriteOnlyProperty() {
 
         context.put("writeOnly", "new writeOnly");
-        writeOnly = ((TestContext) context).returnWriteOnly();
-        assertNotNull("writeOnly found", writeOnly);
-        assertTrue("writeOnly String",
-                   writeOnly instanceof String);
-        assertEquals("writeOnly value", "new writeOnly", writeOnly);
+        assertEquals("new writeOnly", ((TestContext) context).returnWriteOnly());
 
     }
 
+    @Test
+    public void readWriteIsInstanceOfString() {
+
+        assertThat(context.get("readWrite"), instanceOf(String.class));
+
+    }
+
+    @Test
+    public void readWriteIsProvidedByContext() {
+
+        assertEquals("readWrite", context.get("readWrite"));
+
+    }
+
+    @Test
+    public void putNewReadWriteProperty() {
+
+        context.put("readWrite", "new readWrite");
+        assertEquals("new readWrite", context.get("readWrite"));
+
+    }
 
     // ------------------------------------------------------- Protected Methods
 
