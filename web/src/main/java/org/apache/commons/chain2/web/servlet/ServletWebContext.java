@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
- * @author Elijah Zupancic
  * @since 1.0.0
+ * @version $Id$
  */
 public interface ServletWebContext<K, V> extends WebContext<K, V> {
     /**
