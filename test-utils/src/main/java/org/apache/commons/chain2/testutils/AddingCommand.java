@@ -16,12 +16,9 @@
  */
 package org.apache.commons.chain2.testutils;
 
-
 import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
-import org.apache.commons.chain2.testutils.NonDelegatingCommand;
-
 
 /**
  * <p>Implementation of {@link Command} that logs its identifier and
@@ -31,7 +28,6 @@ import org.apache.commons.chain2.testutils.NonDelegatingCommand;
  *
  * @version $Id$
  */
-
 public class AddingCommand extends NonDelegatingCommand {
 
 
