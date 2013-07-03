@@ -17,6 +17,7 @@
 package org.apache.commons.chain2.cookbook.mailreader.commands;
 
 import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.cookbook.mailreader.MailReader;
 
 import java.io.IOException;
@@ -29,14 +30,14 @@ public class LogonUser implements Command<String, Object, MailReader> {
     public LogonUser() {
     }
 
-    public boolean execute(MailReader mailReader) {
+    public Processing execute(MailReader mailReader) {
         try {
             mailReader.getLogger().write("LogonUser.execute");
         } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         }
 
-        return CONTINUE_PROCESSING;
+        return Processing.CONTINUE;
     }
 
 }

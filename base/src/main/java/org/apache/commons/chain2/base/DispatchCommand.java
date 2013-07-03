@@ -18,6 +18,7 @@ package org.apache.commons.chain2.base;
 
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -55,7 +56,7 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
 
     /**
      * Look up the method specified by either "method" or "methodKey" and invoke it,
-     * returning a boolean value as interpreted by <code>evaluateResult</code>.
+     * returning a {@link Processing} value as interpreted by <code>evaluateResult</code>.
      * @param context The Context to be processed by this Command.
      * @return the result of method being dispatched to.
      * @throws IllegalStateException if neither 'method' nor 'methodKey' properties are defined
@@ -64,7 +65,7 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
      * the exception itself, unless the cause is an <code>Error</code> or other <code>Throwable</code>
      * which is not an <code>Exception</code>.
      */
-    public boolean execute(C context) {
+    public Processing execute(C context) {
         if (this.getMethod() == null && this.getMethodKey() == null) {
             throw new IllegalStateException("Neither 'method' nor 'methodKey' properties are defined ");
         }
@@ -120,15 +121,19 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
     }
 
     /**
-     * Evaluate the result of the method invocation as a boolean value.  Base implementation
-     * expects that the invoked method returns boolean true/false, but subclasses might
+     * Evaluate the result of the method invocation as a processing value. Base implementation
+     * expects that the invoked method returns processing, but subclasses might
      * implement other interpretations.
-     * @param o The result of the methid execution
+     * @param obj The result of the method execution
      * @return The evaluated result/
      */
-    protected boolean evaluateResult(Object o) {
-        Boolean result = (Boolean) o;
-        return result != null && result.booleanValue();
+    protected Processing evaluateResult(Object obj) {
+        if(obj instanceof Processing) {
+            Processing result = (Processing) obj;
+            return result;
+        } else {
+            return Processing.CONTINUE;
+        }
     }
 
     /**

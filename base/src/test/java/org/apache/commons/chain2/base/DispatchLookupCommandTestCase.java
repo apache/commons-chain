@@ -17,6 +17,7 @@
 package org.apache.commons.chain2.base;
 
 import static org.apache.commons.chain2.testutils.HasLog.hasLog;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -24,6 +25,7 @@ import static org.junit.Assert.fail;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.impl.ContextBase;
@@ -102,8 +104,8 @@ public class DispatchLookupCommandTestCase {
         command.setMethod("fooMethod");
 
         try {
-            assertTrue("Command should return true",
-                       command.execute(context));
+            assertEquals("Command should return finished",
+                    Processing.FINISHED, command.execute(context));
         } catch (Exception e) {
 
             fail("Threw exception: " + e);
@@ -113,8 +115,8 @@ public class DispatchLookupCommandTestCase {
         command.setMethod("barMethod");
 
         try {
-            assertTrue("Command should return true",
-                       command.execute(context));
+            assertEquals("Command should return finished",
+                    Processing.FINISHED, command.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -160,8 +162,8 @@ public class DispatchLookupCommandTestCase {
         context.put("methodKey", "fooMethod");
 
         try {
-            assertTrue("Command should return true",
-                       command.execute(context));
+            assertEquals("Command should return finished",
+                    Processing.FINISHED, command.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -172,8 +174,8 @@ public class DispatchLookupCommandTestCase {
 
 
         try {
-            assertTrue("Command should return true",
-                       command.execute(context));
+            assertEquals("Command should return finished",
+                    Processing.FINISHED, command.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -193,14 +195,14 @@ public class DispatchLookupCommandTestCase {
             super(id);
         }
 
-        public boolean fooMethod(C context) {
+        public Processing fooMethod(C context) {
             log(context, id);
-            return true;
+            return Processing.FINISHED;
         }
 
-        public boolean barMethod(C context) {
+        public Processing barMethod(C context) {
             log(context, id);
-            return true;
+            return Processing.FINISHED;
         }
 
     }

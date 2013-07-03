@@ -28,8 +28,10 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.chain2.Chain;
+import org.apache.commons.chain2.ChainException;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.testutils.AddingCommand;
 import org.apache.commons.chain2.testutils.DelegatingCommand;
 import org.apache.commons.chain2.testutils.DelegatingFilter;
@@ -37,6 +39,7 @@ import org.apache.commons.chain2.testutils.ExceptionCommand;
 import org.apache.commons.chain2.testutils.ExceptionFilter;
 import org.apache.commons.chain2.testutils.NonDelegatingCommand;
 import org.apache.commons.chain2.testutils.NonDelegatingFilter;
+import org.apache.commons.chain2.testutils.NullReturningCommand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -91,6 +94,15 @@ public class ChainBaseTestCase {
     // ------------------------------------------------ Individual Test Methods
 
 
+    @Test (expected = ChainException.class)
+    public void nullReturningCommandForcesException() {
+        chain.addCommand(new DelegatingCommand("BeforeNullReturningCommand"));
+        chain.addCommand(new NullReturningCommand());
+        chain.addCommand(new NonDelegatingCommand("AfterNullReturningCommand"));
+        
+        chain.execute(context);
+    }
+    
     // Test the ability to add commands
     @Test
     public void testCommands() {
@@ -117,8 +129,7 @@ public class ChainBaseTestCase {
     public void testExecute1a() {
         chain.addCommand(new NonDelegatingCommand("1"));
         try {
-            assertTrue("Chain returned true",
-                       chain.execute(context));
+            assertEquals(Processing.FINISHED, chain.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -131,8 +142,7 @@ public class ChainBaseTestCase {
     public void testExecute1b() {
         chain.addCommand(new DelegatingCommand("1"));
         try {
-            assertTrue("Chain returned false",
-                       !chain.execute(context));
+            assertEquals(Processing.CONTINUE, chain.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -177,8 +187,7 @@ public class ChainBaseTestCase {
         chain.addCommand(new DelegatingCommand("2"));
         chain.addCommand(new NonDelegatingCommand("3"));
         try {
-            assertTrue("Chain returned true",
-                       chain.execute(context));
+            assertEquals(Processing.FINISHED, chain.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -193,8 +202,7 @@ public class ChainBaseTestCase {
         chain.addCommand(new DelegatingCommand("2"));
         chain.addCommand(new DelegatingCommand("3"));
         try {
-            assertTrue("Chain returned false",
-                       !chain.execute(context));
+            assertEquals(Processing.CONTINUE, chain.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -241,8 +249,7 @@ public class ChainBaseTestCase {
     public void testExecute3a() {
         chain.addCommand(new NonDelegatingFilter("1", "a"));
         try {
-            assertTrue("Chain returned true",
-                       chain.execute(context));
+            assertEquals(Processing.FINISHED, chain.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -255,8 +262,7 @@ public class ChainBaseTestCase {
     public void testExecute3b() {
         chain.addCommand(new DelegatingFilter("1", "a"));
         try {
-            assertTrue("Chain returned false",
-                       !chain.execute(context));
+            assertEquals(Processing.CONTINUE, chain.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -286,8 +292,7 @@ public class ChainBaseTestCase {
         chain.addCommand(new DelegatingCommand("2"));
         chain.addCommand(new NonDelegatingFilter("3", "c"));
         try {
-            assertTrue("Chain returned true",
-                       chain.execute(context));
+            assertEquals(Processing.FINISHED, chain.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -302,8 +307,7 @@ public class ChainBaseTestCase {
         chain.addCommand(new DelegatingFilter("2", "b"));
         chain.addCommand(new DelegatingCommand("3"));
         try {
-            assertTrue("Chain returned false",
-                       !chain.execute(context));
+            assertEquals(Processing.CONTINUE, chain.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }

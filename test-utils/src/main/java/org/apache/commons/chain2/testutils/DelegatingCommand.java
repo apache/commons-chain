@@ -19,6 +19,7 @@ package org.apache.commons.chain2.testutils;
 
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 
 
 /**
@@ -50,10 +51,10 @@ public class DelegatingCommand extends NonDelegatingCommand {
 
     // Execution method for this Command
     @Override
-    public boolean execute(Context<String, Object> context) {
+    public Processing execute(Context<String, Object> context) {
 
         super.execute(context);
-        return (false);
+        return Processing.CONTINUE;
 
     }
 

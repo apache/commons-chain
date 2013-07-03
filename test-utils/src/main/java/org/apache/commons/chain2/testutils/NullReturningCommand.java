@@ -14,30 +14,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.chain2.cookbook.mailreader.commands;
+package org.apache.commons.chain2.testutils;
 
+
+import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Processing;
-import org.apache.commons.chain2.cookbook.mailreader.MailReader;
 
-import java.io.IOException;
 
 /**
- * @version $Id$
+ * Implementation of {@link Command} that always returns null if it's executed.
+ * 
+ * @version $Id $
  */
-public class ProfileCheck implements Command<String, Object, MailReader> {
+public class NullReturningCommand extends DelegatingCommand {
 
-    public ProfileCheck() {
+
+    // ------------------------------------------------------------ Constructor
+
+
+    public NullReturningCommand() {
+        this("");
     }
 
-    public Processing execute(MailReader mailReader) {
-        try {
-            mailReader.getLogger().write("ProfileCheck.execute\n");
-        } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
-        }
 
-        return Processing.CONTINUE;
+    // Construct an instance that will log the specified identifier
+    public NullReturningCommand(String id) {
+        super(id);
     }
+
+
+    // -------------------------------------------------------- Command Methods
+    
+    @Override
+    public Processing execute(Context<String, Object> context) {
+        return null;
+    }
+    
+    
+    public Processing execute(Context<String, Object> context, Chain<String, Object, Context<String, Object>> chain) {
+        return null;
+    }
+
 
 }

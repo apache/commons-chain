@@ -18,14 +18,15 @@
 package org.apache.commons.chain2.testutils;
 
 import static org.apache.commons.chain2.testutils.HasLog.hasLog;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 import java.util.UUID;
 
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -68,6 +69,6 @@ public class NonDelegatingCommandTestCase {
     }
 
     private void execute() {
-        assertThat(command.execute(context), is(true));
+        assertEquals(Processing.FINISHED, command.execute(context));
     }
 }

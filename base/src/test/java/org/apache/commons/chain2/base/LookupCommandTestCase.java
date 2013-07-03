@@ -28,6 +28,7 @@ import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.impl.ChainBase;
@@ -104,8 +105,8 @@ public class LookupCommandTestCase {
         command.setName("foo");
 
         try {
-            assertTrue("Command should return true",
-                       command.execute(context));
+            assertEquals("Command should return finished",
+        	    Processing.FINISHED, command.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -127,8 +128,8 @@ public class LookupCommandTestCase {
         command.setName("foo");
 
         try {
-            assertTrue("Command should return true",
-                    command.execute(context));
+            assertEquals("Command should return finished",
+        	    Processing.FINISHED, command.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -146,8 +147,8 @@ public class LookupCommandTestCase {
         context.put("nameKey", "foo");
 
         try {
-            assertTrue("Command should return true",
-                    command.execute(context));
+            assertEquals("Command should return finished",
+                Processing.FINISHED, command.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -170,8 +171,8 @@ public class LookupCommandTestCase {
         context.put("nameKey", "foo");
 
         try {
-            assertTrue("Command should return true",
-                       command.execute(context));
+            assertEquals("Command should return finished",
+                Processing.FINISHED, command.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }
@@ -189,8 +190,8 @@ public class LookupCommandTestCase {
         command.setName("foo");
 
         try {
-            assertFalse("Command should return false",
-                       command.execute(context));
+            assertEquals("Command should return continue",
+                Processing.CONTINUE, command.execute(context));
         } catch (Exception e) {
             fail("Threw exception: " + e);
         }

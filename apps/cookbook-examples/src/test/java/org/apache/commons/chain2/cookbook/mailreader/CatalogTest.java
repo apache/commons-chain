@@ -18,6 +18,7 @@ package org.apache.commons.chain2.cookbook.mailreader;
 
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Processing;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -28,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Locale;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -51,8 +53,8 @@ public class CatalogTest {
         when(request.getSession()).thenReturn(session);
     }
 
-    private boolean executeCatalogCommand(MailReader context,
-            String name, HttpServletRequest request) {
+    private Processing executeCatalogCommand(MailReader context,
+                                             String name, HttpServletRequest request) {
 
         ServletContext servletContext =
                 request.getSession().getServletContext();
@@ -73,9 +75,9 @@ public class CatalogTest {
         MailReader context = new MailReader();
         context.setLocale(Locale.CANADA);
 
-        when(testCommand.execute(context)).thenReturn(true);
+        when(testCommand.execute(context)).thenReturn(Processing.FINISHED);
 
-        assertTrue("Catalog execution did not complete as expected",
+        assertEquals("Catalog execution did not complete as expected", Processing.FINISHED,
                 executeCatalogCommand(context, "aCommand", request));
 
         verify(testCommand).execute(context);

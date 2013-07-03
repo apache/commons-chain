@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 
 /**
  * <p>Override any context attribute stored under the <code>key</code> with <code>value</code>.</p>
@@ -79,14 +80,14 @@ public class OverrideCommand<K, V, C extends Map<K, V>> implements Command<K, V,
      *
      * @param context {@link org.apache.commons.chain2.Context} in which we are operating
      *
-     * @return <code>false</code> so that processing will continue
+     * @return {@link Processing#CONTINUE} so that {@link Processing} will continue.
      * @throws org.apache.commons.chain2.ChainException if and error occurs.
      */
-    public boolean execute(C context) {
+    public Processing execute(C context) {
         if (context.containsKey(getKey())) {
             context.put(getKey(), getValue());
         }
-        return false;
+        return Processing.CONTINUE;
     }
 
 }

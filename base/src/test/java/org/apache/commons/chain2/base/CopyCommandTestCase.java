@@ -27,6 +27,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.chain2.Processing;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -94,8 +95,8 @@ public class CopyCommandTestCase {
     }
 
     private void execute() {
-        // make sure execute always returns false
-        assertFalse(command.execute(context));
+        // make sure execute always returns continue
+        assertEquals(Processing.CONTINUE, command.execute(context));
     }
 
 }

@@ -21,6 +21,7 @@ import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Filter;
 import org.apache.commons.chain2.ChainException;
+import org.apache.commons.chain2.Processing;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -145,12 +146,12 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      * @throws IllegalArgumentException if <code>context</code>
      *  is <code>null</code>
      *
-     * @return <code>true</code> if the processing of this {@link Context}
-     *  has been completed, or <code>false</code> if the processing
-     *  of this {@link Context} should be delegated to a subsequent
-     *  {@link Command} in an enclosing {@link Chain}
+     * @return {@link Processing#FINISHED} if the processing of this contex
+     *  has been completed. Returns {@link Processing#CONTINUE} if the processing
+     *  of this context should be delegated to a subsequent command in an 
+     *  enclosing chain.
      */
-    public boolean execute(C context) {
+    public Processing execute(C context) {
         // Verify our parameters
         if (context == null) {
             throw new IllegalArgumentException("Can't execute a null context");
@@ -159,9 +160,9 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
         // Freeze the configuration of the command list
         frozen = true;
 
-        // Execute the commands in this list until one returns true
-        // or throws an exception
-        boolean saveResult = false;
+        // Execute the commands in this list until one returns something else 
+        // than Processing.CONTINUE or throws an exception
+        Processing saveResult = Processing.CONTINUE;
         Exception saveException = null;
         int i = 0;
         int n = commands.size();
@@ -170,7 +171,11 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
             try {
                 lastCommand = commands.get(i);
                 saveResult = lastCommand.execute(context);
-                if (saveResult) {
+                if(saveResult == null) {
+                    String format = String.format("The command '%s' returned an invalid processing value: '%s'",
+                            lastCommand.getClass().getName(), saveResult);
+                    throw new ChainException(format);
+                } else if (saveResult != Processing.CONTINUE) {
                     break;
                 }
             } catch (Exception e) {

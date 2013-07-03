@@ -91,7 +91,7 @@ public final class Chains {
             return this;
         }
 
-        public boolean execute(C context) {
+        public Processing execute(C context) {
             return chain.execute(checkNotNullArgument(context, "Chain cannot be applied to a null context."));
         }
 

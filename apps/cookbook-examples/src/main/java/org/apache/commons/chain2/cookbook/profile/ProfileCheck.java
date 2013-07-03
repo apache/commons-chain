@@ -17,6 +17,7 @@
 package org.apache.commons.chain2.cookbook.profile;
 
 import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Processing;
 
 /**
  * @version $Id$
@@ -25,13 +26,13 @@ public class ProfileCheck implements Command<String, Object, ProfileContext> {
 
     public Profile newProfile(ProfileContext context) { return new Profile(); }
 
-    public boolean execute(ProfileContext context) {
+    public Processing execute(ProfileContext context) {
         Profile profile = context.getProfile();
 
         if (null == profile) {
             context.setProfile(newProfile(context));
         }
-        return false;
+        return Processing.CONTINUE;
     }
 
 }

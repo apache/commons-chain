@@ -19,6 +19,7 @@ package org.apache.commons.chain2.testutils;
 
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 
 
 /**
@@ -64,13 +65,13 @@ public class NonDelegatingCommand implements Command<String, Object, Context<Str
 
 
     // Execution method for this Command
-    public boolean execute(Context<String, Object> context) {
+    public Processing execute(Context<String, Object> context) {
 
         if (context == null) {
             throw new IllegalArgumentException();
         }
         log(context, id);
-        return (true);
+        return Processing.FINISHED;
 
     }
 

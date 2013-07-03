@@ -18,6 +18,7 @@ package org.apache.commons.chain2.apps.example;
 
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.web.WebContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,15 +59,15 @@ public class CountCommand implements Command<String, Object,
      * <p>Execute the command.</p>
      *
      * @param context The {@link Context} we are operating on
-     * @return <code>false</code> so that processng will continue
+     * @return {@link Processing#CONTINUE} so that processing will continue.
      */
-    public boolean execute(WebContext<String, Object> context) {
+    public Processing execute(WebContext<String, Object> context) {
         count++;
         log.info("Executing: " + attribute + "=" + count);
 
         context.getSessionScope().put(attribute, new Integer(count));
 
-        return false;
+        return Processing.CONTINUE;
     }
 
 }

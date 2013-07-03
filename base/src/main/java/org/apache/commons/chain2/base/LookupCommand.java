@@ -21,6 +21,7 @@ import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Filter;
+import org.apache.commons.chain2.Processing;
 
 import java.util.Map;
 
@@ -254,7 +255,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * <p>Look up the specified command, and (if found) execute it.
      * Unless <code>ignoreExecuteResult</code> is set to <code>true</code>,
      * return the result of executing the found command.  If no command
-     * is found, return <code>false</code>, unless the <code>optional</code>
+     * is found, return {@link Processing#CONTINUE}, unless the <code>optional</code>
      * property is <code>false</code>, in which case an <code>IllegalArgumentException</code>
      * will be thrown.
      * </p>
@@ -265,21 +266,21 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      *  can be found and the <code>optional</code> property is set
      *  to <code>false</code>
      * @return the result of executing the looked-up command, or
-     * <code>false</code> if no command is found or if the command
+     * <code>CONTINUE</code> if no command is found or if the command
      * is found but the <code>ignoreExecuteResult</code> property of this
      * instance is <code>true</code>
      * @throws org.apache.commons.chain2.ChainException if and error occurs in the looked-up Command.
      */
-    public boolean execute(C context) {
+    public Processing execute(C context) {
         Command<K, V, C> command = getCommand(context);
         if (command != null) {
-            boolean result = command.execute(context);
+            Processing result = command.execute(context);
             if (isIgnoreExecuteResult()) {
-                return false;
+                return Processing.CONTINUE;
             }
             return result;
         }
-        return false;
+        return Processing.CONTINUE;
     }
 
 

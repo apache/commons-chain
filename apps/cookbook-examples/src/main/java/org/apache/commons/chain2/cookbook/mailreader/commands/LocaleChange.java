@@ -17,6 +17,7 @@
 package org.apache.commons.chain2.cookbook.mailreader.commands;
 
 import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.cookbook.mailreader.MailReader;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class LocaleChange implements Command<String, Object, MailReader> {
     public LocaleChange() {
     }
 
-    public boolean execute(MailReader mailReader) {
+    public Processing execute(MailReader mailReader) {
         try {
             Writer logger = mailReader.getLogger();
             logger.write("LocaleChange.execute ");
@@ -39,7 +40,7 @@ public class LocaleChange implements Command<String, Object, MailReader> {
             throw new RuntimeException(ioe);
         }
 
-        return CONTINUE_PROCESSING;
+        return Processing.CONTINUE;
     }
 
 }

@@ -18,6 +18,7 @@ package org.apache.commons.chain2.apps.example;
 
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,10 +58,11 @@ public class ForwardCommand implements Command<String, Object, ServletWebContext
     /**
      * <p>Execute the command.</p>
      *
-     * @param context The {@link Context} we are operating on
-     * @return <code>false</code> so that processng will continue
+     *
+     * @param context The {@link org.apache.commons.chain2.Context} we are operating on
+     * @return {@link Processing#CONTINUE} so that processnig will continue.
      */
-    public boolean execute(ServletWebContext<String, Object> context) {
+    public Processing execute(ServletWebContext<String, Object> context) {
         try {
             String uri = getForward(context);
             if (uri != null) {
@@ -69,12 +71,12 @@ public class ForwardCommand implements Command<String, Object, ServletWebContext
                 }
                 RequestDispatcher rd = context.getContext().getRequestDispatcher(uri);
                 rd.forward(context.getRequest(), context.getResponse());
-                return true;
+                return Processing.FINISHED;
             } else {
                 if (log.isDebugEnabled()) {
                     log.debug("No forward found");
                 }
-                return false;
+                return Processing.CONTINUE;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

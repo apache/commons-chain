@@ -16,6 +16,7 @@
  */
 package org.apache.commons.chain2.web.portlet;
 
+import org.apache.commons.chain2.Processing;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -125,8 +126,8 @@ public class PortletGetLocaleCommandTestCase {
         assertNotNull(localeKey);
         Object value = context.get(localeKey);
         assertNull(value);
-        boolean result = command.execute(context);
-        assertFalse(result);
+        Processing result = command.execute(context);
+        assertEquals(Processing.CONTINUE, result);
         value = context.get(localeKey);
         assertNotNull(value);
         assertTrue(value instanceof Locale);

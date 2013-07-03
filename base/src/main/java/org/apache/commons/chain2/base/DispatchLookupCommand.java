@@ -20,6 +20,7 @@ import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Filter;
+import org.apache.commons.chain2.Processing;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -133,13 +134,13 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
      *
      * @param context The context for this request
      * @return the result of executing the looked-up command's method, or
-     * <code>false</code> if no command is found.
+     * {@link Processing#CONTINUE} if no command is found.
      *
      * @throws DispatchException if no such {@link Command} can be found and the
      *  <code>optional</code> property is set to <code>false</code>
      */
     @Override
-    public boolean execute(C context) {
+    public Processing execute(C context) {
         if (this.getMethod() == null && this.getMethodKey() == null) {
             throw new IllegalStateException("Neither 'method' nor 'methodKey' properties are defined");
         }
@@ -150,9 +151,13 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
             try {
                 Method methodObject = extractMethod(command, context);
                 Object obj = methodObject.invoke(command, getArguments(context));
-
-                Boolean result = (Boolean) obj;
-                return result != null && result.booleanValue(); // might cause NPE (obj could be null)
+                
+                if(obj instanceof Processing) {
+                    Processing result = (Processing) obj;
+                    return result;
+                } else {
+                    return Processing.CONTINUE;
+                }
             } catch (NoSuchMethodException e) {
                 throw new DispatchException("Error extracting method from context", e, context, this);
             } catch (IllegalAccessException e) {
@@ -162,7 +167,7 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
                 throw new DispatchException("Error in reflected dispatched command", cause, context, this);
             }
         }
-        return false;
+        return Processing.CONTINUE;
     }
 
     // ------------------------------------------------------ Protected Methods

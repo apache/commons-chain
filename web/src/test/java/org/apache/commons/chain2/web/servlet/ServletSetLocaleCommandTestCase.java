@@ -16,6 +16,7 @@
  */
 package org.apache.commons.chain2.web.servlet;
 
+import org.apache.commons.chain2.Processing;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -130,8 +131,8 @@ public class ServletSetLocaleCommandTestCase {
         context.put(localeKey, locale);
         assertNotNull(context.get(localeKey));
         assertNull(response.getLocale());
-        boolean result = command.execute(context);
-        assertFalse(result);
+        Processing result = command.execute(context);
+        assertEquals(Processing.CONTINUE, result);
         assertNotNull(response.getLocale());
         assertEquals(locale, response.getLocale());
     }

@@ -19,6 +19,7 @@ package org.apache.commons.chain2.testutils;
 
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Filter;
+import org.apache.commons.chain2.Processing;
 
 
 /**
@@ -64,10 +65,10 @@ public class NonDelegatingFilter
 
     // Execution method for this Command
     @Override
-    public boolean execute(Context<String, Object> context) {
+    public Processing execute(Context<String, Object> context) {
 
         super.execute(context);
-        return (true);
+        return Processing.FINISHED;
 
     }
 

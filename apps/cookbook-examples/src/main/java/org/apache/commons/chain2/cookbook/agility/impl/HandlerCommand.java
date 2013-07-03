@@ -17,6 +17,7 @@
 package org.apache.commons.chain2.cookbook.agility.impl;
 
 import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.cookbook.agility.ProcessException;
 import org.apache.commons.chain2.cookbook.agility.Request;
 import org.apache.commons.chain2.cookbook.agility.RequestHandler;
@@ -48,10 +49,10 @@ public class HandlerCommand implements Command<String, Object, RequestContext>,
         }
     }
 
-    public boolean execute(RequestContext requestContext) {
+    public Processing execute(RequestContext requestContext) {
         handle(requestContext);
 
-        return CONTINUE_PROCESSING;
+        return Processing.CONTINUE;
     }
 
 }

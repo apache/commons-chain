@@ -22,7 +22,7 @@ import java.util.Map;
  * <p>A {@link Chain} represents a configured list of
  * {@link Command}s that will be executed in order to perform processing
  * on a specified {@link Context}.  Each included {@link Command} will be
- * executed in turn, until either one of them returns <code>true</code>,
+ * executed in turn, until either one of them returns <code>FINISHED</code>,
  * one of the executed {@link Command}s throws an exception,
  * or the end of the chain has been reached.  The {@link Chain} itself will
  * return the return value of the last {@link Command} that was executed
@@ -78,12 +78,12 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      * to the following algorithm.</p>
      * <ul>
      * <li>If there are no configured {@link Command}s in the {@link Chain},
-     *     return <code>false</code>.</li>
+     *     return <code>CONTINUE</code>.</li>
      * <li>Call the <code>execute()</code> method of each {@link Command}
      *     configured on this chain, in the order they were added via calls
      *     to the <code>addCommand()</code> method, until the end of the
      *     configured {@link Command}s is encountered, or until one of
-     *     the executed {@link Command}s returns <code>true</code>
+     *     the executed {@link Command}s returns <code>FINISHED</code>
      *     or throws an exception.</li>
      * <li>Walk backwards through the {@link Command}s whose
      *     <code>execute()</code> methods, starting with the last one that
@@ -94,10 +94,10 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      *     was called threw an exception, rethrow that exception.</li>
      * <li>Otherwise, return the value returned by the <code>execute()</code>
      *     method of the last {@link Command} that was executed.  This will be
-     *     <code>true</code> if the last {@link Command} indicated that
+     *     <code>FINISHED</code> if the last {@link Command} indicated that
      *     processing of this {@link Context} has been completed, or
-     *     <code>false</code> if none of the called {@link Command}s
-     *     returned <code>true</code>.</li>
+     *     <code>CONTINUE</code> if none of the called {@link Command}s
+     *     returned <code>FINISHED</code>.</li>
      * </ul>
      *
      * @param context The {@link Context} to be processed by this
@@ -106,11 +106,11 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      * @exception IllegalArgumentException if <code>context</code>
      *  is <code>null</code>
      *
-     * @return <code>true</code> if the processing of this {@link Context}
-     *  has been completed, or <code>false</code> if the processing
-     *  of this {@link Context} should be delegated to a subsequent
-     *  {@link Command} in an enclosing {@link Chain}
+     * @return {@link Processing#FINISHED} if the processing of this context
+     *  has been completed. Returns {@link Processing#CONTINUE} if the processing
+     *  of this context should be delegated to a subsequent command in an 
+     *  enclosing chain.
      */
-    boolean execute(C context);
+    Processing execute(C context);
 
 }

@@ -33,6 +33,7 @@ import java.util.List;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.testutils.AddingCommand;
 import org.apache.commons.chain2.impl.CatalogBase;
 import org.apache.commons.chain2.impl.ChainBase;
@@ -160,8 +161,7 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute2a() throws Exception {
 
-        assertTrue("Chain returned true",
-                catalog.getCommand("Execute2a").execute(context));
+        assertEquals(Processing.FINISHED, catalog.getCommand("Execute2a").execute(context));
         assertThat(context, hasLog("1/2/3"));
 
     }
@@ -171,8 +171,7 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute2b() throws Exception {
 
-        assertFalse("Chain returned false",
-                catalog.getCommand("Execute2b").execute(context));
+        assertEquals(Processing.CONTINUE, catalog.getCommand("Execute2b").execute(context));
         assertThat(context, hasLog("1/2/3"));
 
     }
@@ -212,8 +211,7 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute4a() throws Exception {
 
-        assertTrue("Chain returned true",
-                catalog.getCommand("Execute4a").execute(context));
+        assertEquals(Processing.FINISHED, catalog.getCommand("Execute4a").execute(context));
         assertThat(context, hasLog("1/2/3/c/a"));
 
     }
@@ -223,8 +221,7 @@ public class XmlConfigParserTestCase {
     @Test
     public void testExecute4b() throws Exception {
 
-        assertFalse("Chain returned false",
-                catalog.getCommand("Execute4b").execute(context));
+        assertEquals(Processing.CONTINUE, catalog.getCommand("Execute4b").execute(context));
         assertThat(context, hasLog("1/2/3/b"));
 
     }

@@ -34,7 +34,7 @@ import java.util.Map;
  * {@link Command}, is where potentially expensive resources must be acquired
  * and held until the processing of a particular request has been completed,
  * even if execution is delegated to a subsequent {@link Command} via the
- * <code>execute()</code> returning <code>false</code>.  A {@link Filter}
+ * <code>execute()</code> returning <code>CONTINUE</code>.  A {@link Filter}
  * can reliably release such resources in the <code>postprocess()</code>
  * method, which is guaranteed to be called by the owning {@link Chain}.</p>
  *
@@ -61,8 +61,8 @@ public interface Filter<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      *  is <code>null</code>
      *
      * @return If a non-null <code>exception</code> was "handled" by this
-     *  method (and therefore need not be rethrown), return <code>true</code>;
-     *  otherwise return <code>false</code>
+     *  method (and therefore need not be rethrown), return <code>FINISHED</code>;
+     *  otherwise return <code>CONTINUE</code>
      */
    boolean postprocess(C context, Exception exception);
 

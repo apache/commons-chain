@@ -17,6 +17,7 @@
 package org.apache.commons.chain2.base;
 
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.impl.ContextBase;
 import org.junit.Test;
 
@@ -32,8 +33,8 @@ public class DispatchCommandTestCase {
         test.setMethod("testMethod");
         Context<String, Object> context = new ContextBase();
         assertNull(context.get("foo"));
-        boolean result = test.execute(context);
-        assertTrue(result);
+        Processing result = test.execute(context);
+        assertEquals(Processing.FINISHED, result);
         assertNotNull(context.get("foo"));
         assertEquals("foo", context.get("foo"));
 
@@ -49,8 +50,8 @@ public class DispatchCommandTestCase {
         Context<String, Object> context = new ContextBase();
         context.put("foo", "testMethodKey");
         assertNull(context.get("bar"));
-        boolean result = test.execute(context);
-        assertFalse(result);
+        Processing result = test.execute(context);
+        assertEquals(Processing.CONTINUE, result);
         assertNotNull(context.get("bar"));
         assertEquals("bar", context.get("bar"));
 
@@ -64,8 +65,8 @@ public class DispatchCommandTestCase {
         test.setMethod("foo");
         Context<String, Object> context = new ContextBase();
         assertNull(context.get("elephant"));
-        boolean result = test.execute(context);
-        assertTrue(result);
+        Processing result = test.execute(context);
+        assertEquals(Processing.FINISHED, result);
         assertNotNull(context.get("elephant"));
         assertEquals("elephant", context.get("elephant"));
 
@@ -76,15 +77,15 @@ public class DispatchCommandTestCase {
     class TestCommand extends DispatchCommand<String, Object, Context<String, Object>> {
 
 
-        public boolean testMethod(Context<String, Object> context) {
+        public Processing testMethod(Context<String, Object> context) {
             context.put("foo", "foo");
-            return true;
+            return Processing.FINISHED;
         }
 
-        public boolean testMethodKey(Context<String, Object> context) {
+        public Processing testMethodKey(Context<String, Object> context) {
 
             context.put("bar", "bar");
-            return false;
+            return Processing.CONTINUE;
         }
 
     }
@@ -106,9 +107,9 @@ public class DispatchCommandTestCase {
             return new Object[] { new TestAlternateContext(context) };
         }
 
-        public boolean foo(TestAlternateContext context) {
+        public Processing foo(TestAlternateContext context) {
             context.put("elephant", "elephant");
-            return true;
+            return Processing.FINISHED;
         }
 
     }

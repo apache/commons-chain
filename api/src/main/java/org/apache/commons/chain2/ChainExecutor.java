@@ -18,6 +18,8 @@ package org.apache.commons.chain2;
 
 import java.util.Map;
 
+import org.apache.commons.chain2.Processing;
+
 /**
  * Builder that allows continue adding a command in the target chain and execute it.
  *
@@ -33,10 +35,13 @@ public interface ChainExecutor<K, V, C extends Map<K, V>> extends CommandSetter<
      * Execute the processing represented by the target chain.
      *
      * @param context the context processed by the target chain
-     * @return true, if the processing of the target chain has been completed,
-     *         false otherwise
+     * @return {@link Processing#FINISHED} if the processing of this context
+     *  has been completed. Returns {@link Processing#CONTINUE} if the processing
+     *  of this context should be delegated to a subsequent command in an
+     *  enclosing chain.
+     *  
      * @see Chain#execute(Map)
      */
-    boolean execute(C context);
+    Processing execute(C context);
 
 }

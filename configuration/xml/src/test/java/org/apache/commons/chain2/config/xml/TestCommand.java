@@ -19,6 +19,7 @@ package org.apache.commons.chain2.config.xml;
 
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
+import org.apache.commons.chain2.Processing;
 
 
 /**
@@ -47,8 +48,8 @@ public class TestCommand implements Command<String, Object, Context<String, Obje
     }
 
 
-    public boolean execute(Context<String, Object> context) {
-    return (false);
+    public Processing execute(Context<String, Object> context) {
+        return Processing.CONTINUE;
     }
 
 
