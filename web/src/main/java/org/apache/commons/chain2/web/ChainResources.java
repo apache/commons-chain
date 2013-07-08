@@ -17,6 +17,7 @@
 package org.apache.commons.chain2.web;
 
 import org.apache.commons.chain2.Catalog;
+import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.config.xml.XmlConfigParser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,6 +26,7 @@ import javax.servlet.ServletContext;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 /**
@@ -74,7 +76,8 @@ final class ChainResources {
                 if (log.isDebugEnabled()) {
                     log.debug("Loading chain config resource '" + path + "'");
                 }
-                parser.parse(url);
+                @SuppressWarnings("unused") // FIXME we have to assign the factory here to help the compiler with the type arguments
+                CatalogFactory<Object,Object,Map<Object,Object>> factory = parser.parse(url);
             }
         } catch (Exception e) {
             throw new RuntimeException
@@ -110,7 +113,8 @@ final class ChainResources {
                 if (log.isDebugEnabled()) {
                     log.debug("Loading chain config resource '" + path + "'");
                 }
-                parser.parse(url);
+                @SuppressWarnings("unused") // FIXME we have to assign the factory here to help the compiler with the type arguments
+                CatalogFactory<Object, Object, Map<Object, Object>> factory = parser.parse(url);
             }
         } catch (Exception e) {
             throw new RuntimeException

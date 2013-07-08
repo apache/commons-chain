@@ -41,6 +41,9 @@ The <action> type attribute can be add,update,fix,remove.
 
   <body>
     <release version="2.0" description="Major release">
+      <action issue="CHAIN-108" dev="britter" type="update">
+          Build fails with Java 6
+      </action>
       <action issue="CHAIN-94" dev="britter" type="update" due-to="Jonas Sprenger">
           Refactor tests in class TestContextTestCase
       </action>

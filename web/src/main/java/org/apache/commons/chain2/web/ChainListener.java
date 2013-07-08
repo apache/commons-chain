@@ -19,6 +19,7 @@ package org.apache.commons.chain2.web;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -258,7 +259,8 @@ public class ChainListener implements ServletContextListener {
                 if (log.isDebugEnabled()) {
                     log.debug("Parsing: " + resourceURL);
                 }
-                parser.parse(resourceURL);
+                @SuppressWarnings("unused") // FIXME we have to assign the factory here to help the compiler with the type arguments
+                CatalogFactory<Object, Object,Map<Object,Object>> factory = parser.parse(resourceURL);
             } catch (Exception e) {
                 String externalURL = "null";
                 if (resourceURL != null) {
