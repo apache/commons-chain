@@ -227,6 +227,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <aggregate>true</aggregate>
+          <excludePackageNames>org.apache.commons.chain2.cookbook:org.apache.commons.chain2.apps</excludePackageNames>
         </configuration>
       </plugin>
 
