@@ -19,6 +19,7 @@ package org.apache.commons.chain2.apps.example;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.apache.commons.chain2.web.servlet.ServletWebContextBase;
 import org.apache.commons.logging.Log;
@@ -28,6 +29,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 /**
@@ -74,7 +76,7 @@ public class ExampleServlet extends HttpServlet {
         throws IOException {
 
         CatalogFactory<String, Object, ServletWebContext<String, Object>> factory =
-                CatalogFactory.getInstance();
+                CatalogFactoryBase.getInstance();
         Catalog<String, Object, ServletWebContext<String, Object>> catalog =
                 factory.getCatalog(servletName);
 

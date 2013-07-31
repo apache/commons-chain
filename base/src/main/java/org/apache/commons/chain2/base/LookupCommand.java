@@ -22,6 +22,7 @@ import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Filter;
 import org.apache.commons.chain2.Processing;
+import org.apache.commons.chain2.impl.CatalogFactoryBase;
 
 import java.util.Map;
 
@@ -58,7 +59,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @since Chain 1.1
      */
     public LookupCommand() {
-        this(CatalogFactory.<K, V, C>getInstance());
+        this(CatalogFactoryBase.<K, V, C>getInstance());
     }
 
     /**
@@ -78,7 +79,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
     private CatalogFactory<K, V, C> catalogFactory = null;
 
     /**
-     * <p>Set the {@link CatalogFactory} from which lookups will be
+     * <p>Set the {@link CatalogFactoryBase} from which lookups will be
      * performed.</p>
      *
      * @param catalogFactory The Catalog Factory.
@@ -90,7 +91,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
     }
 
     /**
-     * Return the {@link CatalogFactory} from which lookups will be performed.
+     * Return the {@link CatalogFactoryBase} from which lookups will be performed.
      * @return The Catalog factory.
      *
      * @since Chain 1.1
@@ -323,7 +324,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
     protected Catalog<K, V, C> getCatalog(C context) {
         CatalogFactory<K, V, C> lookupFactory = this.catalogFactory;
         if (lookupFactory == null) {
-            lookupFactory = CatalogFactory.getInstance();
+            lookupFactory = CatalogFactoryBase.getInstance();
         }
 
         String catalogName = getCatalogName();

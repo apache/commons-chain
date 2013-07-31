@@ -19,6 +19,7 @@ package org.apache.commons.chain2.cookbook.mailreader;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.impl.CatalogFactoryBase;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +45,7 @@ public class MailReaderServlet extends HttpServlet {
         context.setLogger(response.getWriter());
 
         CatalogFactory<String, Object, MailReader> catalogFactory =
-                CatalogFactory.getInstance();
+                CatalogFactoryBase.getInstance();
 
         Catalog<String, Object, MailReader> catalog =
                 catalogFactory.getCatalog();

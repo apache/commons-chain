@@ -29,8 +29,8 @@ import javax.servlet.ServletContextListener;
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.config.xml.XmlConfigParser;
-import org.apache.commons.chain2.config.xml.XmlConfigParser;
 import org.apache.commons.chain2.impl.CatalogBase;
+import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.web.servlet.ServletWebContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -56,7 +56,7 @@ import org.apache.commons.logging.LogFactory;
  *     If not specified, it is expected that parsed resources will
  *     contain <code>&lt;catalog&gt;</code> elements (which will
  *     cause registration of the created {@link Catalog}s into
- *     the {@link CatalogFactory} for this application, and no
+ *     the {@link CatalogFactoryBase} for this application, and no
  *     servlet context attribute will be created.
  *     <strong>NOTE</strong> - This parameter is deprecated.</p>
  * <li><strong>org.apache.commons.chain2.RULE_SET</strong> -
@@ -82,7 +82,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * <p>If no attribute key is specified, on the other hand, parsed configuration
  * resources are expected to contain <code>&lt;catalog&gt;</code> elements,
- * and the catalogs will be registered with the {@link CatalogFactory}
+ * and the catalogs will be registered with the {@link CatalogFactoryBase}
  * for this web application.</p>
  *
  * <p>This class requires Servlet 2.3 or later.  If you are running on
@@ -96,7 +96,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ChainListener implements ServletContextListener {
     {
-        CatalogFactory.checkForValidConfigurationModule();
+        CatalogFactoryBase.checkForValidConfigurationModule();
     }
 
     // ------------------------------------------------------ Manifest Constants
@@ -145,7 +145,7 @@ public class ChainListener implements ServletContextListener {
         if (attr != null) {
             context.removeAttribute(attr);
         }
-        CatalogFactory.clear();
+        CatalogFactoryBase.clear();
     }
 
     /**

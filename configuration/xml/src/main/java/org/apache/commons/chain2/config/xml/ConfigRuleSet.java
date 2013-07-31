@@ -35,7 +35,7 @@ import org.apache.commons.digester3.RuleSetBase;
  * <li><strong>catalogElement</strong> -- Name of the XML element representing
  *     the addition of a {@link org.apache.commons.chain2.Catalog}.
  *     Any such catalog that is created will be registered with the
- *     {@link org.apache.commons.chain2.CatalogFactory} instance for our
+ *     {@link org.apache.commons.chain2.impl.CatalogFactoryBase} instance for our
  *     application, under the name specified by the <code>nameAttribute</code>
  *     attribute (if present), or as the default {@link org.apache.commons.chain2.Catalog}.
  *     If not specified, the default value is <code>catalog</code>.</li>

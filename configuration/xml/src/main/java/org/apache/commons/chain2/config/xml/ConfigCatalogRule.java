@@ -18,6 +18,7 @@ package org.apache.commons.chain2.config.xml;
 
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.CatalogFactory;
+import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.digester3.Rule;
 import org.xml.sax.Attributes;
 
@@ -26,7 +27,7 @@ import java.util.Map;
 /**
  * <p>Digester rule that will cause the top-most element on the Digester
  * stack (if it is a {@link org.apache.commons.chain2.Catalog} to be registered with the
- * {@link org.apache.commons.chain2.CatalogFactory} instance for our application.  If the attribute
+ * {@link org.apache.commons.chain2.impl.CatalogFactoryBase} instance for our application.  If the attribute
  * specified to our constructor has a value, that will be used as the name
  * under which to register this {@link org.apache.commons.chain2.Catalog}.  Otherwise, this will
  * become the default {@link org.apache.commons.chain2.Catalog} for this application.</p>
@@ -85,7 +86,7 @@ class ConfigCatalogRule extends Rule {
     public void begin(String namespace, String name, Attributes attributes) throws Exception {
         // Retrieve any current Catalog with the specified name
         Catalog<Object, Object, Map<Object, Object>> catalog;
-        CatalogFactory<Object, Object, Map<Object, Object>> factory = CatalogFactory.getInstance();
+        CatalogFactory<Object, Object, Map<Object, Object>> factory = CatalogFactoryBase.getInstance();
         String nameValue = attributes.getValue(nameAttribute);
         if (nameValue == null) {
             catalog = factory.getCatalog();

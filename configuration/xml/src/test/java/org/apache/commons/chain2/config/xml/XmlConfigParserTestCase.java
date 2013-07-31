@@ -36,6 +36,7 @@ import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.testutils.AddingCommand;
 import org.apache.commons.chain2.impl.CatalogBase;
+import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.impl.ChainBase;
 import org.apache.commons.chain2.impl.ContextBase;
 import org.apache.commons.chain2.testutils.DelegatingCommand;
@@ -88,7 +89,7 @@ public class XmlConfigParserTestCase {
     }
 
     private void init() {
-        CatalogFactory.clear();
+        CatalogFactoryBase.clear();
         catalog = new CatalogBase<String, Object, Context<String, Object>>();
         context = new ContextBase();
         parser = new XmlConfigParser();

@@ -47,7 +47,7 @@ public class CatalogFactoryBaseTestCase {
 
 
     /**
-     * <p>The {@link CatalogFactory} instance under test.</p>
+     * <p>The {@link CatalogFactoryBase} instance under test.</p>
      */
     protected CatalogFactory<String, Object, Context<String, Object>> factory = null;
 
@@ -60,8 +60,8 @@ public class CatalogFactoryBaseTestCase {
      */
     @Before
     public void setUp() {
-        CatalogFactory.clear();
-        factory = CatalogFactory.getInstance();
+        CatalogFactoryBase.clear();
+        factory = CatalogFactoryBase.getInstance();
     }
 
     /**
@@ -70,7 +70,7 @@ public class CatalogFactoryBaseTestCase {
     @After
     public void tearDown() {
         factory = null;
-        CatalogFactory.clear();
+        CatalogFactoryBase.clear();
     }
 
 
@@ -78,7 +78,7 @@ public class CatalogFactoryBaseTestCase {
 
 
     /**
-     * <p>Test a pristine instance of {@link CatalogFactory}.</p>
+     * <p>Test a pristine instance of {@link CatalogFactoryBase}.</p>
      */
     @Test
     public void testPristine() {
@@ -120,8 +120,8 @@ public class CatalogFactoryBaseTestCase {
         factory.addCatalog("foo", new CatalogBase<String, Object, Context<String, Object>>());
         assertEquals(1, getCatalogCount());
         assertTrue(!(catalog == factory.getCatalog("foo")));
-        CatalogFactory.clear();
-        factory = CatalogFactory.getInstance();
+        CatalogFactoryBase.clear();
+        factory = CatalogFactoryBase.getInstance();
         assertEquals(0, getCatalogCount());
 
     }
@@ -180,7 +180,7 @@ public class CatalogFactoryBaseTestCase {
 
     /**
      * <p>Return the number of {@link Catalog}s defined in our
-     * {@link CatalogFactory}.</p>
+     * {@link CatalogFactoryBase}.</p>
      */
     private int getCatalogCount() {
 

@@ -19,6 +19,7 @@ package org.apache.commons.chain2.config.xml;
 import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.config.ChainConfigurationException;
 import org.apache.commons.chain2.config.ConfigParser;
+import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.RuleSet;
 
@@ -161,7 +162,7 @@ public class XmlConfigParser implements ConfigParser {
             throw new ChainConfigurationException(msg, e);
         }
         // FIXME get rid of singleton pattern and create a new instance here
-        return CatalogFactory.getInstance();
+        return CatalogFactoryBase.getInstance();
     }
 
 }

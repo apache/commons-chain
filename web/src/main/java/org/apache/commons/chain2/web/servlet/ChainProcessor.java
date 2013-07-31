@@ -17,14 +17,15 @@
 package org.apache.commons.chain2.web.servlet;
 
 import org.apache.commons.chain2.Catalog;
-import org.apache.commons.chain2.CatalogFactory;
 import org.apache.commons.chain2.Command;
+import org.apache.commons.chain2.impl.CatalogFactoryBase;
 import org.apache.commons.chain2.web.ChainServlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 /**
@@ -98,13 +99,13 @@ public class ChainProcessor extends ChainServlet {
      * is stored.  This value is also used as the name of the
      * context attribute under which the catalog is exposed to commands.
      * If not specified, we will look up commands in the appropriate
-     * {@link Catalog} retrieved from our {@link CatalogFactory}.</p>
+     * {@link Catalog} retrieved from our {@link CatalogFactoryBase}.</p>
      */
     private String attribute = null;
 
     /**
      * <p>The name of the {@link Catalog} to retrieve from the
-     * {@link CatalogFactory} for this application, or <code>null</code>
+     * {@link CatalogFactoryBase} for this application, or <code>null</code>
      * to select the default {@link Catalog}.</p>
      */
     private String catalog = null;
@@ -184,10 +185,10 @@ public class ChainProcessor extends ChainServlet {
                 throw new IllegalArgumentException(msg);
             }
         } else if (catalog != null) {
-            theCatalog = CatalogFactory.<String, Object, ServletWebContext<String, Object>>getInstance()
+            theCatalog = CatalogFactoryBase.<String, Object, ServletWebContext<String, Object>>getInstance()
                     .getCatalog(catalog);
         } else {
-            theCatalog = CatalogFactory.<String, Object, ServletWebContext<String, Object>>getInstance()
+            theCatalog = CatalogFactoryBase.<String, Object, ServletWebContext<String, Object>>getInstance()
                     .getCatalog();
         }
         if (attribute == null) {
