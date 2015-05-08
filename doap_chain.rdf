@@ -39,11 +39,15 @@
         <created>2008-06-02</created>
         <revision>1.2</revision>
       </Version>
+    </release>
+    <release>
       <Version>
         <name>commons-chain</name>
         <created>2006-06-14</created>
         <revision>1.1</revision>
       </Version>
+    </release>
+    <release>
       <Version>
         <name>commons-chain</name>
         <created>2004-12-09</created>
