@@ -132,7 +132,7 @@ public class ChainProcessor extends ChainServlet {
     /**
      * <p>Cache the name of the command we should execute for each request.</p>
      *
-     * @exception ServletException if an initialization error occurs
+     * @throws ServletException if an initialization error occurs
      */
     @Override
     public void init() throws ServletException {
@@ -153,8 +153,8 @@ public class ChainProcessor extends ChainServlet {
      * @param request The request we are processing
      * @param response The response we are creating
      *
-     * @exception IOException if an input/output error occurs
-     * @exception ServletException if a servlet exception occurs
+     * @throws IOException if an input/output error occurs
+     * @throws ServletException if a servlet exception occurs
      */
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response)

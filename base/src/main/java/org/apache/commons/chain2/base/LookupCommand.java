@@ -263,7 +263,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      *
      * @param context The context for this request
      *
-     * @exception IllegalArgumentException if no such {@link Command}
+     * @throws IllegalArgumentException if no such {@link Command}
      *  can be found and the <code>optional</code> property is set
      *  to <code>false</code>
      * @return the result of executing the looked-up command, or
@@ -316,7 +316,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      *
      * @param context {@link Context} for this request
      * @return The catalog.
-     * @exception IllegalArgumentException if no {@link Catalog}
+     * @throws IllegalArgumentException if no {@link Catalog}
      *  can be found
      *
      * @since Chain 1.2
@@ -353,7 +353,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      *
      * @param context {@link Context} for this request
      * @return The looked-up Command.
-     * @exception IllegalArgumentException if no such {@link Command}
+     * @throws IllegalArgumentException if no such {@link Command}
      *  can be found and the <code>optional</code> property is set
      *  to <code>false</code>
      */

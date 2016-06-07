@@ -59,7 +59,7 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
      *
      * @param commands Map of Commands.
      *
-     * @exception IllegalArgumentException if <code>commands</code>
+     * @throws IllegalArgumentException if <code>commands</code>
      * is <code>null</code>
      *
      * @since Chain 1.1

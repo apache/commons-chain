@@ -72,9 +72,9 @@ public class ContextBase extends ContextMap<String, Object> {
      *
      * @param map Map whose key-value pairs are added
      *
-     * @exception IllegalArgumentException if an exception is thrown
+     * @throws IllegalArgumentException if an exception is thrown
      *  writing a local property value
-     * @exception UnsupportedOperationException if a local property does not
+     * @throws UnsupportedOperationException if a local property does not
      *  have a write method.
      */
     public ContextBase(Map<? extends String, ? extends Object> map) {
@@ -162,7 +162,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * @param value the value look for in the context.
      * @return <code>true</code> if found in this context otherwise
      *  <code>false</code>.
-     * @exception IllegalArgumentException if a property getter
+     * @throws IllegalArgumentException if a property getter
      *  throws an exception
      */
     @Override
@@ -219,9 +219,9 @@ public class ContextBase extends ContextMap<String, Object> {
      * @param key Key of the value to be returned
      * @return The value for the specified key.
      *
-     * @exception IllegalArgumentException if an exception is thrown
+     * @throws IllegalArgumentException if an exception is thrown
      *  reading this local property value
-     * @exception UnsupportedOperationException if this local property does not
+     * @throws UnsupportedOperationException if this local property does not
      *  have a read method.
      */
     @Override
@@ -289,9 +289,9 @@ public class ContextBase extends ContextMap<String, Object> {
      * @param value New value to be stored
      * @return The value added to the Context.
      *
-     * @exception IllegalArgumentException if an exception is thrown
+     * @throws IllegalArgumentException if an exception is thrown
      *  reading or writing this local property value
-     * @exception UnsupportedOperationException if this local property does not
+     * @throws UnsupportedOperationException if this local property does not
      *  have both a read method and a write method
      */
     @Override
@@ -338,9 +338,9 @@ public class ContextBase extends ContextMap<String, Object> {
      * @param map <code>Map</code> containing key-value pairs to store
      *  (or replace)
      *
-     * @exception IllegalArgumentException if an exception is thrown
+     * @throws IllegalArgumentException if an exception is thrown
      *  reading or writing a local property value
-     * @exception UnsupportedOperationException if a local property does not
+     * @throws UnsupportedOperationException if a local property does not
      *  have both a read method and a write method
      */
     @Override
@@ -358,7 +358,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * @param key Key to be removed
      * @return The value removed from the Context.
      *
-     * @exception UnsupportedOperationException if the specified
+     * @throws UnsupportedOperationException if the specified
      *  <code>key</code> matches the name of a local property
      */
     @Override
@@ -424,9 +424,9 @@ public class ContextBase extends ContextMap<String, Object> {
      * the {@link Context} implementation class.</p>
      *
      *
-     * @exception IllegalArgumentException if an exception is thrown
+     * @throws IllegalArgumentException if an exception is thrown
      *  writing this local property value
-     * @exception UnsupportedOperationException if this local property does not
+     * @throws UnsupportedOperationException if this local property does not
      *  have a write method.
      */
     private void initialize() {
@@ -459,9 +459,9 @@ public class ContextBase extends ContextMap<String, Object> {
      * @param descriptor <code>PropertyDescriptor</code> for the
      *  specified property
      *
-     * @exception IllegalArgumentException if an exception is thrown
+     * @throws IllegalArgumentException if an exception is thrown
      *  reading this local property value
-     * @exception UnsupportedOperationException if this local property does not
+     * @throws UnsupportedOperationException if this local property does not
      *  have a read method.
      */
     private Object readProperty(PropertyDescriptor descriptor) {
@@ -487,7 +487,7 @@ public class ContextBase extends ContextMap<String, Object> {
      *
      * @param entry Key-value pair to be removed
      *
-     * @exception UnsupportedOperationException if the specified key
+     * @throws UnsupportedOperationException if the specified key
      *  identifies a property instead of an attribute
      */
     private boolean remove(Map.Entry<String, Object> entry) {
@@ -518,9 +518,9 @@ public class ContextBase extends ContextMap<String, Object> {
      * @param value The new value for this property (must be of the
      *  correct type)
      *
-     * @exception IllegalArgumentException if an exception is thrown
+     * @throws IllegalArgumentException if an exception is thrown
      *  writing this local property value
-     * @exception UnsupportedOperationException if this local property does not
+     * @throws UnsupportedOperationException if this local property does not
      *  have a write method.
      */
     private void writeProperty(PropertyDescriptor descriptor, Object value) {

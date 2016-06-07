@@ -66,9 +66,9 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      * @param <CMD> the {@link Command} type to be added in the {@link Chain}
      * @param command The {@link Command} to be added
      *
-     * @exception IllegalArgumentException if <code>command</code>
+     * @throws IllegalArgumentException if <code>command</code>
      *  is <code>null</code>
-     * @exception IllegalStateException if this {@link Chain} has already
+     * @throws IllegalStateException if this {@link Chain} has already
      *  been executed at least once, so no further configuration is allowed
      */
     <CMD extends Command<K, V, C>> void addCommand(CMD command);
@@ -103,7 +103,7 @@ public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      * @param context The {@link Context} to be processed by this
      *  {@link Chain}
      *
-     * @exception IllegalArgumentException if <code>context</code>
+     * @throws IllegalArgumentException if <code>context</code>
      *  is <code>null</code>
      *
      * @return {@link Processing#FINISHED} if the processing of this context

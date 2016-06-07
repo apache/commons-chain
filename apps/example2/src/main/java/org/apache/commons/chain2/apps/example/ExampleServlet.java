@@ -49,7 +49,7 @@ public class ExampleServlet extends HttpServlet {
     /**
      * <p>Cache the name of the servlet.</p>
      *
-     * @exception ServletException if an initialization error occurs
+     * @throws ServletException if an initialization error occurs
      */
     public void init() throws ServletException {
         super.init();
@@ -69,7 +69,7 @@ public class ExampleServlet extends HttpServlet {
      * @param request The request we are processing
      * @param response The response we are creating
      *
-     * @exception IOException if an input/output error occurs
+     * @throws IOException if an input/output error occurs
      */
     public void service(HttpServletRequest request,
                         HttpServletResponse response)

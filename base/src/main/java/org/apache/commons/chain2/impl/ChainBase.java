@@ -53,7 +53,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      *
      * @param command The {@link Command} to be configured
      *
-     * @exception IllegalArgumentException if <code>command</code>
+     * @throws IllegalArgumentException if <code>command</code>
      *  is <code>null</code>
      */
     public ChainBase(Command<K, V, C> command) {
@@ -66,7 +66,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      *
      * @param commands The {@link Command Commands} to be configured
      *
-     * @exception IllegalArgumentException if <code>commands</code>,
+     * @throws IllegalArgumentException if <code>commands</code>,
      *  or one of the individual {@link Command} elements,
      *  is <code>null</code>
      */
@@ -85,7 +85,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      *
      * @param commands The {@link Command}s to be configured
      *
-     * @exception IllegalArgumentException if <code>commands</code>,
+     * @throws IllegalArgumentException if <code>commands</code>,
      *  or one of the individual {@link Command} elements,
      *  is <code>null</code>
      */
@@ -121,9 +121,9 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      * @param <CMD> the {@link Command} type to be added in the {@link Chain}
      * @param command The {@link Command} to be added
      *
-     * @exception IllegalArgumentException if <code>command</code>
+     * @throws IllegalArgumentException if <code>command</code>
      *  is <code>null</code>
-     * @exception IllegalStateException if no further configuration is allowed
+     * @throws IllegalStateException if no further configuration is allowed
      */
     public <CMD extends Command<K, V, C>> void addCommand(CMD command) {
         if (command == null) {

@@ -57,7 +57,7 @@ public interface Filter<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      *  by the last {@link Command} that was executed; otherwise
      *  <code>null</code>
      *
-     * @exception IllegalArgumentException if <code>context</code>
+     * @throws IllegalArgumentException if <code>context</code>
      *  is <code>null</code>
      *
      * @return If a non-null <code>exception</code> was "handled" by this

@@ -145,7 +145,7 @@ public class XmlConfigParser implements ConfigParser {
      * @param <C> Type of the context associated with this command
      * @param url <code>URL</code> of the XML document to be parsed
      * @return a CatalogFactory instance parsed from the given location
-     * @exception ChainConfigurationException if a parsing error occurs
+     * @throws ChainConfigurationException if a parsing error occurs
      */
     public <K, V, C extends Map<K, V>> CatalogFactory<K, V, C> parse(URL url) {
         // Prepare our Digester instance

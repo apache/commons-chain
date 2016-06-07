@@ -65,7 +65,7 @@ public class PathInfoMapper extends LookupCommand<String, Object, ServletWebCont
      *
      * @param context {@link Context} for this request
      * @return The catalog.
-     * @exception IllegalArgumentException if no {@link Catalog}
+     * @throws IllegalArgumentException if no {@link Catalog}
      *  can be found
      *
      * @since Chain 1.2

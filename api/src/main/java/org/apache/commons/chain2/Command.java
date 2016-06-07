@@ -94,9 +94,9 @@ public interface Command<K, V, C extends Map<K, V>> {
      * @param context The {@link Context} to be processed by this
      *  {@link Command}
      *
-     * @exception ChainException general purpose exception return
+     * @throws ChainException general purpose exception return
      *  to indicate abnormal termination
-     * @exception IllegalArgumentException if <code>context</code>
+     * @throws IllegalArgumentException if <code>context</code>
      *  is <code>null</code>
      *
      * @return {@link Processing#FINISHED} if the processing of this contex
