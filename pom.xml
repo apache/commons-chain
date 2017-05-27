@@ -141,7 +141,8 @@
   <properties>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
-    <commons.componentid>chain</commons.componentid>
+    <commons.componentid>chain2</commons.componentid>
+    <commons.module.name>org.apache.commons.chain2</commons.module.name>
     <commons.release.version>2.0</commons.release.version>
     <commons.release.desc>(minium JDK 1.6)</commons.release.desc>
     <commons.rc.version>RC1</commons.rc.version>
