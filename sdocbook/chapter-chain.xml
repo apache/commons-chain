@@ -808,7 +808,7 @@ public class MailReader extends Hashmap implements Context {
 
     <para>The default attribute name can be changed, if needed, You can also
     configure ChainListener to read files from a system path or from a JAR.
-    See the JavaDoc for all the configuration details. There is also a
+    See the Javadoc for all the configuration details. There is also a
     <classname>ChainServlet</classname> if you are using the Servlet 2.2
     platform.</para>
 

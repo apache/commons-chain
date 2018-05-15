@@ -168,7 +168,7 @@ The <action> type attribute can be add,update,fix,remove.
          PathInfoMapper command can not obtain the current catalog instance.
       </action>
       <action dev="niallp" type="fix" issue="CHAIN-34" due-to="Mark Vedder">
-         Unbalanced tags in JavaDoc for ContextBase class.
+         Unbalanced tags in Javadoc for ContextBase class.
       </action>
       <action dev="niallp" type="fix" issue="CHAIN-33">
          Upgrade to Commons Digester 1.8 to fix bug loading webapp resources.
@@ -269,7 +269,7 @@ The <action> type attribute can be add,update,fix,remove.
          build.properties.sample should add commons-logging.
       </action>
       <action dev="husted" type="update" issue="CHAIN-22" due-to="Matthew Sgarlata">
-         Added JavaDoc and a toString() method to CatalogBase.
+         Added Javadoc and a toString() method to CatalogBase.
       </action>
     </release>
   </body>

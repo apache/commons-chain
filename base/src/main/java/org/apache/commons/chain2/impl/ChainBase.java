@@ -116,7 +116,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
     // ---------------------------------------------------------- Chain Methods
 
     /**
-     * See the {@link Chain} JavaDoc.
+     * See the {@link Chain} Javadoc.
      *
      * @param <CMD> the {@link Command} type to be added in the {@link Chain}
      * @param command The {@link Command} to be added
@@ -136,7 +136,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
     }
 
     /**
-     * See the {@link Chain} JavaDoc.
+     * See the {@link Chain} Javadoc.
      *
      * @param context The {@link Context} to be processed by this
      *  {@link Chain}

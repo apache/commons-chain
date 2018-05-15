@@ -807,7 +807,7 @@ public class MailReader extends Hashmap<String, Locale> implements Context<Strin
       </example></p>
 
     <p>You can also configure ChainListener to read files from a system path
-    or from a JAR. See the JavaDoc for all the configuration details. There
+    or from a JAR. See the Javadoc for all the configuration details. There
     is also a <code>ChainServlet</code> if you are using the Servlet 2.2
     platform.</p>
 
