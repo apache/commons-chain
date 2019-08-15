@@ -51,9 +51,9 @@
   </modules>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/chain/trunk/</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/chain/trunk/</developerConnection>
-    <url>http://svn.apache.org/viewvc/commons/proper/chain/trunk/</url>
+    <connection>scm:git:https://gitbox.apache.org/repos/asf/commons-chain</connection>
+    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-chain</developerConnection>
+    <url>https://gitbox.apache.org/repos/asf/commons-chain</url>
   </scm>
   <issueManagement>
     <system>jira</system>
