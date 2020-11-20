@@ -48,7 +48,6 @@ class ConfigCatalogRule extends Rule {
      *  created {@link org.apache.commons.chain2.Catalog} instances
      */
     public ConfigCatalogRule(String nameAttribute, String catalogClass) {
-        super();
         this.nameAttribute = nameAttribute;
         this.catalogClass = catalogClass;
     }

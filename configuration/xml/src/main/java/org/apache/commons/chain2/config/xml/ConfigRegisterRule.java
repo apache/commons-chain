@@ -46,7 +46,6 @@ class ConfigRegisterRule extends Rule {
      *  which this command should be registered
      */
     public ConfigRegisterRule(String nameAttribute) {
-        super();
         this.nameAttribute = nameAttribute;
     }
 

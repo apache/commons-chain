@@ -28,21 +28,18 @@ public class MockPrincipal implements Principal {
 
 
     public MockPrincipal() {
-        super();
         this.name = "";
         this.roles = new String[0];
     }
 
 
     public MockPrincipal(String name) {
-        super();
         this.name = name;
         this.roles = new String[0];
     }
 
 
     public MockPrincipal(String name, String roles[]) {
-        super();
         this.name = name;
         this.roles = roles;
     }

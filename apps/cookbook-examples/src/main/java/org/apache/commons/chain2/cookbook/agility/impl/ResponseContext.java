@@ -27,7 +27,6 @@ public class ResponseContext extends ContextBase implements Response {
     private final String name;
 
     public ResponseContext(String name) {
-        super();
         this.name = name;
     }
 

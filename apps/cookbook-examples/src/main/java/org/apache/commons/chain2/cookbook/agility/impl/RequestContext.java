@@ -30,7 +30,6 @@ public class RequestContext extends ContextBase implements Request {
     private Response response;
 
     public RequestContext(String name) {
-        super();
         this.name = name;
     }
 

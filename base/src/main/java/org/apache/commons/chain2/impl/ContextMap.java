@@ -41,7 +41,6 @@ public class ContextMap<K, V> extends ConcurrentHashMap<K, V> implements Context
      * Creates a new, empty Context with a default initial capacity, load factor, and concurrencyLevel.
      */
     public ContextMap() {
-        super();
     }
 
     /**

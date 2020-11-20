@@ -60,7 +60,6 @@ public class ContextBase extends ContextMap<String, Object> {
      * Default, no argument constructor.
      */
     public ContextBase() {
-        super();
         initialize();
     }
 
