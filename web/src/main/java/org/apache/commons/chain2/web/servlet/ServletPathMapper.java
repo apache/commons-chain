@@ -84,7 +84,7 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
          */
         @SuppressWarnings("unchecked")
         Catalog<String, Object, ServletWebContext<String, Object>> catalog =
-                testCatalog != null && testCatalog instanceof Catalog ?
+                testCatalog instanceof Catalog ?
                     (Catalog<String, Object, ServletWebContext<String, Object>>) testCatalog :
                     super.getCatalog(context);
 
