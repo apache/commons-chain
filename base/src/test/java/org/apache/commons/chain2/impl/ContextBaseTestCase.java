@@ -84,7 +84,7 @@ public class ContextBaseTestCase {
     @Test
     public void testAttributes() {
 
-        Object value = null;
+        Object value;
         checkAttributeCount(0);
 
         context.put("foo", "This is foo");
