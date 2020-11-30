@@ -23,12 +23,12 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>43</version>
+    <version>49</version>
   </parent>
 
   <groupId>org.apache.commons</groupId>
   <artifactId>commons-chain-parent</artifactId>
-  <version>2.0-SNAPSHOT</version>
+  <version>FOSS-2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Apache Commons Chain :: Parent</name>
@@ -139,8 +139,8 @@
   </contributors>
 
   <properties>
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <commons.componentid>chain2</commons.componentid>
     <commons.module.name>org.apache.commons.chain2</commons.module.name>
     <commons.release.version>2.0</commons.release.version>
@@ -248,6 +248,45 @@
             <goals>
               <goal>checkstyle-aggregate</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <!-- Should agree with config in reporting section -->
+        <configuration>
+          <!--
+            If you wish to override this list in the component (child) pom, ensure you use
+            <excludes combine.children="merge">
+            so that the child pom entries replace the parent entries
+          -->
+          <excludes combine.children="append">
+            <exclude>site-content/**</exclude>
+            <exclude>base/**</exclude>
+            <exclude>api/**</exclude>
+            <exclude>src/**</exclude>
+            <exclude>test-utils/**</exclude>
+            <exclude>commons-chain2-test-utils/**</exclude>
+            <exclude>.checkstyle</exclude>
+            <exclude>.fbprefs</exclude>
+            <exclude>.pmd</exclude>
+            <exclude>src/site/resources/download_*.cgi</exclude>
+            <exclude>src/site/resources/profile.*</exclude>
+            <exclude>profile.*</exclude>
+            <!-- Exclude Eclipse local files and folders -->
+            <exclude>maven-eclipse.xml</exclude>
+            <exclude>.externalToolBuilders/**</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+<!--            <id>rat-check</id>-->
+<!--            <phase>validate</phase>-->
+<!--            <goals>-->
+<!--              <goal>check</goal>-->
+<!--            </goals>-->
           </execution>
         </executions>
       </plugin>

@@ -266,20 +266,6 @@ public class ContextBase extends ContextMap<String, Object> {
     }
 
     /**
-     * <p>Override the default <code>Map</code> behavior to return a
-     * <code>Set</code> that meets the specified default behavior except
-     * for attempts to remove the key for a property of the {@link Context}
-     * implementation class, which will throw
-     * <code>UnsupportedOperationException</code>.</p>
-     *
-     * @return The set of keys for objects in this Context.
-     */
-    @Override
-    public Set<String> keySet() {
-        return super.keySet();
-    }
-
-    /**
      * <p>Override the default <code>Map</code> behavior to set the value
      * of a local property if the specified key matches a local property name.
      * </p>

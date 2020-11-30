@@ -23,7 +23,7 @@
   <parent>
     <artifactId>commons-chain-parent</artifactId>
     <groupId>org.apache.commons</groupId>
-    <version>2.0-SNAPSHOT</version>
+    <version>FOSS-2.0-SNAPSHOT</version>
     <relativePath>../../</relativePath>
   </parent>
 
