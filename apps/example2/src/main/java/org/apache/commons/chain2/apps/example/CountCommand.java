@@ -17,7 +17,6 @@
 package org.apache.commons.chain2.apps.example;
 
 import org.apache.commons.chain2.Command;
-import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Processing;
 import org.apache.commons.chain2.web.WebContext;
 import org.apache.commons.logging.Log;

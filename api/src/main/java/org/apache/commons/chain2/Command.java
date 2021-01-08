@@ -18,8 +18,6 @@ package org.apache.commons.chain2;
 
 import java.util.Map;
 
-import org.apache.commons.chain2.Processing;
-
 /**
  * <p>A {@link Command} encapsulates a unit of processing work to be
  * performed, whose purpose is to examine and/or modify the state of a

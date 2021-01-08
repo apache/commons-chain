@@ -18,10 +18,7 @@ package org.apache.commons.chain2.base;
 
 import static org.apache.commons.chain2.testutils.HasLog.hasLog;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.apache.commons.chain2.Catalog;

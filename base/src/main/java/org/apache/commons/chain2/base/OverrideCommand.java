@@ -20,7 +20,6 @@ package org.apache.commons.chain2.base;
 import java.util.Map;
 
 import org.apache.commons.chain2.Command;
-import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Processing;
 
 /**

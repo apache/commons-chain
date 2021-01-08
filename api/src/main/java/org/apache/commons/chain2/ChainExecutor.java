@@ -18,8 +18,6 @@ package org.apache.commons.chain2;
 
 import java.util.Map;
 
-import org.apache.commons.chain2.Processing;
-
 /**
  * Builder that allows continue adding a command in the target chain and execute it.
  *

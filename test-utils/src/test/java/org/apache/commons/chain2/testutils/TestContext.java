@@ -1,8 +1,6 @@
 package org.apache.commons.chain2.testutils;
 
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.commons.chain2.Context;
 
 /**

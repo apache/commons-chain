@@ -17,11 +17,8 @@
 
 package org.apache.commons.chain2.testutils;
 
-import static org.apache.commons.chain2.testutils.HasCommandCount.hasCommandCount;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import java.util.Map;
 
 import org.apache.commons.chain2.Catalog;
 import org.apache.commons.chain2.Context;
