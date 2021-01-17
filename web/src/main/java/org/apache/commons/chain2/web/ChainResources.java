@@ -144,7 +144,7 @@ final class ChainResources {
 
         while (resourcesTokenizer.hasMoreTokens()) {
             String path = resourcesTokenizer.nextToken().trim();
-            if (path.length() > 0) {
+            if (!path.isEmpty()) {
                 paths.add(path);
             }
         }
