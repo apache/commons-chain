@@ -135,7 +135,7 @@ final class ChainResources {
      * @since Chain 1.1
      */
     static String[] getResourcePaths(String resources) {
-        if (resources == null || resources.length() == 0) {
+        if (resources == null || resources.isEmpty()) {
             return new String[0];
         }
 
