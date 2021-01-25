@@ -55,7 +55,7 @@ public class CatalogBaseTestCase {
     /**
      * The {@link Catalog} instance under test.
      */
-    protected CatalogBase<String, Object, Context<String, Object>> catalog = null;
+    protected CatalogBase<String, Object, Context<String, Object>> catalog;
 
 
     // -------------------------------------------------- Overall Test Methods

@@ -42,7 +42,7 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
     /**
      * <p>Whether the entry can be modified.</p>
      */
-    private boolean modifiable = false;
+    private boolean modifiable;
 
     /**
      * <p>Creates a map entry that can either allow modifications or not.</p>

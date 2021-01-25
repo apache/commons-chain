@@ -50,7 +50,7 @@ public class NonDelegatingCommand implements Command<String, Object, Context<Str
 
 
     // The identifier to log for this Command instance
-    protected String id = null;
+    protected String id;
 
     String getId() {
         return (this.id);

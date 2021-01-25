@@ -33,7 +33,7 @@ public class RemoveCommand<K, V, C extends Context<K, V>> implements Command<K, 
 
     // -------------------------------------------------------------- Properties
 
-    private K fromKey = null;
+    private K fromKey;
 
     /**
      * <p>Return the context attribute key for the attribute.</p>

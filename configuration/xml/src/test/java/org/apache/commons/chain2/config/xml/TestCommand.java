@@ -30,7 +30,7 @@ import org.apache.commons.chain2.Processing;
 public class TestCommand implements Command<String, Object, Context<String, Object>> {
 
 
-    private String bar = null;
+    private String bar;
     public String getBar() {
     return (this.bar);
     }
@@ -39,7 +39,7 @@ public class TestCommand implements Command<String, Object, Context<String, Obje
     }
 
 
-    private String foo = null;
+    private String foo;
     public String getFoo() {
     return (this.foo);
     }

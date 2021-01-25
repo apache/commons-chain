@@ -68,64 +68,64 @@ public class PortletWebContext extends WebContextBase {
      * <p>The lazily instantiated <code>Map</code> of application scope
      * attributes.</p>
      */
-    private Map<String, Object> applicationScope = null;
+    private Map<String, Object> applicationScope;
 
     /**
      * <p>The <code>PortletContext</code> for this web application.</p>
      */
-    private PortletContext context = null;
+    private PortletContext context;
 
     /**
      * <p>The lazily instantiated <code>Map</code> of header name-value
      * combinations (immutable).</p>
      */
-    private Map<String, String> header = null;
+    private Map<String, String> header;
 
     /**
      * <p>The lazily instantitated <code>Map</code> of header name-values
      * combinations (immutable).</p>
      */
-    private Map<String, String[]> headerValues = null;
+    private Map<String, String[]> headerValues;
 
     /**
      * <p>The lazily instantiated <code>Map</code> of context initialization
      * parameters.</p>
      */
-    private Map<String, String> initParam = null;
+    private Map<String, String> initParam;
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request
      * parameter name-value.</p>
      */
-    private Map<String, String> param = null;
+    private Map<String, String> param;
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request
      * parameter name-values.</p>
      */
-    private Map<String, String[]> paramValues = null;
+    private Map<String, String[]> paramValues;
 
     /**
      * <p>The <code>PortletRequest</code> for this request.</p>
      */
-    private PortletRequest request = null;
+    private PortletRequest request;
 
     /**
      * <p>The lazily instantiated <code>Map</code> of request scope
      * attributes.</p>
      */
-    private Map<String, Object> requestScope = null;
+    private Map<String, Object> requestScope;
 
     /**
      * <p>The <code>PortletResponse</code> for this request.</p>
      */
-    private PortletResponse response = null;
+    private PortletResponse response;
 
     /**
      * <p>The lazily instantiated <code>Map</code> of session scope
      * attributes.</p>
      */
-    private Map<String, Object> sessionScope = null;
+    private Map<String, Object> sessionScope;
 
     // ---------------------------------------------------------- Public Methods
 

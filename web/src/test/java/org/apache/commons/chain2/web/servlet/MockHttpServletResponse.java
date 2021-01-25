@@ -34,7 +34,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
     // ------------------------------------------------------ Instance Variables
 
 
-    private Locale locale = null;
+    private Locale locale;
 
 
     // ---------------------------------------------------------- Public Methods

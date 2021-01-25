@@ -63,7 +63,7 @@ public class FacesWebContext extends WebContextBase {
      * <p>The <code>FacesContext</code> instance for the request represented
      * by this {@link org.apache.commons.chain2.web.WebContext}.</p>
      */
-    private FacesContext context = null;
+    private FacesContext context;
 
     // ---------------------------------------------------------- Public Methods
 

@@ -52,7 +52,7 @@ public class CatalogFactoryBase<K, V, C extends Map<K, V>> implements CatalogFac
     /**
      * <p>The default {@link Catalog} for this {@link CatalogFactoryBase}.</p>
      */
-    private Catalog<K, V, C> catalog = null;
+    private Catalog<K, V, C> catalog;
 
     /**
      * <p>Map of named {@link Catalog}s, keyed by catalog name.</p>

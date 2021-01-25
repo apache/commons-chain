@@ -49,7 +49,7 @@ public class CatalogFactoryBaseTestCase {
     /**
      * <p>The {@link CatalogFactoryBase} instance under test.</p>
      */
-    protected CatalogFactory<String, Object, Context<String, Object>> factory = null;
+    protected CatalogFactory<String, Object, Context<String, Object>> factory;
 
 
     // -------------------------------------------------- Overall Test Methods
