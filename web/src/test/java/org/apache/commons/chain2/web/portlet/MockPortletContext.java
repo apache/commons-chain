@@ -32,12 +32,12 @@ import javax.portlet.PortletRequestDispatcher;
 public class MockPortletContext implements PortletContext {
 
 
-    private int majorVersion = 1;
-    private int minorVersion = 0;
+    private final int majorVersion = 1;
+    private final int minorVersion = 0;
     private String portletContextName = "MockPortletContext";
     private String serverInfo = portletContextName;
-    private Hashtable<String, String> parameters = new Hashtable<String, String>();
-    private Hashtable<String, Object> attributes = new Hashtable<String, Object>();
+    private final Hashtable<String, String> parameters = new Hashtable<String, String>();
+    private final Hashtable<String, Object> attributes = new Hashtable<String, Object>();
 
 
     // --------------------------------------------------------- Public Methods

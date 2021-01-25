@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
 public class CountCommand implements Command<String, Object,
         WebContext<String, Object>> {
 
-    private Log log = LogFactory.getLog(CountCommand.class);
+    private final Log log = LogFactory.getLog(CountCommand.class);
 
     private int count;
 

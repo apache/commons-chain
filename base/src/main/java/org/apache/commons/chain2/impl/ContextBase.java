@@ -130,7 +130,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * <p>Zero-length array of parameter values for calling property getters.
      * </p>
      */
-    private static Object[] zeroParams = new Object[0];
+    private static final Object[] zeroParams = new Object[0];
 
     // ------------------------------------------------------------- Map Methods
 
@@ -608,7 +608,7 @@ public class ContextBase extends ContextMap<String, Object> {
 
         private Map.Entry<String, Object> entry = null;
 
-        private Iterator<String> keys = ContextBase.this.keySet().iterator();
+        private final Iterator<String> keys = ContextBase.this.keySet().iterator();
 
         public boolean hasNext() {
             return keys.hasNext();
@@ -636,7 +636,7 @@ public class ContextBase extends ContextMap<String, Object> {
             this.value = value;
         }
 
-        private String key;
+        private final String key;
 
         private Object value;
 
@@ -748,7 +748,7 @@ public class ContextBase extends ContextMap<String, Object> {
 
         private Map.Entry<String, Object> entry = null;
 
-        private Iterator<String> keys = ContextBase.this.keySet().iterator();
+        private final Iterator<String> keys = ContextBase.this.keySet().iterator();
 
         public boolean hasNext() {
             return keys.hasNext();

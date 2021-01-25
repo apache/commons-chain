@@ -32,7 +32,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  */
 public class HasCommandCount extends TypeSafeDiagnosingMatcher<Catalog> {
 
-    private int expected;
+    private final int expected;
 
     public HasCommandCount(int count) {
         this.expected = count;
