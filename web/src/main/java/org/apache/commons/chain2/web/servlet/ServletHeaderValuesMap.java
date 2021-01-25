@@ -49,6 +49,11 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
         return (request.getHeader(key(key)) != null);
     }
 
+    /**
+     * An empty immutable {@code String} array.
+     */
+    public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
     public boolean containsValue(Object value) {
         if (!(value instanceof String[])) {
             return (false);
@@ -173,7 +178,7 @@ final class ServletHeaderValuesMap implements Map<String, String[]> {
             list.add(values.nextElement());
         }
 
-        return list.toArray(new String[list.size()]);
+        return list.toArray(EMPTY_STRING_ARRAY);
     }
 
     private String key(Object key) {

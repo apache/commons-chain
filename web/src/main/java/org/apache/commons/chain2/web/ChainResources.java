@@ -39,6 +39,11 @@ import java.util.StringTokenizer;
 final class ChainResources {
 
     /**
+     * An empty immutable {@code String} array.
+     */
+    public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+    /**
      * This class uses a private constructor because it is a utility class.
      */
     private ChainResources() {
@@ -149,7 +154,7 @@ final class ChainResources {
             }
         }
 
-        return paths.toArray(new String[paths.size()]);
+        return paths.toArray(EMPTY_STRING_ARRAY);
     }
 
 }
