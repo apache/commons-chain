@@ -35,7 +35,7 @@ import java.util.Map;
  *
  * <p>To protect applications from evolution of this interface, specialized
  * implementations of {@link Chain} should generally be created by extending
- * the provided base class {@link org.apache.commons.chain2.impl.ChainBase})
+ * the provided base class {@code org.apache.commons.chain2.impl.ChainBase})
  * rather than directly implementing this interface.</p>
  *
  * <p>{@link Chain} implementations should be designed in a thread-safe

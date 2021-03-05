@@ -27,11 +27,11 @@
   <!-- Use the N&L files which apply to the included dependencies -->
   <files>
     <file>
-      <source>${basedir}/src/main/assembly/LICENSE-with-deps.txt</source>
+      <source>${basedir}/src/main/assembly/LICENSE.txt</source>
       <destName>LICENSE.txt</destName>
     </file>
     <file>
-      <source>${basedir}/src/main/assembly/NOTICE-with-deps.txt</source>
+      <source>${basedir}/src/main/assembly/NOTICE.txt</source>
       <destName>NOTICE.txt</destName>
     </file>
     <file>

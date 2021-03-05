@@ -45,7 +45,7 @@ import java.util.Map;
  *
  * <p>To protect applications from evolution of this interface, specialized
  * implementations of {@link Context} should generally be created by extending
- * the provided base class ({@link org.apache.commons.chain2.impl.ContextBase})
+ * the provided base class ({@code org.apache.commons.chain2.impl.ContextBase})
  * rather than directly implementing this interface.</p>
  *
  * <p>Applications should <strong>NOT</strong> assume that

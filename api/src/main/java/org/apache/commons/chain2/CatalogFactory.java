@@ -78,7 +78,7 @@ public interface CatalogFactory<K, V, C extends Map<K, V>> {
 
     /**
      * <p>Return an <code>Iterator</code> over the set of named
-     * {@link Catalog}s known to this {@link CatalogFactoryBase}.
+     * {@link Catalog}s known to this instance.
      * If there are no known catalogs, an empty Iterator is returned.</p>
      * @return An Iterator of the names of the Catalogs known by this factory.
      */
