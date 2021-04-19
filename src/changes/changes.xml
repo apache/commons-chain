@@ -134,6 +134,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action issue="CHAIN-47" dev="elijah" type="fix">
         WebContext, ServletWebContext are now interfaces
       </action>
+      <action type="update" dev="ggregory" due-to="Gary Gregory">
+        Bump actions/setup-java from v1.4.3 to v2.
+      </action>
     </release>
 
     <release version="1.2" date="2008-06-02" description="OSGi enabled / minor bug fixes">
