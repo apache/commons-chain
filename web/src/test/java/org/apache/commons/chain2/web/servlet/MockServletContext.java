@@ -37,9 +37,9 @@ import org.apache.commons.logging.LogFactory;
 public class MockServletContext implements ServletContext {
 
 
-    private Log log = LogFactory.getLog(MockServletContext.class);
-    private Hashtable<String, Object> attributes = new Hashtable<String, Object>();
-    private Hashtable<String, String> parameters = new Hashtable<String, String>();
+    private final Log log = LogFactory.getLog(MockServletContext.class);
+    private final Hashtable<String, Object> attributes = new Hashtable<String, Object>();
+    private final Hashtable<String, String> parameters = new Hashtable<String, String>();
 
 
     // --------------------------------------------------------- Public Methods

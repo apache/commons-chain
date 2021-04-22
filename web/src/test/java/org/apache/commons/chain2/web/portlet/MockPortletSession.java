@@ -33,15 +33,15 @@ import org.apache.commons.chain2.web.MockEnumeration;
 public class MockPortletSession implements PortletSession {
 
 
-    private Date creationTime     = new Date();
+    private final Date creationTime     = new Date();
     private Date lastAccessedTime = creationTime;
 
     private PortletContext context = null;
     private int maxInactiveInterval = 100;
     private boolean newSession = true;
     private String id = "mockId" + creationTime.getTime();
-    private Map<String, Object> portletScope = new HashMap<String, Object>();
-    private Map<String, Object> applicationScope = new HashMap<String, Object>();
+    private final Map<String, Object> portletScope = new HashMap<String, Object>();
+    private final Map<String, Object> applicationScope = new HashMap<String, Object>();
 
 
     public MockPortletSession() {

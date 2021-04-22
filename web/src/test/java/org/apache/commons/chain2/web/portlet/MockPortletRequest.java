@@ -53,9 +53,9 @@ public class MockPortletRequest implements PortletRequest {
     private PortletPreferences portletPreferences;
     private WindowState windowState;
     private Principal principal;
-    private Map<String, String[]> parameters = new HashMap<String, String[]>();
-    private Map<String, Object> attributes = new HashMap<String, Object>();
-    private Map<String, String[]> properties = new HashMap<String, String[]>();
+    private final Map<String, String[]> parameters = new HashMap<String, String[]>();
+    private final Map<String, Object> attributes = new HashMap<String, Object>();
+    private final Map<String, String[]> properties = new HashMap<String, String[]>();
 
 
     public MockPortletRequest() {
