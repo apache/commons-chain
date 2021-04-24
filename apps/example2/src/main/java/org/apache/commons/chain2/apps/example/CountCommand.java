@@ -65,7 +65,7 @@ public class CountCommand implements Command<String, Object,
         count++;
         log.info("Executing: " + attribute + "=" + count);
 
-        context.getSessionScope().put(attribute, new Integer(count));
+        context.getSessionScope().put(attribute, Integer.valueOf(count));
 
         return Processing.CONTINUE;
     }

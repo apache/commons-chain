@@ -43,6 +43,6 @@ public enum Processing {
      *
      * @since Chain 2.0
      */
-    FINISHED;
+    FINISHED
 
 }
