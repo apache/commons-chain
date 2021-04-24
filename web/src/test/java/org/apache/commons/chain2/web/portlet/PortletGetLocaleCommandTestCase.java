@@ -38,17 +38,17 @@ public class PortletGetLocaleCommandTestCase {
     // ----------------------------------------------------- Instance Variables
 
 
-    protected Locale locale = null;
+    protected Locale locale;
 
     // Portlet API Objects
-    protected PortletContext pcontext = null;
-    protected PortletRequest request = null;
-    protected PortletResponse response = null;
-    protected PortletSession session = null;
+    protected PortletContext pcontext;
+    protected PortletRequest request;
+    protected PortletResponse response;
+    protected PortletSession session;
 
     // Chain API Objects
-    protected PortletWebContext context = null;
-    protected PortletGetLocaleCommand command = null;
+    protected PortletWebContext context;
+    protected PortletGetLocaleCommand command;
 
 
     // -------------------------------------------------- Overall Test Methods

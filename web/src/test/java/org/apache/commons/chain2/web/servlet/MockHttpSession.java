@@ -45,7 +45,7 @@ public class MockHttpSession implements HttpSession {
 
 
     protected Map<String, Object> attributes = new HashMap<String, Object>();
-    protected ServletContext servletContext = null;
+    protected ServletContext servletContext;
 
 
     // --------------------------------------------------------- Public Methods

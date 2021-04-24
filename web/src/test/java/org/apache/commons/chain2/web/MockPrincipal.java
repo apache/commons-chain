@@ -45,10 +45,10 @@ public class MockPrincipal implements Principal {
     }
 
 
-    protected String name = null;
+    protected String name;
 
 
-    protected String roles[] = null;
+    protected String roles[];
 
 
     public String getName() {

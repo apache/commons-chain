@@ -54,7 +54,7 @@ public class ContextBaseTestCase {
     /**
      * The {@link Context} instance under test.
      */
-    protected Context<String, Object> context = null;
+    protected Context<String, Object> context;
 
 
     // -------------------------------------------------- Overall Test Methods

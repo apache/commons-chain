@@ -63,9 +63,9 @@ import org.junit.runners.Parameterized;
 @RunWith(Parameterized.class)
 public class XmlConfigParserTestCase {
 
-    private Catalog<String, Object, Context<String, Object>> catalog = null;
-    private Context<String, Object> context = null;
-    private XmlConfigParser parser = null;
+    private Catalog<String, Object, Context<String, Object>> catalog;
+    private Context<String, Object> context;
+    private XmlConfigParser parser;
     private final String configLocation;
 
     @Parameterized.Parameters

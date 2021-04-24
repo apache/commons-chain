@@ -33,7 +33,7 @@ public class MockPortletContext implements PortletContext {
 
 
     private int majorVersion = 1;
-    private int minorVersion = 0;
+    private int minorVersion;
     private String portletContextName = "MockPortletContext";
     private String serverInfo = portletContextName;
     private Hashtable<String, String> parameters = new Hashtable<String, String>();

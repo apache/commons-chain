@@ -38,17 +38,17 @@ public class ServletSetLocaleCommandTestCase {
     // ----------------------------------------------------- Instance Variables
 
 
-    protected Locale locale = null;
+    protected Locale locale;
 
     // Servlet API Objects
-    protected ServletContext scontext = null;
-    protected HttpServletRequest request = null;
-    protected HttpServletResponse response = null;
-    protected HttpSession session = null;
+    protected ServletContext scontext;
+    protected HttpServletRequest request;
+    protected HttpServletResponse response;
+    protected HttpSession session;
 
     // Chain API Objects
-    protected ServletWebContextBase context = null;
-    protected ServletSetLocaleCommand command = null;
+    protected ServletWebContextBase context;
+    protected ServletSetLocaleCommand command;
 
 
     // -------------------------------------------------- Overall Test Methods
