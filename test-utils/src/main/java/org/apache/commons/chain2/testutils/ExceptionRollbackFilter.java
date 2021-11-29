@@ -16,58 +16,35 @@
  */
 package org.apache.commons.chain2.testutils;
 
-
 import org.apache.commons.chain2.Context;
 import org.apache.commons.chain2.Filter;
+import org.apache.commons.chain2.Processing;
 
+public class ExceptionRollbackFilter implements Filter<String, Object, Context<String, Object>> {
 
-/**
- * <p>Implementation of {@link Filter} that logs its identifier and
- * and throws an Exception.</p>
- *
- * @version $Id$
- */
-public class ExceptionFilter
-    extends ExceptionCommand implements Filter<String, Object, Context<String, Object>> {
-
-
-    // ------------------------------------------------------------- Constructor
-
-
-    public ExceptionFilter() {
-        this("", "");
-    }
-
+    protected String id = null;
 
     // Construct an instance that will log the specified identifier
-    public ExceptionFilter(String id1, String id2) {
-        super(id1);
-        this.id2 = id2;
+    public ExceptionRollbackFilter(String id) {
+        this.id = id;
     }
-
-
-    // -------------------------------------------------------------- Properties
-
-    protected String id2 = null;
-    public String getId2() {
-        return (this.id2);
-    }
-    public void setId2(String id2) {
-        this.id2 = id2;
-    }
-
-
-    // --------------------------------------------------------- Command Methods
-
 
     // Postprocess command for this Filter
     public boolean postprocess(Context<String, Object> context, Exception exception) {
-        log(context, id2);
         return (false);
     }
 
     // Undo operation for this Filter
     public void undo(Context<String, Object> context, Exception exception) {
+        log(context, id);
     }
 
+    @Override
+    public Processing execute(Context<String, Object> context) {
+        throw new ArithmeticException(this.id);
+    }
+
+    protected void log(Context<String, Object> context, String id) {
+        context.put("log", id);
+    }
 }
