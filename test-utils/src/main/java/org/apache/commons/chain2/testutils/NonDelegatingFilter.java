@@ -79,5 +79,7 @@ public class NonDelegatingFilter
         return (false);
     }
 
+    public void undo(Context<String, Object> context, Exception exception) {
+    }
 
 }

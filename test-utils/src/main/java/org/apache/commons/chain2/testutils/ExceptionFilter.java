@@ -66,5 +66,9 @@ public class ExceptionFilter
         return (false);
     }
 
+    // Undo operation for this Filter
+    public void undo(Context<String, Object> context, Exception exception) {
+        log(context, id2);
+    }
 
 }
