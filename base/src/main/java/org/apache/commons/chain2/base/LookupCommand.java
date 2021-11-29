@@ -309,6 +309,15 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         return false;
     }
 
+    public void undo(C context, Exception exception) {
+        Command<K, V, C> command = getCommand(context);
+        if (command != null) {
+            if (command instanceof Filter) {
+                ((Filter<K, V, C>) command).undo(context, exception);
+            }
+        }
+    }
+
     // --------------------------------------------------------- Private Methods
 
     /**

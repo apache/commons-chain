@@ -66,4 +66,6 @@ public interface Filter<K, V, C extends Map<K, V>> extends Command<K, V, C> {
      */
    boolean postprocess(C context, Exception exception);
 
+   void undo(C context, Exception exception);
+
 }

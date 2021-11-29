@@ -16,6 +16,7 @@
  */
 package org.apache.commons.chain2.impl;
 
+import jdk.vm.ci.meta.ExceptionHandler;
 import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
@@ -148,7 +149,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      *
      * @return {@link Processing#FINISHED} if the processing of this contex
      *  has been completed. Returns {@link Processing#CONTINUE} if the processing
-     *  of this context should be delegated to a subsequent command in an 
+     *  of this context should be delegated to a subsequent command in an
      *  enclosing chain.
      */
     public Processing execute(C context) {
@@ -160,7 +161,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
         // Freeze the configuration of the command list
         frozen = true;
 
-        // Execute the commands in this list until one returns something else 
+        // Execute the commands in this list until one returns something else
         // than Processing.CONTINUE or throws an exception
         Processing saveResult = Processing.CONTINUE;
         Exception saveException = null;
@@ -207,6 +208,17 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
 
         // Return the exception or result state from the last execute()
         if (saveException != null && !handled) {
+            // Handle rollback
+            for (int j = 1; j >= 0; j--) {
+               if (commands.get(j) instanceof Filter) {
+                try {
+                   ((Filter<K, V, C>) commands.get(j)).undo(context,
+                                   saveException);
+                } catch (Exception e) {
+                   // Silently ignore
+                }
+               }
+            }
             // Wrap and rethrow exception
             throw wrapUnhandledExceptions(saveException, context,
                     lastCommand);
