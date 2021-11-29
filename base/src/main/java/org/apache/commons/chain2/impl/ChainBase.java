@@ -16,7 +16,6 @@
  */
 package org.apache.commons.chain2.impl;
 
-import jdk.vm.ci.meta.ExceptionHandler;
 import org.apache.commons.chain2.Chain;
 import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;

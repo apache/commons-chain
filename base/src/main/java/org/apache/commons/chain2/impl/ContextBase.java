@@ -275,7 +275,7 @@ public class ContextBase extends ContextMap<String, Object> {
      * @return The set of keys for objects in this Context.
      */
     @Override
-    public Set<String> keySet() {
+    public KeySetView<String, Object> keySet() {
         return super.keySet();
     }
 
