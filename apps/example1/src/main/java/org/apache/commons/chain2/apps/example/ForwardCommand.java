@@ -30,7 +30,6 @@ import java.lang.RuntimeException;
 /**
  * <p>Foo Command</p>
  *
- * @version $Id$
  */
 public class ForwardCommand implements Command<String, Object, ServletWebContext<String, Object>> {
 

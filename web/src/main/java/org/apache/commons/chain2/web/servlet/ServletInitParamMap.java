@@ -31,7 +31,6 @@ import org.apache.commons.chain2.web.MapEntry;
  * <p>Private implementation of <code>Map</code> for servlet context
  * init parameters.</p>
  *
- * @version $Id$
  */
 final class ServletInitParamMap implements Map<String, String> {
 

@@ -92,7 +92,6 @@ import org.apache.commons.logging.LogFactory;
  * of <em>context</em> init parameters.  Because of this, you can use
  * both facilities in the same application, if desired.</p>
  *
- * @version $Id$
  */
 public class ChainListener implements ServletContextListener {
     {

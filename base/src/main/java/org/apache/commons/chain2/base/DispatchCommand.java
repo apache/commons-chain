@@ -35,7 +35,6 @@ import java.util.WeakHashMap;
  * @param <C> Type of the context associated with this command
  *
  * @since Chain 1.1
- * @version $Id$
  */
 public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements Command<K, V, C> {
 

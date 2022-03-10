@@ -25,7 +25,6 @@ import java.util.Map;
 
 /**
  *
- * @version $Id$
  */
 public interface WebContext<K, V> extends Context<K, V>, Serializable {
     /**

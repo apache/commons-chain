@@ -32,7 +32,6 @@ import javax.servlet.http.HttpServletRequest;
  * an environment, a request for the context-relative URI "/execute/foo"
  * would cause the "/foo" command to be loaded and executed.</p>
  *
- * @version $Id$
  */
 public class PathInfoMapper extends LookupCommand<String, Object, ServletWebContext<String, Object>> {
 

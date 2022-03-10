@@ -31,7 +31,6 @@ import org.apache.commons.chain2.web.MapEntry;
  * <p>Private implementation of <code>Map</code> for servlet context
  * attributes.</p>
  *
- * @version $Id$
  */
 final class ServletApplicationScopeMap implements Map<String, Object> {
 

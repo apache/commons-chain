@@ -30,7 +30,6 @@ import java.util.Locale;
  *
  * @param <C> Type of the context associated with this command
  *
- * @version $Id$
  */
 public abstract class AbstractSetLocaleCommand<C extends WebContext<String, Object>>
         implements Command<String, Object, C> {

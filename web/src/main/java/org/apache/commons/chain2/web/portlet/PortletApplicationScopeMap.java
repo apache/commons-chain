@@ -31,7 +31,6 @@ import org.apache.commons.chain2.web.MapEntry;
  * <p>Private implementation of <code>Map</code> for portlet context
  * attributes.</p>
  *
- * @version $Id$
  */
 final class PortletApplicationScopeMap implements Map<String, Object> {
 

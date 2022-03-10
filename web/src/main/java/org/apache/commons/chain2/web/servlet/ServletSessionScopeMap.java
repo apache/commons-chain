@@ -32,7 +32,6 @@ import org.apache.commons.chain2.web.MapEntry;
  * <p>Private implementation of <code>Map</code> for HTTP session
  * attributes.</p>
  *
- * @version $Id$
  */
 final class ServletSessionScopeMap implements Map<String, Object> {
 

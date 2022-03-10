@@ -39,7 +39,6 @@ import org.junit.Test;
 /**
  * <p>Test case for the <code>LookupCommand</code> class.</p>
  *
- * @version $Id$
  */
 
 public class LookupCommandTestCase {

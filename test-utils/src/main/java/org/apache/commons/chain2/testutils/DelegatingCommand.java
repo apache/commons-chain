@@ -26,7 +26,6 @@ import org.apache.commons.chain2.Processing;
  * <p>Implementation of {@link Command} that logs its identifier and
  * and delegates to the rest of the chain.</p>
  *
- * @version $Id$
  */
 
 public class DelegatingCommand extends NonDelegatingCommand {

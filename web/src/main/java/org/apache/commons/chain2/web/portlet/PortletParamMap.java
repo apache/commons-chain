@@ -31,7 +31,6 @@ import org.apache.commons.chain2.web.MapEntry;
  * <p>Private implementation of <code>Map</code> for portlet parameter
  * name-value.</p>
  *
- * @version $Id$
  */
 final class PortletParamMap implements Map<String, String> {
 

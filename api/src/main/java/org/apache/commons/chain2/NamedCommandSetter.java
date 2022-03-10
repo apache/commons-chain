@@ -25,7 +25,6 @@ import java.util.Map;
  * @param <V> Context value type
  * @param <C> Type of the context associated with this command setter
  * @since 2.0
- * @version $Id$
  */
 public interface NamedCommandSetter<K, V, C extends Map<K, V>>
     extends CommandSetter<K, V, C, NameSetter<K, V, C>> {

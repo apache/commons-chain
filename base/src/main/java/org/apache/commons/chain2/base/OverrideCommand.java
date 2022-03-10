@@ -29,7 +29,6 @@ import org.apache.commons.chain2.Processing;
  * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this command
  *
- * @version $Id$
  */
 public class OverrideCommand<K, V, C extends Map<K, V>> implements Command<K, V, C> {
 

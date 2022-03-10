@@ -26,7 +26,6 @@ import org.apache.commons.chain2.Context;
  * should cause an IllegalStateException if the {@link Chain} implementation
  * subclasses <code>ChainBase</code>.</p>
  *
- * @version $Id$
  */
 public class AddingCommand extends NonDelegatingCommand {
 

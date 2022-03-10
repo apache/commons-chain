@@ -34,7 +34,6 @@ import org.apache.commons.logging.LogFactory;
  * @param <K> Context key type
  * @param <V> Context value type
  * @param <C> Type of the context associated with this command
- * @version $Id$
  */
 public class CatalogFactoryBase<K, V, C extends Map<K, V>> implements CatalogFactory<K, V, C> {
 

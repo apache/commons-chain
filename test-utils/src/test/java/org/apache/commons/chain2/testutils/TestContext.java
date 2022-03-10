@@ -24,7 +24,6 @@ import org.apache.commons.chain2.Context;
  * Since we can not import classes from modules that depend on test utils (eg chain2-base)
  * we have to implement a test context here.
  *
- * @version $Id$
  */
 public class TestContext<K, V> extends HashMap<K,V> implements Context<K, V> {
     @Override

@@ -88,7 +88,6 @@ import org.apache.commons.logging.LogFactory;
  * parameters. Because of this, you can use both facilities in the
  * same application, if desired.</p>
  *
- * @version $Id$
  */
 public class ChainServlet extends HttpServlet {
     {

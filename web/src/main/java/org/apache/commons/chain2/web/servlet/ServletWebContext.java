@@ -27,7 +27,6 @@ import java.util.Map;
 
 /**
  * @since 1.0.0
- * @version $Id$
  */
 public interface ServletWebContext<K, V> extends WebContext<K, V> {
     /**

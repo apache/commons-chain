@@ -25,7 +25,6 @@ import java.util.Map;
  * Runtime Exception that wraps an underlying exception thrown during the
  * execution of a {@link org.apache.commons.chain2.Command} or {@link org.apache.commons.chain2.Chain}.
  *
- * @version $Id$
  */
 public class DispatchException extends ChainException {
 

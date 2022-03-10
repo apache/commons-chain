@@ -26,7 +26,6 @@ import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Context;
 
 /**
- * @version $Id$
  */
 public class TestCatalog<K, V, C extends Context<K, V>> implements Catalog<K, V, C> {
 

@@ -24,7 +24,6 @@ import java.util.Map;
  * Simple fluent chain EDSL to simplify {@link Chain} instances invocation.
  *
  * @since 2.0
- * @version $Id$
  */
 public final class Chains {
 

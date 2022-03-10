@@ -31,7 +31,6 @@ import org.apache.commons.chain2.web.MapEntry;
  * <p>Private implementation of <code>Map</code> for servlet parameter
  * name-values[].</p>
  *
- * @version $Id$
  */
 final class ServletParamValuesMap implements Map<String, String[]> {
 

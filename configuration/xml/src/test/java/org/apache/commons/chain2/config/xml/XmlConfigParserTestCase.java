@@ -58,7 +58,6 @@ import org.junit.runners.Parameterized;
  * <p><strong>Note:</strong> This test case assumes, that all config files will be parsed to the same catalog
  * and command instances.</p>
  *
- * @version $Id$
  */
 @RunWith(Parameterized.class)
 public class XmlConfigParserTestCase {

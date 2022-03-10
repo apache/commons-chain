@@ -28,7 +28,6 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 /**
  * A matchers that checks if a catalog has an expected count of commands.
  *
- * @version $Id$
  */
 public class HasCommandCount extends TypeSafeDiagnosingMatcher<Catalog> {
 

@@ -32,7 +32,6 @@ import org.apache.commons.chain2.impl.ContextBase;
  * a series of JavaBeans properties (and mapped to read-only attributes
  * of the same name, as supported by {@link ContextBase}.</p>
  *
- * @version $Id$
  */
 public abstract class WebContextBase extends ContextBase
         implements WebContext<String, Object> {

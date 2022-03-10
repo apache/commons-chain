@@ -30,7 +30,6 @@ import java.util.Map;
  * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this command
  *
- * @version $Id$
  */
 public interface Catalog<K, V, C extends Map<K, V>> {
 

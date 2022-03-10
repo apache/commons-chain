@@ -30,7 +30,6 @@ import java.util.Map;
  * collections of the underlying <code>FacesContext</code> instance
  * that is passed to the constructor (or the initialize method).</p>
  *
- * @version $Id$
  */
 public class FacesWebContext extends WebContextBase {
 

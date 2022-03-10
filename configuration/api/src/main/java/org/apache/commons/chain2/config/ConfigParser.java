@@ -29,7 +29,6 @@ import org.apache.commons.chain2.CatalogFactory;
  * <code>parse()</code> method more than once, in order
  * to parse more than one configuration document.</p>
  *
- * @version $Id$
  */
 public interface ConfigParser {
 

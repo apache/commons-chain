@@ -34,7 +34,6 @@ import java.util.StringTokenizer;
  * to configure a {@link Catalog}.  These methods are shared between
  * <code>ChainListener</code> and <code>ChainServlet</code>.</p>
  *
- * @version $Id$
  */
 final class ChainResources {
 

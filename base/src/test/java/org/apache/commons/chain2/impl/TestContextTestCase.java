@@ -31,7 +31,6 @@ import org.junit.Test;
  * Extension of <code>ContextBaseTestCase</code> to validate property
  * delegation.
  *
- * @version $Id$
  */
 public class TestContextTestCase extends ContextBaseTestCase {
 

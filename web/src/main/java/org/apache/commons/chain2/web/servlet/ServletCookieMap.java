@@ -30,7 +30,6 @@ import org.apache.commons.chain2.web.MapEntry;
 /**
  * <p>Private implementation of <code>Map</code> for servlet cookies</p>
  *
- * @version $Id$
  * @since Chain 1.1
  */
 final class ServletCookieMap implements Map<String, Cookie> {

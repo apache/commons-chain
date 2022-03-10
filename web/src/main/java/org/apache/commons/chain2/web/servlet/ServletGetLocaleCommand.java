@@ -26,7 +26,6 @@ import java.util.Locale;
  * <p>Concrete implementation of {@link AbstractGetLocaleCommand} for
  * the Servlet API.</p>
  *
- * @version $Id$
  */
 public class ServletGetLocaleCommand
         extends AbstractGetLocaleCommand<ServletWebContext<String, Object>> {

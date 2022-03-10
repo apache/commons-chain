@@ -33,7 +33,6 @@ import javax.servlet.http.HttpServletRequest;
  * "/foo.execute?command=bar" would cause the "/bar" command to be loaded
  * and executed.</p>
  *
- * @version $Id$
  */
 public class RequestParameterMapper
         extends LookupCommand<String, Object, ServletWebContext<String, Object>> {

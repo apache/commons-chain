@@ -46,7 +46,6 @@ import java.util.Map;
  * @param <V> Context value type
  * @param <C> Type of the context associated with this command
  *
- * @version $Id$
  */
 public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C> {
 

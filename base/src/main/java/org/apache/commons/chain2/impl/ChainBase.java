@@ -35,7 +35,6 @@ import java.util.Map;
  * @param <V> the type of mapped values
  * @param <C> Type of the context associated with this chain
  *
- * @version $Id$
  */
 public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
 

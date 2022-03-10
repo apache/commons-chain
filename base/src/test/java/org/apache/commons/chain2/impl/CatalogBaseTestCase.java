@@ -43,7 +43,6 @@ import org.junit.Test;
 /**
  * <p>Test case for the <code>CatalogBase</code> class.</p>
  *
- * @version $Id$
  */
 
 public class CatalogBaseTestCase {

@@ -29,7 +29,6 @@ import java.io.IOException;
 /**
  * <p>Forward Command</p>
  *
- * @version $Id$
  */
 public class ForwardCommand implements Command<String, Object, ServletWebContext<String, Object>> {
 

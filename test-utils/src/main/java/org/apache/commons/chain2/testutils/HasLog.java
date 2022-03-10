@@ -28,7 +28,6 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * This matcher assumes that the context has a context value of type {@link StringBuilder}
  * registered for key {@code log}.
  *
- * @version $Id$
  */
 public class HasLog extends TypeSafeDiagnosingMatcher<Context> {
 

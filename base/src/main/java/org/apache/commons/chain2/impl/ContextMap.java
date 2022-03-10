@@ -28,7 +28,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @param <V> the type of mapped values
  *
  * @since 2.0
- * @version $Id$
  */
 public class ContextMap<K, V> extends ConcurrentHashMap<K, V> implements Context<K, V> {
 

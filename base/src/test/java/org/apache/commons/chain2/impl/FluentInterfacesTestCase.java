@@ -34,7 +34,6 @@ import org.apache.commons.chain2.testutils.NonDelegatingFilter;
 import org.junit.Test;
 
 /**
- * @version $Id$
  */
 public final class FluentInterfacesTestCase {
 
