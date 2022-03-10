@@ -23,7 +23,6 @@ import org.apache.commons.chain2.cookbook.mailreader.MailReader;
 import java.io.IOException;
 
 /**
- * @version $Id$
  */
 public class LogonUser implements Command<String, Object, MailReader> {
 

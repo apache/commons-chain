@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @version $Id$
  */
 public class MailReaderServlet extends HttpServlet {
 

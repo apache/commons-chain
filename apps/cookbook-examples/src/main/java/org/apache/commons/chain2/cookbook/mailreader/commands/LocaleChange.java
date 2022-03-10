@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
- * @version $Id$
  */
 public class LocaleChange implements Command<String, Object, MailReader> {
 

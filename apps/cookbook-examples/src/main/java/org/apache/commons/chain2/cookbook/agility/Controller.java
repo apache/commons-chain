@@ -17,7 +17,6 @@
 package org.apache.commons.chain2.cookbook.agility;
 
 /**
- * @version $Id$
  */
 public interface Controller {
 

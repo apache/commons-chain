@@ -19,7 +19,6 @@ package org.apache.commons.chain2.cookbook.profile;
 import org.apache.commons.chain2.impl.ContextBase;
 
 /**
- * @version $Id$
  */
 public class ProfileContext extends ContextBase {
 

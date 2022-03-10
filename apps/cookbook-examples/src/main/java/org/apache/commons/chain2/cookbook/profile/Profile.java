@@ -17,7 +17,6 @@
 package org.apache.commons.chain2.cookbook.profile;
 
 /**
- * @version $Id$
  */
 public class Profile {
 

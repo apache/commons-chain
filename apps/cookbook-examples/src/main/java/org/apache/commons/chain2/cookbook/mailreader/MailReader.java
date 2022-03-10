@@ -22,7 +22,6 @@ import java.io.Writer;
 import java.util.Locale;
 
 /**
- * @version $Id$
  */
 public class MailReader extends ContextBase {
 

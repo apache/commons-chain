@@ -20,7 +20,6 @@ import org.apache.commons.chain2.Command;
 import org.apache.commons.chain2.Processing;
 
 /**
- * @version $Id$
  */
 public class ProfileCheck implements Command<String, Object, ProfileContext> {
 
