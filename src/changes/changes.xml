@@ -137,6 +137,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action type="update" dev="ggregory" due-to="Gary Gregory">
         Bump actions/setup-java from 1.4.3 to 3.
       </action>
+      <action type="update" dev="ggregory" due-to="Gary Gregory">
+        Bump actions/checkout 2.3.4 to 3.
+      </action>
     </release>
 
     <release version="1.2" date="2008-06-02" description="OSGi enabled / minor bug fixes">
