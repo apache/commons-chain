@@ -31,7 +31,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  */
 public class HasLog extends TypeSafeDiagnosingMatcher<Context> {
 
-    private String expectedContent;
+    private final String expectedContent;
 
     public HasLog(String expectedContent) {
         this.expectedContent = expectedContent;

@@ -32,7 +32,7 @@ import java.io.IOException;
  */
 public class ForwardCommand implements Command<String, Object, ServletWebContext<String, Object>> {
 
-    private Log log = LogFactory.getLog(ForwardCommand.class);
+    private final Log log = LogFactory.getLog(ForwardCommand.class);
 
     private String forward;
 

@@ -39,7 +39,7 @@ public class RequestParameterMapper
 
     // ------------------------------------------------------ Instance Variables
 
-    private String catalogKey = ChainProcessor.CATALOG_DEFAULT;
+    private final String catalogKey = ChainProcessor.CATALOG_DEFAULT;
 
     private String parameter = "command";
 

@@ -26,7 +26,7 @@ public class TestContext extends ContextBase {
     private static final long serialVersionUID = 20120724L;
 
     // Read-only property
-    private String readOnly = "readOnly";
+    private final String readOnly = "readOnly";
 
     public String getReadOnly() {
         return (this.readOnly);
