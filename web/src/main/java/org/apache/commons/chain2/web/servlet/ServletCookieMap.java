@@ -17,6 +17,7 @@
 package org.apache.commons.chain2.web.servlet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -129,9 +130,7 @@ final class ServletCookieMap implements Map<String, Cookie> {
         List<Cookie> list = new ArrayList<Cookie>(size());
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                list.add(cookies[i]);
-            }
+            list.addAll(Arrays.asList(cookies));
         }
         return (list);
     }
