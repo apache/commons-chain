@@ -58,13 +58,13 @@ public class ChainBaseTestCase {
     /**
      * The {@link Chain} instance under test.
      */
-    protected Chain<String, Object, Context<String, Object>> chain = null;
+    protected Chain<String, Object, Context<String, Object>> chain;
 
 
     /**
      * The {@link Context} instance on which to execute the chain.
      */
-    protected Context<String, Object> context = null;
+    protected Context<String, Object> context;
 
 
     // -------------------------------------------------- Overall Test Methods

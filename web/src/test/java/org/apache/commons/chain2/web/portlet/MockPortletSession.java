@@ -36,7 +36,7 @@ public class MockPortletSession implements PortletSession {
     private Date creationTime     = new Date();
     private Date lastAccessedTime = creationTime;
 
-    private PortletContext context = null;
+    private PortletContext context;
     private int maxInactiveInterval = 100;
     private boolean newSession = true;
     private String id = "mockId" + creationTime.getTime();

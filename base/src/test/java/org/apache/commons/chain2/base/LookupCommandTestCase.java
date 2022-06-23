@@ -59,7 +59,7 @@ public class LookupCommandTestCase {
     /**
      * The {@link Context} instance on which to execute the chain.
      */
-    protected Context<String, Object> context = null;
+    protected Context<String, Object> context;
 
 
     // -------------------------------------------------- Overall Test Methods

@@ -90,9 +90,9 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
 
     // ------------------------------------------------------------- Properties
 
-    private String method = null;
+    private String method;
 
-    private String methodKey = null;
+    private String methodKey;
 
     /**
      * Return the method name.

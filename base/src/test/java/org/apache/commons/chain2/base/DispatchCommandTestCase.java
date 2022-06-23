@@ -120,7 +120,7 @@ public class DispatchCommandTestCase {
 
         private static final long serialVersionUID = 20120724L;
 
-        Context<String, Object> wrappedContext = null;
+        Context<String, Object> wrappedContext;
         TestAlternateContext(Context<String, Object> context) {
             this.wrappedContext = context;
         }

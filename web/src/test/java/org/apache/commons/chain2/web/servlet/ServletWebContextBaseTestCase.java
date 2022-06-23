@@ -46,10 +46,10 @@ public class ServletWebContextBaseTestCase extends ContextBaseTestCase {
 
 
     // Servlet API Objects
-    protected ServletContext scontext = null;
-    protected HttpServletRequest request = null;
-    protected HttpServletResponse response = null;
-    protected HttpSession session = null;
+    protected ServletContext scontext;
+    protected HttpServletRequest request;
+    protected HttpServletResponse response;
+    protected HttpSession session;
 
 
     // -------------------------------------------------- Overall Test Methods

@@ -45,7 +45,7 @@ public class AddingCommand extends NonDelegatingCommand {
 
 
     // The parent Chain
-    private Chain<String, Object, Context<String, Object>> parent = null;
+    private Chain<String, Object, Context<String, Object>> parent;
 
 
     // -------------------------------------------------------- Command Methods

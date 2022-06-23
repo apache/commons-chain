@@ -110,7 +110,7 @@ public class ChainBase<K, V, C extends Map<K, V>> implements Chain<K, V, C> {
      * <p>Flag indicating whether the configuration of our commands list
      * has been frozen by a call to the <code>execute()</code> method.</p>
      */
-    private boolean frozen = false;
+    private boolean frozen;
 
     // ---------------------------------------------------------- Chain Methods
 

@@ -40,9 +40,9 @@ final class ServletSessionScopeMap implements Map<String, Object> {
         sessionExists();
     }
 
-    private HttpSession session = null;
+    private HttpSession session;
 
-    private HttpServletRequest request = null;
+    private HttpServletRequest request;
 
     public void clear() {
         if (sessionExists()) {

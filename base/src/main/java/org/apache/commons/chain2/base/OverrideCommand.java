@@ -34,8 +34,8 @@ public class OverrideCommand<K, V, C extends Map<K, V>> implements Command<K, V,
 
     // -------------------------------------------------------------- Properties
 
-    private K key = null;
-    private V value = null;
+    private K key;
+    private V value;
 
     /**
      * <p>Return the context attribute key for the attribute to override.</p>

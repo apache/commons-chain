@@ -42,10 +42,10 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
     private final Map<String, Method> methods = new WeakHashMap<String, Method>();
 
     /** Method name */
-    private String method = null;
+    private String method;
 
     /** Method key */
-    private String methodKey = null;
+    private String methodKey;
 
     /**
      * The base implementation expects dispatch methods to take a <code>Context</code>

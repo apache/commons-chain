@@ -75,7 +75,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
 
     // -------------------------------------------------------------- Properties
 
-    private CatalogFactory<K, V, C> catalogFactory = null;
+    private CatalogFactory<K, V, C> catalogFactory;
 
     /**
      * <p>Set the {@link CatalogFactoryBase} from which lookups will be
@@ -99,7 +99,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         return this.catalogFactory;
     }
 
-    private String catalogName = null;
+    private String catalogName;
 
     /**
      * <p>Return the name of the {@link Catalog} to be searched, or
@@ -120,7 +120,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         this.catalogName = catalogName;
     }
 
-    private String name = null;
+    private String name;
 
     /**
      * <p>Return the name of the {@link Command} that we will look up and
@@ -141,7 +141,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         this.name = name;
     }
 
-    private String nameKey = null;
+    private String nameKey;
 
     /**
      * <p>Return the context attribute key under which the {@link Command}
@@ -162,7 +162,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         this.nameKey = nameKey;
     }
 
-    private boolean optional = false;
+    private boolean optional;
 
     /**
      * <p>Return <code>true</code> if locating the specified command
@@ -182,7 +182,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         this.optional = optional;
     }
 
-    private boolean ignoreExecuteResult = false;
+    private boolean ignoreExecuteResult;
 
     /**
      * <p>Return <code>true</code> if this command should ignore
@@ -215,7 +215,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
         this.ignoreExecuteResult = ignoreReturn;
     }
 
-    private boolean ignorePostprocessResult = false;
+    private boolean ignorePostprocessResult;
 
     /**
      * <p>Return <code>true</code> if this command is a Filter and

@@ -100,20 +100,20 @@ public class ChainProcessor extends ChainServlet {
      * If not specified, we will look up commands in the appropriate
      * {@link Catalog} retrieved from our {@link CatalogFactoryBase}.</p>
      */
-    private String attribute = null;
+    private String attribute;
 
     /**
      * <p>The name of the {@link Catalog} to retrieve from the
      * {@link CatalogFactoryBase} for this application, or <code>null</code>
      * to select the default {@link Catalog}.</p>
      */
-    private String catalog = null;
+    private String catalog;
 
     /**
      * <p>The name of the {@link Command} to be executed for each incoming
      * request.</p>
      */
-    private String command = null;
+    private String command;
 
     // --------------------------------------------------------- Servlet Methods
 

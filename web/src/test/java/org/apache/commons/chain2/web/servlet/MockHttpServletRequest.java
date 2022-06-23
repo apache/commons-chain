@@ -60,16 +60,16 @@ public class MockHttpServletRequest implements HttpServletRequest {
 
 
     protected Map<String, Object> attributes = new HashMap<String, Object>();
-    protected String contextPath = null;
+    protected String contextPath;
     protected Map<String, String[]> headers = new HashMap<String, String[]>();
     protected Cookie[] cookies = new Cookie[0];
-    protected Locale locale = null;
+    protected Locale locale;
     protected Map<String, String[]> parameters = new HashMap<String, String[]>();
-    protected String pathInfo = null;
-    protected Principal principal = null;
-    protected String queryString = null;
-    protected String servletPath = null;
-    protected HttpSession session = null;
+    protected String pathInfo;
+    protected Principal principal;
+    protected String queryString;
+    protected String servletPath;
+    protected HttpSession session;
 
 
     // --------------------------------------------------------- Public Methods

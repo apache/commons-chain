@@ -50,7 +50,7 @@ public class NonDelegatingFilter
     // -------------------------------------------------------------- Properties
 
 
-    protected String id2 = null;
+    protected String id2;
     public String getId2() {
         return (this.id2);
     }

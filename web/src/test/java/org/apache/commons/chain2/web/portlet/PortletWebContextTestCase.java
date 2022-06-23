@@ -46,10 +46,10 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
 
 
     // Portlet API Objects
-    protected PortletContext pcontext = null;
-    protected PortletRequest request = null;
-    protected PortletResponse response = null;
-    protected PortletSession session = null;
+    protected PortletContext pcontext;
+    protected PortletRequest request;
+    protected PortletResponse response;
+    protected PortletSession session;
 
 
     // -------------------------------------------------- Overall Test Methods

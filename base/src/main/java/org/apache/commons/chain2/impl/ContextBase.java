@@ -95,12 +95,12 @@ public class ContextBase extends ContextMap<String, Object> {
      * This collection is allocated only if there are any JavaBeans
      * properties.</p>
      */
-    private transient Map<String, PropertyDescriptor> descriptors = null;
+    private transient Map<String, PropertyDescriptor> descriptors;
 
     /**
      * <p>The same <code>PropertyDescriptor</code>s as an array.</p>
      */
-    private transient PropertyDescriptor[] pd = null;
+    private transient PropertyDescriptor[] pd;
 
     /**
      * <p>Distinguished singleton value that is stored in the map for each
@@ -605,7 +605,7 @@ public class ContextBase extends ContextMap<String, Object> {
      */
     private class EntrySetIterator implements Iterator<Entry<String, Object>> {
 
-        private Map.Entry<String, Object> entry = null;
+        private Map.Entry<String, Object> entry;
 
         private Iterator<String> keys = ContextBase.this.keySet().iterator();
 
@@ -745,7 +745,7 @@ public class ContextBase extends ContextMap<String, Object> {
      */
     private class ValuesIterator implements Iterator<Object> {
 
-        private Map.Entry<String, Object> entry = null;
+        private Map.Entry<String, Object> entry;
 
         private Iterator<String> keys = ContextBase.this.keySet().iterator();
 
