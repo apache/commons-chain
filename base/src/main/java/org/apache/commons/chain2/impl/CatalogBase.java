@@ -61,7 +61,7 @@ public class CatalogBase<K, V, C extends Map<K, V>> implements Catalog<K, V, C> 
      * @throws IllegalArgumentException if <code>commands</code>
      * is <code>null</code>
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     public CatalogBase(Map<String, Command<K, V, C>> commands) {
         if (commands == null) {

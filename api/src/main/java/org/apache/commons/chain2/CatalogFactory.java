@@ -107,7 +107,7 @@ public interface CatalogFactory<K, V, C extends Map<K, V>> {
      * @throws IllegalArgumentException if the commandID contains more than
      *  one DELIMITER
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     public abstract <CMD extends Command<K, V, C>> CMD getCommand(
             String commandID);

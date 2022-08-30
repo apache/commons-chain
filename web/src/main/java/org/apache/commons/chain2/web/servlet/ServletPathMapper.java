@@ -44,7 +44,7 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
      * @param swcontext Context for the current request
      * @return The name of the {@link Command} instance
      *
-     * @since Chain 1.2
+     * @since 1.2
      */
     @Override
     protected String getCommandName(ServletWebContext<String, Object> swcontext) {
@@ -67,7 +67,7 @@ public class ServletPathMapper extends LookupCommand<String, Object, ServletWebC
      * @throws IllegalArgumentException if no {@link Catalog}
      *  can be found
      *
-     * @since Chain 1.2
+     * @since 1.2
      */
     @Override
     protected Catalog<String, Object, ServletWebContext<String, Object>>

@@ -33,7 +33,7 @@ public enum Processing {
      * Commands should return continue if the processing of the given 
      * context should be delegated to a subsequent command in an enclosing chain.
      *
-     * @since Chain 2.0
+     * @since 2.0
      */
     CONTINUE,
 
@@ -41,7 +41,7 @@ public enum Processing {
      * Commands should return finished if the processing of the given context
      * has been completed.
      *
-     * @since Chain 2.0
+     * @since 2.0
      */
     FINISHED;
 

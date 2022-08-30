@@ -116,7 +116,7 @@ public interface ServletWebContext<K, V> extends WebContext<K, V> {
      * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Map of Cookies.
-     * @since Chain 1.1
+     * @since 1.1
      */
     Map<String, Cookie> getCookies();
 

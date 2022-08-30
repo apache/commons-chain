@@ -173,7 +173,7 @@ public class FacesWebContext extends WebContextBase {
      * See the {@link org.apache.commons.chain2.web.WebContext}'s Javadoc.
      *
      * @return Map of Cookies.
-     * @since Chain 1.1
+     * @since 1.1
      */
     public Map<String, Cookie> getCookies() {
         @SuppressWarnings("unchecked") // Assume faces is following contract

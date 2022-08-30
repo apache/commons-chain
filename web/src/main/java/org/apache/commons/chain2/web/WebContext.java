@@ -82,7 +82,7 @@ public interface WebContext<K, V> extends Context<K, V>, Serializable {
      * the set of cookies specified in the request.
      *
      * @return Map of Cookies.
-     * @since Chain 1.1
+     * @since 1.1
      */
     Map<String, Cookie> getCookies();
 

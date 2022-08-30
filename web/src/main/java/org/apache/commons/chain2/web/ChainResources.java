@@ -131,7 +131,7 @@ final class ChainResources {
      *
      * @return An array of non-empty paths. The array itself may be empty.
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     static String[] getResourcePaths(String resources) {
         if (resources == null || resources.isEmpty()) {

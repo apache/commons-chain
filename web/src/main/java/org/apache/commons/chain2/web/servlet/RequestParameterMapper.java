@@ -74,7 +74,7 @@ public class RequestParameterMapper
      * @param context Context for the current request
      * @return The name of the {@link Command} instance
      *
-     * @since Chain 1.2
+     * @since 1.2
      */
     @Override
     protected String getCommandName(ServletWebContext context) {
@@ -92,7 +92,7 @@ public class RequestParameterMapper
      * @throws IllegalArgumentException if no {@link Catalog}
      *  can be found
      *
-     * @since Chain 1.2
+     * @since 1.2
      */
     @Override
     protected Catalog<String, Object, ServletWebContext<String, Object>>

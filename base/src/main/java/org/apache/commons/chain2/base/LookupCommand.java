@@ -55,7 +55,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * Create an instance, setting its <code>catalogFactory</code> property to the
      * value of <code>CatalogFactory.getInstance()</code>.
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     public LookupCommand() {
         this(CatalogFactoryBase.<K, V, C>getInstance());
@@ -67,7 +67,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      *
      * @param factory The Catalog Factory.
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     public LookupCommand(CatalogFactory<K, V, C> factory) {
         this.catalogFactory = factory;
@@ -83,7 +83,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      *
      * @param catalogFactory The Catalog Factory.
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     public void setCatalogFactory(CatalogFactory<K, V, C> catalogFactory) {
         this.catalogFactory = catalogFactory;
@@ -93,7 +93,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * Return the {@link CatalogFactoryBase} from which lookups will be performed.
      * @return The Catalog factory.
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     public CatalogFactory<K, V, C> getCatalogFactory() {
         return this.catalogFactory;
@@ -193,7 +193,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @return <code>true</code> if result of the looked up Command
      * should be ignored.
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     public boolean isIgnoreExecuteResult() {
         return ignoreExecuteResult;
@@ -209,7 +209,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @param ignoreReturn <code>true</code> if result of the
      * looked up Command should be ignored.
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     public void setIgnoreExecuteResult(boolean ignoreReturn) {
         this.ignoreExecuteResult = ignoreReturn;
@@ -227,7 +227,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @return <code>true</code> if result of the looked up Filter's
      * <code>postprocess()</code> method should be ignored.
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     public boolean isIgnorePostprocessResult() {
         return ignorePostprocessResult;
@@ -243,7 +243,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @param ignorePostprocessResult <code>true</code> if result of the
      * looked up Filter's <code>postprocess()</code> method should be ignored.
      *
-     * @since Chain 1.1
+     * @since 1.1
      */
     public void setIgnorePostprocessResult(boolean ignorePostprocessResult) {
         this.ignorePostprocessResult = ignorePostprocessResult;
@@ -318,7 +318,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @throws IllegalArgumentException if no {@link Catalog}
      *  can be found
      *
-     * @since Chain 1.2
+     * @since 1.2
      */
     protected Catalog<K, V, C> getCatalog(C context) {
         CatalogFactory<K, V, C> lookupFactory = this.catalogFactory;
@@ -385,7 +385,7 @@ public class LookupCommand<K, V, C extends Map<K, V>> implements Filter<K, V, C>
      * @param context {@link Context} for this request
      * @return The name of the {@link Command} instance
      *
-     * @since Chain 1.2
+     * @since 1.2
      */
     protected String getCommandName(C context) {
         String name = getName();
