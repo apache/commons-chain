@@ -135,10 +135,7 @@ The <action> type attribute can be add,update,fix,remove.
         WebContext, ServletWebContext are now interfaces
       </action>
       <action type="update" dev="ggregory" due-to="Gary Gregory">
-        Bump actions/checkout 2.3.4 to 3.
-      </action>
-      <action type="update" dev="ggregory" due-to="Gary Gregory">
-        Bump actions/checkout 2.3.4 to 3.
+        Bump actions/checkout 2.3.4 to 3.0.2.
       </action>
       <action type="update" dev="ggregory" due-to="Gary Gregory">
         Bump actions/setup-java from 1.4.3 to 3.
