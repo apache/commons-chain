@@ -99,7 +99,7 @@ class ConfigCatalogRule extends Rule {
 
             /* Convert catalog pulled from digester to default generic signature
              * with the assumption that the Catalog returned from digester will
-             * comply with the the historic chain contract. */
+             * comply with the historic chain contract. */
             @SuppressWarnings("unchecked")
             Catalog<Object, Object, Map<Object, Object>> digesterCatalog =
                     (Catalog<Object, Object, Map<Object, Object>>) clazz.newInstance();
