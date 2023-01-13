@@ -87,7 +87,7 @@ public abstract class DispatchCommand<K, V, C extends Context<K, V>> implements 
     /**
      * Extract the dispatch method.  The base implementation uses the command's
      * <code>method</code> property as the name of a method to look up, or, if that is not defined,
-     * looks up the the method name in the Context using the <code>methodKey</code>.
+     * looks up the method name in the Context using the <code>methodKey</code>.
      *
      * @param context The Context being processed by this Command.
      * @return The method to execute

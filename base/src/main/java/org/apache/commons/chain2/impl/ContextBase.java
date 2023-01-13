@@ -582,7 +582,7 @@ public class ContextBase extends ContextMap<String, Object> {
         public boolean remove(Object obj) {
             if (obj instanceof Map.Entry) {
 
-                /* The remove method is expecting an input of the the same
+                /* The remove method is expecting an input of the same
                  * type as the entry set. This precondition is checked above,
                  * so we can safely suppress the unchecked warnings. */
                 @SuppressWarnings("unchecked")
