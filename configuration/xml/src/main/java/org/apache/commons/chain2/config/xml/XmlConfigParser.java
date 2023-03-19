@@ -35,7 +35,6 @@ import java.util.Map;
  * is legal to call the <code>parse()</code> method more than once, in order
  * to parse more than one configuration document.</p>
  *
- * @version $Id: ConfigParser.java 1364104 2012-07-21 14:25:54Z elijah $
  */
 public class XmlConfigParser implements ConfigParser {
     // ----------------------------------------------------- Instance Variables

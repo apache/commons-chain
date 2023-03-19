@@ -26,7 +26,6 @@ import org.apache.commons.chain2.Processing;
 /**
  * Implementation of {@link Command} that always returns null if it's executed.
  * 
- * @version $Id $
  */
 public class NullReturningCommand extends DelegatingCommand {
 

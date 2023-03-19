@@ -28,7 +28,6 @@ import org.xml.sax.Attributes;
  * the class names to make changes easier, this also makes configuration
  * files <strong>much</strong> easier to read and write.</p>
  *
- * @version $Id: ConfigDefineRule.java 1363305 2012-07-19 11:42:53Z simonetripodi $
  */
 class ConfigDefineRule extends Rule {
 

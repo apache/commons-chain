@@ -32,7 +32,6 @@ import java.util.Map;
  * under which to register this {@link org.apache.commons.chain2.Catalog}.  Otherwise, this will
  * become the default {@link org.apache.commons.chain2.Catalog} for this application.</p>
  *
- * @version $Id: ConfigCatalogRule.java 1363305 2012-07-19 11:42:53Z simonetripodi $
  */
 class ConfigCatalogRule extends Rule {
 

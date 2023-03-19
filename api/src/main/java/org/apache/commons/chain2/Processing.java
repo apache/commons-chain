@@ -25,7 +25,6 @@ package org.apache.commons.chain2;
  * <code>CONTINUE</code> if the processing of the given {@link Context} should
  * be delegated to a subsequent command in an enclosing {@link Chain}.
  *
- * @version $Id $
  */
 public enum Processing {
 

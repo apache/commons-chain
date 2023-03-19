@@ -71,7 +71,6 @@ import org.apache.commons.digester3.RuleSetBase;
  *     [null]</li>
  * </ul>
  *
- * @version $Id: ConfigRuleSet.java 1363305 2012-07-19 11:42:53Z simonetripodi $
  */
 public class ConfigRuleSet extends RuleSetBase {
 

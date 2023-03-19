@@ -32,7 +32,6 @@ import java.util.Map;
  * a value for the specified attribute that contains the name under which
  * it should be registered.</p>
  *
- * @version $Id: ConfigRegisterRule.java 1363305 2012-07-19 11:42:53Z simonetripodi $
  */
 class ConfigRegisterRule extends Rule {
 
