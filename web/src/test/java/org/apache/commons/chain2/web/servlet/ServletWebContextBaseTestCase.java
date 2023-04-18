@@ -783,7 +783,7 @@ public class ServletWebContextBaseTestCase extends ContextBaseTestCase {
         try {
             assertNull("put()", sessionMap.put("ABC", "XYZ"));
             assertNotNull("Session(P)", ctx.getRequest().getSession(false));
-        } catch(UnsupportedOperationException ex) {
+        } catch (UnsupportedOperationException ex) {
             // expected: currently MockHttpServletRequest throws this
             //           when trying to create a HttpSession
         }

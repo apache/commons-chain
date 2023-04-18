@@ -679,7 +679,7 @@ public class PortletWebContextTestCase extends ContextBaseTestCase {
         try {
             assertNull("put()", sessionMap.put("ABC", "XYZ"));
             assertNotNull("Session(P)", ctx.getRequest().getPortletSession(false));
-        } catch(UnsupportedOperationException ex) {
+        } catch (UnsupportedOperationException ex) {
             // expected: currently MockPortletRequest throws this
             //           when trying to create a PortletSession
         }
