@@ -110,9 +110,9 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
     }
 
     /**
-     * <p>Returns the hashcode for this entry.</p>
+     * <p>Returns the hash code for this entry.</p>
      *
-     * @return The and'ed hashcode of the key and value
+     * @return The and'ed hash code of the key and value
      */
     @Override
     public int hashCode() {
