@@ -67,7 +67,7 @@ public class XmlConfigParser implements ConfigParser {
 
         try {
             Class<?> clazz = loader.loadClass(ruleSet);
-            setRuleSet((RuleSet) clazz.newInstance());
+            setRuleSet((RuleSet) clazz.getConstructor().newInstance());
         } catch (Exception e) {
             throw new RuntimeException("Exception initializing RuleSet '"
                     + ruleSet + "' instance: "

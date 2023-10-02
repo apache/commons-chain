@@ -101,7 +101,7 @@ class ConfigCatalogRule extends Rule {
              * comply with the historic chain contract. */
             @SuppressWarnings("unchecked")
             Catalog<Object, Object, Map<Object, Object>> digesterCatalog =
-                    (Catalog<Object, Object, Map<Object, Object>>) clazz.newInstance();
+                    (Catalog<Object, Object, Map<Object, Object>>) clazz.getConstructor().newInstance();
 
             catalog = digesterCatalog;
 
