@@ -174,7 +174,7 @@ public class DispatchLookupCommand<K, V, C extends Context<K, V>>
     /**
      * <p>Return a <code>Class[]</code> describing the expected signature of
      * the method.  The default is a signature that just accepts the command's
-     * {@link Context}.  The method can be overidden to provide a different
+     * {@link Context}.  The method can be overridden to provide a different
      * method signature.<p>
      *
      * @return the expected method signature
