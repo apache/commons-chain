@@ -43,8 +43,7 @@
 Apache Commons Chain :: Parent
 ===================
 
-[![Build Status](https://travis-ci.org/apache/commons-chain2.svg)](https://travis-ci.org/apache/commons-chain2)
-[![Coverage Status](https://coveralls.io/repos/apache/commons-chain2/badge.svg)](https://coveralls.io/r/apache/commons-chain2)
+[![Java CI](https://github.com/apache/commons-chain/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-chain/actions/workflows/maven.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-chain-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-chain-parent/)
 [![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-chain-parent/2.0.svg)](https://javadoc.io/doc/org.apache.commons/commons-chain-parent/2.0)
 
