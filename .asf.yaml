@@ -14,7 +14,7 @@
 # limitations under the License.
 
 github:
-  description: "Apache Commons Chain"
+  description: "Apache Commons Chain (Dormant)"
   homepage: https://commons.apache.org/chain/
 
 notifications:

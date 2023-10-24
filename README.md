@@ -43,32 +43,22 @@
 Apache Commons Chain :: Parent
 ===================
 
-[![Java CI](https://github.com/apache/commons-chain/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-chain/actions/workflows/maven.yml)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-chain-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-chain-parent/)
-[![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-chain-parent/2.0.svg)](https://javadoc.io/doc/org.apache.commons/commons-chain-parent/2.0)
+**Warning: The Apache Commons Functor component is now DORMANT, meaning
+this component is not being developed.**
+
+For queries, please contact the
+<a href="mailto:dev@commons.apache.org?subject=[FUNCTOR] question on dormant component">Commons Developer</a> list
+
+----------------
 
 An implementation of the GoF Chain of Responsibility pattern
 
 Documentation
 -------------
 
-More information can be found on the [Apache Commons Chain :: Parent homepage](https://commons.apache.org/proper/commons-chain2).
-The [Javadoc](https://commons.apache.org/proper/commons-chain2/apidocs) can be browsed.
+More information can be found on the [Apache Commons Chain :: Parent homepage](https://commons.apache.org/dormant/commons-chain2).
+The [Javadoc](https://commons.apache.org/dormant/commons-chain2/apidocs) can be browsed.
 Questions related to the usage of Apache Commons Chain :: Parent should be posted to the [user mailing list][ml].
-
-Where can I get the latest release?
------------------------------------
-You can download source and binaries from our [download page](https://commons.apache.org/proper/commons-chain2/download_chain2.cgi).
-
-Alternatively, you can pull it from the central Maven repositories:
-
-```xml
-<dependency>
-  <groupId>org.apache.commons</groupId>
-  <artifactId>commons-chain-parent</artifactId>
-  <version>2.0</version>
-</dependency>
-```
 
 Contributing
 ------------

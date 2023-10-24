@@ -34,7 +34,7 @@
   <description>
     An implementation of the GoF Chain of Responsibility pattern
   </description>
-  <url>http://commons.apache.org/proper/commons-chain/</url>
+  <url>http://commons.apache.org/dormant/commons-chain/</url>
   <inceptionYear>2003</inceptionYear>
 
   <modules>
