@@ -43,11 +43,11 @@
 Apache Commons Chain :: Parent
 ===================
 
-**Warning: The Apache Commons Functor component is now DORMANT, meaning
+**Warning: The Apache Commons Chain component is now DORMANT, meaning
 this component is not being developed.**
 
 For queries, please contact the
-<a href="mailto:dev@commons.apache.org?subject=[FUNCTOR] question on dormant component">Commons Developer</a> list
+<a href="mailto:dev@commons.apache.org?subject=[CHAIN] question on dormant component">Commons Developer</a> list
 
 ----------------
 
@@ -88,7 +88,5 @@ Additional Resources
 
 + [Apache Commons Homepage](https://commons.apache.org/)
 + [Apache Issue Tracker (JIRA)](https://issues.apache.org/jira/browse/CHAIN)
-+ [Apache Commons Twitter Account](https://twitter.com/ApacheCommons)
-+ `#apache-commons` IRC channel on `irc.freenode.org`
 
 [ml]:https://commons.apache.org/mail-lists.html
