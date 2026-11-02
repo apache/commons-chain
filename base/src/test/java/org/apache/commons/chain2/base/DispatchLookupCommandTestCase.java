@@ -124,7 +124,7 @@ public class DispatchLookupCommandTestCase {
     }
 
     // Test IllegalArgumentException when incorrect command name specified
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testExecuteDispatchLookup_2() {
 
         // use default catalog
@@ -134,16 +134,7 @@ public class DispatchLookupCommandTestCase {
         command.setName("fooCommand");
         command.setMethod("fooMethod");
 
-        try {
-            command.execute(context);
-        } catch (IllegalArgumentException e) {
-            // test passed
-            return;
-        } catch (Exception e) {
-            // this is a failure
-        }
-
-        fail("Expected IllegalArgumentException");
+        command.execute(context);
     }
 
     // Test ability to lookup and execute a dispatch method on a single

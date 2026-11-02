@@ -123,10 +123,10 @@ The <action> type attribute can be add,update,fix,remove.
         Update Chain Context interface to use K,V generics
       </action>
       <action issue="CHAIN-56" dev="simonetripodi" type="add">
-        clever Context with generic type "auto-cast" feature.
+        Clever Context with generic type "auto-cast" feature.
       </action>
       <action issue="CHAIN-55" dev="simonetripodi" type="add">
-        split the huge project in submodules.
+        Split the huge project into submodules.
       </action>
       <action issue="CHAIN-53" dev="simonetripodi" type="add" due-to="Elijah Zupancic">
         Global Update of Chain - Generics, JDK 1.5, Update Dependency Versions.
@@ -135,7 +135,7 @@ The <action> type attribute can be add,update,fix,remove.
         WebContext, ServletWebContext are now interfaces
       </action>
       <action type="update" dev="ggregory" due-to="Gary Gregory">
-        Bump actions/checkout 2.3.4 to 3.0.2.
+        Bump actions/checkout from 2.3.4 to 3.0.2.
       </action>
       <action type="update" dev="ggregory" due-to="Gary Gregory">
         Bump actions/setup-java from 1.4.3 to 3.
